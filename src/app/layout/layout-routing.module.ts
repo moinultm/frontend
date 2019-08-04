@@ -10,9 +10,12 @@ const routes: Routes = [
       children: [
           { path: '', redirectTo: 'dashboard', pathMatch: 'prefix' },
           { path: 'dashboard', loadChildren: () => import('../components/dashboard/dashboard.module').then(m => m.DashboardModule) },
-		    { path: 'users', loadChildren: () => import('../components/dashboard/dashboard.module').then(m => m.DashboardModule) },
- 
+		      { path: '', loadChildren: () => import('../components/security/security.module').then(m => m.SecurityModule) },
       ]
+  },
+  {
+    path: '**',
+    redirectTo: '/dashboard'
   }
 ];
 
