@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { UsersComponent } from './users/users.component';
+
 
 // Module routes
 const routes: Routes = [
- 
+
   {
     path: 'users',
-   loadChildren: './users/users.module#UsersModule'
+   loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
   },
   // Profiles module
   {
     path: 'profiles',
-    loadChildren: './profiles/profiles.module#ProfilesModule'
+    loadChildren: () => import('./profiles/profiles.module').then(m => m.ProfilesModule)
   },
   // Roles module
   {
@@ -23,7 +23,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [UsersComponent],
+  declarations: [],
   imports: [
     CommonModule,
     RouterModule.forChild(routes)
