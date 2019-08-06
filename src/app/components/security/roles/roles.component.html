@@ -32,15 +32,7 @@
                                   </div>
                                   <!-- /.card-header -->
                                   <div class="card-body">
-                                    <ng-container *ngIf="!loading">
-                                    <tr *ngFor="let ur of data.data">
-                                      <td (click)="populateForm(pd)">{{ur.id}}</td>
-                                      <td (click)="populateForm(pd)">{{ur.name}}</td>
-                                      <td>
-                                        <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(pd.PMId)"></i>
-                                      </td>
-                                    </tr>
-                                </ng-container>
+                                   
 
                                     <table class="table table-bordered">
                                       <tbody>
@@ -48,24 +40,34 @@
                                         <th style="width: 10px">#</th>
                                         <th>Code</th>
                                         <th>Name</th>
+                                        <th>Action</th>
                                       </tr>
-                                      <tr>
-                                        <td> </td>
-                                        <td> </td>
-                                        <td><span class="badge bg-danger"> </span></td>
-                                      </tr>
+                                      <ng-container *ngIf="!loading">
+                                          <tr *ngFor="let ur of data.data; let i = index">
+                                            <td (click)="populateForm(pd)">{{i+1}}</td>
+                                            <td (click)="populateForm(pd)">{{ur.id}}</td>
+                                            <td (click)="populateForm(pd)">{{ur.name}}</td>
+                                            <td>
+                                              <i class="fa fa-trash text-danger float-right" (click)="onDelete(pd.PMId)"></i> 
+                          
+                                            </td>
+                                          </tr>
+                                      </ng-container>
 
                                     </tbody></table>
                                   </div>
                                   <!-- /.card-body -->
                                   <div class="card-footer clearfix">
-                                    <ul class="pagination pagination-sm m-0 float-right">
-                                      <li class="page-item"><a class="page-link" href="#">«</a></li>
-                                      <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                      <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                      <li class="page-item"><a class="page-link" href="#">»</a></li>
-                                    </ul>
+                                       <!-- Pagination -->
+                                    <ngb-pagination 
+                                    *ngIf="!loading && data"
+                                    [collectionSize]="data.count" 
+                                    [pageSize]="size" 
+                                    [page]="data.page"
+                                    (pageChange)="loadData($event)"
+                                    class="pagination pagination-sm m-0 float-right">
+                                  </ngb-pagination>
+                             <!-- Pagination -->
                                   </div>
                                 </div>
                                 <!-- /.card -->
