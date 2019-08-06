@@ -32,24 +32,15 @@
                                   </div>
                                   <!-- /.card-header -->
                                   <div class="card-body">
-
-
-                                      <tr *ngFor="let item of data.data; let i = index">
-                                          <td>{{ i+1 }}</td>
-                                          <td>{{ item.id }}</td>
-                                          <td>{{ item.name }}</td>
-                                          <td>{{ item.created_at | date:'medium' }}</td>
-                                          <td>{{ item.updated_at | date:'medium' }}</td>
-                                          <td class="actions">
-                                            <button class="btn btn-dark btn-sm icon-btn" type="button" (click)="initSave(saveModal, item)">
-                                              <i class="mdi mdi-pencil"></i>
-                                            </button>
-                                            <button class="btn btn-danger btn-sm icon-btn" type="button" (click)="initDelete(deleteModal, item)">
-                                              <i class="mdi mdi-delete"></i>
-                                            </button>
-                                          </td>
-                                        </tr>
-
+                                    <ng-container *ngIf="!loading">
+                                    <tr *ngFor="let ur of data.data">
+                                      <td (click)="populateForm(pd)">{{ur.id}}</td>
+                                      <td (click)="populateForm(pd)">{{ur.name}}</td>
+                                      <td>
+                                        <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(pd.PMId)"></i>
+                                      </td>
+                                    </tr>
+                                </ng-container>
 
                                     <table class="table table-bordered">
                                       <tbody>

@@ -18,14 +18,15 @@ export class RolesComponent implements OnInit {
   deletingRole: boolean;
   page = 1;
   size = 10;
-  selectedRole: Role;
+ 
 
   constructor(  private roleService: RoleService) {
 
     }
 
-  ngOnInit() {
-    this.loadData();
+  ngOnInit(): void {
+     this.loadData();
+ 
      }
 
      loadData(page?: number): void {
@@ -39,6 +40,7 @@ export class RolesComponent implements OnInit {
         this.loading = false;
       });
     }
+  
 
 
 
