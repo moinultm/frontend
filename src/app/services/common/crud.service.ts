@@ -13,8 +13,8 @@ export class CrudService<T> {
   protected options: any;
   protected headers: any;
   list : PartialList<T>;
-
-  constructor(private _http:  HttpClient  ) {
+  protected url ='';
+  constructor(private _http:  HttpClient ) {
   this.headers = new HttpHeaders({     
        'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -31,5 +31,10 @@ export class CrudService<T> {
     return this._http.get <PartialList<T>>('http://localhost:8000/api/roles',this.options);
   }
  
+  public findById(id: number): any {
+    this.options.params = undefined;
+    return this._http.get<T>(this.url + '/' + id, this.options);
+  }
+
 
 }
