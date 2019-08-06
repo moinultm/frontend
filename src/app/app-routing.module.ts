@@ -5,9 +5,9 @@ import { SignupComponent } from './components/signup/signup.component';
 import { RequestResetComponent } from './components/password/request-reset/request-reset.component';
 import { ResponseResetComponent } from './components/password/response-reset/response-reset.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { BeforeLoginService } from './services/before-login.service';
-import { AfterLoginService } from './services/after-login.service';
- 
+import { BeforeLoginService } from './services/security/before-login.service';
+import { AfterLoginService } from './services/security/after-login.service';
+
 
 
 

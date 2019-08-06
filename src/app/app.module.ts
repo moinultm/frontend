@@ -14,11 +14,11 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { RequestResetComponent } from './components/password/request-reset/request-reset.component';
 import { ResponseResetComponent } from './components/password/response-reset/response-reset.component';
 import { HttpClientModule } from '@angular/common/http';
-import { PoolsService } from './services/pools.service';
-import { AuthService } from './services/auth.service';
-import { TokenService } from './services/token.service';
-import { AfterLoginService } from './services/after-login.service';
-import { BeforeLoginService } from './services/before-login.service';
+import { PoolsService } from './services/security/pools.service';
+import { AuthService } from './services/security/auth.service';
+import { TokenService } from './services/security/token.service';
+import { AfterLoginService } from './services/security/after-login.service';
+import { BeforeLoginService } from './services/security/before-login.service';
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 
 

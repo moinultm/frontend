@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject,OnDestroy, Renderer2 } from '@angular/core';
-import { PoolsService } from 'src/app/services/pools.service';
-import { TokenService } from 'src/app/services/token.service';
+import { PoolsService } from 'src/app/services/security/pools.service';
+import { TokenService } from 'src/app/services/security/token.service';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/security/auth.service';
 import { Snotify, SnotifyService } from 'ng-snotify';
 
 
@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
   handleResponse(data)  {
    this.Token.handle(data.access_token)
    this.Auth.changeAuthStatus(true);
-   this.router.navigateByUrl('/profile');
+   this.router.navigateByUrl('/dashboard');
   }
 
    handleError(error){

@@ -1,4 +1,96 @@
-<p>roles works! roles works! roles works! roles works! roles works! roles works!</p>
-<p>roles works!</p>
-<p>roles works!</p>
-<p>roles works!</p>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Roles</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Roles</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+
+
+
+              <section class="content">
+                  <div class="container-fluid">
+                    <div class="row">
+
+
+                            <div class="col-md-6">
+                                <div class="card">
+                                  <div class="card-header">
+                                    <h3 class="card-title">Roles List</h3>
+                                  </div>
+                                  <!-- /.card-header -->
+                                  <div class="card-body">
+
+
+                                      <tr *ngFor="let item of data.data; let i = index">
+                                          <td>{{ i+1 }}</td>
+                                          <td>{{ item.id }}</td>
+                                          <td>{{ item.name }}</td>
+                                          <td>{{ item.created_at | date:'medium' }}</td>
+                                          <td>{{ item.updated_at | date:'medium' }}</td>
+                                          <td class="actions">
+                                            <button class="btn btn-dark btn-sm icon-btn" type="button" (click)="initSave(saveModal, item)">
+                                              <i class="mdi mdi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-danger btn-sm icon-btn" type="button" (click)="initDelete(deleteModal, item)">
+                                              <i class="mdi mdi-delete"></i>
+                                            </button>
+                                          </td>
+                                        </tr>
+
+
+                                    <table class="table table-bordered">
+                                      <tbody>
+                                      <tr>
+                                        <th style="width: 10px">#</th>
+                                        <th>Code</th>
+                                        <th>Name</th>
+                                      </tr>
+                                      <tr>
+                                        <td> </td>
+                                        <td> </td>
+                                        <td><span class="badge bg-danger"> </span></td>
+                                      </tr>
+
+                                    </tbody></table>
+                                  </div>
+                                  <!-- /.card-body -->
+                                  <div class="card-footer clearfix">
+                                    <ul class="pagination pagination-sm m-0 float-right">
+                                      <li class="page-item"><a class="page-link" href="#">«</a></li>
+                                      <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                      <li class="page-item"><a class="page-link" href="#">»</a></li>
+                                    </ul>
+                                  </div>
+                                </div>
+                                <!-- /.card -->
+
+                              </div>
+                              <!--Col md 6-->
+
+
+                    </div><!-- /.row -->
+                  </div><!-- /.container-fluid -->
+                </section>
+
+
+
+
+
+    </div>
+
+

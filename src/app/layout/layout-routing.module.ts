@@ -13,10 +13,7 @@ const routes: Routes = [
 		      { path: '', loadChildren: () => import('../components/security/security.module').then(m => m.SecurityModule) },
       ]
   },
-  {
-    path: '**',
-    redirectTo: '/dashboard'
-  }
+  //{ path: '**',  redirectTo: '/dashboard'  }
 ];
 
 @NgModule({
