@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Role } from 'src/app/models/role.model';
-import { RoleService } from 'src/app/services/role.service';
-import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
-import { PartialList } from 'src/app/models/common/patial-list.model';
-
+import { Role } from '@models/role.model';
+import { Title } from '@angular/platform-browser';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { RoleService } from '@services/role.service';
+import { PartialList } from '@models/common/patial-list.model';
+import { ToastrService } from 'ngx-toastr';
+import { success, error, warning } from '@services/core/utils/toastr';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-roles',
@@ -18,17 +21,26 @@ export class RolesComponent implements OnInit {
   deletingRole: boolean;
   page = 1;
   size = 10;
- 
 
-  constructor(  private roleService: RoleService) {
+  form: FormGroup;
+  selectedRole: Role;
+
+  constructor(
+    private roleService: RoleService,
+    private _toastr: ToastrService,
+    private modalService: NgbModal,
+    titleService: Title,
+
+    private _formBuilder: FormBuilder,) {
+      titleService.setTitle('Security - Roles management');
 
     }
 
   ngOnInit(): void {
      this.loadData();
- 
      }
 
+     //Loading Data
      loadData(page?: number): void {
       this.page = page ? page : 1;
       this.loading = true;
@@ -40,8 +52,81 @@ export class RolesComponent implements OnInit {
         this.loading = false;
       });
     }
-  
+
+    //Save Data
+    initSave(modal: any, role?: Role): void {
+      this.initSaveForm(role);
+      this.modalService
+        .open(modal)
+        .result
+        .then((result) => {
+          if (result) {
+            this.loadData();
+          } else {
+            this.initSaveForm();
+          }
+        }, () => {
+          this.initSaveForm();
+        });
+    }
+
+    initSaveForm(role?: Role): void {
+      if (role) {
+        this.selectedRole = Object.assign(Role, role);
+      } else {
+        this.selectedRole = new Role();
+      }
+      this.form = this._formBuilder.group({
+        code: [
+          role ? role.code : '',
+          [Validators.required, Validators.maxLength(255)]
+        ],
+        designation: [
+          role ? role.designation : '',
+          [Validators.required, Validators.maxLength(255)]
+        ]
+      });
+    }
+
+//main Save function
+    save(modal: any): void {
+      if (this.form.valid) {
+        this.savingRole = true;
+        this.roleService.save({
+          id: this.selectedRole.id,
+          code: this.form.get('code').value,
+          designation: this.form.get('designation').value
+        }, this.selectedRole.id ? true : false).subscribe((res: Role) => {
+          success('Success!', 'The role is successfully saved.', this._toastr);
+          this.savingRole = false;
+          this.close(modal, true);
+        }, (err: any) => {
+          if (err.status === 403) {
+            err.error.forEach((e: string) => {
+              warning('Warning!', e, this._toastr);
+            });
+          } else {
+            error('Error!', 'An error has occured when saving the role, please contact system administrator.', this._toastr);
+          }
+          this.savingRole = false;
+        });
+      }
+    }
+  //Delete
+    delete(modal: any): void {
+      this.deletingRole = true;
+      this.roleService.delete({
+        id: this.selectedRole.id
+      }).subscribe(() => {
+        this.close(modal, true);
+        this.deletingRole = false;
+      });
+    }
 
 
+    //Close Module
+    close(modal: any, flag?: boolean): void {
+      modal.close(flag ? true : false);
+    }
 
 }

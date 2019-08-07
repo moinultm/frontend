@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -20,6 +21,8 @@ import { TokenService } from './services/security/token.service';
 import { AfterLoginService } from './services/security/after-login.service';
 import { BeforeLoginService } from './services/security/before-login.service';
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -34,15 +37,26 @@ import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
-      FormsModule,
-      HttpClientModule,
-      SnotifyModule
+    FormsModule,
+     HttpClientModule,
+    SnotifyModule,
+    MatProgressBarModule,
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      positionClass: 'toast-bottom-right'
+    })
   ],
-  providers: [PoolsService,AuthService,TokenService,
-    AfterLoginService,BeforeLoginService,
-  { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
-  SnotifyService],
+  providers: [
+    PoolsService,
+    AuthService,
+    TokenService,
+    AfterLoginService,
+    BeforeLoginService,
+   { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
+   SnotifyService
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

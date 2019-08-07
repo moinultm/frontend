@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PoolsService } from 'src/app/services/security/pools.service';
+import { PoolsService } from '@services/security/pools.service';
 import { SnotifyService } from 'ng-snotify';
 
 @Component({

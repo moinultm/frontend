@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PoolsService } from 'src/app/services/security/pools.service';
-import { TokenService } from 'src/app/services/security/token.service';
+import { PoolsService } from '@services/security/pools.service';
+import { TokenService } from '@services/security/token.service';
 import { Router } from '@angular/router';
 
 

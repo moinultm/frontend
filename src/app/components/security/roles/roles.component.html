@@ -10,7 +10,8 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
+              <li class="breadcrumb-item"><a>Security</a></li>
               <li class="breadcrumb-item active">Roles</li>
             </ol>
           </div><!-- /.col -->
@@ -18,39 +19,59 @@
       </div><!-- /.container-fluid -->
     </div>
 
-
-
               <section class="content">
                   <div class="container-fluid">
                     <div class="row">
 
-
-                            <div class="col-md-6">
-                                <div class="card">
+                            <div class="col-md-12">
+                                <div class="card  card-outline">
                                   <div class="card-header">
-                                    <h3 class="card-title">Roles List</h3>
+                                    <h3 class="card-title">
+                                      Roles List | Add new
+                                      <i class="fa fa-plus"  (click)="initSave(saveModal)"></i>
+                                    </h3>
+
                                   </div>
                                   <!-- /.card-header -->
                                   <div class="card-body">
-                                   
 
                                     <table class="table table-bordered">
                                       <tbody>
+
                                       <tr>
                                         <th style="width: 10px">#</th>
                                         <th>Code</th>
-                                        <th>Name</th>
-                                        <th>Action</th>
+                                        <th>Designation</th>
+                                        <th style="width: 20%">Action</th>
                                       </tr>
+
+                                      <tr *ngIf="loading">
+                                          <td colspan="6" class="text-center loading-data">
+                                            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                                            Loading data . .
+                                          </td>
+                                      </tr>
+
+                                      <tr *ngIf="!loading && data && !data.data.length">
+                                          <td colspan="6" class="text-center loading-data">
+                                            No roles created yet!
+                                          </td>
+                                        </tr>
+
+
                                       <ng-container *ngIf="!loading">
-                                          <tr *ngFor="let ur of data.data; let i = index">
-                                            <td (click)="populateForm(pd)">{{i+1}}</td>
-                                            <td (click)="populateForm(pd)">{{ur.id}}</td>
-                                            <td (click)="populateForm(pd)">{{ur.name}}</td>
-                                            <td>
-                                              <i class="fa fa-trash text-danger float-right" (click)="onDelete(pd.PMId)"></i> 
-                          
-                                            </td>
+                                          <tr *ngFor="let item of data.data; let i = index">
+                                              <td>{{ i+1 }}</td>
+                                              <td>{{ item.code }}</td>
+                                              <td>{{ item.designation }}</td>
+                                              <td class="actions">
+                                                  <button type="button" class="btn  btn-success" (click)="initSave(saveModal, item)">
+                                                      <i class="fa fa-pencil"></i>
+                                                  </button>
+                                                  <button type="button" class="btn  btn-danger" (click)="initDelete(deleteModal, item)">
+                                                      <i class="fa fa-trash"></i>
+                                                  </button>
+                                              </td>
                                           </tr>
                                       </ng-container>
 
@@ -59,10 +80,10 @@
                                   <!-- /.card-body -->
                                   <div class="card-footer clearfix">
                                        <!-- Pagination -->
-                                    <ngb-pagination 
+                                    <ngb-pagination
                                     *ngIf="!loading && data"
-                                    [collectionSize]="data.count" 
-                                    [pageSize]="size" 
+                                    [collectionSize]="data.count"
+                                    [pageSize]="size"
                                     [page]="data.page"
                                     (pageChange)="loadData($event)"
                                     class="pagination pagination-sm m-0 float-right">
@@ -79,11 +100,85 @@
                     </div><!-- /.row -->
                   </div><!-- /.container-fluid -->
                 </section>
+   </div>
 
 
 
+   <!-- Role save modal -->
+<ng-template #saveModal let-modal>
 
+    <!-- Modal header -->
+    <div class="modal-header">
+      <h4 class="modal-title">
+        {{ selectedRole.id ? ('Update role: ' + selectedRole.designation) : 'Create new role' }}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="close(modal)">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <!-- ./Modal header -->
+
+    <!-- Modal body -->
+    <div class="modal-body">
+
+      <form [formGroup]="form">
+
+        <!-- Code field -->
+        <div class="form-group">
+          <label for="code">Code</label>
+          <input type="text" class="form-control" id="code" formControlName="code"
+            [class.has-error]="form.get('code').dirty && form.get('code').invalid" />
+        </div>
+        <!-- ./Code field -->
+
+        <!-- Code field validations container -->
+        <div class="row" *ngIf="form.get('code').dirty && form.get('code').invalid">
+          <div class="col-12">
+            <div class="alert alert-danger alert-transparent-left" role="alert"
+              *ngIf="form.get('code').dirty && form.controls['code'].hasError('required')">
+              The code is required
+            </div>
+            <div class="alert alert-danger alert-transparent-left" role="alert"
+              *ngIf="form.get('code').dirty && form.get('code').hasError('maxLength')">
+              The code must be less than 255 Digits
+            </div>
+          </div>
+        </div>
+        <!-- ./Code field validations container -->
+
+        <!-- Name field -->
+        <div class="form-group">
+          <label for="designation">Name</label>
+          <input type="text" class="form-control" id="designation" formControlName="designation"
+            [class.has-error]="form.get('designation').dirty && form.get('designation').invalid" />
+        </div>
+        <!-- ./designation field -->
+
+        <!-- designation field validations container -->
+        <div class="row" *ngIf="form.get('designation').dirty && form.get('designation').invalid">
+          <div class="col-12">
+            <div class="alert alert-danger alert-transparent-left" role="alert"
+              *ngIf="form.get('designation').dirty && form.controls['designation'].hasError('required')">
+              The Name is required
+            </div>
+            <div class="alert alert-danger alert-transparent-left" role="alert"
+              *ngIf="form.get('designation').dirty && form.get('designation').hasError('maxLength')">
+              The designation must be less than 255 digits
+            </div>
+          </div>
+        </div>
+        <!-- ./designation field validations container -->
+
+      </form>
 
     </div>
+    <!-- ./Modal body -->
 
+    <!-- Modal footer -->
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="save(modal)"
+        [disabled]="form.invalid || savingRole">Save</button>
+    </div>
+    <!-- ./Modal footer -->
 
+  </ng-template>
+  <!-- ./Role save modal -->
