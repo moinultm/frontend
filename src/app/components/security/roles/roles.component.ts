@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Role } from '@models/role.model';
+import { Role } from '@models/security/role.model';
 import { Title } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RoleService } from '@services/role.service';

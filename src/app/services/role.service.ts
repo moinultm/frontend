@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Role } from '@models/role.model';
+import { Role } from '@models/security/role.model';
 
 import { CrudService } from './common/crud.service';
 import { HttpClient } from '@angular/common/http';
