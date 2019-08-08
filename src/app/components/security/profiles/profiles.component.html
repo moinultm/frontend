@@ -25,7 +25,7 @@
         <div class="card  card-outline">
           <div class="card-header">
             <h3 class="card-title">
-              Roles List | Add new
+              Profile List | Add new
               <i class="fa fa-plus" (click)="initSave(saveModal)"></i>
             </h3>
 
@@ -48,14 +48,14 @@
               </thead>
               <tbody>
                 <tr *ngIf="loading">
-                  <td colspan="6" class="text-center loading-data">
-                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                  <td colspan="7" class="text-center loading-data">
+                    <mat-spinner   *ngIf="loading" class="loading-roles"></mat-spinner>
                     Loading data . .
                   </td>
                 </tr>
 
                 <tr *ngIf="!loading && data && !data.data.length">
-                  <td colspan="6" class="text-center loading-data">
+                  <td colspan="7" class="text-center loading-data">
                     No roles created yet!
                   </td>
                 </tr>
@@ -102,3 +102,129 @@
 
 </div>
 <!-- Content Wrapper. Contains page content -->
+
+
+<!-- Profile save modal -->
+<ng-template #saveModal let-modal>
+
+  <!-- Modal header -->
+  <div class="modal-header">
+    <h4 class="modal-title">{{ selectedProfile.id ? ('Update profile: ' + selectedProfile.designation) : 'Create new profile' }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="close(modal)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <!-- ./Modal header -->
+
+  <!-- Modal body -->
+  <div class="modal-body">
+
+    <form [formGroup]="form" *ngIf="!loadingRoles">
+
+      <!-- Code field -->
+      <div class="form-group">
+        <label for="code">Code</label>
+        <input type="text" class="form-control" id="code" formControlName="code" 
+          [class.has-error]="form.get('code').dirty && form.get('code').invalid" />
+      </div>
+      <!-- ./Code field -->
+
+      <!-- Code field validations container -->
+      <div class="row" *ngIf="form.get('code').dirty && form.get('code').invalid">
+        <div class="col-12">
+          <div class="alert alert-danger alert-transparent-left" role="alert"
+            *ngIf="form.get('code').dirty && form.controls['code'].hasError('required')">
+            The code is required
+          </div>
+          <div class="alert alert-danger alert-transparent-left" role="alert"
+            *ngIf="form.get('code').dirty && form.get('code').hasError('maxLength')">
+            The code must be less than 255 characters
+          </div>
+        </div>
+      </div>
+      <!-- ./Code field validations container -->
+      
+      <!-- Designation field -->
+      <div class="form-group">
+        <label for="designation">Designation</label>
+        <input type="text" class="form-control" id="designation" formControlName="designation"
+          [class.has-error]="form.get('designation').dirty && form.get('designation').invalid" />
+      </div>
+      <!-- ./Designation field -->
+
+      <!-- Designation field validations container -->
+      <div class="row" *ngIf="form.get('designation').dirty && form.get('designation').invalid">
+        <div class="col-12">
+          <div class="alert alert-danger alert-transparent-left" role="alert"
+            *ngIf="form.get('designation').dirty && form.controls['designation'].hasError('required')">
+            The designation is required
+          </div>
+          <div class="alert alert-danger alert-transparent-left" role="alert"
+            *ngIf="form.get('designation').dirty && form.get('designation').hasError('maxLength')">
+            The designation must be less than 255 characters
+          </div>
+        </div>
+      </div>
+      <!-- ./Designation field validations container -->
+
+      <!-- Roles checkboxes -->
+      <h3>Role(s)</h3>
+      <ng-container
+        *ngFor="let role of roles">
+        <div class="row">
+          <div class="col-12">
+            <mat-checkbox
+              color="primary"
+              (change)="selectRole(role)"
+              [checked]="selectedProfileHasRole(role)">
+              {{ role.designation }}
+            </mat-checkbox>
+          </div>
+        </div>
+      </ng-container>
+      <!-- ./Roles checkboxes -->
+
+    </form>
+
+    <!-- Loading roles indicator -->
+    <mat-spinner class="loading-roles" *ngIf="loadingRoles"></mat-spinner>
+    <!-- Loading roles indicator -->
+
+  </div>
+  <!-- ./Modal body -->
+
+  <!-- Modal footer -->
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="save(modal)" [disabled]="form.invalid || savingProfile">Save</button>
+  </div>
+  <!-- ./Modal footer -->
+
+</ng-template>
+<!-- ./Profile save modal -->
+
+<!-- Profile delete confirmation modal -->
+<ng-template #deleteModal let-modal>
+
+  <!-- Modal header -->
+  <div class="modal-header">
+    <h4 class="modal-title">Delete profile</h4>
+    <button type="button" class="close" aria-label="Close" (click)="close(modal)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <!-- ./Modal header -->
+
+  <!-- Modal body -->
+  <div class="modal-body">
+    <p>Are you sure you want to delete this profile?</p>
+  </div>
+  <!-- ./Modal body -->
+
+  <!-- Modal footer -->
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-danger" [disabled]="deletingProfile" (click)="delete(modal)">Delete</button>
+  </div>
+  <!-- ./Modal footer -->
+
+</ng-template>
+<!-- ./Profile delete confirmation modal -->

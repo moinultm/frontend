@@ -18,7 +18,9 @@ export class CrudService<T> {
   protected url :string;
 
   constructor(private _http:  HttpClient ) {
-  this.headers = new HttpHeaders({ 'Content-Type': 'application/json'  });
+  this.headers = new HttpHeaders({ 
+      'Accept': 'application/json'
+    });
   this.options = {headers: this.headers }
    }
 
