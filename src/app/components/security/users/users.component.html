@@ -1,80 +1,274 @@
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <div class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1 class="m-0 text-dark">Users</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#"  [routerLink]="['/dashboard']">Home</a></li>
-                <li class="breadcrumb-item"><a>Security</a></li>
-                <li class="breadcrumb-item active" >Users</li>
-              </ol>
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-      </div><!-- Content Header (Page header) -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Users
+          </h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
+            <li class="breadcrumb-item"><a>Security</a></li>
+            <li class="breadcrumb-item active">Users</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div><!-- Content Header (Page header) -->
 
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">User List Table | Add new
+                <i class="fa fa-plus" (click)="initSave(saveModal)"></i>
+              </h3>
+              <div class="card-tools">
+                <!-- Pagination -->
+                <ngb-pagination *ngIf="!loading && data" [collectionSize]="data.count" [pageSize]="size"
+                  [page]="data.page" (pageChange)="loadData($event)" class="pagination pagination-sm m-0 float-right">
+                </ngb-pagination>
+                <!-- ./Pagination -->
+              </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body p-0">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 10px">#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Profile</th>
+                    <th>Create</th>
+                    <th>Update</th>
+                    <th style="width: 20%">Action</th>
+                  </tr>
+                </thead>
 
+                <tbody>
+                  <tr *ngIf="loading">
+                    <td colspan="6" class="text-center loading-data">
+                      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                      Loading data . .
+                    </td>
+                  </tr>
 
-      <section class="content">
-          <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                      <div class="card-header">
-                        <h3 class="card-title">User List Table</h3>
-                        <div class="card-tools">
-                          <ul class="pagination pagination-sm m-0 float-right">
-                            <li class="page-item"><a class="page-link" href="#">«</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">»</a></li>
-                          </ul>
-                        </div>
-                      </div>
-                      <!-- /.card-header -->
-                      <div class="card-body p-0">
-                        <table class="table">
-                          <thead>
-                            <tr>
-                              <th style="width: 10px">#</th>
-                              <th>Task</th>
-                              <th>Progress</th>
-                              <th style="width: 20%">Action</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
+                  <tr *ngIf="!loading && data && !data.data.length">
+                    <td colspan="6" class="text-center loading-data">
+                      No roles created yet!
+                    </td>
+                  </tr>
 
-                              <td>1.</td>
-                              <td>Update software</td>
-                              <td>
-                                <div class="progress progress-xs">
-                                  <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                </div>
-                              </td>
-                              <td><span class="badge bg-danger">55%</span></td>
-                            </tr>
+                  <ng-container *ngIf="!loading">
+                    <tr *ngFor="let item of data.data; let i = index">
+                      <td>{{ i+1 }}</td>
+                      <td>{{ item.name }}</td>
+                      <td>{{ item.email }}</td>
+                      <td>{{ item.profiles.length }}</td>
+                      <td>{{ item.created_at | date:'medium' }}</td>
+                      <td>{{ item.updated_at | date:'medium' }}</td>
+                      <td class="actions">
+                        <button type="button" class="btn  btn-success" (click)="initSave(saveModal, item)">
+                          <i class="fa fa-pencil"></i>
+                        </button>
+                        <button type="button" class="btn  btn-danger" (click)="initDelete(deleteModal, item)">
+                          <i class="fa fa-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
 
-                          </tbody>
-                        </table>
-                      </div>
-                      <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
-                   </div>
-                <!-- /.col-6 -->
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col-6 -->
+      </div>
+    </div>
+  </section>
+</div> <!-- Content Wrapper. Contains page content -->
+
+<!-- User save modal -->
+<ng-template #saveModal let-modal>
+
+    <!-- Modal header -->
+    <div class="modal-header">
+      <h4 class="modal-title">{{ selectedUser.id ? ('Update user: ' + selectedUser.name) : 'Create new user' }}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="close(modal)">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <!-- ./Modal header -->
+
+    <!-- Modal body -->
+    <div class="modal-body">
+
+      <form [formGroup]="form" *ngIf="!loadingProfiles">
+
+        <!-- Picture field -->
+        <div class="img-uploader">
+          <div class="img-preview">
+            <img [src]="picturePreview" />
+          </div>
+          <div class="img-input">
+            <input type="file" id="image" #file (change)="onImageChanged(file.files[0])" />
+            <label for="image"><i class="mdi mdi-cloud-upload"></i></label>
+          </div>
+        </div>
+        <!-- ./Picture field -->
+
+        <!-- Name field -->
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" formControlName="name"
+            [class.has-error]="form.get('name').dirty && form.get('name').invalid" />
+        </div>
+        <!-- ./Name field -->
+
+        <!-- Name field validations container -->
+        <div class="row" *ngIf="form.get('name').dirty && form.get('name').invalid">
+          <div class="col-12">
+            <div class="alert alert-danger alert-transparent-left" role="alert"
+              *ngIf="form.get('name').dirty && form.controls['name'].hasError('required')">
+              The name is required
+            </div>
+            <div class="alert alert-danger alert-transparent-left" role="alert"
+              *ngIf="form.get('name').dirty && form.get('name').hasError('maxLength')">
+              The name must be less than 255 characters
             </div>
           </div>
-      </section>
+        </div>
+        <!-- ./Name field validations container -->
 
+        <!-- Email address field -->
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="text" class="form-control" id="email" formControlName="email"
+            [class.has-error]="form.get('email').dirty && form.get('email').invalid" />
+        </div>
+        <!-- ./Email address field -->
 
- </div> <!-- Content Wrapper. Contains page content -->
+        <!-- Email address field validations container -->
+        <div class="row" *ngIf="form.get('email').dirty && form.get('email').invalid">
+          <div class="col-12">
+            <div class="alert alert-danger alert-transparent-left" role="alert"
+              *ngIf="form.get('email').dirty && form.controls['email'].hasError('required')">
+              The email is required
+            </div>
+            <div class="alert alert-danger alert-transparent-left" role="alert"
+              *ngIf="form.get('email').dirty && form.get('email').hasError('maxLength')">
+              The email must be less than 255 characters
+            </div>
+          </div>
+        </div>
+        <!-- ./Email address field validations container -->
 
+        <!-- Password field -->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" formControlName="password"
+            [class.has-error]="form.get('password').dirty && form.get('password').invalid" />
+        </div>
+        <!-- ./Password field -->
 
+        <!-- Password field validations container -->
+        <div class="row" *ngIf="form.get('password').dirty && form.get('password').invalid">
+          <div class="col-12">
+            <div class="alert alert-danger alert-transparent-left" role="alert"
+              *ngIf="form.get('password').dirty && form.controls['password'].hasError('required')">
+              The password is required
+            </div>
+          </div>
+        </div>
+        <!-- ./Password field validations container -->
+
+        <!-- Password confirmation field -->
+        <div class="form-group">
+          <label for="password_confirmation">Password confirmation</label>
+          <input type="password" class="form-control" id="password_confirmation" formControlName="password_confirmation"
+            [class.has-error]="form.get('password_confirmation').dirty && form.get('password_confirmation').invalid" />
+        </div>
+        <!-- ./Password confirmation field -->
+
+        <!-- Password confirmation field validations container -->
+        <div class="row" *ngIf="form.get('password_confirmation').dirty && form.get('password_confirmation').invalid">
+          <div class="col-12">
+            <div class="alert alert-danger alert-transparent-left" role="alert"
+              *ngIf="form.get('password_confirmation').dirty && form.controls['password_confirmation'].hasError('required')">
+              The password confirmation is required
+            </div>
+          </div>
+        </div>
+        <!-- ./Password confirmation field validations container -->
+
+        <!-- Profiles checkboxes -->
+        <h5>Profile(s)</h5>
+        <ng-container
+          *ngFor="let profile of profiles">
+          <div class="row">
+            <div class="col-12">
+              <mat-checkbox
+                color="primary"
+                (change)="selectProfile(profile)"
+                [checked]="selectedUserHasProfile(profile)">
+                {{ profile.designation }}
+              </mat-checkbox>
+            </div>
+          </div>
+        </ng-container>
+        <!-- ./Profiles checkboxes -->
+
+      </form>
+
+      <!-- Loading profiles indicator -->
+      <mat-spinner class="loading-profiles" *ngIf="loadingProfiles"></mat-spinner>
+      <!-- Loading profiles indicator -->
+
+    </div>
+    <!-- ./Modal body -->
+
+    <!-- Modal footer -->
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="save(modal)" [disabled]="form.invalid || savingUser">Save</button>
+    </div>
+    <!-- ./Modal footer -->
+
+  </ng-template>
+  <!-- ./User save modal -->
+
+  <!-- User delete confirmation modal -->
+  <ng-template #deleteModal let-modal>
+
+    <!-- Modal header -->
+    <div class="modal-header">
+      <h4 class="modal-title">Delete user</h4>
+      <button type="button" class="close" aria-label="Close" (click)="close(modal)">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <!-- ./Modal header -->
+
+    <!-- Modal body -->
+    <div class="modal-body">
+      <p>Are you sure you want to delete this user?</p>
+    </div>
+    <!-- ./Modal body -->
+
+    <!-- Modal footer -->
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-danger" [disabled]="deletingUser" (click)="delete(modal)">Delete</button>
+    </div>
+    <!-- ./Modal footer -->
+
+  </ng-template>
+  <!-- ./User delete confirmation modal -->
 

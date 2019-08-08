@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TokenService } from '../security/token.service';
+import { TokenService } from '../auth/token.service';
 import { HttpClient,HttpParams, HttpHeaders} from '@angular/common/http';
 import { PartialList } from '@models/common/patial-list.model';
 
@@ -15,7 +15,7 @@ export class CrudService<T> {
   protected headers: any;
   list : PartialList<T>;
 
-  protected url ='http://localhost:8000/api/roles';
+  protected url :string;
 
   constructor(private _http:  HttpClient ) {
   this.headers = new HttpHeaders({ 'Content-Type': 'application/json'  });
@@ -29,7 +29,7 @@ export class CrudService<T> {
     } else {
       this.options.params = undefined;
     }
-    return this._http.get <PartialList<T>>('http://localhost:8000/api/roles',this.options);
+    return this._http.get <PartialList<T>>(this.url,this.options);
   }
 
   //specific search

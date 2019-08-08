@@ -1,1 +1,104 @@
-<p>profiles works!</p>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Profiles</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
+            <li class="breadcrumb-item"><a>Security</a></li>
+            <li class="breadcrumb-item active">Manage profiles</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="col-md-12">
+        <div class="card  card-outline">
+          <div class="card-header">
+            <h3 class="card-title">
+              Roles List | Add new
+              <i class="fa fa-plus" (click)="initSave(saveModal)"></i>
+            </h3>
+
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+
+            <table class="table table-bordered">
+
+              <thead>
+                <tr>
+                  <th style="width: 10px">#</th>
+                  <th>Code</th>
+                  <th>Designation</th>
+                  <th>Roles attached</th>
+                  <th>Creation date</th>
+                  <th>Last update</th>
+                  <th style="width: 20%">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngIf="loading">
+                  <td colspan="6" class="text-center loading-data">
+                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                    Loading data . .
+                  </td>
+                </tr>
+
+                <tr *ngIf="!loading && data && !data.data.length">
+                  <td colspan="6" class="text-center loading-data">
+                    No roles created yet!
+                  </td>
+                </tr>
+
+                <ng-container *ngIf="!loading">
+                  <tr *ngFor="let item of data.data; let i = index">
+                    <td>{{ i+1 }}</td>
+                    <td>{{ item.code }}</td>
+                    <td>{{ item.designation }}</td>
+                    <td>{{ item.roles.length }}</td>
+                    <td>{{ item.created_at | date:'medium' }}</td>
+                    <td>{{ item.updated_at | date:'medium' }}</td>
+                    <td class="actions">
+                      <button type="button" class="btn  btn-success" (click)="initSave(saveModal, item)">
+                        <i class="fa fa-pencil"></i>
+                      </button>
+                      <button type="button" class="btn  btn-danger" (click)="initDelete(deleteModal, item)">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </ng-container>
+
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+          <div class="card-footer clearfix">
+            <!-- Pagination -->
+            <ngb-pagination *ngIf="!loading && data" [collectionSize]="data.count" [pageSize]="size" [page]="data.page"
+              (pageChange)="loadData($event)" class="pagination pagination-sm m-0 float-right">
+            </ngb-pagination>
+            <!-- Pagination -->
+          </div>
+        </div>
+        <!-- /.card -->
+
+      </div>
+      <!--Col md 6-->
+
+    </div>
+</div>
+</section>
+
+</div>
+<!-- Content Wrapper. Contains page content -->

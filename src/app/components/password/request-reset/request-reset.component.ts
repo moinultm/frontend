@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PoolsService } from '@services/security/pools.service';
+import { PoolsService } from '@services/auth/pools.service';
 import { SnotifyService } from 'ng-snotify';
 
 @Component({

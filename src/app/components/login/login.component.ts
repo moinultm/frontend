@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject,OnDestroy, Renderer2 } from '@angular/core';
-import { PoolsService } from '@services/security/pools.service';
-import { TokenService } from '@services/security/token.service';
+import { PoolsService } from '@services/auth/pools.service';
+import { TokenService } from '@services/auth/token.service';
 import { Router } from '@angular/router';
-import { AuthService } from '@app/services/security/auth.service';
+import { AuthService } from '@services/auth/auth.service';
 import { Snotify, SnotifyService } from 'ng-snotify';
 
 
