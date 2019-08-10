@@ -34,6 +34,7 @@ import { ToastrModule } from 'ngx-toastr';
     ProfileComponent,
     RequestResetComponent,
     ResponseResetComponent
+    
   ],
   imports: [
     BrowserModule,
