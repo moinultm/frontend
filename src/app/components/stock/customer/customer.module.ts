@@ -1,31 +1,30 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SubCategoryComponent } from './sub-category.component';
+import { CustomerComponent } from './customer.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-
+import { MatProgressBarModule, MatProgressSpinnerModule } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatProgressBarModule,MatCheckboxModule,MatProgressSpinnerModule  } from '@angular/material';
+
 const routes: Routes = [
   // Roles component
   {
     path: '',
-    component: SubCategoryComponent
+    component: CustomerComponent
   }
 ];
 
 
 @NgModule({
-  declarations: [SubCategoryComponent],
+  declarations: [CustomerComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     MatProgressBarModule,
     MatProgressSpinnerModule,
-    MatCheckboxModule,
     NgbModule,
     FormsModule,
     ReactiveFormsModule
   ]
 })
-export class SubCategoryModule { }
+export class CustomerModule { }

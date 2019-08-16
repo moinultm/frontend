@@ -1,1 +1,195 @@
-<p>sub-category works!</p>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Subcategory</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
+              <li class="breadcrumb-item"><a>Stock</a></li>
+              <li class="breadcrumb-item active">Subcategory</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+  
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">List of Subcategories |
+                 Add Subcategories <i class="fa fa-plus" (click)="initSave(saveModal)"></i>   </h3>
+                    
+
+                    <div class="card-tools">
+
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" subcategory_name="table_search" class="form-control float-right"
+                                placeholder="Search">
+
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-default"><i
+                                        class="fa fa-search" ></i></button>
+                            </div>
+                    
+                    </div>
+                </div>
+
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body p-0">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th style="width: 10px">#</th>
+                                <th>Subcategory Name</th>
+                                <th>Category Id</th>
+                                <th style="width:20%">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <tr *ngIf="loading">
+                                        <td colspan="12" class="text-center loading-data">
+                                          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                                          Loading data . .
+                                        </td>
+                                      </tr>
+                    
+                                      <tr *ngIf="!loading && data && !data.data.length">
+                                        <td colspan="12" class="text-center loading-data">
+                                          No Subcategory created yet!
+                                        </td>
+                                      </tr>
+                    
+                                      <ng-container *ngIf="!loading">
+                                        <tr *ngFor="let item of data.data; let i = index">
+                                          <td>{{ i+1 }}</td>                                      
+                                          <td>{{ item.subcategory_name }}</td>
+                                          <td>{{ item.categories.category_name }}</td>
+                                          <td class="actions">
+                                            <button type="button" class="btn  btn-success" (click)="initSave(saveModal, item)">
+                                              <i class="fa fa-pencil"></i>
+                                            </button>
+                                            <button type="button" class="btn  btn-danger" (click)="initDelete(deleteModal, item)">
+                                              <i class="fa fa-trash"></i>
+                                            </button>
+                                          
+                                          </td>
+                                        </tr>
+                                      </ng-container>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer clearfix">
+                    <!-- Pagination -->
+                <ngb-pagination *ngIf="!loading && data" [collectionSize]="data.count" [pageSize]="size"
+                [page]="data.page" (pageChange)="loadData($event)" class="pagination pagination-sm m-0 float-right">
+              </ngb-pagination>
+              <!-- ./Pagination -->
+                </div>
+
+
+            </div>
+        </div>
+
+
+        </div>
+      </div>
+    </section>
+  
+  </div>
+  <!-- Content Wrapper. Contains page content -->
+
+  
+
+<!-- Category save modal -->
+<ng-template #saveModal let-modal>
+
+  <!-- Modal header -->
+  <div class="modal-header">
+    <h4 class="modal-title">
+      {{ selectedSub.id ? ('Update  Subcategory: ' + selectedSub.subcategory_name) : 'Create new  Subcategory' }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="close(modal)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <!-- ./Modal header -->
+
+  <!-- Modal body -->
+  <div class="modal-body" >
+
+    <form [formGroup]="form" *ngIf="!loadingCategory">
+
+      <!-- sub_category_name field -->
+      <div class="form-group">
+        <label for="subcategory_name">Name</label>
+        <input type="text" class="form-control" id="subcategory_name" formControlName="subcategory_name"
+          [class.has-error]="form.get('subcategory_name').dirty && form.get('subcategory_name').invalid" />
+      </div>
+      <!-- ./sub_category_name field -->
+
+      <!-- category_name field validations container -->
+      <div class="row" *ngIf="form.get('subcategory_name').dirty && form.get('subcategory_name').invalid">
+        <div class="col-12">
+          <div class="alert alert-danger alert-transparent-left" role="alert"
+            *ngIf="form.get('subcategory_name').dirty && form.controls['subcategory_name'].hasError('required')">
+            The subcategory_name is required
+          </div>
+          <div class="alert alert-danger alert-transparent-left" role="alert"
+            *ngIf="form.get('subcategory_name').dirty && form.get('subcategory_name').hasError('maxLength')">
+            The subcategory_name must be less than 255 Digits
+          </div>
+        </div>
+      </div>
+      <!-- ./category_name field validations container -->
+ 
+
+       <!--Category checkboxes -->
+       <h5>Category(s)</h5>     
+       <div class="form-group">
+         <select class="form-control"  id="subcategory_id" formControlName="category_id">               
+                <option *ngFor="let cat of categories" [value]="cat.id"
+                (change)="selectCategory(cat)"
+                [selected]="selectedSubHasCategory(cat)"  >
+                {{cat.category_name}}</option>  
+        </select>
+       </div>
+       <!-- ./Category checkboxes -->
+
+       <div class="row" *ngIf="form.get('category_id').dirty && form.get('category_id').invalid">
+          <div class="col-12">
+            <div class="alert alert-danger alert-transparent-left" role="alert"
+              *ngIf="form.get('category_id').dirty && form.controls['category_id'].hasError('required')">
+              The category_id is required
+            </div>
+            </div>
+          </div>
+
+
+    </form>
+
+      <!-- Loading profiles indicator -->
+      <mat-spinner class="loading-profiles" *ngIf="loadingCategory"></mat-spinner>
+      <!-- Loading profiles indicator -->
+
+  </div>
+  <!-- ./Modal body -->
+
+  <!-- Modal footer -->
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="save(modal)"
+      [disabled]="form.invalid || savingSubcategory">Save</button>
+  </div>
+  <!-- ./Modal footer -->
+
+</ng-template>
+<!-- ./Category save modal -->
+  

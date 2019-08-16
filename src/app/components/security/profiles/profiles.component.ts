@@ -88,6 +88,7 @@ export class ProfilesComponent implements OnInit {
   
   initSaveForm(profile?: Profile): void {
     // Initialize the selected profile object
+    
     if (profile) {
       this.selectedProfile = Object.assign(Profile, profile);
     } else {
@@ -108,7 +109,8 @@ export class ProfilesComponent implements OnInit {
 
  
   selectedProfileHasRole(role: Role): boolean {
-    return this.selectedProfile.roles.some((r: Role) => r.id === role.id);
+ 
+     return this.selectedProfile.roles.some((r: Role) => r.id === role.id);
   }
 
  

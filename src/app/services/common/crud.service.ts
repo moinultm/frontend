@@ -37,6 +37,7 @@ export class CrudService<T> {
   //specific search
   public findById(id: number): any {
     this.options.params = undefined;
+    
     return this._http.get<T>(this.url + '/' + id, this.options);
   }
 

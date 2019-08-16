@@ -1,56 +1,59 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryService } from '@services/stock/category.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Client } from '@models/stock/client.model';
+import { PartialList } from '@models/common/patial-list.model';
+import { CustomerService } from '@services/stock/customer.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Title } from '@angular/platform-browser';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PartialList } from '@models/common/patial-list.model';
-import { Category } from '@models/stock/category.model';
-import { success, warning, error } from '@services/core/utils/toastr';
+import { success, warning,error } from '@services/core/utils/toastr';
+ 
 
 @Component({
-  selector: 'app-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.scss']
+  selector: 'app-customer',
+  templateUrl: './customer.component.html',
+  styleUrls: ['./customer.component.scss']
 })
-export class CategoryComponent implements OnInit {
-  data: PartialList<Category>;
+export class CustomerComponent implements OnInit {
+  data: PartialList<Client>;
   loading: boolean;
-  savingCategory: boolean;
-  deletingCategory: boolean;
+  savingCustomer: boolean;
+  deletingCustomer: boolean;
   page = 1;
   size = 10;
-
   form: FormGroup;
-  selectedCategory: Category;
-  constructor(  private categoryService: CategoryService,
+  selectedCustomer: Client;
+  
+  constructor(private customerService: CustomerService,
     private _toastr: ToastrService,
     private modalService: NgbModal,
     titleService: Title,
-    private _formBuilder: FormBuilder,) { 
-      titleService.setTitle('Stock - Category');
-    }
+    private _formBuilder: FormBuilder) {
+      titleService.setTitle('Stock - Customer');
+     }
 
   ngOnInit() {
     this.loadData()
+
   }
 
-      //Loading Data
+  //Loading Data
       loadData(page?: number): void {
         this.page = page ? page : 1;
         this.loading = true;
-        this.categoryService.find({
+        this.customerService.find({
           page: this.page,
           size: this.size
-        }).subscribe((res: PartialList<Category>) => {
+        }).subscribe((res: PartialList<Client>) => {
           this.data = res;
           this.loading = false;
         });
       }
 
-       //Save Data
-    initSave(modal: any, category?: Category): void {
-      this.initSaveForm(category);
+
+      //Save Data
+    initSave(modal: any, client?: Client): void {
+      this.initSaveForm(client);
       this.modalService
         .open(modal)
         .result
@@ -64,15 +67,15 @@ export class CategoryComponent implements OnInit {
           this.initSaveForm();
         });
     }
-    initSaveForm(category?: Category): void {
-      if (category) {
-        this.selectedCategory = Object.assign(Category, category);
+    initSaveForm(client?: Client): void {
+      if (client) {
+        this.selectedCustomer = Object.assign(Client, client);
       } else {
-        this.selectedCategory = new Category();
+        this.selectedCustomer = new Client();
       }
       this.form = this._formBuilder.group({
-        category_name: [
-          category ? category.category_name : '',
+        full_name: [
+          client ? client.full_name : '',
           [Validators.required, Validators.maxLength(255)]
         ] 
       });
@@ -81,14 +84,14 @@ export class CategoryComponent implements OnInit {
     //main Save function
     save(modal: any): void {
       if (this.form.valid) {
-        this.savingCategory = true;
-        this.categoryService.save({
-          id: this.selectedCategory.id,
-          category_name: this.form.get('category_name').value,
+        this.savingCustomer = true;
+        this.customerService.save({
+          id: this.selectedCustomer.id,
+          full_name: this.form.get('full_name').value,
           
-        }, this.selectedCategory.id ? true : false).subscribe((res: Category) => {
+        }, this.selectedCustomer.id ? true : false).subscribe((res: Client) => {
           success('Success!', 'The role is successfully saved.', this._toastr);
-          this.savingCategory = false;
+          this.savingCustomer = false;
           this.close(modal, true);
         }, (err: any) => {
           if (err.status === 403) {
@@ -98,25 +101,28 @@ export class CategoryComponent implements OnInit {
           } else {
             error('Error!', 'An error has occured when saving the role, please contact system administrator.', this._toastr);
           }
-          this.savingCategory = false;
+          this.savingCustomer = false;
         });
       }
     }
 
      //Delete
      delete(modal: any): void {
-      this.deletingCategory = true;
-      this.categoryService.delete({
-        id: this.selectedCategory.id
+      this.deletingCustomer = true;
+      this.customerService.delete({
+        id: this.selectedCustomer.id
       }).subscribe(() => {
         this.close(modal, true);
-        this.deletingCategory = false;
+        this.deletingCustomer = false;
       });
     }
+
 
       //Close Module
       close(modal: any, flag?: boolean): void {
         modal.close(flag ? true : false);
       }
   
+
+
 }
