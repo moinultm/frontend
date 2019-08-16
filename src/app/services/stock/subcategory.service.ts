@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CrudService } from '@services/common/crud.service';
 import { Subcategory } from '@models/stock/subcategory.model';
+import { PartialList } from '@models/common/patial-list.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,15 @@ export class SubcategoryService extends CrudService<Subcategory> {
     } else {
       return this.__http.post<Subcategory>(this.url, model, this.options);
     }
+  }
+
+  public findParent(query?: {}): any {
+    if (query) {
+      this.options.params = query;
+    } else {
+      this.options.params = undefined;
+    }
+    return this.__http.get <PartialList<Subcategory>>(this.url + '/parent?categoryId=2' , this.options);
   }
 
 

@@ -7,6 +7,7 @@ import { SubcategoryService } from '@services/stock/subcategory.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Product } from '@models/stock/product.model';
+import { ParentcategoryService } from '@services/stock/parentcategory.service';
 
 @Component({
   selector: 'app-product',
@@ -20,10 +21,12 @@ export class ProductComponent implements OnInit {
   _subcategories :Array <Subcategory>;
   form: FormGroup;
   selectedProduct: Product;
-
+  SelCategoryId:number=0; 
+  
   constructor( 
     private categoryService: CategoryService,
     private subcategoryService: SubcategoryService,
+    private parentService:ParentcategoryService,
     private _fb: FormBuilder,
     private _toastr: ToastrService) { }
 
@@ -34,7 +37,7 @@ export class ProductComponent implements OnInit {
   FillSubcategory(catid:number)  
   {     
     this.loadingSubcategory=true;
-    this.subcategoryService.findById(1)
+    this.parentService.findParent(catid)
     .subscribe((res: PartialList<Subcategory>) => { 
       this._subcategories = res.data;
       this.loadingSubcategory = false;
