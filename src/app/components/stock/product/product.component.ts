@@ -21,9 +21,9 @@ export class ProductComponent implements OnInit {
   _subcategories :Array <Subcategory>;
   form: FormGroup;
   selectedProduct: Product;
-  SelCategoryId:number=0; 
-  
-  constructor( 
+  SelCategoryId:number=0;
+
+  constructor(
     private categoryService: CategoryService,
     private subcategoryService: SubcategoryService,
     private parentService:ParentcategoryService,
@@ -34,19 +34,19 @@ export class ProductComponent implements OnInit {
     this.initForm();
   }
 
-  FillSubcategory(catid:number)  
-  {     
+  FillSubcategory(catid:number)
+  {
     this.loadingSubcategory=true;
     this.parentService.findParent(catid)
-    .subscribe((res: PartialList<Subcategory>) => { 
+    .subscribe((res: PartialList<Subcategory>) => {
       this._subcategories = res.data;
       this.loadingSubcategory = false;
     });
-  }  
+  }
 
 
-  FillCategory()  
-  {  
+  FillCategory()
+  {
     this.loadingCategory=true;
     this.categoryService.find()
     .subscribe((res: PartialList<Category>) => {
@@ -54,9 +54,9 @@ export class ProductComponent implements OnInit {
        this.loadingCategory = false;
     });
 
-  }  
+  }
 
-  initForm(product?: Product): void {  
+  initForm(product?: Product): void {
     if (product) {
       this.selectedProduct =  Object.assign(Product, product);
     } else {
@@ -65,12 +65,11 @@ export class ProductComponent implements OnInit {
 
     this.FillCategory();
 
-  
     this.form = this._fb.group({
       product_name: [
         product ? product.product_name : '',
         [Validators.required, Validators.maxLength(255)]
-      ], 
+      ],
       product_code: [    product ? product.code : this.randcode(),   [Validators.required, Validators.maxLength(255)] ] ,
       product_category: [
         product ? product.category_id : '',
@@ -80,7 +79,7 @@ export class ProductComponent implements OnInit {
 
     });
 
-   
+
 
   }
 

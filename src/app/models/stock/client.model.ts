@@ -1,5 +1,4 @@
- 
- 
+
 
 export class Client {
     id: number;
@@ -11,6 +10,5 @@ export class Client {
     client_type:string;
     previous_due:number;
     account_no:number;
-    
 
 }

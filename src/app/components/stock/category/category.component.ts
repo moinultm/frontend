@@ -27,7 +27,7 @@ export class CategoryComponent implements OnInit {
     private _toastr: ToastrService,
     private modalService: NgbModal,
     titleService: Title,
-    private _formBuilder: FormBuilder,) { 
+    private _formBuilder: FormBuilder,) {
       titleService.setTitle('Stock - Category');
     }
 
@@ -74,7 +74,7 @@ export class CategoryComponent implements OnInit {
         category_name: [
           category ? category.category_name : '',
           [Validators.required, Validators.maxLength(255)]
-        ] 
+        ]
       });
     }
 
@@ -85,7 +85,7 @@ export class CategoryComponent implements OnInit {
         this.categoryService.save({
           id: this.selectedCategory.id,
           category_name: this.form.get('category_name').value,
-          
+
         }, this.selectedCategory.id ? true : false).subscribe((res: Category) => {
           success('Success!', 'The role is successfully saved.', this._toastr);
           this.savingCategory = false;
@@ -118,5 +118,5 @@ export class CategoryComponent implements OnInit {
       close(modal: any, flag?: boolean): void {
         modal.close(flag ? true : false);
       }
-  
+
 }

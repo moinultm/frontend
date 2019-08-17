@@ -73,14 +73,20 @@
 
           <li class="nav-header">SALES</li>
           <li class="nav-item">
-            <a href="#" routerLink="/salesorder" class="nav-link"  routerLinkActive="active">
+            <a href="#" [routerLink]="['/sell','add']" class="nav-link"    [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+              <i class="nav-icon fa fa-circle-o text-warning"></i>
+              <p>Sales New</p>
+            </a>
+          </li>
+          <li class="nav-item" >
+            <a href="#"[routerLink]="['/sell']" class="nav-link"   [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
               <i class="nav-icon fa fa-circle-o text-info"></i>
-              <p>Sales Order</p>
+              <p>Sales List</p>
             </a>
           </li>
           <li class="nav-header">PURCHASE</li>
           <li class="nav-item">
-            <a href="#" routerLink="/purchaseorder" class="nav-link"  routerLinkActive="active">
+            <a href="#" routerLink="/purchaseorder" class="nav-link"  routerLinkActive="active" >
               <i class="nav-icon fa fa-circle-o text-info"></i>
               <p>Purchase Order</p>
             </a>

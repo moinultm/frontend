@@ -9,14 +9,14 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
-              <li class="breadcrumb-item"><a>Security</a></li>
+              <li class="breadcrumb-item"><a>Stock</a></li>
               <li class="breadcrumb-item active">Manage product</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-  
+
     <section class="content">
       <div class="container-fluid">
         <div class="row">
@@ -28,18 +28,19 @@
             <!-- /.card-header -->
             <!-- form start -->
             <form  [formGroup]="form">
+
               <div class="card-body">
-                                          
+
                 <div class="form-group">
                     <label>Product Name</label>
                     <input type="text" class="form-control" formControlName="product_name" placeholder="Enter ...">
                   </div>
 
-                  <div class="form-group">                      
+                  <div class="form-group">
                     <label>Product Code</label>
-                    <input type="text" class="form-control" 
+                    <input type="text" class="form-control"
                      formControlName="product_code" placeholder="Enter ...">
-                  </div> 
+                  </div>
 
 
                   <div class="form-group">
@@ -47,64 +48,64 @@
                     <select class="form-control"   formControlName="product_category"  (change)="FillSubcategory($event.target.value)" >
                         <option *ngFor="let cat of categories" [value]="cat.id">
                         {{cat.category_name}}
-                    </option>             
+                    </option>
                     </select>
                   </div>
-                  
+
 
                   <div class="form-group">
                     <label>Subcategory</label>
                     <select class="form-control"  formControlName="product_subcatrgory" >
                         <option *ngFor="let subcat of _subcategories" [value]="subcat.id">
                         {{subcat.subcategory_name}}
-                    </option>             
+                    </option>
                     </select>
                   </div>
 
-                  <div class="form-group">                      
+                  <div class="form-group">
                         <label>Cost Price</label>
-                        <input type="text" class="form-control" 
+                        <input type="text" class="form-control"
                          formControlName="product_code" placeholder="Enter ...">
-                  </div> 
-                  
+                  </div>
 
-                  <div class="form-group">                      
+
+                  <div class="form-group">
                         <label>MRP</label>
-                        <input type="text" class="form-control" 
+                        <input type="text" class="form-control"
                          formControlName="product_code" placeholder="Enter ...">
-                  </div> 
+                  </div>
 
-                  <div class="form-group">                      
+                  <div class="form-group">
                         <label>Minimum Retail Price</label>
-                        <input type="text" class="form-control" 
+                        <input type="text" class="form-control"
                          formControlName="product_code" placeholder="Enter ...">
-                      </div> 
+                      </div>
 
-                      <div class="form-group">                      
+                      <div class="form-group">
                             <label>Unit</label>
-                            <input type="text" class="form-control" 
+                            <input type="text" class="form-control"
                              formControlName="product_code" placeholder="Enter ...">
-                          </div> 
+                          </div>
 
                           <div class="form-group">
                                 <label>Status</label>
                                 <select class="form-control"  formControlName="product_subcatrgory" >
-                                    <option  [value]="1"> Active </option>   
-                                     <option  [value]="0"> Active </option>            
+                                    <option  [value]="1"> Active </option>
+                                     <option  [value]="0"> Active </option>
                                 </select>
                               </div>
 
-                              <div class="form-group">                      
+                              <div class="form-group">
                                     <label>Details</label>
-                                    <input type="text" class="form-control" 
+                                    <input type="text" class="form-control"
                                      formControlName="product_code" placeholder="Enter ...">
-                                  </div> 
+                                  </div>
 
-                                  <div class="form-group">                      
+                                  <div class="form-group">
                                         <label>Opening Stock</label>
-                                        <input type="text" class="form-control" 
+                                        <input type="text" class="form-control"
                                          formControlName="product_code" placeholder="Enter ...">
-                                      </div> 
+                                      </div>
 
                                       <div class="form-group">
                                             <label for="exampleInputFile">Image</label>
@@ -117,8 +118,8 @@
                                                 <span class="input-group-text" id="">Upload</span>
                                               </div>
                                             </div>
-                                          </div> 
-    
+                                          </div>
+
 
               </div>
               <!-- /.card-body -->
@@ -210,7 +211,6 @@
         </div>
       </div>
     </section>
-  
+
   </div>
   <!-- Content Wrapper. Contains page content -->
-  

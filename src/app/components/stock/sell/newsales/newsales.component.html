@@ -1,0 +1,137 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">New Sales</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
+            <li class="breadcrumb-item"><a>Stock</a></li>
+            <li class="breadcrumb-item active">New Sales</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+<div class="col-md-12">
+
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Form</h3>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+          <form>
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Customer Name</label>
+                            <select class="form-control">
+                                <option *ngFor="let list of customerList" [value]="list.id">
+                                    {{list.full_name}}
+                                </option>
+                            </select>
+                          </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Payment Method</label>
+                                <select class="form-control">
+                                    <option value="cash">Cash</option>
+                                    <option value="cheque">Cheque</option>
+                                </select>
+                        </div>
+                      </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Paid</label>
+                            <input class="form-control" type="text" placeholder="Enter Paid Amount">
+                        </div>
+                      </div>
+
+                      <div class="col-md-4">
+                          <div class="form-group">
+                              <label>Grand Total</label>
+                              <input class="form-control" type="text"  readonly >
+                            </div>
+                      </div>
+
+                      <div class="col-md-4">
+                          <div class="form-group">
+                              <label>Due</label>
+                              <input class="form-control" type="text"  readonly>
+                          </div>
+                        </div>
+                </div>
+
+
+                 <!-- order items table-->
+  <table class="table table-borderless">
+      <thead class="thead-light">
+        <th>Sl#</th>
+        <th>ProductName</th>
+        <th>Quantity</th>
+        <th>Discount(%)</th>
+        <th>Price(MRP)</th>
+        <th>Subtotal</th>
+        <th>
+          <a class="btn btn-sm btn-success text-white" initItemModal(addItemModal) ><i class="fa fa-plus"></i> Add Item</a>
+        </th>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="font-italic text-center" colspan="5" *ngIf="sellsList.length==0" [class.text-danger]="!isValid && sellsList.length==0">
+            No food item selected for this order.
+          </td>
+        </tr>
+
+        <tr *ngFor="let item of sellsList ;let i=index;">
+            <td>{{i}}</td>
+          <td>{{item.id}}</td>
+          <td>{{item.client_id}}</td>
+          <td>Discount(%)</td>
+          <td>Price(MRP)</td>
+          <td>Subtotal</td>
+          <td>
+            <a class="btn btn-sm btn-info text-white" ><i class="fa fa-pencil"></i></a>
+            <a class="btn btn-sm btn-danger text-white ml-1"><i class="fa fa-trash"></i></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+                 <!-- order items table-->
+
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+<!-- Content Wrapper. Contains page content -->
+
+<ng-template #addItemModal let-modal>
+
+
+</ng-template>
