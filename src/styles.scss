@@ -9,6 +9,18 @@
 
 
 
+  /* remove scrollbar space
+.modal-dialog{
+  animation-name: example;
+  animation-duration: 0.3s;
+}
+
+@keyframes example {
+  0%   {transform: scale(0.5)}
+  100% {transform: scale(1)}
+}
+*/
+
 ::-webkit-scrollbar {
   width: 0px;
   /* remove scrollbar space */

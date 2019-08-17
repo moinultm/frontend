@@ -88,7 +88,7 @@
         <th>Price(MRP)</th>
         <th>Subtotal</th>
         <th>
-          <a class="btn btn-sm btn-success text-white" initItemModal(addItemModal) ><i class="fa fa-plus"></i> Add Item</a>
+          <a class="btn btn-sm btn-success text-white" (click)="initItemModal(addItemModal)" ><i class="fa fa-plus"></i> Add Item</a>
         </th>
       </thead>
       <tbody>
@@ -131,7 +131,13 @@
 </div>
 <!-- Content Wrapper. Contains page content -->
 
-<ng-template #addItemModal let-modal>
-
+<ng-template  #addItemModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title"> Modal
+          </h4>
+        <button type="button" class="close" aria-label="Close" (click)="close(modal)">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
 
 </ng-template>

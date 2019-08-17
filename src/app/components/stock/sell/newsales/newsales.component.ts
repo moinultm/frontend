@@ -5,6 +5,7 @@ import { FormGroup } from '@angular/forms';
 import { SellsOrder } from '@models/stock/sellsorder.model';
 import { PartialList } from '@models/common/patial-list.model';
 import { CustomerService } from '@services/stock/customer.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-newsales',
@@ -23,7 +24,8 @@ export class NewsalesComponent implements OnInit {
 
 
   constructor(private sellsOrdererSvice: SellsOrderService,
-    private customeService:CustomerService
+    private customeService:CustomerService,
+    private modalService: NgbModal,
 
     ) { }
 
@@ -61,6 +63,20 @@ export class NewsalesComponent implements OnInit {
   }
 
   initItemModal(modal: any, sellsOrder?: SellsOrder){
+
+
+    this.modalService
+    .open(modal)
+    .result
+    .then((result) => {
+      if (result) {
+        //this.loadData();
+      } else {
+        //this.initSaveForm();
+      }
+    }, () => {
+     // this.initSaveForm();
+    });
 
   }
 
