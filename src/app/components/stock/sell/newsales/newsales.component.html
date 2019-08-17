@@ -134,8 +134,7 @@
 <ng-template  #addItemModal let-modal>
     <div class="modal-header">
         <h4 class="modal-title">
-            {{ selectedInvoiceProduct.id ? ('Update  Invoice Product: ' + selectedInvoiceProduct.name) : 'Add New Invoice Product' }}
-          </h4>
+           </h4>
         <button type="button" class="close" aria-label="Close" (click)="close(modal)">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -144,7 +143,7 @@
        <!-- Modal body -->
   <div class="modal-body" >
 
-    <form [formGroup]="form" *ngIf="!loadingCategory">
+    <form [formGroup]="form" *ngIf="!loadingProductList">
   <!--name-->
   <h5>Product</h5>     
   <div class="form-group">
@@ -156,7 +155,9 @@
   <!-- ./name-->
 
 
-   <!-- quantity field -->
+  <div class="row">
+      <div class="col-md-4">
+         <!-- quantity field -->
    <div class="form-group">
       <label for="quantity">Quantity</label>
       <input type="text" class="form-control" id="quantity" formControlName="quantity"
@@ -171,22 +172,60 @@
         </div>
       </div>
     <!-- ./quantity field -->
-
-       <!-- discount field -->
-   <div class="form-group">
-      <label for="quantity">Quantity</label>
-      <input type="text" class="form-control" id="quantity" formControlName="quantity"
-        [class.has-error]="form.get('quantity').dirty && form.get('quantity').invalid" />
+      </div>
+      <div class="col-md-4">
+         <!-- productMRP field -->
+       <div class="form-group">
+          <label for="productMRP">MRP</label>
+          <input type="text" class="form-control" id="productMRP" formControlName="productMRP"
+            [class.has-error]="form.get('productMRP').dirty && form.get('productMRP').invalid" />
+        </div>
+        <div class="row" *ngIf="form.get('productMRP').dirty && form.get('productMRP').invalid">
+            <div class="col-12">
+              <div class="alert alert-danger alert-transparent-left" role="alert"
+                *ngIf="form.get('productMRP').dirty && form.controls['productMRP'].hasError('required')">
+                The MRP is required
+              </div>        
+            </div>
+          </div>
+        <!-- ./productMRP field -->
+      </div>
+      <div class="col-md-4">
+<!-- discount field -->
+<div class="form-group">
+    <label for="discountOnMRP">Discount MRP(%)</label>
+    <input type="text" class="form-control" id="discountOnMRP" formControlName="discountOnMRP"
+      [class.has-error]="form.get('discountOnMRP').dirty && form.get('discountOnMRP').invalid" /> 
+  </div>
+  <div class="row" *ngIf="form.get('discountOnMRP').dirty && form.get('discountOnMRP').invalid">
+      <div class="col-12">
+        <div class="alert alert-danger alert-transparent-left" role="alert"
+          *ngIf="form.get('discountOnMRP').dirty && form.controls['discountOnMRP'].hasError('required')">
+          The Discount is required
+        </div>        
+      </div>
     </div>
-    <div class="row" *ngIf="form.get('quantity').dirty && form.get('quantity').invalid">
+  <!-- ./discount field -->
+      </div>
+    </div>
+     
+
+           <!-- itemTotal field -->
+   <div class="form-group">
+      <label for="subTotal">Sub Total</label>
+      <input type="text" class="form-control" id="subTotal" formControlName="subTotal"
+        [class.has-error]="form.get('subTotal').dirty && form.get('subTotal').invalid" />
+    </div>
+    <div class="row" *ngIf="form.get('subTotal').dirty && form.get('subTotal').invalid">
         <div class="col-12">
           <div class="alert alert-danger alert-transparent-left" role="alert"
-            *ngIf="form.get('quantity').dirty && form.controls['quantity'].hasError('required')">
+            *ngIf="form.get('subTotal').dirty && form.controls['subTotal'].hasError('required')">
             The Quantity is required
           </div>        
         </div>
       </div>
-    <!-- ./discount field -->
+          <!-- ./discount field -->
+
 
       </form>
  <!-- Loading profiles indicator -->

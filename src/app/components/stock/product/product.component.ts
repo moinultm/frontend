@@ -67,7 +67,7 @@ export class ProductComponent implements OnInit {
 
     this.form = this._fb.group({
       product_name: [
-        product ? product.product_name : '',
+        product ? product.name : '',
         [Validators.required, Validators.maxLength(255)]
       ],
       product_code: [    product ? product.code : this.randcode(),   [Validators.required, Validators.maxLength(255)] ] ,

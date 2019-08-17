@@ -22,18 +22,18 @@ export class NewsalesComponent implements OnInit {
   loadingOrder: boolean;
   loadingCustomer:boolean;
   form: FormGroup;
+
   selectedOrder: SellsOrder;
 
   _productList: Array<Product>;
   loadingProductList:boolean;
-  addingItemToInvoice:boolean;
-  selectedInvoiceProduct: Product;
+ 
 
   constructor(private sellsOrdererSvice: SellsOrderService,
     private customeService:CustomerService,
     private productService:ProductService,
     private modalService: NgbModal,
-    private _fbitems: FormBuilder,
+    private _fb: FormBuilder,
 
     ) { }
 
@@ -54,7 +54,7 @@ export class NewsalesComponent implements OnInit {
   }
 
 
-  initForm(product?: Product): void {
+  initForm(order?: SellsOrder): void {
     this.FillCustomer();
 
   }
@@ -72,7 +72,7 @@ export class NewsalesComponent implements OnInit {
 
   initItemModal(modal: any, product?: Product){
 
-    this.initItemsForm(product);
+    this.initItemsForm();
 
     this.loadingProductList=true;
     this.productService.find()
@@ -95,23 +95,37 @@ export class NewsalesComponent implements OnInit {
     });
 
   }
-  initItemsForm(product?: Product): void{
+  initItemsForm(orderitem?: SellsOrder): void{
 
-    if (product) {
-      this.selectedInvoiceProduct =  Object.assign(Product, product);
+    if (orderitem) {
+      this.selectedOrder=  Object.assign(SellsOrder, orderitem);
     } else {
-      this.selectedInvoiceProduct = new Product();
+      this.selectedOrder = new SellsOrder();
     }
-    this.form = this._fbitems.group({
+    
+    this.form = this._fb.group({
       name: [
-        product ? product.name : '',
+        orderitem ? orderitem.product_id : '',
         [Validators.required, Validators.maxLength(255)]
+      ], 
+       quantity: [
+        orderitem ? orderitem.quantity : '',
+        [Validators.required]
       ] ,
-      quantity: [
-        product ? product.quantity : '',
+      productMRP: [
+        orderitem ? orderitem.product_id : '',
+        [Validators.required]
+      ] ,
+      
+      discountOnMRP: [
+        orderitem ? orderitem.product_discount_percentage : '',
+        [Validators.required]
+      ] ,
+      subTotal: [
+        orderitem ? orderitem.sub_total : '',
         [Validators.required]
       ] 
-        
+      
     });
   }
   
