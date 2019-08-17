@@ -1,6 +1,6 @@
 export class Product {
     id:number;
-    product_name:string;
+    name:string;
     code:number;
     category_id:Number;
     subcategory_id:number;

@@ -133,11 +133,74 @@
 
 <ng-template  #addItemModal let-modal>
     <div class="modal-header">
-        <h4 class="modal-title"> Modal
+        <h4 class="modal-title">
+            {{ selectedInvoiceProduct.id ? ('Update  Invoice Product: ' + selectedInvoiceProduct.name) : 'Add New Invoice Product' }}
           </h4>
         <button type="button" class="close" aria-label="Close" (click)="close(modal)">
           <span aria-hidden="true">&times;</span>
         </button>
+      </div>
+
+       <!-- Modal body -->
+  <div class="modal-body" >
+
+    <form [formGroup]="form" *ngIf="!loadingCategory">
+  <!--name-->
+  <h5>Product</h5>     
+  <div class="form-group">
+    <select class="form-control"  id="name" formControlName="name">               
+           <option *ngFor="let product of _productList" [value]="product.id"   >
+           {{product.name}}</option>  
+   </select>
+  </div>
+  <!-- ./name-->
+
+
+   <!-- quantity field -->
+   <div class="form-group">
+      <label for="quantity">Quantity</label>
+      <input type="text" class="form-control" id="quantity" formControlName="quantity"
+        [class.has-error]="form.get('quantity').dirty && form.get('quantity').invalid" />
+    </div>
+    <div class="row" *ngIf="form.get('quantity').dirty && form.get('quantity').invalid">
+        <div class="col-12">
+          <div class="alert alert-danger alert-transparent-left" role="alert"
+            *ngIf="form.get('quantity').dirty && form.controls['quantity'].hasError('required')">
+            The Quantity is required
+          </div>        
+        </div>
+      </div>
+    <!-- ./quantity field -->
+
+       <!-- discount field -->
+   <div class="form-group">
+      <label for="quantity">Quantity</label>
+      <input type="text" class="form-control" id="quantity" formControlName="quantity"
+        [class.has-error]="form.get('quantity').dirty && form.get('quantity').invalid" />
+    </div>
+    <div class="row" *ngIf="form.get('quantity').dirty && form.get('quantity').invalid">
+        <div class="col-12">
+          <div class="alert alert-danger alert-transparent-left" role="alert"
+            *ngIf="form.get('quantity').dirty && form.controls['quantity'].hasError('required')">
+            The Quantity is required
+          </div>        
+        </div>
+      </div>
+    <!-- ./discount field -->
+
+      </form>
+ <!-- Loading profiles indicator -->
+ <mat-spinner class="loading-profiles" *ngIf="loadingProductList"></mat-spinner>
+ <!-- Loading profiles indicator -->
+
+  <!-- Modal footer -->
+  <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="addItemToInvoice(modal)"
+        [disabled]="form.invalid || addingItemToInvoice">Save</button>
+    </div>
+    <!-- ./Modal footer -->
+
+
       </div>
 
 </ng-template>

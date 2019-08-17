@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { SellsOrderService } from '@services/stock/sellsorder.service';
 import { Client } from '@models/stock/client.model';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { SellsOrder } from '@models/stock/sellsorder.model';
 import { PartialList } from '@models/common/patial-list.model';
 import { CustomerService } from '@services/stock/customer.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ProductService } from '@services/stock/product.service';
+import { Product } from '@models/stock/product.model';
 
 @Component({
   selector: 'app-newsales',
@@ -22,10 +24,16 @@ export class NewsalesComponent implements OnInit {
   form: FormGroup;
   selectedOrder: SellsOrder;
 
+  _productList: Array<Product>;
+  loadingProductList:boolean;
+  addingItemToInvoice:boolean;
+  selectedInvoiceProduct: Product;
 
   constructor(private sellsOrdererSvice: SellsOrderService,
     private customeService:CustomerService,
+    private productService:ProductService,
     private modalService: NgbModal,
+    private _fbitems: FormBuilder,
 
     ) { }
 
@@ -46,7 +54,7 @@ export class NewsalesComponent implements OnInit {
   }
 
 
-  initForm(salesorder?: SellsOrder): void {
+  initForm(product?: Product): void {
     this.FillCustomer();
 
   }
@@ -62,9 +70,17 @@ export class NewsalesComponent implements OnInit {
     });
   }
 
-  initItemModal(modal: any, sellsOrder?: SellsOrder){
+  initItemModal(modal: any, product?: Product){
 
+    this.initItemsForm(product);
 
+    this.loadingProductList=true;
+    this.productService.find()
+    .subscribe((res: PartialList<Product>) => {
+      this._productList = res.data;
+      this.loadingProductList = false;
+    });
+    
     this.modalService
     .open(modal)
     .result
@@ -72,12 +88,32 @@ export class NewsalesComponent implements OnInit {
       if (result) {
         //this.loadData();
       } else {
-        //this.initSaveForm();
+        // this.initItemsForm();
       }
     }, () => {
      // this.initSaveForm();
     });
 
   }
+  initItemsForm(product?: Product): void{
+
+    if (product) {
+      this.selectedInvoiceProduct =  Object.assign(Product, product);
+    } else {
+      this.selectedInvoiceProduct = new Product();
+    }
+    this.form = this._fbitems.group({
+      name: [
+        product ? product.name : '',
+        [Validators.required, Validators.maxLength(255)]
+      ] ,
+      quantity: [
+        product ? product.quantity : '',
+        [Validators.required]
+      ] 
+        
+    });
+  }
+  
 
 }
