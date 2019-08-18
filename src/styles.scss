@@ -25,6 +25,12 @@
   margin: 0 auto;
 }
 
+input.ng-dirty.ng-invalid {
+color: red;
+border-color: #dc3545!important;
+}
+
+
 ::-webkit-scrollbar {
   width: 0px;
   /* remove scrollbar space */

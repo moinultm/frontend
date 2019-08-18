@@ -28,19 +28,27 @@
           </div>
           <!-- /.card-header -->
           <!-- form start -->
-          <form>
+          <form [formGroup]="mainForm">
 
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
-                            <label>Customer Name</label>
+                            <label>Select Customer</label>
                             <select class="form-control">
                                 <option *ngFor="let list of customerList" [value]="list.id">
                                     {{list.full_name}}
                                 </option>
                             </select>
                           </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                        <label>New Customer</label>
+                        <button class="form-control">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                        </div>
                     </div>
 
                     <div class="col-md-6">
@@ -58,21 +66,26 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Paid</label>
-                            <input class="form-control" type="text" placeholder="Enter Paid Amount">
+                            <input class="form-control"  type="text" id="paidAmount" formControlName="paidAmount"
+                            placeholder="Paid Amount" (keyup)="updateDueAmount()"
+                            [class.has-error]="mainForm.get('paidAmount').dirty && mainForm.get('paidAmount').invalid"
+                            >
                         </div>
                       </div>
+
+
 
                       <div class="col-md-4">
                           <div class="form-group">
                               <label>Grand Total</label>
-                              <input class="form-control" type="text"  readonly >
+                              <input class="form-control" type="text" id="grandTotal" formControlName="grandTotal"  readonly >
                             </div>
                       </div>
 
                       <div class="col-md-4">
                           <div class="form-group">
                               <label>Due</label>
-                              <input class="form-control" type="text"  readonly>
+                              <input class="form-control" type="text"  id="dueAmount" formControlName="dueAmount"  readonly>
                           </div>
                         </div>
                 </div>
@@ -81,7 +94,7 @@
                  <!-- order items table-->
   <table class="table table-borderless">
       <thead class="thead-light">
-        <th>Sl#</th>
+
         <th>ProductName</th>
         <th>Quantity</th>
         <th>Discount(%)</th>
@@ -93,18 +106,18 @@
       </thead>
       <tbody>
         <tr>
-          <td class="font-italic text-center" colspan="5" *ngIf="sellsList.length==0" [class.text-danger]="!isValid && sellsList.length==0">
-            No food item selected for this order.
+          <td class="font-italic text-center" colspan="5" *ngIf="orderItemList.length==0" [class.text-danger]="!isValid && orderItemList.length==0">
+            No product selected for this order.
           </td>
         </tr>
 
-        <tr *ngFor="let item of sellsList ;let i=index;">
-            <td>{{i}}</td>
-          <td>{{item.id}}</td>
-          <td>{{item.client_id}}</td>
-          <td>Discount(%)</td>
-          <td>Price(MRP)</td>
-          <td>Subtotal</td>
+        <tr *ngFor="let item of orderItemList;let i=index;">
+
+          <td>{{item.product_name}}</td>
+          <td>{{item.quantity}}</td>
+          <td>{{item.discount}}</td>
+          <td>{{item.mrp}}</td>
+          <td>{{item.subtotal}}</td>
           <td>
             <a class="btn btn-sm btn-info text-white" ><i class="fa fa-pencil"></i></a>
             <a class="btn btn-sm btn-danger text-white ml-1"><i class="fa fa-trash"></i></a>
@@ -112,13 +125,13 @@
         </tr>
       </tbody>
     </table>
-
-                 <!-- order items table-->
+    <!-- order items table-->
 
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-primary"
+              [disabled]="mainForm.invalid">Submit</button>
             </div>
           </form>
 
@@ -143,13 +156,14 @@
        <!-- Modal body -->
   <div class="modal-body" >
 
-    <form [formGroup]="form" *ngIf="!loadingProductList">
+    <form [formGroup]="formProducts" *ngIf="!loadingProductList"  >
   <!--name-->
-  <h5>Product</h5>     
+  <h5>Product</h5>
   <div class="form-group">
-    <select class="form-control"  id="name" formControlName="name">               
-           <option *ngFor="let product of _productList" [value]="product.id"   >
-           {{product.name}}</option>  
+    <select class="form-control"  id="name" formControlName="name" (change)="updatePrice($event.target)">
+        <option value="0">--Select--</option>
+           <option *ngFor="let product of _productList" [ngValue]="product"   >
+           {{product.name}}</option>
    </select>
   </div>
   <!-- ./name-->
@@ -160,15 +174,15 @@
          <!-- quantity field -->
    <div class="form-group">
       <label for="quantity">Quantity</label>
-      <input type="text" class="form-control" id="quantity" formControlName="quantity"
-        [class.has-error]="form.get('quantity').dirty && form.get('quantity').invalid" />
+      <input type="text" class="form-control" id="quantity" formControlName="quantity" (keyup)="updateSubTotal()"
+        [class.has-error]="formProducts.get('quantity').dirty && formProducts.get('quantity').invalid" />
     </div>
-    <div class="row" *ngIf="form.get('quantity').dirty && form.get('quantity').invalid">
+    <div class="row" *ngIf="formProducts.get('quantity').dirty && formProducts.get('quantity').invalid">
         <div class="col-12">
           <div class="alert alert-danger alert-transparent-left" role="alert"
-            *ngIf="form.get('quantity').dirty && form.controls['quantity'].hasError('required')">
+            *ngIf="formProducts.get('quantity').dirty && formProducts.controls['quantity'].hasError('required')">
             The Quantity is required
-          </div>        
+          </div>
         </div>
       </div>
     <!-- ./quantity field -->
@@ -178,14 +192,14 @@
        <div class="form-group">
           <label for="productMRP">MRP</label>
           <input type="text" class="form-control" id="productMRP" formControlName="productMRP"
-            [class.has-error]="form.get('productMRP').dirty && form.get('productMRP').invalid" />
+            [class.has-error]="formProducts.get('productMRP').dirty && formProducts.get('productMRP').invalid"  readonly />
         </div>
-        <div class="row" *ngIf="form.get('productMRP').dirty && form.get('productMRP').invalid">
+        <div class="row" *ngIf="formProducts.get('productMRP').dirty && formProducts.get('productMRP').invalid">
             <div class="col-12">
               <div class="alert alert-danger alert-transparent-left" role="alert"
-                *ngIf="form.get('productMRP').dirty && form.controls['productMRP'].hasError('required')">
-                The MRP is required
-              </div>        
+                *ngIf="formProducts.get('productMRP').dirty && formProducts.controls['productMRP'].hasError('required')">
+                MRP Not Set
+              </div>
             </div>
           </div>
         <!-- ./productMRP field -->
@@ -194,37 +208,39 @@
 <!-- discount field -->
 <div class="form-group">
     <label for="discountOnMRP">Discount MRP(%)</label>
-    <input type="text" class="form-control" id="discountOnMRP" formControlName="discountOnMRP"
-      [class.has-error]="form.get('discountOnMRP').dirty && form.get('discountOnMRP').invalid" /> 
+    <input type="text" class="form-control" id="discountOnMRP" formControlName="discountOnMRP" (keyup)="updateSubTotal()"
+      [class.has-error]="formProducts.get('discountOnMRP').dirty && formProducts.get('discountOnMRP').invalid" />
   </div>
-  <div class="row" *ngIf="form.get('discountOnMRP').dirty && form.get('discountOnMRP').invalid">
+  <div class="row" *ngIf="formProducts.get('discountOnMRP').dirty && formProducts.get('discountOnMRP').invalid">
       <div class="col-12">
         <div class="alert alert-danger alert-transparent-left" role="alert"
-          *ngIf="form.get('discountOnMRP').dirty && form.controls['discountOnMRP'].hasError('required')">
-          The Discount is required
-        </div>        
+          *ngIf="formProducts.get('discountOnMRP').dirty && formProducts.controls['discountOnMRP'].hasError('required')">
+           % Required
+        </div>
       </div>
     </div>
   <!-- ./discount field -->
       </div>
     </div>
-     
+
 
            <!-- itemTotal field -->
    <div class="form-group">
-      <label for="subTotal">Sub Total</label>
-      <input type="text" class="form-control" id="subTotal" formControlName="subTotal"
-        [class.has-error]="form.get('subTotal').dirty && form.get('subTotal').invalid" />
+      <label for="subtotal">Sub Total</label>
+      <input type="text" class="form-control" id="subtotal" formControlName="subtotal"
+        [class.has-error]="formProducts.get('subtotal').dirty && formProducts.get('subtotal').invalid"  readonly />
     </div>
-    <div class="row" *ngIf="form.get('subTotal').dirty && form.get('subTotal').invalid">
+    <div class="row" *ngIf="formProducts.get('subtotal').dirty && formProducts.get('subtotal').invalid">
         <div class="col-12">
           <div class="alert alert-danger alert-transparent-left" role="alert"
-            *ngIf="form.get('subTotal').dirty && form.controls['subTotal'].hasError('required')">
-            The Quantity is required
-          </div>        
+            *ngIf="formProducts.get('subtotal').dirty && formProducts.controls['subtotal'].hasError('required')">
+              required
+          </div>
         </div>
       </div>
           <!-- ./discount field -->
+
+
 
 
       </form>
@@ -234,8 +250,10 @@
 
   <!-- Modal footer -->
   <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="addItemToInvoice(modal)"
-        [disabled]="form.invalid || addingItemToInvoice">Save</button>
+      <div class="form-group">
+          <button type="button" class="btn btn-outline-dark" (click)="addItemToInvoice(formProducts,modal)"
+          [disabled]="formProducts.invalid || addingItemToInvoice">Save</button>
+      </div>
     </div>
     <!-- ./Modal footer -->
 

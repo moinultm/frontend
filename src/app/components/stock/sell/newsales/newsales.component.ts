@@ -5,9 +5,10 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { SellsOrder } from '@models/stock/sellsorder.model';
 import { PartialList } from '@models/common/patial-list.model';
 import { CustomerService } from '@services/stock/customer.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ProductService } from '@services/stock/product.service';
 import { Product } from '@models/stock/product.model';
+import { OrderItems } from '@models/stock/orderitems.model ';
 
 @Component({
   selector: 'app-newsales',
@@ -15,19 +16,24 @@ import { Product } from '@models/stock/product.model';
   styleUrls: ['./newsales.component.scss']
 })
 export class NewsalesComponent implements OnInit {
+  modalOption: NgbModalOptions = {};
 
   customerList: Array<Client>;
-  sellsList: Array<SellsOrder>=[];
+
+  orderItemList: Array<OrderItems>=[];
 
   loadingOrder: boolean;
   loadingCustomer:boolean;
-  form: FormGroup;
+
+  mainForm: FormGroup;
+  formProducts:FormGroup;
 
   selectedOrder: SellsOrder;
+selectedOrderItem: OrderItems;
 
   _productList: Array<Product>;
   loadingProductList:boolean;
- 
+
 
   constructor(private sellsOrdererSvice: SellsOrderService,
     private customeService:CustomerService,
@@ -48,14 +54,20 @@ export class NewsalesComponent implements OnInit {
     customObj.id = 1;
     customObj.client_id = 12;
 
-    this.sellsList.push(customObj);
+    //this.sellsList.push(customObj);
 
-    console.log(this.sellsList);
+    //console.log(this.sellsList);
   }
 
 
   initForm(order?: SellsOrder): void {
     this.FillCustomer();
+
+    this.mainForm = this._fb.group({
+    grandTotal:['',[Validators.required]  ],
+    paidAmount:['',[Validators.required]  ],
+    dueAmount:['', [Validators.required]  ]
+  });
 
   }
 
@@ -71,6 +83,8 @@ export class NewsalesComponent implements OnInit {
   }
 
   initItemModal(modal: any, product?: Product){
+    this.modalOption.backdrop = 'static';
+    this.modalOption.keyboard = false;
 
     this.initItemsForm();
 
@@ -80,54 +94,134 @@ export class NewsalesComponent implements OnInit {
       this._productList = res.data;
       this.loadingProductList = false;
     });
-    
+
     this.modalService
-    .open(modal)
+    .open(modal,this.modalOption)
     .result
     .then((result) => {
       if (result) {
         //this.loadData();
+
       } else {
         // this.initItemsForm();
+
       }
     }, () => {
      // this.initSaveForm();
+
     });
 
   }
-  initItemsForm(orderitem?: SellsOrder): void{
+  initItemsForm(orderitem?: OrderItems): void{
 
     if (orderitem) {
-      this.selectedOrder=  Object.assign(SellsOrder, orderitem);
+      this.selectedOrderItem=  Object.assign(OrderItems, orderitem);
     } else {
-      this.selectedOrder = new SellsOrder();
+      this.selectedOrderItem = new OrderItems();
     }
-    
-    this.form = this._fb.group({
+
+    this.formProducts = this._fb.group({
       name: [
-        orderitem ? orderitem.product_id : '',
+        orderitem ? orderitem.product_name : '',
         [Validators.required, Validators.maxLength(255)]
-      ], 
+      ],
        quantity: [
         orderitem ? orderitem.quantity : '',
         [Validators.required]
       ] ,
       productMRP: [
-        orderitem ? orderitem.product_id : '',
+        orderitem ? orderitem.mrp : '',
         [Validators.required]
       ] ,
-      
+
       discountOnMRP: [
-        orderitem ? orderitem.product_discount_percentage : '',
+        orderitem ? orderitem.discount : '',
         [Validators.required]
       ] ,
-      subTotal: [
-        orderitem ? orderitem.sub_total : '',
+      subtotal: [
+        orderitem ? orderitem.subtotal : '',
         [Validators.required]
-      ] 
-      
+      ],
+
+
     });
   }
-  
+
+
+  //=================update price   selected item===================================
+  updatePrice(ctrl) {
+    if (ctrl.selectedIndex == 0) {
+      this.formProducts.patchValue({
+        name: '',
+        productMRP:0
+     });
+    }
+    else {
+      this.formProducts.patchValue({
+        //name:this._productList[ctrl.selectedIndex - 1].name ,
+        productMRP:this._productList[ctrl.selectedIndex - 1].mrp,
+           });
+
+    }
+    this.updateSubTotal();
+  }
+
+  updateSubTotal() {
+   const discount = Math.round((this.formProducts.value.discountOnMRP / 100) * this.formProducts.value.productMRP);
+   const newMRP= (this.formProducts.value.productMRP-discount);
+   const newVal= parseFloat((this.formProducts.value.quantity * newMRP).toFixed(2)) ;
+
+    this.formProducts.patchValue({
+      subtotal: newVal,
+   });
+
+  }
+
+  updateGrandTotal(){
+    let grand :number;
+    grand= this.orderItemList.reduce((prev, curr) => {
+      return prev + curr.subtotal;
+    }, 0);
+    this.mainForm.patchValue({
+      grandTotal:    parseFloat(grand.toFixed(2)),
+    });
+  }
+
+  updateDueAmount(){
+    let due :number;
+    due= (this.mainForm.value.grandTotal-this.mainForm.value.paidAmount);
+    this.mainForm.patchValue({dueAmount:    parseFloat(due.toFixed(2)),});
+  }
+  //=================update price   selected item===================================
+
+
+
+  addItemToInvoice(formProducts:any,modal ?:any) : void{
+
+   let formItem = new OrderItems();
+   formItem.product_id=formProducts.value.name.id;
+   formItem.product_name= formProducts.value.name.name ;
+   formItem.quantity=formProducts.value.quantity;
+   formItem.mrp=formProducts.value.productMRP;
+   formItem.discount=formProducts.value.discountOnMRP;
+   formItem.subtotal=formProducts.value.subtotal;
+
+    if (this.formProducts.valid) {
+      this.orderItemList.push(formItem);
+      this.updateGrandTotal();
+      this.updateDueAmount();
+      this.close(modal, true);
+    }
+
+
+  }
+
+
+
+
+   //Close Module
+   close(modal: any, flag?: boolean): void {
+    modal.close(flag ? true : false);
+  }
 
 }
