@@ -1,3 +1,4 @@
+import { OrderItems } from './orderitems.model ';
 
 
 export class SellsOrder {
@@ -11,5 +12,5 @@ export class SellsOrder {
     product_discount_percentage:number;
     sub_total:number;
     product_tax:number;
-
+    
 }

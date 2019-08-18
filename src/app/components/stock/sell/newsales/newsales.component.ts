@@ -9,6 +9,8 @@ import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ProductService } from '@services/stock/product.service';
 import { Product } from '@models/stock/product.model';
 import { OrderItems } from '@models/stock/orderitems.model ';
+import { ToastrService } from 'ngx-toastr';
+import { success, error, warning } from '@app/services/core/utils/toastr';
 
 @Component({
   selector: 'app-newsales',
@@ -25,6 +27,7 @@ export class NewsalesComponent implements OnInit {
   loadingOrder: boolean;
   loadingCustomer:boolean;
 
+  _saving:boolean;
   mainForm: FormGroup;
   formProducts:FormGroup;
 
@@ -40,11 +43,17 @@ selectedOrderItem: OrderItems;
     private productService:ProductService,
     private modalService: NgbModal,
     private _fb: FormBuilder,
+    private _toastr: ToastrService,
 
     ) { }
 
   ngOnInit() {
     this.initForm();
+
+    //date = new FormControl(new Date());
+   
+
+
   }
 
 
@@ -62,15 +71,15 @@ selectedOrderItem: OrderItems;
 
   initForm(order?: SellsOrder): void {
     this.FillCustomer();
-
     this.mainForm = this._fb.group({
+    sellDate:[new Date(),[Validators.nullValidator]],
+    customerName:['',[Validators.required]  ],
+    paymentMethod:['',[Validators.required]  ],
     grandTotal:['',[Validators.required]  ],
     paidAmount:['',[Validators.required]  ],
     dueAmount:['', [Validators.required]  ]
   });
-
   }
-
 
   FillCustomer()
   {
@@ -210,14 +219,54 @@ selectedOrderItem: OrderItems;
       this.orderItemList.push(formItem);
       this.updateGrandTotal();
       this.updateDueAmount();
-      this.close(modal, true);
+      //this.close(modal, true);
+      this.initItemsForm();
     }
 
 
   }
 
 
+//Main Save Function
 
+save(form: any){
+  this._saving=true;
+
+  if(parseFloat(this.mainForm.get('paidAmount').value) > this.mainForm.get('grandTotal').value ){
+    error('Error!', "Paid amount (" + this.mainForm.get('paidAmount').value + ") cant\'be greater than total amount (" + this.mainForm.get('grandTotal').value  + ")", this._toastr);
+   this._saving = false
+   return false;
+ }
+
+  const formData = new FormData();
+  formData.append('customer', this.mainForm.get('customerName').value);
+  formData.append('paid', this.mainForm.get('customerName').value);
+  formData.append('method', this.mainForm.get('paymentMethod').value);
+  formData.append('total', this.mainForm.get('grandTotal').value);
+  formData.append('paid', this.mainForm.get('paidAmount').value);
+  formData.append('sells', JSON.stringify(this.orderItemList));
+
+  this.sellsOrdererSvice.save(formData, false).subscribe((res: SellsOrder) => {
+
+    success('Success!', 'The user is successfully saved.', this._toastr);
+    this._saving = false;
+
+    //this.close(form, true);
+  }, (err: any) => {
+
+    if (err.status === 403) {
+
+      err.error.forEach((e: string) => {
+        warning('Warning!', e, this._toastr);
+      });
+    } else {
+
+      error('Error!', 'An error has occured when saving the user, please contact system administrator.', this._toastr);
+    }
+    this._saving = false;
+  });
+  
+}
 
    //Close Module
    close(modal: any, flag?: boolean): void {
