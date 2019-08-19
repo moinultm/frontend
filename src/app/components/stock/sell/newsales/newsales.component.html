@@ -62,20 +62,44 @@
                   </div>
 
                   <div class="col-md-3">
-                  
+
                     <mat-form-field>
-                 
+
                       <input matInput [matDatepicker]="picker" placeholder="Bill Date" formControlName="sellDate">
                       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                       <mat-datepicker #picker></mat-datepicker>
-                  
+
                     </mat-form-field>
                     <!--https://appdividend.com/2018/09/16/angular-datepicker-example-tutorial/-->
                   </div>
                   </div>
 
                 <div class="row">
-                  <div class="col-md-4">
+
+
+
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Grand Total</label>
+                      <input class="form-control" type="text" id="grandTotal" formControlName="grandTotal" readonly>
+                    </div>
+                  </div>
+
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label>Discount</label>
+                      <input class="form-control" type="text" id="discountAmount" formControlName="discountAmount"  >
+                    </div>
+                  </div>
+
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label>Shipping Cost</label>
+                      <input class="form-control" type="text" id="shippingCost" formControlName="shippingCost"  >
+                    </div>
+                  </div>
+                  <div class="col-md-3">
                     <div class="form-group">
                       <label>Paid</label>
                       <input class="form-control" type="text" id="paidAmount" formControlName="paidAmount"
@@ -84,22 +108,19 @@
                     </div>
                   </div>
 
-
-
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label>Grand Total</label>
-                      <input class="form-control" type="text" id="grandTotal" formControlName="grandTotal" readonly>
-                    </div>
-                  </div>
-
-                  <div class="col-md-4">
+                  <div class="col-md-2">
                     <div class="form-group">
                       <label>Due</label>
                       <input class="form-control" type="text" id="dueAmount" formControlName="dueAmount" readonly>
                     </div>
                   </div>
+
+
+
+
                 </div>
+
+
 
 
                 <!-- order items table-->
@@ -128,7 +149,7 @@
 
                       <td>{{item.product_name}}</td>
                       <td>{{item.quantity}}</td>
-                      <td>{{item.discount}}</td>
+                      <td>{{item.product_discount_percentage}}</td>
                       <td>{{item.mrp}}</td>
                       <td>{{item.subtotal}}</td>
                       <td>
@@ -147,7 +168,9 @@
                   [disabled]="mainForm.invalid || _saving">Save Invoice</button>
               </div>
             </form>
-
+            <!-- Loading profiles indicator -->
+            <mat-spinner class="loading-profiles" *ngIf="_saving"></mat-spinner>
+            <!-- Loading profiles indicator -->
           </div>
         </div>
       </div>

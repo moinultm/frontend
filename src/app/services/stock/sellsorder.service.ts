@@ -8,11 +8,9 @@ import { SellsOrder } from '@models/stock/sellsorder.model';
 })
 export class SellsOrderService extends CrudService<SellsOrder> {
 
-
-  constructor(private __http: HttpClient ) {
-    super(__http);
+  constructor(_http: HttpClient ) {
+    super(_http);
     this.setUrl('sell');
   }
-
 
 }

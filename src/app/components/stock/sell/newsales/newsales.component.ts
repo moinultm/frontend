@@ -50,34 +50,36 @@ selectedOrderItem: OrderItems;
   ngOnInit() {
     this.initForm();
 
-    //date = new FormControl(new Date());
-   
-
 
   }
 
 
- addOrderItem(){
-
-    let customObj = new SellsOrder();
-    customObj.id = 1;
-    customObj.client_id = 12;
-
-    //this.sellsList.push(customObj);
-
-    //console.log(this.sellsList);
-  }
 
 
   initForm(order?: SellsOrder): void {
+
+    if (order){
+
+    }
+    else{
+      this.selectedOrder =new SellsOrder();
+      this.orderItemList =[];
+    }
+
+
+
+
     this.FillCustomer();
+
     this.mainForm = this._fb.group({
     sellDate:[new Date(),[Validators.nullValidator]],
     customerName:['',[Validators.required]  ],
-    paymentMethod:['',[Validators.required]  ],
-    grandTotal:['',[Validators.required]  ],
-    paidAmount:['',[Validators.required]  ],
-    dueAmount:['', [Validators.required]  ]
+    paymentMethod:['cash',[Validators.required]  ],
+    grandTotal:['0',[Validators.required]  ],
+    paidAmount:['0',[Validators.required]  ],
+    dueAmount:['0', [Validators.required]  ],
+    discountAmount:['0', [Validators.required]  ],
+    shippingCost:['0', [Validators.required]  ],
   });
   }
 
@@ -144,7 +146,7 @@ selectedOrderItem: OrderItems;
       ] ,
 
       discountOnMRP: [
-        orderitem ? orderitem.discount : '',
+        orderitem ? orderitem.product_discount_percentage : '',
         [Validators.required]
       ] ,
       subtotal: [
@@ -210,9 +212,10 @@ selectedOrderItem: OrderItems;
    let formItem = new OrderItems();
    formItem.product_id=formProducts.value.name.id;
    formItem.product_name= formProducts.value.name.name ;
+   formItem.cost_price=formProducts.value.name.cost_price;
    formItem.quantity=formProducts.value.quantity;
    formItem.mrp=formProducts.value.productMRP;
-   formItem.discount=formProducts.value.discountOnMRP;
+   formItem.product_discount_percentage=formProducts.value.discountOnMRP;
    formItem.subtotal=formProducts.value.subtotal;
 
     if (this.formProducts.valid) {
@@ -244,14 +247,14 @@ save(form: any){
   formData.append('method', this.mainForm.get('paymentMethod').value);
   formData.append('total', this.mainForm.get('grandTotal').value);
   formData.append('paid', this.mainForm.get('paidAmount').value);
+  formData.append('discount', this.mainForm.get('discountAmount').value);
+  formData.append('shipping_cost', this.mainForm.get('shippingCost').value);
   formData.append('sells', JSON.stringify(this.orderItemList));
 
   this.sellsOrdererSvice.save(formData, false).subscribe((res: SellsOrder) => {
-
-    success('Success!', 'The user is successfully saved.', this._toastr);
+    success('Success!', 'The Order is successfully saved.', this._toastr);
+    this.initForm();
     this._saving = false;
-
-    //this.close(form, true);
   }, (err: any) => {
 
     if (err.status === 403) {
@@ -265,7 +268,7 @@ save(form: any){
     }
     this._saving = false;
   });
-  
+
 }
 
    //Close Module
