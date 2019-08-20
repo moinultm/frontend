@@ -1,1 +1,115 @@
-<p>supplier works!</p>
+<div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Supplier</h1>
+              </div><!-- /.col -->
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
+                  <li class="breadcrumb-item"><a>Stock</a></li>
+                  <li class="breadcrumb-item active">Manage Supplier</li>
+                </ol>
+              </div><!-- /.col -->
+            </div><!-- /.row -->
+          </div><!-- /.container-fluid -->
+        </div>
+      
+        <section class="content">
+          <div class="container-fluid">
+            <div class="row">
+                    <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">List of customers |
+                         Add customer <i class="fa fa-plus" (click)="initSave(saveModal)"></i>   </h3>
+                            
+
+                            <div class="card-tools">
+
+                                <div class="input-group input-group-sm" style="width: 150px;">
+                                    <input type="text" name="table_search" class="form-control float-right"
+                                        placeholder="Search">
+
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-default"><i
+                                                class="fa fa-search" ></i></button>
+                                    </div>
+                            
+                            </div>
+                        </div>
+
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body p-0">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10px">#</th>
+                                        <th>Customer Name</th>
+                                        <th>Contact</th>
+                                        <th>Company Name</th>
+                                        <th>Due</th>
+                                        <th>Transaction Total</th>
+                                        <th style="width:20%">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        <tr *ngIf="loading">
+                                                <td colspan="12" class="text-center loading-data">
+                                                  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                                                  Loading data . .
+                                                </td>
+                                              </tr>
+                            
+                                              <tr *ngIf="!loading && data && !data.data.length">
+                                                <td colspan="12" class="text-center loading-data">
+                                                  No category created yet!
+                                                </td>
+                                              </tr>
+                            
+                                              <ng-container *ngIf="!loading">
+                                                <tr *ngFor="let item of data.data; let i = index">
+                                                  <td>{{ i+1 }}</td>
+                                                  <td>{{ item.full_name }}</td>
+                                                  <td>{{ item.contact }}</td>
+                                                  <td>{{ item.company_name }}</td>
+                                                  <td>{{ item.company_name }}</td>
+                                                  <td>{{ item.company_name }}</td>
+                                                  <td class="actions">
+                                                    <button type="button" class="btn  btn-success" (click)="initSave(saveModal, item)">
+                                                      <i class="fa fa-pencil"></i>
+                                                    </button>
+                                                    <button type="button" class="btn  btn-danger" (click)="initDelete(deleteModal, item)">
+                                                      <i class="fa fa-trash"></i>
+                                                    </button>
+                                                  </td>
+                                                </tr>
+                                              </ng-container>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+
+                        <div class="card-footer clearfix">
+                            <ul class="pagination pagination-sm m-0 float-right">
+                                <li class="page-item"><a class="page-link" href="#">«</a></li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">»</a></li>
+                            </ul>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+          </div>
+        </section>
+      
+      </div>
+      <!-- Content Wrapper. Contains page content -->
+      

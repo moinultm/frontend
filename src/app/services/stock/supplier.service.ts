@@ -6,11 +6,11 @@ import { Subcategory } from '@models/stock/subcategory.model';
 @Injectable({
   providedIn: 'root'
 })
-export class SubcategoryService extends CrudService<Subcategory> {
+export class SupplierService extends CrudService<Subcategory> {
 
   constructor(private __http: HttpClient ) { 
     super(__http);
-    this.setUrl('subcategory');
+    this.setUrl('supplier');
   }
 
   public save(model: any, update?: boolean): any {

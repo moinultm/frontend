@@ -30,6 +30,7 @@ export class SellsOrderService extends CrudService<SellsOrder> {
             .set('page', pageNumber.toString())
             .set('size', pageSize.toString())
     }).pipe(
+   
        // map(res =>  res["data"])
        map(res => {
         //this.resultsLength = res.total[''];

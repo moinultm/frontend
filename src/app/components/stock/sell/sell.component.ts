@@ -41,12 +41,14 @@ export class SellComponent implements OnInit {
 
     this.dataSource = new TablesDataSource(this.sellsService);
     this.dataSource.loadTables( '', 'asc', 1, 3);
+    console.log( this.dataSource.loadTables( '', 'asc', 1, 3));
     this.loadData();
 
   }
 
 
   ngAfterViewInit() {
+        
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
     fromEvent(this.input.nativeElement,'keyup')
         .pipe(
