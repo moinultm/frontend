@@ -25,7 +25,6 @@ export class SellsOrderService extends CrudService<SellsOrder> {
 
     return this.__http.get(this.url, {
         params: new HttpParams()
-
             .set('filter', filter)
             .set('sortOrder', sortOrder)
             .set('page', pageNumber.toString())

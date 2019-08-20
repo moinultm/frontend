@@ -66,11 +66,13 @@ export class SellComponent implements OnInit {
 }
 
 loadLessonsPage() {
+
      this.dataSource.loadTables(
       this.input.nativeElement.value,
       this.sort.direction,
       this.paginator.pageIndex,
       this.paginator.pageSize);
+
 }
 
 
@@ -84,7 +86,7 @@ loadLessonsPage() {
         }).subscribe((res: PartialList<SellsOrder>) => {
           this.data = res;
           this.loading = false;
-          console.log(this.data.count);
+
         });
       }
 

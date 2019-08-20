@@ -9,9 +9,7 @@ import {catchError, finalize} from "rxjs/operators";
 export class TablesDataSource implements DataSource<SellsOrder> {
 
     private tablesSubject = new BehaviorSubject<SellsOrder[]>([]);
-
     private loadingSubject = new BehaviorSubject<boolean>(false);
-
     public loading$ = this.loadingSubject.asObservable();
 
     constructor(private coursesService: SellsOrderService) {    }
@@ -30,9 +28,13 @@ export class TablesDataSource implements DataSource<SellsOrder> {
                 catchError(() => of([])),
                 finalize(() => this.loadingSubject.next(false))
             )
-            .subscribe(lessons => this.tablesSubject.next(lessons));
+            .subscribe(
+              lessons => this.tablesSubject.next(lessons)
+            );
+
 
     }
+
 
     connect(collectionViewer: CollectionViewer): Observable<SellsOrder[]> {
         console.log("Connecting data source");
