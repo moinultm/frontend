@@ -74,53 +74,6 @@
                   </div>
                   </div>
 
-                <div class="row">
-
-
-
-
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label>Grand Total</label>
-                      <input class="form-control" type="text" id="grandTotal" formControlName="grandTotal" readonly>
-                    </div>
-                  </div>
-
-                  <div class="col-md-2">
-                    <div class="form-group">
-                      <label>Discount</label>
-                      <input class="form-control" type="text" id="discountAmount" formControlName="discountAmount"  >
-                    </div>
-                  </div>
-
-                  <div class="col-md-2">
-                    <div class="form-group">
-                      <label>Shipping Cost</label>
-                      <input class="form-control" type="text" id="shippingCost" formControlName="shippingCost"  >
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label>Paid</label>
-                      <input class="form-control" type="text" id="paidAmount" formControlName="paidAmount"
-                        placeholder="Paid Amount" (keyup)="updateDueAmount()"
-                        [class.has-error]="mainForm.get('paidAmount').dirty && mainForm.get('paidAmount').invalid">
-                    </div>
-                  </div>
-
-                  <div class="col-md-2">
-                    <div class="form-group">
-                      <label>Due</label>
-                      <input class="form-control" type="text" id="dueAmount" formControlName="dueAmount" readonly>
-                    </div>
-                  </div>
-
-
-
-
-                </div>
-
-
 
 
                 <!-- order items table-->
@@ -160,6 +113,47 @@
                   </tbody>
                 </table>
                 <!-- order items table-->
+
+                <div class="row">
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Grand Total</label>
+                      <input class="form-control" type="text" id="grandTotal" formControlName="grandTotal" readonly>
+                    </div>
+                  </div>
+
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label>Discount</label>
+                      <input class="form-control" type="text" id="discountAmount" formControlName="discountAmount"  >
+                    </div>
+                  </div>
+
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label>Shipping Cost</label>
+                      <input class="form-control" type="text" id="shippingCost" formControlName="shippingCost"  >
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Paid</label>
+                      <input class="form-control" type="text" id="paidAmount" formControlName="paidAmount"
+                        placeholder="Paid Amount" (keyup)="updateDueAmount()"
+                        [class.has-error]="mainForm.get('paidAmount').dirty && mainForm.get('paidAmount').invalid">
+                    </div>
+                  </div>
+
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label>Due</label>
+                      <input class="form-control" type="text" id="dueAmount" formControlName="dueAmount" readonly>
+                    </div>
+                  </div>
+
+                </div>
+
 
               </div>
               <!-- /.card-body -->

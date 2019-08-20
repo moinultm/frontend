@@ -1,9 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { PartialList } from '@models/common/patial-list.model';
 import { SellsOrder } from '@models/stock/sellsorder.model';
 import { SellsOrderService } from '@services/stock/sellsorder.service';
-
+import{TablesDataSource} from '@services/stock/lessons.datasource'
+import { fromEvent, merge } from 'rxjs';
+import { tap, distinctUntilChanged, debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-sell',
@@ -14,33 +16,74 @@ export class SellComponent implements OnInit {
   data: PartialList<SellsOrder>;
 
   loading: boolean;
-  savingCategory: boolean;
-  deletingCategory: boolean;
+  savingSles: boolean;
+  deletingSales: boolean;
   page = 1;
   size = 10;
 
+  dataSource: TablesDataSource;
 
-  showFloatingButtons = false;
-  expanded = [];
-  displayedColumns: string[] = [  'date',	'invoice-no',	'customer',	'net-total',	'paid',	'actions'];
+  displayedColumns= ["seqNo", "description", "duration"];
 
-  dataSource = new MatTableDataSource<SellsOrder>(data);
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
+
+  @ViewChild('input', { static: false }) input: ElementRef;
+
+
 
   constructor(
     private sellsService:SellsOrderService
   ) { }
 
   ngOnInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
 
+    this.dataSource = new TablesDataSource(this.sellsService);
+
+    this.dataSource.loadTables(1, '', 'asc', 1, 3);
 
     this.loadData()
 
   }
+
+
+  ngAfterViewInit() {
+
+    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+
+    fromEvent(this.input.nativeElement,'keyup')
+        .pipe(
+            debounceTime(150),
+            distinctUntilChanged(),
+            tap(() => {
+                this.paginator.pageIndex = 0;
+
+                this.loadLessonsPage();
+            })
+        )
+        .subscribe();
+
+    merge(this.sort.sortChange, this.paginator.page)
+    .pipe(
+        tap(() => this.loadLessonsPage())
+    )
+    .subscribe();
+
+}
+
+loadLessonsPage() {
+    this.dataSource.loadTables(
+        1,
+        this.input.nativeElement.value,
+        this.sort.direction,
+        this.paginator.pageIndex,
+        this.paginator.pageSize);
+}
+
+
+
+
 
       //Loading Data
       loadData(page?: number): void {
@@ -56,31 +99,7 @@ export class SellComponent implements OnInit {
         });
       }
 
-  toggleFloat(i:number) {
-    this.expanded[i] = !this.expanded[i];
-  }
+
 
 
 }
-
-export interface IPLData {
-  season: number;
-  winner: string;
-  runnerUp: string;
-  totalTeams: number;
-}
-
-/*const data: IPLData[] = [
-  {season: 2008, winner: 'Rajasthan Royals', runnerUp: 'Chennai Super Kings', totalTeams: 8},
-  {season: 2009, winner: 'Deccan Chargers', runnerUp: 'Royal Challengers Bangalore', totalTeams: 8},
-  {season: 2010, winner: 'Chennai Super Kings', runnerUp: 'Mumbai Indians', totalTeams: 8},
-  {season: 2011, winner: 'Chennai Super Kings', runnerUp: 'Royal Challengers Bangalore', totalTeams: 10},
-  {season: 2012, winner: 'Kolkata Knight Riders', runnerUp: 'Chennai Super Kings', totalTeams: 9},
-  {season: 2013, winner: 'Mumbai Indians', runnerUp: 'Chennai Super Kings', totalTeams: 9},
-  {season: 2014, winner: 'Kolkata Knight Riders', runnerUp: 'Kings XI Punjab', totalTeams: 8},
-  {season: 2015, winner: 'Mumbai Indians', runnerUp: 'Chennai Super Kings', totalTeams: 8},
-  {season: 2016, winner: 'Sunrisers Hyderabad', runnerUp: 'Royal Challengers Bangalore', totalTeams: 8},
-  {season: 2017, winner: 'Mumbai Indians', runnerUp: 'Rising Pune Supergiant', totalTeams: 8},
-  {season: 2018, winner: 'Chennai Super Kings', runnerUp: 'Sunrisers Hyderabad', totalTeams: 8},
-  {season: 2019, winner: 'TBD', runnerUp: 'TBD', totalTeams: 8}
-];*/
