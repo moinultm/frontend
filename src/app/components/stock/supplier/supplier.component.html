@@ -48,7 +48,7 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 10px">#</th>
-                                        <th>Customer Name</th>
+                                        <th>Supplier Name</th>
                                         <th>Contact</th>
                                         <th>Company Name</th>
                                         <th>Due</th>
@@ -75,9 +75,9 @@
                                                   <td>{{ i+1 }}</td>
                                                   <td>{{ item.full_name }}</td>
                                                   <td>{{ item.contact }}</td>
-                                                  <td>{{ item.company_name }}</td>
-                                                  <td>{{ item.company_name }}</td>
-                                                  <td>{{ item.company_name }}</td>
+                                                  <td>{{ item.company_name_name }}</td>
+                                                  <td>{{ item.company_name_name }}</td>
+                                                  <td>{{ item.company_name_name }}</td>
                                                   <td class="actions">
                                                     <button type="button" class="btn  btn-success" (click)="initSave(saveModal, item)">
                                                       <i class="fa fa-pencil"></i>
@@ -112,4 +112,111 @@
       
       </div>
       <!-- Content Wrapper. Contains page content -->
+       <!-- Supplier save modal -->
+<ng-template #saveModal let-modal>
+
+        <!-- Modal header -->
+        <div class="modal-header">
+          <h4 class="modal-title">
+            {{ selectedSupplier.id ? ('Update Supplier: ' + selectedSupplier.full_name) : 'Create new  Supplier' }}</h4>
+          <button type="button" class="close" aria-label="Close" (click)="close(modal)">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <!-- ./Modal header -->
       
+        <!-- Modal body -->
+        <div class="modal-body">
+      
+          <form [formGroup]="form">
+      
+            <!-- full_name field -->
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="full_name" formControlName="full_name"
+                [class.has-error]="form.get('full_name').dirty && form.get('full_name').invalid" />
+            </div>
+            <!-- ./full_name field -->
+      
+            <!-- full_name field validations container -->
+            <div class="row" *ngIf="form.get('full_name').dirty && form.get('full_name').invalid">
+              <div class="col-12">
+                <div class="alert alert-danger alert-transparent-left" role="alert"
+                  *ngIf="form.get('full_name').dirty && form.controls['full_name'].hasError('required')">
+                  The full_name is required
+                </div>
+                <div class="alert alert-danger alert-transparent-left" role="alert"
+                  *ngIf="form.get('full_name').dirty && form.get('full_name').hasError('maxLength')">
+                  The full_name must be less than 255 Digits
+                </div>
+              </div>
+            </div>
+            <!-- ./full_name field validations container -->
+       
+
+                          <!-- full_name field -->
+                          <div class="form-group">
+                                <label for="contact">Phone</label>
+                                <input type="text" class="form-control" id="contact" formControlName="contact"
+                                  [class.has-error]="form.get('contact').dirty && form.get('contact').invalid" />
+                              </div>
+                              <!-- ./full_name field -->
+
+                              
+
+               <!-- full_name field -->
+               <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" formControlName="email"
+                      [class.has-error]="form.get('email').dirty && form.get('email').invalid" />
+                  </div>
+                  <!-- ./full_name field -->
+
+
+       
+
+                     <!-- full_name field -->
+            <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" id="address" formControlName="address"
+                      [class.has-error]="form.get('address').dirty && form.get('address').invalid" />
+                  </div>
+                  <!-- ./full_name field -->
+
+                     <!-- full_name field -->
+            <div class="form-group">
+                    <label for="company_name">Company</label>
+                    <input type="text" class="form-control" id="company_name" formControlName="company_name"
+                      [class.has-error]="form.get('company_name').dirty && form.get('company_name').invalid" />
+                  </div>
+                  <!-- ./full_name field -->
+
+                     <!-- full_name field -->
+            <div class="form-group">
+                    <label for="account_no">Account</label>
+                    <input type="text" class="form-control" id="account_no" formControlName="account_no"
+                      [class.has-error]="form.get('account_no').dirty && form.get('account_no').invalid" />
+                  </div>
+                  <!-- ./full_name field -->
+
+                     <!-- full_name field -->
+            <div class="form-group">
+                    <label for="previous_due">Opening balance</label>
+                    <input type="text" class="form-control" id="previous_due" formControlName="previous_due"
+                      [class.has-error]="form.get('previous_due').dirty && form.get('previous_due').invalid" />
+                  </div>
+                  <!-- ./full_name field -->
+      
+          </form>
+      
+        </div>
+        <!-- ./Modal body -->
+      
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="save(modal)"
+            [disabled]="form.invalid || savingSupplier">Save</button>
+        </div>
+        <!-- ./Modal footer -->
+      
+      </ng-template>

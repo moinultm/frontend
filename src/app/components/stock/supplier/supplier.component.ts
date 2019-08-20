@@ -76,7 +76,15 @@ export class SupplierComponent implements OnInit {
           full_name: [
             client ? client.full_name : '',
             [Validators.required, Validators.maxLength(255)]
-          ] 
+          ] ,
+          email: [ client ? client.email : '',  [Validators.nullValidator]] ,
+          contact: [ client ? client.contact : '',  [Validators.required]],
+          company_name: [ client ? client.company_name : '',  [Validators.nullValidator]],
+          address: [ client ? client.address : '',  [Validators.nullValidator]],
+          account_no: [ client ? client.account_no : '',  [Validators.nullValidator]],
+          previous_due: [ client ? client.previous_due : '',  [Validators.nullValidator]],
+          
+          
         });
       }
   
