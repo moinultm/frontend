@@ -13,11 +13,11 @@ import { ToastrService } from 'ngx-toastr';
 import { success, error, warning } from '@app/services/core/utils/toastr';
 
 @Component({
-  selector: 'app-newsales',
-  templateUrl: './newsales.component.html',
-  styleUrls: ['./newsales.component.scss']
+  selector: 'app-add',
+  templateUrl: './add.component.html',
+  styleUrls: ['./add.component.scss']
 })
-export class NewsalesComponent implements OnInit {
+export class AddComponent implements OnInit {
   modalOption: NgbModalOptions = {};
 
   customerList: Array<Client>;

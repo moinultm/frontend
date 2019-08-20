@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NewsalesComponent } from './newsales/newsales.component';
+import { AddComponent } from './add/add.component';
 import { MaterialsModule } from '@app/material.module';
 
 import { MatProgressBarModule, MatProgressSpinnerModule, MatNativeDateModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSortModule, MatCardModule } from '@angular/material';
@@ -17,7 +17,7 @@ const routes: Routes = [
   // Roles component
   {
     path: 'add',
-    component: NewsalesComponent
+    component: AddComponent
   },
   {
     path: '',
@@ -27,7 +27,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [SellComponent, NewsalesComponent],
+  declarations: [SellComponent, AddComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
