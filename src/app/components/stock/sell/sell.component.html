@@ -24,7 +24,7 @@
             <mat-card class="mat-elevation-z8">
             <mat-form-field>
 
-                <input matInput placeholder="Search lessons" #input>
+                <input matInput placeholder="Search Invoice" #input>
 
             </mat-form-field>
 
@@ -40,7 +40,7 @@
 
      <ng-container matColumnDef="seqNo">
 
-         <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+         <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
 
          <mat-cell *matCellDef="let lesson">{{lesson.id}}</mat-cell>
 
@@ -48,7 +48,7 @@
 
      <ng-container matColumnDef="description">
 
-         <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+         <mat-header-cell *matHeaderCellDef>Reference No</mat-header-cell>
 
          <mat-cell class="description-cell"
                    *matCellDef="let lesson">{{lesson.reference_no}}</mat-cell>
@@ -57,12 +57,25 @@
 
      <ng-container matColumnDef="duration">
 
-         <mat-header-cell *matHeaderCellDef>Duration</mat-header-cell>
+         <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
 
          <mat-cell class="duration-cell"
-                   *matCellDef="let lesson">{{lesson.duration}}</mat-cell>
+                   *matCellDef="let lesson">{{lesson.date}}</mat-cell>
 
      </ng-container>
+
+
+     <ng-container matColumnDef="actions">
+
+        <mat-header-cell  *matHeaderCellDef > Actions </mat-header-cell>
+        <mat-cell *matCellDef="let row" >
+             <button mat-button >Details</button>
+             <button mat-button >Print</button>
+        </mat-cell>
+
+    </ng-container>
+
+
 
      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 
@@ -71,7 +84,7 @@
  </mat-table>
 
 
- <mat-paginator [length]="course?.lessonsCount" [pageSize]="3"
+ <mat-paginator [length]="10" [pageSize]="3"
                 [pageSizeOptions]="[3, 5, 10]"></mat-paginator>
 
           </mat-card>

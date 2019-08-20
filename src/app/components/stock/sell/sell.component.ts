@@ -23,7 +23,7 @@ export class SellComponent implements OnInit {
 
   dataSource: TablesDataSource;
 
-  displayedColumns= ["seqNo", "description", "duration"];
+  displayedColumns= ["seqNo", "description", "duration","actions"];
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
@@ -40,49 +40,38 @@ export class SellComponent implements OnInit {
   ngOnInit() {
 
     this.dataSource = new TablesDataSource(this.sellsService);
-
-    this.dataSource.loadTables(1, '', 'asc', 1, 3);
-
-    this.loadData()
+    this.dataSource.loadTables( '', 'asc', 1, 3);
+    this.loadData();
 
   }
 
 
   ngAfterViewInit() {
-
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
-
     fromEvent(this.input.nativeElement,'keyup')
         .pipe(
             debounceTime(150),
             distinctUntilChanged(),
             tap(() => {
                 this.paginator.pageIndex = 0;
-
                 this.loadLessonsPage();
             })
         )
         .subscribe();
-
     merge(this.sort.sortChange, this.paginator.page)
     .pipe(
         tap(() => this.loadLessonsPage())
     )
     .subscribe();
-
 }
 
 loadLessonsPage() {
-    this.dataSource.loadTables(
-        1,
-        this.input.nativeElement.value,
-        this.sort.direction,
-        this.paginator.pageIndex,
-        this.paginator.pageSize);
+     this.dataSource.loadTables(
+      this.input.nativeElement.value,
+      this.sort.direction,
+      this.paginator.pageIndex,
+      this.paginator.pageSize);
 }
-
-
-
 
 
       //Loading Data
@@ -95,7 +84,7 @@ loadLessonsPage() {
         }).subscribe((res: PartialList<SellsOrder>) => {
           this.data = res;
           this.loading = false;
-          console.log(this.data.data);
+          console.log(this.data.count);
         });
       }
 

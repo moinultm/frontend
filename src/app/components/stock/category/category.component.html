@@ -26,7 +26,7 @@
                         <div class="card-header">
                             <h3 class="card-title">List of categories |
                          Add categories <i class="fa fa-plus" (click)="initSave(saveModal)"></i>   </h3>
-                            
+
 
                             <div class="card-tools">
 
@@ -38,7 +38,7 @@
                                         <button type="submit" class="btn btn-default"><i
                                                 class="fa fa-search" ></i></button>
                                     </div>
-                            
+
                             </div>
                         </div>
 
@@ -50,7 +50,7 @@
                                     <tr>
                                         <th style="width: 10px">#</th>
                                         <th>Category Name</th>
-                                       
+
                                         <th style="width:20%">Action</th>
                                     </tr>
                                 </thead>
@@ -61,13 +61,13 @@
                                                   Loading data . .
                                                 </td>
                                               </tr>
-                            
+
                                               <tr *ngIf="!loading && data && !data.data.length">
                                                 <td colspan="12" class="text-center loading-data">
                                                   No category created yet!
                                                 </td>
                                               </tr>
-                            
+
                                               <ng-container *ngIf="!loading">
                                                 <tr *ngFor="let item of data.data; let i = index">
                                                   <td>{{ i+1 }}</td>
@@ -122,12 +122,12 @@
       </button>
     </div>
     <!-- ./Modal header -->
-  
+
     <!-- Modal body -->
     <div class="modal-body">
-  
+
       <form [formGroup]="form">
-  
+
         <!-- category_name field -->
         <div class="form-group">
           <label for="name">Name</label>
@@ -135,7 +135,7 @@
             [class.has-error]="form.get('category_name').dirty && form.get('category_name').invalid" />
         </div>
         <!-- ./category_name field -->
-  
+
         <!-- category_name field validations container -->
         <div class="row" *ngIf="form.get('category_name').dirty && form.get('category_name').invalid">
           <div class="col-12">
@@ -150,19 +150,19 @@
           </div>
         </div>
         <!-- ./category_name field validations container -->
-   
-  
+
+
       </form>
-  
+
     </div>
     <!-- ./Modal body -->
-  
+
     <!-- Modal footer -->
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-dark" (click)="save(modal)"
         [disabled]="form.invalid || savingRole">Save</button>
     </div>
     <!-- ./Modal footer -->
-  
+
   </ng-template>
   <!-- ./Category save modal -->

@@ -16,16 +16,17 @@ export class TablesDataSource implements DataSource<SellsOrder> {
 
     constructor(private coursesService: SellsOrderService) {    }
 
-    loadTables(courseId:number,
+    loadTables(
                 filter:string,
                 sortDirection:string,
                 pageIndex:number,
                 pageSize:number) {
-
         this.loadingSubject.next(true);
-
-        this.coursesService.findLessons(courseId, filter, sortDirection,
-            pageIndex, pageSize).pipe(
+        this.coursesService.findLessons(
+            filter,
+            sortDirection,
+            pageIndex,
+            pageSize).pipe(
                 catchError(() => of([])),
                 finalize(() => this.loadingSubject.next(false))
             )
