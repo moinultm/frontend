@@ -8,8 +8,17 @@ import { Product } from '@models/stock/product.model';
 })
 export class ProductService extends CrudService <Product> {
 
-  constructor( _http: HttpClient ) { 
-    super(_http);
+  constructor( private __http: HttpClient ) {
+    super(__http);
     this.setUrl('product');
   }
+
+
+  public findById(id: number): any {
+    this.options.params = undefined;
+
+    return this.__http.get<Product>(this.url + '/' + id, this.options);
+  }
+
+
 }

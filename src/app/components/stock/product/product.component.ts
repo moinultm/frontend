@@ -11,6 +11,7 @@ import { ParentcategoryService } from '@services/stock/parentcategory.service';
 import { ProductService } from '@services/stock/product.service';
 import { success, warning } from '@services/core/utils/toastr';
 import { error } from 'util';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -28,16 +29,31 @@ export class ProductComponent implements OnInit {
   deletingProduct:boolean;
   savingProduct:boolean;
 
+
+
   constructor(
     private productService : ProductService,
     private categoryService: CategoryService,
     private subcategoryService: SubcategoryService,
     private parentService:ParentcategoryService,
     private _fb: FormBuilder,
-    private _toastr: ToastrService) { }
+    private _toastr: ToastrService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.initForm();
+
+
+if( this.route.snapshot.params.id) {
+  let id=this.route.snapshot.params.id;
+
+  this.getProduct(id);
+
+
+}
+else{
+  this.initForm();
+}
+
   }
 
   FillSubcategory(catid:number)
@@ -62,13 +78,32 @@ export class ProductComponent implements OnInit {
 
   }
 
+
+  getProduct(id: number): void {
+    this.productService.findById(id)
+      .subscribe(
+        (product: Product) => this.initForm(product),
+        (err: any) => {  if (err.status === 404) {
+          err.error.forEach((e: string) => {
+            warning('Warning not getting product!', e, this._toastr);
+          });
+        } }
+
+      );
+  }
+
+
   initForm(product?: Product): void {
     if (product) {
-      this.selectedProduct =  Object.assign(Product, product);
+     // console.log(product )
+      this.selectedProduct = product;
+      let cid =product.category_id;
+      //this.selectedProduct =  Object.assign(Product, product);
+      this.FillSubcategory()
     } else {
       this.selectedProduct = new Product();
     }
-    this.FillCategory();
+
     this.form = this._fb.group({
       product_name: [ product ? product.name : '',  [Validators.required, Validators.maxLength(255)]  ],
       product_code: [ product ? product.code : this.randcode(),   [Validators.required, Validators.maxLength(255)] ] ,
