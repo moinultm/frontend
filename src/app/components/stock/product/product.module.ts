@@ -11,8 +11,9 @@ import { ManageComponent } from './manage/manage.component';
 const routes: Routes = [
   // Roles component
   {path: '',component: ProductComponent },
-  {path: ':id',component: ProductComponent },
-  {path: 'manage',component: ManageComponent }
+
+  {path: 'edit/:id',component: ProductComponent },
+  {path: 'manage',component: ManageComponent },
 ];
 
 
@@ -26,6 +27,7 @@ const routes: Routes = [
     NgbModule,
     FormsModule,
     ReactiveFormsModule
-  ]
+  ],
+  exports: [RouterModule]
 })
 export class ProductModule { }
