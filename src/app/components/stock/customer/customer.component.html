@@ -16,7 +16,7 @@
             </div><!-- /.row -->
           </div><!-- /.container-fluid -->
         </div>
-      
+
         <section class="content">
           <div class="container-fluid">
             <div class="row">
@@ -25,22 +25,22 @@
                                 <div class="card-header">
                                     <h3 class="card-title">List of customers |
                                  Add customer <i class="fa fa-plus" (click)="initSave(saveModal)"></i>   </h3>
-                                    
-        
+
+
                                     <div class="card-tools">
-        
+
                                         <div class="input-group input-group-sm" style="width: 150px;">
                                             <input type="text" name="table_search" class="form-control float-right"
                                                 placeholder="Search">
-        
+
                                             <div class="input-group-append">
                                                 <button type="submit" class="btn btn-default"><i
                                                         class="fa fa-search" ></i></button>
                                             </div>
-                                    
+
                                     </div>
                                 </div>
-        
+
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body p-0">
@@ -63,13 +63,13 @@
                                                           Loading data . .
                                                         </td>
                                                       </tr>
-                                    
+
                                                       <tr *ngIf="!loading && data && !data.data.length">
                                                         <td colspan="12" class="text-center loading-data">
                                                           No category created yet!
                                                         </td>
                                                       </tr>
-                                    
+
                                                       <ng-container *ngIf="!loading">
                                                         <tr *ngFor="let item of data.data; let i = index">
                                                           <td>{{ i+1 }}</td>
@@ -92,24 +92,22 @@
                                     </table>
                                 </div>
                                 <!-- /.card-body -->
-        
+
                                 <div class="card-footer clearfix">
-                                    <ul class="pagination pagination-sm m-0 float-right">
-                                        <li class="page-item"><a class="page-link" href="#">«</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">»</a></li>
-                                    </ul>
+                                            <!-- Pagination -->
+                <ngb-pagination *ngIf="!loading && data" [collectionSize]="data.count" [pageSize]="size"
+                [page]="data.page" (pageChange)="loadData($event)" class="pagination pagination-sm m-0 float-right">
+              </ngb-pagination>
+              <!-- ./Pagination -->
                                 </div>
-        
-        
+
+
                             </div>
                         </div>
             </div>
           </div>
         </section>
-      
+
       </div>
       <!-- Content Wrapper. Contains page content -->
 
@@ -126,12 +124,12 @@
           </button>
         </div>
         <!-- ./Modal header -->
-      
+
         <!-- Modal body -->
         <div class="modal-body">
-      
+
           <form [formGroup]="form">
-      
+
             <!-- full_name field -->
             <div class="form-group">
               <label for="name">Name</label>
@@ -139,7 +137,7 @@
                 [class.has-error]="form.get('full_name').dirty && form.get('full_name').invalid" />
             </div>
             <!-- ./full_name field -->
-      
+
             <!-- full_name field validations container -->
             <div class="row" *ngIf="form.get('full_name').dirty && form.get('full_name').invalid">
               <div class="col-12">
@@ -154,19 +152,18 @@
               </div>
             </div>
             <!-- ./full_name field validations container -->
-       
-      
+
+
           </form>
-      
+
         </div>
         <!-- ./Modal body -->
-      
+
         <!-- Modal footer -->
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-dark" (click)="save(modal)"
             [disabled]="form.invalid || savingCustomer">Save</button>
         </div>
         <!-- ./Modal footer -->
-      
+
       </ng-template>
-      

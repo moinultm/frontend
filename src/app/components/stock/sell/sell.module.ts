@@ -8,10 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddComponent } from './add/add.component';
 import { MaterialsModule } from '@app/material.module';
 
-import { MatProgressBarModule, MatProgressSpinnerModule, MatNativeDateModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSortModule, MatCardModule } from '@angular/material';
-import {MatTableModule} from '@angular/material/table';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatChipsModule} from '@angular/material/chips';
+
 
 const routes: Routes = [
   // Roles component

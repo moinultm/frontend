@@ -123,6 +123,22 @@ export class RolesComponent implements OnInit {
       });
     }
 
+    initDelete(modal: any, role: Role): void {
+      this.selectedRole = role;
+      // Open the delete confirmation modal
+      this.modalService
+        .open(modal)
+        .result
+        .then((result) => {
+          if (result) {
+            this.loadData();
+          }
+          this.selectedRole = new Role();
+        }, () => {
+          // If the modal is dismissed
+          this.selectedRole = new Role();
+        });
+    }
 
     //Close Module
     close(modal: any, flag?: boolean): void {

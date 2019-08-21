@@ -48,7 +48,7 @@ export class SellComponent implements OnInit {
 
 
   ngAfterViewInit() {
-        
+
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
     fromEvent(this.input.nativeElement,'keyup')
         .pipe(

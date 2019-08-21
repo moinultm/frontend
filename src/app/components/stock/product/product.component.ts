@@ -8,6 +8,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Product } from '@models/stock/product.model';
 import { ParentcategoryService } from '@services/stock/parentcategory.service';
+import { ProductService } from '@services/stock/product.service';
+import { success, warning } from '@services/core/utils/toastr';
+import { error } from 'util';
 
 @Component({
   selector: 'app-product',
@@ -22,8 +25,11 @@ export class ProductComponent implements OnInit {
   form: FormGroup;
   selectedProduct: Product;
   SelCategoryId:number=0;
+  deletingProduct:boolean;
+  savingProduct:boolean;
 
   constructor(
+    private productService : ProductService,
     private categoryService: CategoryService,
     private subcategoryService: SubcategoryService,
     private parentService:ParentcategoryService,
@@ -62,29 +68,72 @@ export class ProductComponent implements OnInit {
     } else {
       this.selectedProduct = new Product();
     }
-
     this.FillCategory();
-
     this.form = this._fb.group({
-      product_name: [
-        product ? product.name : '',
-        [Validators.required, Validators.maxLength(255)]
-      ],
-      product_code: [    product ? product.code : this.randcode(),   [Validators.required, Validators.maxLength(255)] ] ,
-      product_category: [
-        product ? product.category_id : '',
-          [Validators.required]
-      ],
-      product_subcatrgory: [  product ? product.subcategory_id : '',  [Validators.required]  ]
+      product_name: [ product ? product.name : '',  [Validators.required, Validators.maxLength(255)]  ],
+      product_code: [ product ? product.code : this.randcode(),   [Validators.required, Validators.maxLength(255)] ] ,
+      product_category: [ product ? product.category_id : '', [Validators.required] ],
+      product_subcatrgory: [  product ? product.subcategory_id : '',  [Validators.required]  ],
+      product_unit: [  product ? product.unit : '',  [Validators.required]  ],
+      product_cost_price:[product ? product.cost_price : '',  [Validators.required]  ],
+      product_mrp:[product ? product.mrp : '',  [Validators.required]  ],
+      product_minimum_retail_price:[product ? product.minimum_retail_price : '',  [Validators.required]  ],
+      product_status:[product ? product.status : '',  [Validators.required]  ],
+      product_details:[product ? product.details : '',  [Validators.nullValidator]  ],
+      opening_stock:[product ? product.opening_stock : '',  [Validators.nullValidator]  ],
 
     });
 
-
-
   }
 
-randcode(){
-  return  Math.floor(100000 + Math.random() * 900000).toString();
+
+  //Save
+ //main Save function
+ saveForm(form: any): void {
+  if (this.form.valid) {
+    this.savingProduct = true;
+    this.productService.save({
+      id: this.selectedProduct.id,
+      full_name: this.form.get('full_name').value,
+
+    }, this.selectedProduct.id ? true : false).subscribe((res: Product) => {
+      success('Success!', 'The Product is successfully saved.', this._toastr);
+      this.savingProduct = false;
+      this.initForm();
+    }, (err: any) => {
+      if (err.status === 403) {
+        err.error.forEach((e: string) => {
+          warning('Warning!', e, this._toastr);
+        });
+      } else {
+        error('Error!', 'An error has occured when saving the Product, please contact system administrator.', this._toastr);
+      }
+      this.savingProduct = false;
+    });
+  }
 }
+
+
+
+  randcode(){
+    return  Math.floor(100000 + Math.random() * 900000).toString();
+  }
+
+     //Delete
+     delete(modal: any): void {
+      this.deletingProduct = true;
+      this.productService.delete({
+        id: this.selectedProduct.id
+      }).subscribe(() => {
+        this.close(modal, true);
+        this.deletingProduct = false;
+      });
+    }
+
+
+      //Close Module
+      close(modal: any, flag?: boolean): void {
+        modal.close(flag ? true : false);
+      }
 
 }

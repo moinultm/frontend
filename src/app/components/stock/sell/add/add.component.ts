@@ -94,8 +94,8 @@ selectedOrderItem: OrderItems;
   }
 
   initItemModal(modal: any, product?: Product){
-    this.modalOption.backdrop = 'static';
-    this.modalOption.keyboard = false;
+    //this.modalOption.backdrop = 'static';
+    //this.modalOption.keyboard = false;
 
     this.initItemsForm();
 

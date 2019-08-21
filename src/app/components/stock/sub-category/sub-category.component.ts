@@ -11,7 +11,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
 import { constants } from '@env/constants';
- 
+
 @Component({
   selector: 'app-sub-category',
   templateUrl: './sub-category.component.html',
@@ -30,17 +30,17 @@ export class SubCategoryComponent implements OnInit {
   form: FormGroup;
   categories: Array<Category>;
   selectedSub: Subcategory;
- 
 
-  constructor(    
+
+  constructor(
     private subcategoryService: SubcategoryService,
     private categoryService: CategoryService,
     private modalService: NgbModal,
     private _fb: FormBuilder,
     private _toastr: ToastrService,
-   
-    titleService: Title) { 
-      titleService.setTitle(constants.app_name + ' - Stock - Subcategory management');      
+
+    titleService: Title) {
+      titleService.setTitle(constants.app_name + ' - Stock - Subcategory management');
     }
 
   ngOnInit() {
@@ -70,7 +70,7 @@ export class SubCategoryComponent implements OnInit {
       this.loadingCategory = false;
     });
 
-      
+
     this.modalService
       .open(modal)
       .result
@@ -84,10 +84,10 @@ export class SubCategoryComponent implements OnInit {
         this.initSaveForm();
       });
 
-       
+
   }
 
- 
+
   initSaveForm(subcategory?: Subcategory): void {
      if (subcategory) {
       this.selectedSub =  Object.assign(Subcategory, subcategory);
@@ -98,11 +98,11 @@ export class SubCategoryComponent implements OnInit {
       subcategory_name: [
         subcategory ? subcategory.subcategory_name : '',
         [Validators.required, Validators.maxLength(255)]
-      ], 
+      ],
        category_id: [
         subcategory ? subcategory.category_id : '',
         [Validators.required]
-      ] 
+      ]
     });
   }
 
@@ -114,32 +114,32 @@ export class SubCategoryComponent implements OnInit {
     {
       return false;
     }
- 
+
  }
 
- 
-  selectCategory(cat:Category): void {     
+
+  selectCategory(cat:Category): void {
     if (this.selectedSubHasCategory(cat)) {
       this.selectedSub.category_id == cat.id;
     } else {
       this.selectedSub.category_id==cat.id;
-    } 
+    }
   }
 
   save(modal: any): void {
-    // Check if the form is valid
+
     if (this.form.valid) {
       this.savingSubcategory= true;
-      // Send save / update request to the service
+
       this.subcategoryService.save({
         id: this.selectedSub.id,
-        subcategory_name: this.form.get('subcategory_name').value,       
-        category_id: this.form.get('category_id').value, 
+        subcategory_name: this.form.get('subcategory_name').value,
+        category_id: this.form.get('category_id').value,
       }, this.selectedSub.id ? true : false).subscribe((res: Subcategory) => {
-        // Show success alert
+
         success('Success!', 'The profile is successfully saved.', this._toastr);
         this.savingSubcategory = false;
-        // Close profile save modal
+
         this.close(modal, true);
       }, (err: any) => {
         // Check if the error status is 403 (Form errors)
@@ -157,7 +157,7 @@ export class SubCategoryComponent implements OnInit {
     }
   }
 
-  
+
     //Close Module
     close(modal: any, flag?: boolean): void {
       modal.close(flag ? true : false);

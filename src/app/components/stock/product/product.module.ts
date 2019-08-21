@@ -5,19 +5,19 @@ import { RouterModule, Routes } from '@angular/router';
 import { MatProgressBarModule, MatProgressSpinnerModule } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ManageComponent } from './manage/manage.component';
 
 
 const routes: Routes = [
   // Roles component
-  {
-    path: '',
-    component: ProductComponent
-  }
+  {path: '',component: ProductComponent },
+  {path: ':id',component: ProductComponent },
+  {path: 'manage',component: ManageComponent }
 ];
 
 
 @NgModule({
-  declarations: [ProductComponent],
+  declarations: [ProductComponent, ManageComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

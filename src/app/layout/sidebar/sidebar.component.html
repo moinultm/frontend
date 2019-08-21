@@ -34,12 +34,22 @@
           </li>
 
           <li class="nav-header">STOCK</li>
+
           <li class="nav-item">
-              <a href="#" routerLink="/product" class="nav-link" routerLinkActive="active">
+              <a  href="#" [routerLink]="['/product']" class="nav-link"    [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
                 <i class="nav-icon fa fa-circle-o text-danger"></i>
-                <p class="text">Product</p>
+                <p class="text">Add Products</p>
               </a>
             </li>
+
+            <li class="nav-item">
+              <a href="#" [routerLink]="['/product','manage']" class="nav-link"  [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+                <i class="nav-icon fa fa-circle-o text-danger"></i>
+                <p class="text">Manage Products</p>
+              </a>
+            </li>
+
+
             <li class="nav-item">
               <a href="#" routerLink="/category" class="nav-link" routerLinkActive="active">
                 <i class="nav-icon fa fa-circle-o text-warning"></i>
@@ -75,7 +85,7 @@
           <li class="nav-item">
             <a href="#" [routerLink]="['/sell','add']" class="nav-link"    [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
               <i class="nav-icon fa fa-circle-o text-warning"></i>
-              <p>New Invoice</p>
+              <p>Add Invoice</p>
             </a>
           </li>
           <li class="nav-item" >
@@ -88,13 +98,13 @@
           <li class="nav-item">
             <a href="#" routerLink="/purchaseorder" class="nav-link"  routerLinkActive="active" >
               <i class="nav-icon fa fa-circle-o text-info"></i>
-              <p>Purchase New</p>
+              <p>Add Purchase</p>
             </a>
           </li>
           <li class="nav-item">
               <a href="#" routerLink="/purchaseorder" class="nav-link"  routerLinkActive="active" >
                 <i class="nav-icon fa fa-circle-o text-info"></i>
-                <p>Purchase List</p>
+                <p>Manage Purchase</p>
               </a>
             </li>
 
@@ -368,7 +378,7 @@
               <p>Documentation</p>
             </a>
           </li>
-          
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

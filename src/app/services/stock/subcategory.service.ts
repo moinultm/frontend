@@ -9,7 +9,7 @@ import { PartialList } from '@models/common/patial-list.model';
 })
 export class SubcategoryService extends CrudService<Subcategory> {
 
-  constructor(private __http: HttpClient ) { 
+  constructor(private __http: HttpClient ) {
     super(__http);
     this.setUrl('subcategory');
   }
@@ -17,7 +17,7 @@ export class SubcategoryService extends CrudService<Subcategory> {
   public save(model: any, update?: boolean): any {
     this.options.params = undefined;
     if (update) {
-      return this.__http.post<Subcategory>(this.url + '/' + model.get('id'), model, this.options);
+      return this.__http.put<Subcategory>(this.url + '/' + model.id, model, this.options);
     } else {
       return this.__http.post<Subcategory>(this.url, model, this.options);
     }

@@ -7,7 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Title } from '@angular/platform-browser';
 import { success, warning,error } from '@services/core/utils/toastr';
- 
+
 
 @Component({
   selector: 'app-customer',
@@ -23,7 +23,7 @@ export class CustomerComponent implements OnInit {
   size = 10;
   form: FormGroup;
   selectedCustomer: Client;
-  
+
   constructor(private customerService: CustomerService,
     private _toastr: ToastrService,
     private modalService: NgbModal,
@@ -67,6 +67,7 @@ export class CustomerComponent implements OnInit {
           this.initSaveForm();
         });
     }
+    
     initSaveForm(client?: Client): void {
       if (client) {
         this.selectedCustomer = Object.assign(Client, client);
@@ -77,7 +78,7 @@ export class CustomerComponent implements OnInit {
         full_name: [
           client ? client.full_name : '',
           [Validators.required, Validators.maxLength(255)]
-        ] 
+        ]
       });
     }
 
@@ -88,7 +89,7 @@ export class CustomerComponent implements OnInit {
         this.customerService.save({
           id: this.selectedCustomer.id,
           full_name: this.form.get('full_name').value,
-          
+
         }, this.selectedCustomer.id ? true : false).subscribe((res: Client) => {
           success('Success!', 'The role is successfully saved.', this._toastr);
           this.savingCustomer = false;
@@ -122,7 +123,7 @@ export class CustomerComponent implements OnInit {
       close(modal: any, flag?: boolean): void {
         modal.close(flag ? true : false);
       }
-  
+
 
 
 }

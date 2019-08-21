@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CrudService } from '@services/common/crud.service';
-import { Subcategory } from '@models/stock/subcategory.model';
+import { Client } from '@models/stock/Client.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SupplierService extends CrudService<Subcategory> {
+export class SupplierService extends CrudService<Client> {
 
-  constructor(private __http: HttpClient ) { 
+  constructor(private __http: HttpClient ) {
     super(__http);
     this.setUrl('supplier');
   }
@@ -16,9 +16,9 @@ export class SupplierService extends CrudService<Subcategory> {
   public save(model: any, update?: boolean): any {
     this.options.params = undefined;
     if (update) {
-      return this.__http.post<Subcategory>(this.url + '/' + model.get('id'), model, this.options);
+      return this.__http.put<Client>(this.url + '/' + model.id, model, this.options);
     } else {
-      return this.__http.post<Subcategory>(this.url, model, this.options);
+      return this.__http.post<Client>(this.url, model, this.options);
     }
   }
 

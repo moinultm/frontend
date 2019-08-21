@@ -16,16 +16,16 @@
             </div><!-- /.row -->
           </div><!-- /.container-fluid -->
         </div>
-      
+
         <section class="content">
           <div class="container-fluid">
             <div class="row">
                     <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">List of customers |
-                         Add customer <i class="fa fa-plus" (click)="initSave(saveModal)"></i>   </h3>
-                            
+                            <h3 class="card-title">List of supplier |
+                         Add Supplier <i class="fa fa-plus" (click)="initSave(saveModal)"></i>   </h3>
+
 
                             <div class="card-tools">
 
@@ -37,7 +37,7 @@
                                         <button type="submit" class="btn btn-default"><i
                                                 class="fa fa-search" ></i></button>
                                     </div>
-                            
+
                             </div>
                         </div>
 
@@ -49,7 +49,7 @@
                                     <tr>
                                         <th style="width: 10px">#</th>
                                         <th>Supplier Name</th>
-                                        <th>Contact</th>
+                                        <th>contact</th>
                                         <th>Company Name</th>
                                         <th>Due</th>
                                         <th>Transaction Total</th>
@@ -63,13 +63,13 @@
                                                   Loading data . .
                                                 </td>
                                               </tr>
-                            
+
                                               <tr *ngIf="!loading && data && !data.data.length">
                                                 <td colspan="12" class="text-center loading-data">
                                                   No category created yet!
                                                 </td>
                                               </tr>
-                            
+
                                               <ng-container *ngIf="!loading">
                                                 <tr *ngFor="let item of data.data; let i = index">
                                                   <td>{{ i+1 }}</td>
@@ -94,13 +94,11 @@
                         <!-- /.card-body -->
 
                         <div class="card-footer clearfix">
-                            <ul class="pagination pagination-sm m-0 float-right">
-                                <li class="page-item"><a class="page-link" href="#">«</a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">»</a></li>
-                            </ul>
+                                     <!-- Pagination -->
+                <ngb-pagination *ngIf="!loading && data" [collectionSize]="data.count" [pageSize]="size"
+                [page]="data.page" (pageChange)="loadData($event)" class="pagination pagination-sm m-0 float-right">
+              </ngb-pagination>
+              <!-- ./Pagination -->
                         </div>
 
 
@@ -109,7 +107,7 @@
             </div>
           </div>
         </section>
-      
+
       </div>
       <!-- Content Wrapper. Contains page content -->
        <!-- Supplier save modal -->
@@ -124,12 +122,12 @@
           </button>
         </div>
         <!-- ./Modal header -->
-      
+
         <!-- Modal body -->
         <div class="modal-body">
-      
+
           <form [formGroup]="form">
-      
+
             <!-- full_name field -->
             <div class="form-group">
               <label for="name">Name</label>
@@ -137,7 +135,7 @@
                 [class.has-error]="form.get('full_name').dirty && form.get('full_name').invalid" />
             </div>
             <!-- ./full_name field -->
-      
+
             <!-- full_name field validations container -->
             <div class="row" *ngIf="form.get('full_name').dirty && form.get('full_name').invalid">
               <div class="col-12">
@@ -152,17 +150,17 @@
               </div>
             </div>
             <!-- ./full_name field validations container -->
-       
+
 
                           <!-- full_name field -->
                           <div class="form-group">
-                                <label for="contact">Phone</label>
+                                <label for="contact">Contact</label>
                                 <input type="text" class="form-control" id="contact" formControlName="contact"
                                   [class.has-error]="form.get('contact').dirty && form.get('contact').invalid" />
                               </div>
                               <!-- ./full_name field -->
 
-                              
+
 
                <!-- full_name field -->
                <div class="form-group">
@@ -173,7 +171,7 @@
                   <!-- ./full_name field -->
 
 
-       
+
 
                      <!-- full_name field -->
             <div class="form-group">
@@ -206,17 +204,46 @@
                       [class.has-error]="form.get('previous_due').dirty && form.get('previous_due').invalid" />
                   </div>
                   <!-- ./full_name field -->
-      
+
           </form>
-      
+
         </div>
         <!-- ./Modal body -->
-      
+
         <!-- Modal footer -->
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-dark" (click)="save(modal)"
             [disabled]="form.invalid || savingSupplier">Save</button>
         </div>
         <!-- ./Modal footer -->
-      
+
       </ng-template>
+
+
+      <!-- ELEMENT delete confirmation modal -->
+<ng-template #deleteModal let-modal>
+
+  <!-- Modal header -->
+  <div class="modal-header">
+    <h4 class="modal-title">Delete Element</h4>
+    <button type="button" class="close" aria-label="Close" (click)="close(modal)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <!-- ./Modal header -->
+
+  <!-- Modal body -->
+  <div class="modal-body">
+    <p>Are you sure you want to delete this Element?</p>
+  </div>
+  <!-- ./Modal body -->
+
+  <!-- Modal footer -->
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-danger" [disabled]="deletingSupplier"
+      (click)="delete(modal)">Delete</button>
+  </div>
+  <!-- ./Modal footer -->
+
+</ng-template>
+<!-- ./ELEMENT delete confirmation modal -->
