@@ -2,7 +2,7 @@ export class Product {
     id:number;
     name:string;
     code:number;
-    category_id:Number;
+    category_id:number;
     subcategory_id:number;
     quantity:number;
     details:number;

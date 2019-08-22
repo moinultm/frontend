@@ -25,9 +25,12 @@ export class ProductComponent implements OnInit {
   _subcategories :Array <Subcategory>;
   form: FormGroup;
   selectedProduct: Product;
-  SelCategoryId:number=0;
+  SelectedCategoryId:number=0;
   deletingProduct:boolean;
   savingProduct:boolean;
+
+  loading: boolean;
+
 
 
 
@@ -41,39 +44,33 @@ export class ProductComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
+    if( this.route.snapshot.params.id) {
 
+      let id=this.route.snapshot.params.id;
+      this.getProduct(id);
 
-if( this.route.snapshot.params.id) {
-  let id=this.route.snapshot.params.id;
-
-  this.getProduct(id);
-
-
-}
-else{
-  this.initForm();
-}
-
+    }
+    else{  this.initForm(); }
   }
 
   FillSubcategory(catid:number)
   {
-    this.loadingSubcategory=true;
+    this.loading=true;
     this.parentService.findParent(catid)
     .subscribe((res: PartialList<Subcategory>) => {
       this._subcategories = res.data;
-      this.loadingSubcategory = false;
+      this.loading = false;
     });
   }
 
 
   FillCategory()
   {
-    this.loadingCategory=true;
+    this.loading=true;
     this.categoryService.find()
     .subscribe((res: PartialList<Category>) => {
       this.categories = res.data;
-       this.loadingCategory = false;
+       this.loading = false;
     });
 
   }
@@ -94,16 +91,18 @@ else{
 
 
   initForm(product?: Product): void {
+
     if (product) {
-     // console.log(product )
+
       this.selectedProduct = product;
-      let cid =product.category_id;
-      //this.selectedProduct =  Object.assign(Product, product);
-      this.FillSubcategory()
+      this.FillCategory();
+      this.FillSubcategory(product.category_id);
+
     } else {
       this.selectedProduct = new Product();
     }
 
+    this.FillCategory();
     this.form = this._fb.group({
       product_name: [ product ? product.name : '',  [Validators.required, Validators.maxLength(255)]  ],
       product_code: [ product ? product.code : this.randcode(),   [Validators.required, Validators.maxLength(255)] ] ,
@@ -118,6 +117,7 @@ else{
       opening_stock:[product ? product.opening_stock : '',  [Validators.nullValidator]  ],
 
     });
+
 
   }
 

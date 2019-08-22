@@ -32,14 +32,10 @@ const routes: Routes = [
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
-//materials
-
+    //materials
     MatDatepickerModule,
     MaterialsModule
-
-//materials
-
-
+    //materials
   ],
   providers: [ MatDatepickerModule ],
 })

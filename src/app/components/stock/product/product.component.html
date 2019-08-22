@@ -31,6 +31,12 @@
 
               <div class="card-body">
 
+                  <tr *ngIf="loading">
+                      <td colspan="12" class="text-center loading-data">
+                        <mat-spinner></mat-spinner>
+                      </td>
+                    </tr>
+
                 <div class="form-group">
                   <div class="row">
                   <div class="col-md-6">
@@ -133,18 +139,18 @@
 
                       <div class="form-group">
                           <div class="row">
-                      <div class="col-md-6">
+                      <!-->div class="col-md-6">
                           <label for="exampleInputFile">Image</label>
                           <div class="input-group">
                             <div class="custom-file">
-                              <input type="file" class="custom-file-input" id="exampleInputFile">
+                              <input type="file" class="custom-file-input" >
                               <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                             </div>
                             <div class="input-group-append">
                               <span class="input-group-text" id="">Upload</span>
                             </div>
                           </div>
-                        </div>
+                        </div-->
 
                         <div class="col-md-6">
                             <label>Status</label>

@@ -20,14 +20,14 @@ export class CategoryComponent implements OnInit {
   deletingCategory: boolean;
   page = 1;
   size = 10;
-
   form: FormGroup;
   selectedCategory: Category;
+
   constructor(  private categoryService: CategoryService,
     private _toastr: ToastrService,
     private modalService: NgbModal,
     titleService: Title,
-    private _formBuilder: FormBuilder,) {
+    private _formBuilder: FormBuilder) {
       titleService.setTitle('Stock - Category');
     }
 
