@@ -14,4 +14,7 @@ export class Product {
     status:number;
     image:string;
     opening_stock:number;
+    sells:[];
+    purchases:[];
+
 }

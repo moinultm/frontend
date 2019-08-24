@@ -67,6 +67,19 @@ initDetailView(modal){
 
 }
 
+loadDetails(page?: number): void {
+  this.page = page ? page : 1;
+  this.loading = true;
+  this.productService.find({
+    page: this.page,
+    size: this.size
+  }).subscribe((res: PartialList<Product>) => {
+    this.data = res;
+    this.loading = false;
+  });
+}
+
+
  //Close Module
  close(modal: any, flag?: boolean): void {
   modal.close(flag ? true : false);
