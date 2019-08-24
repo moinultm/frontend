@@ -47,5 +47,29 @@ export class ManageComponent implements OnInit {
       });
     }
 
+//Detail View+++++++++++++++++++++++
+
+initDetailView(modal){
+  event.preventDefault();
+ 
+  this.modalService
+  .open(modal)
+  .result
+  .then((result) => {
+    if (result) {
+      this.loadData();
+    } else {
+     // this.initSaveForm();
+    }
+  }, () => {
+    //this.initSaveForm();
+  });
+
+}
+
+ //Close Module
+ close(modal: any, flag?: boolean): void {
+  modal.close(flag ? true : false);
+}
 
 }

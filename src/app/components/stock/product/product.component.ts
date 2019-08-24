@@ -55,22 +55,22 @@ export class ProductComponent implements OnInit {
 
   FillSubcategory(catid:number)
   {
-    this.loading=true;
+    this.loadingSubcategory=true;
     this.parentService.findParent(catid)
     .subscribe((res: PartialList<Subcategory>) => {
       this._subcategories = res.data;
-      this.loading = false;
+      this.loadingSubcategory = false;
     });
   }
 
 
   FillCategory()
   {
-    this.loading=true;
+    this.loadingSubcategory=true;
     this.categoryService.find()
     .subscribe((res: PartialList<Category>) => {
       this.categories = res.data;
-       this.loading = false;
+       this.loadingSubcategory = false;
     });
 
   }
