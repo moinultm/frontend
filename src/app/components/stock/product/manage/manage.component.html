@@ -82,7 +82,7 @@
                                            <span  >   <i class="fa fa-pencil"></i>
                                              Edit</span>
                                            </a>
-                                           <a href="#"  class="dropdown-item" (click)="initDetailView(detailsModal, item)"><span><i class="fa fa-eye"></i> Details</span></a>
+                                           <a href="#"  class="dropdown-item" (click)="initDetailView(detailsModal, item.id)"><span><i class="fa fa-eye"></i> Details</span></a>
 
                                    <a href="#" class="dropdown-item">   <span>   <i class="fa fa-trash"></i>
                                     Delete</span></a>
@@ -135,19 +135,30 @@
           <a class="nav-link active" id="tab-1-tab" data-toggle="pill" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">Details</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="tab-2-tab" data-toggle="pill" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">Purchase History</a>
+          <a class="nav-link" id="tab-2-tab" data-toggle="pill" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">Sells History</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="tab-3-tab" data-toggle="pill" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">Sells History</a>
+          <a class="nav-link" id="tab-3-tab" data-toggle="pill" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">Purchase History</a>
         </li>
       </ul>
       <div class="tab-content" id="custom-content-below-tabContent">
-          <div class="tab-pane active fade show" id="tab-1" role="tabpanel" aria-labelledby="tab-1-tab">
-              1
+          <div class="tab-pane active fade show" id="tab-1" role="tabpanel" aria-labelledby="tab-1-tab" *ngIf="!loadingDetails">
+              <tr *ngFor="let productPurchase of details.data; let i = index">
+                 
+                  <div *ngFor="let purchase of productPurchase.purchases; let i = index">
+                    {{purchase.reference_no}} 
+                    
+                  </div>
+               
+                </tr>
           </div>
-          <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2-tab">
-              <tr *ngFor="let item_sells of data.sells; let i = index">
-                {{item_sells.id}}
+          <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2-tab" *ngIf="!loadingDetails">
+              <tr *ngFor="let productSell of details.data; let i = index">
+                  Summ : {{getSum(1)}}
+                  <div *ngFor="let sell of productSell.sells; let i = index">
+                    {{sell.reference_no}} - {{sell.client.full_name}} -  {{sell.date}} -  {{sell.quantity}}
+                  </div>
+               
                 </tr>
           </div>
           <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3-tab">

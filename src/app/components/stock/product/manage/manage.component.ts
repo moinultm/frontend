@@ -15,6 +15,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class ManageComponent implements OnInit {
 
   data: PartialList<Product>;
+  details:PartialList<Product>;
+  loadingDetails:boolean;
   loading: boolean;
   savingProduct: boolean;
   deletingProduct: boolean;
@@ -23,6 +25,8 @@ export class ManageComponent implements OnInit {
   form: FormGroup;
   selectedProduct: Product;
 
+  items:number[][];
+  //https://stackoverflow.com/questions/45467550/angular-2-how-to-sum-column-ngfor
 
   constructor(private productService: ProductService,
     private _toastr: ToastrService,
@@ -43,43 +47,53 @@ export class ManageComponent implements OnInit {
         size: this.size
       }).subscribe((res: PartialList<Product>) => {
         this.data = res;
+      
         this.loading = false;
-        console.log(this.data);
+      
       });
     }
 
 //Detail View+++++++++++++++++++++++
 
-initDetailView(modal){
+initDetailView(modal:any,id:number){
   event.preventDefault();
+console.log("reading");
+
+this.loadDetails(id);
 
   this.modalService
   .open(modal)
   .result
   .then((result) => {
     if (result) {
-      this.loadData();
+     // this.loadDetails(id);
     } else {
-     // this.initSaveForm();
+      //this.loadDetails(id);
     }
   }, () => {
-    //this.initSaveForm();
+  //  this.loadDetails(id);
+
   });
 
 }
 
-loadDetails(page?: number): void {
-  this.page = page ? page : 1;
-  this.loading = true;
-  this.productService.find({
-    page: this.page,
-    size: this.size
-  }).subscribe((res: PartialList<Product>) => {
-    this.data = res;
-    this.loading = false;
+loadDetails(id:number): void {
+  //this.page = page ? page : 1;
+  this.loadingDetails = true;
+  this.productService.findDetailsById(id).subscribe((res: PartialList<Product>) => {
+    this.details = res;
+    console.log(this.details);
+    this.loadingDetails = false;
   });
 }
 
+getSum(index: number) : number {
+  let sum = 0;
+  for(let i = 0; i < this.items.length; i++) {
+    sum += this.items[i][index];
+  }
+  return sum;
+}
 
  //Close Module
  close(modal: any, flag?: boolean): void {

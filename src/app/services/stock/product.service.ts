@@ -14,10 +14,10 @@ export class ProductService extends CrudService <Product> {
   }
 
 
-  public findById(id: number): any {
+  public findDetailsById(id: number): any {
     this.options.params = undefined;
 
-    return this.__http.get<Product>(this.url + '/' + id, this.options);
+    return this.__http.get<Product>(this.url + '/' + id +'/'+'details', this.options);
   }
 
 

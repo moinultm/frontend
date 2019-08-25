@@ -118,7 +118,7 @@ export class ProductComponent implements OnInit {
       product_minimum_retail_price:[product ? product.minimum_retail_price : '',  [Validators.required]  ],
       product_status:[product ? product.status : '',  [Validators.required]  ],
       product_details:[product ? product.details : '',  [Validators.nullValidator]  ],
-      opening_stock:[product ? product.opening_stock : '',  [Validators.nullValidator]  ],
+      opening_stock:[product ? product.opening_stock : '',  [Validators.required]   ],
        image:[product ? product.image : '',  [Validators.nullValidator]  ]
     });
 

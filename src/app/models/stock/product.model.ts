@@ -18,9 +18,7 @@ export class Product {
     opening_stock:number;
 
     sells:Array<SellsOrder>;
-    constructor() {
-      this.sells = [];
-  }
+ 
    // purchases:[];
 
 }
