@@ -1,3 +1,5 @@
+import { SellsOrder } from './sellsorder.model';
+
 export class Product {
     id:number;
     name:string;
@@ -12,9 +14,13 @@ export class Product {
     minimum_retail_price:number;
     unit:string;
     status:number;
-    image:string;
+    image:any;
     opening_stock:number;
-    sells:[];
-    purchases:[];
+
+    sells:Array<SellsOrder>;
+    constructor() {
+      this.sells = [];
+  }
+   // purchases:[];
 
 }

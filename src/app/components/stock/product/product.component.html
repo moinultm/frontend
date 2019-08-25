@@ -1,187 +1,177 @@
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Product</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
-              <li class="breadcrumb-item"><a>Stock</a></li>
-              <li class="breadcrumb-item active">Add product</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Product</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
+            <li class="breadcrumb-item"><a>Stock</a></li>
+            <li class="breadcrumb-item active">Add product</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
 
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-      <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">Add Product</h3>
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">        <h3 class="card-title">
+                {{ selectedProduct.id ? ('Update Product: ' + selectedProduct.name) : 'Add Product' }}
+              </h3>
             </div>
             <!-- /.card-header -->
+
             <!-- form start -->
-            <form  [formGroup]="form">
+            <form [formGroup]="form" *ngIf="!loading">
+                <tr *ngIf="loading">
+                    <td colspan="12" class="text-center loading-data">
+                      <mat-spinner></mat-spinner>
+                    </td>
+                 </tr>
 
               <div class="card-body">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label>Product Name</label>
+                      <input type="text" class="form-control" formControlName="product_name"
+                        placeholder="Name of product">
+                    </div>
 
-                  <tr *ngIf="loading">
-                      <td colspan="12" class="text-center loading-data">
-                        <mat-spinner></mat-spinner>
-                      </td>
-                    </tr>
+                    <div class="col-md-6">
+                      <label>Product Code</label>
+                      <div class="input-group">
+                        <input type="text" class="form-control" formControlName="product_code">
+                        <div class="input-group-append">
+                          <div class="input-group-text"><i class="fa fa-random"></i></div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
 
                 <div class="form-group">
                   <div class="row">
-                  <div class="col-md-6">
-                      <label>Product Name</label>
-                      <input type="text" class="form-control" formControlName="product_name" placeholder="Name of product">
-
-                  </div>
-
-                  <div class="col-md-6">
-                      <label>Product Code</label>
-                       <div class="input-group">
-                         <input type="text" class="form-control"  formControlName="product_code">
-                          <div class="input-group-append">
-                            <div class="input-group-text"><i class="fa fa-random"></i></div>
-                          </div>
-                        </div>
-                  </div>
-
-                </div>
-                  </div>
-
-                  <div class="form-group">
-                  <div class="row">
-                      <div class="col-md-6">
-                          <label>Category</label>
-                          <select class="form-control"   formControlName="product_category"  (change)="FillSubcategory($event.target.value)" >
-                              <option *ngFor="let cat of categories" [value]="cat.id">
-                              {{cat.category_name}}
-                          </option>
-                          </select>
-                        </div>
-                      <div class="col-md-6">
-                          <label>Subcategory</label>
-                          <select class="form-control"  formControlName="product_subcatrgory" >
-                              <option *ngFor="let subcat of _subcategories" [value]="subcat.id">
-                              {{subcat.subcategory_name}}
-                          </option>
-                          </select>
-
-                        </div>
-                     </div>
-                  </div>
-
-                  <div class="form-group">
-                  <div class="row">
-                      <div class="col-md-4">
-                          <label>Cost Price</label>
-                          <input type="text" class="form-control"
-                           formControlName="product_cost_price" placeholder="Cost">
-                        </div>
-
-                        <div class="col-md-4">
-                            <label>MRP</label>
-                        <input type="text" class="form-control"
-                         formControlName="product_mrp" placeholder="MRP">
-                          </div>
-
-                          <div class="col-md-4">
-                              <label>Minimum Retail Price</label>
-                              <input type="text" class="form-control"
-                               formControlName="product_minimum_retail_price" placeholder="Minimum price">
-                            </div>
-
+                    <div class="col-md-6">
+                      <label>Category</label>
+                      <select class="form-control" formControlName="product_category"
+                        (change)="FillSubcategory($event.target.value)">
+                        <option *ngFor="let cat of categories" [value]="cat.id">
+                          {{cat.category_name}}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <label>Subcategory</label>
+                      <select class="form-control" formControlName="product_subcatrgory">
+                        <option *ngFor="let subcat of _subcategories" [value]="subcat.id">
+                          {{subcat.subcategory_name}}
+                        </option>
+                      </select>
 
                     </div>
                   </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label>Cost Price</label>
+                      <input type="text" class="form-control" formControlName="product_cost_price" placeholder="Cost">
+                    </div>
+
+                    <div class="col-md-4">
+                      <label>MRP</label>
+                      <input type="text" class="form-control" formControlName="product_mrp" placeholder="MRP">
+                    </div>
+
+                    <div class="col-md-4">
+                      <label>Minimum Retail Price</label>
+                      <input type="text" class="form-control" formControlName="product_minimum_retail_price"
+                        placeholder="Minimum price">
+                    </div>
+
+
+                  </div>
+                </div>
 
 
 
-                  <div class="form-group">
-                      <div class="row">
+                <div class="form-group">
+                  <div class="row">
 
-                          <div class="col-md-4">
-                              <label>Unit</label>
-                               <select class="form-control" formControlName="product_unit">
-                                  <option value="pcs">Pcs</option>
-                                </select>
-                            </div>
+                    <div class="col-md-4">
+                      <label>Unit</label>
+                      <select class="form-control" formControlName="product_unit">
+                        <option value="pcs">Pcs</option>
+                      </select>
+                    </div>
 
-                          <div class="col-md-4">
-                              <label>Description</label>
-                              <input type="text" class="form-control"
-                               formControlName="product_details" placeholder="Details">
+                    <div class="col-md-4">
+                      <label>Description</label>
+                      <input type="text" class="form-control" formControlName="product_details" placeholder="Details">
 
-                            </div>
+                    </div>
 
-                            <div class="col-md-4">
-                                <label>Opening Stock</label>
-                                <input type="text" class="form-control"
-                                 formControlName="opening_stock" placeholder="Opening">
+                    <div class="col-md-4">
+                      <label>Opening Stock</label>
+                      <input type="text" class="form-control" formControlName="opening_stock" placeholder="Opening">
 
-                              </div>
+                    </div>
 
+                  </div>
+                </div>
 
-
-
-
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <!-- Picture field/
+                      <div class="img-uploader">
+                        <div class="img-preview">
+                          <img [src]="picturePreview" height="60" width="70" />
+                        </div>
+                        <div class="img-input">
+                          <input type="file" id="image" formControlName="image" #file (change)="onImageChanged(file.files[0])" />
+                          <label for="image"><i class="mdi mdi-cloud-upload"></i></label>
                         </div>
                       </div>
-
-                      <div class="form-group">
-                          <div class="row">
-                      <!-->div class="col-md-6">
-                          <label for="exampleInputFile">Image</label>
-                          <div class="input-group">
-                            <div class="custom-file">
-                              <input type="file" class="custom-file-input" >
-                              <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                            </div>
-                            <div class="input-group-append">
-                              <span class="input-group-text" id="">Upload</span>
-                            </div>
-                          </div>
-                        </div-->
-
-                        <div class="col-md-6">
-                            <label>Status</label>
-                            <select class="form-control"  formControlName="product_status" >
-                                <option  [value]="1"> Active </option>
-                                 <option  [value]="0"> Inactive </option>
-                            </select>
-                          </div>
-
-</div>
-</div>
+                       ./Picture field -->
+                    </div>
+                    <div class="col-md-6">
+                      <label>Status</label>
+                      <select class="form-control" formControlName="product_status">
+                        <option [value]="1"> Active </option>
+                        <option [value]="0"> Inactive </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
               </div>
               <!-- /.card-body -->
 
               <div class="card-footer">
-                  <button type="button" class="btn btn-warning float-left" (click)="initForm()"
-                   >Reset</button>
-
-                    <button type="button" class="btn btn-primary float-right" (click)="saveForm(form)"
-                    [disabled]="form.invalid || savingProduct">Save</button>
+                <button type="button" class="btn btn-warning float-left" (click)="initForm()">Reset</button>
+                <button type="button" class="btn btn-primary float-right" (click)="saveForm(form)"
+                  [disabled]="form.invalid || savingProduct">Save</button>
               </div>
             </form>
           </div>
 
-      </div>
-
-
-
         </div>
-      </div>
-    </section>
 
-  </div>
-  <!-- Content Wrapper. Contains page content -->
+
+
+      </div>
+    </div>
+  </section>
+
+</div>
+<!-- Content Wrapper. Contains page content -->

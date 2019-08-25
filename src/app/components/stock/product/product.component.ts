@@ -11,7 +11,7 @@ import { ParentcategoryService } from '@services/stock/parentcategory.service';
 import { ProductService } from '@services/stock/product.service';
 import { success, warning } from '@services/core/utils/toastr';
 import { error } from 'util';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -30,7 +30,7 @@ export class ProductComponent implements OnInit {
   savingProduct:boolean;
 
   loading: boolean;
-
+  picturePreview: any;
 
 
 
@@ -41,14 +41,15 @@ export class ProductComponent implements OnInit {
     private parentService:ParentcategoryService,
     private _fb: FormBuilder,
     private _toastr: ToastrService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
     if( this.route.snapshot.params.id) {
 
-      let id=this.route.snapshot.params.id;
-      this.getProduct(id);
-
+     let id=this.route.snapshot.params.id;
+     this.getProduct(id);
+     this.initForm();
     }
     else{  this.initForm(); }
   }
@@ -77,9 +78,14 @@ export class ProductComponent implements OnInit {
 
 
   getProduct(id: number): void {
+    this.loading=true;
+
     this.productService.findById(id)
       .subscribe(
-        (product: Product) => this.initForm(product),
+        (product: Product) => {
+          this.initForm(product),
+          this.loading = false;
+        },
         (err: any) => {  if (err.status === 404) {
           err.error.forEach((e: string) => {
             warning('Warning not getting product!', e, this._toastr);
@@ -93,13 +99,11 @@ export class ProductComponent implements OnInit {
   initForm(product?: Product): void {
 
     if (product) {
-
-      this.selectedProduct = product;
-      this.FillCategory();
-      this.FillSubcategory(product.category_id);
-
+        this.selectedProduct = product;
+       this.FillSubcategory(product.category_id);
     } else {
       this.selectedProduct = new Product();
+
     }
 
     this.FillCategory();
@@ -115,7 +119,7 @@ export class ProductComponent implements OnInit {
       product_status:[product ? product.status : '',  [Validators.required]  ],
       product_details:[product ? product.details : '',  [Validators.nullValidator]  ],
       opening_stock:[product ? product.opening_stock : '',  [Validators.nullValidator]  ],
-
+       image:[product ? product.image : '',  [Validators.nullValidator]  ]
     });
 
 
@@ -127,14 +131,31 @@ export class ProductComponent implements OnInit {
  saveForm(form: any): void {
   if (this.form.valid) {
     this.savingProduct = true;
-    this.productService.save({
-      id: this.selectedProduct.id,
-      full_name: this.form.get('full_name').value,
 
-    }, this.selectedProduct.id ? true : false).subscribe((res: Product) => {
+    const formData = new FormData();
+    if (this.selectedProduct.image instanceof File) {
+     // formData.append('image', this.selectedProduct.image);
+    }
+
+    formData.append('id', this.selectedProduct.id + '');
+    formData.append('name', this.form.get('product_name').value);
+    formData.append('code', this.form.get('product_code').value);
+    formData.append('category_id', this.form.get('product_category').value);
+    formData.append('subcategory_id', this.form.get('product_subcatrgory').value);
+    formData.append('cost_price', this.form.get('product_cost_price').value);
+    formData.append('mrp', this.form.get('product_mrp').value);
+    formData.append('minimum_retail_price', this.form.get('product_minimum_retail_price').value);
+    formData.append('unit', this.form.get('product_unit').value);
+    formData.append('details', this.form.get('product_details').value);
+    formData.append('opening_stock', this.form.get('opening_stock').value);
+    formData.append('status', this.form.get('product_status').value);
+
+
+    this.productService.save(formData, this.selectedProduct.id ? true : false).subscribe((res: Product) => {
       success('Success!', 'The Product is successfully saved.', this._toastr);
       this.savingProduct = false;
       this.initForm();
+      this.router.navigate(['/product']);
     }, (err: any) => {
       if (err.status === 403) {
         err.error.forEach((e: string) => {
@@ -144,6 +165,7 @@ export class ProductComponent implements OnInit {
         error('Error!', 'An error has occured when saving the Product, please contact system administrator.', this._toastr);
       }
       this.savingProduct = false;
+
     });
   }
 }
@@ -165,6 +187,27 @@ export class ProductComponent implements OnInit {
       });
     }
 
+//Image Processing
+    onImageChanged(file): void {
+      this.selectedProduct.image = file;
+      if (this.selectedProduct && this.selectedProduct.image && this.selectedProduct.image instanceof File) {
+        this.previewImage(this.selectedProduct.image);
+      } else {
+        this.picturePreview = 'assets/images/file-icons/512/006-record.png';
+      }
+    }
+
+    private previewImage(file: File): void {
+      if (file.type.match(/image\/*/) == null) {
+        this.picturePreview = 'assets/images/file-icons/512/006-record.png';
+      } else {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (_event) => {
+          this.picturePreview = reader.result;
+        };
+      }
+    }
 
       //Close Module
       close(modal: any, flag?: boolean): void {

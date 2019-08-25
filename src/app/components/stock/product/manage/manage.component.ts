@@ -44,6 +44,7 @@ export class ManageComponent implements OnInit {
       }).subscribe((res: PartialList<Product>) => {
         this.data = res;
         this.loading = false;
+        console.log(this.data);
       });
     }
 
@@ -51,7 +52,7 @@ export class ManageComponent implements OnInit {
 
 initDetailView(modal){
   event.preventDefault();
- 
+
   this.modalService
   .open(modal)
   .result

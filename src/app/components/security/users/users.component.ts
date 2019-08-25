@@ -60,6 +60,7 @@ export class UsersComponent implements OnInit {
       size: this.size
     }).subscribe((res: PartialList<User>) => {
       this.data = res;
+       console.log( this.data);
       this.loading = false;
     });
   }

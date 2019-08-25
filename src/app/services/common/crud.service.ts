@@ -18,7 +18,7 @@ export class CrudService<T> {
   protected url :string;
 
   constructor(private _http:  HttpClient ) {
-  this.headers = new HttpHeaders({ 
+  this.headers = new HttpHeaders({
       'Accept': 'application/json'
     });
   this.options = {headers: this.headers }
@@ -37,7 +37,7 @@ export class CrudService<T> {
   //specific search
   public findById(id: number): any {
     this.options.params = undefined;
-    
+
     return this._http.get<T>(this.url + '/' + id, this.options);
   }
 

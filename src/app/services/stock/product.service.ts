@@ -21,4 +21,15 @@ export class ProductService extends CrudService <Product> {
   }
 
 
+
+  public save(model: any, update?: boolean): any {
+    this.options.params = undefined;
+    if (update) {
+      return this.__http.post<Product>(this.url + '/' + model.get('id'), model, this.options);
+    } else {
+      return this.__http.post<Product>(this.url, model, this.options);
+    }
+  }
+
+
 }
