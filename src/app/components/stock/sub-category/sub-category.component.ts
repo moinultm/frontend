@@ -118,7 +118,7 @@ export class SubCategoryComponent implements OnInit {
  }
 
 
-  selectCategory(cat:Category): void {
+  selectedSubCats(cat:Category): void {
     if (this.selectedSubHasCategory(cat)) {
       this.selectedSub.category_id == cat.id;
     } else {
@@ -158,6 +158,63 @@ export class SubCategoryComponent implements OnInit {
   }
 
 
+  initProducts(modal: any, subcategory: Subcategory){
+    this.selectedSub = subcategory;
+
+    this.modalService
+      .open(modal)
+      .result
+      .then((result) => {
+        if (result) {
+          this.loadData();
+        }
+        this.selectedSub = new Subcategory();
+      }, () => {
+    
+        this.selectedSub = new Subcategory();
+      });
+  }
+
+  //DeleteFunction
+  initDelete(modal: any, subcategory: Subcategory): void {
+    this.selectedSub = subcategory;
+    // Open the delete confirmation modal
+    this.modalService
+      .open(modal)
+      .result
+      .then((result) => {
+        if (result) {
+          this.loadData();
+        }
+        this.selectedSub = new Subcategory();
+      }, () => {
+        // If the modal is dismissed
+        this.selectedSub = new Subcategory();
+      });
+  }
+
+   //Delete
+   delete(modal: any): void {
+    event.preventDefault();
+    this.deletingSubcategory = true;
+    this.subcategoryService.delete({
+      id: this.selectedSub.id
+    }).subscribe(() => {
+       success('Success!', 'The Subcategory is successfully saved.', this._toastr);
+      this.close(modal, true);
+      this.deletingSubcategory = false;
+    },
+    (err: any) => {
+      if (err.status === 403) {          
+        warning('Warning!', err.error.error, this._toastr);
+        this.close(modal, true);
+      } else {
+        error('Error!', 'An error has occured when saving the role, please contact system administrator.', this._toastr);
+        this.close(modal, true);
+      }
+      this.savingSubcategory = false;
+    });
+  }
     //Close Module
     close(modal: any, flag?: boolean): void {
       modal.close(flag ? true : false);
