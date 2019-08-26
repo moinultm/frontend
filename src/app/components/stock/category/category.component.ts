@@ -50,6 +50,8 @@ export class CategoryComponent implements OnInit {
 
        //Save Data
     initSave(modal: any, category?: Category): void {
+      event.preventDefault();
+
       this.initSaveForm(category);
       this.modalService
         .open(modal)
@@ -103,14 +105,44 @@ export class CategoryComponent implements OnInit {
       }
     }
 
+
+    initDelete(modal: any, category: Category): void {
+      this.selectedCategory = category;
+      // Open the delete confirmation modal
+      this.modalService
+        .open(modal)
+        .result
+        .then((result) => {
+          if (result) {
+            this.loadData();
+          }
+          this.selectedCategory = new Category();
+        }, () => {
+          // If the modal is dismissed
+          this.selectedCategory = new Category();
+        });
+    }
+  
      //Delete
      delete(modal: any): void {
+      event.preventDefault();
       this.deletingCategory = true;
       this.categoryService.delete({
         id: this.selectedCategory.id
       }).subscribe(() => {
+         success('Success!', 'The role is successfully saved.', this._toastr);
         this.close(modal, true);
         this.deletingCategory = false;
+      },
+      (err: any) => {
+        if (err.status === 403) {          
+          warning('Warning!', err.error.error, this._toastr);
+          this.close(modal, true);
+        } else {
+          error('Error!', 'An error has occured when saving the role, please contact system administrator.', this._toastr);
+          this.close(modal, true);
+        }
+        this.savingCategory = false;
       });
     }
 
