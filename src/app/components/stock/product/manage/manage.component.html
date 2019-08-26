@@ -69,7 +69,7 @@
                         <tr *ngFor="let item of data.data; let i = index">
                           <td>{{ i+1 }}</td>
                           <td>{{ item.name }}</td>
-                          <td>	{{item.quantity}} {{item.unit}} </td>
+                          <td>{{item.quantity}} {{item.unit}}</td>
                           <td class="actions">
                               <ul class="navbar-nav mr-auto">
                                   <li class="nav-item dropdown">
@@ -91,8 +91,6 @@
                                       </div>
                                     </li>
                               </ul>
-
-
 
                           </td>
                         </tr>
@@ -128,9 +126,13 @@
     <!-- ./Modal header -->
 
     <!-- Modal body -->
-    <div class="modal-body">
+    <div class="modal-body" >
 
-    <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
+        <div *ngIf="loadingDetails" class="text-center loading-profiles">
+              <mat-spinner></mat-spinner>
+          </div>
+
+    <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist" *ngIf="!loadingDetails">
         <li class="nav-item">
           <a class="nav-link active" id="tab-1-tab" data-toggle="pill" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">Details</a>
         </li>
@@ -141,28 +143,94 @@
           <a class="nav-link" id="tab-3-tab" data-toggle="pill" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">Purchase History</a>
         </li>
       </ul>
-      <div class="tab-content" id="custom-content-below-tabContent">
-          <div class="tab-pane active fade show" id="tab-1" role="tabpanel" aria-labelledby="tab-1-tab" *ngIf="!loadingDetails">
-              <tr *ngFor="let productPurchase of details.data; let i = index">
-                 
-                  <div *ngFor="let purchase of productPurchase.purchases; let i = index">
-                    {{purchase.reference_no}} 
-                    
+      <div class="tab-content" id="custom-content-below-tabContent" *ngIf="!loadingDetails">
+          <div class="tab-pane active fade show" id="tab-1" role="tabpanel" aria-labelledby="tab-1-tab" >
+
+            <div class="card-body box-profile" *ngFor="let product of details.data; let i = index">
+                  <div class="text-center">
+                    <!--img class="profile-user-img img-fluid img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture"-->
                   </div>
-               
-                </tr>
+
+                  <h3 class="profile-username text-center">Name: {{product.name}}</h3>
+                  <h3 class="profile-username text-center">Cost: {{product.cost_price}}</h3>
+                  <h3 class="profile-username text-center">MRP: {{product.mrp}}</h3>
+                  <p class="text-muted text-center">Opening: {{product.sum_opening}}</p>
+
+                  <ul class="list-group list-group-unbordered mb-3">
+                    <li class="list-group-item">
+                      <b>Total Sells:  </b> <a class="float-right">
+                               {{product.total_sells}}
+
+                      </a>
+                    </li>
+                    <li class="list-group-item">
+                      <b>Total Purchase:   </b> <a class="float-right">
+                              {{product.total_purchase}}
+                      </a>
+                    </li>
+                    <li class="list-group-item">
+                      <b>Current Stock: </b> <a class="float-right">{{product.total_quantity_transaction}}</a>
+                    </li>
+                  </ul>
+                </div>
           </div>
-          <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2-tab" *ngIf="!loadingDetails">
-              <tr *ngFor="let productSell of details.data; let i = index">
-                  Summ : {{getSum(1)}}
-                  <div *ngFor="let sell of productSell.sells; let i = index">
-                    {{sell.reference_no}} - {{sell.client.full_name}} -  {{sell.date}} -  {{sell.quantity}}
-                  </div>
-               
-                </tr>
+
+
+
+          <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2-tab"  >
+
+              <h4>Top(10) Sells </h4>
+
+              <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                  <thead>
+                  <tr role="row">
+                      <th rowspan="1" colspan="1">Date</th>
+                      <th rowspan="1" colspan="1">Supplier</th>
+                      <th rowspan="1" colspan="1">Quantity(s)</th>
+                  </thead>
+                  <tbody *ngFor="let productSell of details.data; let i = index">
+
+
+                  <tr role="row" class="odd" *ngFor="let sell of productSell.sells; let i = index">
+                    <td class="sorting_1">{{sell.date}}</td>
+                    <td>{{sell.client.full_name}} </td>
+                    <td>{{sell.quantity}}</td>
+                  </tr>
+
+
+                </tbody>
+                  <tfoot>
+
+                  </tfoot>
+                </table>
           </div>
-          <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3-tab">
-tab 3
+
+          <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3-tab"  >
+
+            <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                <thead>
+                <tr role="row">
+                    <th rowspan="1" colspan="1">Date</th>
+                    <th rowspan="1" colspan="1">Customer</th>
+                    <th rowspan="1" colspan="1">Quantity(s)</th>
+                </thead>
+                <tbody *ngFor="let productPurchase of details.data; let i = index">
+
+
+                <tr role="row" class="odd" *ngFor="let purchase of productPurchase.purchases; let i = index">
+                  <td class="sorting_1">{{purchase.date}}</td>
+                  <td>{{purchase.client.full_name}} </td>
+                  <td>{{purchase.quantity}}</td>
+                </tr>
+
+
+              </tbody>
+                <tfoot>
+
+                </tfoot>
+              </table>
+
+
           </div>
 
         </div>

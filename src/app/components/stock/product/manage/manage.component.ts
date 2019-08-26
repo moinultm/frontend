@@ -25,7 +25,7 @@ export class ManageComponent implements OnInit {
   form: FormGroup;
   selectedProduct: Product;
 
-  items:number[][];
+
   //https://stackoverflow.com/questions/45467550/angular-2-how-to-sum-column-ngfor
 
   constructor(private productService: ProductService,
@@ -47,9 +47,9 @@ export class ManageComponent implements OnInit {
         size: this.size
       }).subscribe((res: PartialList<Product>) => {
         this.data = res;
-      
+
         this.loading = false;
-      
+
       });
     }
 
@@ -87,13 +87,7 @@ loadDetails(id:number): void {
   });
 }
 
-getSum(index: number) : number {
-  let sum = 0;
-  for(let i = 0; i < this.items.length; i++) {
-    sum += this.items[i][index];
-  }
-  return sum;
-}
+
 
  //Close Module
  close(modal: any, flag?: boolean): void {
