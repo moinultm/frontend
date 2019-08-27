@@ -6,6 +6,8 @@ import { SellsOrderService } from '@services/stock/sellsorder.service';
 import{TablesDataSource} from '@services/stock/lessons.datasource'
 import { fromEvent, merge } from 'rxjs';
 import { tap, distinctUntilChanged, debounceTime } from 'rxjs/operators';
+import { ProductService } from '@services/stock/product.service';
+import { UserService } from '@services/security/user.service';
 
 @Component({
   selector: 'app-sell',
@@ -22,7 +24,7 @@ export class SellComponent implements OnInit {
   size = 10;
 
   dataSource: TablesDataSource;
-
+ 
   displayedColumns= ["seqNo", "description", "duration","actions"];
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
@@ -30,22 +32,23 @@ export class SellComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   @ViewChild('input', { static: false }) input: ElementRef;
+  route: any;
 
 
 
   constructor(
-    private sellsService:SellsOrderService
+    private sellsService:SellsOrderService,
+ 
   ) { }
 
   ngOnInit() {
-
+ 
    this.dataSource = new TablesDataSource(this.sellsService);
 
-    this.dataSource.loadTables( '', 'asc', 1, 3);
-
-    this.loadData();
-
+    this.dataSource.loadSalesTables( '', 'asc', 1, 3) ;
+    
   }
+
 
 
   ngAfterViewInit() {
@@ -56,7 +59,6 @@ export class SellComponent implements OnInit {
             debounceTime(150),
             distinctUntilChanged(),
             tap(() => {
-                this.paginator.pageIndex = 0;
                 this.loadLessonsPage();
             })
         )
@@ -71,8 +73,7 @@ export class SellComponent implements OnInit {
 
 
 loadLessonsPage() {
-
-     this.dataSource.loadTables(
+     this.dataSource.loadSalesTables(
       this.input.nativeElement.value,
       this.sort.direction,
       this.paginator.pageIndex,

@@ -4,6 +4,8 @@ import { HttpClient,HttpParams, HttpHeaders} from '@angular/common/http';
 import { PartialList } from '@models/common/patial-list.model';
 
 import { environment } from '@env/environment';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -60,5 +62,25 @@ public delete(model: any): any {
 setUrl(url: String): void {
   this.url = environment.rest_url + '' + url;
 }
+
+
+
+findTable(
+  filter :string,
+  sortOrder :string,
+  pageNumber:number,
+  pageSize :number):  Observable<any[]> {
+
+  return this._http.get(this.url, {
+      params: new HttpParams()
+          .set('filter', filter)
+          .set('sortOrder', sortOrder)
+          .set('page', pageNumber.toString())
+          .set('size', pageSize.toString())
+  }).pipe(map(res =>  res["data"]) );
+
+}
+
+//https://www.techiediaries.com/angular-rxjs-tutorial/
 
 }
