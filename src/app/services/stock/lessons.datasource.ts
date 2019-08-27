@@ -1,10 +1,6 @@
 import {CollectionViewer, DataSource} from "@angular/cdk/collections";
 import {Observable, BehaviorSubject, of} from "rxjs";
-import {SellsOrderService} from "@services/stock/sellsorder.service";
 import {catchError, finalize, map, count} from "rxjs/operators";
-
-
-
 
 export class TablesDataSource implements DataSource<any[]> {
     

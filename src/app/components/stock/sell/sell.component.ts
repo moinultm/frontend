@@ -23,17 +23,12 @@ export class SellComponent implements OnInit {
   page = 1;
   size = 10;
 
-  dataSource: TablesDataSource;
- 
+  dataSource: TablesDataSource; 
   displayedColumns= ["seqNo", "description", "duration","actions"];
-
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-
   @ViewChild(MatSort, { static: false }) sort: MatSort;
-
   @ViewChild('input', { static: false }) input: ElementRef;
   route: any;
-
 
 
   constructor(
@@ -44,7 +39,7 @@ export class SellComponent implements OnInit {
   ngOnInit() {
  
    this.dataSource = new TablesDataSource(this.sellsService);
-
+//pass Id or uri or any params or override the function in the desire service constructions
     this.dataSource.loadSalesTables( '', 'asc', 1, 3) ;
     
   }

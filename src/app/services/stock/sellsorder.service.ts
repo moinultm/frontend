@@ -16,5 +16,21 @@ export class SellsOrderService extends CrudService<SellsOrder> {
     this.setUrl('sell');
   }
 
+  findTable(
+    filter :string,
+    sortOrder :string,
+    pageNumber:number,
+    pageSize :number):  Observable<any[]> {
+  
+    return this.__http.get(this.url +'fuk', {
+        params: new HttpParams()
+            .set('filter', filter)
+            .set('sortOrder', sortOrder)
+            .set('page', pageNumber.toString())
+            .set('size', pageSize.toString())
+    }).pipe(map(res =>  res["data"]) );
+  
+  }
+  
 
 }
