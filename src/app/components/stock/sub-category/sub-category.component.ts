@@ -12,6 +12,10 @@ import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
 import { constants } from '@env/constants';
 
+import {MatDialog, MatDialogConfig} from "@angular/material";
+import { ProductComponent } from './product/product.component';
+
+
 @Component({
   selector: 'app-sub-category',
   templateUrl: './sub-category.component.html',
@@ -33,6 +37,7 @@ export class SubCategoryComponent implements OnInit {
 
 
   constructor(
+    private dialog: MatDialog,
     private subcategoryService: SubcategoryService,
     private categoryService: CategoryService,
     private modalService: NgbModal,
@@ -170,7 +175,7 @@ export class SubCategoryComponent implements OnInit {
         }
         this.selectedSub = new Subcategory();
       }, () => {
-    
+
         this.selectedSub = new Subcategory();
       });
   }
@@ -205,7 +210,7 @@ export class SubCategoryComponent implements OnInit {
       this.deletingSubcategory = false;
     },
     (err: any) => {
-      if (err.status === 403) {          
+      if (err.status === 403) {
         warning('Warning!', err.error.error, this._toastr);
         this.close(modal, true);
       } else {
@@ -219,6 +224,23 @@ export class SubCategoryComponent implements OnInit {
     close(modal: any, flag?: boolean): void {
       modal.close(flag ? true : false);
     }
+
+
+
+    openDialog(number:any) {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+
+      dialogConfig.data = {
+        id: 1,
+        title: 'Angular For Beginners',
+        description: 'Angular For Beginners'
+    };
+
+      this.dialog.open(ProductComponent, dialogConfig,);
+  }
+
 
 
 }

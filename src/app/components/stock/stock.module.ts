@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 
+
 // Module routes
 const routes: Routes = [
   {
@@ -39,8 +40,9 @@ const routes: Routes = [
 @NgModule({
   declarations: [],
   imports: [
+
     CommonModule,
-    RouterModule.forChild(routes)
+        RouterModule.forChild(routes)
   ],
   exports: [RouterModule]
 })

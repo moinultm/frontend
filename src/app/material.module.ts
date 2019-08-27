@@ -1,11 +1,8 @@
 import { NgModule } from '@angular/core';
-//import { CommonModule } from '@angular/common';
-//import { BrowserModule } from '@angular/platform-browser';
 
-//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material';
+
 //import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import {
@@ -44,6 +41,7 @@ import {
   MatToolbarModule,
   MatTooltipModule,
   MatTreeModule,
+  MatFormFieldModule
 } from '@angular/material';
 
 const MaterialComponents = [
@@ -82,14 +80,11 @@ const MaterialComponents = [
   MatToolbarModule,
   MatTooltipModule,
   MatTreeModule,
- // BrowserModule,
-  //BrowserAnimationsModule,
   FormsModule,
-  HttpClientModule,
   MatNativeDateModule,
   ReactiveFormsModule,
   MatFormFieldModule,
-  MatInputModule,
+
 ];
 
 @NgModule({

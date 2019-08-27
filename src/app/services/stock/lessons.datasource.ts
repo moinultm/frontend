@@ -6,9 +6,9 @@ import {catchError, finalize} from "rxjs/operators";
 
 
 
-export class TablesDataSource implements DataSource<SellsOrder> {
+export class TablesDataSource implements DataSource<any[]> {
 
-    private tablesSubject = new BehaviorSubject<SellsOrder[]>([]);
+    private tablesSubject = new BehaviorSubject<any[]>([]);
     private loadingSubject = new BehaviorSubject<boolean>(false);
     public loading$ = this.loadingSubject.asObservable();
 
@@ -29,14 +29,13 @@ export class TablesDataSource implements DataSource<SellsOrder> {
                 finalize(() => this.loadingSubject.next(false))
             )
             .subscribe(
-              lessons => this.tablesSubject.next(lessons)              
+              lessons => this.tablesSubject.next(lessons)
             );
-          
 
-    }
+        }
 
 
-    connect(collectionViewer: CollectionViewer): Observable<SellsOrder[]> {
+    connect(collectionViewer: CollectionViewer): Observable<any[]> {
         console.log("Connecting data source");
         return this.tablesSubject.asObservable();
     }
@@ -48,3 +47,5 @@ export class TablesDataSource implements DataSource<SellsOrder> {
 
 }
 
+//Get more info from
+//https://github.com/academind/angular-material-introduction/tree/03-data-table

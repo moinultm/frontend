@@ -16,7 +16,7 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-  
+
     <section class="content">
       <div class="container-fluid">
         <div class="row">
@@ -25,7 +25,7 @@
                 <div class="card-header">
                     <h3 class="card-title">List of Subcategories |
                  Add Subcategories <i class="fa fa-plus" (click)="initSave(saveModal)"></i>   </h3>
-                    
+
 
                     <div class="card-tools">
 
@@ -37,7 +37,7 @@
                                 <button type="submit" class="btn btn-default"><i
                                         class="fa fa-search" ></i></button>
                             </div>
-                    
+
                     </div>
                 </div>
 
@@ -60,25 +60,25 @@
 
                                         </td>
                                       </tr>
-                    
+
                                       <tr *ngIf="!loading && data && !data.data.length">
                                         <td colspan="12" class="text-center loading-data">
                                           No Subcategory created yet!
                                         </td>
                                       </tr>
-                    
+
                                       <ng-container *ngIf="!loading">
                                         <tr *ngFor="let item of data.data; let i = index">
-                                          <td>{{ i+1 }}</td>                                      
+                                          <td>{{ i+1 }}</td>
                                           <td>{{ item.subcategory_name }}</td>
                                           <td>{{ item.categories.category_name }}</td>
                                           <td class="actions">
                                               <div class="btn-group">
                                                   <button type="button" class="btn btn-default" (click)="initSave(saveModal, item)"><i class="fa fa-pencil"></i></button>
-                                                  <button type="button" class="btn btn-default" (click)="initProducts(productsModal, item)"><i class="fa fa-eye"></i></button>
+                                                  <button type="button" class="btn btn-default" (click)="openDialog(1)"><i class="fa fa-eye"></i></button>
                                                   <button type="button" class="btn btn-default" (click)="initDelete(deleteModal, item)"><i class="fa fa-trash"></i></button>
                                                 </div>
-                                          
+
                                           </td>
                                         </tr>
                                       </ng-container>
@@ -103,11 +103,11 @@
         </div>
       </div>
     </section>
-  
+
   </div>
   <!-- Content Wrapper. Contains page content -->
 
-  
+
 
 <!-- subcategory save modal -->
 <ng-template #saveModal let-modal>
@@ -149,16 +149,16 @@
         </div>
       </div>
       <!-- ./category_name field validations container -->
- 
+
 
        <!--subcategory checkboxes -->
-       <h5>subcategory(s)</h5>     
+       <h5>subcategory(s)</h5>
        <div class="form-group">
-         <select class="form-control"  id="subcategory_id" formControlName="category_id">               
+         <select class="form-control"  id="subcategory_id" formControlName="category_id">
                 <option *ngFor="let cat of categories" [value]="cat.id"
                 (change)="selectCategory(cat)"
                 [selected]="selectedSubHasCategory(cat)"  >
-                {{cat.category_name}}</option>  
+                {{cat.category_name}}</option>
         </select>
        </div>
        <!-- ./subcategory checkboxes -->
@@ -191,7 +191,7 @@
 
 </ng-template>
 <!-- ./subcategory save modal -->
-  
+
 
  <!-- subcategory delete confirmation modal -->
  <ng-template #deleteModal let-modal>
@@ -204,19 +204,19 @@
       </button>
     </div>
     <!-- ./Modal header -->
-  
+
     <!-- Modal body -->
     <div class="modal-body">
       <p>Are you sure you want to delete this subcategory?</p>
     </div>
     <!-- ./Modal body -->
-  
+
     <!-- Modal footer -->
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-danger" [disabled]="deletingCategory" (click)="delete(modal)">Delete</button>
     </div>
     <!-- ./Modal footer -->
-  
+
   </ng-template>
   <!-- ./subcategory delete confirmation modal -->
 
@@ -232,5 +232,5 @@
       </div>
       <!-- ./Modal header -->
 
-  
+
   </ng-template>
