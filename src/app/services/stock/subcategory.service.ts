@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { CrudService } from '@services/common/crud.service';
 import { Subcategory } from '@models/stock/subcategory.model';
 import { PartialList } from '@models/common/patial-list.model';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +33,24 @@ export class SubcategoryService extends CrudService<Subcategory> {
     }
     return this.__http.get <PartialList<Subcategory>>(this.url + '/parent?categoryId=2' , this.options);
   }
+
+  findTable(
+    filter :string,
+    sortOrder :string,
+    pageNumber:number,
+    pageSize :number,
+    id?:number):  Observable<any[]> {
+
+    return this.__http.get(this.url+'/'+id+'/'+'product', {
+        params: new HttpParams()
+            .set('filter', filter)
+            .set('sortOrder', sortOrder)
+            .set('page', pageNumber.toString())
+            .set('size', pageSize.toString())
+    }).pipe(map(res =>  res["data"]) );
+
+  }
+
 
 
 }

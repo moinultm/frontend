@@ -23,7 +23,7 @@ export class SellComponent implements OnInit {
   page = 1;
   size = 10;
 
-  dataSource: TablesDataSource; 
+  dataSource: TablesDataSource;
   displayedColumns= ["seqNo", "description", "duration","actions"];
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
@@ -33,15 +33,15 @@ export class SellComponent implements OnInit {
 
   constructor(
     private sellsService:SellsOrderService,
- 
+
   ) { }
 
   ngOnInit() {
- 
+
    this.dataSource = new TablesDataSource(this.sellsService);
 //pass Id or uri or any params or override the function in the desire service constructions
-    this.dataSource.loadSalesTables( '', 'asc', 1, 3) ;
-    
+    this.dataSource.loadTables( '', 'asc', 1, 3) ;
+
   }
 
 
@@ -68,7 +68,7 @@ export class SellComponent implements OnInit {
 
 
 loadLessonsPage() {
-     this.dataSource.loadSalesTables(
+     this.dataSource.loadTables(
       this.input.nativeElement.value,
       this.sort.direction,
       this.paginator.pageIndex,

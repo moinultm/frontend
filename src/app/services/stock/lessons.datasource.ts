@@ -3,29 +3,29 @@ import {Observable, BehaviorSubject, of} from "rxjs";
 import {catchError, finalize, map, count} from "rxjs/operators";
 
 export class TablesDataSource implements DataSource<any[]> {
-    
+
     private tablesSubject = new BehaviorSubject<any[]>([]);
     private loadingSubject = new BehaviorSubject<boolean>(false);
     public loading$ = this.loadingSubject.asObservable();
 
     constructor(private anyService: any) {   }
-    resultsLength = 0; 
-    loadSalesTables(filter:string, sortDirection:string, pageIndex:number,  pageSize:number) {
+    resultsLength = 0;
+    loadTables(filter:string, sortDirection:string, pageIndex:number,  pageSize:number,id?:number) {
         this.loadingSubject.next(true);
-        this.anyService.findTable(filter,sortDirection, pageIndex,   pageSize)
+        this.anyService.findTable(filter,sortDirection, pageIndex,   pageSize,id)
         .pipe(
                 catchError(() => of([])),
-                finalize(() => this.loadingSubject.next(false)),             
+                finalize(() => this.loadingSubject.next(false)),
             )
-            .subscribe(           
-                result =>{ 
-                this.tablesSubject.next(result) ,          
-                this.resultsLength = result.length; 
-              }                           
+            .subscribe(
+                result =>{
+                this.tablesSubject.next(result) ,
+                this.resultsLength = result.length;
+              }
             );
-            
+
         }
-   
+
     connect(collectionViewer: CollectionViewer): Observable<any[]> {
         console.log("Connecting data source");
         return this.tablesSubject.asObservable();

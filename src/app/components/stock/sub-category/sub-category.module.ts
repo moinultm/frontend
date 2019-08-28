@@ -6,7 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
-import { ProductComponent } from './product/product.component';
+import { ProductListComponent } from './product-list/product-list.component';
 
 
 import { MaterialsModule } from '@app/material.module';
@@ -21,7 +21,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [SubCategoryComponent, ProductComponent],
+  declarations: [SubCategoryComponent, ProductListComponent],
   imports: [
     MaterialsModule,
     CommonModule,
@@ -30,6 +30,6 @@ const routes: Routes = [
 
 
   ],
-  entryComponents:[ProductComponent]
+  entryComponents:[ProductListComponent]
 })
 export class SubCategoryModule { }

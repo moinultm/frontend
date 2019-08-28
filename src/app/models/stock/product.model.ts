@@ -18,7 +18,7 @@ export class Product {
     opening_stock:number;
 
     sells:Array<SellsOrder>;
- 
+
    // purchases:[];
 
 }

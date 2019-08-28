@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 })
 export class SellsOrderService extends CrudService<SellsOrder> {
 
-   
+
   constructor(private __http: HttpClient ) {
     super(__http);
     this.setUrl('sell');
@@ -21,16 +21,16 @@ export class SellsOrderService extends CrudService<SellsOrder> {
     sortOrder :string,
     pageNumber:number,
     pageSize :number):  Observable<any[]> {
-  
-    return this.__http.get(this.url +'fuk', {
+
+    return this.__http.get(this.url , {
         params: new HttpParams()
             .set('filter', filter)
             .set('sortOrder', sortOrder)
             .set('page', pageNumber.toString())
             .set('size', pageSize.toString())
     }).pipe(map(res =>  res["data"]) );
-  
+
   }
-  
+
 
 }

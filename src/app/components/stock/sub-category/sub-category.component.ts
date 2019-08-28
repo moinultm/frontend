@@ -13,7 +13,7 @@ import { Title } from '@angular/platform-browser';
 import { constants } from '@env/constants';
 
 import {MatDialog, MatDialogConfig} from "@angular/material";
-import { ProductComponent } from './product/product.component';
+import { ProductListComponent } from './product-list/product-list.component';
 
 
 @Component({
@@ -226,19 +226,20 @@ export class SubCategoryComponent implements OnInit {
     }
 
 
+//mat Dialog
 
-    openDialog(number:any) {
+    openDialog(number:number) {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
 
       dialogConfig.data = {
-        id: 1,
-        title: 'Angular For Beginners',
-        description: 'Angular For Beginners'
+        id: number,
+        title: 'Angular For Beginners title',
+        description: 'Angular For Beginners desc'
     };
 
-      this.dialog.open(ProductComponent, dialogConfig,);
+      this.dialog.open(ProductListComponent, dialogConfig,);
   }
 
 

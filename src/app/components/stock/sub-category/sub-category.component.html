@@ -57,10 +57,8 @@
                                 <tr *ngIf="loading">
                                         <td colspan="12" class="text-center loading-data">
                                             <mat-spinner></mat-spinner>
-
                                         </td>
-                                      </tr>
-
+                                </tr>
                                       <tr *ngIf="!loading && data && !data.data.length">
                                         <td colspan="12" class="text-center loading-data">
                                           No Subcategory created yet!
@@ -75,7 +73,7 @@
                                           <td class="actions">
                                               <div class="btn-group">
                                                   <button type="button" class="btn btn-default" (click)="initSave(saveModal, item)"><i class="fa fa-pencil"></i></button>
-                                                  <button type="button" class="btn btn-default" (click)="openDialog(1)"><i class="fa fa-eye"></i></button>
+                                                  <button type="button" class="btn btn-default" (click)="openDialog(item.id)"><i class="fa fa-eye"></i></button>
                                                   <button type="button" class="btn btn-default" (click)="initDelete(deleteModal, item)"><i class="fa fa-trash"></i></button>
                                                 </div>
 

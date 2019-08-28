@@ -36,6 +36,7 @@ export class ManageComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
+
   }
 
      //Loading Data
@@ -47,9 +48,8 @@ export class ManageComponent implements OnInit {
         size: this.size
       }).subscribe((res: PartialList<Product>) => {
         this.data = res;
-
+        console.log( this.data )
         this.loading = false;
-
       });
     }
 
@@ -57,10 +57,9 @@ export class ManageComponent implements OnInit {
 
 initDetailView(modal:any,id:number){
   event.preventDefault();
+
 console.log("reading");
-
 this.loadDetails(id);
-
   this.modalService
   .open(modal)
   .result
@@ -72,9 +71,7 @@ this.loadDetails(id);
     }
   }, () => {
   //  this.loadDetails(id);
-
   });
-
 }
 
 loadDetails(id:number): void {

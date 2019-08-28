@@ -69,7 +69,8 @@ findTable(
   filter :string,
   sortOrder :string,
   pageNumber:number,
-  pageSize :number):  Observable<any[]> {
+  pageSize :number,
+  id?:number):  Observable<any[]> {
 
   return this._http.get(this.url, {
       params: new HttpParams()
@@ -77,6 +78,7 @@ findTable(
           .set('sortOrder', sortOrder)
           .set('page', pageNumber.toString())
           .set('size', pageSize.toString())
+          .set('id', id.toString()|| null)
   }).pipe(map(res =>  res["data"]) );
 
 }

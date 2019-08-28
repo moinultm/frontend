@@ -3,5 +3,5 @@ export class   PartialList<T>  {
     count: number;
     page: number;
     size: number;
-    total_count: number;
+
 }
