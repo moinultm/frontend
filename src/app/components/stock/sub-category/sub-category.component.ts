@@ -43,13 +43,12 @@ export class SubCategoryComponent implements OnInit {
     private modalService: NgbModal,
     private _fb: FormBuilder,
     private _toastr: ToastrService,
-
     titleService: Title) {
       titleService.setTitle(constants.app_name + ' - Stock - Subcategory management');
     }
 
   ngOnInit() {
- this.loadData()
+  this.loadData()
   }
   //Loading Data
   loadData(page?: number): void {
@@ -88,8 +87,6 @@ export class SubCategoryComponent implements OnInit {
       }, () => {
         this.initSaveForm();
       });
-
-
   }
 
 

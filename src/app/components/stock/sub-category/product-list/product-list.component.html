@@ -13,10 +13,9 @@
     </ng-container>
     <ng-container matColumnDef="stock">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Stock</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.mobile}}</mat-cell>
+      <mat-cell *matCellDef="let element">{{element.total_quantity_transaction}}</mat-cell>
     </ng-container>
-
-    <ng-container matColumnDef="loading" *ngIf="dataSource.loading$ | async">
+    <ng-container matColumnDef="loading" *ngIf="dataSource.loading$">
       <mat-footer-cell *matFooterCellDef colspan="3">
         Loading data...
       </mat-footer-cell>
@@ -28,10 +27,10 @@
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
-    <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+    <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':dataSource!=null}"></mat-footer-row>
+    <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(dataSource!=null && dataSource.resultsLength==0)}"></mat-footer-row>
   </mat-table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+  <mat-paginator [length]="dataSource.resultsLength" [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
 </div>
 
 

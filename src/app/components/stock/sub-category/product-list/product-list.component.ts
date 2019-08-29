@@ -36,10 +36,7 @@ export class ProductListComponent implements OnInit {
     }
   ngOnInit() {
 
-
     this.getId=this.data['id'];
-
-   // this.form = this.fb.group({    description: ['haha', []],  });
 
      this.dataSource = new TablesDataSource(this.subcategoryService);
      this.dataSource.loadTables( '', 'asc', 1, 3,  this.getId);

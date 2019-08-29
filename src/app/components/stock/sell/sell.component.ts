@@ -39,8 +39,7 @@ export class SellComponent implements OnInit {
   ngOnInit() {
 
    this.dataSource = new TablesDataSource(this.sellsService);
-//pass Id or uri or any params or override the function in the desire service constructions
-    this.dataSource.loadTables( '', 'asc', 1, 3) ;
+     this.dataSource.loadTables( '', 'asc', 1, 3) ;
 
   }
 
