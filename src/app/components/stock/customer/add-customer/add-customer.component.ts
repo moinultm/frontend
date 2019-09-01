@@ -2,6 +2,9 @@ import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef, MatSort, MatPaginator} from "@angular/material";
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Client } from '@models/stock/client.model';
+import { CustomerService } from '@services/stock/customer.service';
+import { ToastrService } from 'ngx-toastr';
+import { warning } from '@services/core/utils/toastr';
 
 
 @Component({
@@ -11,19 +14,24 @@ import { Client } from '@models/stock/client.model';
 export class AddCustomerComponent implements OnInit {
 
   form: FormGroup;
-  data :Client;
+  LOCAL_data :Client;
   selectedCustomer: Client;
+  ResultData: any;
 
 
-  constructor(private _formBuilder: FormBuilder,
+  savingCustomer:boolean;
+
+  constructor(private customerService: CustomerService,
+    private _formBuilder: FormBuilder,
+    private _toastr: ToastrService,
     private dialogRef: MatDialogRef<AddCustomerComponent>,
-    @Inject(MAT_DIALOG_DATA) data) {
-      this.data = data;
+    @Inject(MAT_DIALOG_DATA) public data: Client) {
+      this.LOCAL_data = data;
     }
 
 
   ngOnInit() {
-this.initSaveForm(this.data)
+this.initSaveForm(this.LOCAL_data)
   }
 
 
@@ -46,11 +54,41 @@ this.initSaveForm(this.data)
 
 
  save() {
-    this.dialogRef.close(this.form.value);
+
+  if (this.form.valid) {
+    this.savingCustomer = true;
+    this.customerService.save({
+      id: this.selectedCustomer.id,
+      full_name: this.form.get('full_name').value,
+      contact: this.form.get('contact').value,     
+      email: this.form.get('email').value,
+      company_name: this.form.get('company_name').value,
+      address: this.form.get('address').value,
+      opening: this.form.get('opening').value,
+      account_no: this.form.get('account_no').value,
+    
+
+    }, this.selectedCustomer.id ? true : false).subscribe((res: Client) => {     
+      this.savingCustomer = false;      
+      this.dialogRef.close({ data: 200}); 
+    }, (err: any) => {
+      if (err.status === 403) {
+        err.error.forEach((e: string) => {
+         
+          warning('Warning!', e, this._toastr);
+
+        });
+      } else if (err.status === 500) {
+         this.dialogRef.close({ data: err.status}); 
+      }
+      this.savingCustomer = false;
+    });
+  }
+       
 }
 
 close() {
-    this.dialogRef.close();
+    this.dialogRef.close({ data: 'close'});
 }
 
 

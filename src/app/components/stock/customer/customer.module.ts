@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { MaterialsModule } from '@app/material.module';
+import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 
 const routes: Routes = [
   // Roles component
@@ -17,7 +18,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [CustomerComponent,AddCustomerComponent],
+  declarations: [CustomerComponent,
+    AddCustomerComponent,
+    CustomerDetailsComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -27,6 +30,6 @@ const routes: Routes = [
     ReactiveFormsModule,
 
   ],
-  entryComponents:[AddCustomerComponent]
+  entryComponents:[AddCustomerComponent,CustomerDetailsComponent]
 })
 export class CustomerModule { }

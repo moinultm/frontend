@@ -9,6 +9,7 @@ import { Title } from '@angular/platform-browser';
 import { success, warning,error } from '@services/core/utils/toastr';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
+import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 
 
 @Component({
@@ -129,24 +130,54 @@ export class CustomerComponent implements OnInit {
 
 
 
-    //mat Dialog
+    //matERIAL Dialog
     openDialog(client?:Client): void {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
 
-if (client)
-{
-  dialogConfig.data = client
-}
-else
-{
-  dialogConfig.data ={}
-}
+ 
+      dialogConfig.width= '25%';
 
-      this.dialog.open(AddCustomerComponent, dialogConfig,);
-  }
+    if (client)
+    {
+      dialogConfig.data = client
+    }
+    else
+    {
+      dialogConfig.data ={}
+    }
 
+   const dialogRef=   this.dialog.open(AddCustomerComponent, dialogConfig,);
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(result)
+        if (result.data==200) {
+          success('success!', 'The data is successfully saved.'  , this._toastr);
+          this.loadData();
+           }
+
+         else  if(result.data==500) {
+            error('Error!', "Server Error"  , this._toastr);
+           }
+          else{
+            warning('warning!', result.data  , this._toastr);
+          }
+          
+             
+      });
+    }
+
+
+       
+    openDialogDetails(){
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+
+      const dialogRef=   this.dialog.open(CustomerDetailsComponent, dialogConfig,);
+
+    }
 
 
 

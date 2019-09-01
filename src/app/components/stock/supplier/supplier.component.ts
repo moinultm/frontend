@@ -91,7 +91,7 @@ export class SupplierComponent implements OnInit {
           address: [ client ? client.address : '',  [Validators.nullValidator]],
           account_no: [ client ? client.account_no : '',  [Validators.nullValidator]],
           previous_due: [ client ? client.previous_due : '',  [Validators.nullValidator]],
-
+         
 
         });
       }
