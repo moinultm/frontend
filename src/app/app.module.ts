@@ -24,6 +24,8 @@ import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 
 import { ToastrModule } from 'ngx-toastr';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    FlexLayoutModule,
     FormsModule,
      HttpClientModule,
     SnotifyModule,

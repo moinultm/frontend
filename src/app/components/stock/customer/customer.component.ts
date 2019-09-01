@@ -7,6 +7,8 @@ import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Title } from '@angular/platform-browser';
 import { success, warning,error } from '@services/core/utils/toastr';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { AddCustomerComponent } from './add-customer/add-customer.component';
 
 
 @Component({
@@ -24,12 +26,13 @@ export class CustomerComponent implements OnInit {
   form: FormGroup;
   selectedCustomer: Client;
 
-  constructor(private customerService: CustomerService,
+  constructor(   private dialog: MatDialog,
+    private customerService: CustomerService,
     private _toastr: ToastrService,
     private modalService: NgbModal,
     titleService: Title,
     private _formBuilder: FormBuilder) {
-      titleService.setTitle('Stock - Customer');
+      titleService.setTitle('Stock-Customer');
      }
 
   ngOnInit() {
@@ -67,7 +70,7 @@ export class CustomerComponent implements OnInit {
           this.initSaveForm();
         });
     }
-    
+
     initSaveForm(client?: Client): void {
       if (client) {
         this.selectedCustomer = Object.assign(Client, client);
@@ -123,6 +126,27 @@ export class CustomerComponent implements OnInit {
       close(modal: any, flag?: boolean): void {
         modal.close(flag ? true : false);
       }
+
+
+
+    //mat Dialog
+    openDialog(client?:Client): void {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+
+if (client)
+{
+  dialogConfig.data = client
+}
+else
+{
+  dialogConfig.data ={}
+}
+
+      this.dialog.open(AddCustomerComponent, dialogConfig,);
+  }
+
 
 
 

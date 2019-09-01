@@ -224,8 +224,7 @@ export class SubCategoryComponent implements OnInit {
 
 
 //mat Dialog
-
-    openDialog(number:number) {
+openDialog(number:number) {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;

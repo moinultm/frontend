@@ -5,9 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-
 import { ProductListComponent } from './product-list/product-list.component';
-
 
 import { MaterialsModule } from '@app/material.module';
 

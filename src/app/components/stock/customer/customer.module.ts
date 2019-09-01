@@ -3,8 +3,10 @@ import { CommonModule } from '@angular/common';
 import { CustomerComponent } from './customer.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { MatProgressBarModule, MatProgressSpinnerModule } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { AddCustomerComponent } from './add-customer/add-customer.component';
+import { MaterialsModule } from '@app/material.module';
 
 const routes: Routes = [
   // Roles component
@@ -14,17 +16,17 @@ const routes: Routes = [
   }
 ];
 
-
 @NgModule({
-  declarations: [CustomerComponent],
+  declarations: [CustomerComponent,AddCustomerComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule
-  ]
+    MaterialsModule,
+    ReactiveFormsModule,
+
+  ],
+  entryComponents:[AddCustomerComponent]
 })
 export class CustomerModule { }

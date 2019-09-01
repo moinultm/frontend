@@ -24,7 +24,7 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title">List of customers |
-                                 Add customer <i class="fa fa-plus" (click)="initSave(saveModal)"></i>   </h3>
+                                 Add customer <i class="fa fa-plus" (click)="openDialog()"></i>   </h3>
 
 
                                     <div class="card-tools">
@@ -79,7 +79,7 @@
                                                           <td>{{ item.company_name }}</td>
                                                           <td>{{ item.company_name }}</td>
                                                           <td class="actions">
-                                                            <button type="button" class="btn  btn-success" (click)="initSave(saveModal, item)">
+                                                            <button type="button" class="btn  btn-success" (click)="openDialog(item)">
                                                               <i class="fa fa-pencil"></i>
                                                             </button>
                                                             <button type="button" class="btn  btn-danger" (click)="initDelete(deleteModal, item)">
