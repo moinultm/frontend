@@ -136,7 +136,7 @@ export class CustomerComponent implements OnInit {
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
 
- 
+
       dialogConfig.width= '25%';
 
     if (client)
@@ -163,17 +163,31 @@ export class CustomerComponent implements OnInit {
           else{
             warning('warning!', result.data  , this._toastr);
           }
-          
-             
+
+
       });
     }
 
 
-       
-    openDialogDetails(){
+
+    openDialogDetails(id:number){
+
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
+
+
+      dialogConfig.width= '50%';
+
+      dialogConfig.height= '300px auto';
+      if (id)
+      {
+        dialogConfig.data = id
+      }
+      else
+      {
+        dialogConfig.data ={}
+      }
 
       const dialogRef=   this.dialog.open(CustomerDetailsComponent, dialogConfig,);
 

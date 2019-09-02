@@ -1,5 +1,3 @@
-
-
 export class Client {
     id: number;
     full_name:string;
@@ -11,4 +9,14 @@ export class Client {
     previous_due:number;
     account_no:number;
 
+    net_total:number;
+    total_due: number;
+    total_invoice: number;
+    total_received: number;
+    total_return:number;
+
+    client:[];
+    payments:[];
+    returns:[];
+    payment_lists:[];
 }

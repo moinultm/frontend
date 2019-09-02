@@ -1,6 +1,86 @@
 
 
- 
+
+
+<mat-tab-group >
+
+  <mat-tab label="Information">
+
+      <div *ngIf="loadingDetails" class="text-center loading-profiles">
+          <mat-spinner></mat-spinner>
+      </div>
+    <div *ngIf="!loadingDetails">
+        <div class="card-body box-profile">
+            <h4 class="profile-username text-center">Name: {{details.data.client.full_name}}</h4>
+            <h4 class="profile-username text-center">Phone: {{details.data.client.contact}}</h4>
+            <h4 class="profile-username text-center">Email: {{ details.data.client.email}}</h4>
+            <h4 class="profile-username text-center">Address: {{ details.data.client.address}}</h4>
+        </div>
+
+        <h2>Transaction Summary</h2>
+        <h4 class="profile-username text-center">Selling: {{details.data.net_total}}</h4>
+        <h4 class="profile-username text-center">Recived: {{details.data.total_received}}</h4>
+        <h4 class="profile-username text-center">Due: {{details.data.total_due}}</h4>
+    </div>
+
+  </mat-tab>
+
+
+  <mat-tab label="Payments">
+
+      <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info" *ngIf="!loadingDetails">
+          <thead>
+          <tr role="row">
+              <th rowspan="1" colspan="1">Reference</th>
+              <th rowspan="1" colspan="1">Net Total </th>
+              <th rowspan="1" colspan="1">Paid</th>
+              <th rowspan="1" colspan="1">Recipt</th>
+
+          </thead>
+          <tbody>
+
+          <tr role="row" class="odd" *ngFor="let s of details.data.client.payment_lists; let i = index">
+            <td class="sorting_1">{{s.reference_no}}</td>
+            <td>{{s.net_total}}</td>
+            <td>{{s.paid}}</td>
+            <td>Print</td>
+          </tr>
+
+        </tbody>
+          <tfoot>
+
+          </tfoot>
+        </table>
+
+  </mat-tab>
+
+  <mat-tab label="Collection">Payment Collection
+
+      <div class="example-container">
+          <mat-form-field>
+            <input matInput placeholder="Amount">
+          </mat-form-field>
+
+          <mat-form-field>
+            <textarea matInput placeholder="Note"></textarea>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Select">
+              <mat-option value="cash">Cash</mat-option>
+              <mat-option value="cheque">Cheque</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <button  mat-button class="mat-raised-button float-right"(click)="saveCollection()">Save</button>
+
+        </div>
+
+  </mat-tab>
+
+
+</mat-tab-group>
+
 
 
 <mat-dialog-actions>

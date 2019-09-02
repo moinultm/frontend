@@ -5,6 +5,7 @@ import { Client } from '@models/stock/client.model';
 import { CustomerService } from '@services/stock/customer.service';
 import { ToastrService } from 'ngx-toastr';
 import { warning } from '@services/core/utils/toastr';
+import { PartialList } from '@models/common/patial-list.model';
 
 
 @Component({
@@ -14,33 +15,38 @@ import { warning } from '@services/core/utils/toastr';
 export class CustomerDetailsComponent implements OnInit {
 
   form: FormGroup;
-  LOCAL_data :Client;
+  LOCAL_data :number;
   selectedCustomer: Client;
   ResultData: any;
+  loadingDetails:boolean;
 
-
-  savingCustomer:boolean;
+  details:PartialList <Client> ;
 
   constructor(private customerService: CustomerService,
     private _formBuilder: FormBuilder,
     private _toastr: ToastrService,
+    private clientService: CustomerService,
     private dialogRef: MatDialogRef<CustomerDetailsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Client) {
+    @Inject(MAT_DIALOG_DATA) public data) {
       this.LOCAL_data = data;
     }
 
 
   ngOnInit() {
- 
+   this.loadDetails(this.LOCAL_data);
   }
 
+  loadDetails(id:number){
+    this.loadingDetails = true;
+    this.clientService.findDetailsById(id).subscribe((res:PartialList <Client>) => {
+      this.details = res;
+      console.log(this.details);
+      this.loadingDetails = false;
+    });
 
-   
- save() {
+  }
 
-  
-       
-}
+ save() {}
 
 close() {
     this.dialogRef.close({ data: 'close'});

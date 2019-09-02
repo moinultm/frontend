@@ -58,7 +58,6 @@ export class ManageComponent implements OnInit {
 initDetailView(modal:any,id:number){
   event.preventDefault();
 
-console.log("reading");
 this.loadDetails(id);
   this.modalService
   .open(modal)
