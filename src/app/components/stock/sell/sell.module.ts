@@ -9,6 +9,7 @@ import { AddComponent } from './add/add.component';
 import { MaterialsModule } from '@app/material.module';
 
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { SellDetailsComponent } from './sell-details/sell-details.component';
 
 
 const routes: Routes = [
@@ -20,12 +21,16 @@ const routes: Routes = [
   {
     path: '',
     component: SellComponent
+  },
+  {
+    path: 'details/:id',
+    component: SellDetailsComponent
   }
 
 ];
 
 @NgModule({
-  declarations: [SellComponent, AddComponent],
+  declarations: [SellComponent, AddComponent,SellDetailsComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

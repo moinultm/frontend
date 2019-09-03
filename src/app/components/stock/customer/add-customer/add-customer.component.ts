@@ -60,31 +60,31 @@ this.initSaveForm(this.LOCAL_data)
     this.customerService.save({
       id: this.selectedCustomer.id,
       full_name: this.form.get('full_name').value,
-      contact: this.form.get('contact').value,     
+      contact: this.form.get('contact').value,
       email: this.form.get('email').value,
       company_name: this.form.get('company_name').value,
       address: this.form.get('address').value,
       opening: this.form.get('opening').value,
       account_no: this.form.get('account_no').value,
-    
 
-    }, this.selectedCustomer.id ? true : false).subscribe((res: Client) => {     
-      this.savingCustomer = false;      
-      this.dialogRef.close({ data: 200}); 
+
+    }, this.selectedCustomer.id ? true : false).subscribe((res: Client) => {
+      this.savingCustomer = false;
+      this.dialogRef.close({ data: 200});
     }, (err: any) => {
       if (err.status === 403) {
         err.error.forEach((e: string) => {
-         
+
           warning('Warning!', e, this._toastr);
 
         });
       } else if (err.status === 500) {
-         this.dialogRef.close({ data: err.status}); 
+         this.dialogRef.close({ data: err.status});
       }
       this.savingCustomer = false;
     });
   }
-       
+
 }
 
 close() {

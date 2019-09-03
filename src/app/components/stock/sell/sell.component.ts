@@ -24,7 +24,7 @@ export class SellComponent implements OnInit {
   size = 10;
 
   dataSource: TablesDataSource;
-  displayedColumns= ["seqNo", "description", "duration","actions"];
+  displayedColumns= ["slNo", "referenceNo", "date", "name","total","paid","actions"];
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   @ViewChild('input', { static: false }) input: ElementRef;
@@ -39,6 +39,7 @@ export class SellComponent implements OnInit {
   ngOnInit() {
 
    this.dataSource = new TablesDataSource(this.sellsService);
+   console.log( this.dataSource );
      this.dataSource.loadTables( '', 'asc', 1, 3) ;
 
   }

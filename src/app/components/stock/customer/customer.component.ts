@@ -37,8 +37,7 @@ export class CustomerComponent implements OnInit {
      }
 
   ngOnInit() {
-    this.loadData()
-
+    this.loadData();
   }
 
   //Loading Data
@@ -53,7 +52,6 @@ export class CustomerComponent implements OnInit {
           this.loading = false;
         });
       }
-
 
       //Save Data
     initSave(modal: any, client?: Client): void {
@@ -177,9 +175,9 @@ export class CustomerComponent implements OnInit {
       dialogConfig.autoFocus = true;
 
 
-      dialogConfig.width= '50%';
+      //dialogConfig.width= '50%';
 
-      dialogConfig.height= '300px auto';
+
       if (id)
       {
         dialogConfig.data = id

@@ -5,6 +5,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { MatProgressBarModule, MatProgressSpinnerModule } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+ import { SupplierDetailsComponent } from './supplier-details/supplier-details.component';
+
+ import { MaterialsModule } from '@app/material.module';
 
 const routes: Routes = [
 
@@ -17,15 +20,16 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [SupplierComponent],
+  declarations: [SupplierComponent,SupplierDetailsComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
+
     NgbModule,
     FormsModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    MaterialsModule,
+  ],
+  entryComponents:[SupplierDetailsComponent]
 })
 export class SupplierModule { }

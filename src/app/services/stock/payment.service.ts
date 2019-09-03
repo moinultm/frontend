@@ -1,22 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CrudService } from '@services/common/crud.service';
-import { Subcategory } from '@models/stock/subcategory.model';
+
 import { PartialList } from '@models/common/patial-list.model';
+import { Payment } from '@models/stock/payment.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ParentcategoryService extends CrudService<Subcategory> {
+export class PaymentService extends CrudService<Payment> {
 
   constructor(private __http: HttpClient ) {
     super(__http);
-    this.setUrl('parent');
+    this.setUrl('payment');
   }
 
   public findParent(id:number): any {
 
-    return this.__http.get <PartialList <Subcategory>> (this.url + '?categoryId='+id , this.options);
+    return this.__http.get <PartialList <Payment>> (this.url + '?categoryId='+id , this.options);
   }
 
 

@@ -2,7 +2,7 @@ import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef, MatSort, MatPaginator} from "@angular/material";
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Client } from '@models/stock/client.model';
-import { CustomerService } from '@services/stock/customer.service';
+import { SupplierService } from '@services/stock/supplier.service';
 import { ToastrService } from 'ngx-toastr';
 import { warning, success } from '@services/core/utils/toastr';
 import { PartialList } from '@models/common/patial-list.model';
@@ -11,14 +11,14 @@ import { PaymentService } from '@services/stock/payment.service';
 
 
 @Component({
-  selector: 'customer-details',
-  templateUrl: './customer-details.component.html'
+  selector: 'supplier-details',
+  templateUrl: './supplier-details.component.html'
 })
-export class CustomerDetailsComponent implements OnInit {
+export class SupplierDetailsComponent implements OnInit {
 
   form: FormGroup;
   LOCAL_data :number;
-  selectedCustomer: Client;
+  selectedSupplier: Client;
   ResultData: any;
   loadingDetails:boolean;
 
@@ -29,12 +29,12 @@ export class CustomerDetailsComponent implements OnInit {
 
   details:PartialList <Client> ;
 
-  constructor(private customerService: CustomerService,
+  constructor(private supplierService: SupplierService,
     private paymentService:PaymentService,
     private _formBuilder: FormBuilder,
     private _toastr: ToastrService,
-    private clientService: CustomerService,
-    private dialogRef: MatDialogRef<CustomerDetailsComponent>,
+    private clientService: SupplierService,
+    private dialogRef: MatDialogRef<SupplierDetailsComponent>,
     @Inject(MAT_DIALOG_DATA) public data) {
       this.LOCAL_data = data;
     }
@@ -55,15 +55,15 @@ export class CustomerDetailsComponent implements OnInit {
 
   }
 
- save() {}
+ save() {
+
+ }
 
 close() {
     this.dialogRef.close({ data: 'close'});
 }
 
-
 IniCollection(payment?: Payment): void {
-
   if (payment) {
     this.selectedType = Object.assign(Payment, payment);
   } else {
@@ -72,14 +72,13 @@ IniCollection(payment?: Payment): void {
   this.form = this._formBuilder.group({
     client_id: [ payment ? payment.client_id : this.LOCAL_data,  [Validators.nullValidator]  ],
     amount: [ payment ? payment.amount : '',  [Validators.required]  ],
-    type: [ payment ? payment.type : 'credit',  [Validators.nullValidator]  ],
+    type: [ payment ? payment.type : 'debit',  [Validators.nullValidator]  ],
     method: [ payment ? payment.method : '',  [Validators.required]  ],
     note: [ payment ? payment.note : '',  [Validators.nullValidator]  ]
   });
 }
 
 saveCollection(){
-
   if (this.form.valid) {
     this.savingPayment = true;
     this.paymentService.save({

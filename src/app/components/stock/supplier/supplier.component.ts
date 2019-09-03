@@ -8,6 +8,8 @@ import { Title } from '@angular/platform-browser';
 import { SupplierService } from '@services/stock/supplier.service';
 import { success, warning, error } from '@services/core/utils/toastr';
 import { CommonService } from '@services/common/common.services';
+import { MatDialogConfig, MatDialog } from '@angular/material';
+import { SupplierDetailsComponent } from './supplier-details/supplier-details.component';
 @Component({
   selector: 'app-supplier',
   templateUrl: './supplier.component.html',
@@ -25,7 +27,8 @@ export class SupplierComponent implements OnInit {
 
   modalOption: NgbModalOptions = {};
 
-  constructor(private supplierService: SupplierService,
+  constructor(private dialog: MatDialog,
+    private supplierService: SupplierService,
     private _cs :CommonService,
     private _toastr: ToastrService,
     private modalService: NgbModal,
@@ -165,9 +168,40 @@ export class SupplierComponent implements OnInit {
       }
 
 
+
         //Close Module
         close(modal: any, flag?: boolean): void {
           modal.close(flag ? true : false);
         }
+
+
+        //Material
+
+
+        openDialogDetails(id:number){
+
+          const dialogConfig = new MatDialogConfig();
+          dialogConfig.disableClose = true;
+          dialogConfig.autoFocus = true;
+
+
+          //dialogConfig.width= '50%';
+
+
+          if (id)
+          {
+            dialogConfig.data = id
+          }
+          else
+          {
+            dialogConfig.data ={}
+          }
+
+          const dialogRef=   this.dialog.open(SupplierDetailsComponent, dialogConfig,);
+
+        }
+
+
+
 
 }
