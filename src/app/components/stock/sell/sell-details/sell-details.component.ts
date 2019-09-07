@@ -5,7 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PartialList } from '@models/common/patial-list.model';
 import { SellsOrder } from '@models/stock/sellsorder.model';
 import { SellsOrderService } from '@services/stock/sellsorder.service';
-import { CombineLatestSubscriber } from 'rxjs/internal/observable/combineLatest';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { AddPaymentComponent } from '../add-payment/add-payment.component';
 
 @Component({
   selector: 'app-sell-details',
@@ -23,6 +24,8 @@ export class SellDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private sellsService: SellsOrderService,
+    private dialog: MatDialog,
+    
   ) { }
 
   ngOnInit() {
@@ -37,6 +40,56 @@ export class SellDetailsComponent implements OnInit {
       this.loadingDetails = false;
     });
   }
+
+
+
+  openDialogPayments(id:number){
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+
+    //dialogConfig.width= '50%';
+
+
+    if (id)
+    {
+      dialogConfig.data = id
+    }
+    else
+    {
+      dialogConfig.data ={}
+    }
+
+    const dialogRef=   this.dialog.open(AddPaymentComponent, dialogConfig,);
+
+  }
+
+
+
+
+  print(): void {
+    event.preventDefault()
+
+    let printContents, popupWin;
+    printContents = document.getElementById('print-section').innerHTML;
+    popupWin = window.open();
+    popupWin.document.open();
+    popupWin.document.write(`
+      <html>
+        <head>
+          <title>Print tab</title>
+          <style>
+          
+          </style>
+        </head>
+    <body onload="window.print();window.close()">${printContents}</body>
+      </html>`
+    );
+    popupWin.document.close();
+}
+
 
 
 }

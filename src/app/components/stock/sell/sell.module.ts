@@ -10,6 +10,7 @@ import { MaterialsModule } from '@app/material.module';
 
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { SellDetailsComponent } from './sell-details/sell-details.component';
+import { AddPaymentComponent } from './add-payment/add-payment.component';
 
 
 const routes: Routes = [
@@ -31,7 +32,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [SellComponent, AddComponent,SellDetailsComponent],
+  declarations: [SellComponent, AddComponent,SellDetailsComponent,AddPaymentComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -43,6 +44,7 @@ const routes: Routes = [
     MaterialsModule
     //materials
   ],
+  entryComponents:[AddPaymentComponent],
   providers: [ MatDatepickerModule ],
 })
 export class SellModule { }

@@ -8,7 +8,7 @@ import { warning } from '@services/core/utils/toastr';
 
 
 @Component({
-  selector: 'app-customer',
+  selector: 'add-customer',
   templateUrl: './add-customer.component.html'
 })
 export class AddCustomerComponent implements OnInit {
