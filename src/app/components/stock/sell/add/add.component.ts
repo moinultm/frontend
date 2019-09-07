@@ -75,11 +75,12 @@ selectedOrderItem: OrderItems;
     sellDate:[new Date(),[Validators.nullValidator]],
     customerName:['',[Validators.required]  ],
     paymentMethod:['cash',[Validators.required]  ],
-    grandTotal:['0',[Validators.required]  ],
+    totalAmount:['0',[Validators.required]  ],
     paidAmount:['0',[Validators.required]  ],
     dueAmount:['0', [Validators.required]  ],
     discountAmount:['0', [Validators.required]  ],
     shippingCost:['0', [Validators.required]  ],
+    grandTotal:['0',[Validators.required]  ],
   });
   }
 
@@ -149,11 +150,14 @@ selectedOrderItem: OrderItems;
         orderitem ? orderitem.product_discount_percentage : '',
         [Validators.required]
       ] ,
+
+      itemDiscountAmt:[ orderitem ? orderitem.product_discount_amount : '', [Validators.required]],
+
       subtotal: [
         orderitem ? orderitem.subtotal : '',
-        [Validators.required]
-      ],
+        [Validators.required]],
 
+        itemTotal:[ orderitem ? orderitem.item_total : '', [Validators.required]],
 
     });
   }
@@ -178,12 +182,18 @@ selectedOrderItem: OrderItems;
   }
 
   updateSubTotal() {
+    const itemTotal= parseFloat((this.formProducts.value.quantity * this.formProducts.value.productMRP).toFixed(2)) ;
+
    const discount = Math.round((this.formProducts.value.discountOnMRP / 100) * this.formProducts.value.productMRP);
    const newMRP= (this.formProducts.value.productMRP-discount);
    const newVal= parseFloat((this.formProducts.value.quantity * newMRP).toFixed(2)) ;
 
+   const discountPrice=parseFloat((this.formProducts.value.quantity * discount).toFixed(2)) ;
+
     this.formProducts.patchValue({
+      itemTotal:itemTotal,
       subtotal: newVal,
+      itemDiscountAmt:discountPrice
    });
 
   }
@@ -196,15 +206,35 @@ selectedOrderItem: OrderItems;
     this.mainForm.patchValue({
       grandTotal:    parseFloat(grand.toFixed(2)),
     });
+
+    let discount :number;
+    discount= this.orderItemList.reduce((prev, curr) => {
+      return prev + curr.product_discount_amount;
+    }, 0);
+    this.mainForm.patchValue({
+      discountAmount:    parseFloat(discount.toFixed(2)),
+    });
+
+
+    let item_total :number;
+    item_total= this.orderItemList.reduce((prev, curr) => {
+      return prev + curr.item_total;
+    }, 0);
+    this.mainForm.patchValue({
+      totalAmount:   parseFloat(item_total.toFixed(2)),
+    });
+
+
+
   }
 
   updateDueAmount(){
     let due :number;
+
     due= (this.mainForm.value.grandTotal-this.mainForm.value.paidAmount);
     this.mainForm.patchValue({dueAmount:    parseFloat(due.toFixed(2)),});
   }
   //=================update price   selected item===================================
-
 
 
   addItemToInvoice(formProducts:any,modal ?:any) : void{
@@ -212,11 +242,17 @@ selectedOrderItem: OrderItems;
    let formItem = new OrderItems();
    formItem.product_id=formProducts.value.name.id;
    formItem.product_name= formProducts.value.name.name ;
-   formItem.cost_price=formProducts.value.name.cost_price;
+
    formItem.quantity=formProducts.value.quantity;
    formItem.mrp=formProducts.value.productMRP;
+   formItem.item_total=formProducts.value.itemTotal;
+
    formItem.product_discount_percentage=formProducts.value.discountOnMRP;
+   formItem.product_discount_amount=formProducts.value.itemDiscountAmt;
+
    formItem.subtotal=formProducts.value.subtotal;
+
+   formItem.cost_price=formProducts.value.name.cost_price;
 
     if (this.formProducts.valid) {
       this.orderItemList.push(formItem);

@@ -4,6 +4,7 @@ import { CrudService } from '@services/common/crud.service';
 import { SellsOrder } from '@models/stock/sellsorder.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { PartialList } from '@models/common/patial-list.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,13 @@ export class SellsOrderService extends CrudService<SellsOrder> {
             .set('size', pageSize.toString())
     }).pipe(map(res =>  res["data"]) );
 
+  }
+
+
+  public findDetailsById(id: number): any {
+    this.options.params = undefined;
+
+    return this.__http.get <PartialList<SellsOrder>>(this.url + '/' + id +'/'+'details', this.options);
   }
 
 

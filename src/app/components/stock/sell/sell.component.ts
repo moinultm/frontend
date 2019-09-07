@@ -8,6 +8,7 @@ import { fromEvent, merge } from 'rxjs';
 import { tap, distinctUntilChanged, debounceTime } from 'rxjs/operators';
 import { ProductService } from '@services/stock/product.service';
 import { UserService } from '@services/security/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sell',
@@ -33,7 +34,7 @@ export class SellComponent implements OnInit {
 
   constructor(
     private sellsService:SellsOrderService,
-
+    private router:Router,
   ) { }
 
   ngOnInit() {
@@ -91,7 +92,10 @@ loadLessonsPage() {
         });
       }
 
-
+//Redirection
+toDetails(id:number){
+  this.router.navigate([`sell/details/${id}`]);
+}
 
 
 }

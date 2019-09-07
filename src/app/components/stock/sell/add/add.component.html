@@ -10,7 +10,7 @@
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
             <li class="breadcrumb-item"><a>Stock</a></li>
-            <li class="breadcrumb-item active">New Sales</li>
+            <li class="breadcrumb-item active">New Invoice</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -36,7 +36,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                  <label>New Customer</label>
+                                  <label>Bill to</label>
                                   <button class="form-control">
                                     <i class="fa fa-plus"></i>
                                   </button>
@@ -58,7 +58,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="row">
-                                      
+
                                 <div class="col-md-12">
                                   <mat-form-field>
                                     <input matInput [matDatepicker]="picker" placeholder="Bill Date" formControlName="sellDate">
@@ -80,7 +80,7 @@
 
                         </div>
                       </div>
- 
+
 
                   </div>
 
@@ -116,40 +116,50 @@
                       <td>{{item.mrp}}</td>
                       <td>{{item.subtotal}}</td>
                       <td>
-                        <a class="btn btn-sm btn-info text-white"><i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-sm btn-info text-white"><i class="fas fa-edit"></i></a>
                         <a class="btn btn-sm btn-danger text-white ml-1"><i class="fa fa-trash"></i></a>
                       </td>
                     </tr>
                   </tbody>
                     <tfoot>
+
                         <tr>
-                          <td colspan="4" style="text-align: right; font-weight: bold;">
-                            Total                         
-                           </td> <td colspan="2">
-                            <input class="form-control" type="text" id="grandTotal" formControlName="grandTotal" readonly>
-                          </td>
-                          </tr>
+                            <td colspan="4" style="text-align: right; font-weight: bold;">
+                              Total
+                             </td> <td colspan="2">
+                                <input class="form-control" type="text" id="totalAmount" formControlName="totalAmount" readonly>
+                              </td>
+                            </tr>
 
                           <tr>
                               <td colspan="4" style="text-align: right; font-weight: bold;">
-                                Discount on Total                         
+                                Discount
                                </td> <td colspan="2">
-                                  <input class="form-control" type="text" id="discountAmount" formControlName="discountAmount"  >
+                                  <input class="form-control" type="text" id="discountAmount" formControlName="discountAmount" readonly>
                                 </td>
                               </tr>
 
                               <tr>
                                   <td colspan="4" style="text-align: right; font-weight: bold;">
-                                    Shipping                         
+                                    Shipping
                                    </td> <td colspan="2">
-                                      <input class="form-control" type="text" id="shippingCost" formControlName="shippingCost"  >
+                                      <input class="form-control" type="text" id="shippingCost" formControlName="shippingCost">
                                     </td>
                                   </tr>
 
 
+                                      <tr>
+                                          <td colspan="4" style="text-align: right; font-weight: bold;">
+                                            Net Total
+                                           </td> <td colspan="2">
+                                            <input class="form-control" type="text" id="grandTotal" formControlName="grandTotal" readonly>
+                                          </td>
+                                          </tr>
+
+
                                   <tr>
                                       <td colspan="4" style="text-align: right; font-weight: bold;">
-                                        Paid                         
+                                        Paid
                                        </td> <td colspan="2">
                                           <input class="form-control" type="text" id="paidAmount" formControlName="paidAmount"
                                           placeholder="Paid Amount" (keyup)="updateDueAmount()"
@@ -157,24 +167,25 @@
                                       </tr>
 
 
+
                                       <tr>
                                           <td colspan="4" style="text-align: right; font-weight: bold;">
-                                            Due                       
+                                            Due
                                            </td> <td colspan="2">
                                               <input class="form-control" type="text" id="dueAmount" formControlName="dueAmount" readonly>
                                             </td>
                                           </tr>
 
-                                          
+
                     </tfoot>
 
-      
+
                 </table>
                 <!-- order items table-->
 
                 <div class="row">
 
-          
+
 
                 </div>
 
@@ -231,14 +242,7 @@
             <input type="text" class="form-control" id="quantity" formControlName="quantity" (keyup)="updateSubTotal()"
               [class.has-error]="formProducts.get('quantity').dirty && formProducts.get('quantity').invalid" />
           </div>
-          <div class="row" *ngIf="formProducts.get('quantity').dirty && formProducts.get('quantity').invalid">
-            <div class="col-12">
-              <div class="alert alert-danger alert-transparent-left" role="alert"
-                *ngIf="formProducts.get('quantity').dirty && formProducts.controls['quantity'].hasError('required')">
-                Quantity required
-              </div>
-            </div>
-          </div>
+
           <!-- ./quantity field -->
         </div>
         <div class="col-md-4">
@@ -249,14 +253,7 @@
               [class.has-error]="formProducts.get('productMRP').dirty && formProducts.get('productMRP').invalid"
               readonly />
           </div>
-          <div class="row" *ngIf="formProducts.get('productMRP').dirty && formProducts.get('productMRP').invalid">
-            <div class="col-12">
-              <div class="alert alert-danger alert-transparent-left" role="alert"
-                *ngIf="formProducts.get('productMRP').dirty && formProducts.controls['productMRP'].hasError('required')">
-                MRP Not Set
-              </div>
-            </div>
-          </div>
+
           <!-- ./productMRP field -->
         </div>
         <div class="col-md-4">
@@ -267,34 +264,51 @@
               (keyup)="updateSubTotal()"
               [class.has-error]="formProducts.get('discountOnMRP').dirty && formProducts.get('discountOnMRP').invalid" />
           </div>
-          <div class="row" *ngIf="formProducts.get('discountOnMRP').dirty && formProducts.get('discountOnMRP').invalid">
-            <div class="col-12">
-              <div class="alert alert-danger alert-transparent-left" role="alert"
-                *ngIf="formProducts.get('discountOnMRP').dirty && formProducts.controls['discountOnMRP'].hasError('required')">
-                % Required
-              </div>
-            </div>
-          </div>
+
           <!-- ./discount field -->
         </div>
       </div>
 
+     <div class="row">
 
+      <div class="col-md-4">
       <!-- itemTotal field -->
       <div class="form-group">
-        <label for="subtotal">Sub Total</label>
-        <input type="text" class="form-control" id="subtotal" formControlName="subtotal"
-          [class.has-error]="formProducts.get('subtotal').dirty && formProducts.get('subtotal').invalid" readonly />
-      </div>
-      <div class="row" *ngIf="formProducts.get('subtotal').dirty && formProducts.get('subtotal').invalid">
-        <div class="col-12">
-          <div class="alert alert-danger alert-transparent-left" role="alert"
-            *ngIf="formProducts.get('subtotal').dirty && formProducts.controls['subtotal'].hasError('required')">
-            required
-          </div>
+          <label for="itemTotal">Item Total</label>
+          <input type="text" class="form-control" id="itemTotal" formControlName="itemTotal"
+            [class.has-error]="formProducts.get('itemTotal').dirty && formProducts.get('itemTotal').invalid" readonly />
         </div>
-      </div>
-      <!-- ./discount field -->
+
+        <!-- ./itemTotal field -->
+        </div>
+
+        <div class="col-md-4">
+            <!-- Discount field -->
+            <div class="form-group">
+                <label for="itemDiscountAmt">Discount Amt</label>
+                <input type="text" class="form-control" id="itemDiscountAmt" formControlName="itemDiscountAmt"
+                  [class.has-error]="formProducts.get('itemDiscountAmt').dirty && formProducts.get('itemDiscountAmt').invalid" readonly />
+              </div>
+
+              <!-- ./Dicount field -->
+            </div>
+
+        <div class="col-md-4">
+            <!-- itemTotal field -->
+            <div class="form-group">
+                <label for="subtotal">Total</label>
+                <input type="text" class="form-control" id="subtotal" formControlName="subtotal"
+                  [class.has-error]="formProducts.get('subtotal').dirty && formProducts.get('subtotal').invalid" readonly />
+              </div>
+
+              <!-- ./itemTotal field -->
+              </div>
+
+     </div>
+
+
+
+
 
 
 

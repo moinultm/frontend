@@ -29,7 +29,7 @@ export class SupplierDetailsComponent implements OnInit {
 
   details:PartialList <Client> ;
 
-  constructor(private supplierService: SupplierService,
+  constructor(
     private paymentService:PaymentService,
     private _formBuilder: FormBuilder,
     private _toastr: ToastrService,

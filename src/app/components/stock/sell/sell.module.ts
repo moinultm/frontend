@@ -25,6 +25,7 @@ const routes: Routes = [
   {
     path: 'details/:id',
     component: SellDetailsComponent
+
   }
 
 ];
