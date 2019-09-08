@@ -25,18 +25,20 @@ export class SellDetailsComponent implements OnInit {
     private router: Router,
     private sellsService: SellsOrderService,
     private dialog: MatDialog,
-    
+
   ) { }
 
   ngOnInit() {
     let id=this.route.snapshot.params.id;
     this.ShowBillDetails(id);
+
   }
 
   ShowBillDetails(id:number){
     this.loadingDetails = true;
     this.sellsService.findDetailsById(id).subscribe((res:PartialList <SellsOrder>) => {
       this.details = res;
+console.log(res);
       this.loadingDetails = false;
     });
   }
@@ -81,7 +83,7 @@ export class SellDetailsComponent implements OnInit {
         <head>
           <title>Print tab</title>
           <style>
-          
+
           </style>
         </head>
     <body onload="window.print();window.close()">${printContents}</body>

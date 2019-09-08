@@ -28,7 +28,7 @@
           <div class="col-12">
             <h4>
               <i class="fas fa-globe"></i> Invoice Details
-              <small class="float-right">Date: {{details.data.transaction.date}} </small>
+              <small class="float-right" *ngFor="let  T of details.data " >Date: {{T.date}} </small>
             </h4>
           </div>
           <!-- /.col -->
@@ -51,21 +51,21 @@
           <!-- /.col -->
           <div class="col-sm-4 invoice-col">
             To
-            <address *ngFor="let  customer of details.data.clients ">
-              <strong>{{ customer.full_name }}</strong><br>
-              {{ customer.address }}<br>
-              {{ customer.company_name }}<br>
-              Phone: {{ customer.contact }}<br>
-              Email: {{ customer.email }}
+            <address *ngFor="let  T of details.data ">
+              <strong>{{ T.client.full_name }}</strong>
+              {{  T.client.address }}<br>
+              {{ T.client.company_name }}<br>
+              Phone: {{  T.client.contact }}<br>
+              Email: {{  T.client.email }}
             </address>
           </div>
           <!-- /.col -->
-          <div class="col-sm-4 invoice-col" >
-            <b>Invoice {{details.data.transaction.reference_no}}</b><br>
+          <div class="col-sm-4 invoice-col"  *ngFor="let  T of details.data ">
+            <b>Invoice {{T.reference_no}}</b><br>
             <br>
-            <b>transaction ID:</b> {{details.data.transaction.id}}<br>
-            
-             
+            <b>transaction ID:</b> {{T.id}}<br>
+
+
           </div>
           <!-- /.col -->
         </div>
@@ -86,14 +86,15 @@
                 <th>Subtotal</th>
               </tr>
               </thead>
-              <tbody>
-              <tr *ngFor="let s of details.data.sells; let i = index">
+              <tbody  *ngFor="let T of details.data ;">
+              <tr *ngFor="let TD of T.sells ; let i = index">
                 <td>{{i+1}}</td>
-                <td>{{s.product_name}}</td>
-                <td>{{s.quantity}}</td>
-                <td>{{s.product_mrp}}</td>
-                <td>{{s.product_discount_percentage}}</td>
-                <td>{{s.sub_total}}</td>
+                <td>{{TD.product.name}}</td>
+                <td>{{TD.quantity}} </td>
+                <td>{{TD.product.mrp}}  </td>
+                <td>{{TD.product_discount_percentage}} </td>
+                <td>{{TD.sub_total}} </td>
+
               </tr>
 
               </tbody>
@@ -106,11 +107,30 @@
 
         <div class="row">
           <!-- accepted payments column -->
-          <div class="col-6">
-
+          <div class="col-6"  >
             <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
+           <h4>Payment History:</h4>
 
-            </p>
+           <ul class="todo-list ui-sortable" data-widget="todo-list" *ngFor="let T of details.data ;" >
+
+            <li *ngFor="let TP of T.payments ;">
+              <span class="handle ui-sortable-handle">
+                <i class="fas fa-ellipsis-v"></i>
+                <i class="fas fa-ellipsis-v"></i>
+              </span>
+
+              <span class="text">Reference: {{ TP.reference_no }}</span>
+
+              <small class="badge badge-info">Paid : <i class="fas fa-check"></i>{{ TP.amount }} </small>
+              <div class="tools">
+                <i class="fas fa-clock"></i>
+                {{ TP.date }}
+                 </div>
+
+            </li>
+
+
+          </ul>
 
           </div>
           <!-- /.col -->
@@ -119,27 +139,38 @@
             <p class="lead">Amount</p>
 
             <div class="table-responsive" >
-              <table class="table">
+              <table class="table" *ngFor="let T of details.data ;">
                 <tbody><tr>
                   <th style="width:50%">Subtotal:</th>
-                  <td>{{details.data.transaction.net_total + details.data.transaction.discount }} </td>
+                  <td>{{T.total + T.discount }} </td>
                 </tr>
                 <tr>
                   <th>Tax  </th>
-                  <td>{{details.data.transaction.total_tax}} </td>
+                  <td>{{T.total_tax}} </td>
                 </tr>
                 <tr>
                   <th>Shipping:</th>
-                  <td>{{details.data.transaction.labor_cost}}</td>
+                  <td>{{T.labor_cost}}</td>
                 </tr>
                 <tr>
                     <th>Discount:</th>
-                    <td>{{details.data.transaction.discount}}</td>
+                    <td>{{T.discount}}</td>
                   </tr>
 
-                <tr>
+                  <tr>
+                    <th>Paid:</th>
+                    <td>{{T.paid}}
+                      <div *ngIf="T.return == 1">
+                        <small>(Has return item)</small>
+                      </div>
+                    </td>
+
+                  </tr>
+
+                <tr *ngIf="T.return == 1 || (T.net_total - T.paid) > 0">
                   <th>Total due:</th>
-                  <td>{{details.data.transaction.net_total}}</td>
+                  <td *ngIf="T.net_total - T.paid > 0">{{T.net_total- T.paid }}</td>
+
                 </tr>
               </tbody></table>
             </div>
@@ -153,12 +184,8 @@
           <div class="col-12">
             <a href="#"  (click)="print()"  class="btn btn-default"><i class="fas fa-print"></i> Print</a>
 
-            <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                <i class="fas fa-eye"></i> Payment History
-              </button>
- 
 
-            <button type="button" class="btn btn-success float-right" style="margin-right: 5px;" (click)="openDialogPayments(details.data.clients.id)" ><i class="far fa-credit-card"></i>
+            <button type="button" class="btn btn-success float-right" style="margin-right: 5px;" (click)="openDialogPayments(0)" ><i class="far fa-credit-card"></i>
               Submit Payment
             </button>
 
