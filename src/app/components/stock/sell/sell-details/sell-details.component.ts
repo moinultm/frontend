@@ -45,25 +45,19 @@ console.log(res);
 
 
 
-  openDialogPayments(id:number){
+  openDialogPayments(){
 
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 
 
-    //dialogConfig.width= '50%';
+    dialogConfig.width= '250px';
 
-
-    if (id)
-    {
-      dialogConfig.data = id
-    }
-    else
-    {
-      dialogConfig.data ={}
-    }
-
+    
+      dialogConfig.data = this.details
+    
+   
     const dialogRef=   this.dialog.open(AddPaymentComponent, dialogConfig,);
 
   }

@@ -81,9 +81,10 @@
                 <th>Sl</th>
                 <th>Product Name</th>
                 <th>Qty</th>
-                <th>Rate(MRP)</th>
+                <th>Rate(MRP)</th>              
+     
                 <th>Discount(%)</th>
-                <th>Subtotal</th>
+                <th>Item Total</th>
               </tr>
               </thead>
               <tbody  *ngFor="let T of details.data ;">
@@ -92,6 +93,7 @@
                 <td>{{TD.product.name}}</td>
                 <td>{{TD.quantity}} </td>
                 <td>{{TD.product.mrp}}  </td>
+                 
                 <td>{{TD.product_discount_percentage}} </td>
                 <td>{{TD.sub_total}} </td>
 
@@ -141,7 +143,7 @@
             <div class="table-responsive" >
               <table class="table" *ngFor="let T of details.data ;">
                 <tbody><tr>
-                  <th style="width:50%">Subtotal:</th>
+                  <th style="width:50%">Total:</th>
                   <td>{{T.total + T.discount }} </td>
                 </tr>
                 <tr>
@@ -168,7 +170,7 @@
                   </tr>
 
                 <tr *ngIf="T.return == 1 || (T.net_total - T.paid) > 0">
-                  <th>Total due:</th>
+                  <th>Due:</th>
                   <td *ngIf="T.net_total - T.paid > 0">{{T.net_total- T.paid }}</td>
 
                 </tr>
@@ -181,11 +183,11 @@
 
         <!-- this row will not appear when printing -->
         <div class="row no-print">
-          <div class="col-12">
+          <div class="col-12" *ngFor="let  T of details.data ">
             <a href="#"  (click)="print()"  class="btn btn-default"><i class="fas fa-print"></i> Print</a>
 
 
-            <button type="button" class="btn btn-success float-right" style="margin-right: 5px;" (click)="openDialogPayments(0)" ><i class="far fa-credit-card"></i>
+            <button type="button" class="btn btn-success float-right" style="margin-right: 5px;" (click)="openDialogPayments()" ><i class="far fa-credit-card"></i>
               Submit Payment
             </button>
 
