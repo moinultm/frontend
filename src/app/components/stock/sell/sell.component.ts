@@ -46,9 +46,7 @@ export class SellComponent implements OnInit {
   }
 
 
-
   ngAfterViewInit() {
-
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
     fromEvent(this.input.nativeElement,'keyup')
         .pipe(
@@ -74,9 +72,7 @@ loadLessonsPage() {
       this.sort.direction,
       this.paginator.pageIndex,
       this.paginator.pageSize);
-
-}
-
+      }
 
       //Loading Data
       loadData(page?: number): void {
@@ -95,6 +91,14 @@ loadLessonsPage() {
 //Redirection
 toDetails(id:number){
   this.router.navigate([`sell/details/${id}`]);
+}
+
+refereToNewSell(){
+  this.router.navigate(['sell/add']);
+}
+
+refereToReturnSell(id:number){
+  this.router.navigate([`sell/return/${id}`]);
 }
 
 

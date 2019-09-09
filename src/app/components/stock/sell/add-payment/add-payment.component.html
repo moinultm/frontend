@@ -4,9 +4,13 @@
   <mat-form-field>
     <input  matInput placeholder="Amount" formControlName="amount" >
   </mat-form-field>
- 
+
+  <div class="" *ngIf="form.get('amount').dirty && form.get('amount').errors && form.get('amount').errors.thisGreaterDue ">
+  * Amount should be less than Due Amount
 </div>
-            
+
+</div>
+
   <div class="form-group">
 
     <mat-form-field>

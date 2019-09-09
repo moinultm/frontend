@@ -81,8 +81,8 @@
                 <th>Sl</th>
                 <th>Product Name</th>
                 <th>Qty</th>
-                <th>Rate(MRP)</th>              
-     
+                <th>Rate(MRP)</th>
+
                 <th>Discount(%)</th>
                 <th>Item Total</th>
               </tr>
@@ -93,7 +93,7 @@
                 <td>{{TD.product.name}}</td>
                 <td>{{TD.quantity}} </td>
                 <td>{{TD.product.mrp}}  </td>
-                 
+
                 <td>{{TD.product_discount_percentage}} </td>
                 <td>{{TD.sub_total}} </td>
 
@@ -185,10 +185,8 @@
         <div class="row no-print">
           <div class="col-12" *ngFor="let  T of details.data ">
             <a href="#"  (click)="print()"  class="btn btn-default"><i class="fas fa-print"></i> Print</a>
-
-
             <button type="button" class="btn btn-success float-right" style="margin-right: 5px;" (click)="openDialogPayments()" ><i class="far fa-credit-card"></i>
-              Submit Payment
+              Add Payment
             </button>
 
           </div>

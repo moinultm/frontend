@@ -11,6 +11,7 @@ import { MaterialsModule } from '@app/material.module';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { SellDetailsComponent } from './sell-details/sell-details.component';
 import { AddPaymentComponent } from './add-payment/add-payment.component';
+import { SellReturnComponent } from './sell-return/sell-return.component';
 
 
 const routes: Routes = [
@@ -27,8 +28,12 @@ const routes: Routes = [
     path: 'details/:id',
     component: SellDetailsComponent
 
-  }
+  },
+  {
+    path: 'return/:id',
+    component: SellReturnComponent
 
+  }
 ];
 
 @NgModule({

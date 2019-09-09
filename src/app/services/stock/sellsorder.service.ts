@@ -40,5 +40,15 @@ export class SellsOrderService extends CrudService<SellsOrder> {
     return this.__http.get <PartialList<SellsOrder>>(this.url + '/' + id +'/'+'details', this.options);
   }
 
+  public getReturnSellById(id: number): any {
+    this.options.params = undefined;
+    return this.__http.get <PartialList<SellsOrder>>(this.url + '/' +'return'+ id , this.options);
+  }
+
+  public postReturnSellById(model: any): any {
+    this.options.params = undefined;
+    return this.__http.post <PartialList<SellsOrder>>  (this.url + '/'+'return' + model.id, model, this.options)
+
+  }
 
 }

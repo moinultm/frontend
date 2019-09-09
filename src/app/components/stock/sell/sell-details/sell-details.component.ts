@@ -38,11 +38,10 @@ export class SellDetailsComponent implements OnInit {
     this.loadingDetails = true;
     this.sellsService.findDetailsById(id).subscribe((res:PartialList <SellsOrder>) => {
       this.details = res;
-console.log(res);
+       console.log(res);
       this.loadingDetails = false;
     });
   }
-
 
 
   openDialogPayments(){
@@ -54,10 +53,10 @@ console.log(res);
 
     dialogConfig.width= '250px';
 
-    
+
       dialogConfig.data = this.details
-    
-   
+
+
     const dialogRef=   this.dialog.open(AddPaymentComponent, dialogConfig,);
 
   }

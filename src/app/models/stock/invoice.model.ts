@@ -1,4 +1,5 @@
 export class Invoice {
+
     id: number;
     reference_no: string;
     client_id:number;
