@@ -36,7 +36,6 @@ export class ManageComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
-
   }
 
      //Loading Data

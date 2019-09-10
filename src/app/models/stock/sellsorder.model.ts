@@ -2,6 +2,7 @@ import { OrderItems } from './orderitems.model ';
 
 
 export class SellsOrder {
+ 
     id: number;
     reference_no: string;
     client_id:number;
@@ -12,5 +13,6 @@ export class SellsOrder {
     product_discount_percentage:number;
     sub_total:number;
     product_tax:number;
-
+    product_name:string;
+    mrp:number;
 }

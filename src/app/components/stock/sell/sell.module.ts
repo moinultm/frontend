@@ -37,7 +37,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [SellComponent, AddComponent,SellDetailsComponent,AddPaymentComponent],
+  declarations: [SellComponent, AddComponent,SellDetailsComponent,AddPaymentComponent,SellReturnComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

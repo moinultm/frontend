@@ -42,7 +42,7 @@ export class SellsOrderService extends CrudService<SellsOrder> {
 
   public getReturnSellById(id: number): any {
     this.options.params = undefined;
-    return this.__http.get <PartialList<SellsOrder>>(this.url + '/' +'return'+ id , this.options);
+    return this.__http.get <PartialList<SellsOrder>>(this.url + '/' +'return'+ '/' + id , this.options);
   }
 
   public postReturnSellById(model: any): any {

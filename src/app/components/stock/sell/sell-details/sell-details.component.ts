@@ -50,12 +50,9 @@ export class SellDetailsComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 
-
     dialogConfig.width= '250px';
 
-
       dialogConfig.data = this.details
-
 
     const dialogRef=   this.dialog.open(AddPaymentComponent, dialogConfig,);
 
