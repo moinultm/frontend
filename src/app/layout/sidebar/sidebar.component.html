@@ -37,14 +37,14 @@
 
           <li class="nav-item">
               <a  href="#" [routerLink]="['/product']" class="nav-link"    [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
-                <i class="nav-icon fas fa-circle text-danger"></i>
+                <i class="nav-icon far fa-circle text-danger"></i>
                 <p class="text">Add Products</p>
               </a>
             </li>
 
             <li class="nav-item">
               <a href="#" [routerLink]="['/product','manage']" class="nav-link"  [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
-                <i class="nav-icon fas fa-circle text-danger"></i>
+                <i class="nav-icon far fa-circle text-danger"></i>
                 <p class="text">Manage Products</p>
               </a>
             </li>
@@ -65,7 +65,7 @@
             </li>
             <li class="nav-item">
               <a href="#" routerLink="/customer" class="nav-link" routerLinkActive="active">
-                <i class="nav-icon fa fa-circle text-info"></i>
+                <i class="nav-icon far fa-circle text-info"></i>
                 <p>Customer</p>
               </a>
             </li>
@@ -97,14 +97,14 @@
           </li>
           <li class="nav-header">PURCHASE</li>
           <li class="nav-item">
-            <a href="#" routerLink="/purchaseorder" class="nav-link"  routerLinkActive="active" >
-              <i class="nav-icon fa fa-circle text-info"></i>
+            <a href="#" [routerLink]="['/purchase','add']"  class="nav-link"   [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+              <i class="nav-icon far fa-circle text-info"></i>
               <p>Add Purchase</p>
             </a>
           </li>
           <li class="nav-item">
-              <a href="#" routerLink="/purchaseorder" class="nav-link"  routerLinkActive="active" >
-                <i class="nav-icon fa fa-circle text-info"></i>
+              <a href="#" [routerLink]="['/purchase']"   class="nav-link"   [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" >
+                <i class="nav-icon far fa-circle text-info"></i>
                 <p>Manage Purchase</p>
               </a>
             </li>
@@ -115,7 +115,7 @@
           <li class="nav-header">SECURITY</li>
           <li class="nav-item">
             <a href="#" routerLink="/users" class="nav-link"  routerLinkActive="active">
-              <i class="nav-icon fa fa-circle text-info"></i>
+              <i class="nav-icon far fa-circle text-info"></i>
               <p>Users</p>
             </a>
           </li>
@@ -127,7 +127,7 @@
           </li>
           <li class="nav-item">
             <a href="#" routerLink="/roles" class="nav-link"  routerLinkActive="active">
-              <i class="nav-icon fa fa-circle text-warning"></i>
+              <i class="nav-icon far fa-circle text-warning"></i>
               <p>Roles</p>
             </a>
           </li>

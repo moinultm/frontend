@@ -1,9 +1,9 @@
-import { SellsOrder } from './sellsorder.model';
+import { SellsOrder } from './sells-order.model';
 
 export class Transaction {
     change_amount:  number;
     client_id: number;
-    client_name: string;    
+    client_name: string;
     discount: number;
     id: number;
     invoice_tax: number;
@@ -20,7 +20,7 @@ export class Transaction {
     total_pay: number;
     total_return: number;
     total_tax: number;
-    transaction_type: string;     
+    transaction_type: string;
     warehouse_id: number;
 
 }

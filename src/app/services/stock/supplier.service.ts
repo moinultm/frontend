@@ -31,4 +31,17 @@ export class SupplierService extends CrudService<Client> {
   }
 
 
+    //general search
+    public findSupplier(query?: {}): any {
+      if (query) {
+        this.options.params = query;
+      } else {
+        this.options.params = undefined;
+      }
+      return this.__http.get <PartialList<Client>>(this.url,this.options);
+    }
+
+
+
+
 }

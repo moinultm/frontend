@@ -1,17 +1,18 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, Inject } from '@angular/core';
- 
+
 import { FormGroup, FormBuilder, Validators, FormControl, ValidatorFn, FormArray } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { PartialList } from '@models/common/patial-list.model';
-import { SellsOrder } from '@models/stock/sellsorder.model';
+import { SellsOrder } from '@models/stock/sells-order.model';
 import { ActivatedRoute } from '@angular/router';
-import { SellsOrderService } from '@services/stock/sellsorder.service';
+import { SellsOrderService } from '@services/stock/sells-order.service';
 import { Transaction } from '@models/stock/transaction.model';
+import { MatPrefix } from '@angular/material';
 
 @Component({
   selector: 'app-sell-return',
   templateUrl: './sell-return.component.html'
-  
+
 })
 
 
@@ -22,14 +23,12 @@ export class SellReturnComponent implements OnInit {
   loadingDetails:boolean;
   details:PartialList <Transaction> ;
   form: FormGroup;
-  
-  data = {
-    companies: [{company: "example comany"}]
-  }
+
+
 
 
   myForm: FormGroup;
- 
+
 
   constructor(private _formBuilder: FormBuilder,
     private _toastr: ToastrService,
@@ -39,11 +38,11 @@ export class SellReturnComponent implements OnInit {
 
     }
 
-    
+
   ngOnInit() {
     let id=this.route.snapshot.params.id;
     this.ShowBillDetails(id);
-   
+
     this.iniForm();
   }
 
@@ -52,51 +51,36 @@ export class SellReturnComponent implements OnInit {
     this.sellsService.getReturnSellById(id).subscribe((res:PartialList <Transaction>) => {
       this.details = res;
        console.log( 'ppp',this.details);
-       
+
        this.setCompanies(res);
       this.loadingDetails = false;
     });
    }
-   
 
-   
+
+
 iniForm( ){
   this.myForm = this._formBuilder.group({
     companies: this._formBuilder.array([])
-  })
-
+  });
 
 }
- 
-setCompanies(datas: PartialList <Transaction>) {
-console.log( 'mmnk',datas.data);
 
+setCompanies(datas: PartialList <Transaction>) {
+//console.log( 'mmnk',datas.data);
   let control = <FormArray>this.myForm.controls.companies;
    datas.data.forEach(x => {
-
      x.sells.forEach( s =>{
       control.push(
-        this._formBuilder.group({ 
-        company: s.product_name, 
+        this._formBuilder.group({
+          product_name: s.product_name,
+          quantity: s.quantity,
+          quantity_return: [0,[Validators.required, Validators.pattern(/^[.\d]+$/)]],
+          mrp:s.mrp
           }));
      })
-   
+
   })
-}
-
-addNewCompany() {
-  let control = <FormArray>this.myForm.controls.companies;
-  control.push(
-    this._formBuilder.group({
-      company: ['']
-     
-    })
-  )
-}
-
-deleteCompany(index) {
-  let control = <FormArray>this.myForm.controls.companies;
-  control.removeAt(index)
 }
 
 
@@ -120,3 +104,4 @@ deleteCompany(index) {
 
 //https://stackblitz.com/edit/angular-dffny7?file=app%2Fapp.component.ts
 
+// Sales return function will be completes after edit/alter implemention 11-9-19

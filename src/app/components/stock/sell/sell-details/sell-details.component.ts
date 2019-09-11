@@ -3,8 +3,8 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PartialList } from '@models/common/patial-list.model';
-import { SellsOrder } from '@models/stock/sellsorder.model';
-import { SellsOrderService } from '@services/stock/sellsorder.service';
+import { SellsOrder } from '@models/stock/sells-order.model';
+import { SellsOrderService } from '@services/stock/sells-order.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddPaymentComponent } from '../add-payment/add-payment.component';
 

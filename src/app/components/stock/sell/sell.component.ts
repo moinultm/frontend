@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { PartialList } from '@models/common/patial-list.model';
-import { SellsOrder } from '@models/stock/sellsorder.model';
-import { SellsOrderService } from '@services/stock/sellsorder.service';
+import { SellsOrder } from '@models/stock/sells-order.model';
+import { SellsOrderService } from '@services/stock/sells-order.service';
 import{TablesDataSource} from '@services/stock/lessons.datasource'
 import { fromEvent, merge } from 'rxjs';
 import { tap, distinctUntilChanged, debounceTime } from 'rxjs/operators';

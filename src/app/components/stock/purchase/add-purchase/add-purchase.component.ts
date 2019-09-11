@@ -1,45 +1,45 @@
 import { Component, OnInit } from '@angular/core';
-import { SellsOrderService } from '@services/stock/sells-order.service';
+import { PurchaseOrderService } from '@services/stock/purchase-order.service';
 import { Client } from '@models/stock/client.model';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { SellsOrder } from '@models/stock/sells-order.model';
+import { PurchaseOrder } from '@models/stock/purchase-order.model';
 import { PartialList } from '@models/common/patial-list.model';
-import { CustomerService } from '@services/stock/customer.service';
+import { SupplierService } from '@services/stock/supplier.service';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ProductService } from '@services/stock/product.service';
 import { Product } from '@models/stock/product.model';
 import { OrderItems } from '@models/stock/orderitems.model ';
 import { ToastrService } from 'ngx-toastr';
 import { success, error, warning } from '@app/services/core/utils/toastr';
+import { PurchaseItems } from '@models/stock/purchase-items';
 
 @Component({
-  selector: 'app-add',
-  templateUrl: './add.component.html',
-  styleUrls: ['./add.component.scss']
+  selector: 'app-add-purchase',
+  templateUrl: './add-purchase.component.html'
 })
-export class AddComponent implements OnInit {
+export class AddPurchaseComponent implements OnInit {
   modalOption: NgbModalOptions = {};
 
-  customerList: Array<Client>;
+  supplierList: Array<Client>;
 
-  orderItemList: Array<OrderItems>=[];
+  orderItemList: Array<PurchaseItems>=[];
 
   loadingOrder: boolean;
-  loadingCustomer:boolean;
+  loadingSupplier:boolean;
 
   _saving:boolean;
   mainForm: FormGroup;
   formProducts:FormGroup;
 
-  selectedOrder: SellsOrder;
-selectedOrderItem: OrderItems;
+  selectedOrder: PurchaseOrder;
+selectedOrderItem: PurchaseItems;
 
   _productList: Array<Product>;
   loadingProductList:boolean;
 
 
-  constructor(private sellsOrdererSvice: SellsOrderService,
-    private customeService:CustomerService,
+  constructor(private purchaseOrderSvice: PurchaseOrderService,
+    private supplierService:SupplierService,
     private productService:ProductService,
     private modalService: NgbModal,
     private _fb: FormBuilder,
@@ -54,26 +54,24 @@ selectedOrderItem: OrderItems;
   }
 
 
-
-
-  initForm(order?: SellsOrder): void {
+  initForm(order?: PurchaseOrder): void {
 
     if (order){
 
     }
     else{
-      this.selectedOrder =new SellsOrder();
+      this.selectedOrder =new PurchaseOrder();
       this.orderItemList =[];
     }
 
 
 
 
-    this.FillCustomer();
+    this.FillSupplier();
 
     this.mainForm = this._fb.group({
     sellDate:[new Date(),[Validators.nullValidator]],
-    customerName:['',[Validators.required]  ],
+    supplierName:['',[Validators.required]  ],
     paymentMethod:['cash',[Validators.required]  ],
     totalAmount:['0',[Validators.required]  ],
     paidAmount:['0',[Validators.required]  ],
@@ -84,13 +82,13 @@ selectedOrderItem: OrderItems;
   });
   }
 
-  FillCustomer()
+  FillSupplier()
   {
-    this.loadingCustomer=true;
-    this.customeService.findCustomer()
+    this.loadingSupplier=true;
+    this.supplierService.findSupplier()
     .subscribe((res: PartialList<Client>) => {
-      this.customerList = res.data;
-       this.loadingCustomer = false;
+      this.supplierList = res.data;
+       this.loadingSupplier = false;
     });
   }
 
@@ -174,7 +172,7 @@ selectedOrderItem: OrderItems;
     else {
       this.formProducts.patchValue({
         //name:this._productList[ctrl.selectedIndex - 1].name ,
-        productMRP:this._productList[ctrl.selectedIndex - 1].mrp,
+        productMRP:this._productList[ctrl.selectedIndex - 1].cost_price,
            });
 
     }
@@ -239,20 +237,20 @@ selectedOrderItem: OrderItems;
 
   addItemToInvoice(formProducts:any,modal ?:any) : void{
 
-   let formItem = new OrderItems();
+   let formItem = new PurchaseItems();
    formItem.product_id=formProducts.value.name.id;
-   formItem.product_name= formProducts.value.name.name ;
+   //formItem.product_name= formProducts.value.name.name ;
 
    formItem.quantity=formProducts.value.quantity;
-   formItem.mrp=formProducts.value.productMRP;
-   formItem.item_total=formProducts.value.itemTotal;
+   //formItem.mrp=formProducts.value.productMRP;
+   //formItem.item_total=formProducts.value.itemTotal;
 
-   formItem.product_discount_percentage=formProducts.value.discountOnMRP;
-   formItem.product_discount_amount=formProducts.value.itemDiscountAmt;
+   //formItem.product_discount_percentage=formProducts.value.discountOnMRP;
+   //formItem.product_discount_amount=formProducts.value.itemDiscountAmt;
 
    formItem.subtotal=formProducts.value.subtotal;
 
-   formItem.cost_price=formProducts.value.name.cost_price;
+   //formItem.cost_price=formProducts.value.name.cost_price;
 
     if (this.formProducts.valid) {
       this.orderItemList.push(formItem);
@@ -278,16 +276,16 @@ save(form: any){
  }
 
   const formData = new FormData();
-  formData.append('customer', this.mainForm.get('customerName').value);
-  formData.append('paid', this.mainForm.get('customerName').value);
+  formData.append('supplier', this.mainForm.get('supplierName').value);
+  formData.append('paid', this.mainForm.get('supplierName').value);
   formData.append('method', this.mainForm.get('paymentMethod').value);
   formData.append('total', this.mainForm.get('grandTotal').value);
   formData.append('paid', this.mainForm.get('paidAmount').value);
   formData.append('discount', this.mainForm.get('discountAmount').value);
   formData.append('shipping_cost', this.mainForm.get('shippingCost').value);
-  formData.append('sells', JSON.stringify(this.orderItemList));
+  formData.append('purchases', JSON.stringify(this.orderItemList));
 
-  this.sellsOrdererSvice.save(formData, false).subscribe((res: SellsOrder) => {
+  this.purchaseOrderSvice.save(formData, false).subscribe((res: PurchaseOrder) => {
     success('Success!', 'The Order is successfully saved.', this._toastr);
     this.initForm();
     this._saving = false;

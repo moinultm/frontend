@@ -2,7 +2,7 @@ import { OrderItems } from './orderitems.model ';
 
 
 export class SellsOrder {
- 
+
     id: number;
     reference_no: string;
     client_id:number;

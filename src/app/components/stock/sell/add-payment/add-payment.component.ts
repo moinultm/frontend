@@ -16,20 +16,19 @@ import { ToastrService } from 'ngx-toastr';
   })
   export class AddPaymentComponent implements OnInit {
 
-  form: FormGroup;
+   form: FormGroup;
    formLocalData:Invoice;
    savingPayment:boolean;
    selectedInvoice:Invoice;
-
 
     constructor(private _formBuilder: FormBuilder,
       private paymentService:PaymentService,
       private _toastr: ToastrService,
       private dialogRef: MatDialogRef<AddPaymentComponent>,
-        @Inject(MAT_DIALOG_DATA) public data : Invoice){
 
-     this.formLocalData=data;
-console.log(data);
+        @Inject(MAT_DIALOG_DATA) public data : Invoice){
+        this.formLocalData=data;
+        console.log(data);
         }
 
     ngOnInit() {
@@ -38,13 +37,11 @@ console.log(data);
     }
 
 iniForm( ){
-
   this.form = this._formBuilder.group({
     amount: ['',  [Validators.required,dueAmountValidator(this.due()), Validators.pattern(/^[.\d]+$/) ]],
     note: ['',  [Validators.required, Validators.maxLength(255)]],
     method: ['',  [Validators.required, Validators.maxLength(255)]]
   });
-
 }
 
 
