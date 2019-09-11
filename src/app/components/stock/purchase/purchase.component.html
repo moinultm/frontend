@@ -25,11 +25,17 @@
             <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">List Purchases
-                      <span class="badge bg-primary">
-                          <i class="nav-icon far fa-circle"></i>
-                          New Invoice</span>
+                     
+
+                        <a href="#" [routerLink]="['/purchase/add']" class="nav-link d-inline"   
+                        [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+                          <span class="badge bg-primary">                           
+                            <i class="nav-icon fas fa-cart-plus"></i>
+                            New Invoice
+                          </span>
+                        </a>
                       <span class="badge bg-primary float-right">
-                         <i class="nav-icon far fa-circle"></i>
+                         <i class="nav-icon fas fa-search"></i>
                         Search</span>
                   </h3>
 
@@ -49,28 +55,54 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>1.</td>
-                        <td>Update Invoice No</td>
-                        <td>Update Name</td>
-                        <td>Update Total</td>
-                        <td>Update Paid</td>
-                        <td>Update Date</td>
-                        <td>Update actions</td>
-                      </tr>
 
+                        <tr *ngIf="loading">
+                            <td colspan="12" class="text-center loading-data">
+                                <mat-spinner></mat-spinner>
+                            </td>
+                          </tr>
+                          <tr *ngIf="!loading && data && !data.data.length">
+                            <td colspan="12" class="text-center loading-data">
+                              No category created yet!
+                            </td>
+                          </tr>
+
+                          <ng-container *ngIf="!loading">
+                        <tr *ngFor="let item of data.data; let i = index">
+                        <td>{{ i+1 }}</td>
+                        <td>{{item.reference_no}}</td>
+                        <td>{{item.client_name}}</td>
+                        <td>{{item.net_total}}</td>
+                        <td>{{item.paid}}</td>
+                        <td>{{item.date}}</td>
+                        <td>
+                            <button mat-icon-button color="accent"
+                  matTooltip="view details invoice"
+                   (click)="toDetails(result.id)">
+                    <mat-icon class="mat-18">flip_to_front</mat-icon>
+                  </button>
+                  
+                  <button mat-icon-button color="accent" matTooltip="Edit invoice"
+                  (click)="refereToEditInvoice(result.id)">
+                      <mat-icon>edit</mat-icon>
+                  </button>
+                  <button mat-icon-button color="accent" matTooltip="Delete invoice">
+                    	<mat-icon>restore_from_trash</mat-icon>
+                    </button>
+
+                        </td>
+                      </tr>
+                        </ng-container>
                     </tbody>
                   </table>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
-                  <ul class="pagination pagination-sm m-0 float-right">
-                    <li class="page-item"><a class="page-link" href="#">«</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">»</a></li>
-                  </ul>
+                <!-- Pagination -->
+                <ngb-pagination *ngIf="!loading && data" [collectionSize]="data.count" [pageSize]="size"
+                [page]="data.page" (pageChange)="loadData($event)" class="pagination pagination-sm m-0 float-right">
+              </ngb-pagination>
+              <!-- ./Pagination -->
                 </div>
               </div>
                  <!--Card-->

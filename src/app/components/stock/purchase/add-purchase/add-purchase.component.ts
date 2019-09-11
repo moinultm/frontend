@@ -70,7 +70,7 @@ selectedOrderItem: PurchaseItems;
     this.FillSupplier();
 
     this.mainForm = this._fb.group({
-    sellDate:[new Date(),[Validators.nullValidator]],
+      purchaseDate:[new Date(),[Validators.nullValidator]],
     supplierName:['',[Validators.required]  ],
     paymentMethod:['cash',[Validators.required]  ],
     totalAmount:['0',[Validators.required]  ],
@@ -131,22 +131,22 @@ selectedOrderItem: PurchaseItems;
     }
 
     this.formProducts = this._fb.group({
-      //name: [        orderitem ? orderitem.product_name : '',        [Validators.required, Validators.maxLength(255)] ],
+      name: [        orderitem ? orderitem.product_name : '',        [Validators.required, Validators.maxLength(255)] ],
        quantity: [
         orderitem ? orderitem.quantity : '',
         [Validators.required]
       ] ,
-    //  productMRP: [        orderitem ? orderitem.mrp : '',        [Validators.required]      ] ,
+    productMRP: [        orderitem ? orderitem.mrp : '',        [Validators.required]      ] ,
 
-    //  discountOnMRP: [        orderitem ? orderitem.product_discount_percentage : '',        [Validators.required]      ] ,
+     discountOnMRP: [        orderitem ? orderitem.product_discount_percentage : '',        [Validators.required]      ] ,
 
-    //  itemDiscountAmt:[ orderitem ? orderitem.product_discount_amount : '', [Validators.required]],
+    itemDiscountAmt:[ orderitem ? orderitem.product_discount_amount : '', [Validators.required]],
 
       subtotal: [
         orderitem ? orderitem.subtotal : '',
         [Validators.required]],
 
-      //  itemTotal:[ orderitem ? orderitem.item_total : '', [Validators.required]],
+       itemTotal:[ orderitem ? orderitem.item_total : '', [Validators.required]],
 
     });
   }
@@ -198,7 +198,8 @@ selectedOrderItem: PurchaseItems;
 
     let discount :number;
     discount= this.orderItemList.reduce((prev, curr) => {
-      return prev + curr.product_discount_amount;
+     return prev + curr.product_discount_amount;
+     
     }, 0);
     this.mainForm.patchValue({
       discountAmount:    parseFloat(discount.toFixed(2)),
@@ -207,7 +208,8 @@ selectedOrderItem: PurchaseItems;
 
     let item_total :number;
     item_total= this.orderItemList.reduce((prev, curr) => {
-      return prev + curr.item_total;
+    return prev + curr.item_total;
+   
     }, 0);
     this.mainForm.patchValue({
       totalAmount:   parseFloat(item_total.toFixed(2)),
@@ -230,18 +232,18 @@ selectedOrderItem: PurchaseItems;
 
    let formItem = new PurchaseItems();
    formItem.product_id=formProducts.value.name.id;
-   //formItem.product_name= formProducts.value.name.name ;
+   formItem.product_name= formProducts.value.name.name ;
 
    formItem.quantity=formProducts.value.quantity;
-   //formItem.mrp=formProducts.value.productMRP;
-   //formItem.item_total=formProducts.value.itemTotal;
+    formItem.mrp=formProducts.value.productMRP;
+    formItem.item_total=formProducts.value.itemTotal;
 
-   //formItem.product_discount_percentage=formProducts.value.discountOnMRP;
-   //formItem.product_discount_amount=formProducts.value.itemDiscountAmt;
+    formItem.product_discount_percentage=formProducts.value.discountOnMRP;
+    formItem.product_discount_amount=formProducts.value.itemDiscountAmt;
 
    formItem.subtotal=formProducts.value.subtotal;
 
-   //formItem.cost_price=formProducts.value.name.cost_price;
+   formItem.cost_price=formProducts.value.name.cost_price;
 
     if (this.formProducts.valid) {
       this.orderItemList.push(formItem);
