@@ -122,40 +122,31 @@ selectedOrderItem: PurchaseItems;
     });
 
   }
-  initItemsForm(orderitem?: OrderItems): void{
+  initItemsForm(orderitem?: PurchaseItems): void{
 
     if (orderitem) {
       this.selectedOrderItem=  Object.assign(OrderItems, orderitem);
     } else {
-      this.selectedOrderItem = new OrderItems();
+      this.selectedOrderItem = new PurchaseItems();
     }
 
     this.formProducts = this._fb.group({
-      name: [
-        orderitem ? orderitem.product_name : '',
-        [Validators.required, Validators.maxLength(255)]
-      ],
+      //name: [        orderitem ? orderitem.product_name : '',        [Validators.required, Validators.maxLength(255)] ],
        quantity: [
         orderitem ? orderitem.quantity : '',
         [Validators.required]
       ] ,
-      productMRP: [
-        orderitem ? orderitem.mrp : '',
-        [Validators.required]
-      ] ,
+    //  productMRP: [        orderitem ? orderitem.mrp : '',        [Validators.required]      ] ,
 
-      discountOnMRP: [
-        orderitem ? orderitem.product_discount_percentage : '',
-        [Validators.required]
-      ] ,
+    //  discountOnMRP: [        orderitem ? orderitem.product_discount_percentage : '',        [Validators.required]      ] ,
 
-      itemDiscountAmt:[ orderitem ? orderitem.product_discount_amount : '', [Validators.required]],
+    //  itemDiscountAmt:[ orderitem ? orderitem.product_discount_amount : '', [Validators.required]],
 
       subtotal: [
         orderitem ? orderitem.subtotal : '',
         [Validators.required]],
 
-        itemTotal:[ orderitem ? orderitem.item_total : '', [Validators.required]],
+      //  itemTotal:[ orderitem ? orderitem.item_total : '', [Validators.required]],
 
     });
   }
