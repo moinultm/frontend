@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { WarehouseComponent } from './warehouse.component';
+import { ExpenseComponent } from './expense.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -12,13 +12,13 @@ const routes: Routes = [
 
   {
     path: '',
-    component: WarehouseComponent
+    component: ExpenseComponent
   }
 ];
 
 
 @NgModule({
-  declarations: [WarehouseComponent],
+  declarations: [ExpenseComponent],
   imports: [
 
     CommonModule,
@@ -30,4 +30,4 @@ const routes: Routes = [
     MaterialsModule,
   ]
 })
-export class WarehouseModule { }
+export class ExpenseModule { }

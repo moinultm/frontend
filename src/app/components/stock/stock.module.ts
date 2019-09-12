@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { Routes, RouterModule } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialsModule } from '@app/material.module';
 
 
 
@@ -38,6 +41,15 @@ const routes: Routes = [
     path: 'purchase',
     loadChildren: () => import('./purchase/purchase.module').then(m => m.PurchaseModule)
   }
+  ,
+  {
+    path: 'warehouse',
+    loadChildren: () => import('./warehouse/warehouse.module').then(m => m.WarehouseModule)
+  },
+  {
+    path: 'expenses',
+    loadChildren: () => import('./expense/expense.module').then(m => m.ExpenseModule)
+  }
 
 ];
 
@@ -47,7 +59,12 @@ const routes: Routes = [
   imports: [
 
     CommonModule,
-        RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+
+    NgbModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MaterialsModule,
   ],
   exports: [RouterModule]
 })
