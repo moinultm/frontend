@@ -45,11 +45,11 @@
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
-
-                      <th>Name</th>
-                      <th>Address</th>
-                      <th>Phone</th>
-                      <th>In Charge Name</th>
+                      		
+                      <th>Purpose</th>
+                      <th>Amount</th>
+                      <th>Date</th>
+                 
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -69,11 +69,10 @@
                         <ng-container *ngIf="!loading">
                       <tr *ngFor="let item of data.data; let i = index">
                       <td>{{ i+1 }}</td>
-                      <td>{{item.name}}</td>
-                      <td>{{item.address}}</td>
-                      <td>{{item.phone}}</td>
-                      <td>{{item.in_charge_name}}</td>
-                      <td>
+                      <td>{{item.purpose}}</td>
+                      <td>{{item.amount}}</td>
+                      <td>{{item.date}}</td>
+                       <td>
                         <button mat-icon-button color="accent" matTooltip="Edit"
                         (click)="initSave(saveModal, item)">
                             <mat-icon>edit</mat-icon>
@@ -109,12 +108,12 @@
 <!-- Content Wrapper. Contains page content -->
 
 
-<!-- warehouse save modal -->
+<!-- expense save modal -->
 <ng-template #saveModal let-modal>
   <!-- Modal header -->
   <div class="modal-header">
     <h4 class="modal-title">
-      {{ selectedWarehouse.id ? ('Update warehouse: ' + selectedWarehouse.address) : 'Create new warehouse' }}</h4>
+      {{ selectedExpense.id ? ('Update expense: ' + selectedExpense.amount) : 'Create new expense' }}</h4>
     <button type="button" class="close" aria-label="Close" (click)="close(modal)">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -126,124 +125,54 @@
 
     <form [formGroup]="form">
 
-      <!-- name field -->
+      <!-- purpose field -->
       <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" formControlName="name"
-          [class.has-error]="form.get('name').dirty && form.get('name').invalid" />
+        <label for="purpose">Purpose</label>
+        <input type="text" class="form-control" id="purpose" formControlName="purpose"
+          [class.has-error]="form.get('purpose').dirty && form.get('purpose').invalid" />
       </div>
-      <!-- ./name field -->
+      <!-- ./purpose field -->
 
-      <!-- name field validations container -->
-      <div class="row" *ngIf="form.get('name').dirty && form.get('name').invalid">
+      <!-- purpose field validations container -->
+      <div class="row" *ngIf="form.get('purpose').dirty && form.get('purpose').invalid">
         <div class="col-12">
-          <div class="alert alert-danger alert-transparent-left" warehouse="alert"
-            *ngIf="form.get('name').dirty && form.controls['name'].hasError('required')">
-            The name is required
+          <div class="alert alert-danger alert-transparent-left" expense="alert"
+            *ngIf="form.get('purpose').dirty && form.controls['purpose'].hasError('required')">
+            The purpose is required
           </div>
-          <div class="alert alert-danger alert-transparent-left" warehouse="alert"
-            *ngIf="form.get('name').dirty && form.get('name').hasError('maxLength')">
-            The name must be less than 255 Digits
+          <div class="alert alert-danger alert-transparent-left" expense="alert"
+            *ngIf="form.get('purpose').dirty && form.get('purpose').hasError('maxLength')">
+            The purpose must be less than 255 Digits
           </div>
         </div>
       </div>
-      <!-- ./name field validations container -->
+      <!-- ./purpose field validations container -->
 
-      <!-- address field -->
+      <!-- amount field -->
       <div class="form-group">
-        <label for="address">Address</label>
-        <input type="text" class="form-control" id="address" formControlName="address"
-          [class.has-error]="form.get('address').dirty && form.get('address').invalid" />
+        <label for="amount">Amount</label>
+        <input type="text" class="form-control" id="amount" formControlName="amount"
+          [class.has-error]="form.get('amount').dirty && form.get('amount').invalid" />
       </div>
-      <!-- ./address field -->
+      <!-- ./amount field -->
 
-      <!-- address field validations container -->
-      <div class="row" *ngIf="form.get('address').dirty && form.get('address').invalid">
+      <!-- amount field validations container -->
+      <div class="row" *ngIf="form.get('amount').dirty && form.get('amount').invalid">
         <div class="col-12">
-          <div class="alert alert-danger alert-transparent-left" warehouse="alert"
-            *ngIf="form.get('address').dirty && form.controls['address'].hasError('required')">
-            The address is required
+          <div class="alert alert-danger alert-transparent-left" expense="alert"
+            *ngIf="form.get('amount').dirty && form.controls['amount'].hasError('required')">
+            The amount is required
           </div>
-          <div class="alert alert-danger alert-transparent-left" warehouse="alert"
-            *ngIf="form.get('address').dirty && form.get('address').hasError('maxLength')">
-            The address must be less than 255 digits
+          <div class="alert alert-danger alert-transparent-left" expense="alert"
+            *ngIf="form.get('amount').dirty && form.get('amount').hasError('maxLength')">
+            The amount must be less than 255 digits
           </div>
         </div>
       </div>
-      <!-- ./address field validations container -->
+      <!-- ./amount field validations container -->
 
 
-
-       <!-- phone field -->
-       <div class="form-group">
-        <label for="phone">Phone</label>
-        <input type="text" class="form-control" id="phone" formControlName="phone"
-          [class.has-error]="form.get('phone').dirty && form.get('phone').invalid" />
-      </div>
-      <!-- ./phone field -->
-
-      <!-- phone field validations container -->
-      <div class="row" *ngIf="form.get('phone').dirty && form.get('phone').invalid">
-        <div class="col-12">
-          <div class="alert alert-danger alert-transparent-left" warehouse="alert"
-            *ngIf="form.get('phone').dirty && form.controls['phone'].hasError('required')">
-            The phone is required
-          </div>
-          <div class="alert alert-danger alert-transparent-left" warehouse="alert"
-            *ngIf="form.get('phone').dirty && form.get('phone').hasError('maxLength')">
-            The phone must be less than 15 digits
-          </div>
-        </div>
-      </div>
-      <!-- ./phone field validations container -->
-
-
-            <!-- email field -->
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="text" class="form-control" id="email" formControlName="email"
-                [class.has-error]="form.get('email').dirty && form.get('email').invalid" />
-            </div>
-            <!-- ./email field -->
-
-            <!-- email field validations container -->
-            <div class="row" *ngIf="form.get('email').dirty && form.get('email').invalid">
-              <div class="col-12">
-                <div class="alert alert-danger alert-transparent-left" warehouse="alert"
-                  *ngIf="form.get('email').dirty && form.controls['email'].hasError('required')">
-                  The email is required
-                </div>
-                <div class="alert alert-danger alert-transparent-left" warehouse="alert"
-                  *ngIf="form.get('email').dirty && form.get('email').hasError('maxLength')">
-                  The email must be less than 15 digits
-                </div>
-              </div>
-            </div>
-            <!-- ./email field validations container -->
-
-
-                  <!-- incharge_name field -->
-       <div class="form-group">
-        <label for="incharge_name">Incharge Name</label>
-        <input type="text" class="form-control" id="incharge_name" formControlName="incharge_name"
-          [class.has-error]="form.get('incharge_name').dirty && form.get('incharge_name').invalid" />
-      </div>
-      <!-- ./incharge_name field -->
-
-      <!-- incharge_name field validations container -->
-      <div class="row" *ngIf="form.get('incharge_name').dirty && form.get('incharge_name').invalid">
-        <div class="col-12">
-          <div class="alert alert-danger alert-transparent-left" warehouse="alert"
-            *ngIf="form.get('incharge_name').dirty && form.controls['incharge_name'].hasError('required')">
-            The incharge_name is required
-          </div>
-          <div class="alert alert-danger alert-transparent-left" warehouse="alert"
-            *ngIf="form.get('incharge_name').dirty && form.get('incharge_name').hasError('maxLength')">
-            The incharge_name must be less than 15 digits
-          </div>
-        </div>
-      </div>
-      <!-- ./incharge_name field validations container -->
+ 
 
     </form>
 
@@ -253,9 +182,38 @@
   <!-- Modal footer -->
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="save(modal)"
-      [disabled]="form.invalid || savingWarehouse">Save</button>
+      [disabled]="form.invalid || savingExpense">Save</button>
   </div>
   <!-- ./Modal footer -->
 
 </ng-template>
-<!-- ./warehouse save modal -->
+<!-- ./expense save modal -->
+
+
+
+  <!-- Expense delete confirmation modal -->
+  <ng-template #deleteModal let-modal>
+
+    <!-- Modal header -->
+    <div class="modal-header">
+      <h4 class="modal-title">Delete Expense</h4>
+      <button type="button" class="close" aria-label="Close" (click)="close(modal)">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <!-- ./Modal header -->
+
+    <!-- Modal body -->
+    <div class="modal-body">
+      <p>Are you sure you want to delete this Expense?</p>
+    </div>
+    <!-- ./Modal body -->
+
+    <!-- Modal footer -->
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-danger" [disabled]="deletingExpense" (click)="delete(modal)">Delete</button>
+    </div>
+    <!-- ./Modal footer -->
+
+  </ng-template>
+  <!-- ./Expense delete confirmation modal -->

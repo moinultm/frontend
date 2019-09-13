@@ -1,0 +1,228 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Vat</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
+              <li class="breadcrumb-item"><a>General</a></li>
+              <li class="breadcrumb-item active">Manage Vat</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+  
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+  
+            <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">List Vat
+  
+  
+                        <a href="#"  (click)="initSave(saveModal)">
+                          <span class="badge bg-primary">
+                            <i class="nav-icon fas fa-cart-plus"></i>
+                            New Vat
+                          </span>
+                        </a>
+                      <span class="badge bg-primary float-right">
+                         <i class="nav-icon fas fa-search"></i>
+                        Search</span>
+                  </h3>
+  
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th style="width: 10px">#</th>
+                                
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Rate</th>
+                   
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+  
+                        <tr *ngIf="loading">
+                            <td colspan="12" class="text-center loading-data">
+                                <mat-spinner></mat-spinner>
+                            </td>
+                          </tr>
+                          <tr *ngIf="!loading && data && !data.data.length">
+                            <td colspan="12" class="text-center loading-data">
+                              No data created yet!
+                            </td>
+                          </tr>
+  
+                          <ng-container *ngIf="!loading">
+                        <tr *ngFor="let item of data.data; let i = index">
+                        <td>{{ i+1 }}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.type}}</td>
+                        <td>{{item.rate}}</td>
+                         <td>
+                          <button mat-icon-button color="accent" matTooltip="Edit"
+                          (click)="initSave(saveModal, item)">
+                              <mat-icon>edit</mat-icon>
+                          </button>
+                          <button mat-icon-button color="accent" matTooltip="Delete"
+                          (click)="initDelete(deleteModal, item)">
+                              <mat-icon>restore_from_trash</mat-icon>
+                            </button>
+                        </td>
+  
+                      </tr>
+                        </ng-container>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer clearfix">
+                <!-- Pagination -->
+                <ngb-pagination *ngIf="!loading && data" [collectionSize]="data.count" [pageSize]="size"
+                [page]="data.page" (pageChange)="loadData($event)" class="pagination pagination-sm m-0 float-right">
+              </ngb-pagination>
+              <!-- ./Pagination -->
+                </div>
+              </div>
+                 <!--Card-->
+            </div>
+  
+        </div>
+      </div>
+    </section>
+  
+  </div>
+  <!-- Content Wrapper. Contains page content -->
+  
+  
+  <!-- vat save modal -->
+  <ng-template #saveModal let-modal>
+    <!-- Modal header -->
+    <div class="modal-header">
+      <h4 class="modal-title">
+        {{ selectedVat.id ? ('Update vat: ' + selectedVat.rate) : 'Create new vat' }}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="close(modal)">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <!-- ./Modal header -->
+  
+    <!-- Modal body -->
+    <div class="modal-body">
+  
+      <form [formGroup]="form">
+  
+        <!-- name field -->
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" formControlName="name"
+            [class.has-error]="form.get('name').dirty && form.get('name').invalid" />
+        </div>
+        <!-- ./name field -->
+  
+        <!-- name field validations container -->
+        <div class="row" *ngIf="form.get('name').dirty && form.get('name').invalid">
+          <div class="col-12">
+            <div class="alert alert-danger alert-transparent-left" vat="alert"
+              *ngIf="form.get('name').dirty && form.controls['name'].hasError('required')">
+              The name is required
+            </div>
+            <div class="alert alert-danger alert-transparent-left" vat="alert"
+              *ngIf="form.get('name').dirty && form.get('name').hasError('maxLength')">
+              The name must be less than 255 Digits
+            </div>
+          </div>
+        </div>
+        <!-- ./name field validations container -->
+  
+
+
+        <!-- rate field -->
+        <div class="form-group">
+          <label for="rate">Rate</label>
+          <input type="text" class="form-control" id="rate" formControlName="rate"
+            [class.has-error]="form.get('rate').dirty && form.get('rate').invalid" />
+        </div>
+        <!-- ./rate field -->
+  
+        <!-- rate field validations container -->
+        <div class="row" *ngIf="form.get('rate').dirty && form.get('rate').invalid">
+          <div class="col-12">
+            <div class="alert alert-danger alert-transparent-left" vat="alert"
+              *ngIf="form.get('rate').dirty && form.controls['rate'].hasError('required')">
+              The rate is required
+            </div>
+            <div class="alert alert-danger alert-transparent-left" vat="alert"
+              *ngIf="form.get('rate').dirty && form.get('rate').hasError('maxLength')">
+              The rate must be less than 255 digits
+            </div>
+          </div>
+        </div>
+        <!-- ./rate field validations container -->
+  
+   <!-- ./Type field validations container -->
+        <div class="form-group">
+            <label>Select Type</label>
+            <select class="form-control" formControlName="type">
+              <option *ngFor="let list of vatType" [value]="list.id">
+                {{list.name}}
+              </option>
+            </select>
+          </div>
+   <!-- ./Type field validations container -->
+      </form>
+  
+    </div>
+    <!-- ./Modal body -->
+  
+    <!-- Modal footer -->
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="save(modal)"
+        [disabled]="form.invalid || savingExpense">Save</button>
+    </div>
+    <!-- ./Modal footer -->
+  
+  </ng-template>
+  <!-- ./vat save modal -->
+  
+  
+  
+    <!-- Vat delete confirmation modal -->
+    <ng-template #deleteModal let-modal>
+  
+      <!-- Modal header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Delete Vat</h4>
+        <button type="button" class="close" aria-label="Close" (click)="close(modal)">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- ./Modal header -->
+  
+      <!-- Modal body -->
+      <div class="modal-body">
+        <p>Are you sure you want to delete this Vat?</p>
+      </div>
+      <!-- ./Modal body -->
+  
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" [disabled]="deletingExpense" (click)="delete(modal)">Delete</button>
+      </div>
+      <!-- ./Modal footer -->
+  
+    </ng-template>
+    <!-- ./Vat delete confirmation modal -->

@@ -1,8 +1,9 @@
+ 
 import { Component, OnInit } from '@angular/core';
-import { Expense } from '@models/stock/expense.model';
+import { Vat } from '@models/common/Vat.model';
 import { PartialList } from '@models/common/patial-list.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {ExpenseService } from '@services/stock/expense.service';
+import {VatService } from '@services/common/vat.service';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
@@ -10,22 +11,27 @@ import { ToastrService } from 'ngx-toastr';
 import { success, warning, error } from '@services/core/utils/toastr';
 
 @Component({
-  selector: 'app-expense',
-  templateUrl: './expense.component.html'
-
+  selector: 'app-vat-settings',
+  templateUrl: './vat-settings.component.html',
+  styleUrls: ['./vat-settings.component.scss']
 })
-export class ExpenseComponent implements OnInit {
+export class VatSettingsComponent implements OnInit {
   modalOption: NgbModalOptions = {};
-  data: PartialList<Expense>;
+  data: PartialList<Vat>;
   loading: boolean;
   savingExpense: boolean;
   deletingItem: boolean;
   page = 1;
   size = 10;
   form: FormGroup;
-  selectedExpense: Expense;
+  selectedVat: Vat;
 
-  constructor( private expenseService: ExpenseService,  private router:Router,
+
+  vatType:Array<Object>= [
+    {id:1,name:'Percentage'}
+  ];
+
+  constructor( private vatService: VatService,  private router:Router,
 
     private _toastr: ToastrService,
     private modalService: NgbModal,
@@ -33,7 +39,7 @@ export class ExpenseComponent implements OnInit {
 
     private _formBuilder: FormBuilder,) {
 
-      titleService.setTitle('General - Expense management');
+      titleService.setTitle('General - Vat management');
 
 
 
@@ -46,10 +52,10 @@ export class ExpenseComponent implements OnInit {
   loadData(page?: number): void {
     this.page = page ? page : 1;
     this.loading = true;
-    this.expenseService.find({
+    this.vatService.find({
       page: this.page,
       size: this.size
-    }).subscribe((res: PartialList<Expense>) => {
+    }).subscribe((res: PartialList<Vat>) => {
       this.data = res;
       this.loading = false;
     });
@@ -58,11 +64,11 @@ export class ExpenseComponent implements OnInit {
 
 
   //Save Data
-  initSave(modal: any, expense?: Expense): void {
+  initSave(modal: any, Vat?: Vat): void {
     event.preventDefault();
     this.modalOption.backdrop = 'static';
     this.modalOption.keyboard = false;
-    this.initSaveForm(expense);
+    this.initSaveForm(Vat);
     this.modalService
       .open(modal,this.modalOption)
       .result
@@ -77,23 +83,25 @@ export class ExpenseComponent implements OnInit {
       });
   }
 
-  initSaveForm(expense?: Expense): void {
-    if (expense) {
-      this.selectedExpense =  expense ;
+  initSaveForm(vat?: Vat): void {
+    if (vat) {
+      this.selectedVat =  vat ;
     } else {
-      this.selectedExpense = new Expense();
+      this.selectedVat = new Vat();
     }
     this.form = this._formBuilder.group({
-      purpose: [
-        expense ? expense.purpose : '',
+      name: [
+        vat ? vat.name : '',
         [Validators.required, Validators.maxLength(255)]
       ],
-      amount: [
-        expense ? expense.amount : '',
-        [Validators.required, Validators.maxLength(255)]
+      rate: [
+        vat ? vat.rate : '',
+        [Validators.required ]
+      ],
+      type: [
+        vat ? vat.type : '',
+        [Validators.required]
       ]
-
-
 
     });
   }
@@ -102,14 +110,14 @@ export class ExpenseComponent implements OnInit {
   save(modal: any): void {
     if (this.form.valid) {
       this.savingExpense = true;
-      this.expenseService.save({
-        id: this.selectedExpense.id,
-        purpose: this.form.get('purpose').value,
-        amount: this.form.get('amount').value,
+      this.vatService.save({
+        id: this.selectedVat.id,
+        name: this.form.get('name').value,
+        type: this.form.get('type').value,
+        rate: this.form.get('rate').value,
 
-
-      }, this.selectedExpense.id ? true : false).subscribe((res: Expense) => {
-        success('Success!', 'The expense is successfully saved.', this._toastr);
+      }, this.selectedVat.id ? true : false).subscribe((res: Vat) => {
+        success('Success!', 'The Vat is successfully saved.', this._toastr);
         this.savingExpense = false;
         this.close(modal, true);
       }, (err: any) => {
@@ -118,26 +126,17 @@ export class ExpenseComponent implements OnInit {
             warning('Warning!', e, this._toastr);
           });
         } else {
-          error('Error!', 'An error has occured when saving the expense, please contact system administrator.', this._toastr);
+          error('Error!', 'An error has occured when saving the Vat, please contact system administrator.', this._toastr);
         }
         this.savingExpense = false;
       });
     }
   }
 
- //Delete
- delete(modal: any): void {
-  this.deletingItem = true;
-  this.expenseService.delete({
-    id: this.selectedExpense.id
-  }).subscribe(() => {
-    this.close(modal, true);
-    this.deletingItem = false;
-  });
-}
 
-initDelete(modal: any, role: Expense): void {
-  this.selectedExpense = role;
+
+initDelete(modal: any, vat: Vat): void {
+  this.selectedVat = vat;
   // Open the delete confirmation modal
   this.modalService
     .open(modal)
@@ -145,12 +144,24 @@ initDelete(modal: any, role: Expense): void {
     .then((result) => {
       if (result) {
         this.loadData();
+     
       }
-      this.selectedExpense = new Expense();
+      this.selectedVat = new Vat();
     }, () => {
       // If the modal is dismissed
-      this.selectedExpense = new Expense();
+      this.selectedVat = new Vat();
     });
+}
+ //Delete
+ delete(modal: any): void {
+  this.deletingItem = true;
+  this.vatService.delete({
+    id: this.selectedVat.id
+  }).subscribe(() => {
+ 
+    this.deletingItem = false;
+    this.close(modal, true);
+  });
 }
 
 //Close Module
