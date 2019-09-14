@@ -8,18 +8,21 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { MaterialsModule } from '@app/material.module';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
+import { CustomerReportComponent } from './customer-report/customer-report.component';
 
 const routes: Routes = [
   // Roles component
   {
     path: '',
     component: CustomerComponent
-  }
+  },
+  {path: 'report/:id',component: CustomerReportComponent },
 ];
 
 @NgModule({
   declarations: [CustomerComponent,
     AddCustomerComponent,
+    CustomerReportComponent,
     CustomerDetailsComponent],
   imports: [
     CommonModule,
@@ -30,6 +33,6 @@ const routes: Routes = [
     ReactiveFormsModule,
 
   ],
-  entryComponents:[AddCustomerComponent,CustomerDetailsComponent]
+  entryComponents:[AddCustomerComponent,CustomerDetailsComponent,CustomerReportComponent]
 })
 export class CustomerModule { }
