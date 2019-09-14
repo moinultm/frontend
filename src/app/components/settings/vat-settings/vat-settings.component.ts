@@ -1,4 +1,4 @@
- 
+
 import { Component, OnInit } from '@angular/core';
 import { Vat } from '@models/common/Vat.model';
 import { PartialList } from '@models/common/patial-list.model';
@@ -37,7 +37,7 @@ export class VatSettingsComponent implements OnInit {
     private modalService: NgbModal,
     titleService: Title,
 
-    private _formBuilder: FormBuilder,) {
+    private _formBuilder: FormBuilder) {
 
       titleService.setTitle('General - Vat management');
 
@@ -144,7 +144,7 @@ initDelete(modal: any, vat: Vat): void {
     .then((result) => {
       if (result) {
         this.loadData();
-     
+
       }
       this.selectedVat = new Vat();
     }, () => {
@@ -158,7 +158,7 @@ initDelete(modal: any, vat: Vat): void {
   this.vatService.delete({
     id: this.selectedVat.id
   }).subscribe(() => {
- 
+
     this.deletingItem = false;
     this.close(modal, true);
   });

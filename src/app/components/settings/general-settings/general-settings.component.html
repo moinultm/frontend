@@ -1,179 +1,235 @@
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Settings</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
-              <li class="breadcrumb-item"><a>General</a></li>
-              <li class="breadcrumb-item active">Manage settings</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-  
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">        <h3 class="card-title">
-                        {{ selectedProduct.id ? ('Update Product: ' + selectedProduct.name) : 'Add Product' }}
-                      </h3>
-                    </div>
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Settings</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
+            <li class="breadcrumb-item"><a>General</a></li>
+            <li class="breadcrumb-item active">Manage settings</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">
+                Settings
+              </h3>
+            </div>
 
 
-                     <!-- form start -->
+            <!-- form start -->
             <form [formGroup]="form" *ngIf="!loading">
-                <tr *ngIf="loading">
-                    <td colspan="12" class="text-center loading-data">
-                      <mat-spinner></mat-spinner>
-                    </td>
-                 </tr>
+
+              <tr *ngIf="loading">
+                <td colspan="12" class="text-center loading-data">
+                  <mat-spinner></mat-spinner>
+                </td>
+              </tr>
 
               <div class="card-body">
                 <div class="form-group">
                   <div class="row">
                     <div class="col-md-6">
-                            <label>Site Name</label>
-                            <input type="text" class="form-control" formControlName="site_name"
-                              placeholder="Name of product">
+                      <label>Site Name</label>
+                      <input type="text" class="form-control" formControlName="site_name" placeholder="Site Name">
                     </div>
                     <div class="col-md-6">
-                            <label>Slogan</label>
-                            <input type="text" class="form-control" formControlName="slogan"
-                              placeholder="Name of product">
+                      <label>Slogan</label>
+                      <input type="text" class="form-control" formControlName="slogan" placeholder="Slogan">
                     </div>
 
-                    
+
                     <div class="col-md-6">
-                            <label>Site email</label>
-                            <input type="text" class="form-control" formControlName="email"
-                              placeholder="Name of product">
+                      <label>Email</label>
+                      <input type="text" class="form-control" formControlName="email" placeholder="Email">
                     </div>
-                     <div class="col-md-6">
-                            <label>Site Phone</label>
-                            <input type="text" class="form-control" formControlName="phone"
-                              placeholder="Name of product">
+                    <div class="col-md-6">
+                      <label>Phone</label>
+                      <input type="text" class="form-control" formControlName="phone" placeholder="Phone">
                     </div>
 
-                    </div><!--Row-->
+                  </div>
+                  <!--Row-->
 
                 </div>
-            </div>
+                <!--Form-Group-->
 
-            <div class="form-group">
-                <div class="row">
+
+
+                <div class="form-group">
+                  <div class="row">
                     <div class="col-md-12">
-                            <label>Address</label>
-                            <input type="text" class="form-control" formControlName="address" placeholder="Address">
-             
-                    </div>                    
-                </div>
-                <!--Row-->
-            
-            </div>
+                      <label>Address</label>
+                      <textarea type="text" class="form-control" formControlName="address" placeholder="Address">
+                              </textarea>
 
-            <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-12">
-                                <label>Owner Name</label>
-                                <input type="text" class="form-control" formControlName="owner_name" placeholder="Name of product">
-                         </div>
-                         <div class="col-md-6">
-                                <label>Site Logo</label>
-                                <input type="text" class="form-control" formControlName="site_logo" placeholder="Site Logo">
-                         </div>                           
                     </div>
-                    <!--Row-->                
+                  </div>
+                  <!--Row-->
+
+                </div>
+
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label>Owner Name</label>
+                      <input type="text" class="form-control" formControlName="owner_name"
+                        placeholder="Name of product">
+                    </div>
+                    <div class="col-md-6">
+                      <label>Site Logo</label>
+                      <input type="text" class="form-control" formControlName="site_logo" placeholder="Site Logo">
+                    </div>
+                  </div>
+                  <!--Row-->
                 </div>
 
 
                 <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-12">
-                                    <label>Currency Code</label>
-                                    <input type="text" class="form-control" formControlName="currency_code" placeholder="Currency_code">
-                             </div>
-                             <div class="col-md-6">
-                                    <label>Alert Quantity</label>
-                                    <input type="text" class="form-control" formControlName="alert_quantity" placeholder="Alert Quantity">
-                             </div>                           
-                        </div>
-                        <!--Row-->                
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label>Currency</label>
+                      <input type="text" class="form-control" formControlName="currency_code" placeholder="Currency">
+                    </div>
+                    <div class="col-md-6">
+                      <label>Alert Quantity</label>
+                      <input type="text" class="form-control" formControlName="alert_quantity"
+                        placeholder="Alert Quantity">
+                    </div>
+                  </div>
+                  <!--Row-->
+                </div>
+
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label>Invoice Tax</label>
+                      <input type="text" class="form-control" formControlName="invoice_tax" placeholder="Invoice Tax">
+                    </div>
+                    <div class="col-md-6">
+                      <label>Invoice Tax Rate</label>
+                      <select class="form-control" formControlName="invoice_tax_rate" *ngIf="!loadingVat" >
+                          <option *ngFor="let list of  listVat.data" [value]="list.id">
+                            {{list.name}}
+                          </option>
+                        </select>
+                    </div>
+                  </div>
+                  <!--Row-->
+                </div>
+
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label>Invoice Tax Type</label>
+                      <input type="text" class="form-control" formControlName="invoice_tax_type"
+                        placeholder="Invoice Tax Type">
+                    </div>
+                    <div class="col-md-6">
+                      <!-- ./Type field validations container -->
+
+                      <label>Select Theme</label>
+                      <select class="form-control" formControlName="theme">
+                        <option *ngFor="let list of lteThemes" [value]="list.name">
+                          {{list.name}}
+                        </option>
+                      </select>
+
+                      <!-- ./Type field validations container -->
+                    </div>
+                  </div>
+                  <!--Row-->
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label>Vat No:</label>
+                      <input type="text" class="form-control" formControlName="vat_no" placeholder="Vat No">
+                    </div>
+                    <div class="col-md-6">
+                      <label>Customer Acces</label>
+
+                      <select class="form-control" formControlName="enable_customer">
+                        <option *ngFor="let list of lteActivity" [value]="list.id">
+                          {{list.name}}
+                        </option>
+                      </select>
                     </div>
 
-                    <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-12">
-                                        <label>invoice_tax</label>
-                                        <input type="text" class="form-control" formControlName="invoice_tax" placeholder="invoice_tax">
-                                 </div>
-                                 <div class="col-md-6">
-                                        <label>invoice_tax_rate</label>
-                                        <input type="text" class="form-control" formControlName="invoice_tax_rate" placeholder="invoice_tax_rate">
-                                 </div>                           
-                            </div>
-                            <!--Row-->                
-                        </div>
-    
-                        <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                            <label>invoice_tax_type</label>
-                                            <input type="text" class="form-control" formControlName="invoice_tax_type" placeholder="invoice_tax_type">
-                                     </div>
-                                     <div class="col-md-6">
-                                            <label>theme</label>
-                                            <input type="text" class="form-control" formControlName="theme" placeholder="theme">
-                                     </div>                           
-                                </div>
-                                <!--Row-->                
-                            </div>
-                            <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                                <label>vat_no</label>
-                                                <input type="text" class="form-control" formControlName="vat_no" placeholder="vat_no">
-                                         </div>
-                                         <div class="col-md-6">
-                                                <label>enable_purchaser</label>
-                                                <input type="text" class="form-control" formControlName="enable_purchaser" placeholder="enable_purchaser">
-                                         </div>                           
-                                    </div>
-                                    <!--Row-->                
-                                </div>
-                                <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                    <label>enable_customer</label>
-                                                    <input type="text" class="form-control" formControlName="enable_customer" placeholder="enable_customer">
-                                             </div>
-                                             <div class="col-md-6">
-                                                    <label>enable_purchaser</label>
-                                                    <input type="text" class="form-control" formControlName="enable_purchaser" placeholder="enable_purchaser">
-                                             </div>                           
-                                        </div>
-                                        <!--Row-->                
-                                    </div>
-        
-                                		pos_invoice_footer_text	dashboard	product_tax	created_at	updated_at
-
-
-                    </form>
-
-
+                  </div>
+                  <!--Row-->
                 </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label>Supplier Access</label>
+                      <select class="form-control" formControlName="enable_purchaser">
+                        <option *ngFor="let list of lteActivity" [value]="list.id">
+                          {{list.name}}
+                        </option>
+                      </select>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label>Product Tax</label>
+                      <select class="form-control" formControlName="product_tax">
+                        <option *ngFor="let list of lteActivity" [value]="list.id">
+                          {{list.name}}
+                        </option>
+                      </select>
+                    </div>
+                    <!--Row-->
+                  </div>
                 </div>
+
+
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label>Invoice Footer Text</label>
+                      <input type="text" class="form-control" formControlName="pos_invoice_footer_text"
+                        placeholder="Invoice Footer Text">
+                    </div>
+
+                    <div class="col-md-6">
+                      <label>Dashboard</label>
+                      <select class="form-control" formControlName="dashboard">
+                        <option *ngFor="let D of lteDashboard" [value]="D.name">
+                          {{D.name}}
+                        </option>
+                      </select>
+                    </div>
+
+                  </div>
+                  <!--Row-->
+                </div>
+
+
+              </div>
+              <!--Card-Body-->
+              <div class="card-footer">
+                  <button type="submit" class="btn btn-primary"  (click)="saveForm(form)">Submit</button>
+                </div>
+            </form>
+
+
+          </div>
         </div>
       </div>
-    </section>
-  
-  </div>
-  <!-- Content Wrapper. Contains page content -->
-  
+    </div>
+  </section>
+
+</div>
+<!-- Content Wrapper. Contains page content -->

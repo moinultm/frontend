@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class VatService extends CrudService <Vat> {
-  constructor( _http: HttpClient ) { 
+  constructor( _http: HttpClient ) {
     super(_http);
     this.setUrl('vat');
   }

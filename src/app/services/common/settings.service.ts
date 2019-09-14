@@ -7,9 +7,20 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class SettingsService extends CrudService <Settings> {
-
-  constructor( _http: HttpClient ) { 
-    super(_http);
+  constructor(private __http: HttpClient ) {
+    super(__http);
     this.setUrl('settings');
   }
+
+
+  public save(model: any, update?: boolean): any {
+    this.options.params = undefined;
+    if (update) {
+      return this.__http.post<Settings>(this.url + '/' + model.get('id'), model, this.options);
+    } else {
+      return this.__http.post<Settings>(this.url, model, this.options);
+    }
+  }
+
+
 }

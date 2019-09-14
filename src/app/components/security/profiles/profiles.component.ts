@@ -57,8 +57,7 @@ export class ProfilesComponent implements OnInit {
     });
   }
 
-  
- 
+
   initSave(modal: any, profile?: Profile): void {
     // Initialize the form group with the profile passed in parameter
     this.initSaveForm(profile);
@@ -85,10 +84,10 @@ export class ProfilesComponent implements OnInit {
       });
   }
 
-  
+
   initSaveForm(profile?: Profile): void {
     // Initialize the selected profile object
-    
+
     if (profile) {
       this.selectedProfile = Object.assign(Profile, profile);
     } else {
@@ -107,13 +106,13 @@ export class ProfilesComponent implements OnInit {
     });
   }
 
- 
+
   selectedProfileHasRole(role: Role): boolean {
- 
+
      return this.selectedProfile.roles.some((r: Role) => r.id === role.id);
   }
 
- 
+
   selectRole(role: Role): void {
     if (this.selectedProfileHasRole(role)) {
       this.selectedProfile.roles.splice(this.selectedProfile.roles.findIndex((r: Role) => r.id === role.id), 1);
@@ -122,7 +121,7 @@ export class ProfilesComponent implements OnInit {
     }
   }
 
-  
+
   save(modal: any): void {
     // Check if the form is valid
     if (this.form.valid) {
@@ -155,8 +154,8 @@ export class ProfilesComponent implements OnInit {
     }
   }
 
-  
- 
+
+
   initDelete(modal: any, profile: Profile): void {
     this.selectedProfile = profile;
     // Open the delete confirmation modal
@@ -174,7 +173,7 @@ export class ProfilesComponent implements OnInit {
       });
   }
 
- 
+
   delete(modal: any): void {
     this.deletingProfile = true;
     this.profileService.delete({
@@ -185,7 +184,7 @@ export class ProfilesComponent implements OnInit {
     });
   }
 
- 
+
   close(modal: any, flag?: boolean): void {
     modal.close(flag ? true : false);
   }
