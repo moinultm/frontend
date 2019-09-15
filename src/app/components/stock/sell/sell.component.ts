@@ -41,7 +41,7 @@ export class SellComponent implements OnInit {
 
    this.dataSource = new TablesDataSource(this.sellsService);
    console.log( this.dataSource );
-     this.dataSource.loadTables( '', 'asc', 1, 3) ;
+     this.dataSource.loadTables( '', 'asc', 1, 10) ;
 
   }
 

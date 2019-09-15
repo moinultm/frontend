@@ -25,7 +25,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item  menu-open">
-            <a href="#" class="nav-link"  routerLinkActive="active">
+            <a href="#" [routerLink]="['/dashboard']"  class="nav-link"   [routerLinkActiveOptions]="{exact: true}"  routerLinkActive="active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -33,86 +33,168 @@
             </a>
           </li>
 
-          <li class="nav-header">STOCK</li>
+          <li class="nav-header">
+            STOCK</li>
 
-          <li class="nav-item">
-              <a  href="#" [routerLink]="['/product']" class="nav-link"    [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
-                <i class="nav-icon far fa-circle text-danger"></i>
-                <p class="text">Add Products</p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="#" [routerLink]="['/product','manage']" class="nav-link"  [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
-                <i class="nav-icon far fa-circle text-danger"></i>
-                <p class="text">Manage Products</p>
-              </a>
-            </li>
-
-
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fab fa-buffer"></i>
+              <p>
+                My Products
+                <i class="fa fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a  href="#" [routerLink]="['/product']" class="nav-link"    [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+                  <i class="nav-icon fas fa-cart-plus"></i>                 
+                   <p class="text">Add Product</p>
+                </a>
+              </li>
+  
+              <li class="nav-item">
+                <a href="#" [routerLink]="['/product','manage']" class="nav-link"  [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+                  <i class="nav-icon fab fa-dropbox text-info"></i>                  
+                  <p class="text">Manage Product</p>
+                </a>
+              </li>
+          
+            </ul>
+          </li>
+          
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+            
+              <i class="nav-icon fas fa-boxes"></i>
+              <p>
+                Classification
+                <i class="fa fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="#" routerLink="/category" class="nav-link" routerLinkActive="active">
-                <i class="nav-icon far fa-circle text-warning"></i>
-
+                <i class="nav-icon  fab fa-audible"></i>              
                 <p>Category</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="#" routerLink="/subcategory" class="nav-link" routerLinkActive="active">
-                <i class="nav-icon far fa-circle text-info"></i>
+                <i class="nav-icon  fab fa-accusoft"></i>                
                 <p>Subcategory</p>
               </a>
             </li>
+
+          </ul>
+        </li>
+            
+
+
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+                 
+            <i class="nav-icon fas fa-american-sign-language-interpreting"></i>
+            <p>
+              Cilents
+              <i class="fa fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="#" routerLink="/customer" class="nav-link" routerLinkActive="active">
-                <i class="nav-icon far fa-circle text-info"></i>
+                
+                <i class="nav-icon  fab fa-angellist"></i>
                 <p>Customer</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="#"routerLink="/supplier" class="nav-link" routerLinkActive="active" >
-                <i class="nav-icon far fa-circle text-info"></i>
+                
+                <i class="nav-icon fab fa-codiepie  text-info"></i>
                 <p>Supplier</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="#" routerLink="/warehouse" class="nav-link" routerLinkActive="active">
-                <i class="nav-icon far fa-circle text-info"></i>
+                 <i class="nav-icon  fas fa-city"></i>
                 <p>Warehouse</p>
               </a>
             </li>
 
+        </ul>
+      </li>
+            
+
           <li class="nav-header">SELLS</li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+                   
+               <i class="nav-icon fas fa-comment-dollar"></i>
+              <p>
+                Manage Sells
+                <i class="fa fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
           <li class="nav-item">
             <a href="#" [routerLink]="['/sell','add']" class="nav-link"    [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
-              <i class="nav-icon far fa-circle text-warning"></i>
+               
+              <i class="nav-icon fas fa-cart-plus"></i>
               <p>Add Invoice</p>
             </a>
           </li>
           <li class="nav-item" >
             <a href="#"[routerLink]="['/sell']" class="nav-link"   [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
-              <i class="nav-icon far fa-circle text-info"></i>
+               <i class="nav-icon fas fa-cart-arrow-down"></i>
               <p>Manage Invoice</p>
             </a>
           </li>
-          <li class="nav-header">PURCHASE</li>
-          <li class="nav-item">
-            <a href="#" [routerLink]="['/purchase','add']"  class="nav-link"   [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
-              <i class="nav-icon far fa-circle text-info"></i>
-              <p>Add Purchase</p>
-            </a>
-          </li>
-          <li class="nav-item">
-              <a href="#" [routerLink]="['/purchase']"   class="nav-link"   [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" >
-                <i class="nav-icon far fa-circle text-info"></i>
-                <p>Manage Purchase</p>
-              </a>
-            </li>
 
+        </ul>
+      </li>
+            
+
+      <li class="nav-header">PURCHASE</li>
+
+      <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+          
+              <i class="nav-icon fas fa-download"></i>
+            <p>
+               Product Purchases 
+              <i class="fa fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+
+              <li class="nav-item">
+                  <a href="#" [routerLink]="['/purchase','add']"  class="nav-link"   [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+                   
+                    <i class="nav-icon fab fa-elementor"></i>
+                    <p>Add Purchase</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" [routerLink]="['/purchase']"   class="nav-link"   [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" >
+             
+                      <i class="nav-icon fab fa-dashcube"></i>
+                      <p>Manage Purchase</p>
+                    </a>
+                  </li>
+      
+
+      </ul>
+    </li>
+
+
+      
+          
           <li class="nav-header">GENERAL</li>
           <li class="nav-item">
             <a href="#" [routerLink]="['/expenses']"   class="nav-link"   [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" >
-              <i class="nav-icon far fa-circle text-info"></i>
+             
+              <i class="nav-icon  fas fa-feather-alt"></i>
               <p>Expenses</p>
             </a>
           </li>
@@ -120,13 +202,16 @@
           <li class="nav-header">SETTING</li>
           <li class="nav-item">
             <a href="#" routerLink="/settings/general" class="nav-link"  routerLinkActive="active">
-              <i class="nav-icon far fa-circle text-info"></i>
+               
+              <i class="nav-icon fas fa-file-contract"></i>
+
               <p>General</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="#" routerLink="/settings/vat" class="nav-link"  routerLinkActive="active">
-              <i class="nav-icon far fa-circle text-danger"></i>
+             
+              <i class="nav-icon  fab fa-ello"></i>
               <p>Vat</p>
             </a>
           </li>

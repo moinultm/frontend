@@ -48,13 +48,12 @@
                                         <thead>
                                             <tr>
                                                 <th style="width: 10px">#</th>
-                                                <th>Product Name</th>
-                                                <th>Opening </th>
-                                                <th>Stock In</th>
-                                                <th>Total Stock</th>
-                                                <th>Sale % </th>
-                                                <th>Total Sale Qty</th>
-                                                <th>Closing Stock</th>
+                                                <th>Product Name</th>  
+                                                <th>Quantity </th>  
+                                                <th>MRP </th>                                                                                       
+                                                <th>Discount % </th>
+                                                <th>Discount</th>
+                                                <th>Total</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -74,35 +73,15 @@
                                                       <ng-container *ngIf="!loading">
                                                         <tr *ngFor="let item of data.data; let i = index">
                                                           <td>{{ i+1 }}</td>
-                                                          <td>{{ item.full_name }}</td>
-                                                          <td>{{ item.contact }}</td>
-                                                          <td>{{ item.company_name }}</td>
-                                                          <td>{{ item.company_name }}</td>
-                                                          <td>{{ item.company_name }}</td>
-                                                          <td>0</td>
-                                                          <td class="actions">
-                                                        
-
-                                                        <button mat-icon-button color="accent"
-                                                        matTooltip="view details"
-                                                        (click)="openDialogDetails(item.id)">
-                                                          <mat-icon class="mat-18">flip_to_front</mat-icon>
-                                                        </button>
-                                                      
-                                                        <button mat-icon-button color="accent" matTooltip="Edit Client Information"
-                                                        (click)="openDialog(item)">
-                                                            <mat-icon>edit</mat-icon>
-                                                        </button>
-                                                        <button mat-icon-button color="accent" (click)="initDelete(deleteModal, item)"
-                                                        matTooltip="Delete invoice">
-                                                            <mat-icon>restore_from_trash</mat-icon>
-                                                          </button>
-
-                                                          <button mat-icon-button color="accent" matTooltip="View Client Report"
-                                                           >
-                                                          <mat-icon>open_in_browser</mat-icon>
-                                                        </button>
-                                                          </td>
+                                                          <td>{{ item.name }}</td>
+                                                          <td>{{ item.quantity }}</td>
+                                                          <td>{{ item.mrp }}</td>
+                                                          <td>{{ item.product_discount_percentage }}</td>
+                                                          <td>{{item.product_discount_amount}}</td>
+                                                          <td>{{item.sub_total}}</td>
+                                                          
+                                                          <td>{{ item.TotalSell }}</td>
+                                                         
                                                         </tr>
                                                       </ng-container>
                                         </tbody>

@@ -32,4 +32,10 @@ export class CustomerService extends CrudService<Client> {
       return this.__http.get <PartialList<Client>>(this.url + '/' + id +'/'+'details', this.options);
     }
 
+
+    public findCustomerReport(id: number): any {
+      this.options.params = undefined;
+
+      return this.__http.get <PartialList<Client>>(this.url + '/' + id +'/'+'report', this.options);
+    }
 }
