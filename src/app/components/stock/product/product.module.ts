@@ -6,6 +6,8 @@ import { MatProgressBarModule, MatProgressSpinnerModule } from '@angular/materia
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ManageComponent } from './manage/manage.component';
+import { NgxBarcodeModule } from 'ngx-barcode';
+import { ProductBarcodeComponent } from './product-barcode/product-barcode.component';
 
 
 const routes: Routes = [
@@ -14,11 +16,12 @@ const routes: Routes = [
 
   {path: 'edit/:id',component: ProductComponent },
   {path: 'manage',component: ManageComponent },
+  {path: 'barcode',component: ProductBarcodeComponent },
 ];
 
 
 @NgModule({
-  declarations: [ProductComponent, ManageComponent],
+  declarations: [ProductComponent, ManageComponent,ProductBarcodeComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -26,7 +29,8 @@ const routes: Routes = [
     MatProgressSpinnerModule,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxBarcodeModule
   ],
   exports: [RouterModule]
 })
