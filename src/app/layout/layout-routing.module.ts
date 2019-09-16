@@ -13,6 +13,7 @@ const routes: Routes = [
           { path: '', loadChildren: () => import('../components/security/security.module').then(m => m.SecurityModule) },
           { path: '', loadChildren: () => import('../components/stock/stock.module').then(m => m.StockModule) },
           { path: '', loadChildren: () => import('../components/settings/settings.module').then(m => m.SettingsModule) },
+          { path: '', loadChildren: () => import('../components/report/report.module').then(m => m.ReportModule) },
       ]
   },
   //{ path: '**',  redirectTo: '/dashboard'  }

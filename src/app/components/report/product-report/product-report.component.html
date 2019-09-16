@@ -1,0 +1,185 @@
+<p>product-report works!</p>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Pruducts Summary</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
+              <li class="breadcrumb-item"><a>Reports</a></li>
+              <li class="breadcrumb-item active">Pruducts Report</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+  <div class="col-12">
+
+      <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Data Table with (today) products summary</h3>
+            <div class="card-tools">
+                <a href="#" class="btn btn-tool btn-sm">
+                  <i class="fas fa-download"></i>
+                </a>
+                <a href="#" class="btn btn-tool btn-sm">
+                  <i class="fas fa-bars"></i>
+                </a>
+              </div>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+
+              <div class="row">
+                  <div class="col-md-4">
+              <form [formGroup]="form">
+
+                  <label>Date masks:</label>
+
+                  <div class="form-group">
+                  <mat-form-field>
+                      <input matInput [matDatepicker]="picker" placeholder="Bill Date" formControlName="fromDate">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="form-group">
+                      <mat-form-field>
+                          <input matInput [matDatepicker]="picker" placeholder="Bill Date" formControlName="toDate">
+                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                          <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+                </div>
+
+
+                  <button type="button" class="btn btn-primary float-right" (click)="dateFilter(form)">Filter</button>
+              </form>
+             </div>
+          </div>
+              <!--table class="table table-bordered">
+                  <thead>
+                      <tr>
+                          <th class="tg-0pky" rowspan="2">Sl</th>
+                          <th class="tg-0pky" rowspan="2">Product Name</th>
+                          <th class="tg-0pky" colspan="3">Opening</th>
+                          <th class="tg-0pky" colspan="3">Inward</th>
+                          <th class="tg-0pky" colspan="3">Outward</th>
+                          <th class="tg-0pky" colspan="3">Closing</th>
+                        </tr>
+                        <tr>
+                          <td class="tg-0pky">Qty</td>
+                          <td class="tg-0pky">Rate</td>
+                          <td class="tg-0pky">Value</td>
+                          <td class="tg-0pky">Qty</td>
+                          <td class="tg-0pky">Rate</td>
+                          <td class="tg-0pky">Value</td>
+                          <td class="tg-0pky">Qty</td>
+                          <td class="tg-0pky">Rate</td>
+                          <td class="tg-0pky">Value</td>
+                          <td class="tg-0pky">Qty</td>
+                          <td class="tg-0pky">Rate</td>
+                          <td class="tg-0lax">Value</td>
+                        </tr>
+
+                    </thead>
+
+
+                  <tbody>
+                      <tr>
+                          <td class="tg-0pky"></td>
+                          <td class="tg-0pky"></td>
+                          <td class="tg-0pky"></td>
+                          <td class="tg-0pky"></td>
+                          <td class="tg-0pky"></td>
+                          <td class="tg-0pky"></td>
+                          <td class="tg-0pky"></td>
+                          <td class="tg-0pky"></td>
+                          <td class="tg-0pky"></td>
+                          <td class="tg-0pky"></td>
+                          <td class="tg-0pky"></td>
+                          <td class="tg-0pky"></td>
+                          <td class="tg-0pky"></td>
+                          <td class="tg-0lax"></td>
+                        </tr>
+
+                  </tbody>
+                </table-->
+
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th style="width: 10px">#</th>
+                            <th>Product Name</th>
+                            <th>Code</th>
+                            <th>Quantity Opening</th>
+                            <th>Quantity Inward</th>
+                            <th>Quantity Outward</th>
+                            <th>Quantity Closing</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr *ngIf="loading">
+                                    <td colspan="12" class="text-center loading-data">
+                                        <mat-spinner></mat-spinner>
+                                    </td>
+                                  </tr>
+
+                                  <tr *ngIf="!loading && data && !data.data.length">
+                                    <td colspan="12" class="text-center loading-data">
+                                      No category created yet!
+                                    </td>
+                                  </tr>
+
+                                  <ng-container *ngIf="!loading">
+                                    <tr *ngFor="let item of data.data; let i = index">
+                                      <td>{{ i+1 }}</td>
+                                      <td>{{ item.name }}</td>
+                                      <td>{{ item.code }}</td>
+                                      <td>{{ item.sum_opening }}</td>
+                                      <td>{{ item.total_purchases }}</td>
+                                      <td>{{ item.total_sells }}</td>
+                                      <td>{{ item.total_quantity_transaction }}</td>
+                                    </tr>
+                                  </ng-container>
+                    </tbody>
+                </table>
+
+          </div>
+          <!-- /.card-body -->
+
+
+          <div class="card-footer clearfix">
+              <ul class="pagination pagination-sm m-0 float-right">
+                <li class="page-item"><a class="page-link" href="#">«</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">»</a></li>
+              </ul>
+            </div>
+
+
+        </div>
+
+  </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+  <!-- Content Wrapper. Contains page content -->
+
+
+
+ <!--https://www.tablesgenerator.com/html_tables#-->
