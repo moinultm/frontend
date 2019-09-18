@@ -46,7 +46,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <mat-form-field>
-                                <input matInput [matDatepicker]="pickerFrom" placeholder="Bill Date" formControlName="fromDate">
+                                <input matInput [matDatepicker]="pickerFrom" placeholder="Bill Date" formControlName="fromDate"  [value]="date.value">
                                 <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
                                 <mat-datepicker #pickerFrom></mat-datepicker>
                               </mat-form-field>
@@ -55,7 +55,7 @@
                       <div class="col-md-4">
                           <div class="form-group">
                               <mat-form-field>
-                                  <input matInput [matDatepicker]="pickerTo" placeholder="Bill Date" formControlName="toDate">
+                                  <input matInput [matDatepicker]="pickerTo" placeholder="Bill Date" formControlName="toDate"  [value]="date.value">
                                   <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
                                   <mat-datepicker #pickerTo></mat-datepicker>
                                 </mat-form-field>
@@ -87,16 +87,16 @@
                         </tr>
                         <tr>
                           <td class="tg-0pky">Qty</td>
-                          <td class="tg-0pky">Rate</td>
+
                           <td class="tg-0pky">Value</td>
                           <td class="tg-0pky">Qty</td>
-                          <td class="tg-0pky">Rate</td>
+
                           <td class="tg-0pky">Value</td>
                           <td class="tg-0pky">Qty</td>
-                          <td class="tg-0pky">Rate</td>
+
                           <td class="tg-0pky">Value</td>
                           <td class="tg-0pky">Qty</td>
-                          <td class="tg-0pky">Rate</td>
+
                           <td class="tg-0lax">Value</td>
                         </tr>
 
@@ -125,17 +125,28 @@
                 </table-->
 
 
-                <table class="table">
+                <table class="table table-bordered">
                     <thead>
-                        <tr>
-                            <th style="width: 10px">#</th>
-                            <th>Product Name</th>
-                            <th>Code</th>
-                            <th>Quantity Opening</th>
-                            <th>Quantity Inward</th>
-                            <th>Quantity Outward</th>
-                            <th>Quantity Closing</th>
-                        </tr>
+                      <tr>
+                        <th class="tg-0pky" rowspan="2">Sl</th>
+                        <th class="tg-0pky" rowspan="2">Product Name</th>
+                        <th class="tg-0pky" colspan="2">Opening</th>
+                        <th class="tg-0pky" colspan="2">Inward</th>
+                        <th class="tg-0pky" colspan="2">Outward</th>
+
+                      </tr>
+                      <tr>
+                        <td class="tg-0pky">Qty</td>
+                        <td class="tg-0pky">Value</td>
+
+                        <td class="tg-0pky">Qty</td>
+                        <td class="tg-0pky">Value</td>
+
+                        <td class="tg-0pky">Qty</td>
+                        <td class="tg-0pky">Value</td>
+
+
+                      </tr>
                     </thead>
                     <tbody>
                             <tr *ngIf="loading">
@@ -153,12 +164,14 @@
                                   <ng-container *ngIf="!loading">
                                     <tr *ngFor="let item of data.data; let i = index">
                                       <td>{{ i+1 }}</td>
-                                      <td>{{ item.name }}</td>
-                                      <td>{{ item.code }}</td>
-                                      <td>{{ item.sum_opening }}</td>
-                                      <td>{{ item.total_purchases }}</td>
-                                      <td>{{ item.total_sells }}</td>
-                                      <td>{{ item.total_quantity_transaction }}</td>
+                                      <td>{{ item.STOCK_ITEM_NAME }}</td>
+                                      <td>{{ item.TRAN_QUANTITY }}</td>
+                                      <td>{{ item.TRAN_AMOUNT }}</td>
+                                      <td>{{ item.OUTWARD_QUANTITY }}</td>
+                                      <td>{{ item.OUTWARD_AMOUNT }}</td>
+                                      <td>{{ item.INWARD_QUANTITY }}</td>
+                                      <td>{{ item.INWARD_AMOUNT }}</td>
+
                                     </tr>
                                   </ng-container>
                     </tbody>
