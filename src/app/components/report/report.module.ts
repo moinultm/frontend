@@ -10,6 +10,8 @@ import { MatProgressSpinnerModule, MatDatepickerModule, MatFormFieldModule, MatI
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { DailySalesReportComponent } from './daily-sales-report/daily-sales-report.component';
+import { CustomerSummaryReportComponent } from './customer-summary-report/customer-summary-report.component';
 
 
 
@@ -32,7 +34,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [  ReportMenuComponent, StockReportComponent, ProductReportComponent ],
+  declarations: [  ReportMenuComponent, StockReportComponent, ProductReportComponent, DailySalesReportComponent, CustomerSummaryReportComponent ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

@@ -68,7 +68,18 @@ dateFilter(){
     this.loading = false;
   });
 
-
 }
+ 
+
+_CIN(val){
+  return parseInt(val);
+}
+ 
+_CIP(val){
+  return parseInt(val)*-1;
+}
+ 
+
+
 
 }
