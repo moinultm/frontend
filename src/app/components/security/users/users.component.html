@@ -210,6 +210,17 @@
         </div>
         <!-- ./Password confirmation field validations container -->
 
+        <div class="col-md-6">
+          <div class="form-group">
+           <label>User Type</label>
+           <select class="form-control" formControlName="user_type">
+             <option *ngFor="let list of TypeList" [value]="list.id">             
+             </option>
+           </select>
+         </div>
+     </div>
+
+
         <!-- Profiles checkboxes -->
         <h5>Profile(s)</h5>
         <ng-container

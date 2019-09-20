@@ -60,7 +60,7 @@ export class UsersComponent implements OnInit {
       size: this.size
     }).subscribe((res: PartialList<User>) => {
       this.data = res;
-       console.log( this.data);
+       //console.log( this.data);
       this.loading = false;
     });
   }
@@ -121,7 +121,11 @@ export class UsersComponent implements OnInit {
       password_confirmation: [
         '',
         user && user.id ? [] : [Validators.required]
-      ]
+      ],
+      user_type: [
+        user ? user.name : '',
+        [Validators.required, Validators.maxLength(255)]
+      ],
     });
   }
 

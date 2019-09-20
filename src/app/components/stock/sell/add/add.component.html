@@ -1,3 +1,5 @@
+
+  
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <div class="content-header">
@@ -34,7 +36,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                   <label>Bill to</label>
                                   <button class="form-control">
@@ -43,9 +45,9 @@
                                 </div>
                               </div>
 
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Select Customer</label>
+                              <div class="col-md-6">
+                                   <div class="form-group">
+                                    <label>Sale by Rep.</label>
                                     <select class="form-control" formControlName="customerName">
                                       <option *ngFor="let list of customerList" [value]="list.id">
                                         {{list.full_name}}
@@ -54,6 +56,16 @@
                                   </div>
                               </div>
 
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Sale to Customer</label>
+                                    <select class="form-control" formControlName="customerName">
+                                      <option *ngFor="let list of customerList" [value]="list.id">
+                                        {{list.full_name}}
+                                      </option>
+                                    </select>
+                                  </div>
+                              </div>
                         </div>
                     </div>
                     <div class="col-md-6">

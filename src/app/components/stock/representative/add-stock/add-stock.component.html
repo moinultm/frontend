@@ -1,0 +1,145 @@
+<div class="content-wrapper" >
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Represtative Stock</h1>
+              </div><!-- /.col -->
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
+                  <li class="breadcrumb-item"><a>Stock</a></li>
+                  <li class="breadcrumb-item active">Manage Represtative Stock</li>
+                </ol>
+              </div><!-- /.col -->
+            </div><!-- /.row -->
+          </div><!-- /.container-fluid -->
+        </div>
+      
+        <section class="content">
+          <div class="container-fluid">
+              <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Product Table</h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body" >
+
+                      <div *ngIf="loading" class="text-center loading-profiles">
+                          <mat-spinner></mat-spinner>
+                        </div>
+
+                       
+                        
+                    <form  role="form"  [formGroup]="myForm">
+
+                  <div class="row" *ngIf="!loading">
+                  <div class="col-md-4">
+                      <div class="form-group">
+                          <label for="name">Represtative Name</label>
+                          <select class="form-control"  formControlName="user_id">
+                              <option *ngFor="let U of users.data" [value]="U.id">
+                              {{U.name}} - {{U.id}}</option>
+                      </select>
+                        </div>
+                  </div>
+                  <div class="col-md-4"></div>
+                  <div class="col-md-4">
+                      <div class="form-group">                      
+                      <mat-form-field>
+                          <input matInput [matDatepicker]="picker" placeholder="Bill Date" formControlName="bill_date">
+                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                          <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                        </div>
+                  </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12"> 
+                <div formArrayName="companies">
+                <table class="table table-bordered stock-add-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 10px">#</th>
+                            <th>Product Name</th>
+                            <th style="width: 100px">Stock</th>
+                            <th style="width: 100px">Quantity</th>
+                            <th style="width: 100px">MRP Price</th>
+                            <th style="width: 100px">Control</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let comp of myForm.get('companies').controls; let i=index; let i=index" [formGroupName]="i">
+
+                          <td>
+                                <div class="form-group">
+                                    {{i+1}}
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="form-group" *ngIf="!loadingProducts">
+                                    <select class="form-control"   formControlName="product_name" (change)="updatePrice($event.target)">
+                                        <option value="0">--Select--</option>
+                                        <option *ngFor="let product of _productList" [ngValue]="product">
+                                          {{product.name}}</option>
+                                      </select>                               
+                              
+                              </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                   <input type="text" class="form-control" formControlName="quantity" readonly>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="form-group">
+                                   <input type="text" class="form-control" formControlName="add_quantity">
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="form-group">
+                                   <input type="text" class="form-control" formControlName="mrp" readonly>
+                                </div>
+                            </td>
+
+                            <td >
+                                <button class="btn btn-danger" (click)="deleteCompany(i)">-</button>
+                            </td>                            
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                          <td>
+                              <button class="btn btn-" (click)="addNewCompany()">Add Row</button>
+                          </td>
+                        </tr>
+                    </tfoot>
+                </table>
+              </div>
+
+
+            </div>
+            </div>
+
+</form>
+                  </div>
+
+                  <div class="card-footer clearfix">
+                      <button type="submit" class="btn btn-primary" (click)="saveReturn()">Submit</button>
+                  </div>
+
+
+                  </div>
+
+
+          </div>
+        </section>
+      
+      </div>
+      <!-- Content Wrapper. Contains page content -->
+      

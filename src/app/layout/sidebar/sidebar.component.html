@@ -148,6 +148,47 @@
         </li>
 
 
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+
+            <i class="nav-icon fab fa-500px"></i>
+            <p>
+              Representative
+              <i class="fa fa-angle-left right"></i>
+              
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+              <li class="nav-item">
+                  <a href="#" class="nav-link"   [routerLink]="['/representative']"     [routerLinkActiveOptions]="{exact: true}"  routerLinkActive="active">
+                
+                    <i class="nav-icon  fab fa-angellist"></i>
+                    <p>Main</p>
+                  </a>
+                </li>
+            <li class="nav-item">
+              <a href="#"  class="nav-link"  [routerLink]="['/sell/add']"     [routerLinkActiveOptions]="{exact: true}"  routerLinkActive="active">
+            
+                <i class="nav-icon  fab fa-angellist"></i>
+                <p>Add Sales</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link"  [routerLink]="['/representative/add-stock']"     [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" >
+                <i class="nav-icon fab fa-codiepie  text-info"></i>
+                <p>Add Stock</p>
+              </a>
+            </li>
+             
+            <li class="nav-item">
+              <a href="#"  class="nav-link"  [routerLink]="['/representative/add-payment']"     [routerLinkActiveOptions]="{exact: true}"  routerLinkActive="active" >
+                <i class="nav-icon fab fa-codiepie"></i>
+                <p>Add Payments</p>
+              </a>
+            </li>
+        </ul>
+      </li>
+
 
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
