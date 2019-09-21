@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
 import { User } from '@models/security/user.model';
 import { PartialList } from '@models/common/patial-list.model';
 import { UserService } from '@services/security/user.service';
@@ -17,7 +17,8 @@ export class AddStockComponent implements OnInit {
   users:PartialList <User>;
   _productList: Array<Product>;
   loadingProducts:boolean;
-  
+  total:number;
+
   myForm: FormGroup;
   constructor(    titleService: Title,private _formBuilder: FormBuilder,
     private userService:UserService,
@@ -36,7 +37,7 @@ export class AddStockComponent implements OnInit {
     this.loading = true;
     this.userService.findRepresentative().subscribe((res: PartialList<User>) => {
       this.users = res;
-       console.log( this.users);
+       //console.log( this.users);
       this.loading = false;
     });
   }
@@ -52,7 +53,7 @@ export class AddStockComponent implements OnInit {
 
 
 
-  iniForm( ){  
+  iniForm( ){
     this.myForm = this._formBuilder.group({
       bill_date:'',
       user_id:0,
@@ -70,7 +71,7 @@ export class AddStockComponent implements OnInit {
           quantity: 0,
           add_quantity: [0,[Validators.required, Validators.pattern(/^[.\d]+$/)]],
           mrp:0
-  
+
       })
     )
   }
@@ -78,56 +79,56 @@ export class AddStockComponent implements OnInit {
     let control = <FormArray>this.myForm.controls.companies;
     control.removeAt(index)
   }
-  
-/*
-  setCompanies() {
-    let control = <FormArray>this.myForm.controls.companies;
-    this.data.companies.forEach(x => {
-      control.push(this.fb.group({ 
-         product_name: 0,
-        quantity:0,
-        mrp:0}))
-    })
-  }
-*/
+
+
+
+get employees(): FormArray {
+  return this.myForm.get('companies') as FormArray;
+}
 
   //other function
-  updatePrice(ctrl) {
-    let control = <FormArray>this.myForm.controls.companies;
-         this._formBuilder.group({ 
-         
-        quantity:11,
-        mrp:1
-      }) 
-   
+  updatePrice(ctrl,index) {
+
+
+
+     const arrayControl = this.myForm.get('companies') as FormArray;
 
 
     if (ctrl.selectedIndex == 0) {
-      this.myForm.patchValue({
-        companies:  this._formBuilder.group([{
-          quantity:1,
-          mrp:1
-        }
-        ]),
-        product_name: 0,
-        
-     });
+
+      arrayControl.at(index).patchValue({
+        quantity:0,
+        mrp:0
+       });
     }
     else {
-      this.myForm.patchValue({
-        companies:  this._formBuilder.group([{
-          quantity:1,
-          mrp:1
-        }
-        ]),
-        //name:this._productList[ctrl.selectedIndex - 1].name ,
- 
-    
-           });
 
+   arrayControl.at(index).patchValue({
+   quantity:this._productList[ctrl.selectedIndex - 1].quantity,
+   mrp:this._productList[ctrl.selectedIndex - 1].mrp
+  });
     }
     //this.updateSubTotal();
   }
+//Saavestock
 
-
+saveStock(){
+  console.log("Reactive Form submitted: ", this.myForm);
 }
+
+
+ summaryQty(){
+  this.myForm.get('companies').valueChanges.subscribe(values => {
+    this.total = 0;
+    const ctrl = <FormArray>this.myForm.controls['companies'];
+      ctrl.controls.forEach(x => {
+        let parsed = parseInt(x.get('add_quantity').value)
+        this.total += parsed
+       // this.ref.detectChanges()
+      });
+    })
+
+ }
+}
+
+//https://medium.com/sparkles-blog/angular2-building-nested-reactive-forms-7978ecd145e4

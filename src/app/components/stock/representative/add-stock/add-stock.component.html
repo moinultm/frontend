@@ -16,12 +16,12 @@
             </div><!-- /.row -->
           </div><!-- /.container-fluid -->
         </div>
-      
+
         <section class="content">
           <div class="container-fluid">
               <div class="card">
                   <div class="card-header">
-                    <h3 class="card-title">Product Table</h3>
+                    <h3 class="card-title">Stock Loading Table</h3>
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body" >
@@ -30,8 +30,8 @@
                           <mat-spinner></mat-spinner>
                         </div>
 
-                       
-                        
+
+
                     <form  role="form"  [formGroup]="myForm">
 
                   <div class="row" *ngIf="!loading">
@@ -46,7 +46,7 @@
                   </div>
                   <div class="col-md-4"></div>
                   <div class="col-md-4">
-                      <div class="form-group">                      
+                      <div class="form-group">
                       <mat-form-field>
                           <input matInput [matDatepicker]="picker" placeholder="Bill Date" formControlName="bill_date">
                           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -57,15 +57,15 @@
             </div>
 
             <div class="row">
-                <div class="col-md-12"> 
+                <div class="col-md-12">
                 <div formArrayName="companies">
-                <table class="table table-bordered stock-add-table">
+                <table class="table  stock-add-table">
                     <thead>
                         <tr>
                             <th style="width: 10px">#</th>
                             <th>Product Name</th>
-                            <th style="width: 100px">Stock</th>
-                            <th style="width: 100px">Quantity</th>
+                            <th style="width: 150px">Stock</th>
+                            <th style="width: 150px">Quantity</th>
                             <th style="width: 100px">MRP Price</th>
                             <th style="width: 100px">Control</th>
                         </tr>
@@ -81,12 +81,12 @@
 
                             <td>
                                 <div class="form-group" *ngIf="!loadingProducts">
-                                    <select class="form-control"   formControlName="product_name" (change)="updatePrice($event.target)">
+                                    <select class="form-control"   formControlName="product_name" (change)="updatePrice($event.target,i)">
                                         <option value="0">--Select--</option>
-                                        <option *ngFor="let product of _productList" [ngValue]="product">
+                                        <option *ngFor="let product of _productList" [ngValue]="product.id">
                                           {{product.name}}</option>
-                                      </select>                               
-                              
+                                      </select>
+
                               </div>
                             </td>
                             <td>
@@ -96,7 +96,7 @@
                             </td>
 
                             <td>
-                                <div class="form-group">
+                                <div class="form-group" (keyup)="summaryQty()">
                                    <input type="text" class="form-control" formControlName="add_quantity">
                                 </div>
                             </td>
@@ -109,14 +109,17 @@
 
                             <td >
                                 <button class="btn btn-danger" (click)="deleteCompany(i)">-</button>
-                            </td>                            
+                            </td>
                         </tr>
                     </tbody>
                     <tfoot>
                         <tr>
-                          <td>
-                              <button class="btn btn-" (click)="addNewCompany()">Add Row</button>
+
+                          <td  colspan="3">
+                              <button class="btn btn-success" (click)="addNewCompany()">Add Row</button>
                           </td>
+                          <td></td>
+                          <td  colspan="2">Quantity Total :{{ total }}</td>
                         </tr>
                     </tfoot>
                 </table>
@@ -130,7 +133,7 @@
                   </div>
 
                   <div class="card-footer clearfix">
-                      <button type="submit" class="btn btn-primary" (click)="saveReturn()">Submit</button>
+                      <button type="submit" class="btn btn-primary float-right" (click)="saveStock()">Submit</button>
                   </div>
 
 
@@ -139,7 +142,6 @@
 
           </div>
         </section>
-      
+
       </div>
       <!-- Content Wrapper. Contains page content -->
-      
