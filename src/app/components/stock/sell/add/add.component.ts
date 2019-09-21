@@ -268,12 +268,18 @@ selectedOrderItem: OrderItems;
 
 //Main Save Function
 save(form: any){
+
+  console.log(JSON.stringify(this.orderItemList));
+
+  
   this._saving=true;
   if(parseFloat(this.mainForm.get('paidAmount').value) > this.mainForm.get('grandTotal').value ){
     error('Error!', "Paid amount (" + this.mainForm.get('paidAmount').value + ") cant\'be greater than total amount (" + this.mainForm.get('grandTotal').value  + ")", this._toastr);
    this._saving = false
    return false;
  }
+
+ console.log(JSON.stringify(this.orderItemList));
 
   const formData = new FormData();
   formData.append('customer', this.mainForm.get('customerName').value);

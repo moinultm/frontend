@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { Routes, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -71,5 +71,6 @@ const routes: Routes = [
     MaterialsModule,
   ],
   exports: [RouterModule]
+  ,providers:[DatePipe ]
 })
 export class StockModule { }

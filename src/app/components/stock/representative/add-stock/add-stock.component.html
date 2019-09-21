@@ -81,7 +81,7 @@
 
                             <td>
                                 <div class="form-group" *ngIf="!loadingProducts">
-                                    <select class="form-control"   formControlName="product_name" (change)="updatePrice($event.target,i)">
+                                    <select class="form-control"   formControlName="product_id" (change)="updatePrice($event.target,i)">
                                         <option value="0">--Select--</option>
                                         <option *ngFor="let product of _productList" [ngValue]="product.id">
                                           {{product.name}}</option>
@@ -133,7 +133,7 @@
                   </div>
 
                   <div class="card-footer clearfix">
-                      <button type="submit" class="btn btn-primary float-right" (click)="saveStock()">Submit</button>
+                      <button type="submit" class="btn btn-primary float-right" (click)="saveStock(myForm)">Submit</button>
                   </div>
 
 
