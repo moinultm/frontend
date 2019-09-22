@@ -140,7 +140,7 @@ name:'admins'
         user && user.id ? [] : [Validators.required]
       ],
       user_type: [
-        user ? user.name : '',
+        user ? user.user_type : '',
         [Validators.required, Validators.maxLength(255)]
       ],
     });
@@ -158,8 +158,13 @@ name:'admins'
     }
   }
 
+  profileItemList: Array<Profile>=[];
+
 
   save(modal: any): void {
+ 
+ var myArr =    this.selectedUser.profiles.map((p: Profile) => p.id)+'' ;
+ var string = myArr.split(',') ;
 
     if (this.form.valid) {
       this.savingUser = true;
@@ -173,7 +178,9 @@ name:'admins'
       formData.append('email', this.form.get('email').value);
       formData.append('password', this.form.get('password').value);
       formData.append('password_confirmation', this.form.get('password_confirmation').value);
-      formData.append('profiles', this.selectedUser.profiles.map((p: Profile) => p.id) + '');
+      formData.append('user_type', this.form.get('user_type').value);
+      formData.append('profiles', this.selectedUser.profiles.map((p: Profile) => p.id)+''  );
+     
 
       this.userService.save(formData, this.selectedUser.id ? true : false).subscribe((res: User) => {
 

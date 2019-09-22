@@ -15,6 +15,6 @@ export class OrderItems {
 
 cost_price:number;
 
-
+user_id:number;
 
 }

@@ -12,6 +12,7 @@ export class User {
   //ProfileSection
   profiles: Array<Profile>;
   picture: any;
+  user_type:number;
   constructor() {
       this.profiles = [];
   }

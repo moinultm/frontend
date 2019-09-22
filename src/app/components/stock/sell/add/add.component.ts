@@ -143,6 +143,8 @@ export class AddComponent implements OnInit {
         orderitem ? orderitem.product_name : '',
         [Validators.required, Validators.maxLength(255)]
       ],
+      user_id:[orderitem ? orderitem.user_id : '',
+      [Validators.required, Validators.maxLength(255)]],
        quantity: [
         orderitem ? orderitem.quantity : '',
         [Validators.required]
@@ -289,6 +291,7 @@ save(form: any){
 
   const formData = new FormData();
   formData.append('customer', this.mainForm.get('customerName').value);
+  formData.append('user_id', this.mainForm.get('user_id').value);
   formData.append('paid', this.mainForm.get('customerName').value);
   formData.append('method', this.mainForm.get('paymentMethod').value);
   formData.append('total', this.mainForm.get('grandTotal').value);

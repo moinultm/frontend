@@ -48,7 +48,7 @@
                               <div class="col-md-6" *ngIf="!loading">
                                    <div class="form-group">
                                     <label>Sale by Rep.</label>
-                                    <select class="form-control" formControlName="customerName">
+                                    <select class="form-control" formControlName="user_id">
                                       <option *ngFor="let list of users.data" [value]="list.id">
                                         {{list.name}}
                                       </option>
