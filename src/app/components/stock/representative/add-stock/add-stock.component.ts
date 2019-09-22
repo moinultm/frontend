@@ -63,9 +63,12 @@ export class AddStockComponent implements OnInit {
 
 
   iniForm( ){
+   this.total=0;
+
     this.myForm = this._formBuilder.group({
       bill_date:'',
       user_id:0,
+
       companies: this._formBuilder.array([])
     });
     this.loadProducts()
@@ -126,7 +129,7 @@ viewData(){
 
 }
 saveStock(form: any){
- 
+
     this._saving=true;
     const formData = new FormData();
     let formDt = this.datePipe.transform(this.myForm.get('bill_date').value, 'yyyy-MM-dd');
@@ -134,25 +137,25 @@ saveStock(form: any){
     formData.append('user_id', this.myForm.get('user_id').value);
     formData.append('date', formDt);
     formData.append('items', JSON.stringify(this.myForm.get('companies').value));
-  
+
     this.__StockService.save(formData, false).subscribe((res: RepresentStock) => {
       success('Success!', 'The Order is successfully saved.', this._toastr);
       this.iniForm();
       this._saving = false;
     }, (err: any) => {
-  
+
       if (err.status === 403) {
-  
+
         err.error.forEach((e: string) => {
           warning('Warning!', e, this._toastr);
         });
       } else {
-  
+
         error('Error!', 'An error has occured when saving the user, please contact system administrator.', this._toastr);
       }
       this._saving = false;
     });
-  
+
   console.log("Reactive Form submitted: ", this.myForm);
 }
 

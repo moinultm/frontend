@@ -212,9 +212,10 @@
 
         <div class="col-md-6">
           <div class="form-group">
-           <label>User Type</label>
+           <label>User Group</label>
            <select class="form-control" formControlName="user_type">
-             <option *ngFor="let list of TypeList" [value]="list.id">             
+             <option *ngFor="let list of userTypeList" [value]="list.id">
+               {{ list.name}}
              </option>
            </select>
          </div>

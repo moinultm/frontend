@@ -11,6 +11,8 @@ import { Product } from '@models/stock/product.model';
 import { OrderItems } from '@models/stock/orderitems.model ';
 import { ToastrService } from 'ngx-toastr';
 import { success, error, warning } from '@app/services/core/utils/toastr';
+import { UserService } from '@services/security/user.service';
+import { User } from '@models/security/user.model';
 
 @Component({
   selector: 'app-add',
@@ -18,25 +20,23 @@ import { success, error, warning } from '@app/services/core/utils/toastr';
   styleUrls: ['./add.component.scss']
 })
 export class AddComponent implements OnInit {
+  loading:boolean;
   modalOption: NgbModalOptions = {};
-
   customerList: Array<Client>;
-
   orderItemList: Array<OrderItems>=[];
-
   loadingOrder: boolean;
   loadingCustomer:boolean;
 
   _saving:boolean;
   mainForm: FormGroup;
   formProducts:FormGroup;
-
   selectedOrder: SellsOrder;
-selectedOrderItem: OrderItems;
+  selectedOrderItem: OrderItems;
 
   _productList: Array<Product>;
   loadingProductList:boolean;
 
+  users:PartialList <User>;
 
   constructor(private sellsOrdererSvice: SellsOrderService,
     private customeService:CustomerService,
@@ -44,19 +44,25 @@ selectedOrderItem: OrderItems;
     private modalService: NgbModal,
     private _fb: FormBuilder,
     private _toastr: ToastrService,
+    private userService:UserService
+    ) {
 
-    ) { }
+    }
 
   ngOnInit() {
     this.initForm();
-
-
   }
 
-
-
+  loadUser(): void {
+    this.loading = true;
+    this.userService.findRepresentative().subscribe((res: PartialList<User>) => {
+      this.users = res;
+       this.loading = false;
+    });
+  }
 
   initForm(order?: SellsOrder): void {
+    this.loadUser();
 
     if (order){
 
@@ -271,7 +277,7 @@ save(form: any){
 
   console.log(JSON.stringify(this.orderItemList));
 
-  
+
   this._saving=true;
   if(parseFloat(this.mainForm.get('paidAmount').value) > this.mainForm.get('grandTotal').value ){
     error('Error!', "Paid amount (" + this.mainForm.get('paidAmount').value + ") cant\'be greater than total amount (" + this.mainForm.get('grandTotal').value  + ")", this._toastr);

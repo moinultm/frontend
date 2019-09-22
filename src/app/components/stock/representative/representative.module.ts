@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule, MatFormFieldModule, MatProgressSpinnerModule, MatInputModule } from '@angular/material';
+import { UserSalesListComponent } from './user-sales-list/user-sales-list.component';
 
 const routes: Routes = [
 
@@ -25,12 +26,16 @@ const routes: Routes = [
       component: AddPaymentComponent
     },
 
-   
-  
+    {
+      path: 'user-sales-list',
+      component: UserSalesListComponent
+    },
+
+
 ];
 
 @NgModule({
-  declarations: [RepresentativeComponent, AddStockComponent, AddPaymentComponent],
+  declarations: [RepresentativeComponent, AddStockComponent, AddPaymentComponent, UserSalesListComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

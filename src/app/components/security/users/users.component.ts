@@ -11,7 +11,7 @@ import { User } from '@models/security/user.model';
 import { Profile } from '@models/security/profile.model';
 import { Title } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '@env/environment';
 
 
@@ -22,6 +22,9 @@ import { environment } from '@env/environment';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
+
+
+  modalOption: NgbModalOptions = {};
 
   data: PartialList<User>;
   loading: boolean;
@@ -35,6 +38,17 @@ export class UsersComponent implements OnInit {
   profiles: Array<Profile>;
   selectedUser: User;
   picturePreview: any;
+
+
+  userTypeList = [
+    {
+      id:1,
+name:'admins'
+    },
+    {
+      id:2,
+      name:'sales'
+    }]
 
   constructor(
     private userService: UserService,
@@ -68,6 +82,9 @@ export class UsersComponent implements OnInit {
 
   initSave(modal: any, user?: User): void {
 
+    this.modalOption.backdrop = 'static';
+    this.modalOption.keyboard = false;
+
     this.initSaveForm(user);
 
     this.loadingProfiles = true;
@@ -78,7 +95,7 @@ export class UsersComponent implements OnInit {
       });
 
     this.modalService
-      .open(modal)
+      .open(modal,this.modalOption)
       .result
       .then((result) => {
         if (result) {
@@ -172,7 +189,6 @@ export class UsersComponent implements OnInit {
             warning('Warning!', e, this._toastr);
           });
         } else {
-
           error('Error!', 'An error has occured when saving the user, please contact system administrator.', this._toastr);
         }
         this.savingUser = false;

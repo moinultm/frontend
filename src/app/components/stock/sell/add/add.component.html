@@ -1,5 +1,5 @@
 
-  
+
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <div class="content-header">
@@ -45,12 +45,12 @@
                                 </div>
                               </div>
 
-                              <div class="col-md-6">
+                              <div class="col-md-6" *ngIf="!loading">
                                    <div class="form-group">
                                     <label>Sale by Rep.</label>
                                     <select class="form-control" formControlName="customerName">
-                                      <option *ngFor="let list of customerList" [value]="list.id">
-                                        {{list.full_name}}
+                                      <option *ngFor="let list of users.data" [value]="list.id">
+                                        {{list.name}}
                                       </option>
                                     </select>
                                   </div>
