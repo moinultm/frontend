@@ -42,11 +42,11 @@
                       <thead>
                           <tr>
                               <th style="width: 10px">#</th>
-                              <th style="width: 20px">Invoice.No</th>
+                              <th style="width: 150px">Invoice No.</th>
                               <th>Customer</th>
                               <th>Total</th>
                               <th>Paid</th>
-                              <th>Recipt</th>
+                              <th>Due</th>
                               <th>Date</th>
                               <th style="width:20%">Action</th>
                           </tr>
@@ -67,14 +67,14 @@
                                       <tr *ngFor="let item of data.data; let i = index">
                                         <td>{{ i+1 }}</td>
                                         <td>{{item.reference_no}}</td>
-                                        <td>Customer</td>
-                                        <td>Total</td>
-                                        <td>Paid</td>
-                                        <td>Recipt</td>
-                                        <td>Date</td>
+                                        <td>{{item.client_name}}</td>
+                                        <td>{{item.total}}</td>
+                                        <td>{{item.paid}}</td>
+                                        <td>{{ _CIN(item.total)-_CIN(item.paid)}}</td>
+                                        <td>{{item.date}}</td>
                                         <td class="actions">
                                             <div class="btn-group">
-                                                 <button type="button" class="btn btn-default" (click)="openDialog(item.id)"><i class="fa fa-eye"></i></button>
+                                                 <button type="button" class="btn btn-default"  (click)="toDetails(item.id)"><i class="fa fa-eye"></i></button>
                                                </div>
 
                                         </td>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RepresentStockService } from '@services/stock/represent-stock.service';
 import { PartialList } from '@models/common/patial-list.model';
 import { SellsOrder } from '@models/stock/sells-order.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-sales-invoices',
@@ -19,7 +20,7 @@ export class UserSalesInvoicesComponent implements OnInit {
   size = 10;
 
 
-  constructor( private representService: RepresentStockService) { }
+  constructor( private representService: RepresentStockService,    private router:Router) { }
 
   ngOnInit() {
     this.loadData(0);
@@ -38,4 +39,11 @@ export class UserSalesInvoicesComponent implements OnInit {
     });
   }
 
+  _CIN(val){
+    return parseInt(val);
+  }
+
+  toDetails(id:number){
+    this.router.navigate([`sell/details/${id}`]);
+  }
 }
