@@ -38,6 +38,8 @@ export class AddComponent implements OnInit {
 
   users:PartialList <User>;
 
+
+
   constructor(private sellsOrdererSvice: SellsOrderService,
     private customeService:CustomerService,
     private productService:ProductService,
@@ -73,8 +75,6 @@ export class AddComponent implements OnInit {
     }
 
 
-
-
     this.FillCustomer();
 
     this.mainForm = this._fb.group({
@@ -87,6 +87,7 @@ export class AddComponent implements OnInit {
     discountAmount:['0', [Validators.required]  ],
     shippingCost:['0', [Validators.required]  ],
     grandTotal:['0',[Validators.required]  ],
+    user_id:[0, [Validators.required]],
   });
   }
 
@@ -143,8 +144,7 @@ export class AddComponent implements OnInit {
         orderitem ? orderitem.product_name : '',
         [Validators.required, Validators.maxLength(255)]
       ],
-      user_id:[orderitem ? orderitem.user_id : '',
-      [Validators.required, Validators.maxLength(255)]],
+
        quantity: [
         orderitem ? orderitem.quantity : '',
         [Validators.required]
@@ -277,7 +277,7 @@ export class AddComponent implements OnInit {
 //Main Save Function
 save(form: any){
 
-  console.log(JSON.stringify(this.orderItemList));
+  //console.log(JSON.stringify(this.orderItemList));
 
 
   this._saving=true;

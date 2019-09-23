@@ -15,12 +15,27 @@ export class RepresentStockService extends CrudService <RepresentStock> {
   }
 
 
-  public findSells(query?: {}): any {
+  public findSells(id:number,query?: {}): any {
     if (query) {
       this.options.params = query;
     } else {
       this.options.params = undefined;
     }
-    return this.__http.get <PartialList<RepresentStock>>(this.url + '/'+'get'+ 'sells' , this.options);
+    return this.__http.get <PartialList<RepresentStock>>(this.url + '/'+id+'/'+ 'sells' , this.options);
   }
+
+
+  public salesInvoices(id:number,query?: {}): any {
+    if (query) {
+      this.options.params = query;
+    } else {
+      this.options.params = undefined;
+    }
+    return this.__http.get <PartialList<RepresentStock>>(this.url + '/'+id+'/'+ 'invoices' , this.options);
+  }
+
+
+
+
+
 }

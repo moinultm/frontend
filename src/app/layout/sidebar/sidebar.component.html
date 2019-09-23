@@ -150,7 +150,7 @@
 
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
-            <i class="nav-icon fab fa-500px"></i>
+            <i class="nav-icon far fa-grin"></i>
             <p>
               Representative
               <i class="fa fa-angle-left right"></i>
@@ -160,7 +160,7 @@
 
              <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
-            <i class="nav-icon fab fa-500px"></i>
+            <i class="nav-icon fas fa-align-justify"></i>
             <p>
               list
               <i class="fa fa-angle-left right"></i>
@@ -168,19 +168,40 @@
           </a>
 
           <ul class="nav nav-treeview">
-              <li class="nav-item has-treeview">
+
+
+
+              <li class="nav-item">
+                    <a href="#" class="nav-link"   [routerLink]="['/representative']"      [routerLinkActiveOptions]="{exact: true}"  routerLinkActive="active">
+                      <i class="nav-icon  far fa-file-alt"></i>
+
+                      <p>Recipt Invoices</p>
+                    </a>
+                </li>
+
+   <!--li class="nav-item has-treeview">
             <a href="#" class="nav-link"   [routerLink]="['/representative']"     [routerLinkActiveOptions]="{exact: true}"  routerLinkActive="active">
                     <i class="nav-icon  fab fa-angellist"></i>
-                    <p>Recipt List</p>
+                    <p>Recipt Quantity</p>
                   </a>
+                </li-->
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link"   [routerLink]="['/representative','user-sales-invoices']"      [routerLinkActiveOptions]="{exact: true}"  routerLinkActive="active">
+                      <i class="nav-icon  fab fa-angellist"></i>
+                      <p>Sales Invoices</p>
+                    </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="#" class="nav-link"   [routerLink]="['/representative','user-sales-list']"      [routerLinkActiveOptions]="{exact: true}"  routerLinkActive="active">
-                      <i class="nav-icon  fab fa-angellist"></i>
-                      <p>Sells List</p>
+                      <i class="nav-icon  far fa-file-alt"></i>
+                      <p>Sales Quantity</p>
                     </a>
                 </li>
+
+
+
 
               </ul>
 
@@ -190,14 +211,16 @@
 
                  <li class="nav-item" >
               <a href="#" class="nav-link"  [routerLink]="['/representative/add-stock']"     [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" >
-                <i class="nav-icon fab fa-codiepie  text-info"></i>
+                <i class="nav-icon fas fa-dolly-flatbed"></i>
+
                 <p>Add Stock</p>
               </a>
             </li>
 
             <li class="nav-item">
               <a href="#"  class="nav-link"  [routerLink]="['/sell/add']"     [routerLinkActiveOptions]="{exact: true}"  routerLinkActive="active">
-                <i class="nav-icon  fab fa-angellist"></i>
+                <i class="nav-icon  fas fa-file-invoice-dollar"></i>
+
                 <p>Add Sales</p>
               </a>
             </li>
@@ -216,7 +239,8 @@
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
 
-            <i class="nav-icon fas fa-american-sign-language-interpreting"></i>
+            <i class="nav-icon fab fa-ello"></i>
+
             <p>
               Cilents
               <i class="fa fa-angle-left right"></i>
@@ -225,15 +249,15 @@
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="#" routerLink="/customer" class="nav-link" routerLinkActive="active">
-
-                <i class="nav-icon  fab fa-angellist"></i>
+                <i class="nav-icon fas fa-user-friends"></i>
                 <p>Customer</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="#"routerLink="/supplier" class="nav-link" routerLinkActive="active" >
 
-                <i class="nav-icon fab fa-codiepie  text-info"></i>
+                <i class="nav-icon fas fa-users"></i>
+
                 <p>Supplier</p>
               </a>
             </li>

@@ -3,6 +3,8 @@ import { PartialList } from '@models/common/patial-list.model';
 import { SellsOrder } from '@models/stock/sells-order.model';
 import { RepresentStockService } from '@services/stock/represent-stock.service';
 import { RepresentStock } from '@models/stock/represent-stock.model';
+import { UserService } from '@services/security/user.service';
+import { User } from '@models/security/user.model';
 
 
 @Component({
@@ -14,6 +16,7 @@ export class UserSalesListComponent implements OnInit {
 
 data: PartialList<RepresentStock>;
 loading: boolean;
+loadingUser:boolean;
 savingSubcategory: boolean;
 deletingSubcategory: boolean;
 
@@ -21,18 +24,32 @@ loadingCategory: boolean;
 page = 1;
 size = 10;
 
-  constructor(private representService: RepresentStockService) { }
+users:PartialList <User>;
+
+  constructor(private representService: RepresentStockService,    private userService:UserService) { }
 
   ngOnInit() {
-    this.loadData();
 
+    this.loadData(0);
+
+    this.loadUser();
   }
 
+
+  loadUser(): void {
+    this.loadingUser = true;
+    this.userService.findRepresentative().subscribe((res: PartialList<User>) => {
+      this.users = res;
+       this.loadingUser = false;
+    });
+  }
+
+
     //Loading Data
-    loadData(page?: number): void {
+    loadData(id:number,page?: number): void {
       this.page = page ? page : 1;
       this.loading = true;
-      this.representService.findSells({
+      this.representService.findSells(id,{
         page: this.page,
         size: this.size
       }).subscribe((res: PartialList<RepresentStock>) => {
@@ -41,5 +58,10 @@ size = 10;
       });
     }
 
+
+    changeSelection(id:number){
+      //console.log(id)
+      this.loadData(id);
+    }
 
 }

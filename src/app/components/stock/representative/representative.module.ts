@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule, MatFormFieldModule, MatProgressSpinnerModule, MatInputModule } from '@angular/material';
 import { UserSalesListComponent } from './user-sales-list/user-sales-list.component';
+import { UserSalesInvoicesComponent } from './user-sales-invoices/user-sales-invoices.component';
 
 const routes: Routes = [
 
@@ -30,12 +31,15 @@ const routes: Routes = [
       path: 'user-sales-list',
       component: UserSalesListComponent
     },
-
+    {
+      path: 'user-sales-invoices',
+      component: UserSalesInvoicesComponent
+    },
 
 ];
 
 @NgModule({
-  declarations: [RepresentativeComponent, AddStockComponent, AddPaymentComponent, UserSalesListComponent],
+  declarations: [RepresentativeComponent, AddStockComponent, AddPaymentComponent, UserSalesListComponent, UserSalesInvoicesComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
