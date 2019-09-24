@@ -28,7 +28,7 @@ import { ToastrService } from 'ngx-toastr';
 
         @Inject(MAT_DIALOG_DATA) public data : Invoice){
         this.formLocalData=data;
-        console.log(data);
+       // console.log(data);
         }
 
     ngOnInit() {
@@ -47,7 +47,7 @@ iniForm( ){
 
     close() {
         this.dialogRef.close({ data: 'close'});
-    }
+          }
 
    save( )
   {
@@ -65,6 +65,8 @@ iniForm( ){
     }, false).subscribe((res: Payment) => {
       this.savingPayment = false;
       success('Success!', "Saved", this._toastr);
+      this.iniForm();
+
     }, (err: any) => {
       if (err.status === 403) {
         err.error.forEach((e: string) => {

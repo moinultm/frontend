@@ -7,6 +7,7 @@
 @import '../node_modules/icheck-bootstrap/icheck-bootstrap.min.css';
 @import "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css";
 @import "../node_modules/ngx-toastr/toastr.css";
+@import "../node_modules/overlayscrollbars/css/OverlayScrollbars.min.css";
 
   /* remove scrollbar space
 .modal-dialog{
@@ -19,6 +20,18 @@
   100% {transform: scale(1)}
 }
 */
+
+.direct-over-flow {
+  -webkit-transform: translate(0,0);
+  transform: translate(0,0);
+  height: 250px;
+  overflow: auto;
+  padding: 10px;
+}
+
+
+.mat-form-field{width: 100%;}
+
 .mat-spinner{margin: auto;}
 
 .loading-profiles {

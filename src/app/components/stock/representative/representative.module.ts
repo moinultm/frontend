@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule, MatFormFieldModule, MatProgressSpinnerModule, MatInputModule } from '@angular/material';
 import { UserSalesListComponent } from './user-sales-list/user-sales-list.component';
 import { UserSalesInvoicesComponent } from './user-sales-invoices/user-sales-invoices.component';
+import { UserReceiptDetailComponent } from './user-receipt-detail/user-receipt-detail.component';
 
 const routes: Routes = [
 
@@ -36,10 +37,14 @@ const routes: Routes = [
       component: UserSalesInvoicesComponent
     },
 
+    {
+      path: 'user-receipt-detail/:id',
+      component: UserReceiptDetailComponent
+    },
 ];
 
 @NgModule({
-  declarations: [RepresentativeComponent, AddStockComponent, AddPaymentComponent, UserSalesListComponent, UserSalesInvoicesComponent],
+  declarations: [RepresentativeComponent, AddStockComponent, AddPaymentComponent, UserSalesListComponent, UserSalesInvoicesComponent, UserReceiptDetailComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

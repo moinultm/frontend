@@ -13,6 +13,9 @@ import { ToastrService } from 'ngx-toastr';
 import { success, error, warning } from '@app/services/core/utils/toastr';
 import { UserService } from '@services/security/user.service';
 import { User } from '@models/security/user.model';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { Title } from '@angular/platform-browser';
+import { AddCustomerComponent } from '../../customer/add-customer/add-customer.component';
 
 @Component({
   selector: 'app-add',
@@ -46,9 +49,11 @@ export class AddComponent implements OnInit {
     private modalService: NgbModal,
     private _fb: FormBuilder,
     private _toastr: ToastrService,
-    private userService:UserService
+    private userService:UserService,
+    titleService: Title,
+    private dialog: MatDialog,
     ) {
-
+      titleService.setTitle('Sales Invoice');
     }
 
   ngOnInit() {
@@ -287,7 +292,12 @@ save(form: any){
    return false;
  }
 
- console.log(JSON.stringify(this.orderItemList));
+ if(this.orderItemList.length ==0){
+  error('Error!', "No product selected for this order", this._toastr);
+  this._saving = false
+  return false;
+ }
+ //console.log(JSON.stringify(this.orderItemList));
 
   const formData = new FormData();
   formData.append('customer', this.mainForm.get('customerName').value);
@@ -323,6 +333,45 @@ save(form: any){
    //Close Module
    close(modal: any, flag?: boolean): void {
     modal.close(flag ? true : false);
+  }
+
+
+
+  //mat customer
+  openDialog(client?:Client): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.width= '25%';
+
+  if (client)
+  {
+    dialogConfig.data = client
+  }
+  else
+  {
+    dialogConfig.data ={}
+  }
+
+ const dialogRef=   this.dialog.open(AddCustomerComponent, dialogConfig,);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result)
+      if (result.data==200) {
+        success('success!', 'New Customer is successfully saved.'  , this._toastr);
+        this.initForm();
+         }
+
+       else  if(result.data==500) {
+          error('Error!', "Server Error"  , this._toastr);
+         }
+        else{
+          warning('warning!', result.data  , this._toastr);
+        }
+
+
+    });
   }
 
 }

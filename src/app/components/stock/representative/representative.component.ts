@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RepresentStock } from '@models/stock/represent-stock.model';
 import { PartialList } from '@models/common/patial-list.model';
 import { RepresentStockService } from '@services/stock/represent-stock.service';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-representative',
@@ -18,12 +20,25 @@ export class RepresentativeComponent implements OnInit {
   page = 1;
   size = 10;
 
+  form: FormGroup;
+  date = new FormControl(new Date());
+  serializedDate = new FormControl((new Date()).toISOString());
 
-  constructor(  private representService: RepresentStockService,) { }
+  constructor(  private representService: RepresentStockService,private _fb: FormBuilder,private datePipe : DatePipe) { }
 
   ngOnInit() {
     this.loadData();
+    this.iniForm();
   }
+
+
+  iniForm(){
+    this.form = this._fb.group({
+      fromDate: [  '',  [Validators.nullValidator],],
+      toDate: [  '',  [Validators.nullValidator],]
+    });
+  }
+
 
 
   //Loading Data

@@ -32,8 +32,8 @@ export class ProductReportComponent implements OnInit {
 
 
 
-    this.loadData()
-    this.iniForm()
+    this.loadData();
+    this.iniForm();
   }
 
       //Loading Data
@@ -69,16 +69,16 @@ dateFilter(){
   });
 
 }
- 
+
 
 _CIN(val){
   return parseInt(val);
 }
- 
+
 _CIP(val){
   return parseInt(val)*-1;
 }
- 
+
 
 
 

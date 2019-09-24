@@ -7,6 +7,7 @@ import { SellsOrder } from '@models/stock/sells-order.model';
 import { SellsOrderService } from '@services/stock/sells-order.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddPaymentComponent } from '../add-payment/add-payment.component';
+import { error, warning, success } from '@services/core/utils/toastr';
 
 @Component({
   selector: 'app-sell-details',
@@ -50,13 +51,22 @@ export class SellDetailsComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 
-    dialogConfig.width= '250px';
+      dialogConfig.width= '250px';
 
       dialogConfig.data = this.details
 
     const dialogRef=   this.dialog.open(AddPaymentComponent, dialogConfig,);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result)
+
+        let id=this.route.snapshot.params.id;
+        this.ShowBillDetails(id);
+
+
+    });
 
   }
+
 
 
 

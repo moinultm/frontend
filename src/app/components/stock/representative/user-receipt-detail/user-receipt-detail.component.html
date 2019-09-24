@@ -113,38 +113,8 @@
 
         <div class="row">
           <!-- accepted payments column -->
-          <div class="col-6"  >
-
-
-
-            <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-           <h4>Payment History:</h4>
-
-           <div class="direct-over-flow">
-
-           <ul class="todo-list ui-sortable" data-widget="todo-list" *ngFor="let T of details.data ;" >
-
-            <li *ngFor="let TP of T.payments ;">
-              <span class="handle ui-sortable-handle">
-                <i class="fas fa-ellipsis-v"></i>
-                <i class="fas fa-ellipsis-v"></i>
-              </span>
-
-              <span class="text">Reference: {{ TP.reference_no }}</span>
-
-              <small class="badge badge-info">Paid : <i class="fas fa-check"></i>{{ TP.amount }} </small>
-              <div class="tools">
-                <i class="fas fa-clock"></i>
-                {{ TP.date }}
-                 </div>
-
-            </li>
-
-
-          </ul>
-        </div><!--overflow-->
-
-          </div>
+          <div class="col-6">
+            </div>
           <!-- /.col -->
 
           <div class="col-6">
@@ -196,7 +166,7 @@
           <div class="col-12" *ngFor="let  T of details.data ">
             <a href="#"  (click)="print()"  class="btn btn-default"><i class="fas fa-print"></i> Print</a>
             <button type="button" class="btn btn-success float-right" style="margin-right: 5px;" (click)="openDialogPayments()" ><i class="far fa-credit-card"></i>
-              Add Payment
+            Close
             </button>
 
           </div>

@@ -18,7 +18,7 @@
       "@services/*": ["app/services/*"],
       "@models/*": ["app/models/*"],
       "@app/*": ["app/*"],
-      "@env/*": ["environments/*"],
+      "@env/*": ["environments/*"]
     },
     "lib": [
       "es2018",
@@ -27,6 +27,8 @@
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
+    "strictInjectionParameters": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
   }
 }

@@ -69,6 +69,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     MaterialsModule,
+
   ],
   exports: [RouterModule]
   ,providers:[DatePipe ]

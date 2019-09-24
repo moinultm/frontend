@@ -12,6 +12,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { SellDetailsComponent } from './sell-details/sell-details.component';
 import { AddPaymentComponent } from './add-payment/add-payment.component';
 import { SellReturnComponent } from './sell-return/sell-return.component';
+import { AddCustomerComponent } from '../customer/add-customer/add-customer.component';
 
 
 const routes: Routes = [
@@ -37,7 +38,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [SellComponent, AddComponent,SellDetailsComponent,AddPaymentComponent,SellReturnComponent],
+  declarations: [SellComponent, AddComponent,SellDetailsComponent,AddPaymentComponent,SellReturnComponent,AddCustomerComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -49,7 +50,7 @@ const routes: Routes = [
     MaterialsModule
     //materials
   ],
-  entryComponents:[AddPaymentComponent],
+  entryComponents:[AddPaymentComponent,AddCustomerComponent],
   providers: [ MatDatepickerModule ],
 })
 export class SellModule { }

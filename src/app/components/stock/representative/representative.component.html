@@ -4,13 +4,13 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0 text-dark">List of Represtative Invoices</h1>
+          <h1 class="m-0 text-dark">Representative Product Reciving</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
             <li class="breadcrumb-item"><a>Represtative</a></li>
-            <li class="breadcrumb-item active">Recipt Invoices</li>
+            <li class="breadcrumb-item active">Reciving List</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -23,32 +23,57 @@
         <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">List of user and stock  </h3>
+                <h3 class="card-title">Reciving List</h3>
                 <div class="card-tools">
-                    <div class="input-group input-group-sm" style="width: 150px;">
-                        <input type="text" subcategory_name="table_search" class="form-control float-right"
-                            placeholder="Search">
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-default"><i
-                                    class="fa fa-search" ></i></button>
-                        </div>
-                </div>
+
             </div>
 
             </div>
             <!-- /.card-header -->
-            <div class="card-body p-0">
+
+
+            <div class="card-body">
+
+                <form [formGroup]="form">
+
+                    <div class="row">
+                      <div class="col-md-4">
+                          <div class="form-group">
+                              <mat-form-field>
+                                  <input matInput [matDatepicker]="pickerFrom" placeholder="Date" formControlName="fromDate"  [value]="date.value">
+                                  <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                                  <mat-datepicker #pickerFrom></mat-datepicker>
+                                </mat-form-field>
+                              </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <mat-form-field>
+                                    <input matInput [matDatepicker]="pickerTo" placeholder="Date" formControlName="toDate"  [value]="date.value">
+                                    <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                                    <mat-datepicker #pickerTo></mat-datepicker>
+                                  </mat-form-field>
+                                </div>
+                          </div>
+                          <div class="col-md-4">
+                              <button type="button" class="btn btn-primary float-left" (click)="dateFilter(form)">Filter</button>
+                            </div>
+                    </div>
+
+
+
+
+                </form>
+
+
                 <table class="table">
                     <thead>
                         <tr>
                             <th style="width: 10px">#</th>
-                            <th style="width: 20px">Refe.No</th>
-                            <th>Representetive</th>
-                            <th>Product</th>
-                            <th>Add Qty</th>
-                            <th>MRP</th>
-                            <th>By Date</th>
-                            <th style="width:20%">Action</th>
+                            <th>Receipt No.</th>
+                            <th>Total Qty</th>
+                            <th>Date</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -66,18 +91,13 @@
                                   <ng-container *ngIf="!loading">
                                     <tr *ngFor="let item of data.data; let i = index">
                                       <td>{{ i+1 }}</td>
-                                      <td>{{item.id }}</td>
-                                      <td>{{ item.user.name }}</td>
-                                      <td>{{ item.product.name }}</td>
-                                      <td>{{ item.quantity }}</td>
-                                      <td>{{ item.product.mrp }}</td>
-                                      <td>{{ item.date }}</td>
-                                      <td class="actions">
-                                          <div class="btn-group">
-                                               <button type="button" class="btn btn-default" (click)="openDialog(item.id)"><i class="fa fa-eye"></i></button>
-                                             </div>
 
-                                      </td>
+                                      <td>{{ item.ref_no }}</td>
+                                      <td>{{ item.total_quantity }}</td>
+                                      <td>{{ item.date |  date:'dd/MM/yyyy'}}</td>
+                                      <td>View Recipt</td>
+
+
                                     </tr>
                                   </ng-container>
                     </tbody>
@@ -102,3 +122,6 @@
 
 </div>
 <!-- Content Wrapper. Contains page content -->
+
+
+ 
