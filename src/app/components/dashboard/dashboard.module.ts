@@ -5,20 +5,26 @@ import { ChartsModule } from 'ng2-charts';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
- 
+import { TranslateModule } from '@app/shared/translate/translate.module';
+
+
 
 @NgModule({
-    imports: [
+     declarations: [
+        DashboardComponent,
+
+    ],
+     imports: [
         CommonModule,
         NgbCarouselModule,
         NgbAlertModule,
         DashboardRoutingModule,
-        ChartsModule
-       
+        ChartsModule,
+        TranslateModule
     ],
-    declarations: [
-        DashboardComponent
-        
-    ]
+
 })
-export class DashboardModule {}
+
+export class DashboardModule {
+
+}

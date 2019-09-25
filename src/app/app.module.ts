@@ -1,4 +1,5 @@
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
+
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,12 +25,18 @@ import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 
 import { ToastrModule } from 'ngx-toastr';
 
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { TranslateService } from './services/common/translate.service';
+import { TranslateModule } from './shared/translate/translate.module';
+
+
+export function setupTranslateFactory(
+  service: TranslateService): Function {
+  return () => service.use('en');
+}
 
 
 @NgModule({
   declarations: [
-
     AppComponent,
     NavbarComponent,
     LoginComponent,
@@ -39,21 +46,24 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ResponseResetComponent,
 
   ],
-  imports: [
 
+  imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    FlexLayoutModule,
-    FormsModule,
+     FormsModule,
      HttpClientModule,
     SnotifyModule,
     MaterialsModule,
     ToastrModule.forRoot({
       timeOut: 2000,
       positionClass: 'toast-bottom-right'
-    })
+    }),
+    TranslateModule
+
   ],
+
+
   providers: [
     PoolsService,
     AuthService,
@@ -62,9 +72,15 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     BeforeLoginService,
    { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
    SnotifyService,
+   TranslateService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: setupTranslateFactory,
+      deps: [ TranslateService ],
+      multi: true
+    }
 
 ],
-  bootstrap: [AppComponent],
-
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

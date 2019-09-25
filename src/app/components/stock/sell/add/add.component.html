@@ -38,30 +38,20 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                  <label>Bill to</label>
-                                  <button class="form-control" (click)="openDialog()">
-
-                                    <i class="fa fa-plus"></i>
+                                  <label>Bill to
+                                  </label>
+                                  <button class="form-control btn btn-primary " (click)="openDialog()">
                                     Add new customer
                                   </button>
                                 </div>
                               </div>
 
-                              <div class="col-md-6" *ngIf="!loading">
-                                   <div class="form-group">
-                                    <label>Sale by Rep.</label>
-                                    <select class="form-control" formControlName="user_id">
-                                      <option *ngFor="let list of users.data" [value]="list.id">
-                                        {{list.name}}
-                                      </option>
-                                    </select>
-                                  </div>
-                              </div>
 
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Sale to Customer</label>
+                                    <label>Customer Name</label>
                                     <select class="form-control" formControlName="customerName">
+                                        <option [value]="null">Select Customer</option>
                                       <option *ngFor="let list of customerList" [value]="list.id">
                                         {{list.full_name}}
                                       </option>
@@ -69,6 +59,21 @@
                                   </div>
                               </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-md-12" *ngIf="!loading">
+                                <div class="form-group">
+                                 <label>Sales Representative name</label>
+                                 <select class="form-control" formControlName="user_id">
+                                    <option [value]="null">Select Representative</option>
+                                   <option *ngFor="let list of users.data" [value]="list.id">
+                                     {{list.name}}
+                                   </option>
+                                 </select>
+                               </div>
+                           </div>
+                        </div>
+
                     </div>
 
                     <div class="col-md-2">
@@ -135,8 +140,8 @@
                       <td>{{item.mrp}}</td>
                       <td>{{item.subtotal}}</td>
                       <td>
-                        <a class="btn btn-sm btn-info text-white"><i class="fas fa-edit"></i></a>
-                        <a class="btn btn-sm btn-danger text-white ml-1"><i class="fa fa-trash"></i></a>
+                        <!--a class="btn btn-sm btn-info text-white"><i class="fas fa-edit"></i></a-->
+                        <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteOrderItem(item.product_id,i)"><i class="fa fa-trash"></i></a>
                       </td>
                     </tr>
                   </tbody>
@@ -324,11 +329,6 @@
               </div>
 
      </div>
-
-
-
-
-
 
 
 

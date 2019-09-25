@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '../../services/common/translate.service';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -19,14 +21,29 @@ export class DashboardComponent implements OnInit {
   chartLabels = ['January', 'February', 'Mars', 'April'];
 
   onChartClick(event) {
-    console.log(event);
+
   }
 
-  
-  constructor() { }
+
+  constructor(private translate: TranslateService) {
+
+
+      console.log(translate.data);
+
+
+  }
+
+
+  setLang(lang: string) {
+    this.translate.use(lang);
+  }
+
 
   ngOnInit() {
-    
+
   }
 
 }
+
+
+//https://medium.com/@DenysVuika/simple-i18n-support-for-your-angular-apps-6138a47eb2a9

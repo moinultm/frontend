@@ -84,7 +84,7 @@ export class AddComponent implements OnInit {
 
     this.mainForm = this._fb.group({
     sellDate:[new Date(),[Validators.nullValidator]],
-    customerName:['',[Validators.required]  ],
+    customerName:[null,[Validators.required]  ],
     paymentMethod:['cash',[Validators.required]  ],
     totalAmount:['0',[Validators.required]  ],
     paidAmount:['0',[Validators.required]  ],
@@ -92,7 +92,7 @@ export class AddComponent implements OnInit {
     discountAmount:['0', [Validators.required]  ],
     shippingCost:['0', [Validators.required]  ],
     grandTotal:['0',[Validators.required]  ],
-    user_id:[0, [Validators.required]],
+    user_id:[null, [Validators.required]],
   });
   }
 
@@ -333,6 +333,17 @@ save(form: any){
    //Close Module
    close(modal: any, flag?: boolean): void {
     modal.close(flag ? true : false);
+  }
+
+
+
+  onDeleteOrderItem(orderItemID: number, i: number) {
+    if (orderItemID != null)
+ {
+
+console.log(orderItemID)
+ }
+
   }
 
 
