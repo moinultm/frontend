@@ -71,7 +71,7 @@ selectedOrderItem: PurchaseItems;
 
     this.mainForm = this._fb.group({
       purchaseDate:[new Date(),[Validators.nullValidator]],
-    supplierName:['',[Validators.required]  ],
+    supplierName:[null,[Validators.required]  ],
     paymentMethod:['cash',[Validators.required]  ],
     totalAmount:['0',[Validators.required]  ],
     paidAmount:['0',[Validators.required]  ],
@@ -268,6 +268,12 @@ save(form: any){
    return false;
  }
 
+ if(this.orderItemList.length ==0){
+  error('Error!', "No product selected for this order", this._toastr);
+  this._saving = false
+  return false;
+ }
+ 
   const formData = new FormData();
   formData.append('supplier', this.mainForm.get('supplierName').value);
   formData.append('paid', this.mainForm.get('supplierName').value);
@@ -297,6 +303,22 @@ save(form: any){
   });
 
 }
+
+
+
+onDeleteOrderItem(orderItemID: number, i: number) {
+  if (orderItemID != null)
+{
+
+console.log(orderItemID)
+if (orderItemID != null){
+this.orderItemList.splice(i, 1);
+this.updateGrandTotal();
+}
+}
+
+}
+
 
    //Close Module
    close(modal: any, flag?: boolean): void {

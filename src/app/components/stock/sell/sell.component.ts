@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./sell.component.scss']
 })
 export class SellComponent implements OnInit {
+ 
   data: PartialList<SellsOrder>;
 
   loading: boolean;

@@ -143,7 +143,7 @@ export class CustomerComponent implements OnInit {
     }
     else
     {
-      dialogConfig.data ={}
+      dialogConfig.data ="customer"
     }
 
    const dialogRef=   this.dialog.open(AddCustomerComponent, dialogConfig,);

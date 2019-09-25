@@ -7,7 +7,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialsModule } from '@app/material.module';
-
+import { PurchaseDetailsComponent } from './purchase-details/purchase-details.component';
+ 
 
 const routes: Routes = [
   // Roles component
@@ -19,12 +20,17 @@ const routes: Routes = [
     path: '',
     component: PurchaseComponent
   },
+  {
+    path: 'details/:id',
+    component: PurchaseDetailsComponent
+
+  },
 
 ];
 
 
 @NgModule({
-  declarations: [PurchaseComponent,AddPurchaseComponent],
+  declarations: [PurchaseComponent,AddPurchaseComponent,PurchaseDetailsComponent ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

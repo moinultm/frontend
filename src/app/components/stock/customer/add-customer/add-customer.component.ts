@@ -17,7 +17,7 @@ export class AddCustomerComponent implements OnInit {
   LOCAL_data :Client;
   selectedCustomer: Client;
   ResultData: any;
-
+savingType:string;
 
   savingCustomer:boolean;
 
@@ -27,6 +27,7 @@ export class AddCustomerComponent implements OnInit {
     private dialogRef: MatDialogRef<AddCustomerComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Client) {
       this.LOCAL_data = data;
+    
     }
 
 

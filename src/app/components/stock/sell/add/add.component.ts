@@ -342,6 +342,10 @@ save(form: any){
  {
 
 console.log(orderItemID)
+if (orderItemID != null){
+  this.orderItemList.splice(i, 1);
+this.updateGrandTotal();
+}
  }
 
   }

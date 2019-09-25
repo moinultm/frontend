@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./purchase.component.scss']
 })
 export class PurchaseComponent implements OnInit {
+ 
+
   data: PartialList<PurchaseOrder>;
   loading: boolean;
   savingSupplier: boolean;
@@ -40,4 +42,9 @@ export class PurchaseComponent implements OnInit {
   }
 //refereal
  
+toDetails(id:number){
+  this.router.navigate([`purchase/details/${id}`]);
+}
+
+
 }

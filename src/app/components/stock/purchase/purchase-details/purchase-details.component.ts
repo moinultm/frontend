@@ -3,29 +3,29 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, Input } from '
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PartialList } from '@models/common/patial-list.model';
-import { SellsOrder } from '@models/stock/sells-order.model';
-import { SellsOrderService } from '@services/stock/sells-order.service';
+import { PurchaseOrder } from '@models/stock/purchase-order.model';
+import { PurchaseOrderService } from '@services/stock/purchase-order.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import { AddPaymentComponent } from '../add-payment/add-payment.component';
+import { AddPaymentComponent } from '../../sell/add-payment/add-payment.component';
 import { error, warning, success } from '@services/core/utils/toastr';
 
 @Component({
-  selector: 'app-sell-details',
-  templateUrl: './sell-details.component.html',
-  styleUrls: ['./sell-details.component.scss']
+  selector: 'app-purchase-details',
+  templateUrl: './purchase-details.component.html',
+  styleUrls: ['./purchase-details.component.scss']
 })
 
 
-export class SellDetailsComponent implements OnInit {
+export class PurchaseDetailsComponent implements OnInit {
   
   
   loadingDetails:boolean;
-  details:PartialList <SellsOrder> ;
+  details:PartialList <PurchaseOrder> ;
 
   constructor(  private _toastr: ToastrService,
     private route: ActivatedRoute,
     private router: Router,
-    private sellsService: SellsOrderService,
+    private purchaseService: PurchaseOrderService,
     private dialog: MatDialog,
 
   ) { }
@@ -38,7 +38,7 @@ export class SellDetailsComponent implements OnInit {
 
   ShowBillDetails(id:number){
     this.loadingDetails = true;
-    this.sellsService.findDetailsById(id).subscribe((res:PartialList <SellsOrder>) => {
+    this.purchaseService.findDetailsById(id).subscribe((res:PartialList <PurchaseOrder>) => {
       this.details = res;
        console.log(res);
       this.loadingDetails = false;
