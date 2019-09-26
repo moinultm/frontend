@@ -109,8 +109,8 @@ export class SupplierComponent implements OnInit {
             company_name:this.form.get('company_name').value,
             address:this.form.get('address').value,
             account_no:this.form.get('account_no').value,
-            previous_due:this.form.get('previous_due').value
-
+            previous_due:this.form.get('previous_due').value,
+            email:this.form.get('email').value
           }, this.selectedSupplier.id ? true : false).subscribe((res: Client) => {
             success('Success!', 'The Element is successfully saved.', this._toastr);
             this.savingSupplier = false;

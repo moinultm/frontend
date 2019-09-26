@@ -6,6 +6,7 @@ import { Title } from '@angular/platform-browser';
 import { ProductService } from '@services/stock/product.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-manage',
@@ -32,7 +33,8 @@ export class ManageComponent implements OnInit {
     private _toastr: ToastrService,
     private modalService: NgbModal,
     titleService: Title,
-    private _formBuilder: FormBuilder) { }
+    private _formBuilder: FormBuilder,
+    private router:Router,) { }
 
   ngOnInit() {
     this.loadData();
@@ -82,7 +84,10 @@ loadDetails(id:number): void {
   });
 }
 
-
+toBarcode(id:number){
+  event.preventDefault();
+  this.router.navigate([`product/barcode/${id}`]);
+}
 
  //Close Module
  close(modal: any, flag?: boolean): void {

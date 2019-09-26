@@ -15,7 +15,7 @@ import { UserService } from '@services/security/user.service';
 import { User } from '@models/security/user.model';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { Title } from '@angular/platform-browser';
-import { AddCustomerComponent } from '../../customer/add-customer/add-customer.component';
+import { AddCustomerComponent } from '../add-customer/add-customer.component';
 
 @Component({
   selector: 'app-add',

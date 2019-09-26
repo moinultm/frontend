@@ -12,6 +12,9 @@ import { OrderItems } from '@models/stock/orderitems.model ';
 import { ToastrService } from 'ngx-toastr';
 import { success, error, warning } from '@app/services/core/utils/toastr';
 import { PurchaseItems } from '@models/stock/purchase-items';
+import { MatDialogConfig, MatDialog } from '@angular/material';
+
+import { AddSupplierComponent } from '../add-supplier/add-supplier.component';
 
 @Component({
   selector: 'app-add-purchase',
@@ -44,13 +47,11 @@ selectedOrderItem: PurchaseItems;
     private modalService: NgbModal,
     private _fb: FormBuilder,
     private _toastr: ToastrService,
-
+    private dialog: MatDialog,
     ) { }
 
   ngOnInit() {
     this.initForm();
-
-
   }
 
 
@@ -199,7 +200,7 @@ selectedOrderItem: PurchaseItems;
     let discount :number;
     discount= this.orderItemList.reduce((prev, curr) => {
      return prev + curr.product_discount_amount;
-     
+
     }, 0);
     this.mainForm.patchValue({
       discountAmount:    parseFloat(discount.toFixed(2)),
@@ -209,7 +210,7 @@ selectedOrderItem: PurchaseItems;
     let item_total :number;
     item_total= this.orderItemList.reduce((prev, curr) => {
     return prev + curr.item_total;
-   
+
     }, 0);
     this.mainForm.patchValue({
       totalAmount:   parseFloat(item_total.toFixed(2)),
@@ -273,7 +274,7 @@ save(form: any){
   this._saving = false
   return false;
  }
- 
+
   const formData = new FormData();
   formData.append('supplier', this.mainForm.get('supplierName').value);
   formData.append('paid', this.mainForm.get('supplierName').value);
@@ -319,6 +320,42 @@ this.updateGrandTotal();
 
 }
 
+
+openDialog(client?:Client): void {
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = true;
+  dialogConfig.autoFocus = true;
+
+  dialogConfig.width= '25%';
+
+if (client)
+{
+  dialogConfig.data = client
+}
+else
+{
+  dialogConfig.data ={}
+}
+
+const dialogRef=   this.dialog.open(AddSupplierComponent, dialogConfig,);
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log(result)
+    if (result.data==200) {
+      success('success!', 'New Customer is successfully saved.'  , this._toastr);
+      this.initForm();
+       }
+
+     else  if(result.data==500) {
+        error('Error!', "Server Error"  , this._toastr);
+       }
+      else{
+        warning('warning!', result.data  , this._toastr);
+      }
+
+
+  });
+}
 
    //Close Module
    close(modal: any, flag?: boolean): void {

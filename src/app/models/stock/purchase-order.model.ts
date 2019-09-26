@@ -1,4 +1,3 @@
-import { OrderItems } from './orderitems.model ';
 
 
 export class PurchaseOrder {
@@ -14,4 +13,5 @@ export class PurchaseOrder {
     product_tax:number;
     product_name:string;
     mrp:number;
+
 }

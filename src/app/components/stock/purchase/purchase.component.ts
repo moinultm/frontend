@@ -3,7 +3,7 @@ import { PurchaseOrder } from '@models/stock/purchase-order.model';
 import { PartialList } from '@models/common/patial-list.model';
 import { FormGroup } from '@angular/forms';
 import { PurchaseOrderService } from '@services/stock/purchase-order.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-purchase',
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./purchase.component.scss']
 })
 export class PurchaseComponent implements OnInit {
- 
+
 
   data: PartialList<PurchaseOrder>;
   loading: boolean;
@@ -23,7 +23,10 @@ export class PurchaseComponent implements OnInit {
   selectedInvoice: PurchaseOrder;
 
 
-  constructor( private purchaseService: PurchaseOrderService,  private router:Router,) { }
+  constructor(
+    private purchaseService: PurchaseOrderService,
+
+    private router:Router) { }
 
   ngOnInit() {
     this.loadData()
@@ -41,7 +44,7 @@ export class PurchaseComponent implements OnInit {
     });
   }
 //refereal
- 
+
 toDetails(id:number){
   this.router.navigate([`purchase/details/${id}`]);
 }

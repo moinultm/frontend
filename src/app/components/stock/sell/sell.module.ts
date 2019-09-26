@@ -12,7 +12,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { SellDetailsComponent } from './sell-details/sell-details.component';
 import { AddPaymentComponent } from './add-payment/add-payment.component';
 import { SellReturnComponent } from './sell-return/sell-return.component';
-import { AddCustomerComponent } from '../customer/add-customer/add-customer.component';
+import { AddCustomerComponent } from './add-customer/add-customer.component';
 
 
 const routes: Routes = [

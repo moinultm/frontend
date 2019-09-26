@@ -6,6 +6,7 @@ import { ProductService } from '@services/stock/product.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Title } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-barcode',
@@ -32,43 +33,68 @@ export class ProductBarcodeComponent implements OnInit {
   marginBottom = 10;
   marginLeft = 10;
   marginRight = 10;
-  
+
   data: PartialList<Product>;
   details:PartialList<Product>;
   loadingDetails:boolean;
   loading: boolean;
   savingProduct: boolean;
   deletingProduct: boolean;
-  page = 1;
-  size = 10;
+
   form: FormGroup;
   selectedProduct: Product;
 
   constructor(
     private productService: ProductService,
+    private route: ActivatedRoute,
+
+
   ) { }
-  
+
   ngOnInit() {
-    this.loadData()
+    let id=this.route.snapshot.params.id;
+    this.loadData(id)
   }
 
 
   get values(): string[] {
     return this.value.split('\n');
   }
-  
+
  //Loading Data
- loadData(page?: number): void {
-  this.page = page ? page : 1;
+ loadData(id: number): void {
   this.loading = true;
-  this.productService.find({
-    page: this.page,
-    size: this.size
-  }).subscribe((res: PartialList<Product>) => {
+  this.productService.findDetailsById(1).subscribe((res: PartialList<Product>) => {
     this.data = res;
     console.log( this.data )
     this.loading = false;
   });
 }
+
+
+//Product
+  print(): void {
+    event.preventDefault();
+
+    let printContents, popupWin;
+    printContents = document.getElementById('print-section').innerHTML;
+    popupWin = window.open();
+    popupWin.document.open();
+    popupWin.document.write(`
+      <html>
+        <head>
+          <title>Print Barcode</title>
+          <style>
+
+          </style>
+        </head>
+    <body onload="window.print();window.close()">${printContents}</body>
+      </html>`
+    );
+    popupWin.document.close();
+  }
+
+
+
 
 }

@@ -16,7 +16,7 @@ const routes: Routes = [
 
   {path: 'edit/:id',component: ProductComponent },
   {path: 'manage',component: ManageComponent },
-  {path: 'barcode',component: ProductBarcodeComponent },
+  {path: 'barcode/:id',component: ProductBarcodeComponent },
 ];
 
 

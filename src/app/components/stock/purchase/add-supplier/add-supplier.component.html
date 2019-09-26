@@ -1,0 +1,55 @@
+
+
+
+<form  [formGroup]="form" class="example-form" >
+  <div>
+  <mat-form-field>
+    <input matInput placeholder="Name"  formControlName="full_name">
+  </mat-form-field>
+</div>
+
+<div>
+    <mat-form-field >
+        <input matInput placeholder="Contact" formControlName="contact">
+      </mat-form-field>
+</div>
+<div>
+    <mat-form-field >
+        <input matInput placeholder="Email" formControlName="email">
+      </mat-form-field>
+</div>
+
+<div>
+    <mat-form-field >
+        <input matInput placeholder="Company" formControlName="company_name">
+      </mat-form-field>
+</div>
+
+
+<div>
+    <mat-form-field >
+        <input matInput placeholder="Address" formControlName="address">
+      </mat-form-field>
+</div>
+
+
+<div>
+    <mat-form-field >
+        <input matInput placeholder="Openning" formControlName="opening">
+      </mat-form-field>
+</div>
+
+
+<div>
+    <mat-form-field >
+        <input matInput placeholder="Account" formControlName="account_no">
+      </mat-form-field>
+</div>
+
+</form>
+
+
+<mat-dialog-actions>
+  <button  mat-button class="mat-raised-button float-right"(click)="close()">Close</button>
+  <button  mat-button class="mat-raised-button float-right"(click)="save()">Save</button>
+</mat-dialog-actions>

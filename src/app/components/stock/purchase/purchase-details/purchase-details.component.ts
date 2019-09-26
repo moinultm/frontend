@@ -17,14 +17,14 @@ import { error, warning, success } from '@services/core/utils/toastr';
 
 
 export class PurchaseDetailsComponent implements OnInit {
-  
-  
+
+
   loadingDetails:boolean;
   details:PartialList <PurchaseOrder> ;
 
   constructor(  private _toastr: ToastrService,
     private route: ActivatedRoute,
-    private router: Router,
+
     private purchaseService: PurchaseOrderService,
     private dialog: MatDialog,
 
@@ -33,7 +33,6 @@ export class PurchaseDetailsComponent implements OnInit {
   ngOnInit() {
     let id=this.route.snapshot.params.id;
     this.ShowBillDetails(id);
- 
   }
 
   ShowBillDetails(id:number){

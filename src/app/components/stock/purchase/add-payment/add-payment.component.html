@@ -1,0 +1,37 @@
+
+        <form  [formGroup]="form" class="example-form">
+<div class="form-group">
+  <mat-form-field>
+    <input  matInput placeholder="Amount" formControlName="amount" >
+  </mat-form-field>
+
+  <div class="" *ngIf="form.get('amount').dirty && form.get('amount').errors && form.get('amount').errors.thisGreaterDue ">
+  * Amount should be less than Due Amount
+</div>
+
+</div>
+
+  <div class="form-group">
+
+    <mat-form-field>
+      <input matInput placeholder="Note" formControlName="note">
+    </mat-form-field>
+
+  </div>
+
+
+  <div class="form-group">
+            <mat-form-field>
+              <mat-select placeholder="Select Method" formControlName="method">
+                <mat-option value="cash">Cash</mat-option>
+                <mat-option value="cheque">Cheque</mat-option>
+              </mat-select>
+            </mat-form-field>
+  </div>
+           </form>
+
+<mat-dialog-actions>
+    <button  mat-button class="mat-raised-button float-right"(click)="close()">Close</button>
+    <button  mat-button class="mat-raised-button float-right"(click)="save()">Submit</button>
+  </mat-dialog-actions>
+  <p></p>

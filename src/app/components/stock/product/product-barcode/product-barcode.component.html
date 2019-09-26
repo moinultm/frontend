@@ -1,36 +1,110 @@
 <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-          <div class="container-fluid">
-            <div class="row mb-2">
-              <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Profiles</h1>
-              </div><!-- /.col -->
-              <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
-                  <li class="breadcrumb-item"><a>Product</a></li>
-                  <li class="breadcrumb-item active">Manage Barcode</li>
-                </ol>
-              </div><!-- /.col -->
-            </div><!-- /.row -->
-          </div><!-- /.container-fluid -->
-        </div>
-      
-        <section class="content">
-          <div class="container-fluid">
-            <div class="row">
-       
-<div  *ngFor="let item of data.data; let i = index">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Profiles</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
+            <li class="breadcrumb-item"><a>Product</a></li>
+            <li class="breadcrumb-item active">Manage Barcode</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+
+  <section class="content">
+    <div class="container-fluid">
+
+      <div class="row">
 
 
-      <ngx-barcode  [bc-element-type]="elementType" [bc-value]="item.code" [bc-format]="format" [bc-line-color]="lineColor"
-      [bc-width]="width" [bc-height]="height" [bc-display-value]="displayValue" ></ngx-barcode>
-    </div>
+          <div class="col-md-3">
+
+
+
+
+              <!-- Profile Image -->
+              <div class="card card-primary card-outline" *ngIf="!loading">
+
+                <div class="card-body box-profile" *ngFor="let item of data.data; let i = index">
+
+                  <div class="text-center">
+                      <ngx-barcode [bc-element-type]="elementType" [bc-value]="item.code" [bc-format]="format"
+                      [bc-line-color]="lineColor" [bc-width]="width" [bc-height]="height" [bc-display-value]="displayValue">
+                    </ngx-barcode>
+                   </div>
+
+                  <h3 class="profile-username text-center">{{item.name}}</h3>
+
+                  <p class="text-muted text-center">MRP {{item.mrp}}</p>
+
+                  <ul class="list-group list-group-unbordered mb-3">
+                    <li class="list-group-item">
+                      <b>Stock</b> <a class="float-right">{{  item.quantity }}</a>
+                    </li>
+                    <li class="list-group-item">
+                      <b>Sale</b> <a class="float-right">{{ item.total_sells }}</a>
+                    </li>
+                    <li class="list-group-item">
+                      <b>Purchase</b> <a class="float-right">{{ item.total_purchases }}</a>
+                    </li>
+
+                    <li class="list-group-item">
+                        <b>Purchase</b> <a class="float-right">{{ item.total_purchases }}</a>
+                      </li>
+
+                  </ul>
+
+                  <a href="#" class="btn btn-primary btn-block"><b>Print</b></a>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+
             </div>
+
+
+
+        <!-- /.col (left) -->
+        <div class="col-md-9">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Printing Page</h3>
+            </div>
+            <!-- /.card-header -->
+            <div id="print-section" class="card-body " *ngFor="let item of data.data;">
+
+
+                <ngx-barcode [bc-element-type]="elementType" [bc-value]="item.code" [bc-format]="format"
+                [bc-line-color]="lineColor" [bc-width]="width" [bc-height]="height" [bc-display-value]="displayValue">
+              </ngx-barcode>
+
+
+              <div class="row no-print">
+                <div class="col-12">
+                  <a href="#" (click)="print()" class="btn btn-success float-right"><i class="fas fa-print"></i>
+                    Print</a>
+
+
+                </div>
+
+              </div>
+            </div>
+            <!-- /.card-body -->
           </div>
-        </section>
-      
+          <!-- /.card -->
+        </div>
+        <!-- /.col (right) -->
       </div>
-      <!-- Content Wrapper. Contains page content -->
-      
+
+
+    </div>
+  </section>
+
+</div>
+<!-- Content Wrapper. Contains page content -->
