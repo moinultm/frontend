@@ -20,13 +20,9 @@ export class DashboardComponent implements OnInit {
     responsive: true
   };
 
-  chartData = [
-    { data: [330, 600, 260, 700], label: 'Account A' },
-    { data: [120, 455, 100, 340], label: 'Account B' },
-    { data: [45, 67, 800, 500], label: 'Account C' }
-  ];
+  sellChartData :any[] = [] ;
 
-  chartLabels = ['January', 'February', 'Mars', 'April'];
+  chartLabels :any[]=[];
 
   //barchart
   public barChartOptions = {
@@ -36,11 +32,7 @@ export class DashboardComponent implements OnInit {
   public barChartLabels :  string[]= []  ;
   public barChartType = 'bar';
   public barChartLegend = true;
-  public barChartData = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
-  ];
-
+  public barChartData:  any[] = [] ;
 
   onChartClick(event) {
 
@@ -57,14 +49,26 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.loadData();
    
-    console.log(this.data['todays_stats']);
+    //console.log(this.data['data']);
+
   }
    //Load Data
    loadData() {
+   
     this.loading = true;
     this.dashboard.find().subscribe((res: PartialList<Dashboard>) => {
-      this.data = res;  
-         
+      this.data = res;
+
+
+ this.barChartLabels=  this.data['top_product_name']; 
+ this.barChartData.push({  data:this.data['selling_quantity']  ,  label: 'Quantity Sold'});
+
+this.chartLabels= this.data['months']; 
+this.sellChartData.push(
+  { data:this.data['sells']  ,  label: 'Sales Value'},
+  { data:this.data['purchases']  ,  label: 'Purchase Value'});
+ 
+ 
      this.loading = false;
     });
   }

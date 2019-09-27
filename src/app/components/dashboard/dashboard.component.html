@@ -80,7 +80,7 @@
 
                 <div class="card">
                     <div class="card-header no-border">
-                      <h3 class="card-title">Sell Invoices</h3>
+                      <h3 class="card-title">Sell Invoices (7) Days</h3>
                       <div class="card-tools">
                         <a href="#" class="btn btn-tool btn-sm">
                           <i class="fa fa-download"></i>
@@ -90,11 +90,11 @@
                         </a>
                       </div>
                     </div>
-                    <div class="card-body p-0">
-                      <table class="table table-striped table-valign-middle" *ngIf="!loading">
+                    <div class="card-body p-0  table-responsive" style="height: 300px;">
+                      <table class="table table-striped" *ngIf="!loading">
                         <thead>
                         <tr>
-                            <th>#</th>
+                            <th width="20px">#</th>
                           <th>Invoice No</th>
                           <th>Amount</th>
                           <th>Paid</th>                         
@@ -139,12 +139,14 @@
 
 
 
-                      <div style="display: block">
-                          <canvas baseChart
+                      <div style="display: block"  *ngIf="barChartData.length > 0">
+                          <canvas  
+                                 baseChart
                                   [datasets]="barChartData"
                                   [labels]="barChartLabels"
                                   [options]="barChartOptions"
                                   [legend]="barChartLegend"
+                                  height="150"
                                   [chartType]="barChartType">
                           </canvas>
 
@@ -158,13 +160,16 @@
 </div>
 
             </div> <!--Row-->
+ 
 
+
+            
             <div class="row">
                 <div class="col-lg-6">
   
                   <div class="card">
                       <div class="card-header no-border">
-                        <h3 class="card-title">Purchase Invoices</h3>
+                        <h3 class="card-title">Purchase Invoices (7) Days</h3>
                         <div class="card-tools">
                           <a href="#" class="btn btn-tool btn-sm">
                             <i class="fa fa-download"></i>
@@ -174,7 +179,7 @@
                           </a>
                         </div>
                       </div>
-                      <div class="card-body p-0">
+                      <div class="card-body p-0" style="height: 300px;">
                         <table class="table table-striped table-valign-middle" *ngIf="!loading">
                           <thead>
                           <tr>
@@ -213,19 +218,19 @@
                       <div class="card">
                         <div class="card-header no-border">
                           <div class="d-flex justify-content-between">
-                            <h3 class="card-title">Online Store Visitors</h3>
+                            <h3 class="card-title">Sell Vs Purchase</h3>
                             <a href="javascript:void(0);">View Report</a>
                           </div>
                         </div>
                         <div class="card-body">
                       
           
-                          <div class="position-relative mb-4">
+                          <div class="position-relative mb-4" *ngIf="sellChartData.length > 0">
           
                             <canvas
                             baseChart
                             [chartType]="'line'"
-                            [datasets]="chartData"
+                            [datasets]="sellChartData"
                             [labels]="chartLabels"
                             [options]="chartOptions"
                             [legend]="true"

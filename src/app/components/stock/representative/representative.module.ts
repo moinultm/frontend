@@ -38,7 +38,7 @@ const routes: Routes = [
     },
 
     {
-      path: 'user-receipt-detail/:id',
+      path: 'receipt-detail/:id',
       component: UserReceiptDetailComponent
     },
 ];

@@ -34,7 +34,7 @@
 
             <div class="card-body">
 
-                <form [formGroup]="form">
+                <!--form [formGroup]="form">
 
                     <div class="row">
                       <div class="col-md-4">
@@ -60,10 +60,7 @@
                             </div>
                     </div>
 
-
-
-
-                </form>
+                </form-->
 
 
                 <table class="table">
@@ -91,12 +88,13 @@
                                   <ng-container *ngIf="!loading">
                                     <tr *ngFor="let item of data.data; let i = index">
                                       <td>{{ i+1 }}</td>
-
                                       <td>{{ item.ref_no }}</td>
                                       <td>{{ item.total_quantity }}</td>
                                       <td>{{ item.date |  date:'dd/MM/yyyy'}}</td>
-                                      <td>View Recipt</td>
+                                      <td>
+                                          <button type="button" class="btn btn-primary float-left" (click)="toDetails(item.id)"> View Recipt</button>
 
+                                        </td>
 
                                     </tr>
                                   </ng-container>

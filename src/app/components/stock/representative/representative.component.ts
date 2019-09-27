@@ -4,6 +4,7 @@ import { PartialList } from '@models/common/patial-list.model';
 import { RepresentStockService } from '@services/stock/represent-stock.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-representative',
@@ -24,7 +25,10 @@ export class RepresentativeComponent implements OnInit {
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
 
-  constructor(  private representService: RepresentStockService,private _fb: FormBuilder,private datePipe : DatePipe) { }
+  constructor(  private representService: RepresentStockService,
+    private _fb: FormBuilder,
+    private datePipe : DatePipe,
+    private router:Router,) { }
 
   ngOnInit() {
     this.loadData();
@@ -52,6 +56,16 @@ export class RepresentativeComponent implements OnInit {
       this.data = res;
       this.loading = false;
     });
+  }
+
+
+  dateFilter(form:any){    
+   console.log( )
+  }
+
+
+  toDetails(id:number){
+    this.router.navigate([`representative/receipt-detail/${id}`]);
   }
 
 
