@@ -1,0 +1,90 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Supplier Summary</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
+              <li class="breadcrumb-item"><a>Report</a></li>
+              <li class="breadcrumb-item active">Supplier</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">List
+                </h3>
+
+
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body p-0">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="width: 10px">#</th>
+                                <th>Supplier Name</th>
+                                <th>Total Transaction</th>
+                                <th>Due Amount</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <tr *ngIf="loading">
+                                        <td colspan="12" class="text-center loading-data">
+                                            <mat-spinner></mat-spinner>
+                                        </td>
+                                      </tr>
+
+                                      <tr *ngIf="!loading && data && !data.data.length">
+                                        <td colspan="12" class="text-center loading-data">
+                                          No category created yet!
+                                        </td>
+                                      </tr>
+
+                                      <ng-container *ngIf="!loading">
+                                        <tr *ngFor="let item of data.data; let i = index">
+                                          <td>{{ i+1 }}</td>
+                                          <td>{{ item.category_name }}</td>
+                                          <td>{{ item.category_name }}</td>
+                                          <td>{{ item.category_name }}</td>
+                                        </tr>
+                                      </ng-container>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer clearfix">
+                     <!--- Pagination -->
+              <ngb-pagination *ngIf="!loading && data" [collectionSize]="data.count" [pageSize]="size"
+              [page]="data.page" (pageChange)="loadData($event)" class="pagination pagination-sm m-0 float-right">
+            </ngb-pagination>
+            <!-- ./Pagination -->
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+        </div>
+      </div>
+    </section>
+
+  </div>
+  <!-- Content Wrapper. Contains page content -->
+

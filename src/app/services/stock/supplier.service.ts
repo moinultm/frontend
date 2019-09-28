@@ -42,6 +42,12 @@ export class SupplierService extends CrudService<Client> {
     }
 
 
+    public findTransactionSummary(id: number): any {
+      this.options.params = undefined;
+
+      return this.__http.get <PartialList<Client>>(this.url + '/' + id +'/'+'summary-trans', this.options);
+    }
+
 
 
 }

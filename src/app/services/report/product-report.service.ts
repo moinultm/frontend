@@ -30,4 +30,34 @@ export class ProductReportService extends CrudService<Product> {
     return this.__http.get <PartialList<Product>>(this.url + '/' +'product-summary', this.options);
   }
 
+
+
+  public representStockReport(id:number,query?: {}): any {
+
+    if (query) {
+      this.options.params = query;
+    } else {
+      this.options.params = undefined;
+    }
+
+    return this.__http.get <PartialList<Product>>(this.url + '/' + id +'/'+'represent-stock', this.options);
+  }
+
+
+
+  public productSellReport(query?: {}): any {
+
+    if (query) {
+      this.options.params = query;
+    } else {
+      this.options.params = undefined;
+    }
+
+    return this.__http.get <PartialList<Product>>(this.url + '/'+'product-sells-report', this.options);
+  }
+
+
+
+
+
 }

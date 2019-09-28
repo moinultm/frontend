@@ -1,0 +1,155 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Reports</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
+            <li class="breadcrumb-item"><a>Report</a></li>
+            <li class="breadcrumb-item active">Representative stock report</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Stock report </h3>
+                <div class="card-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                </div>
+            </div>
+          </div>
+
+            <!-- /.card-header -->
+            <div class="card-body ">
+
+                <div class="row">
+                    <div class="col-md-12">
+                <form [formGroup]="form">
+
+                    <div class="row">
+                      <div class="col-md-3">
+                          <div class="form-group">
+                              <mat-form-field>
+                                  <input matInput [matDatepicker]="pickerFrom" placeholder="Start Date" formControlName="fromDate"  [value]="date.value">
+                                  <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                                  <mat-datepicker #pickerFrom></mat-datepicker>
+                                </mat-form-field>
+                              </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <mat-form-field>
+                                    <input matInput [matDatepicker]="pickerTo" placeholder="End Date" formControlName="toDate"  [value]="date.value">
+                                    <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                                    <mat-datepicker #pickerTo></mat-datepicker>
+                                  </mat-form-field>
+                                </div>
+                          </div>
+
+                          <div class="col-md-3"  *ngIf="!loadingUser">
+                            <label>User name</label>
+                            <!--(change)="changeSelection($event.target.value)"-->
+                              <select class="form-control"  formControlName="userId">
+                                  <option [value]="0">--All--</option>
+                                  <option *ngFor="let list of users.data" [value]="list.id">
+                                    {{list.id}} :: {{list.name}}
+                                  </option>
+                                </select>
+                          </div>
+
+                          <div class="col-md-3">
+                              <button type="button" class="btn btn-primary float-right" (click)="dateFilter(form)">Filter</button>
+                           </div>
+
+                    </div>
+                </form>
+               </div>
+            </div>
+
+
+            <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th class="tg-0pky" rowspan="2">Sl</th>
+                    <th class="tg-0pky" rowspan="2">Product Name</th>
+                    <th class="tg-0pky" colspan="1">Opening</th>
+                    <th class="tg-0pky" colspan="2">Outward</th>
+                    <th class="tg-0pky" colspan="1">Inward</th>
+                    <th class="tg-0pky" colspan="1">Closing</th>
+                  </tr>
+                  <tr>
+                    <td class="tg-0pky">Qty</td>
+                    <!--td class="tg-0pky">Value</td-->
+
+                    <td class="tg-0pky">Qty</td>
+                    <td class="tg-0pky">Value</td>
+
+                    <td class="tg-0pky">Qty</td>
+                    <!--td class="tg-0pky">Value</td-->
+
+                    <td class="tg-0pky">Qty</td>
+                    <!--td class="tg-0pky">Value</td-->
+
+                  </tr>
+                </thead>
+                <tbody>
+                        <tr *ngIf="loading">
+                                <td colspan="12" class="text-center loading-data">
+                                    <mat-spinner></mat-spinner>
+                                </td>
+                              </tr>
+
+                              <tr *ngIf="!loading && data && !data.data.length">
+                                <td colspan="12" class="text-center loading-data">
+                                  No category created yet!
+                                </td>
+                              </tr>
+
+                              <ng-container *ngIf="!loading">
+                                <tr *ngFor="let item of data.data; let i = index">
+                                  <td>{{ i+1 }}</td>
+                                  <td>{{ item.STOCK_ITEM_NAME }}</td>
+                                  <td>{{ item.TRAN_QUANTITY }}</td>
+                                  <!--td>{{ item.TRAN_AMOUNT }}</td-->
+                                  <td>{{ _CIP(item.OUTWARD_QUANTITY) }}</td>
+                                  <td>{{ _CIP(item.OUTWARD_AMOUNT) }}</td>
+                                  <td>{{ item.INWARD_QUANTITY }}</td>
+                                  <!--td>{{ item.INWARD_AMOUNT }}</td-->
+                                  <td>{{ _CIN(item.TRAN_QUANTITY)+_CIN(item.OUTWARD_QUANTITY)+_CIN(item.INWARD_QUANTITY)  }}</td>
+                                  <!--td>{{ _CIN(item.TRAN_AMOUNT)+_CIN(item.OUTWARD_AMOUNT)+_CIN(item.INWARD_AMOUNT)  }}</td-->
+                                </tr>
+                              </ng-container>
+                </tbody>
+            </table>
+
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer clearfix">
+                 <!--- Pagination -->
+          <ngb-pagination *ngIf="!loading && data" [collectionSize]="data.count" [pageSize]="size"
+          [page]="data.page" (pageChange)="loadData($event)" class="pagination pagination-sm m-0 float-right">
+        </ngb-pagination>
+        <!-- ./Pagination -->
+            </div>
+
+
+        </div>
+    </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+<!-- Content Wrapper. Contains page content -->

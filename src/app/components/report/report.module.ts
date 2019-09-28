@@ -12,6 +12,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { DailySalesReportComponent } from './daily-sales-report/daily-sales-report.component';
 import { CustomerSummaryReportComponent } from './customer-summary-report/customer-summary-report.component';
+import { RepresentStockReportComponent } from './represent-stock-report/represent-stock-report.component';
+import { RepresentStockSummaryComponent } from './represent-stock-summary/represent-stock-summary.component';
+import { RepresentStatusReportComponent } from './represent-status-report/represent-status-report.component';
+import { SupplierBillSummaryComponent } from './supplier-bill-summary/supplier-bill-summary.component';
+import { ProductSellReportComponent } from './product-sell-report/product-sell-report.component';
 
 
 
@@ -29,12 +34,33 @@ const routes: Routes = [
     {
       path: 'product-report',
       component: ProductReportComponent
-    }
+    },
+
+    //represent
+    { path: 'represent-stock-report',
+    component: RepresentStockReportComponent
+    },
+    { path: 'represent-status-report',
+    component: RepresentStatusReportComponent
+    },
+    { path: 'represent-stock-summary',
+    component: RepresentStockSummaryComponent
+    },
+
+    //Supplier
+    { path: 'supplier-bill-summary',
+    component: SupplierBillSummaryComponent
+    },
+
+    //product
+    { path: 'product-sell-report',
+    component: ProductSellReportComponent
+    },
 
 ];
 
 @NgModule({
-  declarations: [  ReportMenuComponent, StockReportComponent, ProductReportComponent, DailySalesReportComponent, CustomerSummaryReportComponent ],
+  declarations: [  ReportMenuComponent, StockReportComponent, ProductReportComponent, DailySalesReportComponent, CustomerSummaryReportComponent, RepresentStockReportComponent, RepresentStockSummaryComponent, RepresentStatusReportComponent, SupplierBillSummaryComponent, ProductSellReportComponent ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

@@ -30,8 +30,6 @@ export class ProductReportComponent implements OnInit {
 
   ngOnInit() {
 
-
-
     this.loadData();
     this.iniForm();
   }
@@ -55,6 +53,7 @@ iniForm(){
     toDate: [  '',  [Validators.nullValidator],]
   });
 }
+
 
 dateFilter(){
   let formDt = this.datePipe.transform(this.form.get('fromDate').value, 'yyyy-MM-dd');
