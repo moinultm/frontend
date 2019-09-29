@@ -63,7 +63,6 @@ export class SellComponent implements OnInit {
   ngOnInit() {
     this.iniForm();
     this.loadData();
-
   }
 //Loading Data
 loadData(page?: number): void {

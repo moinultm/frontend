@@ -17,6 +17,7 @@ import { RepresentStockSummaryComponent } from './represent-stock-summary/repres
 import { RepresentStatusReportComponent } from './represent-status-report/represent-status-report.component';
 import { SupplierBillSummaryComponent } from './supplier-bill-summary/supplier-bill-summary.component';
 import { ProductSellReportComponent } from './product-sell-report/product-sell-report.component';
+import { SellsStatusReportComponent } from './sells-status-report/sells-status-report.component';
 
 
 
@@ -56,11 +57,17 @@ const routes: Routes = [
     { path: 'product-sell-report',
     component: ProductSellReportComponent
     },
+    //sells status report
+
+    { path: 'sells-status-report',
+    component: SellsStatusReportComponent
+    },
+
 
 ];
 
 @NgModule({
-  declarations: [  ReportMenuComponent, StockReportComponent, ProductReportComponent, DailySalesReportComponent, CustomerSummaryReportComponent, RepresentStockReportComponent, RepresentStockSummaryComponent, RepresentStatusReportComponent, SupplierBillSummaryComponent, ProductSellReportComponent ],
+  declarations: [  ReportMenuComponent, StockReportComponent, ProductReportComponent, DailySalesReportComponent, CustomerSummaryReportComponent, RepresentStockReportComponent, RepresentStockSummaryComponent, RepresentStatusReportComponent, SupplierBillSummaryComponent, ProductSellReportComponent, SellsStatusReportComponent ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

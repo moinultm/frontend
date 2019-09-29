@@ -58,6 +58,14 @@ export class ProductReportService extends CrudService<Product> {
 
 
 
+  public sellsStatusReport(query?: {}): any {
+    if (query) {
+      this.options.params = query;
+    } else {
+      this.options.params = undefined;
+    }
+    return this.__http.get <PartialList<Product>>(this.url + '/'+'sells-status-report', this.options);
+  }
 
 
 }
