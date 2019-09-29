@@ -51,4 +51,13 @@ export class SellsOrderService extends CrudService<SellsOrder> {
 
   }
 
+
+  public findByInvoiceNo(query:Text){
+      this.options.params = undefined;
+
+
+    return this.__http.get <PartialList<SellsOrder>>(this.url+'?invoice='+ query ,this.options);
+  }
+
+
 }

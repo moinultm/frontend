@@ -17,8 +17,8 @@ import { error, warning, success } from '@services/core/utils/toastr';
 
 
 export class SellDetailsComponent implements OnInit {
-  
-  
+
+
   loadingDetails:boolean;
   details:PartialList <SellsOrder> ;
 
@@ -33,14 +33,14 @@ export class SellDetailsComponent implements OnInit {
   ngOnInit() {
     let id=this.route.snapshot.params.id;
     this.ShowBillDetails(id);
- 
+
   }
 
   ShowBillDetails(id:number){
     this.loadingDetails = true;
     this.sellsService.findDetailsById(id).subscribe((res:PartialList <SellsOrder>) => {
       this.details = res;
-       console.log(res);
+       //console.log(res);
       this.loadingDetails = false;
     });
   }

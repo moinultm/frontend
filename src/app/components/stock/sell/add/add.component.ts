@@ -27,8 +27,7 @@ export class AddComponent implements OnInit {
   modalOption: NgbModalOptions = {};
   customerList: Array<Client>;
   orderItemList: Array<OrderItems>=[];
-  loadingOrder: boolean;
-  loadingCustomer:boolean;
+
 
   _saving:boolean;
   mainForm: FormGroup;
@@ -37,7 +36,7 @@ export class AddComponent implements OnInit {
   selectedOrderItem: OrderItems;
 
   _productList: Array<Product>;
-  loadingProductList:boolean;
+
 
   users:PartialList <User>;
 
@@ -98,11 +97,11 @@ export class AddComponent implements OnInit {
 
   FillCustomer()
   {
-    this.loadingCustomer=true;
+    this.loading=true;
     this.customeService.findCustomer()
     .subscribe((res: PartialList<Client>) => {
       this.customerList = res.data;
-       this.loadingCustomer = false;
+       this.loading = false;
     });
   }
 
@@ -112,11 +111,11 @@ export class AddComponent implements OnInit {
 
     this.initItemsForm();
 
-    this.loadingProductList=true;
+    this.loading=true;
     this.productService.find()
     .subscribe((res: PartialList<Product>) => {
       this._productList = res.data;
-      this.loadingProductList = false;
+      this.loading = false;
     });
 
     this.modalService

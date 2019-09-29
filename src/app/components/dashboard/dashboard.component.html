@@ -25,14 +25,78 @@
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
+
+          <div class="row">
+              <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box">
+                  <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+
+                  <div class="info-box-content">
+                    <span class="info-box-text">CPU Traffic</span>
+                    <span class="info-box-number">
+                      10
+                      <small>%</small>
+                    </span>
+                  </div>
+                  <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+              </div>
+              <!-- /.col -->
+              <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                  <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+
+                  <div class="info-box-content">
+                    <span class="info-box-text">Likes</span>
+                    <span class="info-box-number">41,410</span>
+                  </div>
+                  <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+              </div>
+              <!-- /.col -->
+
+              <!-- fix for small devices only -->
+              <div class="clearfix hidden-md-up"></div>
+
+              <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                  <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+
+                  <div class="info-box-content">
+                    <span class="info-box-text">Sales</span>
+                    <span class="info-box-number">760</span>
+                  </div>
+                  <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+              </div>
+              <!-- /.col -->
+              <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                  <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+
+                  <div class="info-box-content">
+                    <span class="info-box-text">New Members</span>
+                    <span class="info-box-number">2,000</span>
+                  </div>
+                  <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+              </div>
+              <!-- /.col -->
+            </div>
+
+
           <div class="row"  *ngIf="!loading" >
-              <div class="col-lg-4 col-6" >
+              <div class="col-lg-3 col-6" >
                 <!-- small box -->
                 <div class="small-box bg-info">
-                  <div class="inner">                   
+                  <div class="inner">
                     <h3>{{data.todays_stats.total_selling_price}}৳</h3>
-                    <p>Quantity {{data.todays_stats.total_selling_quantity}} </p> 
-                     <p>Today Sales </p>
+                    <p>Today Sales, Quantity {{data.todays_stats.total_selling_quantity}} </p>
+
                   </div>
                   <div class="icon">
                     <i class="fas fa-money-bill-wave"></i>
@@ -41,13 +105,13 @@
                 </div>
               </div>
               <!-- ./col -->
-              <div class="col-lg-4 col-6">
+              <div class="col-lg-3 col-6">
                 <!-- small box -->
                 <div class="small-box bg-success">
                   <div class="inner">
                      <h3>{{data.todays_stats.total_purchasing_price}}৳</h3>
-                    <p>Quantity {{data.todays_stats.total_purchasing_quantity}} </p> 
-                     <p>Today Purchases</p>
+                    <p>Today Purchases, Quantity {{data.todays_stats.total_purchasing_quantity}} </p>
+                     <p></p>
                   </div>
                   <div class="icon">
                      <i class="fas fa-shopping-bag"></i>
@@ -56,13 +120,13 @@
                 </div>
               </div>
               <!-- ./col -->
-              <div class="col-lg-4 col-6">
+              <div class="col-lg-3 col-6">
                 <!-- small box -->
                 <div class="small-box bg-warning">
                   <div class="inner">
                      <h3>{{data.todays_stats.total_transactions_today}}৳</h3>
-                      <p>Total</p>
-                     <p>Today Transactaion</p>
+                      <p>Today Transactaion</p>
+                     <p></p>
                   </div>
                   <div class="icon">
                      <i class="fas fa-money-bill-wave"></i>
@@ -71,7 +135,24 @@
                 </div>
               </div>
               <!-- ./col -->
-        
+
+                       <!-- ./col -->
+                       <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-danger">
+                          <div class="inner">
+                             <h3>{{data.todays_stats.total_transactions_today}}৳</h3>
+                              <p>Today Expenses</p>
+
+                          </div>
+                          <div class="icon">
+                             <i class="fas fa-money-bill-wave"></i>
+                          </div>
+                          <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+                      </div>
+                      <!-- ./col -->
+
               <!-- ./col -->
             </div>
 
@@ -97,26 +178,26 @@
                             <th width="20px">#</th>
                           <th>Invoice No</th>
                           <th>Amount</th>
-                          <th>Paid</th>                         
-                          <th>Soled by</th>                      
+                          <th>Paid</th>
+                          <th>Soled by</th>
                           <th>View</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr *ngFor="let TL of data.today_sell_list; let i = index">
-                           
-                              <td>{{ i+1 }}</td>                    
-                      
+
+                              <td>{{ i+1 }}</td>
+
                               <td>{{ TL.reference_no }}</td>
                               <td>{{ TL.net_total }}</td>
                               <td>{{ TL.paid }}</td>
-                          
+
                           <td>{{ TL.user_name  }} </td>
-                      
-                        <td> Details </td> 
-                        </tr>      
-             
-                        
+
+                        <td> Details </td>
+                        </tr>
+
+
                         </tbody>
                       </table>
                     </div>
@@ -132,15 +213,15 @@
                           <a href="javascript:void(0);">View Report</a>
                         </div>
                       </div>
-                      <div class="card-body">                    
-        
+                      <div class="card-body">
+
                         <div class="position-relative mb-4">
-                          
+
 
 
 
                       <div style="display: block"  *ngIf="barChartData.length > 0">
-                          <canvas  
+                          <canvas
                                  baseChart
                                   [datasets]="barChartData"
                                   [labels]="barChartLabels"
@@ -150,23 +231,23 @@
                                   [chartType]="barChartType">
                           </canvas>
 
-                          
+
                         </div>
-        
-                       
+
+
                       </div>
                     </div>
                     </div>
 </div>
 
             </div> <!--Row-->
- 
 
 
-            
+
+
             <div class="row">
                 <div class="col-lg-6">
-  
+
                   <div class="card">
                       <div class="card-header no-border">
                         <h3 class="card-title">Purchase Invoices (7) Days</h3>
@@ -186,34 +267,34 @@
                               <th>#</th>
                             <th>Invoice No</th>
                             <th>Amount</th>
-                            <th>Paid</th>                         
-                            <th>From</th>             
+                            <th>Paid</th>
+                            <th>From</th>
                             <th>View</th>
                           </tr>
                           </thead>
                           <tbody>
                           <tr *ngFor="let TL of data.todayPurchaseList; let i = index">
-                             
-                                <td>{{ i+1 }}</td>                    
-                        
+
+                                <td>{{ i+1 }}</td>
+
                                 <td>{{ TL.reference_no }}</td>
                                 <td>{{ TL.net_total }}</td>
                                 <td>{{ TL.paid }}</td>
                                 <td>{{ TL.client_name }}</td>
-                                
-                        
-                        
-                          <td> Details </td> 
-                          </tr>      
-               
-                          
+
+
+
+                          <td> Details </td>
+                          </tr>
+
+
                           </tbody>
                         </table>
                       </div>
                     </div>
-  
+
                   </div>
-  
+
                   <div class="col-lg-6">
                       <div class="card">
                         <div class="card-header no-border">
@@ -223,10 +304,10 @@
                           </div>
                         </div>
                         <div class="card-body">
-                      
-          
+
+
                           <div class="position-relative mb-4" *ngIf="sellChartData.length > 0">
-          
+
                             <canvas
                             baseChart
                             [chartType]="'line'"
@@ -238,16 +319,16 @@
                             (chartClick)="onChartClick($event)">
                         </canvas>
                           </div>
-          
-                         
+
+
                         </div>
                       </div>
                       </div>
-  
-  
+
+
               </div> <!--Row-->
-       
-     
+
+
       </div>
       <!-- /.container-fluid -->
     </div>

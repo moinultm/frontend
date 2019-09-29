@@ -13,7 +13,7 @@ import { DatePipe } from '@angular/common';
 })
 export class ProductSellReportComponent implements OnInit {
 
-  data: [];
+  data: PartialList<Product>;
   loading: boolean;
   savingCategory: boolean;
   deletingCategory: boolean;
