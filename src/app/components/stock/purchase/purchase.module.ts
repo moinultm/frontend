@@ -10,6 +10,7 @@ import { MaterialsModule } from '@app/material.module';
 import { PurchaseDetailsComponent } from './purchase-details/purchase-details.component';
 import { AddPaymentComponent } from '../purchase/add-payment/add-payment.component';
 import { AddSupplierComponent } from './add-supplier/add-supplier.component';
+import { InvoiceBarcodedComponent } from './invoice-barcoded/invoice-barcoded.component';
 
 
 const routes: Routes = [
@@ -25,14 +26,17 @@ const routes: Routes = [
   {
     path: 'details/:id',
     component: PurchaseDetailsComponent
-
+  },
+  {
+    path: 'invoice-barcoded',
+    component: InvoiceBarcodedComponent
   },
 
 ];
 
 
 @NgModule({
-  declarations: [PurchaseComponent,AddPurchaseComponent,PurchaseDetailsComponent,AddPaymentComponent,AddSupplierComponent ],
+  declarations: [PurchaseComponent,AddPurchaseComponent,PurchaseDetailsComponent,AddPaymentComponent,AddSupplierComponent, InvoiceBarcodedComponent ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

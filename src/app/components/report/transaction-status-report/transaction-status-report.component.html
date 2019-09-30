@@ -1,0 +1,131 @@
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Report</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
+              <li class="breadcrumb-item"><a>Report</a></li>
+              <li class="breadcrumb-item active">Total Transaction</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+
+      <div class="col-md-12">
+
+          <div class="card  card-outline">
+              <div class="card-header">
+                <h3 class="card-title">Transaction  Report</h3>
+              </div> <!-- /.card-body -->
+
+              <div id="printableArea"  class="card-body">
+
+                  <div class="row no-print">
+                  <div class="col-md-12">
+                      <form [formGroup]="form">
+                      <div class="row">
+
+
+                          <div class="col-md-2">Report Date</div>
+                          <div class="col-md-2">
+                              <mat-form-field>
+                                  <input matInput [matDatepicker]="pickerFrom" placeholder="Start Date" formControlName="fromDate"  [value]="date.value">
+                                  <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                                  <mat-datepicker #pickerFrom></mat-datepicker>
+                                </mat-form-field>
+                           </div>
+                          <div class="col-md-2">
+                              <mat-form-field>
+                                  <input matInput [matDatepicker]="pickerTo" placeholder="End Date" formControlName="toDate"  [value]="date.value">
+                                  <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                                  <mat-datepicker #pickerTo></mat-datepicker>
+                                </mat-form-field>
+                           </div>
+
+                          <div class="col-md-2" >
+                            <div class="input-group mb-3">
+                                <input type="button" name="search" id="search" value="Search" (click)="loadData()" class="btn  btn-default btn-lg text-info">
+
+                            </div>
+
+                          </div>
+
+
+                      </div>
+                    </form>
+                  </div>
+                </div>
+
+                  <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <td colspan="2">Purchases</td>
+                            <td colspan="2">Sales</td>
+                            <td rowspan="2">Expenses</td>
+                            <td rowspan="2">Closing Blance</td>
+                          </tr>
+                          <tr>
+                            <td>Purchases Total</td>
+                            <td>Purchases Due</td>
+                            <td>Sales Total</td>
+                            <td>Sales Due</td>
+
+                          </tr>
+                        </thead>
+                          <tbody>
+
+                              <tr>
+                                  <td>0</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                </tr>
+
+
+                         </tbody>
+                    </table>
+
+              </div><!-- /.card-body -->
+
+              <div class="card-footer clearfix">
+
+                  <div class="row">
+                    <div class="col-sm-12 col-md-5">
+                     </div>
+
+                    <div class="col-sm-12 col-md-7">
+                            <input type="button" name="print" id="print" value="Print" (click)="print()" class="btn  btn-default btn-lg text-info">
+
+                       </div>
+
+
+
+                        </div>
+
+
+              </div>
+
+
+            </div>
+
+      </div>
+
+        </div>
+      </div>
+    </section>
+
+  </div>
+  <!-- Content Wrapper. Contains page content -->

@@ -13,6 +13,7 @@ import { SellDetailsComponent } from './sell-details/sell-details.component';
 import { AddPaymentComponent } from './add-payment/add-payment.component';
 import { SellReturnComponent } from './sell-return/sell-return.component';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
+import { SellsOrderComponent } from './sells-order/sells-order.component';
 
 
 const routes: Routes = [
@@ -38,7 +39,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [SellComponent, AddComponent,SellDetailsComponent,AddPaymentComponent,SellReturnComponent,AddCustomerComponent],
+  declarations: [SellComponent, AddComponent,SellDetailsComponent,AddPaymentComponent,SellReturnComponent,AddCustomerComponent, SellsOrderComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

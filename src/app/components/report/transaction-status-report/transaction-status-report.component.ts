@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { DatePipe } from '@angular/common';
-import { ProductReportService } from '@services/report/product-report.service';
 import { PartialList } from '@models/common/patial-list.model';
-import { SellsOrder } from '@models/stock/sells-order.model';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { ProductReportService } from '@services/report/product-report.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-sells-status-report',
-  templateUrl: './sells-status-report.component.html',
-  styleUrls: ['./sells-status-report.component.scss']
+  selector: 'app-transaction-status-report',
+  templateUrl: './transaction-status-report.component.html',
+  styleUrls: ['./transaction-status-report.component.scss']
 })
-export class SellsStatusReportComponent implements OnInit {
+export class TransactionStatusReportComponent implements OnInit {
   data: any;
 
   loading: boolean;
@@ -23,15 +22,16 @@ export class SellsStatusReportComponent implements OnInit {
 
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
-
   constructor(private sellsService:ProductReportService,
     private _fb: FormBuilder,
     private datePipe : DatePipe) { }
 
   ngOnInit() {
     this.iniForm();
-    //this.loadData();
   }
+
+
+
 
   loadData(page?: number): void {
     this.page = page ? page : 1;
@@ -44,7 +44,7 @@ export class SellsStatusReportComponent implements OnInit {
       size: this.size,
       from:  formDt,
       to:   toDt
-    }).subscribe((res: PartialList<SellsOrder>) => {
+    }).subscribe((res: PartialList<any>) => {
       this.data = res;
       console.log( this.data);
       this.loading = false;
@@ -60,23 +60,6 @@ export class SellsStatusReportComponent implements OnInit {
 
 
 
-  totalPaidAmount (){
-    var total = 0;
-            for(let count=0;count<this.data.data.length;count++){
-                total += parseInt(this.data.data[count].paid,10);
-            }
-            return total;
-  }
-
-
-
-  totalAmount (){
-    var total = 0;
-            for(let count=0;count<this.data.data.length;count++){
-                total += parseInt(this.data.data[count].total,10);
-            }
-            return total;
-  }
 
 
   print(): void {
@@ -99,6 +82,5 @@ export class SellsStatusReportComponent implements OnInit {
     );
     popupWin.document.close();
 }
-
 
 }

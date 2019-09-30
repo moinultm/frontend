@@ -104,7 +104,7 @@
                                         <select class="form-control" formControlName="customerName">
                                             <option [value]="null">Select Customer</option>
                                           <option *ngFor="let list of customerList" [value]="list.id">
-                                            {{list.full_name}}
+                                            {{list.full_name}} {{list.client_code}}
                                           </option>
                                         </select>
                                       </div>

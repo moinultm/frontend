@@ -1,6 +1,7 @@
 export class Client {
     id: number;
     full_name:string;
+    client_code:string;
     contact:number;
     company_name:string;
     email:string;

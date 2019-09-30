@@ -16,12 +16,12 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-  
+
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-  
-            
+
+
     <div class="col-md-12">
         <div class="card">
 
@@ -73,13 +73,13 @@
                     </div>
 
                   </div>
- 
+
 
               </div>
             </form>
           </div>
         </div>
- 
+
 
         <hr>
 
@@ -92,10 +92,10 @@
               <th>Product</th>
               <th>To Customer</th>
               <th>Sale by</th>
-              <th>Bill</th>           
+              <th>Bill</th>
               <th>Paid</th>
-             
-             
+
+
             </tr>
           </thead>
           <tbody>
@@ -121,50 +121,45 @@
               <td >
                 <div *ngFor="let T of result.sells ;let j = index">
                         {{j+1}}-  {{T.product.name}}
-                        
-                </div>  
+
+                </div>
                </td>
 
               <td>{{result.client_name}}</td>
               <td>{{result.user_name}}</td>
               <td>{{result.total}}</td>
               <td>{{result.paid}}</td>
-           
          
-
-     
           </ng-container>
-
-
           </tbody>
         </table>
-       
 
-        
- 
+
+
+
         <table class="table" style="width: 50%; font-weight: bold;" align="right">
-              
-                <tbody>     
-       
-      
+
+                <tbody>
+
+
                   <ng-container *ngIf="!loading">
                   <tr>
                     <td> Total Sells Amount</td>
-                    <td>{{totalAmount()}}</td>                  
+                    <td>{{totalAmount()}}</td>
                  </tr>
-      
-               <tr>                
+
+               <tr>
                     <td> Total Recived Amount</td>
-                    <td>{{ totalPaidAmount() }}</td>                 
+                    <td>{{ totalPaidAmount() }}</td>
                </tr>
                 </ng-container>
-      
-      
+
+
                 </tbody>
               </table>
 
 
-     
+
 
           </div>
           <!-- /.card-body -->
@@ -195,10 +190,9 @@
 
 </div>
 
-       
+
       </div>
     </section>
-  
+
   </div>
   <!-- Content Wrapper. Contains page content -->
-  

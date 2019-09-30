@@ -8,6 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ManageComponent } from './manage/manage.component';
 import { NgxBarcodeModule } from 'ngx-barcode';
 import { ProductBarcodeComponent } from './product-barcode/product-barcode.component';
+import { GiftProductComponent } from './gift-product/gift-product.component';
+import { DamageProductComponent } from './damage-product/damage-product.component';
 
 
 const routes: Routes = [
@@ -17,11 +19,15 @@ const routes: Routes = [
   {path: 'edit/:id',component: ProductComponent },
   {path: 'manage',component: ManageComponent },
   {path: 'barcode/:id',component: ProductBarcodeComponent },
+  {path: 'gift',component: GiftProductComponent },
+  {path: 'damage',component: DamageProductComponent },
+ 
+
 ];
 
 
 @NgModule({
-  declarations: [ProductComponent, ManageComponent,ProductBarcodeComponent],
+  declarations: [ProductComponent, ManageComponent,ProductBarcodeComponent, GiftProductComponent, DamageProductComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

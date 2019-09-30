@@ -1,0 +1,148 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Print Barcode by bill</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
+              <li class="breadcrumb-item"><a>Purchase</a></li>
+              <li class="breadcrumb-item active">Print Barcode/li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-outline">
+                    <div class="card-header">
+                      <h3 class="card-title">
+                        <i class="fas fa-edit"></i>
+                        Barcode Printing
+                      </h3>
+                    </div>
+                    <div class="card-body">
+
+                        <div  >
+                          <div class="panel-heading" >
+                            <div class="form-group">
+                              <div class="row">
+                                <div class="col-md-12"><label>Print Per Page</label> <select class="form-control">
+                                    <option disabled="disabled" value="">Please select one</option>
+                                    <option value="pp40">Per Page 40</option>
+                                    <option value="pp40">Per Page 40</option>
+                                  </select></div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <div class="row">
+                                <div class="col-md-2">
+                                  <div class="checkbox-custom checkbox-custom-success">
+                                      <input type="checkbox" name="isSiteName"  [(ngModel)]="barcoded.isSiteName">
+                                     <label for="checkbox3">Site Name</label></div>
+                                </div>
+                                <div class="col-md-2">
+                                  <div class="checkbox-custom checkbox-custom-success">
+                                    <input type="checkbox"  name="isProductName" [(ngModel)]="barcoded.isProductName">
+                                    <label for="checkbox4">Product Name</label>
+                                  </div>
+                                </div>
+                                <div class="col-md-2">
+                                  <div class="checkbox-custom checkbox-custom-success">
+                                    <input id="checkbox1" type="checkbox"  name="isProductPrice" [(ngModel)]="barcoded.isProductPrice"> <label
+                                      for="checkbox1">
+                                      Product Price
+                                    </label></div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="checkbox-custom checkbox-custom-success">
+                                      <input id="checkbox1" type="checkbox"  name="isClientCode" [(ngModel)]="barcoded.isClientCode"> <label
+                                        for="checkbox1">
+                                        Client Code
+                                      </label></div>
+                                  </div>
+
+                              </div>
+                            </div>
+                          </div>
+                          <form method="post">
+                            <div>
+                              <div class="btn-group bootstrap-select form-control Live dropup">
+
+                                <div class="dropdown-menu open" role="combobox" style="max-height: 352.587px; overflow: hidden; min-height: 144px;">
+                                  <div class="bs-searchbox"><input type="text" class="form-control" autocomplete="off" role="textbox"
+                                      aria-label="Search"></div>
+                                  <ul class="dropdown-menu inner" role="listbox" aria-expanded="false"
+                                    style="max-height: 300.587px; overflow-y: auto; min-height: 92px;">
+                                    <li data-original-index="0" class="active"><a tabindex="0" class="" data-tokens="null" role="option"
+                                        aria-disabled="false" aria-selected="false"><span class="text">Select a Purchase</span><span
+                                          class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                    <li data-original-index="1" class="selected"><a tabindex="0" class="" data-tokens="null" role="option"
+                                        aria-disabled="false" aria-selected="true"><span class="text">
+                                          2019/09/P-0001
+                                        </span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+
+                                  </ul>
+                                </div>
+                                <select data-live-search="true" class="form-control selectPickerLive" tabindex="-98">
+                                  <option selected="selected">Select a Purchase</option>
+                                  <option value="8">
+                                    2019/09/P-0001
+                                  </option>
+
+                                </select>
+                              </div>
+                            </div>
+                          </form>
+
+                          <div class="row">
+                            <div class="col-md-12">
+                              <input type="button" class="btn btn-block btn-xs"  value="print" id="print" (click)="print()" >
+
+
+                            </div>
+                          </div>
+                        </div>
+
+
+                        <div id="section-to-print" class="a4paper">
+
+                          <div class="barcode-item">
+                            <div  [ngClass]="barcoded.ppp" >
+                              <p *ngIf="barcoded.isSiteName" class="barcode-info-p">
+                                Yahoo.com
+                              </p>
+                              <p  *ngIf="barcoded.isProductName"  class="barcode-info-p">
+                                <small  *ngIf="barcoded.isClientCode" class="small"><b>CSID#MR-01</b></small>
+                                GM-60 Facewash
+                              </p>
+
+                              <img
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGUAAAAhAQMAAAD6e/f2AAAABlBMVEX///8BAQE6HLieAAAAAXRSTlMAQObYZgAAABxJREFUGJVjuDB5s6Xfucjbu8uUjkcwjPKGNA8AygXpMhXD/eEAAAAASUVORK5CYII=">
+                              <br> <small class="small"><b>020977</b></small>
+                              <p class="barcode-info-p"  *ngIf="barcoded.isProductPrice" >
+                              MRP:BDT 500 + Vat
+                              </p>
+                            </div>
+                          </div>
+
+                        </div> <!--Print Area-->
+
+
+                    </div>
+                    <!-- /.card -->
+                  </div>
+            </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+  <!-- Content Wrapper. Contains page content -->

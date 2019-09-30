@@ -49,11 +49,12 @@
                                             <tr>
                                                 <th style="width: 10px">#</th>
                                                 <th>Customer Name</th>
+                                                <th>Code</th>
                                                 <th>Contact</th>
                                                 <th>Company Name</th>
                                                 <th>Total</th>
                                                 <th>Due</th>
-                                          
+
                                                 <th style="width:20%">Action</th>
                                             </tr>
                                         </thead>
@@ -61,7 +62,7 @@
                                                 <tr *ngIf="loading">
                                                         <td colspan="12" class="text-center loading-data">
                                                           <mat-spinner></mat-spinner>
-                                                         
+
                                                         </td>
                                                       </tr>
 
@@ -75,20 +76,22 @@
                                                         <tr *ngFor="let item of data.data; let i = index">
                                                           <td>{{ i+1 }}</td>
                                                           <td>{{ item.full_name }}</td>
+                                                          <td>{{ item.client_code }}</td>
+
                                                           <td>{{ item.contact }}</td>
                                                           <td>{{ item.company_name }}</td>
-                                                          
+
                                                           <td>{{ item.company_name }}</td>
                                                           <td>{{ item.company_name }}</td>
                                                           <td class="actions">
-                                                        
+
 
                                                         <button mat-icon-button color="accent"
                                                         matTooltip="view details"
                                                         (click)="openDialogDetails(item.id)">
                                                           <mat-icon class="mat-18">flip_to_front</mat-icon>
                                                         </button>
-                                                      
+
                                                         <button mat-icon-button color="accent" matTooltip="Edit Client Information"
                                                         (click)="openDialog(item)">
                                                             <mat-icon>edit</mat-icon>

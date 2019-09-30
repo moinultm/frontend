@@ -9,6 +9,28 @@
 @import "../node_modules/ngx-toastr/toastr.css";
 
 
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #section-to-print, #section-to-print * {
+    visibility: visible;
+    color: white;
+
+  }
+  #section-to-print {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+  }
+}
+
+#section-to-print {
+  color: pink;
+
+}
+
   /* remove scrollbar space
 .modal-dialog{
   animation-name: example;
@@ -19,8 +41,18 @@
   0%   {transform: scale(0.5)}
   100% {transform: scale(1)}
 }
+
+
+.menu-open{
+  background: #323232;
+}
+
 */
- 
+
+.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-treeview {
+
+  background: #494e54;
+}
 
 .direct-over-flow {
   -webkit-transform: translate(0,0);

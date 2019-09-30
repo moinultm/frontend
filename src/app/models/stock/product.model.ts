@@ -20,6 +20,9 @@ export class Product {
     sells:Array<SellsOrder>;
 
     data:[]
+
+
+
    // purchases:[];
 
 }

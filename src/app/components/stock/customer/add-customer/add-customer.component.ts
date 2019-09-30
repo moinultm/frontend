@@ -27,7 +27,7 @@ savingType:string;
     private dialogRef: MatDialogRef<AddCustomerComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Client) {
       this.LOCAL_data = data;
-    
+
     }
 
 
@@ -50,6 +50,8 @@ this.initSaveForm(this.LOCAL_data)
       address: [ client ? client.address : '',  [Validators.nullValidator ]],
       opening: [ client ? client.previous_due : '',  [Validators.nullValidator ]],
       account_no: [ client ? client.account_no : '',  [Validators.nullValidator ]],
+      client_code: [ client ? client.client_code : '',  [Validators.required ]],
+
     });
   }
 
@@ -67,6 +69,7 @@ this.initSaveForm(this.LOCAL_data)
       address: this.form.get('address').value,
       opening: this.form.get('opening').value,
       account_no: this.form.get('account_no').value,
+      client_code: this.form.get('client_code').value
 
 
     }, this.selectedCustomer.id ? true : false).subscribe((res: Client) => {
@@ -89,7 +92,7 @@ this.initSaveForm(this.LOCAL_data)
 }
 
 close() {
-    this.dialogRef.close({ data: 'close'});
+    this.dialogRef.close();
 }
 
 

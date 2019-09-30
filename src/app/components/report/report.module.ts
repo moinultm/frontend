@@ -18,6 +18,9 @@ import { RepresentStatusReportComponent } from './represent-status-report/repres
 import { SupplierBillSummaryComponent } from './supplier-bill-summary/supplier-bill-summary.component';
 import { ProductSellReportComponent } from './product-sell-report/product-sell-report.component';
 import { SellsStatusReportComponent } from './sells-status-report/sells-status-report.component';
+import { TransactionStatusReportComponent } from './transaction-status-report/transaction-status-report.component';
+import { PurchaseStatusReportComponent } from './purchase-status-report/purchase-status-report.component';
+import { StockGeneralReportComponent } from './stock-general-report/stock-general-report.component';
 
 
 
@@ -62,12 +65,26 @@ const routes: Routes = [
     { path: 'sells-status-report',
     component: SellsStatusReportComponent
     },
+    { path: 'purchase-status-report',
+    component: PurchaseStatusReportComponent
+    },
+
+    { path: 'transaction-status-report',
+    component: TransactionStatusReportComponent
+    },
+
+    //stock-general-report
+    { path: 'stock-general-report',
+    component: StockGeneralReportComponent
+    },
+
+
 
 
 ];
 
 @NgModule({
-  declarations: [  ReportMenuComponent, StockReportComponent, ProductReportComponent, DailySalesReportComponent, CustomerSummaryReportComponent, RepresentStockReportComponent, RepresentStockSummaryComponent, RepresentStatusReportComponent, SupplierBillSummaryComponent, ProductSellReportComponent, SellsStatusReportComponent ],
+  declarations: [  ReportMenuComponent, StockReportComponent, ProductReportComponent, DailySalesReportComponent, CustomerSummaryReportComponent, RepresentStockReportComponent, RepresentStockSummaryComponent, RepresentStatusReportComponent, SupplierBillSummaryComponent, ProductSellReportComponent, SellsStatusReportComponent, TransactionStatusReportComponent, PurchaseStatusReportComponent, StockGeneralReportComponent ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

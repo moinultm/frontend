@@ -19,117 +19,188 @@
 
     <section class="content">
       <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-6">
-              <div class="card  card-outline">
-                  <div class="card-header">
-                    <h3 class="card-title">Stock</h3>
-                  </div> <!-- /.card-body -->
-                  <div class="card-body">
+      <div class="row">
+        <div class="col-12">
+            <div class="card  card-outline">
+                <div class="card-header">
+                  <h3 class="card-title">General Report</h3>
+                </div> <!-- /.card-body -->
+                <div class="card-body">
+                    <div class="row mb-3">
 
-                    <div>
-                      <a href="#" [routerLink]="['/product-report']">Products Summary</a><br>
-                      <a href="#">Date Summary</a><br>
-                      <a href="#" [routerLink]="['/product-sell-report']">PRODUCT REPORT</a><br>
-                    </div>
-                  </div><!-- /.card-body -->
+                        <div class="col-6 col-md-3 text-center">
+
+                          <div class="knob-label">
+                            <a href="#" [routerLink]="['/product-report']" style="color:#2573ff;">
+                            <div>
+                                <i class="fas fa-layer-group" style="font-size: 40px; color: #2573ff;"></i>
+                              </div>
+                            Products Summary</a>
+                          </div>
+
+                        </div>
+                        <!-- ./col -->
+                        <div class="col-6 col-md-3 text-center">
+
+                            <div class="knob-label">
+                                <a href="#" [routerLink]="['/transaction-status-report']">
+                                  <div>
+                                      <i class="far fa-list-alt" style="font-size: 40px; color: #2573ff;"></i>
+
+                                    </div>
+                                  Transaction Report</a>
+                              </div>
+
+                        </div>
+                        <!-- ./col -->
+                        <div class="col-6 col-md-3 text-center">
+                            <div class="knob-label">
+                                <a href="#" [routerLink]="['/stock-general-report']" style="color:#2573ff;">
+                                <div>
+                                    <i class="fas fa-file-invoice" style="font-size: 40px; color: #2573ff;"></i>
+
+                                  </div>
+                                  Stock General Report</a>
+                              </div>
+                        </div>
+                        <!-- ./col -->
+                        <div class="col-6 col-md-3 text-center">
+
+                            <div class="knob-label">
+                                <a href="#" [routerLink]="['/represent-stock-report']" style="color:#2573ff;">
+                                <div>
+                                    <i class="fab fa-leanpub" style="font-size: 40px; color: #2573ff;"></i>
+                                  </div>
+                                  Represenatative Stock</a>
+                              </div>
+
+                        </div>
+                        <!-- ./col -->
+                      </div><!--row-->
+
+                      <div class="row mb-3">
+
+                          <div class="col-6 col-md-3 text-center">
+
+                            <div class="color-palette-set">
+                              <a href="#" [routerLink]="['/sells-status-report']" style="color:#2573ff;">
+                              <div>
+                                  <i class="fas fa-file-export" style="font-size: 40px; color: #2573ff;"></i>
+
+                                </div>
+                                Sales Report
+                              </a>
+                            </div>
+
+                          </div>
+                          <!-- ./col -->
+                          <div class="col-6 col-md-3 text-center">
+
+                              <div class="knob-label">
+                                  <a href="#" [routerLink]="['/purchase-status-report']" style="color:#2573ff;">
+                                  <div>
+                                      <i class="fab fa-think-peaks" style="font-size: 40px; color: #2573ff;"></i>
+                                    </div>
+                                    Purchase Report
+                                     </a>
+                                </div>
+
+                          </div>
+                          <!-- ./col -->
+                          <div class="col-6 col-md-3 text-center">
+
+                              <div class="knob-label">
+                                  <a href="#" [routerLink]="['/represent-status-report']">
+                                    <div>
+                                        <i class="fas fa-users" style="font-size: 40px; color: #2573ff;"></i>
+
+                                      </div>
+                                    Representative Sales
+                                     </a>
+                                </div>
+                          </div>
+                          <!-- ./col -->
+                          <div class="col-6 col-md-3 text-center">
+
+                              <div class="knob-label">
+                                  <a href="#" [routerLink]="['/represent-stock-report']" style="color:#2573ff;">
+                                  <div>
+                                      <i class="fas fa-feather-alt" style="font-size: 40px; color: #2573ff;"></i>
+
+                                    </div>
+                                   Expense Summary
+                                    </a>
+                                </div>
+
+                          </div>
+                          <!-- ./col -->
+                        </div><!--Row-->
+
+
+                                              <div class="row mb-3">
+
+                                                  <div class="col-6 col-md-3 text-center">
+
+                                                    <div class="color-palette-set">
+                                                      <a href="#" [routerLink]="['/sells-status-report']" style="color:#2573ff;">
+                                                      <div>
+                                                          <i class="fas fa-id-badge" style="font-size: 40px; color: #2573ff;"></i>
+
+                                                        </div>
+                                                        Customer Statistic
+                                                      </a>
+                                                    </div>
+
+                                                  </div>
+                                                  <!-- ./col -->
+                                                  <div class="col-6 col-md-3 text-center">
+
+                                                      <div class="knob-label">
+                                                          <a href="#" [routerLink]="['/supplier-bill-summary']">
+                                                            <div>
+                                                                <i class="fas fa-file-invoice-dollar" style="font-size: 40px; color: #2573ff;"></i>
+                                                               </div>
+                                                            Supplier Statistics
+                                                             </a>
+                                                        </div>
+
+                                                  </div>
+                                                  <!-- ./col -->
+                                                  <div class="col-6 col-md-3 text-center">
+                                                      <div class="knob-label">
+                                                          <a href="#" [routerLink]="['/product-sell-report']" style="color:#2573ff;">
+                                                          <div>
+                                                              <i class="far fa-list-alt" style="font-size: 40px; color: #2573ff;"></i>
+
+                                                            </div>
+                                                         Other
+                                                             </a>
+                                                        </div>
+                                                  </div>
+                                                  <!-- ./col -->
+                                                  <div class="col-6 col-md-3 text-center">
+
+                                                      <div class="knob-label">
+                                                          <a href="#" [routerLink]="['/represent-stock-report']" style="color:#2573ff;">
+                                                          <div>
+                                                              <i class="fas fa-balance-scale" style="font-size: 40px; color: #2573ff;"></i>
+
+                                                            </div>
+                                                           Profit & Loss
+                                                            </a>
+                                                        </div>
+
+                                                  </div>
+                                                  <!-- ./col -->
+                                                </div><!--Row-->
+
+
                 </div>
-
-          </div>
-
-          <div class="col-md-6">
-              <div class="card card-outline">
-                  <div class="card-header">
-                    <h3 class="card-title">Sales by Representatives</h3>
-                  </div> <!-- /.card-body -->
-                  <div class="card-body">
-
-                    <div>
-                      <a href="#" [routerLink]="['/represent-stock-report']">Represenatative Stock</a><br>
-                      <a href="#" [routerLink]="['/represent-status-report']">Sales Status Report</a><br>
-                      <a href="#" [routerLink]="['/represent-stock-summary']">Stock Summary</a><br>
-                    </div>
-                  </div><!-- /.card-body -->
-                </div>
-
-          </div>
-
-        </div>  <!--Row-->
-
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card  card-outline">
-                    <div class="card-header">
-                      <h3 class="card-title">Purchase</h3>
-                    </div> <!-- /.card-body -->
-                    <div class="card-body">
-
-                      <div>
-                        <a href="#" [routerLink]="['/product-report']">Purchase Summary</a><br>
-                        <a href="https://useiconic.com/open/">Date Summary</a><br>
-                        <a href="http://ionicons.com/">Ion Icons</a><br>
-                      </div>
-                    </div><!-- /.card-body -->
-                  </div>
-
-            </div>
-
-            <div class="col-md-6">
-                <div class="card card-outline">
-                    <div class="card-header">
-                      <h3 class="card-title">Sales</h3>
-                    </div> <!-- /.card-body -->
-                    <div class="card-body">
-
-                      <div>
-                        <a href="#" [routerLink]="['/sells-status-report']">Sales Status Report</a><br>
-                        <a href="https://useiconic.com/open/">Sales Quantity</a><br>
-                        <a href="http://ionicons.com/">Due Invoices</a><br>
-                      </div>
+        </div>
+      </div>
+      </div>
 
 
-                    </div><!-- /.card-body -->
-                  </div>
-
-            </div>
-          </div>               <!--Rows-->
-          <div class="row">
-          <div class="col-md-6">
-              <div class="card  card-outline">
-                  <div class="card-header">
-                    <h3 class="card-title">Suppliers</h3>
-                  </div> <!-- /.card-body -->
-                  <div class="card-body">
-
-                    <div>
-                      <a href="#" [routerLink]="['/supplier-bill-summary']">Supplier Transaction Summary</a><br>
-                      <a href="#">Quantity Summary</a><br>
-                      <a href="#">Overall Report</a><br>
-                    </div>
-                  </div><!-- /.card-body -->
-                </div>
-
-          </div>
-
-          <div class="col-md-6">
-              <div class="card card-outline">
-                  <div class="card-header">
-                    <h3 class="card-title">Customer</h3>
-                  </div> <!-- /.card-body -->
-                  <div class="card-body">
-
-                    <div>
-                      <a href="https://fontawesome.com/">Sales Invoices</a><br>
-                      <a href="https://useiconic.com/open/">Sales Quantity</a><br>
-                      <a href="http://ionicons.com/">Summary  Report</a><br>
-                    </div>
-
-
-                  </div><!-- /.card-body -->
-                </div>
-
-          </div>
-        </div>               <!--Rows-->
       </div>
     </section>
 
