@@ -7,29 +7,9 @@
 @import '../node_modules/icheck-bootstrap/icheck-bootstrap.min.css';
 @import "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css";
 @import "../node_modules/ngx-toastr/toastr.css";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+ 
 
-
-@media print {
-  body * {
-    visibility: hidden;
-  }
-  #section-to-print, #section-to-print * {
-    visibility: visible;
-    color: white;
-
-  }
-  #section-to-print {
-    position: absolute;
-    left: 0;
-    top: 0;
-
-  }
-}
-
-#section-to-print {
-  color: pink;
-
-}
 
   /* remove scrollbar space
 .modal-dialog{
@@ -62,6 +42,76 @@
   padding: 10px;
 }
 
+/*############################print################*/
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #section-to-print, #section-to-print * {
+    visibility: visible;
+    color: white;
+
+  }
+  #section-to-print {
+position: absolute;
+    left: 0;
+    top: 0;
+
+  }
+  .pp40 {
+     border:none!important;
+   
+  }
+}
+
+ 
+.small{font-size: 8px !important;}
+.a4paper{
+  width:100%;
+  height: 11.6in;
+  display: block;
+  /*border: 1px solid #ccc;*/
+  margin: 10px auto;
+  padding: .1in 0 0 .1in;
+  page-break-after: always;
+}
+
+.barcode-single-item {
+  display: block;
+  overflow: hidden;
+  text-align: center;
+  font-size: 12px;
+  line-height: 14px;
+  text-transform: uppercase;
+  float: left;
+}
+
+.barcode-item {
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  line-height: 14px;
+  text-transform: uppercase;
+}
+
+.pp40 {
+  width: 1.5in;
+  height: 1.203in;
+  margin: 0 .07in;
+  padding-top: .05in;
+  border: 1px solid #ddd;
+  margin-top: 2px;
+}
+
+.barcode-info-p {
+  line-height: 15px !important;
+  font-size: 8px !important;
+  color: black !important;
+  margin-bottom: 0;
+}
+
+/*############################print################*/
 
 .mat-form-field{width: 100%;}
 

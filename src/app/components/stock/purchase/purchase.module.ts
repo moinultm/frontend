@@ -11,6 +11,7 @@ import { PurchaseDetailsComponent } from './purchase-details/purchase-details.co
 import { AddPaymentComponent } from '../purchase/add-payment/add-payment.component';
 import { AddSupplierComponent } from './add-supplier/add-supplier.component';
 import { InvoiceBarcodedComponent } from './invoice-barcoded/invoice-barcoded.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 const routes: Routes = [
@@ -45,7 +46,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     //materials
 
-    MaterialsModule
+    MaterialsModule,
+    NgSelectModule
   ],
   entryComponents:[AddPaymentComponent,AddSupplierComponent],
 })

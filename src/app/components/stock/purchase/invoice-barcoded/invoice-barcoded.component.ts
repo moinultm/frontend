@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '@models/stock/product.model';
+import { PurchaseOrderService } from '@services/stock/purchase-order.service';
+import { PurchaseOrder } from '@models/stock/purchase-order.model';
+import { PartialList } from '@models/common/patial-list.model';
+import { FormGroup, FormControl } from '@angular/forms';
+
+import { Select2OptionData } from 'ng2-select2';
 
 @Component({
   selector: 'app-invoice-barcoded',
@@ -7,11 +13,23 @@ import { Product } from '@models/stock/product.model';
   styleUrls: ['./invoice-barcoded.component.scss']
 })
 export class InvoiceBarcodedComponent implements OnInit {
-
+  data: PartialList<PurchaseOrder>;
+  loading: boolean;
+  savingSupplier: boolean;
+  deletingSupplier: boolean;
+  page = 1;
+  size = 10;
+  form: FormGroup;
+  selectedInvoice: PurchaseOrder;
+  
 
  barcoded:Barcoded;
 
-  constructor() {
+ selectedPersonId = '5a15b13c36e7a7f00cf0d7cb';
+
+ 
+
+  constructor(   private purchaseService: PurchaseOrderService,) {
 
     this.barcoded = {
       ppp:'pp40',
@@ -21,12 +39,35 @@ export class InvoiceBarcodedComponent implements OnInit {
       isClientCode: true,
     }
 
+  
+
    }
 
   ngOnInit() {
+    
+ 
+    this.loadData();
+
+ 
+  }
+
+  
+ 
+  loadData(page?: number): void {
+    this.page = page ? page : 1;
+    this.loading = true;
+    this.purchaseService.find({
+      page: this.page,
+      size: this.size
+    }).subscribe((res: PartialList<PurchaseOrder>) => {
+      this.data = res;
+      
+      this.loading = false;
+    });
   }
 
 
+  
   print(): void {
     event.preventDefault()
    window.print();
@@ -65,6 +106,9 @@ export class InvoiceBarcodedComponent implements OnInit {
     */
 }
 
+
+//https://ng-select.github.io/ng-select#/data-sources
+//https://github.com/ng-select/ng-select#getting-started
 
 }
 
