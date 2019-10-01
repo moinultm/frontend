@@ -76,19 +76,8 @@
 
                           <div class="row">
 
-                              <div class="col-md-6">
-                                  <div class="form-group">
-                                      <label>Invoice Type</label>
-                                      <select class="form-control"
-                                      [(ngModel)]="selectedTypeId" (change)="getSells(selectedTypeId)">
-                                        <option  [value]="1" >Sells</option>
-                                        <option  [value]="2" [selected]="true">Purchase</option>
-
-                                      </select>
-                                    </div>
-                              </div>
-
-                            <div class="col-md-6">
+                     
+                            <div class="col-md-12">
 
                                 <div class="form-group">
                                     <label class="form-check-label">Select invoice</label>
@@ -123,50 +112,48 @@
                           </div>
                         </div>
 
-                      <div *ngIf="!loadingDetails">
-                          <div *ngIf="selectedTypeId==2">
-
+                        
+                      <div *ngIf="!loadingDetails" id="section-to-print" class="a4paper">                    
                       <div *ngFor="let T of detailsData.data; let i = index">
                           <div *ngFor="let TD of T.purchases ; let i = index">
 
                                 <div *ngFor="let TDQ of counter(TD.quantity) ; let i = index">
-                                    {{TD.product.name}}
 
-                                    {{TD.product.code}}
-                                    {{TD.product.mrp}}
-
-                                    {{T.client.client_code}}
+                                    <div class="barcode-item">
+                                        <div  [ngClass]="barcoded.ppp" >
+            
+                                    <p *ngIf="barcoded.isSiteName" class="barcode-info-p">
+                                     Company
+                                      </p>
+                                      <p  *ngIf="barcoded.isProductName"  class="barcode-info-p">
+                                          {{TD.product.name}}
+                                        </p>
+ 
+                                        <ngx-barcode [bc-element-type]="elementType" [bc-value]="TD.product.code" [bc-format]="format"
+                                        [bc-line-color]="lineColor" [bc-width]="width" [bc-height]="50"  [bc-display-value]="displayValue">
+                                      </ngx-barcode> 
+                                      <p class="barcode-info-p"  *ngIf="barcoded.isProductPrice" >
+                                          MRP: {{TD.product.mrp}} + Vat
+                                          </p>
+                                   
+                                        </div>    
+                                      </div>
+ 
                                 </div>
 
                           </div>
                       </div>
 
-                    </div>
 
-                      <div *ngIf="selectedTypeId==1">
+                      
+                         </div>
 
-                          <div *ngFor="let T of detailsDataSell.data; let i = index">
-                              <div *ngFor="let TD of T.sells ; let i = index">
-
-                                    <div *ngFor="let TDQ of counter(TD.quantity) ; let i = index">
-                                        {{TD.product.name}}
-
-                                        {{TD.product.code}}
-                                        {{TD.product.mrp}}
-
-                                        {{T.client.client_code}}
-                                    </div>
-
-                              </div>
-                          </div>
-
-                      </div>
+                     
 
 
-                      </div>
+                        <!--div id="section-to-print" class="a4paper">
 
-
-                        <div id="section-to-print" class="a4paper">
+                          
                           <div class="barcode-item">
                             <div  [ngClass]="barcoded.ppp" >
                               <p *ngIf="barcoded.isSiteName" class="barcode-info-p">
@@ -183,9 +170,11 @@
                               MRP:BDT 500 + Vat
                               </p>
                             </div>
-                          </div>
+                          </div
 
-                        </div> <!--Print Area-->
+
+
+                        </div--> <!--Print Area-->
 
 
                     </div>

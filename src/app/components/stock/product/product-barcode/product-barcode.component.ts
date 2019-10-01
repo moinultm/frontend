@@ -3,10 +3,10 @@ import { PartialList } from '@models/common/patial-list.model';
 import { Product } from '@models/stock/product.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ProductService } from '@services/stock/product.service';
-import { ToastrService } from 'ngx-toastr';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Title } from '@angular/platform-browser';
+ 
 import { ActivatedRoute } from '@angular/router';
+import { Client } from '@models/stock/client.model';
+import { CustomerService } from '@services/stock/customer.service';
 
 @Component({
   selector: 'app-product-barcode',
@@ -15,24 +15,24 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductBarcodeComponent implements OnInit {
   elementType = 'svg';
-  value = 'fuck';
+  value = 'kkk';
   format = 'CODE128';
   lineColor = '#000000';
   width = 2;
-  height = 100;
+  height = 50;
   displayValue = true;
   fontOptions = '';
   font = 'monospace';
   textAlign = 'center';
   textPosition = 'bottom';
   textMargin = 2;
-  fontSize = 20;
+  fontSize = 10;
   background = '#ffffff';
-  margin = 10;
-  marginTop = 10;
-  marginBottom = 10;
-  marginLeft = 10;
-  marginRight = 10;
+  margin = 2;
+  marginTop = 2;
+  marginBottom =2;
+  marginLeft = 2;
+  marginRight = 2;
 
   data: PartialList<Product>;
   details:PartialList<Product>;
@@ -44,16 +44,36 @@ export class ProductBarcodeComponent implements OnInit {
   form: FormGroup;
   selectedProduct: Product;
 
+  barcoded:Barcoded;
+  selectedClientCode:string;
+
+  countPrint:number;
+  customerList: Array<Client>;
+
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
+    private customeService:CustomerService
+  ) {
+
+    this.barcoded = {
+      ppp:'pp40',
+      isSiteName: true,
+      isProductName: true,
+      isProductPrice: true,
+      isClientCode: true, 
+       prodDate:'',
+      expdDate:''
+    }
 
 
-  ) { }
+
+   }
 
   ngOnInit() {
     let id=this.route.snapshot.params.id;
-    this.loadData(id)
+    this.loadData(id);
+    this.FillCustomer();
   }
 
 
@@ -72,6 +92,16 @@ export class ProductBarcodeComponent implements OnInit {
 }
 
 
+FillCustomer()
+{
+  this.loading=true;
+  this.customeService.findCustomer()
+  .subscribe((res: PartialList<Client>) => {
+    this.customerList = res.data;
+     this.loading = false;
+  });
+}
+
 //Product
   print(): void {
     event.preventDefault();
@@ -85,6 +115,53 @@ export class ProductBarcodeComponent implements OnInit {
         <head>
           <title>Print Barcode</title>
           <style>
+          .no-print{display:none}
+          .small{font-size: 10px !important;}
+.a4paper{
+  width: 100%;
+  /* height: 11.6in; */
+  overflow: scroll;
+  display: block;
+  /* border: 1px solid #ccc; */
+  margin: 10px auto;
+  padding: 0.1in 0 0 0.1in;
+  page-break-after: always;
+}
+
+.barcode-single-item {
+  display: block;
+  overflow: hidden;
+  text-align: center;
+  font-size: 12px;
+  line-height: 14px;
+  text-transform: uppercase;
+  float: left;
+}
+
+.barcode-item {
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  line-height: 14px;
+  text-transform: uppercase;
+}
+
+.pp40 {
+  width: 2in;
+ 
+  padding: 0.05in;
+  border: 1px solid #ddd;
+  margin-top: 2px;
+  margin-bottom: 2;
+}
+
+.barcode-info-p {
+  line-height: 16px !important;
+  font-size: 12px !important;
+  color: black !important;
+  margin-bottom: 0;
+}
+
 
           </style>
         </head>
@@ -95,6 +172,19 @@ export class ProductBarcodeComponent implements OnInit {
   }
 
 
+  counter(i: number) {
+    return new Array(i);
+}
+
+}
 
 
+export interface Barcoded {
+  ppp:string,
+  isSiteName: boolean;
+  isProductName: boolean;
+  isProductPrice: boolean;
+  isClientCode: boolean;
+  prodDate:string;
+  expdDate:string;
 }

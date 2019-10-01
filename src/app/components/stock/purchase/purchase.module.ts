@@ -13,7 +13,7 @@ import { AddSupplierComponent } from './add-supplier/add-supplier.component';
 import { InvoiceBarcodedComponent } from './invoice-barcoded/invoice-barcoded.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 
-
+import { NgxBarcodeModule } from 'ngx-barcode';
 const routes: Routes = [
   // Roles component
   {
@@ -44,6 +44,7 @@ const routes: Routes = [
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxBarcodeModule,
     //materials
 
     MaterialsModule,

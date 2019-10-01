@@ -4,7 +4,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0 text-dark">Profiles</h1>
+          <h1 class="m-0 text-dark">Barcode Generator</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -44,7 +44,7 @@
                   <p class="text-muted text-center">MRP {{item.mrp}}</p>
 
                   <ul class="list-group list-group-unbordered mb-3">
-                    <li class="list-group-item">
+                    <!--li class="list-group-item">
                       <b>Stock</b> <a class="float-right">{{  item.quantity }}</a>
                     </li>
                     <li class="list-group-item">
@@ -52,16 +52,77 @@
                     </li>
                     <li class="list-group-item">
                       <b>Purchase</b> <a class="float-right">{{ item.total_purchases }}</a>
-                    </li>
+                    </li-->
 
                     <li class="list-group-item">
-                        <b>Purchase</b> <a class="float-right">{{ item.total_purchases }}</a>
+                        <div class="checkbox-custom checkbox-custom-success">
+                            <input type="checkbox" name="isSiteName"  [(ngModel)]="barcoded.isSiteName">
+                           <label for="checkbox3">Site Name</label>
+                          </div>
                       </li>
 
+                      <li class="list-group-item">
+                          <div class="checkbox-custom checkbox-custom-success">
+                              <input type="checkbox"  name="isProductName" [(ngModel)]="barcoded.isProductName">
+                              <label for="checkbox4">Product Name</label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="checkbox-custom checkbox-custom-success">
+                                <input id="checkbox1" type="checkbox"  name="isProductPrice" [(ngModel)]="barcoded.isProductPrice"> <label
+                                  for="checkbox1">
+                                  Product Price
+                                </label></div>
+                          </li>
+                          <li class="list-group-item">
+                              <div class="checkbox-custom checkbox-custom-success">
+                                  <input id="checkbox1" type="checkbox"  name="isClientCode" [(ngModel)]="barcoded.isClientCode"> <label
+                                    for="checkbox1">
+                                    Client Code
+                                  </label></div>
+
+                               
+                                  <div class="form-group">
+                                      <label>Customer Name</label>
+  
+                                      <div class="input-group">
+                                          <div class="input-group-prepend">
+                                            <span class="input-group-text"> <i class="fas fa-user-tag"></i></span>
+                                          </div>
+                                          <select class="form-control"   [(ngModel)]="selectedClientCode">
+                                              <option [value]="null">Select Customer</option>
+                                            <option *ngFor="let list of customerList" [value]="list.client_code">
+                                              {{list.full_name}} {{list.client_code}}
+                                            </option>
+                                          </select>
+                                        </div>
+                                    </div>
+
+                                     
+                            </li>
+
+                            <li class="list-group-item">
+                                <label>Count</label>
+                           
+                              <input class="form-control" type="number"    [(ngModel)]="countPrint"     name="countPrint" step="1">
+                              </li>
+
+
+                              <li class="list-group-item">
+                                  <label>Prod.Date</label>                             
+                                <input class="form-control" type="text"    [(ngModel)]="prodDate"     name="prodDate" >
+                                </li>
+  
+                                <li class="list-group-item">
+                                    <label>Exp.Date</label>                             
+                                  <input class="form-control" type="text"    [(ngModel)]="ExpDate"     name="expDate" >
+                                  </li>
                   </ul>
 
-                  <a href="#" class="btn btn-primary btn-block"><b>Print</b></a>
-                </div>
+
+                  
+
+                 </div>
                 <!-- /.card-body -->
               </div>
               <!-- /.card -->
@@ -71,18 +132,43 @@
 
 
         <!-- /.col (left) -->
-        <div class="col-md-9">
+        <div class="col-md-9" *ngIf="!loading">
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Printing Page</h3>
             </div>
             <!-- /.card-header -->
+           
             <div id="print-section" class="card-body " *ngFor="let item of data.data;">
 
+                <div *ngFor="let TDQ of counter(countPrint) ;">
 
-                <ngx-barcode [bc-element-type]="elementType" [bc-value]="item.code" [bc-format]="format"
-                [bc-line-color]="lineColor" [bc-width]="width" [bc-height]="height" [bc-display-value]="displayValue">
-              </ngx-barcode>
+                    <div class="barcode-item">
+                        <div  [ngClass]="barcoded.ppp" >
+
+                    <p *ngIf="barcoded.isSiteName" class="barcode-info-p">
+                     Company
+                      </p>
+                      <p  *ngIf="barcoded.isProductName"  class="barcode-info-p">
+                          {{item.name}} 
+                        </p>
+                        <p  *ngIf="barcoded.isClientCode"  class="barcode-info-p">
+                          {{selectedClientCode}}
+                            </p>
+                        <ngx-barcode [bc-element-type]="elementType" [bc-value]="item.code" [bc-format]="format"
+                        [bc-line-color]="lineColor" [bc-width]="width" [bc-height]="50"  [bc-display-value]="displayValue">
+                      </ngx-barcode> 
+                      <p class="barcode-info-p"  *ngIf="barcoded.isProductPrice" >
+                          MRP: {{item.mrp}} + Vat
+                          </p>
+                   
+
+                          <p class="barcode-info-p"  *ngIf="barcoded.isProductPrice" >
+                              P.Date:{{prodDate}},E.Date {{ExpDate}}
+                              </p>
+                        </div>    
+                      </div>
+            </div>
 
 
               <div class="row no-print">

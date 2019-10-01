@@ -14,6 +14,27 @@ import { SellsOrder } from '@models/stock/sells-order.model';
   styleUrls: ['./invoice-barcoded.component.scss']
 })
 export class InvoiceBarcodedComponent implements OnInit {
+
+  elementType = 'svg';
+  value = '';
+  format = 'CODE128';
+  lineColor = '#000000';
+  width = 2;
+  height = 50;
+  displayValue = true;
+  fontOptions = '';
+  font = 'monospace';
+  textAlign = 'center';
+  textPosition = 'bottom';
+  textMargin = 2;
+  fontSize = 10;
+  background = '#ffffff';
+  margin = 2;
+  marginTop =2;
+  marginBottom = 2;
+  marginLeft = 2;
+  marginRight = 2;
+
   data:any;
   loading: boolean;
   savingSupplier: boolean;
@@ -30,10 +51,9 @@ export class InvoiceBarcodedComponent implements OnInit {
  loadingDetails:boolean;
  selectedTypeId : number;
 
-
- loadingDetailsSell:boolean;
+ 
  detailsData:PartialList<PurchaseOrder>;
- detailsDataSell:PartialList<SellsOrder>;
+ 
 
   constructor(   private purchaseService: PurchaseOrderService,private sellsService: SellsOrderService,) {
 
@@ -68,56 +88,23 @@ export class InvoiceBarcodedComponent implements OnInit {
     });
   }
 
-  loadSells(page?: number): void {
-    this.page = page ? page : 1;
-    this.loading = true;
-    this.sellsService.getList( ).subscribe((res: PartialList<SellsOrder>) => {
-      this.data = res;
-      this.loading = false;
-    });
-  }
+ 
 
-  ShowBillDetails(id:number){
-    if (this.selectedTypeId==1){
-      this.sellsDetail(id)
-    }
-
-  if (this.selectedTypeId==2){
+  ShowBillDetails(id:number){ 
     this.purchaseDetail(id)
-  }
 
   }
+ 
 
-
-  sellsDetail(id){
-    this.loadingDetails = true;
-    this.sellsService.findDetailsById(id).subscribe((res:PartialList <SellsOrder>) => {
+  purchaseDetail(id){
+    this.loadingDetails= true;
+    this.purchaseService.findDetailsById(id).subscribe((res:PartialList <PurchaseOrder>) => {
       this.detailsData = res;
-       //console.log(res);
       this.loadingDetails = false;
     });
   }
 
-  purchaseDetail(id){
-    this.loadingDetailsSell = true;
-    this.purchaseService.findDetailsById(id).subscribe((res:PartialList <PurchaseOrder>) => {
-      this.detailsDataSell = res;
-      this.loadingDetailsSell = false;
-    });
-  }
-
-  getSells(event){
-
-    if (event==1){
-      this.loadSells();
-    }
-    if (event==2){
-      this.loadData();
-    }
-
-
-  }
-
+ 
 
   counter(i: number) {
     return new Array(i);
@@ -125,9 +112,9 @@ export class InvoiceBarcodedComponent implements OnInit {
 
   print(): void {
     event.preventDefault()
-   window.print();
+  // window.print();
 
-   /**
+   
     let printContents, popupWin;
     printContents = document.getElementById('section-to-print').innerHTML;
     popupWin = window.open();
@@ -137,28 +124,50 @@ export class InvoiceBarcodedComponent implements OnInit {
         <head>
           <title>Print Barcode Report</title>
           <style>
-          .pp40 {
-            width: 1.799in;
-            height: 1.003in;
-            margin: 0 .07in;
-            padding-top: .05in;
-            border: 1px solid #ddd;
-            margin-top: 2px;
-          }
-          .barcode-info-p {
-            line-height: 15px !important;
-            font-size: 8px !important;
-            color: black !important;
-            margin-bottom: 0;
-          }
 
+          @page {
+            margin: 0 auto;
+            sheet-size: 300px 250mm;
+        }
+
+          body {
+            margin: 0;
+            font-family: "Source Sans Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";}
+          .small{font-size: 10px !important;}
+
+.barcode-single-item {
+  display: block;
+  overflow: hidden;
+  text-align: center;
+  font-size: 12px;
+  line-height: 14px;
+  text-transform: uppercase;
+  float: left;
+}
+
+.barcode-item {
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  line-height: 14px;
+  text-transform: uppercase;
+}
+
+ 
+
+.barcode-info-p {
+  line-height: 16px !important;
+  font-size: 12px !important;
+  color: black !important;
+  margin-bottom: 0;
+}
           </style>
         </head>
     <body onload="window.print();window.close()">${printContents}</body>
       </html>`
     );
     popupWin.document.close();
-    */
+    
 }
 
 
