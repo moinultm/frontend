@@ -72,18 +72,49 @@
                               </div>
                             </div>
                           </div>
-                   <div *ngIf="!loading">                  
-                          <ng-select [items]="data.data"
-                          bindLabel="reference_no"
-                          autofocus
-                          bindValue="reference_no"
-                          [(ngModel)]="selectedPersonId">
-               </ng-select>
-               
-              </div>
-               <br/>Selected: {{selectedPersonId}}
-                                           
-                          <br> 
+
+
+                          <div class="row">
+
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label>Invoice Type</label>
+                                      <select class="form-control"
+                                      [(ngModel)]="selectedTypeId" (change)="getSells(selectedTypeId)">
+                                        <option  [value]="1" >Sells</option>
+                                        <option  [value]="2" [selected]="true">Purchase</option>
+
+                                      </select>
+                                    </div>
+                              </div>
+
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    <label class="form-check-label">Select invoice</label>
+
+                                <div *ngIf="!loading">
+                                    <ng-select [items]="data.data"
+                                     bindLabel="reference_no"
+                                     autofocus
+                                     bindValue="id"
+                                     [(ngModel)]="selectedInvoiceId"
+                                     (change)="ShowBillDetails(selectedInvoiceId)">
+                                     </ng-select>
+                                   </div>
+                                  </div>
+                            </div>
+
+
+
+                          </div>
+
+
+               <!--input type="button" class="btn btn-success btn-xs"  value="Generate" id="generate" (click)="ShowBillDetails(selectedInvoiceId)"-->
+
+               <br/>
+
+                          <br>
 
                           <div class="row">
                             <div class="col-md-12">
@@ -92,21 +123,61 @@
                           </div>
                         </div>
 
+                      <div *ngIf="!loadingDetails">
+                          <div *ngIf="selectedTypeId==2">
+
+                      <div *ngFor="let T of detailsData.data; let i = index">
+                          <div *ngFor="let TD of T.purchases ; let i = index">
+
+                                <div *ngFor="let TDQ of counter(TD.quantity) ; let i = index">
+                                    {{TD.product.name}}
+
+                                    {{TD.product.code}}
+                                    {{TD.product.mrp}}
+
+                                    {{T.client.client_code}}
+                                </div>
+
+                          </div>
+                      </div>
+
+                    </div>
+
+                      <div *ngIf="selectedTypeId==1">
+
+                          <div *ngFor="let T of detailsDataSell.data; let i = index">
+                              <div *ngFor="let TD of T.sells ; let i = index">
+
+                                    <div *ngFor="let TDQ of counter(TD.quantity) ; let i = index">
+                                        {{TD.product.name}}
+
+                                        {{TD.product.code}}
+                                        {{TD.product.mrp}}
+
+                                        {{T.client.client_code}}
+                                    </div>
+
+                              </div>
+                          </div>
+
+                      </div>
+
+
+                      </div>
+
 
                         <div id="section-to-print" class="a4paper">
-
                           <div class="barcode-item">
                             <div  [ngClass]="barcoded.ppp" >
                               <p *ngIf="barcoded.isSiteName" class="barcode-info-p">
                                 Yahoo.com
                               </p>
                               <p  *ngIf="barcoded.isProductName"  class="barcode-info-p">
-                               
+
                                 GM-60 Facewash
                               </p>
                                     <p class="barcode-info-p"> <small  *ngIf="barcoded.isClientCode" class="small"><b>CSID#MR-01</b></small></p>
-                              <img
-                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGUAAAAhAQMAAAD6e/f2AAAABlBMVEX///8BAQE6HLieAAAAAXRSTlMAQObYZgAAABxJREFUGJVjuDB5s6Xfucjbu8uUjkcwjPKGNA8AygXpMhXD/eEAAAAASUVORK5CYII=">
+                              <img                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGUAAAAhAQMAAAD6e/f2AAAABlBMVEX///8BAQE6HLieAAAAAXRSTlMAQObYZgAAABxJREFUGJVjuDB5s6Xfucjbu8uUjkcwjPKGNA8AygXpMhXD/eEAAAAASUVORK5CYII=">
                               <br> <small class="small"><b>020977</b></small>
                               <p class="barcode-info-p"  *ngIf="barcoded.isProductPrice" >
                               MRP:BDT 500 + Vat

@@ -59,5 +59,9 @@ export class SellsOrderService extends CrudService<SellsOrder> {
     return this.__http.get <PartialList<SellsOrder>>(this.url+'?invoice='+ query ,this.options);
   }
 
+  public getList(): any {
+    this.options.params = undefined;
+    return this.__http.get <PartialList<SellsOrder>>(this.url + '/' +'list'+'/'+'si', this.options);
+  }
 
 }

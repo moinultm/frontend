@@ -51,4 +51,11 @@ export class PurchaseOrderService extends CrudService<PurchaseOrder> {
 
   }
 
+
+  public getList(): any {
+    this.options.params = undefined;
+    return this.__http.get <PartialList<PurchaseOrder>>(this.url + '/' +'list'+'/'+'pi', this.options);
+  }
+
+
 }

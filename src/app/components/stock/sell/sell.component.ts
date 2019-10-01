@@ -140,7 +140,6 @@ ngAfterViewInit(){
     ,debounceTime(1000)
     ,distinctUntilChanged()
     ).subscribe((text: Text) => {
-
       this.isSearching = true;
        this.sellsService.findByInvoiceNo(text).subscribe((res)=>{
         //console.log('res',res);
