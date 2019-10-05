@@ -67,7 +67,7 @@ export class AddStockComponent implements OnInit {
 
     this.myForm = this._formBuilder.group({
       bill_date:'',
-      user_id:0,
+      user_id:null,
 
       companies: this._formBuilder.array([])
     });
@@ -79,7 +79,7 @@ export class AddStockComponent implements OnInit {
     let control = <FormArray>this.myForm.controls.companies;
     control.push(
       this._formBuilder.group({
-        product_id:0,
+        product_id:null,
           quantity: 0,
           add_quantity: [0,[Validators.required, Validators.pattern(/^[.\d]+$/)]],
           mrp:0

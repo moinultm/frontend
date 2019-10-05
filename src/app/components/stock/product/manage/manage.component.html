@@ -76,7 +76,8 @@
                                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                           <a href="#" [routerLink]="['/product/edit',item.id]" class="dropdown-item"
                                           [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
-                                           <span  >   <i class="fa fa-pencil"></i>
+                                           <span>
+                                            <i class="fas fa-edit"></i>
                                              Edit</span>
                                            </a>
                                            <a href="#"  class="dropdown-item" (click)="initDetailView(detailsModal, item.id)"><span><i class="fa fa-eye"></i> Details</span></a>
@@ -85,7 +86,9 @@
                                     Delete</span></a>
                                         <div class="dropdown-divider"></div>
 
-                                        <a class="dropdown-item" href="#"   (click)="toBarcode(item.id)">Barcode</a>
+                                        <a class="dropdown-item" href="#"   (click)="toBarcode(item.id)">
+<span> <i class="fas fa-barcode"></i>  Barcode </span>
+                                          </a>
                                       </div>
                                     </li>
                               </ul>

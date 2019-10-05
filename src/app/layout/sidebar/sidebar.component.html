@@ -49,26 +49,21 @@
             </a>
             <ul class="nav nav-treeview">
 
-                <li class="nav-item">
-                    <a href="#" [routerLink]="['/sell','add']" class="nav-link"    [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
 
-                      <i class="nav-icon fas fa-cart-plus"></i>
-                      <p>Sales Order</p>
-                    </a>
-                  </li>
 
 
           <li class="nav-item">
             <a href="#" [routerLink]="['/sell','add']" class="nav-link"    [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+              <i class="nav-icon  fas fa-angle-right"></i>
 
-              <i class="nav-icon fas fa-cart-plus"></i>
               <p>Sales Invoice</p>
             </a>
           </li>
 
           <li class="nav-item" >
             <a href="#"[routerLink]="['/sell']" class="nav-link"   [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
-               <i class="nav-icon fas fa-cart-arrow-down"></i>
+
+              <i class="nav-icon  fas fa-angle-double-right"></i>
               <p>Manage Invoice</p>
             </a>
           </li>
@@ -101,6 +96,7 @@
                     <a href="#" [routerLink]="['/purchase']"   class="nav-link"   [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" >
 
                       <i class="nav-icon fab fa-dashcube"></i>
+
                       <p>Manage Purchase</p>
                     </a>
                   </li>
@@ -134,7 +130,8 @@
 
               <li class="nav-item">
                 <a href="#" [routerLink]="['/product','manage']" class="nav-link"  [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
-                  <i class="nav-icon fab fa-dropbox text-info"></i>
+                  <i class="nav-icon fab fa-digital-ocean"></i>
+
                   <p class="text">Manage Product</p>
                 </a>
               </li>
@@ -148,7 +145,8 @@
 
                 <li class="nav-item">
                     <a href="#" [routerLink]="['/product','damage']" class="nav-link"  [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
-                      <i class="nav-icon fab fa-dropbox "></i>
+
+                      <i class="nav-icon fas fa-box"></i>
                       <p class="text">Damage Product</p>
                     </a>
                   </li>

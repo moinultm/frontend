@@ -31,7 +31,6 @@
                         </div>
 
 
-
                     <form  role="form"  [formGroup]="myForm">
 
                   <div class="row" *ngIf="!loading">
@@ -39,6 +38,7 @@
                       <div class="form-group">
                           <label for="name">Represtative Name</label>
                           <select class="form-control"  formControlName="user_id">
+                              <option value="null">--Select--</option>
                               <option *ngFor="let U of users.data" [value]="U.id">
                               {{U.name}} - {{U.id}}</option>
                       </select>
@@ -48,7 +48,7 @@
                   <div class="col-md-4">
                       <div class="form-group">
                       <mat-form-field>
-                          <input matInput [matDatepicker]="picker" placeholder="Bill Date" formControlName="bill_date">
+                          <input matInput [matDatepicker]="picker" placeholder="Date" formControlName="bill_date">
                           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                           <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
@@ -82,9 +82,9 @@
                             <td>
                                 <div class="form-group" *ngIf="!loadingProducts">
                                     <select class="form-control"   formControlName="product_id" (change)="updatePrice($event.target,i)">
-                                        <option value="0">--Select--</option>
+                                        <option value="null">--Select--</option>
                                         <option *ngFor="let product of _productList" [ngValue]="product.id">
-                                          {{product.name}}</option>
+                                           {{product.name}}  | {{product.quantity}} </option>
                                       </select>
 
                               </div>

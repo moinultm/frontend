@@ -1,1 +1,95 @@
-<p>damage-product works!</p>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Damage Products</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
+              <li class="breadcrumb-item"><a>Stock</a></li>
+              <li class="breadcrumb-item active">Damage products</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+
+    <section class="content">
+      <div class="container-fluid">
+          <div class="row">
+          <div class="col-md-6">
+              <div class="card card-success">
+                  <div class="card-header">
+                    <h3 class="card-title">Add Gift</h3>
+                  </div>
+                  <div class="card-body">
+
+                    <form>
+
+                        <div class="form-group">
+                            <label>Product Name</label>
+
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                    <i class="fas fa-box-open"></i></span>
+                                </div>
+                                <select class="form-control"   [(ngModel)]="selectedClientCode">
+                                    <option [value]="null"> - Select Product </option>
+                                  <option *ngFor="let list of productList" [value]="list.id">
+                                    {{list.id}} | {{list.name}}  | {{list.quantity}}
+                                  </option>
+                                </select>
+                              </div>
+                          </div>
+
+
+                          <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fab fa-creative-commons-sa"></i></span>
+                              </div>
+                              <input type="number" class="form-control" placeholder="Quantity">
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                    <i class="fas fa-comments-dollar"></i></span>
+                                </div>
+                                <input type="number" class="form-control" placeholder="Cost" readonly>
+                              </div>
+
+                    </form>
+
+                  </div>
+                  <!-- /.card-body -->
+
+                  <div class="card-footer">
+
+                      <button type="submit" class="btn  btn-info float-right">Submit</button>
+                  </div>
+
+                </div>
+
+          </div>
+          <div class="col-md-6">
+              <div class="card card-danger">
+                  <div class="card-header">
+                    <h3 class="card-title">Control Gift</h3>
+                  </div>
+                  <div class="card-body">
+
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </div>
+  <!-- Content Wrapper. Contains page content -->

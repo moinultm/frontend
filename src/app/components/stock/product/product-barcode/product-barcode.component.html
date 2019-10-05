@@ -81,10 +81,10 @@
                                     Client Code
                                   </label></div>
 
-                               
+
                                   <div class="form-group">
                                       <label>Customer Name</label>
-  
+
                                       <div class="input-group">
                                           <div class="input-group-prepend">
                                             <span class="input-group-text"> <i class="fas fa-user-tag"></i></span>
@@ -98,29 +98,29 @@
                                         </div>
                                     </div>
 
-                                     
+
                             </li>
 
                             <li class="list-group-item">
                                 <label>Count</label>
-                           
+
                               <input class="form-control" type="number"    [(ngModel)]="countPrint"     name="countPrint" step="1">
                               </li>
 
 
                               <li class="list-group-item">
-                                  <label>Prod.Date</label>                             
+                                  <label>Prod.Date</label>
                                 <input class="form-control" type="text"    [(ngModel)]="prodDate"     name="prodDate" >
                                 </li>
-  
+
                                 <li class="list-group-item">
-                                    <label>Exp.Date</label>                             
+                                    <label>Exp.Date</label>
                                   <input class="form-control" type="text"    [(ngModel)]="ExpDate"     name="expDate" >
                                   </li>
                   </ul>
 
 
-                  
+
 
                  </div>
                 <!-- /.card-body -->
@@ -138,7 +138,7 @@
               <h3 class="card-title">Printing Page</h3>
             </div>
             <!-- /.card-header -->
-           
+
             <div id="print-section" class="card-body " *ngFor="let item of data.data;">
 
                 <div *ngFor="let TDQ of counter(countPrint) ;">
@@ -150,23 +150,23 @@
                      Company
                       </p>
                       <p  *ngIf="barcoded.isProductName"  class="barcode-info-p">
-                          {{item.name}} 
+                          {{item.name}}
                         </p>
                         <p  *ngIf="barcoded.isClientCode"  class="barcode-info-p">
                           {{selectedClientCode}}
                             </p>
                         <ngx-barcode [bc-element-type]="elementType" [bc-value]="item.code" [bc-format]="format"
                         [bc-line-color]="lineColor" [bc-width]="width" [bc-height]="50"  [bc-display-value]="displayValue">
-                      </ngx-barcode> 
+                      </ngx-barcode>
                       <p class="barcode-info-p"  *ngIf="barcoded.isProductPrice" >
                           MRP: {{item.mrp}} + Vat
                           </p>
-                   
+
 
                           <p class="barcode-info-p"  *ngIf="barcoded.isProductPrice" >
                               P.Date:{{prodDate}},E.Date {{ExpDate}}
                               </p>
-                        </div>    
+                        </div>
                       </div>
             </div>
 
