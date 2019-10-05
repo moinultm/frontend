@@ -80,14 +80,14 @@ export class GiftProductComponent implements OnInit {
   }
 
 
-  iniForm( ){
+  iniForm(){
 
     this.total=0;
      this.myForm = this._formBuilder.group({
        bill_date:'',
        user_id:null,
        customer_id:null,
-
+     
        companies: this._formBuilder.array([])
      });
      this.loadUser();
@@ -102,8 +102,8 @@ export class GiftProductComponent implements OnInit {
        this._formBuilder.group({
          product_id:null,
          bill_date:[new Date(),[Validators.required]],
-           quantity: 0,
-           add_quantity: [0,[Validators.required, Validators.pattern(/^[.\d]+$/)]],
+           stock_quantity: 0,
+           quantity: [0,[Validators.required, Validators.pattern(/^[.\d]+$/)]],
            mrp:0,
            cost_price:0
 
@@ -134,7 +134,7 @@ export class GiftProductComponent implements OnInit {
      else {
 
     arrayControl.at(index).patchValue({
-    quantity:this._productList[ctrl.selectedIndex - 1].quantity,
+      stock_quantity:this._productList[ctrl.selectedIndex - 1].quantity,
     mrp:this._productList[ctrl.selectedIndex - 1].mrp,
     cost_price:this._productList[ctrl.selectedIndex - 1].cost_price
    });
@@ -144,11 +144,12 @@ export class GiftProductComponent implements OnInit {
  //Saavestock
 
  viewData(){
-  console.log("Reactive Form submitted: ", this.myForm.get('companies').value);
+ // console.log("Reactive Form submitted: ", this.myForm.get('companies').value);
 
  }
  saveGift(form: any){
 
+  
      this._saving=true;
      const formData = new FormData();
      let formDt = this.datePipe.transform(this.myForm.get('bill_date').value, 'yyyy-MM-dd');
@@ -163,7 +164,6 @@ export class GiftProductComponent implements OnInit {
        this.iniForm();
        this._saving = false;
      }, (err: any) => {
-
        if (err.status === 403) {
          err.error.forEach((e: string) => {
            warning('Warning!', e, this._toastr);

@@ -10,6 +10,8 @@ import { NgxBarcodeModule } from 'ngx-barcode';
 import { ProductBarcodeComponent } from './product-barcode/product-barcode.component';
 import { GiftProductComponent } from './gift-product/gift-product.component';
 import { DamageProductComponent } from './damage-product/damage-product.component';
+import { ListGiftComponent } from './gift-product/list-gift/list-gift.component';
+import { ListDamageComponent } from './damage-product/list-damage/list-damage.component';
 
 
 const routes: Routes = [
@@ -20,12 +22,13 @@ const routes: Routes = [
   {path: 'barcode/:id',component: ProductBarcodeComponent },
   {path: 'gift',component: GiftProductComponent },
   {path: 'damage',component: DamageProductComponent },
-
+  {path: 'list-damage',component: ListDamageComponent },
+  {path: 'list-gift',component: ListGiftComponent },
 ];
 
 
 @NgModule({
-  declarations: [ProductComponent, ManageComponent,ProductBarcodeComponent, GiftProductComponent, DamageProductComponent],
+  declarations: [ProductComponent, ManageComponent,ProductBarcodeComponent, GiftProductComponent, DamageProductComponent, ListGiftComponent, ListDamageComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

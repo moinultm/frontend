@@ -23,7 +23,11 @@
           <div class="col-md-12 ">
               <div class="card card-success">
                   <div class="card-header">
-                    <h3 class="card-title">Add Gift</h3>
+                    <h3 class="card-title">Add Gift
+                      <a href="#" [routerLink]="['/product','list-damage']" class="nav-link d-inline"   [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active"><span class="badge bg-danger">View All</span></a>
+
+
+                    </h3>
                   </div>
 
                   <div class="card-body">
@@ -170,7 +174,7 @@
                   <!-- /.card-body -->
 
                   <div class="card-footer">
-                      <button type="submit"  (click)="saveGift()" class="btn  btn-info float-right">Submit</button>
+                      <button type="submit"  [disabled]="myForm.invalid || _saving" (click)="saveGift()" class="btn  btn-info float-right">Submit</button>
                   </div>
 
                 </div>
