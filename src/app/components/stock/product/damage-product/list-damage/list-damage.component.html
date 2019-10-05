@@ -32,34 +32,47 @@
                           <tr>
                             <th style="width: 10px">#</th>
                             <th>Ref.No</th>
-                            <th>Quantity</th>
+                            <th>Date</th>
                             <th style="width: 40px">Action</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>1.</td>
-                            <td>Update software</td>
-                            <td>
-                              <div class="progress progress-xs">
-                                <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                              </div>
-                            </td>
-                            <td><span class="badge bg-danger">55%</span></td>
-                          </tr>
+                            <tr *ngIf="loading">
+                                <td colspan="12" class="text-center loading-data">
+                                    <mat-spinner></mat-spinner>
+                                </td>
+                              </tr>
+
+                              <tr *ngIf="!loading && data && !data.data.length">
+                                <td colspan="12" class="text-center loading-data">
+                                  No Damage created yet!
+                                </td>
+                              </tr>
+
+                              <ng-container *ngIf="!loading">
+                                <tr *ngFor="let item of data.data; let i = index">
+                                  <td>{{ i+1 }}</td>
+                                  <td>{{ item.reference_no }}</td>
+                                  <td>{{ item.date }}</td>
+                                  <td class="actions">
+
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-default" (click)="initSave(saveModal, item)"><i class="fa fa-pencil"></i></button>
+                                            <button type="button" class="btn btn-default" (click)="initDelete(deleteModal, item)"><i class="fa fa-trash"></i></button>
+                                          </div>
+
+                                  </td>
+                                </tr>
+                              </ng-container>
                           
                         </tbody>
                       </table>
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer clearfix">
-                      <ul class="pagination pagination-sm m-0 float-right">
-                        <li class="page-item"><a class="page-link" href="#">«</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">»</a></li>
-                      </ul>
+                        <ngb-pagination *ngIf="!loading && data" [collectionSize]="data.count" [pageSize]="size"
+                        [page]="data.page" (pageChange)="loadData($event)" class="pagination pagination-sm m-0 float-right">
+                      </ngb-pagination>
                     </div>
                   </div>
             </div>
