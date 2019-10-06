@@ -3,8 +3,8 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, Input } from '
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PartialList } from '@models/common/patial-list.model';
-import { SellsOrder } from '@models/stock/sells-order.model';
-import { SellsOrderService } from '@services/stock/sells-order.service';
+import { SellsInvoice } from '@models/stock/sells-invoice.model';
+import { SellsInvoiceService } from '@services/stock/sells-invoice.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddPaymentComponent } from '../add-payment/add-payment.component';
 import { error, warning, success } from '@services/core/utils/toastr';
@@ -20,12 +20,12 @@ export class SellDetailsComponent implements OnInit {
 
 
   loadingDetails:boolean;
-  details:PartialList <SellsOrder> ;
+  details:PartialList <SellsInvoice> ;
 
   constructor(  private _toastr: ToastrService,
     private route: ActivatedRoute,
     private router: Router,
-    private sellsService: SellsOrderService,
+    private sellsService: SellsInvoiceService,
     private dialog: MatDialog,
 
   ) { }
@@ -38,7 +38,7 @@ export class SellDetailsComponent implements OnInit {
 
   ShowBillDetails(id:number){
     this.loadingDetails = true;
-    this.sellsService.findDetailsById(id).subscribe((res:PartialList <SellsOrder>) => {
+    this.sellsService.findDetailsById(id).subscribe((res:PartialList <SellsInvoice>) => {
       this.details = res;
        //console.log(res);
       this.loadingDetails = false;

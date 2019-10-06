@@ -3,7 +3,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { DatePipe } from '@angular/common';
 import { ProductReportService } from '@services/report/product-report.service';
 import { PartialList } from '@models/common/patial-list.model';
-import { SellsOrder } from '@models/stock/sells-order.model';
+import { SellsInvoice } from '@models/stock/sells-invoice.model';
 
 @Component({
   selector: 'app-sells-status-report',
@@ -44,7 +44,7 @@ export class SellsStatusReportComponent implements OnInit {
       size: this.size,
       from:  formDt,
       to:   toDt
-    }).subscribe((res: PartialList<SellsOrder>) => {
+    }).subscribe((res: PartialList<SellsInvoice>) => {
       this.data = res;
       console.log( this.data);
       this.loading = false;

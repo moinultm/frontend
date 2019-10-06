@@ -84,10 +84,11 @@ export class GiftProductComponent implements OnInit {
 
     this.total=0;
      this.myForm = this._formBuilder.group({
-       bill_date:'',
-       user_id:null,
-       customer_id:null,
-     
+
+      bill_date: [new Date(), [Validators.required]],
+      user_id:[null,Validators.required],
+      customer_id:[null,Validators.required],
+
        companies: this._formBuilder.array([])
      });
      this.loadUser();
@@ -149,7 +150,7 @@ export class GiftProductComponent implements OnInit {
  }
  saveGift(form: any){
 
-  
+
      this._saving=true;
      const formData = new FormData();
      let formDt = this.datePipe.transform(this.myForm.get('bill_date').value, 'yyyy-MM-dd');

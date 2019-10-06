@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { CrudService } from '@services/common/crud.service';
-import { SellsOrder } from '@models/stock/sells-order.model';
+import { SellsInvoice } from '@models/stock/sells-Invoice.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PartialList } from '@models/common/patial-list.model';
@@ -9,7 +9,7 @@ import { PartialList } from '@models/common/patial-list.model';
 @Injectable({
   providedIn: 'root'
 })
-export class SellsOrderService extends CrudService<SellsOrder> {
+export class SellsInvoiceService extends CrudService<SellsInvoice> {
 
 
   constructor(private __http: HttpClient ) {
@@ -37,17 +37,17 @@ export class SellsOrderService extends CrudService<SellsOrder> {
   public findDetailsById(id: number): any {
     this.options.params = undefined;
 
-    return this.__http.get <PartialList<SellsOrder>>(this.url + '/' + id +'/'+'details', this.options);
+    return this.__http.get <PartialList<SellsInvoice>>(this.url + '/' + id +'/'+'details', this.options);
   }
 
   public getReturnSellById(id: number): any {
     this.options.params = undefined;
-    return this.__http.get <PartialList<SellsOrder>>(this.url + '/' +'return'+ '/' + id , this.options);
+    return this.__http.get <PartialList<SellsInvoice>>(this.url + '/' +'return'+ '/' + id , this.options);
   }
 
   public postReturnSellById(model: any): any {
     this.options.params = undefined;
-    return this.__http.post <PartialList<SellsOrder>>  (this.url + '/'+'return' + model.id, model, this.options)
+    return this.__http.post <PartialList<SellsInvoice>>  (this.url + '/'+'return' + model.id, model, this.options)
 
   }
 
@@ -56,12 +56,12 @@ export class SellsOrderService extends CrudService<SellsOrder> {
       this.options.params = undefined;
 
 
-    return this.__http.get <PartialList<SellsOrder>>(this.url+'?invoice='+ query ,this.options);
+    return this.__http.get <PartialList<SellsInvoice>>(this.url+'?invoice='+ query ,this.options);
   }
 
   public getList(): any {
     this.options.params = undefined;
-    return this.__http.get <PartialList<SellsOrder>>(this.url + '/' +'list'+'/'+'si', this.options);
+    return this.__http.get <PartialList<SellsInvoice>>(this.url + '/' +'list'+'/'+'si', this.options);
   }
 
 }

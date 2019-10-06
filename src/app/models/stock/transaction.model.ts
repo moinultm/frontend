@@ -1,4 +1,4 @@
-import { SellsOrder } from './sells-order.model';
+import { SellsInvoice } from './sells-invoice.model';
 
 export class Transaction {
     change_amount:  number;
@@ -13,7 +13,7 @@ export class Transaction {
     pos: number;
     reference_no: number;
     return: number;
-    sells:Array<SellsOrder>;
+    sells:Array<SellsInvoice>;
     total: number;
     total_cost_price:number;
     total_paid: number;

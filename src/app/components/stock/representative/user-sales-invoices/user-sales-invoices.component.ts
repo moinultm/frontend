@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RepresentStockService } from '@services/stock/represent-stock.service';
 import { PartialList } from '@models/common/patial-list.model';
-import { SellsOrder } from '@models/stock/sells-order.model';
+import { SellsInvoice } from '@models/stock/sells-invoice.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-sales-invoices.component.scss']
 })
 export class UserSalesInvoicesComponent implements OnInit {
-  data: PartialList<SellsOrder>;
+  data: PartialList<SellsInvoice>;
   loading: boolean;
   savingSubcategory: boolean;
   deletingSubcategory: boolean;
@@ -33,7 +33,7 @@ export class UserSalesInvoicesComponent implements OnInit {
     this.representService.salesInvoices(id,{
       page: this.page,
       size: this.size
-    }).subscribe((res: PartialList<SellsOrder>) => {
+    }).subscribe((res: PartialList<SellsInvoice>) => {
       this.data = res;
       this.loading = false;
     });

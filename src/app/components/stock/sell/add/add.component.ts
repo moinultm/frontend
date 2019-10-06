@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { SellsOrderService } from '@services/stock/sells-order.service';
+import {SellsInvoiceService } from '@services/stock/sells-invoice.service';
 import { Client } from '@models/stock/client.model';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { SellsOrder } from '@models/stock/sells-order.model';
+import {SellsInvoice } from '@models/stock/sells-invoice.model';
 import { PartialList } from '@models/common/patial-list.model';
 import { CustomerService } from '@services/stock/customer.service';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
@@ -32,7 +32,7 @@ export class AddComponent implements OnInit {
   _saving:boolean;
   mainForm: FormGroup;
   formProducts:FormGroup;
-  selectedOrder: SellsOrder;
+  selectedOrder:SellsInvoice;
   selectedOrderItem: OrderItems;
 
   _productList: Array<Product>;
@@ -42,7 +42,7 @@ export class AddComponent implements OnInit {
 
 
 
-  constructor(private sellsOrdererSvice: SellsOrderService,
+  constructor(private sellsOrdererSvice:SellsInvoiceService,
     private customeService:CustomerService,
     private productService:ProductService,
     private modalService: NgbModal,
@@ -67,14 +67,14 @@ export class AddComponent implements OnInit {
     });
   }
 
-  initForm(order?: SellsOrder): void {
+  initForm(order?:SellsInvoice): void {
     this.loadUser();
 
     if (order){
 
     }
     else{
-      this.selectedOrder =new SellsOrder();
+      this.selectedOrder =new SellsInvoice();
       this.orderItemList =[];
     }
 
@@ -309,7 +309,7 @@ save(form: any){
   formData.append('shipping_cost', this.mainForm.get('shippingCost').value);
   formData.append('sells', JSON.stringify(this.orderItemList));
 
-  this.sellsOrdererSvice.save(formData, false).subscribe((res: SellsOrder) => {
+  this.sellsOrdererSvice.save(formData, false).subscribe((res:SellsInvoice) => {
     success('Success!', 'The Order is successfully saved.', this._toastr);
     this.initForm();
     this._saving = false;

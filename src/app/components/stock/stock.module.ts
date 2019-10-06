@@ -6,7 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialsModule } from '@app/material.module';
 
- 
+
 // Module routes
 const routes: Routes = [
   {
@@ -52,6 +52,7 @@ const routes: Routes = [
     path: 'representative',
     loadChildren: () => import('./representative/representative.module').then(m => m.RepresentativeModule)
   }
+
 ];
 
 
@@ -64,7 +65,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     MaterialsModule,
- 
+
   ],
   exports: [RouterModule]
   ,providers:[DatePipe ]

@@ -1,4 +1,4 @@
-import { SellsOrder } from './sells-order.model';
+import { SellsInvoice } from './sells-invoice.model';
 
 export class Product {
     id:number;
@@ -17,7 +17,7 @@ export class Product {
     image:any;
     opening_stock:number;
 
-    sells:Array<SellsOrder>;
+    sells:Array<SellsInvoice>;
 
     data:[]
 

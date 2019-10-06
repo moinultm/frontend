@@ -3,9 +3,9 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, Inject } from 
 import { FormGroup, FormBuilder, Validators, FormControl, ValidatorFn, FormArray } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { PartialList } from '@models/common/patial-list.model';
-import { SellsOrder } from '@models/stock/sells-order.model';
+import { SellsInvoice } from '@models/stock/sells-invoice.model';
 import { ActivatedRoute } from '@angular/router';
-import { SellsOrderService } from '@services/stock/sells-order.service';
+import { SellsInvoiceService } from '@services/stock/sells-invoice.service';
 import { Transaction } from '@models/stock/transaction.model';
 import { MatPrefix } from '@angular/material';
 
@@ -33,7 +33,7 @@ export class SellReturnComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder,
     private _toastr: ToastrService,
     private route: ActivatedRoute,
-    private sellsService: SellsOrderService,
+    private sellsService: SellsInvoiceService,
      ){
 
     }

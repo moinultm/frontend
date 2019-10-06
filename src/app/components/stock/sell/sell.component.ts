@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { PartialList } from '@models/common/patial-list.model';
-import { SellsOrder } from '@models/stock/sells-order.model';
-import { SellsOrderService } from '@services/stock/sells-order.service';
+import { SellsInvoice } from '@models/stock/sells-invoice.model';
+import { SellsInvoiceService } from '@services/stock/sells-invoice.service';
 import{TablesDataSource} from '@services/stock/lessons.datasource'
 import { fromEvent, merge, Observable } from 'rxjs';
 import { tap, distinctUntilChanged, debounceTime, filter, map } from 'rxjs/operators';
@@ -55,7 +55,7 @@ export class SellComponent implements OnInit {
   serializedDate = new FormControl((new Date()).toISOString());
 
   constructor(
-    private sellsService:SellsOrderService,
+    private sellsService:SellsInvoiceService,
     private router:Router,
     private _fb: FormBuilder,private datePipe : DatePipe
   ) { }
@@ -76,7 +76,7 @@ loadData(page?: number): void {
     size: this.size,
     from:  formDt,
     to:   toDt
-  }).subscribe((res: PartialList<SellsOrder>) => {
+  }).subscribe((res: PartialList<SellsInvoice>) => {
     this.data = res;
     console.log();
     this.loading = false;
@@ -91,7 +91,7 @@ dateFilter(){
   this.sellsService.find({
     from:  formDt,
     to:   toDt
-  }).subscribe((res: PartialList<SellsOrder>) => {
+  }).subscribe((res: PartialList<SellsInvoice>) => {
     this.data = res;
     this.loading = false;
   });

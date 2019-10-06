@@ -4,8 +4,8 @@ import { PurchaseOrderService } from '@services/stock/purchase-order.service';
 import { PurchaseOrder } from '@models/stock/purchase-order.model';
 import { PartialList } from '@models/common/patial-list.model';
 import { FormGroup, FormControl } from '@angular/forms';
-import { SellsOrderService } from '@services/stock/sells-order.service';
-import { SellsOrder } from '@models/stock/sells-order.model';
+import { SellsInvoiceService } from '@services/stock/sells-invoice.service';
+import { SellsInvoice } from '@models/stock/sells-invoice.model';
 
 
 @Component({
@@ -51,11 +51,11 @@ export class InvoiceBarcodedComponent implements OnInit {
  loadingDetails:boolean;
  selectedTypeId : number;
 
- 
- detailsData:PartialList<PurchaseOrder>;
- 
 
-  constructor(   private purchaseService: PurchaseOrderService,private sellsService: SellsOrderService,) {
+ detailsData:PartialList<PurchaseOrder>;
+
+
+  constructor(   private purchaseService: PurchaseOrderService,private sellsService: SellsInvoiceService,) {
 
     this.barcoded = {
       ppp:'pp40',
@@ -88,13 +88,13 @@ export class InvoiceBarcodedComponent implements OnInit {
     });
   }
 
- 
 
-  ShowBillDetails(id:number){ 
+
+  ShowBillDetails(id:number){
     this.purchaseDetail(id)
 
   }
- 
+
 
   purchaseDetail(id){
     this.loadingDetails= true;
@@ -104,7 +104,7 @@ export class InvoiceBarcodedComponent implements OnInit {
     });
   }
 
- 
+
 
   counter(i: number) {
     return new Array(i);
@@ -114,7 +114,7 @@ export class InvoiceBarcodedComponent implements OnInit {
     event.preventDefault()
   // window.print();
 
-   
+
     let printContents, popupWin;
     printContents = document.getElementById('section-to-print').innerHTML;
     popupWin = window.open();
@@ -153,7 +153,7 @@ export class InvoiceBarcodedComponent implements OnInit {
   text-transform: uppercase;
 }
 
- 
+
 
 .barcode-info-p {
   line-height: 16px !important;
@@ -167,7 +167,7 @@ export class InvoiceBarcodedComponent implements OnInit {
       </html>`
     );
     popupWin.document.close();
-    
+
 }
 
 
