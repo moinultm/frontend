@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { PartialList } from '@models/common/patial-list.model';
-import { SellsInvoice } from '@models/stock/sells-invoice.model';
+import { SellsInvoice } from '@models/stock/invoice.model';
 import { SellsInvoiceService } from '@services/stock/sells-invoice.service';
 import{TablesDataSource} from '@services/stock/lessons.datasource'
 import { fromEvent, merge, Observable } from 'rxjs';
@@ -25,15 +25,11 @@ export class SellComponent implements OnInit {
 
 
   apiResponse:any;
-
   isSearching:boolean;
-
-  @ViewChild('input', { static: false }) input: ElementRef;
- @ViewChild('input2',{ static: false }) input2: ElementRef;
-
+@ViewChild('input', { static: false }) input: ElementRef;
+@ViewChild('input2',{ static: false }) input2: ElementRef;
 
   data: any;
-
   loading: boolean;
   savingSles: boolean;
   deletingSales: boolean;
@@ -42,15 +38,13 @@ export class SellComponent implements OnInit {
 
   form: FormGroup;
 
-  dataSource: TablesDataSource;
-  displayedColumns= ["slNo", "referenceNo", "date", "name","total","paid","user","actions"];
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
-
+  //dataSource: TablesDataSource;
+  //displayedColumns= ["slNo", "referenceNo", "date", "name","total","paid","user","actions"];
+  //@ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  //@ViewChild(MatSort, { static: false }) sort: MatSort;
 
 
   route: any;
-
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
 
@@ -124,8 +118,8 @@ refereToEditInvoice(id:number){
 
 iniForm(){
   this.form = this._fb.group({
-    fromDate: [  '',  [Validators.nullValidator],],
-    toDate: [  '',  [Validators.nullValidator],]
+    fromDate: [  '',  [Validators.required],],
+    toDate: [  '',  [Validators.required],]
   });
 }
 

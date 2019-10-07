@@ -3,7 +3,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, Input } from '
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PartialList } from '@models/common/patial-list.model';
-import { SellsInvoice } from '@models/stock/sells-invoice.model';
+import { SellsInvoice } from '@models/stock/invoice.model';
 import { SellsInvoiceService } from '@services/stock/sells-invoice.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddPaymentComponent } from '../add-payment/add-payment.component';

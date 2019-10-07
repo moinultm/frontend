@@ -5,7 +5,7 @@ import { PurchaseOrder } from '@models/stock/purchase-order.model';
 import { PartialList } from '@models/common/patial-list.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import { SellsInvoiceService } from '@services/stock/sells-invoice.service';
-import { SellsInvoice } from '@models/stock/sells-invoice.model';
+import { SellsInvoice } from '@models/stock/invoice.model';
 
 
 @Component({

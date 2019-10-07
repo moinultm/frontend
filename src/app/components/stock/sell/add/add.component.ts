@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SellsInvoiceService } from '@services/stock/sells-invoice.service';
 import { Client } from '@models/stock/client.model';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import {SellsInvoice } from '@models/stock/sells-invoice.model';
+import {SellsInvoice } from '@models/stock/invoice.model';
 import { PartialList } from '@models/common/patial-list.model';
 import { CustomerService } from '@services/stock/customer.service';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
@@ -292,7 +292,7 @@ save(form: any){
  }
 
  if(this.orderItemList.length ==0){
-  error('Error!', "No product selected for this order", this._toastr);
+  error('Error!', "No product selected for this Invoice", this._toastr);
   this._saving = false
   return false;
  }
@@ -310,7 +310,7 @@ save(form: any){
   formData.append('sells', JSON.stringify(this.orderItemList));
 
   this.sellsOrdererSvice.save(formData, false).subscribe((res:SellsInvoice) => {
-    success('Success!', 'The Order is successfully saved.', this._toastr);
+    success('Success!', 'The Invoice is successfully saved.', this._toastr);
     this.initForm();
     this._saving = false;
   }, (err: any) => {

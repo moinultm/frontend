@@ -1,4 +1,4 @@
-import { SellsInvoice } from './sells-invoice.model';
+import { SellsInvoice } from './invoice.model';
 
 export class Transaction {
     change_amount:  number;

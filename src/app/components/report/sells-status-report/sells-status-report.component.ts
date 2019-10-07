@@ -3,7 +3,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { DatePipe } from '@angular/common';
 import { ProductReportService } from '@services/report/product-report.service';
 import { PartialList } from '@models/common/patial-list.model';
-import { SellsInvoice } from '@models/stock/sells-invoice.model';
+import { SellsInvoice } from '@models/stock/invoice.model';
 
 @Component({
   selector: 'app-sells-status-report',

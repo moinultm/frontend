@@ -2,7 +2,7 @@ import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef, MatSort, MatPaginator} from "@angular/material";
 import { FormGroup, FormBuilder, Validators, FormControl, ValidatorFn } from '@angular/forms';
 import { PartialList } from '@models/common/patial-list.model';
-import { Invoice } from '@models/stock/invoice.model';
+import { SellsInvoice } from '@models/stock/invoice.model';
 import { AbstractControl } from '@angular/forms';
 import { PaymentService } from '@services/stock/payment.service';
 import { Payment } from '@models/stock/payment.model';
@@ -17,16 +17,16 @@ import { ToastrService } from 'ngx-toastr';
   export class AddPaymentComponent implements OnInit {
 
    form: FormGroup;
-   formLocalData:Invoice;
+   formLocalData:SellsInvoice;
    savingPayment:boolean;
-   selectedInvoice:Invoice;
+   selectedInvoice:SellsInvoice;
 
     constructor(private _formBuilder: FormBuilder,
       private paymentService:PaymentService,
       private _toastr: ToastrService,
       private dialogRef: MatDialogRef<AddPaymentComponent>,
 
-        @Inject(MAT_DIALOG_DATA) public data : Invoice){
+        @Inject(MAT_DIALOG_DATA) public data : SellsInvoice){
         this.formLocalData=data;
        // console.log(data);
         }

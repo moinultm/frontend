@@ -1,1 +1,392 @@
-<p>sells-order works!</p>
+
+<div class="content-wrapper">
+
+  <div class="content-header">
+    <div class="container-fluid">
+      <!--div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">New Sales</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
+            <li class="breadcrumb-item"><a>Stock</a></li>
+            <li class="breadcrumb-item active">New Invoice</li>
+          </ol>
+        </div>
+      </div-->
+    </div>
+  </div>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+
+          <div class="card card-primary">
+            <!--div class="card-header">
+              <h3 class="card-title">Form</h3>
+            </div-->
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form [formGroup]="mainForm">
+
+
+
+              <div class="card-body  table-responsive">
+
+
+
+
+                  <div class="form-group row">
+                      <div class="col-sm-12"><h3 class="title text-info">Order form
+                        <a href="#" [routerLink]="['/sell','order-list']" class="nav-link d-inline"   [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+                          <span class="badge bg-info">List View</span></a>
+                      </h3>
+
+                        <div class="text-center loading-data" *ngIf="loading">
+                            <mat-spinner></mat-spinner>
+                      </div>
+
+                      </div>
+
+
+
+                  </div>
+
+
+                      <div class="row">
+                        <div class="col-md-12">
+                          <mat-form-field>
+                            <input matInput [matDatepicker]="picker" placeholder="Order Date" formControlName="sellDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                          </mat-form-field>
+                          <!--https://appdividend.com/2018/09/16/angular-datepicker-example-tutorial/-->
+                        </div>
+                      </div>
+
+
+
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                  <label>Order for</label>
+                                  <div class="input-group">
+                                      <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="far fa-user-circle"></i></span>
+                                      </div>
+                                      <button class="form-control btn btn-default " (click)="openDialog()">
+                                          Add new customer
+                                        </button>
+                                    </div>
+                                </div>
+                              </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Customer Name</label>
+
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text"> <i class="fas fa-user-tag"></i></span>
+                                        </div>
+                                        <select class="form-control" formControlName="customerName">
+                                            <option [value]="null">Select Customer</option>
+                                          <option *ngFor="let list of customerList" [value]="list.id">
+                                            {{list.full_name}} {{list.client_code}}
+                                          </option>
+                                        </select>
+                                      </div>
+                                  </div>
+                              </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6" *ngIf="!loading">
+                                <div class="form-group">
+                                 <label>Order by</label>
+                                 <div class="input-group">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text"><i class="fas fa-user-tie"></i> </span>
+                                    </div>
+                                    <select class="form-control" formControlName="user_id">
+                                        <option [value]="null">Select Representative</option>
+                                       <option *ngFor="let list of users.data" [value]="list.id">
+                                         {{list.name}}
+                                       </option>
+                                     </select>
+                                  </div>
+
+                               </div>
+                           </div>
+
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                <label>Payment Method</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text"><i class="fas fa-money-bill-wave"></i></span>
+                                    </div>
+                                    <select class="form-control" formControlName="paymentMethod">
+                                        <option value="cash">Cash</option>
+                                        <option value="cheque">Cheque</option>
+                                      </select>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+
+                  </div>
+
+                  <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                            <a class="form-control btn btn-info text-white" (click)="initItemModal(addItemModal)"><i class="fa fa-plus"></i>
+                              Add Item</a>
+                        </div>
+                      </div>
+                    </div>
+
+
+                        <!--order items table-->
+                        <table class="table table-bordered">
+                          <thead class="thead-light">
+                            <th>ProductName</th>
+                            <th>Quantity</th>
+                            <th>Discount</th>
+                            <th>MRP</th>
+                            <th>Subtotal</th>
+                            <th>
+                            </th>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td class="font-italic text-center" colspan="6" *ngIf="orderItemList.length==0"
+                                [class.text-danger]="!isValid && orderItemList.length==0">
+                                No product selected for this order.
+                              </td>
+                            </tr>
+                            <tr *ngFor="let item of orderItemList;let i=index;">
+                              <td>{{item.product_name}}</td>
+                              <td>{{item.quantity}}</td>
+                              <td>{{item.product_discount_percentage}}</td>
+                              <td>{{item.mrp}}</td>
+                              <td>{{item.subtotal}}</td>
+                              <td>
+                                <!--a class="btn btn-sm btn-info text-white"><i class="fas fa-edit"></i></a-->
+                                <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteOrderItem(item.product_id,i)"><i
+                                    class="fa fa-trash"></i></a>
+                              </td>
+                            </tr>
+                          </tbody>
+                          <tfoot>
+                            <tr>
+                              <td colspan="3" style="text-align: right; font-weight: bold;">
+                                Total
+                              </td>
+                              <td colspan="3">
+                                <input class="form-control" type="text" id="totalAmount" formControlName="totalAmount" readonly>
+                              </td>
+
+                            </tr>
+                            <tr>
+                              <td colspan="3" style="text-align: right; font-weight: bold;">
+                                Discount
+                              </td>
+                              <td colspan="3">
+                                <input class="form-control" type="text" id="discountAmount" formControlName="discountAmount" readonly>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td colspan="3" style="text-align: right; font-weight: bold;">
+                                Shipping
+                              </td>
+                              <td colspan="3">
+                                <input class="form-control" type="text" id="shippingCost" formControlName="shippingCost">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td colspan="3" style="text-align: right; font-weight: bold;">
+                                Net Total
+                              </td>
+                              <td colspan="3">
+                                <input class="form-control" type="text" id="grandTotal" formControlName="grandTotal" readonly>
+                              </td>
+                            </tr>
+                            <!--tr>
+                              <td colspan="3" style="text-align: right; font-weight: bold;">
+                                Paid
+                              </td>
+                              <td colspan="3">
+                                <input class="form-control" type="text" id="paidAmount" formControlName="paidAmount" placeholder="Paid Amount"
+                                  (keyup)="updateDueAmount()"
+                                  [class.has-error]="mainForm.get('paidAmount').dirty && mainForm.get('paidAmount').invalid"> </td>
+                            </tr-->
+                            <!--tr>
+                              <td colspan="3" style="text-align: right; font-weight: bold;">
+                                Due
+                              </td>
+                              <td colspan="3">
+                                <input class="form-control" type="text" id="dueAmount" formControlName="dueAmount" readonly>
+                              </td>
+                            </tr-->
+                          </tfoot>
+                        </table>
+                        <!-- order items table-->
+
+
+
+
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer">
+                <button type="button" class="btn btn-primary btn-lg float-right" [disabled]="mainForm.invalid || _saving" (click)="save(mainForm)"
+                  [disabled]="mainForm.invalid || _saving">Save Invoice</button>
+              </div>
+            </form>
+            <!-- Loading profiles indicator -->
+            <mat-spinner class="loading-profiles" *ngIf="_saving"></mat-spinner>
+            <!-- Loading profiles indicator -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+<!-- Content Wrapper. Contains page content -->
+
+<ng-template #addItemModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="close(modal)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <!-- Modal body -->
+  <div class="modal-body">
+
+    <form [formGroup]="formProducts" *ngIf="!loadingProductList">
+      <!--name-->
+      <h5>Product</h5>
+      <div class="form-group">
+        <select class="form-control" id="name" formControlName="name" (change)="updatePrice($event.target)">
+          <option value="0">--Select--</option>
+          <option *ngFor="let product of _productList" [ngValue]="product">
+            {{product.name}}</option>
+        </select>
+      </div>
+      <!-- ./name-->
+
+
+      <div class="row">
+        <div class="col-md-4">
+          <!-- quantity field -->
+          <div class="form-group">
+            <label for="quantity">Quantity</label>
+            <input type="text" class="form-control" id="quantity" formControlName="quantity" (keyup)="updateSubTotal()"
+              [class.has-error]="formProducts.get('quantity').dirty && formProducts.get('quantity').invalid" />
+          </div>
+
+          <!-- ./quantity field -->
+        </div>
+        <div class="col-md-4">
+          <!-- productMRP field -->
+          <div class="form-group">
+            <label for="productMRP">MRP</label>
+            <input type="text" class="form-control" id="productMRP" formControlName="productMRP"
+              [class.has-error]="formProducts.get('productMRP').dirty && formProducts.get('productMRP').invalid"
+              readonly />
+          </div>
+
+          <!-- ./productMRP field -->
+        </div>
+        <div class="col-md-4">
+          <!-- discount field -->
+          <div class="form-group">
+            <label for="discountOnMRP">Discount MRP(%)</label>
+            <input type="text" class="form-control" id="discountOnMRP" formControlName="discountOnMRP"
+              (keyup)="updateSubTotal()"
+              [class.has-error]="formProducts.get('discountOnMRP').dirty && formProducts.get('discountOnMRP').invalid" />
+          </div>
+
+          <!-- ./discount field -->
+        </div>
+      </div>
+
+     <div class="row">
+
+      <div class="col-md-4">
+      <!-- itemTotal field -->
+      <div class="form-group">
+          <label for="itemTotal">Item Total</label>
+          <input type="text" class="form-control" id="itemTotal" formControlName="itemTotal"
+            [class.has-error]="formProducts.get('itemTotal').dirty && formProducts.get('itemTotal').invalid" readonly />
+        </div>
+
+        <!-- ./itemTotal field -->
+        </div>
+
+        <div class="col-md-4">
+            <!-- Discount field -->
+            <div class="form-group">
+                <label for="itemDiscountAmt">Discount Amt</label>
+                <input type="text" class="form-control" id="itemDiscountAmt" formControlName="itemDiscountAmt"
+                  [class.has-error]="formProducts.get('itemDiscountAmt').dirty && formProducts.get('itemDiscountAmt').invalid" readonly />
+              </div>
+
+              <!-- ./Dicount field -->
+            </div>
+
+        <div class="col-md-4">
+            <!-- itemTotal field -->
+            <div class="form-group">
+                <label for="subtotal">Total</label>
+                <input type="text" class="form-control" id="subtotal" formControlName="subtotal"
+                  [class.has-error]="formProducts.get('subtotal').dirty && formProducts.get('subtotal').invalid" readonly />
+              </div>
+
+              <!-- ./itemTotal field -->
+              </div>
+
+     </div>
+
+
+
+    </form>
+    <!-- Loading profiles indicator -->
+    <mat-spinner class="loading-profiles" *ngIf="loadingProductList"></mat-spinner>
+    <!-- Loading profiles indicator -->
+
+    <!-- Modal footer -->
+    <div class="modal-footer">
+      <div class="">
+        <button type="button" class="btn btn-info" (click)="addItemToInvoice(formProducts,modal)"
+          [disabled]="formProducts.invalid || addingItemToInvoice">Add to list</button>
+      </div>
+      <div class="">
+        <button type="button" class="btn btn-danger" aria-label="Close" (click)="close(modal)">
+          <span aria-hidden="true">End</span>
+        </button>
+
+      </div>
+
+    </div>
+    <!-- ./Modal footer -->
+
+
+  </div>
+
+</ng-template>
+
+

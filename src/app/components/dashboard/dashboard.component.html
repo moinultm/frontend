@@ -4,21 +4,18 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
-        <div class="row mb-2">
+        <!--div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="m-0 text-dark"> {{ 'TITLE' | translate }}!</h1>
-
-
-
-          </div><!-- /.col -->
+          </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active">Dashboard v3</li>
             </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
+          </div>
+        </div-->
+      </div>
     </div>
     <!-- /.content-header -->
 
@@ -26,67 +23,6 @@
     <div class="content">
       <div class="container-fluid">
 
-          <div class="row">
-              <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box">
-                  <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
-
-                  <div class="info-box-content">
-                    <span class="info-box-text">CPU Traffic</span>
-                    <span class="info-box-number">
-                      10
-                      <small>%</small>
-                    </span>
-                  </div>
-                  <!-- /.info-box-content -->
-                </div>
-                <!-- /.info-box -->
-              </div>
-              <!-- /.col -->
-              <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box mb-3">
-                  <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
-
-                  <div class="info-box-content">
-                    <span class="info-box-text">Likes</span>
-                    <span class="info-box-number">41,410</span>
-                  </div>
-                  <!-- /.info-box-content -->
-                </div>
-                <!-- /.info-box -->
-              </div>
-              <!-- /.col -->
-
-              <!-- fix for small devices only -->
-              <div class="clearfix hidden-md-up"></div>
-
-              <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box mb-3">
-                  <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
-
-                  <div class="info-box-content">
-                    <span class="info-box-text">Sales</span>
-                    <span class="info-box-number">760</span>
-                  </div>
-                  <!-- /.info-box-content -->
-                </div>
-                <!-- /.info-box -->
-              </div>
-              <!-- /.col -->
-              <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box mb-3">
-                  <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
-
-                  <div class="info-box-content">
-                    <span class="info-box-text">New Members</span>
-                    <span class="info-box-number">2,000</span>
-                  </div>
-                  <!-- /.info-box-content -->
-                </div>
-                <!-- /.info-box -->
-              </div>
-              <!-- /.col -->
-            </div>
 
 
           <div class="row"  *ngIf="!loading" >
@@ -158,51 +94,33 @@
 
             <div class="row">
               <div class="col-lg-6">
-
                 <div class="card">
-                    <div class="card-header no-border">
-                      <h3 class="card-title">Sell Invoices (7) Days</h3>
-                      <div class="card-tools">
-                        <a href="#" class="btn btn-tool btn-sm">
-                          <i class="fa fa-download"></i>
-                        </a>
-                        <a href="#" class="btn btn-tool btn-sm">
-                          <i class="fa fa-bars"></i>
-                        </a>
-                      </div>
-                    </div>
-                    <div class="card-body p-0  table-responsive" style="height: 300px;">
-                      <table class="table table-striped" *ngIf="!loading">
-                        <thead>
-                        <tr>
-                            <th width="20px">#</th>
-                          <th>Invoice No</th>
-                          <th>Amount</th>
-                          <th>Paid</th>
-                          <th>Soled by</th>
-                          <th>View</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr *ngFor="let TL of data.today_sell_list; let i = index">
+                  <div class="card-header no-border">
+                    <div class="d-flex justify-content-between">
+                      <h3 class="card-title">Sell Vs Purchase</h3>
 
-                              <td>{{ i+1 }}</td>
-
-                              <td>{{ TL.reference_no }}</td>
-                              <td>{{ TL.net_total }}</td>
-                              <td>{{ TL.paid }}</td>
-
-                          <td>{{ TL.user_name  }} </td>
-
-                        <td> Details </td>
-                        </tr>
-
-
-                        </tbody>
-                      </table>
                     </div>
                   </div>
+                  <div class="card-body">
 
+
+                    <div class="position-relative mb-4" *ngIf="sellChartData.length > 0">
+
+                      <canvas
+                      baseChart
+                      [chartType]="'line'"
+                      [datasets]="sellChartData"
+                      [labels]="chartLabels"
+                      [options]="chartOptions"
+                      [legend]="true"
+                      height="150"
+                      (chartClick)="onChartClick($event)">
+                  </canvas>
+                    </div>
+
+
+                  </div>
+                </div>
                 </div>
 
                 <div class="col-lg-6">
@@ -210,7 +128,7 @@
                       <div class="card-header no-border">
                         <div class="d-flex justify-content-between">
                           <h3 class="card-title">This Month Best Selling Products</h3>
-                          <a href="javascript:void(0);">View Report</a>
+
                         </div>
                       </div>
                       <div class="card-body">
@@ -239,6 +157,12 @@
                     </div>
                     </div>
 </div>
+            </div>
+            <!--Row-->
+
+            <div class="row">
+
+
 
             </div> <!--Row-->
 
@@ -296,34 +220,54 @@
                   </div>
 
                   <div class="col-lg-6">
-                      <div class="card">
-                        <div class="card-header no-border">
-                          <div class="d-flex justify-content-between">
-                            <h3 class="card-title">Sell Vs Purchase</h3>
-                            <a href="javascript:void(0);">View Report</a>
-                          </div>
-                        </div>
-                        <div class="card-body">
 
-
-                          <div class="position-relative mb-4" *ngIf="sellChartData.length > 0">
-
-                            <canvas
-                            baseChart
-                            [chartType]="'line'"
-                            [datasets]="sellChartData"
-                            [labels]="chartLabels"
-                            [options]="chartOptions"
-                            [legend]="true"
-                            height="150"
-                            (chartClick)="onChartClick($event)">
-                        </canvas>
-                          </div>
-
-
-                        </div>
+                <div class="card">
+                    <div class="card-header no-border">
+                      <h3 class="card-title">Sell Invoices (7) Days</h3>
+                      <div class="card-tools">
+                        <a href="#" class="btn btn-tool btn-sm">
+                          <i class="fa fa-download"></i>
+                        </a>
+                        <a href="#" class="btn btn-tool btn-sm">
+                          <i class="fa fa-bars"></i>
+                        </a>
                       </div>
-                      </div>
+                    </div>
+                    <div class="card-body p-0  table-responsive" style="height: 300px;">
+                      <table class="table table-striped" *ngIf="!loading">
+                        <thead>
+                        <tr>
+                            <th width="20px">#</th>
+                          <th>Invoice No</th>
+                          <th>Amount</th>
+                          <th>Paid</th>
+                          <th>Soled by</th>
+                          <th>View</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let TL of data.today_sell_list; let i = index">
+
+                              <td>{{ i+1 }}</td>
+
+                              <td>{{ TL.reference_no }}</td>
+                              <td>{{ TL.net_total }}</td>
+                              <td>{{ TL.paid }}</td>
+
+                          <td>{{ TL.user_name  }} </td>
+
+                        <td> Details </td>
+                        </tr>
+
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                </div>
+
+
 
 
               </div> <!--Row-->

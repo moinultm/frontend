@@ -1,7 +1,7 @@
 import { OrderItems } from './orderitems.model ';
 
 
-export class SellsInvoice {
+export class SellsOrder {
 
     id: number;
     reference_no: string;

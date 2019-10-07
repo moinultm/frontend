@@ -1,4 +1,4 @@
-export class Invoice {
+export class SellsInvoice {
 
     id: number;
     reference_no: string;
@@ -10,5 +10,7 @@ export class Invoice {
     product_discount_percentage:number;
     sub_total:number;
     product_tax:number;
+    product_name:string;
+    mrp:number;
 
 }

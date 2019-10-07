@@ -8,7 +8,7 @@
 @import "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css";
 @import "../node_modules/ngx-toastr/toastr.css";
 @import "~@ng-select/ng-select/themes/default.theme.css";
- 
+
 
 
   /* remove scrollbar space
@@ -61,11 +61,23 @@ position: absolute;
   }
   .pp40 {
      border:none!important;
-   
+
   }
 }
 */
- 
+
+
+.mat-icon-button-small {
+  padding: 0;
+  min-width: 0;
+  width: 25px;
+  height: 25px;
+  flex-shrink: 0;
+  line-height: 25px;
+  border-radius: 50%;
+}
+
+
 .small{font-size: 10px !important;}
 .a4paper{
   width: 100%;
@@ -98,7 +110,7 @@ position: absolute;
 
 .pp40 {
   width: 2in;
- 
+
   padding: 0.05in;
   border: 1px solid #ddd;
   margin-top: 2px;

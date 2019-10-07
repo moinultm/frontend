@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RepresentStockService } from '@services/stock/represent-stock.service';
 import { PartialList } from '@models/common/patial-list.model';
-import { SellsInvoice } from '@models/stock/sells-invoice.model';
+import { SellsInvoice } from '@models/stock/invoice.model';
 import { Router } from '@angular/router';
 
 @Component({
