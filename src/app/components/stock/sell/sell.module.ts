@@ -42,6 +42,11 @@ const routes: Routes = [
     path: 'order',
     component: SellsOrderComponent
 
+  },
+  {
+    path: 'order-list',
+    component: OrderListComponent
+
   }
 ];
 

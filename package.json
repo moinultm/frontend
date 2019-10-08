@@ -33,6 +33,8 @@
     "hammerjs": "^2.0.8",
     "icheck-bootstrap": "^3.0.1",
     "ionicons": "^4.6.2",
+    "jqwidgets-ng": "^8.3.0",
+    "jqwidgets-scripts": "^8.2.0",
     "ng-snotify": "^4.3.1",
     "ng2-charts": "^2.3.0",
     "ngx-barcode": "^0.2.4",
