@@ -30,5 +30,5 @@
     "strictInjectionParameters": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true
-  }
+  } 
 }

@@ -23,9 +23,10 @@ import { TransactionStatusReportComponent } from './transaction-status-report/tr
 import { PurchaseStatusReportComponent } from './purchase-status-report/purchase-status-report.component';
 import { StockGeneralReportComponent } from './stock-general-report/stock-general-report.component';
 
+ 
+
 import { jqxPivotGridModule } from 'jqwidgets-ng/jqxpivotgrid';
 import { jqxPivotDesignerModule } from 'jqwidgets-ng/jqxpivotdesigner';
-
 
 const routes: Routes = [
 
@@ -82,12 +83,10 @@ const routes: Routes = [
     },
 
 
-
-
 ];
 
 @NgModule({
-  declarations: [ ReportMenuComponent, StockReportComponent, ProductReportComponent, DailySalesReportComponent, CustomerSummaryReportComponent, RepresentStockReportComponent, RepresentStockSummaryComponent, RepresentStatusReportComponent, SupplierBillSummaryComponent, ProductSellReportComponent, SellsStatusReportComponent, TransactionStatusReportComponent, PurchaseStatusReportComponent, StockGeneralReportComponent ],
+  declarations: [  ReportMenuComponent, StockReportComponent, ProductReportComponent, DailySalesReportComponent, CustomerSummaryReportComponent, RepresentStockReportComponent, RepresentStockSummaryComponent, RepresentStatusReportComponent, SupplierBillSummaryComponent, ProductSellReportComponent, SellsStatusReportComponent, TransactionStatusReportComponent, PurchaseStatusReportComponent, StockGeneralReportComponent ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -100,8 +99,7 @@ const routes: Routes = [
     MatProgressSpinnerModule,
     MatInputModule,
 
-    jqxPivotDesignerModule,
-    jqxPivotGridModule
+    jqxPivotDesignerModule, jqxPivotGridModule,
   ]
   ,providers:[DatePipe ]
 

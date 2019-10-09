@@ -29,8 +29,12 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/ng-snotify/styles/material.css",
-              "node_modules/jqwidgets-ng/jqwidgets/styles/jqx.base.css"
+                    
+              "node_modules/jqwidgets-ng/jqwidgets/styles/jqx.base.css",
+              "node_modules/jqwidgets-ng/jqwidgets/styles/jqx.material.css"
+
+
+
 
 
             ],
@@ -45,6 +49,9 @@
        "node_modules/admin-lte/dist/js/pages/dashboard3.js",
 
        "node_modules/admin-lte/plugins/select2/select2.full.js"
+
+
+ 
 
 			]
           },

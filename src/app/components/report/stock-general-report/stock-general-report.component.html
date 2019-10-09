@@ -23,29 +23,49 @@
 
 
           <div class="col-md-12">
-            <table>
-              <tr>
-                  <td>
-                  <jqxPivotDesigner
-                      [type]="pivotGrid"
-                      [width]="250"
-                      [height]="600">
-                  </jqxPivotDesigner>
-                  </td>
-                  <td>
-                  <jqxPivotGrid
 
-                      [width]="getWidth()"
-                      [height]="600"
-                      [source]="pivotDataSource"
-                      [treeStyleRows] = "false"
-                      [autoResize] = "false"
-                      [multipleSelectionEnabled] = "false"
-                       >
-                  </jqxPivotGrid>
-               </td>
-              </tr>
-          </table>
+          
+              <jqxPivotGrid
+              [width]="getWidth()" 
+              [height]="400"
+              [source]="pivotDataSource"
+              [treeStyleRows] = "false"
+              [autoResize] = "false"
+              [multipleSelectionEnabled] = "true"
+             >
+          </jqxPivotGrid>    
+         
+
+
+            <!--table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+              
+                  <th *ngFor="let char of characteristics">
+                {{ char.description }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr  *ngFor="let beer of beers">
+                  <td> {{ beer.description }}</td>
+                  <td *ngFor="let char of characteristics">
+
+                    <span *ngFor=" let cross of crossData">
+                      <div  *ngIf="cross.beerId === beer.id && cross.characteristicId === char.id">
+                          {{cross.value}}
+                      </div>
+
+                    
+                    </span>
+
+
+                  </td>
+                </tr>
+              </tbody>
+            </table-->
+      
           </div>
 
 
