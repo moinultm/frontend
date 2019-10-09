@@ -16,26 +16,52 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-  
+
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-            <jqxPivotGrid #pivotGridReference
-            [width]="800" [height]="400" [source]="pivotDataSource"
-            [treeStyleRows]="true" [autoResize]="false"
-            [multipleSelectionEnabled]="true">
-            </jqxPivotGrid>
+
+
+          <div class="col-md-12">
+            <table>
+              <tr>
+                  <td>
+                  <jqxPivotDesigner
+                      [type]="pivotGrid"
+                      [width]="250"
+                      [height]="600">
+                  </jqxPivotDesigner>
+                  </td>
+                  <td>
+                  <jqxPivotGrid
+
+                      [width]="getWidth()"
+                      [height]="600"
+                      [source]="pivotDataSource"
+                      [treeStyleRows] = "false"
+                      [autoResize] = "false"
+                      [multipleSelectionEnabled] = "false"
+                       >
+                  </jqxPivotGrid>
+               </td>
+              </tr>
+          </table>
+          </div>
+
+
         </div>
       </div>
     </section>
-  
+
   </div>
   <!-- Content Wrapper. Contains page content -->
-  
- 
 
 
 
-<!--npm npm install jqwidgets-ng  --save -->
+
+
+<!-- npm npm install jqwidgets-ng  --save
+npm install jqwidgets-scripts --save
+-->
 
 

@@ -10,7 +10,7 @@ import { MatProgressSpinnerModule, MatDatepickerModule, MatFormFieldModule, MatI
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
- 
+
 import { DailySalesReportComponent } from './daily-sales-report/daily-sales-report.component';
 import { CustomerSummaryReportComponent } from './customer-summary-report/customer-summary-report.component';
 import { RepresentStockReportComponent } from './represent-stock-report/represent-stock-report.component';
@@ -23,8 +23,8 @@ import { TransactionStatusReportComponent } from './transaction-status-report/tr
 import { PurchaseStatusReportComponent } from './purchase-status-report/purchase-status-report.component';
 import { StockGeneralReportComponent } from './stock-general-report/stock-general-report.component';
 
-import { jqxBarGaugeModule }    from 'jqwidgets-ng/jqxbargauge';
-import{ jqxPivotGridComponent } from 'jqwidgets-ng/jqxpivotgrid';           
+import { jqxPivotGridModule } from 'jqwidgets-ng/jqxpivotgrid';
+import { jqxPivotDesignerModule } from 'jqwidgets-ng/jqxpivotdesigner';
 
 
 const routes: Routes = [
@@ -87,7 +87,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [jqxPivotGridComponent, ReportMenuComponent, StockReportComponent, ProductReportComponent, DailySalesReportComponent, CustomerSummaryReportComponent, RepresentStockReportComponent, RepresentStockSummaryComponent, RepresentStatusReportComponent, SupplierBillSummaryComponent, ProductSellReportComponent, SellsStatusReportComponent, TransactionStatusReportComponent, PurchaseStatusReportComponent, StockGeneralReportComponent ],
+  declarations: [ ReportMenuComponent, StockReportComponent, ProductReportComponent, DailySalesReportComponent, CustomerSummaryReportComponent, RepresentStockReportComponent, RepresentStockSummaryComponent, RepresentStatusReportComponent, SupplierBillSummaryComponent, ProductSellReportComponent, SellsStatusReportComponent, TransactionStatusReportComponent, PurchaseStatusReportComponent, StockGeneralReportComponent ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -98,7 +98,10 @@ const routes: Routes = [
     MatDatepickerModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
-    MatInputModule
+    MatInputModule,
+
+    jqxPivotDesignerModule,
+    jqxPivotGridModule
   ]
   ,providers:[DatePipe ]
 
