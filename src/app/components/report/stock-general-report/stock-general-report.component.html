@@ -24,53 +24,149 @@
 
           <div class="col-md-12">
 
-          
-              <jqxPivotGrid
-              [width]="getWidth()" 
-              [height]="400"
-              [source]="pivotDataSource"
-              [treeStyleRows] = "false"
-              [autoResize] = "false"
-              [multipleSelectionEnabled] = "true"
-             >
-          </jqxPivotGrid>    
-         
+            <div class="card">
+
+                <div class="card-header">
+                    <h3 class="card-title">Stock General Report</h3>
+                  </div>
+
+              <div id="printableArea" class="card-body">
+
+                  <div class="row no-print">
+                      <div class="col-md-12">
+                          <form [formGroup]="form">
+                          <div class="row">
+
+                              <div class="col-md-2">Report Date</div>
+                              <div class="col-md-2">
+                                  <mat-form-field>
+                                      <input matInput [matDatepicker]="pickerFrom" placeholder="Start Date" formControlName="fromDate"  [value]="date.value">
+                                      <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                                      <mat-datepicker #pickerFrom></mat-datepicker>
+                                    </mat-form-field>
+                               </div>
+
+                              <div class="col-md-2">
+                                  <mat-form-field>
+                                      <input matInput [matDatepicker]="pickerTo" placeholder="End Date" formControlName="toDate"  [value]="date.value">
+                                      <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                                      <mat-datepicker #pickerTo></mat-datepicker>
+                                    </mat-form-field>
+                               </div>
+
+                               <div class="col-md-2">
+                                  <div class="form-group">
+
+                                      <select class="form-control">
+                                        <option>--All Data--</option>
+                                        <option>option 2</option>
+
+                                      </select>
+                                    </div>
+                               </div>
 
 
-            <!--table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>#</th>
-              
-                  <th *ngFor="let char of characteristics">
-                {{ char.description }}
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr  *ngFor="let beer of beers">
-                  <td> {{ beer.description }}</td>
-                  <td *ngFor="let char of characteristics">
+                              <div class="col-md-2" >
+                                <div class="input-group mb-3">
+                                    <input type="button" name="search" id="search" value="Search" (click)="loadData()" class="btn  btn-primary">
 
-                    <span *ngFor=" let cross of crossData">
-                      <div  *ngIf="cross.beerId === beer.id && cross.characteristicId === char.id">
-                          {{cross.value}}
+                                </div>
+
+                              </div>
+
+                          </div>
+                        </form>
                       </div>
-
-                    
-                    </span>
+                    </div>
 
 
-                  </td>
-                </tr>
-              </tbody>
-            </table-->
-      
+
+                <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Product Name</th>
+                      <th>opening</th>
+                      <th>In-ward</th>
+                      <th *ngFor="let char of characteristics">
+                        {{ char.discount }} Qty
+                      </th>
+                      <th *ngFor="let char of characteristics">
+                          {{ char.discount }} Value
+                        </th>
+                      <th>Gift</th>
+                      <th>Damage</th>
+                      <th>Closing</th>
+                      <th>Total</th>
+                      <th>Paid</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <tr *ngFor="let beer of beers; let i = index">
+                        <td> {{ i+1 }}</td>
+                      <td> {{ beer.description }}</td>
+                      <td> {{ beer.opening }} </td>
+                      <td> {{ beer.inward }}  </td>
+
+                      <td *ngFor="let char of characteristics">
+                        <span *ngFor=" let cross of crossData">
+                          <div *ngIf="cross.beerId === beer.id && cross.characteristicId === char.id">
+                          {{cross.quantity }}
+                          </div>
+                        </span>
+                      </td>
+
+                      <td *ngFor="let char of characteristics">
+                          <span *ngFor=" let cross of crossData">
+                            <div *ngIf="cross.beerId === beer.id && cross.characteristicId === char.id">
+                              {{cross.value }}
+                            </div>
+                          </span>
+                        </td>
+
+                      <td> {{ beer.gift }}  </td>
+                      <td> {{ beer.damage }}  </td>
+                      <td> 0 </td>
+                      <td> 0 </td>
+                      <td> 0 </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <p></p>
+
+
+              </div>
+
+
+              <div class="card-footer clearfix">
+
+                  <div class="row">
+                    <div class="col-sm-12 col-md-5">
+                        <input type="button" name="print" id="print" value="Print" (click)="print()" class="btn  btn-default btn-lg btn-flat">
+
+                     </div>
+
+                    <div class="col-sm-12 col-md-7">
+
+                       </div>
+
+
+
+                        </div>
+<!--Card body-->
+
+              </div>
+<!--Card Footer-->
+
+            </div>
+<!--Card -->
           </div>
 
 
-        </div>
-      </div>
+          </div>
+          </div>
     </section>
 
   </div>
