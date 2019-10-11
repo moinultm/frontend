@@ -131,9 +131,13 @@ position: absolute;
 
 /*############################print################*/
 
-.mat-form-field{width: 100%;}
+.full-width{ width: 100%;}
 
 .mat-spinner{margin: auto;}
+
+mat-form-field {
+  margin-right: 15px;
+}
 
 .loading-profiles {
   float: none;

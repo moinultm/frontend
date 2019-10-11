@@ -2,19 +2,19 @@
   <!-- Content Header (Page header) -->
   <div class="content-header">
     <div class="container-fluid">
-      <div class="row mb-2">
+      <!--div class="row mb-2">
         <div class="col-sm-6">
           <h1 class="m-0 text-dark">Sales Invoices</h1>
-        </div><!-- /.col -->
+        </div> 
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
             <li class="breadcrumb-item"><a>Stock</a></li>
             <li class="breadcrumb-item active">Sales</li>
           </ol>
-        </div><!-- /.col -->
-      </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+        </div> 
+      </div--> 
+    </div> 
   </div>
 
   <section class="content">
@@ -22,74 +22,74 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="card">
+        <div class="card  table-responsive">
 
           <div class="card-header">
 
+            
               <div class="row">
-                  <div class="col-md-6">
-                      <h3 class="card-title">Manage Invoices
-                          <a href="#" [routerLink]="['/sell/add']" class="nav-link d-inline"   [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active"><span class="badge bg-info">Add New</span></a>
-                      </h3>
+                  <div class="col-md-4">
+                      <h3 class="card-title mb-3">
+                        Manage Invoices
+                          <a href="#" [routerLink]="['/sell/add']" class="nav-link d-inline"   [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active"><span class="badge bg-primary">Add New</span></a>
+                      </h3>                 
+
+                        
                   </div>
-
-
-                  </div>
-
-
-
+            
+                  
+            </div>
             </div>
           <!-- /.card-header -->
 
           <div class="card-body">
+ 
 
-        <div class="row">
-          <div class="col-md-12">
               <form [formGroup]="form">
-              <div class="row">
+                  <div class="row">
+                   
+                
+                      <div class="col-md-6">
+                          <mat-form-field >
+                              <input matInput [matDatepicker]="pickerFrom" placeholder="Start Date" formControlName="fromDate"  [value]="date.value">
+                              <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                              <mat-datepicker #pickerFrom></mat-datepicker>
+                            </mat-form-field>                                           
+                         
+     
+                            <mat-form-field>
+                                <input matInput [matDatepicker]="pickerTo" placeholder="End Date" formControlName="toDate"  [value]="date.value">
+                                <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                                <mat-datepicker #pickerTo></mat-datepicker>
+                              </mat-form-field>                      
+                       
+    
+                         
+                              <button mat-raised-button color="primary"   (click)="loadData()">
+                                  Search
+                              </button>    
+                          </div>
+    
 
-
-                  <div class="col-md-2">Invoice Search</div>
-                  <div class="col-md-2">
-                      <mat-form-field>
-                          <input matInput [matDatepicker]="pickerFrom" placeholder="Start Date" formControlName="fromDate"  [value]="date.value">
-                          <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
-                          <mat-datepicker #pickerFrom></mat-datepicker>
-                        </mat-form-field>
-                   </div>
-                  <div class="col-md-2">
-                      <mat-form-field>
-                          <input matInput [matDatepicker]="pickerTo" placeholder="End Date" formControlName="toDate"  [value]="date.value">
-                          <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
-                          <mat-datepicker #pickerTo></mat-datepicker>
-                        </mat-form-field>
-                   </div>
-
-                  <div class="col-md-2">
-                    <div class="input-group mb-3">
-                        <input type="button" name="search" id="search" value="Search" (click)="loadData()" class="btn btn-default btn-lg">
-
-                    </div>
-
-                  </div>
-
-                  <div class="col-md-4">
-                      <div class="card-tools mb-3">
-                          <div class="input-group input-group-lg">
-                              <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                          <div class="col-md-3  offset-md-3">
+                                                    
+                              <div class="card-tools mb-3">
+                                  <div class="input-group input-group">
+                                      <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                                      </div>
+                                      <input type="text" class="form-control" placeholder="Invoice No" #input>
+                                    </div>
                               </div>
-                              <input type="text" class="form-control" placeholder="Invoice No" #input>
-                            </div>
+                          
                       </div>
-                    </div>
 
-              </div>
-            </form>
-          </div>
-        </div>
 
-        <hr>
+                      </div>
+    
+                    </form>
+
+                    
 
             <table class="table table-bordered">
               <thead>
