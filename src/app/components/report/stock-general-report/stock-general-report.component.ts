@@ -5,6 +5,9 @@ import{ jqxPivotGridComponent } from 'jqwidgets-ng/jqxpivotgrid';
 import { jqxPivotDesignerComponent } from 'jqwidgets-ng/jqxpivotdesigner';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { ProductReportService } from '@services/report/product-report.service';
+import { PartialList } from '@models/common/patial-list.model';
+import { SellsInvoice } from '@models/stock/invoice.model';
 
 
 @Component({
@@ -14,6 +17,7 @@ import { DatePipe } from '@angular/common';
 })
 export class StockGeneralReportComponent implements OnInit{
 
+  data: any;
 
   loading: boolean;
   savingSles: boolean;
@@ -29,15 +33,54 @@ export class StockGeneralReportComponent implements OnInit{
 
   constructor(
     private _fb: FormBuilder,
-    private datePipe : DatePipe)	{
+    private datePipe : DatePipe,
+    private reportService:ProductReportService)	{
 
   	}
 
     ngOnInit(){
+
+      this.loadData();
       this.iniForm();
     }
 
+    dateFilter(page?: number): void {
+      this.page = page ? page : 1;
+      this.loading = true;
+      let formDt = this.datePipe.transform(this.form.get('fromDate').value, 'yyyy-MM-dd');
+      let toDt = this.datePipe.transform(this.form.get('toDate').value, 'yyyy-MM-dd');
 
+      this.reportService.stockGeneralReport({
+        page: this.page,
+        size: this.size,
+        from:  formDt,
+        to:   toDt
+      }).subscribe((res: PartialList<SellsInvoice>) => {
+        this.data = res;
+        console.log( this.data);
+        this.loading = false;
+      });
+    }
+
+
+    loadData(page?: number): void {
+      this.page = page ? page : 1;
+      this.loading = true;
+
+      let formDt ='';
+      let toDt = '';
+
+      this.reportService.stockGeneralReport({
+        page: this.page,
+        size: this.size,
+        from:  formDt,
+        to:   toDt
+      }).subscribe((res: PartialList<SellsInvoice>) => {
+        this.data = res;
+        console.log( this.data);
+        this.loading = false;
+      });
+    }
 
     iniForm(){
       this.form = this._fb.group({
@@ -45,6 +88,7 @@ export class StockGeneralReportComponent implements OnInit{
         toDate: [  '',  [Validators.nullValidator],]
       });
     }
+
 
 
 

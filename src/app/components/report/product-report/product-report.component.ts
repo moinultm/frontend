@@ -29,7 +29,6 @@ export class ProductReportComponent implements OnInit {
     private _fb: FormBuilder,private datePipe : DatePipe) { }
 
   ngOnInit() {
-
     this.loadData();
     this.iniForm();
   }

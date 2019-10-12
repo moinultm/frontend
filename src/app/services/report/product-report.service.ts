@@ -4,6 +4,7 @@ import { CrudService } from '@services/common/crud.service';
 import { HttpClient } from '@angular/common/http';
 import { Product } from '@models/stock/product.model';
 import { PartialList } from '@models/common/patial-list.model';
+import { SellsInvoice } from '@models/stock/invoice.model';
 
 @Injectable({
   providedIn: 'root'
@@ -65,6 +66,17 @@ export class ProductReportService extends CrudService<Product> {
       this.options.params = undefined;
     }
     return this.__http.get <PartialList<Product>>(this.url + '/'+'sells-status-report', this.options);
+  }
+
+
+
+  public stockGeneralReport(query?: {}): any {
+    if (query) {
+      this.options.params = query;
+    } else {
+      this.options.params = undefined;
+    }
+    return this.__http.get <PartialList<SellsInvoice>>(this.url + '/'+'stock-general-report', this.options);
   }
 
 
