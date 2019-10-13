@@ -1,1 +1,151 @@
-<p>purchase-status-report works!</p>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <!--div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Profiles</h1>
+          </div> 
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
+              <li class="breadcrumb-item"><a>Security</a></li>
+              <li class="breadcrumb-item active">Manage profiles</li>
+            </ol>
+          </div> 
+        </div> 
+      </div--> 
+    </div>
+  
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div   class="card">
+<div class="card-header">
+<h3>Purchase Report</h3>
+</div>
+
+
+
+<div  id="printableArea" class="card-body table-responsive">
+        <div class="row no-print">
+                <div class="col-md-12">
+                  <form [formGroup]="form">
+                    <div class="row">               
+                      <div class="col-md-6">
+                        <mat-form-field>
+                          <input matInput [matDatepicker]="pickerFrom" placeholder="Start Date"
+                            formControlName="fromDate" [value]="date.value">
+                          <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                          <mat-datepicker #pickerFrom></mat-datepicker>
+                        </mat-form-field>
+                   
+                        <mat-form-field>
+                          <input matInput [matDatepicker]="pickerTo" placeholder="End Date" formControlName="toDate"
+                            [value]="date.value">
+                          <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                          <mat-datepicker #pickerTo></mat-datepicker>
+                        </mat-form-field>
+                  
+                      
+                          <input type="button" name="search" id="search" value="Search" (click)="dateFilter()"
+                            class="btn  btn-primary  ">
+                         
+                      </div>
+                      <div class="col-md-6">
+
+                            <input type="button" name="pirnt" id="print" value="Print"  
+                            class="btn  btn-default  ">
+                          </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+
+              <table class="table table-bordered mb-3">
+                    <thead>
+                        <tr>
+                            <th style="width: 10px">#</th>
+                            <th>Reference No</th>
+                            <th>Supplier</th>
+                            <th>Product</th>
+                            <th>Total</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr *ngIf="loading">
+                                    <td colspan="12" class="text-center loading-data">
+                                        <mat-spinner></mat-spinner>
+                                    </td>
+                                  </tr>
+                                 	 		 
+
+                                  <ng-container *ngIf="!loading">
+
+                                    <tr *ngFor="let item of data.data; let i = index">
+                                      <td>{{ i+1 }}</td>
+                                      <td>{{ item.reference_no}}</td>
+                                      <td>{{ item.client_name }}</td>
+                                      <td>
+                                          <div  *ngFor="let P of item.purchases;">
+                                                
+                                            {{ P.product.name }}   (  {{ P.product.quantity }}  Pcs)
+                                                   
+                                          </div> 
+                                        </td>
+
+                                        <td>{{ item.net_total }}</td>
+                                        <td>{{ item.date }}</td>
+                                    </tr>
+                                  </ng-container>
+                    </tbody>
+                </table>
+
+
+                <table class="table" style="width: 50%; font-weight: bold;" align="right">
+
+                        <tbody>
+        
+        
+                          <ng-container *ngIf="!loading">
+                          <tr>
+                            <td> Total Sells Amount</td>
+                            <td> </td>
+                         </tr>
+        
+                       <tr>
+                            <td> Total Recived Amount</td>
+                            <td> </td>
+                       </tr>
+                        </ng-container>
+        
+        
+                        </tbody>
+                      </table>
+
+
+     
+                    
+
+</div>
+
+<div class="card-footer clearfix">
+        <!--- Pagination -->
+ <ngb-pagination *ngIf="!loading && data" [collectionSize]="data.count" [pageSize]="size"
+ [page]="data.page" (pageChange)="loadData($event)" class="pagination pagination-sm m-0 float-right">
+</ngb-pagination>
+<!-- ./Pagination -->
+   </div>
+
+                </div>
+            </div>
+        </div>
+      </div>
+    </section>
+  
+  </div>
+  <!-- Content Wrapper. Contains page content -->
+  

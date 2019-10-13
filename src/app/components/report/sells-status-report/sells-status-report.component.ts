@@ -4,6 +4,7 @@ import { DatePipe } from '@angular/common';
 import { ProductReportService } from '@services/report/product-report.service';
 import { PartialList } from '@models/common/patial-list.model';
 import { SellsInvoice } from '@models/stock/invoice.model';
+import { StockGeneral } from '@models/stock/stock-general.model';
 
 @Component({
   selector: 'app-sells-status-report',
@@ -30,21 +31,21 @@ export class SellsStatusReportComponent implements OnInit {
 
   ngOnInit() {
     this.iniForm();
-    //this.loadData();
+     this.loadData();
   }
 
   loadData(page?: number): void {
     this.page = page ? page : 1;
     this.loading = true;
-    let formDt = this.datePipe.transform(this.form.get('fromDate').value, 'yyyy-MM-dd');
-    let toDt = this.datePipe.transform(this.form.get('toDate').value, 'yyyy-MM-dd');
+    let formDt = '';
+    let toDt = '';
 
     this.sellsService.sellsStatusReport({
       page: this.page,
       size: this.size,
       from:  formDt,
       to:   toDt
-    }).subscribe((res: PartialList<SellsInvoice>) => {
+    }).subscribe((res: PartialList<StockGeneral>) => {
       this.data = res;
       console.log( this.data);
       this.loading = false;

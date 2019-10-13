@@ -8,6 +8,7 @@ import { DatePipe } from '@angular/common';
 import { ProductReportService } from '@services/report/product-report.service';
 import { PartialList } from '@models/common/patial-list.model';
 import { SellsInvoice } from '@models/stock/invoice.model';
+import { StockGeneral } from '@models/stock/stock-general.model';
 
 
 @Component({
@@ -17,7 +18,7 @@ import { SellsInvoice } from '@models/stock/invoice.model';
 })
 export class StockGeneralReportComponent implements OnInit{
 
-  data: any;
+  data: PartialList<StockGeneral>;
 
   loading: boolean;
   savingSles: boolean;
@@ -55,7 +56,7 @@ export class StockGeneralReportComponent implements OnInit{
         size: this.size,
         from:  formDt,
         to:   toDt
-      }).subscribe((res: PartialList<SellsInvoice>) => {
+      }).subscribe((res: PartialList<StockGeneral>) => {
         this.data = res;
         console.log( this.data);
         this.loading = false;
@@ -75,7 +76,7 @@ export class StockGeneralReportComponent implements OnInit{
         size: this.size,
         from:  formDt,
         to:   toDt
-      }).subscribe((res: PartialList<SellsInvoice>) => {
+      }).subscribe((res: PartialList<StockGeneral>) => {
         this.data = res;
         console.log( this.data);
         this.loading = false;
@@ -89,8 +90,15 @@ export class StockGeneralReportComponent implements OnInit{
       });
     }
 
-
-
+    _CIN(val){
+      return parseInt(val);
+    }
+    
+    _CIP(val){
+      return parseInt(val)*-1;
+    }
+    
+    
 
   beers:Array<Object> = [
   { id: 27, description: "Product 1",  opening: 0, inward:5,sales:3,damage:2,gift:2},
