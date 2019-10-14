@@ -12,7 +12,7 @@ import { ProductReportService } from '@services/report/product-report.service';
 })
 export class PurchaseStatusReportComponent implements OnInit {
 
-  data: PartialList<StockGeneral>;
+  data: any;
 
   loading: boolean;
   savingSles: boolean;
@@ -20,13 +20,13 @@ export class PurchaseStatusReportComponent implements OnInit {
   page = 1;
   size = 10;
 
-  
+
   form: FormGroup;
 
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
 
-  constructor(  private _fb: FormBuilder,    
+  constructor(  private _fb: FormBuilder,
     private datePipe : DatePipe,
     private reportService:ProductReportService) { }
 
@@ -81,5 +81,26 @@ export class PurchaseStatusReportComponent implements OnInit {
       toDate: [  '',  [Validators.nullValidator],]
     });
   }
+
+
+  totalPaidAmount (){
+    var total = 0;
+            for(let count=0;count<this.data.data.length;count++){
+                total += parseInt(this.data.data[count].paid,10);
+            }
+            return total;
+  }
+
+
+
+  totalAmount (){
+    var total = 0;
+            for(let count=0;count<this.data.data.length;count++){
+                total += parseInt(this.data.data[count].total,10);
+            }
+            return total;
+  }
+
+
 
 }

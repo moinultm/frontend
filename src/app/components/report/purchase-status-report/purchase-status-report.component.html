@@ -5,18 +5,18 @@
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="m-0 text-dark">Profiles</h1>
-          </div> 
+          </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
               <li class="breadcrumb-item"><a>Security</a></li>
               <li class="breadcrumb-item active">Manage profiles</li>
             </ol>
-          </div> 
-        </div> 
-      </div--> 
+          </div>
+        </div>
+      </div-->
     </div>
-  
+
     <section class="content">
       <div class="container-fluid">
         <div class="row">
@@ -29,10 +29,10 @@
 
 
 <div  id="printableArea" class="card-body table-responsive">
-        <div class="row no-print">
+        <div class="row no-print  mb-3">
                 <div class="col-md-12">
                   <form [formGroup]="form">
-                    <div class="row">               
+                    <div class="row">
                       <div class="col-md-6">
                         <mat-form-field>
                           <input matInput [matDatepicker]="pickerFrom" placeholder="Start Date"
@@ -40,24 +40,23 @@
                           <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
                           <mat-datepicker #pickerFrom></mat-datepicker>
                         </mat-form-field>
-                   
+
                         <mat-form-field>
                           <input matInput [matDatepicker]="pickerTo" placeholder="End Date" formControlName="toDate"
                             [value]="date.value">
                           <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
                           <mat-datepicker #pickerTo></mat-datepicker>
                         </mat-form-field>
-                  
-                      
+
+
                           <input type="button" name="search" id="search" value="Search" (click)="dateFilter()"
                             class="btn  btn-primary  ">
-                         
+
                       </div>
                       <div class="col-md-6">
 
-                            <input type="button" name="pirnt" id="print" value="Print"  
-                            class="btn  btn-default  ">
-                          </div>
+
+                    </div>
                     </div>
                   </form>
                 </div>
@@ -81,7 +80,7 @@
                                         <mat-spinner></mat-spinner>
                                     </td>
                                   </tr>
-                                 	 		 
+
 
                                   <ng-container *ngIf="!loading">
 
@@ -90,11 +89,11 @@
                                       <td>{{ item.reference_no}}</td>
                                       <td>{{ item.client_name }}</td>
                                       <td>
-                                          <div  *ngFor="let P of item.purchases;">
-                                                
-                                            {{ P.product.name }}   (  {{ P.product.quantity }}  Pcs)
-                                                   
-                                          </div> 
+                                          <div  *ngFor="let P of item.purchases; let i = index">
+
+                                            {{ i+1}} - {{ P.product.name }}   (  {{ P.product.quantity }}  Pcs)
+
+                                          </div>
                                         </td>
 
                                         <td>{{ item.net_total }}</td>
@@ -105,39 +104,39 @@
                 </table>
 
 
-                <table class="table" style="width: 50%; font-weight: bold;" align="right">
+                <table class="table table-bordered mb-3" style="width: 50%; font-weight: bold;" align="right">
 
                         <tbody>
-        
-        
+
+
                           <ng-container *ngIf="!loading">
                           <tr>
-                            <td> Total Sells Amount</td>
-                            <td> </td>
+                            <td> Total Purchases Amount</td>
+                            <td>{{totalAmount()}} </td>
                          </tr>
-        
+
                        <tr>
-                            <td> Total Recived Amount</td>
-                            <td> </td>
+                            <td> Total Paid</td>
+                            <td>{{totalPaidAmount()}} </td>
                        </tr>
                         </ng-container>
-        
-        
+
+
                         </tbody>
                       </table>
 
 
-     
-                    
+
+
 
 </div>
 
-<div class="card-footer clearfix">
-        <!--- Pagination -->
- <ngb-pagination *ngIf="!loading && data" [collectionSize]="data.count" [pageSize]="size"
- [page]="data.page" (pageChange)="loadData($event)" class="pagination pagination-sm m-0 float-right">
-</ngb-pagination>
-<!-- ./Pagination -->
+<div class="card-footer clearfix text-center">
+
+    <input type="button" name="pirnt" id="print" value="Print"
+    class="btn btn-warning">
+
+
    </div>
 
                 </div>
@@ -145,7 +144,6 @@
         </div>
       </div>
     </section>
-  
+
   </div>
   <!-- Content Wrapper. Contains page content -->
-  

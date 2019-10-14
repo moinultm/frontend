@@ -4,6 +4,7 @@ import { DatePipe } from '@angular/common';
 import { SellsOrderService } from '@services/stock/sells-order.service';
 import { PartialList } from '@models/common/patial-list.model';
 import { SellsOrder } from '@models/stock/sells-order.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-list',
@@ -29,7 +30,7 @@ export class OrderListComponent implements OnInit {
     private _fb: FormBuilder,
     private datePipe : DatePipe,
     private sellsService:SellsOrderService,
-
+    private router:Router,
   ) { }
 
   ngOnInit() {
@@ -50,7 +51,7 @@ export class OrderListComponent implements OnInit {
     this.loading = true;
     let formDt = this.datePipe.transform(this.form.get('fromDate').value, 'yyyy-MM-dd');
     let toDt = this.datePipe.transform(this.form.get('toDate').value, 'yyyy-MM-dd');
-  
+
     this.sellsService.find({
       page: this.page,
       size: this.size,
@@ -62,4 +63,23 @@ export class OrderListComponent implements OnInit {
       this.loading = false;
     });
   }
+
+  ifInvoiced(){
+    var total = 'Not Billed';
+    for(let count=0;count<this.data.data.length;count++){
+        if ( parseInt(this.data.data[count].invoiced_qty,10)>0)
+        {
+          return total  ='Billed';
+
+        }
+    }
+    return total;
+  }
+
+
+  //Redirection
+toDetails(id:number){
+  this.router.navigate([`sell/order-details/${id}`]);
+}
+
 }

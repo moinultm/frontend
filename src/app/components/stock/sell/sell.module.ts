@@ -16,6 +16,7 @@ import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { SellsOrderComponent } from './sells-order/sells-order.component';
 import { OrderListComponent } from './order-list/order-list.component';
 import { OrderInvoiceComponent } from './order-invoice/order-invoice.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
 
 
 const routes: Routes = [
@@ -31,27 +32,31 @@ const routes: Routes = [
   {
     path: 'details/:id',
     component: SellDetailsComponent
-
   },
   {
     path: 'return/:id',
     component: SellReturnComponent
-
   },
   {
     path: 'order',
     component: SellsOrderComponent
-
   },
   {
     path: 'order-list',
     component: OrderListComponent
-
+  },
+  {
+    path: 'order-details/:id',
+    component: OrderDetailsComponent
+  },
+  {
+    path: 'order-invoice/:id',
+    component: OrderInvoiceComponent
   }
 ];
 
 @NgModule({
-  declarations: [SellComponent, AddComponent,SellDetailsComponent,AddPaymentComponent,SellReturnComponent,AddCustomerComponent, SellsOrderComponent, OrderListComponent, OrderInvoiceComponent],
+  declarations: [SellComponent, AddComponent,SellDetailsComponent,AddPaymentComponent,SellReturnComponent,AddCustomerComponent, SellsOrderComponent, OrderListComponent, OrderInvoiceComponent, OrderDetailsComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

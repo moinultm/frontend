@@ -23,7 +23,7 @@
 
         <div class="col-md-12">
             <div class="card  table-responsive">
-                <div class="card-header">      
+                <div class="card-header">
                     <div class="row no-print">
                         <div class="col-md-12">
                             <form [formGroup]="form">
@@ -31,9 +31,9 @@
                                 <div class=" col-md-4">
                                   <h3 class="card-title">Data table </h3>
                                 </div>
-                       
-                             
-                               
+
+
+
                                 <div class="col-md-6  offset-md-2">
                                     <mat-form-field >
                                         <input matInput [matDatepicker]="pickerFrom" placeholder="Start Date" formControlName="fromDate"  [value]="date.value">
@@ -47,11 +47,11 @@
                                       </mat-form-field>
                                       <button mat-raised-button color="primary"  (click)="loadData()">
                                          Search
-                                      </button>                               
+                                      </button>
 
                                  </div>
-                                  
-                                
+
+
 
 
                             </div>
@@ -63,10 +63,10 @@
 
                 </div>
                 <div class="card-body">
-               
+
 
                     <table class="table table-bordered">
-                        <thead>                  
+                        <thead>
                           <tr>
                             <th style="width: 10px">#</th>
                             <th>Order#</th>
@@ -93,15 +93,19 @@
                         </tr>
 
                         <ng-container *ngIf="!loading">
-                            <tr *ngFor="let result of data.data; let i = index">
+                            <tr *ngFor="let result of data.data; let i = index;">
                               <td>{{ i+1 }}</td>
                               <td>{{result.reference_no}}</td>
                               <td>{{result.client.full_name}}</td>
-                              <td> </td>
+                              <td>
+
+                              {{ifInvoiced()}}
+
+                              </td>
                               <td>{{result.user.name}}  </td>
                               <td>{{result.date}}</td>
                               <td>{{result.sub_total}}</td>
-                                
+
                               <td>
                                 <button mat-icon-button color="accent"
                                 matTooltip="view details invoice"
@@ -122,20 +126,20 @@
                                 </td>
                             </tr>
                           </ng-container>
-                        
+
                         </tbody>
                       </table>
 
 
                 </div>
-      
+
                 <div class="card-footer">
-      
-      
+
+
                 </div>
               </div>
         </div>
-  
+
       </div>
     </div>
   </section>
