@@ -38,9 +38,10 @@ export class OrderInvoiceComponent implements OnInit {
 
   modalOption: NgbModalOptions = {};
   customerList: Array<Client>;
-  orderItemList: Array<OrderItems> = [];
 
-  orderItems: OrderItems[];
+  orderItemList: OrderItems [];
+
+
 
 
   _saving: boolean;
@@ -89,23 +90,9 @@ export class OrderInvoiceComponent implements OnInit {
     this.loading = true;
     this.ordersService.findOrderById(id).subscribe(res  => {
       this.initForm(res);
-      //this.details = res;
 
-      //this.orderItems = res.order;
-
-      //console.log(this.orderItems);
-
+      this.orderItemList = res.order;
       this.loading = false;
-    });
-  }
-
-
-
-  getOrder2(id: number): void {
-    this.loading = true;
-    this.ordersService.findOrderById(id).then(res => {
-      this.initForm(res);
-      this.orderItems = res.order;
     });
   }
 
@@ -120,9 +107,6 @@ export class OrderInvoiceComponent implements OnInit {
 
     if (order) {
       this.selectedOrder =order;
-      console.log(order.order);
-      this.orderItemList.push(order.order);
-
 
     }
     else {
@@ -136,12 +120,12 @@ export class OrderInvoiceComponent implements OnInit {
       orderNumber: [order ? order.reference_no : null, [Validators.required]],
       customerName: [order ? order.client_id : null, [Validators.required]],
       paymentMethod: ['cash', [Validators.required]],
-      totalAmount: [order ? order.sub_total : 0, [Validators.required]],
+      totalAmount: [order ? order.net_total : 0, [Validators.required]],
       paidAmount: [ 0, [Validators.required]],
       dueAmount: [ 0, [Validators.required]],
-      discountAmount: [order ? order.product_discount_amount : 0, [Validators.required]],
+      discountAmount: [order ? order.discount : 0, [Validators.required]],
       shippingCost: [0, [Validators.required]],
-      grandTotal: [order ? order.sub_total : 0, [Validators.required]],
+      grandTotal: [order ? order.net_total : 0, [Validators.required]],
       user_id: [order ? order.user_id : null, [Validators.required]],
     });
 

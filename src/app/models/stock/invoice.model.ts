@@ -17,6 +17,6 @@ export class SellsInvoice {
     product_tax:number;
     product_name:string;
     mrp:number;
-    order:OrderItems;
-
+  net_total:number;
+  discount:number;
 }
