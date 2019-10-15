@@ -85,4 +85,9 @@ export class SellsInvoiceService extends CrudService<SellsInvoice> {
     return this.__http.get <PartialList<SellsInvoice>>(this.url + '/' +'list'+'/'+'si', this.options);
   }
 
+
+
+ 
+
+
 }

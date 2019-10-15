@@ -57,7 +57,6 @@ export class OrderInvoiceComponent implements OnInit {
 
   loadingDetails: boolean;
 
-
   constructor(private sellsOrdererSvice: SellsInvoiceService,
     private customeService: CustomerService,
     private productService: ProductService,
@@ -75,7 +74,6 @@ export class OrderInvoiceComponent implements OnInit {
   }
 
   ngOnInit() {
-
     if (this.route.snapshot.params.id) {
       let id = this.route.snapshot.params.id;
       this.getOrder(id);
@@ -90,15 +88,10 @@ export class OrderInvoiceComponent implements OnInit {
     this.loading = true;
     this.ordersService.findOrderById(id).subscribe(res  => {
       this.initForm(res);
-
       this.orderItemList = res.order;
       this.loading = false;
     });
   }
-
-
-
-
 
   initForm(order?: SellsInvoice): void {
 
@@ -213,7 +206,7 @@ export class OrderInvoiceComponent implements OnInit {
       itemDiscountAmt: [orderitem ? orderitem.product_discount_amount : '', [Validators.required]],
 
       subtotal: [
-        orderitem ? orderitem.subtotal : '',
+        orderitem ? orderitem.sub_total : '',
         [Validators.required]],
 
       itemTotal: [orderitem ? orderitem.item_total : '', [Validators.required]],
@@ -260,7 +253,7 @@ export class OrderInvoiceComponent implements OnInit {
   updateGrandTotal() {
     let grand: number;
     grand = this.orderItemList.reduce((prev, curr) => {
-      return prev + curr.subtotal;
+      return prev + curr.sub_total;
     }, 0);
     this.mainForm.patchValue({
       grandTotal: parseFloat(grand.toFixed(2)),
@@ -289,7 +282,6 @@ export class OrderInvoiceComponent implements OnInit {
 
   updateDueAmount() {
     let due: number;
-
     due = (this.mainForm.value.grandTotal - this.mainForm.value.paidAmount);
     this.mainForm.patchValue({ dueAmount: parseFloat(due.toFixed(2)), });
   }
@@ -309,7 +301,7 @@ export class OrderInvoiceComponent implements OnInit {
     formItem.product_discount_percentage = formProducts.value.discountOnMRP;
     formItem.product_discount_amount = formProducts.value.itemDiscountAmt;
 
-    formItem.subtotal = formProducts.value.subtotal;
+    formItem.sub_total = formProducts.value.sub_total;
 
     formItem.cost_price = formProducts.value.name.cost_price;
 
@@ -347,6 +339,7 @@ export class OrderInvoiceComponent implements OnInit {
 
     const formData = new FormData();
     formData.append('customer', this.mainForm.get('customerName').value);
+    formData.append('order_no', this.mainForm.get('orderNumber').value);
     formData.append('user_id', this.mainForm.get('user_id').value);
     formData.append('paid', this.mainForm.get('customerName').value);
     formData.append('method', this.mainForm.get('paymentMethod').value);

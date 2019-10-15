@@ -185,7 +185,7 @@
                               <td>{{item.quantity}}</td>
                               <td>{{item.product_discount_percentage}}</td>
                               <td>{{item.mrp}}</td>
-                              <td>{{item.subtotal}}</td>
+                              <td>{{item.sub_total}}</td>
                               <td>
                                 <!--a class="btn btn-sm btn-info text-white"><i class="fas fa-edit"></i></a-->
                                 <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteOrderItem(item.product_id,i)"><i
@@ -357,9 +357,9 @@
         <div class="col-md-4">
             <!-- itemTotal field -->
             <div class="form-group">
-                <label for="subtotal">Total</label>
-                <input type="text" class="form-control" id="subtotal" formControlName="subtotal"
-                  [class.has-error]="formProducts.get('subtotal').dirty && formProducts.get('subtotal').invalid" readonly />
+                <label for="sub_total">Total</label>
+                <input type="text" class="form-control" id="sub_total" formControlName="sub_total"
+                  [class.has-error]="formProducts.get('sub_total').dirty && formProducts.get('sub_total').invalid" readonly />
               </div>
 
               <!-- ./itemTotal field -->

@@ -182,7 +182,7 @@
                             <thead class="thead-light">
                               <th>ProductName</th>
                               <th>Quantity</th>
-                              <th>Discount</th>
+                              <th>Discount % </th>
                               <th>MRP</th>
                               <th>Subtotal</th>
                               <th>
@@ -200,7 +200,7 @@
                                 <td>{{item.quantity}}</td>
                                 <td>{{item.product_discount_percentage}}</td>
                                 <td>{{item.mrp}}</td>
-                                <td>{{item.subtotal}}</td>
+                                <td>{{item.sub_total}}</td>
                                 <td>
                                   <!--a class="btn btn-sm btn-info text-white"><i class="fas fa-edit"></i></a-->
                                   <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteOrderItem(item.product_id,i)"><i

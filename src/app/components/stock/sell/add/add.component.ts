@@ -163,8 +163,8 @@ export class AddComponent implements OnInit {
 
       itemDiscountAmt:[ orderitem ? orderitem.product_discount_amount : '', [Validators.required]],
 
-      subtotal: [
-        orderitem ? orderitem.subtotal : '',
+      sub_total: [
+        orderitem ? orderitem.sub_total : '',
         [Validators.required]],
 
         itemTotal:[ orderitem ? orderitem.item_total : '', [Validators.required]],
@@ -202,7 +202,7 @@ export class AddComponent implements OnInit {
 
     this.formProducts.patchValue({
       itemTotal:itemTotal,
-      subtotal: newVal,
+      sub_total: newVal,
       itemDiscountAmt:discountPrice
    });
 
@@ -211,7 +211,7 @@ export class AddComponent implements OnInit {
   updateGrandTotal(){
     let grand :number;
     grand= this.orderItemList.reduce((prev, curr) => {
-      return prev + curr.subtotal;
+      return prev + curr.sub_total;
     }, 0);
     this.mainForm.patchValue({
       grandTotal:    parseFloat(grand.toFixed(2)),
@@ -260,7 +260,7 @@ export class AddComponent implements OnInit {
    formItem.product_discount_percentage=formProducts.value.discountOnMRP;
    formItem.product_discount_amount=formProducts.value.itemDiscountAmt;
 
-   formItem.subtotal=formProducts.value.subtotal;
+   formItem.sub_total=formProducts.value.sub_total;
 
    formItem.cost_price=formProducts.value.name.cost_price;
 
