@@ -39,9 +39,9 @@ export class OrderDetailsComponent implements OnInit {
 
   ShowBillDetails(id:number){
     this.loadingDetails = true;
-    this.ordersService.findOrderById(id).subscribe((res:PartialList <SellsInvoice>) => {
+    this.ordersService.findOrderDetailsId(id).subscribe((res:PartialList <SellsInvoice>) => {
       this.details = res;
-       //console.log(res);
+    // console.log(res);
       this.loadingDetails = false;
     });
   }

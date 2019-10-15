@@ -40,8 +40,6 @@ export class AddComponent implements OnInit {
 
   users:PartialList <User>;
 
-
-
   constructor(private sellsOrdererSvice:SellsInvoiceService,
     private customeService:CustomerService,
     private productService:ProductService,

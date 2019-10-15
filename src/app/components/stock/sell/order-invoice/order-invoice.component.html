@@ -29,21 +29,19 @@
               </div-->
               <!-- /.card-header -->
               <!-- form start -->
-              <form [formGroup]="mainForm">
+
+              <div class="text-center loading-data" *ngIf="loading">
+                <mat-spinner></mat-spinner>
+          </div>
 
 
+
+              <form [formGroup]="mainForm" *ngIf="!loading">
 
                 <div class="card-body  table-responsive">
-
-
-
-
                     <div class="form-group row">
                         <div class="col-sm-12"><h3 class="title text-info">Order to Invoice</h3>
 
-                          <div class="text-center loading-data" *ngIf="loading">
-                              <mat-spinner></mat-spinner>
-                        </div>
 
                         </div>
 
@@ -63,12 +61,8 @@
                                       <div class="input-group-prepend">
                                         <span class="input-group-text"> <i class="fas fa-user-tag"></i></span>
                                       </div>
-                                      <select class="form-control" formControlName="customerName">
-                                          <option [value]="null">Select Customer</option>
-                                        <option *ngFor="let list of customerList" [value]="list.id">
-                                          {{list.full_name}} {{list.client_code}}
-                                        </option>
-                                      </select>
+                                      <input class="form-control" type="text" id="OrderNumber" formControlName="orderNumber" readonly>
+
                                     </div>
                                 </div>
                           </div>
@@ -114,7 +108,7 @@
                                 </div>
 
 
-                              <div class="col-md-6">
+                              <div class="col-md-6" *ngIf="!loadingCustomer">
                                   <div class="form-group">
                                       <label>Customer Name</label>
 
@@ -134,7 +128,7 @@
                           </div>
 
                           <div class="row">
-                              <div class="col-md-6" *ngIf="!loading">
+                              <div class="col-md-6" *ngIf="!loadingUser">
                                   <div class="form-group">
                                    <label>Sales Representative</label>
                                    <div class="input-group">

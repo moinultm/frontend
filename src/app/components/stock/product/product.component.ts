@@ -45,13 +45,14 @@ export class ProductComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    if( this.route.snapshot.params.id) {
-
-     let id=this.route.snapshot.params.id;
-     this.getProduct(id);
-     this.initForm();
+    if (this.route.snapshot.params.id) {
+      let id = this.route.snapshot.params.id;
+      this.getProduct(id);
     }
-    else{  this.initForm(); }
+    else {
+      this.initForm();
+    }
+
   }
 
   FillSubcategory(catid:number)
@@ -73,7 +74,6 @@ export class ProductComponent implements OnInit {
       this.categories = res.data;
        this.loadingSubcategory = false;
     });
-
   }
 
 
@@ -84,6 +84,7 @@ export class ProductComponent implements OnInit {
       .subscribe(
         (product: Product) => {
           this.initForm(product),
+
           this.loading = false;
         },
         (err: any) => {  if (err.status === 404) {

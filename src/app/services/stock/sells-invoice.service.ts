@@ -11,11 +11,13 @@ import { PartialList } from '@models/common/patial-list.model';
 })
 export class SellsInvoiceService extends CrudService<SellsInvoice> {
 
+  list : PartialList<SellsInvoice>;
 
   constructor(private __http: HttpClient ) {
     super(__http);
     this.setUrl('sell');
   }
+
 
   findTable(
     filter :string,
@@ -42,10 +44,19 @@ export class SellsInvoiceService extends CrudService<SellsInvoice> {
 
 
 
+
   public findOrderById(id: number): any {
     this.options.params = undefined;
 
-    return this.__http.get <PartialList<SellsInvoice>>(this.url + '/' + id +'/'+'order-details', this.options);
+    return this.__http.get<SellsInvoice>(this.url + '/' + id+'/'+'order-edit', this.options);
+  }
+
+
+
+  public findOrderDetailsId(id: number): any {
+    this.options.params = undefined;
+
+    return this.__http.get<PartialList<SellsInvoice>>(this.url + '/' + id+'/'+'order-details', this.options);
   }
 
 
