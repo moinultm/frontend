@@ -59,7 +59,7 @@ export class OrderListComponent implements OnInit {
       to:   toDt
     }).subscribe((res: PartialList<SellsOrder>) => {
       this.data = res;
-      console.log();
+      console.log(  this.data);
       this.loading = false;
     });
   }
@@ -70,7 +70,7 @@ export class OrderListComponent implements OnInit {
         if ( parseInt(this.data.data[count].invoiced_qty,10)>0)
         {
           return total  ='Billed';
-
+console.log();
         }
     }
     return total;

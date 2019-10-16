@@ -8,7 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { UserService } from '@services/security/user.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { Client } from '@models/stock/client.model';
-import { OrderItems } from '@models/stock/orderitems.model ';
+import { OrderItems } from '@models/stock/order-items.model ';
 import { SellsOrder } from '@models/stock/sells-order.model';
 import { Product } from '@models/stock/product.model';
 import { PartialList } from '@models/common/patial-list.model';
@@ -157,10 +157,10 @@ export class SellsOrderComponent implements OnInit {
         itemDiscountAmt:[ orderitem ? orderitem.product_discount_amount : '', [Validators.required]],
 
         subtotal: [
-          orderitem ? orderitem.subtotal : '',
+          orderitem ? orderitem.sub_total : '',
           [Validators.required]],
 
-          itemTotal:[ orderitem ? orderitem.item_total : '', [Validators.required]],
+          itemTotal:[ orderitem ? orderitem.sub_total : '', [Validators.required]],
 
       });
     }
@@ -195,7 +195,7 @@ export class SellsOrderComponent implements OnInit {
 
       this.formProducts.patchValue({
         itemTotal:itemTotal,
-        subtotal: newVal,
+        sub_total: newVal,
         itemDiscountAmt:discountPrice
      });
 
@@ -204,7 +204,7 @@ export class SellsOrderComponent implements OnInit {
     updateGrandTotal(){
       let grand :number;
       grand= this.orderItemList.reduce((prev, curr) => {
-        return prev + curr.subtotal;
+        return prev + curr.sub_total;
       }, 0);
       this.mainForm.patchValue({
         grandTotal:    parseFloat(grand.toFixed(2)),
@@ -219,12 +219,12 @@ export class SellsOrderComponent implements OnInit {
       });
 
 
-      let item_total :number;
-      item_total= this.orderItemList.reduce((prev, curr) => {
-        return prev + curr.item_total;
+      let sub_total :number;
+      sub_total= this.orderItemList.reduce((prev, curr) => {
+        return prev + curr.sub_total;
       }, 0);
       this.mainForm.patchValue({
-        totalAmount:   parseFloat(item_total.toFixed(2)),
+        totalAmount:   parseFloat(sub_total.toFixed(2)),
       });
 
 
@@ -248,12 +248,12 @@ export class SellsOrderComponent implements OnInit {
 
      formItem.quantity=formProducts.value.quantity;
      formItem.mrp=formProducts.value.productMRP;
-     formItem.item_total=formProducts.value.itemTotal;
+     formItem.sub_total=formProducts.value.itemTotal;
 
      formItem.product_discount_percentage=formProducts.value.discountOnMRP;
      formItem.product_discount_amount=formProducts.value.itemDiscountAmt;
 
-     formItem.subtotal=formProducts.value.subtotal;
+     formItem.sub_total=formProducts.value.sub_total;
 
      formItem.cost_price=formProducts.value.name.cost_price;
 

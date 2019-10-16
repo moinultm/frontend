@@ -8,7 +8,7 @@ import { CustomerService } from '@services/stock/customer.service';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ProductService } from '@services/stock/product.service';
 import { Product } from '@models/stock/product.model';
-import { OrderItems } from '@models/stock/orderitems.model ';
+import { OrderItems } from '@models/stock/order-items.model ';
 import { ToastrService } from 'ngx-toastr';
 import { success, error, warning } from '@app/services/core/utils/toastr';
 import { UserService } from '@services/security/user.service';
@@ -167,7 +167,7 @@ export class AddComponent implements OnInit {
         orderitem ? orderitem.sub_total : '',
         [Validators.required]],
 
-        itemTotal:[ orderitem ? orderitem.item_total : '', [Validators.required]],
+        itemTotal:[ orderitem ? orderitem.sub_total : '', [Validators.required]],
 
     });
   }
@@ -226,12 +226,12 @@ export class AddComponent implements OnInit {
     });
 
 
-    let item_total :number;
-    item_total= this.orderItemList.reduce((prev, curr) => {
-      return prev + curr.item_total;
+    let sub_total :number;
+    sub_total= this.orderItemList.reduce((prev, curr) => {
+      return prev + curr.sub_total;
     }, 0);
     this.mainForm.patchValue({
-      totalAmount:   parseFloat(item_total.toFixed(2)),
+      totalAmount:   parseFloat(sub_total.toFixed(2)),
     });
 
 
@@ -255,7 +255,7 @@ export class AddComponent implements OnInit {
 
    formItem.quantity=formProducts.value.quantity;
    formItem.mrp=formProducts.value.productMRP;
-   formItem.item_total=formProducts.value.itemTotal;
+   formItem.sub_total=formProducts.value.itemTotal;
 
    formItem.product_discount_percentage=formProducts.value.discountOnMRP;
    formItem.product_discount_amount=formProducts.value.itemDiscountAmt;

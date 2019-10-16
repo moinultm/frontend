@@ -8,7 +8,7 @@ import { SupplierService } from '@services/stock/supplier.service';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ProductService } from '@services/stock/product.service';
 import { Product } from '@models/stock/product.model';
-import { OrderItems } from '@models/stock/orderitems.model ';
+import { OrderItems } from '@models/stock/order-items.model ';
 import { ToastrService } from 'ngx-toastr';
 import { success, error, warning } from '@app/services/core/utils/toastr';
 import { PurchaseItems } from '@models/stock/purchase-items';

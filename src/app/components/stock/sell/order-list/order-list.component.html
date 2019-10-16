@@ -96,13 +96,13 @@
                             <tr *ngFor="let result of data.data; let i = index;">
                               <td>{{ i+1 }}</td>
                               <td>{{result.reference_no}}</td>
-                              <td>{{result.client.full_name}}</td>
+                              <td>{{result.client_name}}</td>
                               <td>
 
                               {{ifInvoiced()}}
 
                               </td>
-                              <td>{{result.user.name}}  </td>
+                              <td>{{result.user_name}}  </td>
                               <td>{{result.date}}</td>
                               <td>{{result.net_total}}</td>
 

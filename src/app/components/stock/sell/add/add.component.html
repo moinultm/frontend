@@ -205,7 +205,7 @@
                             </tr>
                             <tr>
                               <td colspan="3" style="text-align: right; font-weight: bold;">
-                                Discount
+                                Discount on product
                               </td>
                               <td colspan="3">
                                 <input class="form-control" type="text" id="discountAmount" formControlName="discountAmount" readonly>
@@ -213,7 +213,7 @@
                             </tr>
                             <tr>
                               <td colspan="3" style="text-align: right; font-weight: bold;">
-                                Shipping
+                                Shipping Cost
                               </td>
                               <td colspan="3">
                                 <input class="form-control" type="text" id="shippingCost" formControlName="shippingCost">
@@ -357,7 +357,7 @@
         <div class="col-md-4">
             <!-- itemTotal field -->
             <div class="form-group">
-                <label for="sub_total">Total</label>
+                <label for="sub_total">Sub Total</label>
                 <input type="text" class="form-control" id="sub_total" formControlName="sub_total"
                   [class.has-error]="formProducts.get('sub_total').dirty && formProducts.get('sub_total').invalid" readonly />
               </div>

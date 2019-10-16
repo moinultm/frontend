@@ -1,4 +1,4 @@
-import { OrderItems } from './orderitems.model ';
+import { OrderItems } from './order-items.model ';
 
 
 export class SellsInvoice {
