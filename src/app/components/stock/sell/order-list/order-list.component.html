@@ -99,7 +99,10 @@
                               <td>{{result.client_name}}</td>
                               <td>
 
-                              {{ifInvoiced()}}
+                                  <div *ngIf="result.invoiced_qty > 0">
+                                 Billed
+                                  </div>
+                                 
 
                               </td>
                               <td>{{result.user_name}}  </td>

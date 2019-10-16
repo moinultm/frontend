@@ -10,7 +10,7 @@ export class SellsOrder {
     warehouse_id:number;
     quantity:number;
     unit_cost_price:number;
-    product_discount_percentage:number;
+    discount:number;
     sub_total:number;
     product_tax:number;
     product_name:string;

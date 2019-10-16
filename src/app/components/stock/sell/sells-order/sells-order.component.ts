@@ -76,10 +76,9 @@ export class SellsOrderComponent implements OnInit {
     customerName:[null,[Validators.required]  ],
     paymentMethod:['cash',[Validators.required]  ],
     totalAmount:['0',[Validators.required]  ],
-    paidAmount:['0',[Validators.required]  ],
-    dueAmount:['0', [Validators.required]  ],
     discountAmount:['0', [Validators.required]  ],
     shippingCost:['0', [Validators.required]  ],
+    discountOnTotal:['0',[Validators.required]  ],
     grandTotal:['0',[Validators.required]  ],
     user_id:[null, [Validators.required]],
   });
@@ -156,11 +155,13 @@ export class SellsOrderComponent implements OnInit {
 
         itemDiscountAmt:[ orderitem ? orderitem.product_discount_amount : '', [Validators.required]],
 
-        subtotal: [
+        sub_total: [
           orderitem ? orderitem.sub_total : '',
           [Validators.required]],
 
-          itemTotal:[ orderitem ? orderitem.sub_total : '', [Validators.required]],
+          itemTotal: [
+            orderitem ? orderitem.sub_total : '',
+            [Validators.required]],
 
       });
     }
@@ -203,11 +204,19 @@ export class SellsOrderComponent implements OnInit {
 
     updateGrandTotal(){
       let grand :number;
+      let  costs=  parseFloat(this.mainForm.get('shippingCost').value);
+      let  discount_on_total=  parseFloat(this.mainForm.get('discountOnTotal').value);
+      let netTotal:number;
+      
       grand= this.orderItemList.reduce((prev, curr) => {
         return prev + curr.sub_total;
       }, 0);
+
+     netTotal =  (grand+costs) -  discount_on_total;
+   
+
       this.mainForm.patchValue({
-        grandTotal:    parseFloat(grand.toFixed(2)),
+        grandTotal:    parseFloat(netTotal.toFixed(2)),
       });
 
       let discount :number;
@@ -223,6 +232,7 @@ export class SellsOrderComponent implements OnInit {
       sub_total= this.orderItemList.reduce((prev, curr) => {
         return prev + curr.sub_total;
       }, 0);
+
       this.mainForm.patchValue({
         totalAmount:   parseFloat(sub_total.toFixed(2)),
       });
@@ -275,8 +285,8 @@ export class SellsOrderComponent implements OnInit {
     //console.log(JSON.stringify(this.orderItemList));
 
     this._saving=true;
-    if(parseFloat(this.mainForm.get('paidAmount').value) > this.mainForm.get('grandTotal').value ){
-      error('Error!', "Paid amount (" + this.mainForm.get('paidAmount').value + ") cant\'be greater than total amount (" + this.mainForm.get('grandTotal').value  + ")", this._toastr);
+    if(parseFloat(this.mainForm.get('discountOnTotal').value) > this.mainForm.get('totalAmount').value ){
+      error('Error!', "Discount  amount (" + this.mainForm.get('discountOnTotal').value + ") cant\'be greater than total amount (" + this.mainForm.get('grandTotal').value  + ")", this._toastr);
      this._saving = false
      return false;
    }
@@ -294,8 +304,8 @@ export class SellsOrderComponent implements OnInit {
     formData.append('paid', this.mainForm.get('customerName').value);
     formData.append('method', this.mainForm.get('paymentMethod').value);
     formData.append('total', this.mainForm.get('grandTotal').value);
-    formData.append('paid', this.mainForm.get('paidAmount').value);
-    formData.append('discount', this.mainForm.get('discountAmount').value);
+    formData.append('paid', '0');
+    formData.append('discount', this.mainForm.get('discountOnTotal').value);
     formData.append('shipping_cost', this.mainForm.get('shippingCost').value);
     formData.append('orders', JSON.stringify(this.orderItemList));
 

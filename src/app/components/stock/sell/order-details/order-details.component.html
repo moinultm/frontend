@@ -92,15 +92,14 @@
                 <th>Item Total</th>
               </tr>
               </thead>
-              <tbody  >
-              <tr *ngFor="let T of details.data ;  let i = index;">
-
+              <tbody  *ngFor="let T of details.data ;">
+                  <tr *ngFor="let TD of T.order ; let i = index">
                 <td>{{i+1}}</td>
-                <td>{{T.product.name}}</td>
-                <td>{{T.quantity}} </td>
-                <td>{{T.product.mrp}}  </td>
-                <td>{{T.product_discount_percentage}} </td>
-                <td>{{T.sub_total}} </td>
+                <td>{{TD.product.name}}</td>
+                <td>{{TD.quantity}} </td>
+                <td>{{TD.product.mrp}}  </td>
+                <td>{{TD.product_discount_percentage}} </td>
+                <td>{{TD.sub_total}} </td>
 
               </tr>
 
