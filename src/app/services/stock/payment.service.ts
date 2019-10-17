@@ -15,10 +15,5 @@ export class PaymentService extends CrudService<Payment> {
     this.setUrl('payment');
   }
 
-  public findParent(id:number): any {
-
-    return this.__http.get <PartialList <Payment>> (this.url + '?categoryId='+id , this.options);
-  }
-
 
 }

@@ -5,16 +5,16 @@
       <!--div class="row mb-2">
         <div class="col-sm-6">
           <h1 class="m-0 text-dark">Sales Invoices</h1>
-        </div> 
+        </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
             <li class="breadcrumb-item"><a>Stock</a></li>
             <li class="breadcrumb-item active">Sales</li>
           </ol>
-        </div> 
-      </div--> 
-    </div> 
+        </div>
+      </div-->
+    </div>
   </div>
 
   <section class="content">
@@ -26,53 +26,53 @@
 
           <div class="card-header">
 
-            
+
               <div class="row">
                   <div class="col-md-4">
                       <h3 class="card-title mb-3">
                         Manage Invoices
                           <a href="#" [routerLink]="['/sell/add']" class="nav-link d-inline"   [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active"><span class="badge bg-primary">Add New</span></a>
-                      </h3>                 
+                      </h3>
 
-                        
+
                   </div>
-            
-                  
+
+
             </div>
             </div>
           <!-- /.card-header -->
 
           <div class="card-body">
- 
+
 
               <form [formGroup]="form">
                   <div class="row">
-                   
-                
+
+
                       <div class="col-md-6">
                           <mat-form-field >
                               <input matInput [matDatepicker]="pickerFrom" placeholder="Start Date" formControlName="fromDate"  [value]="date.value">
                               <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
                               <mat-datepicker #pickerFrom></mat-datepicker>
-                            </mat-form-field>                                           
-                         
-     
+                            </mat-form-field>
+
+
                             <mat-form-field>
                                 <input matInput [matDatepicker]="pickerTo" placeholder="End Date" formControlName="toDate"  [value]="date.value">
                                 <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
                                 <mat-datepicker #pickerTo></mat-datepicker>
-                              </mat-form-field>                      
-                       
-    
-                         
+                              </mat-form-field>
+
+
+
                               <button mat-raised-button color="primary"   (click)="loadData()">
                                   Search
-                              </button>    
+                              </button>
                           </div>
-    
+
 
                           <div class="col-md-3  offset-md-3">
-                                                    
+
                               <div class="card-tools mb-3">
                                   <div class="input-group input-group">
                                       <div class="input-group-prepend">
@@ -81,15 +81,15 @@
                                       <input type="text" class="form-control" placeholder="Invoice No" #input>
                                     </div>
                               </div>
-                          
+
                       </div>
 
 
                       </div>
-    
+
                     </form>
 
-                    
+
 
             <table class="table table-bordered">
               <thead>
@@ -122,7 +122,7 @@
                 <ng-container *ngIf="!loading">
                 <tr *ngFor="let result of data.data; let i = index">
                   <td>{{ i+1 }}</td>
-                  <td>0</td>
+                  <td>{{result.order_no}}</td>
                   <td>{{result.reference_no}}</td>
                   <td>{{result.date}}</td>
                   <td>{{result.client_name}}</td>

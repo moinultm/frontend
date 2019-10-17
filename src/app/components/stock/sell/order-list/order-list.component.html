@@ -28,13 +28,19 @@
                         <div class="col-md-12">
                             <form [formGroup]="form">
                             <div class="row">
-                                <div class=" col-md-4">
+                                <div class=" col-md-2">
                                   <h3 class="card-title">Data table </h3>
                                 </div>
 
+                                <div class=" col-md-1">
+                                    <div class="form-group">
+                                        <a class="form-control btn btn-info text-white" (click)="newOrder()"><i class="fa fa-plus"></i>
+                                         Order</a>
+                                    </div>
+                                  </div>
 
 
-                                <div class="col-md-6  offset-md-2">
+                                <div class="col-md-6  offset-md-3 text-right">
                                     <mat-form-field >
                                         <input matInput [matDatepicker]="pickerFrom" placeholder="Start Date" formControlName="fromDate"  [value]="date.value">
                                         <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
@@ -45,7 +51,7 @@
                                         <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
                                         <mat-datepicker #pickerTo></mat-datepicker>
                                       </mat-form-field>
-                                      <button mat-raised-button color="primary"  (click)="loadData()">
+                                      <button mat-raised-button color="primary"  (click)="dateFilter()">
                                          Search
                                       </button>
 
@@ -72,7 +78,6 @@
                             <th>Order#</th>
                             <th>Customer</th>
                             <th>Status</th>
-                            <th>Order by</th>
                             <th>Order Date</th>
                             <th>Amount</th>
                             <th>Action</th>
@@ -96,16 +101,16 @@
                             <tr *ngFor="let result of data.data; let i = index;">
                               <td>{{ i+1 }}</td>
                               <td>{{result.reference_no}}</td>
-                              <td>{{result.client_name}}</td>
+                              <td>{{result.clients_name}}</td>
                               <td>
 
                                   <div *ngIf="result.invoiced_qty > 0">
                                  Billed
                                   </div>
-                                 
+
 
                               </td>
-                              <td>{{result.user_name}}  </td>
+
                               <td>{{result.date}}</td>
                               <td>{{result.net_total}}</td>
 
@@ -115,10 +120,13 @@
                                  (click)="toDetails(result.id)">
                                   <mat-icon class="mat-18">flip_to_front</mat-icon>
                                 </button>
-                                <button mat-icon-button color="accent" matTooltip="Return Items"
-                                 (click)="refereToReturnSell(result.id)">
-                                    <mat-icon>refresh</mat-icon>
-                                </button>
+
+                                    <button  *ngIf="!result.invoiced_qty > 0" mat-icon-button color="accent" matTooltip="Create invoice"
+                                    (click)="makeInvoice(result.id)">
+                                       <mat-icon>refresh</mat-icon>
+                                   </button>
+
+
                                 <button mat-icon-button color="accent" matTooltip="Edit invoice"
                                 (click)="refereToEditInvoice(result.id)">
                                     <mat-icon>edit</mat-icon>
@@ -126,6 +134,7 @@
                                 <button mat-icon-button color="accent" matTooltip="Delete invoice">
                                     <mat-icon>restore_from_trash</mat-icon>
                                   </button>
+
                                 </td>
                             </tr>
                           </ng-container>
@@ -137,7 +146,20 @@
                 </div>
 
                 <div class="card-footer">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5">
+                          <div class="dataTables_info" id="example1_info" role="status" aria-live="polite" *ngIf="!loading && data">Showing  page {{ data.page }}  of {{data.count}} entries</div>
+                        </div>
 
+                        <div class="col-sm-12 col-md-7">
+             <ngb-pagination *ngIf="!loading && data" [collectionSize]="data.count" [pageSize]="size"
+                      [page]="data.page" (pageChange)="loadData($event)" class="pagination pagination-sm m-0 float-right">
+                    </ngb-pagination>
+        </div>
+
+
+
+                            </div>
 
                 </div>
               </div>

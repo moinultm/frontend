@@ -207,13 +207,13 @@ export class SellsOrderComponent implements OnInit {
       let  costs=  parseFloat(this.mainForm.get('shippingCost').value);
       let  discount_on_total=  parseFloat(this.mainForm.get('discountOnTotal').value);
       let netTotal:number;
-      
+
       grand= this.orderItemList.reduce((prev, curr) => {
         return prev + curr.sub_total;
       }, 0);
 
      netTotal =  (grand+costs) -  discount_on_total;
-   
+
 
       this.mainForm.patchValue({
         grandTotal:    parseFloat(netTotal.toFixed(2)),

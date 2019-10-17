@@ -20,7 +20,7 @@ export class OrderListComponent implements OnInit {
   size = 10;
 
   form: FormGroup;
-  data: any;
+  data: PartialList<SellsOrder>;
 
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
@@ -64,22 +64,36 @@ export class OrderListComponent implements OnInit {
     });
   }
 
-  ifInvoiced(){
-    var total = 'Not Billed';
-    for(let count=0;count<this.data.data.length;count++){
-        if ( parseInt(this.data.data[count].invoiced_qty,10)>0)
-        {
-          return total  ='Billed';
-console.log();
-        }
-    }
-    return total;
+
+  dateFilter(){
+    let formDt = this.datePipe.transform(this.form.get('fromDate').value, 'yyyy-MM-dd');
+    let toDt = this.datePipe.transform(this.form.get('toDate').value, 'yyyy-MM-dd');
+    this.loading = true;
+    this.sellsService.find({
+      from:  formDt,
+      to:   toDt
+    }).subscribe((res: PartialList<SellsOrder>) => {
+      this.data = res;
+      this.loading = false;
+    });
+
   }
+
 
 
   //Redirection
 toDetails(id:number){
   this.router.navigate([`sell/order-details/${id}`]);
 }
+
+makeInvoice(id:number){
+  this.router.navigate([`sell/order-invoice/${id}`]);
+}
+
+
+newOrder(){
+  this.router.navigate([`sell/order`]);
+}
+
 
 }

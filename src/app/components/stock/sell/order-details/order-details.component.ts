@@ -32,6 +32,7 @@ export class OrderDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     let id=this.route.snapshot.params.id;
     this.ShowBillDetails(id);
 
