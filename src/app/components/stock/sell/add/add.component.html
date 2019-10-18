@@ -39,7 +39,10 @@
 
 
                   <div class="form-group row">
-                      <div class="col-sm-12"><h3 class="title text-info">Invoice Properties</h3>
+                      <div class="col-sm-12"><h3 class="title text-info">Invoice Properties
+                        <a href="#" [routerLink]="['/sell']" class="nav-link d-inline"   [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+                          <span class="badge bg-info">List View</span></a>
+                      </h3>
 
                         <div class="text-center loading-data" *ngIf="loading">
                             <mat-spinner></mat-spinner>
@@ -287,13 +290,11 @@
                           </div>
 
 
-
                           <div class="col-md-1">
                               <label>Net Total  </label>
                             <input class="form-control" type="text" id="grandTotal" formControlName="grandTotal" readonly>
 
                           </div>
-
 
 
                           <div class="col-md-1">
@@ -303,8 +304,6 @@
                           </div>
 
                         </div>
-
-
 
 
 

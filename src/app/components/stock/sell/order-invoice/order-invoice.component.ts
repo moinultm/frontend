@@ -79,7 +79,7 @@ export class OrderInvoiceComponent implements OnInit {
       this.getOrder(id);
     }
     else {
-      this.initForm();
+     this.initForm();
     }
 
   }
@@ -118,6 +118,7 @@ export class OrderInvoiceComponent implements OnInit {
       dueAmount: [ 0, [Validators.required]],
       discountAmount: [order ? order.discount : 0, [Validators.required]],
       shippingCost: [0, [Validators.required]],
+      discountOnTotal: [0, [Validators.required]],
       grandTotal: [order ? order.net_total : 0, [Validators.required]],
       user_id: [order ? order.user_id : null, [Validators.required]],
     });
@@ -252,11 +253,20 @@ export class OrderInvoiceComponent implements OnInit {
 
   updateGrandTotal() {
     let grand: number;
+    let  costs=  parseFloat(this.mainForm.get('shippingCost').value);
+    let  discount_on_total=  parseFloat(this.mainForm.get('discountOnTotal').value);
+    let netTotal:number;
+
+
     grand = this.orderItemList.reduce((prev, curr) => {
       return prev + curr.sub_total;
     }, 0);
+
+    netTotal =  (grand+costs) -  discount_on_total;
+
+
     this.mainForm.patchValue({
-      grandTotal: parseFloat(grand.toFixed(2)),
+        grandTotal:    parseFloat(netTotal.toFixed(2)),
     });
 
     let discount: number;
@@ -350,8 +360,10 @@ export class OrderInvoiceComponent implements OnInit {
     formData.append('sells', JSON.stringify(this.orderItemList));
 
     this.sellsOrdererSvice.save(formData, false).subscribe((res: SellsInvoice) => {
-      success('Success!', 'The Invoice is successfully saved.', this._toastr);
+      success('Success!', 'The Order  is successfully saved to invoice.', this._toastr);
       this.initForm();
+      this.router.navigate([`order-list`]);
+     
       this._saving = false;
     }, (err: any) => {
 
@@ -379,8 +391,7 @@ export class OrderInvoiceComponent implements OnInit {
   onDeleteOrderItem(orderItemID: number, i: number) {
     if (orderItemID != null) {
 
-      console.log(orderItemID)
-      if (orderItemID != null) {
+     if (orderItemID != null) {
         this.orderItemList.splice(i, 1);
         this.updateGrandTotal();
       }

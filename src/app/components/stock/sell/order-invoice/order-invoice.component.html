@@ -53,7 +53,7 @@
                         <div class="row">
 
 
-                          <div class="col-md-6">
+                          <div class="col-md-4">
                               <div class="form-group">
                                   <label>Order number</label>
 
@@ -67,7 +67,28 @@
                                 </div>
                           </div>
 
-                          <div class="col-md-6">
+                          <div class="col-md-4">
+
+
+
+                            <div class="form-group">
+                              <label>Bill to </label>
+
+                              <div class="input-group">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="far fa-user-circle"></i></span>
+                                  </div>
+                                  <button class="form-control btn btn-default " (click)="openDialog()">
+                                      Add new customer
+                                    </button>
+                                </div>
+
+
+
+                            </div>
+                          </div>
+
+                          <div class="col-md-4">
                               <mat-form-field>
                                 <input matInput [matDatepicker]="picker" placeholder="Invoice Date" formControlName="sellDate">
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -86,29 +107,10 @@
 
                       <div class="col-md-12">
                           <div class="row">
-                              <div class="col-md-6">
+                         
 
 
-
-                                  <div class="form-group">
-                                    <label>Bill to </label>
-
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                          <span class="input-group-text"> <i class="far fa-user-circle"></i></span>
-                                        </div>
-                                        <button class="form-control btn btn-default " (click)="openDialog()">
-                                            Add new customer
-                                          </button>
-                                      </div>
-
-
-
-                                  </div>
-                                </div>
-
-
-                              <div class="col-md-6" *ngIf="!loadingCustomer">
+                              <div class="col-md-4" *ngIf="!loadingCustomer">
                                   <div class="form-group">
                                       <label>Customer Name</label>
 
@@ -125,10 +127,8 @@
                                         </div>
                                     </div>
                                 </div>
-                          </div>
 
-                          <div class="row">
-                              <div class="col-md-6" *ngIf="!loadingUser">
+                                <div class="col-md-4" *ngIf="!loadingUser">
                                   <div class="form-group">
                                    <label>Sales Representative</label>
                                    <div class="input-group">
@@ -147,38 +147,38 @@
                                  </div>
                              </div>
 
-                             <div class="col-md-6">
-                                <div class="form-group">
-                                  <label>Payment Method</label>
-                                  <div class="input-group">
-                                      <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-money-bill-wave"></i></span>
-                                      </div>
-                                      <select class="form-control" formControlName="paymentMethod">
-                                          <option value="cash">Cash</option>
-                                          <option value="cheque">Cheque</option>
-                                        </select>
+                             <div class="col-md-4">
+                              <div class="form-group">
+                                <label>Payment Method</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text"><i class="fas fa-money-bill-wave"></i></span>
                                     </div>
-
-
-                                </div>
+                                    <select class="form-control" formControlName="paymentMethod">
+                                        <option value="cash">Cash</option>
+                                        <option value="cheque">Cheque</option>
+                                      </select>
+                                  </div>
                               </div>
+                            </div>
+
                           </div>
+ 
                       </div>
 
                     </div>
 
-                    <div class="row">
+                    <!--div class="row">
                         <div class="col-md-12">
                           <div class="form-group">
                               <a class="form-control btn btn-success text-white" (click)="initItemModal(addItemModal)"><i class="fa fa-plus"></i>
                                 Add Item</a>
                           </div>
                         </div>
-                      </div>
+                      </div-->
 
                           <!--order items table-->
-                          <table class="table table-bordered">
+                          <table class="table table-bordered mb-3">
                             <thead class="thead-light">
                               <th>ProductName</th>
                               <th>Quantity</th>
@@ -208,7 +208,7 @@
                                 </td>
                               </tr>
                             </tbody>
-                            <tfoot>
+                            <!--tfoot>
                               <tr>
                                 <td colspan="3" style="text-align: right; font-weight: bold;">
                                   Total
@@ -259,11 +259,59 @@
                                   <input class="form-control" type="text" id="dueAmount" formControlName="dueAmount" readonly>
                                 </td>
                               </tr>
-                            </tfoot>
+                            </tfoot-->
                           </table>
                           <!-- order items table-->
 
+                          <div class="row">
 
+                            <div class="col-md-2">
+                                <label>Total </label>
+                                <input class="form-control" type="text" id="totalAmount" formControlName="totalAmount" readonly>
+
+                              </div>
+
+                              <div class="col-md-2">
+                                  <label>Paid  </label>
+                                  <input class="form-control" type="text" id="paidAmount" formControlName="paidAmount" placeholder="Paid Amount"
+                                  (keyup)="updateDueAmount()"
+                                  [class.has-error]="mainForm.get('paidAmount').dirty && mainForm.get('paidAmount').invalid">
+                              </div>
+
+
+                          <div class="col-md-2">
+                            <label> Discount on product  </label>
+                            <input class="form-control" type="text" id="discountAmount" formControlName="discountAmount" readonly>
+
+                          </div>
+                          <div class="col-md-2">
+                              <label> Discount on Total  </label>
+                            <input class="form-control" type="text" id="discountOnTotal" formControlName="discountOnTotal"  (keyup)="updateGrandTotal()">
+
+                          </div>
+                          <div class="col-md-2">
+                              <label>Delivery Costs  </label>
+                            <input class="form-control" type="text" id="shippingCost" formControlName="shippingCost"    (keyup)="updateGrandTotal()">
+
+                          </div>
+
+
+                          <div class="col-md-1">
+                              <label>Net Total  </label>
+                            <input class="form-control" type="text" id="grandTotal" formControlName="grandTotal" readonly>
+
+                          </div>
+
+
+                          <div class="col-md-1">
+                              <label>Due </label>
+                              <input class="form-control" type="text" id="dueAmount" formControlName="dueAmount" readonly>
+
+                          </div>
+
+                        </div>
+
+                          
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">

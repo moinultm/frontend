@@ -59,7 +59,7 @@ export class OrderListComponent implements OnInit {
       to:   toDt
     }).subscribe((res: PartialList<SellsOrder>) => {
       this.data = res;
-      console.log(  this.data);
+     // console.log(  this.data);
       this.loading = false;
     });
   }

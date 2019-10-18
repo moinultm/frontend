@@ -244,7 +244,7 @@ export class AddComponent implements OnInit {
       totalAmount:   parseFloat(sub_total.toFixed(2)),
     });
 
-
+  this.updateDueAmount();
 
   }
 

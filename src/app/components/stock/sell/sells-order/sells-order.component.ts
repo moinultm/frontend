@@ -17,6 +17,7 @@ import { User } from '@models/security/user.model';
 import { success, error, warning } from '@app/services/core/utils/toastr';
 import { AddCustomerComponent } from '../../customer/add-customer/add-customer.component';
 import { SellsOrderService } from '@services/stock/sells-order.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sells-order',
@@ -45,7 +46,8 @@ export class SellsOrderComponent implements OnInit {
     private _toastr: ToastrService,
     private userService:UserService,
     titleService: Title,
-    private dialog: MatDialog,) {
+    private dialog: MatDialog,
+    private router:Router,) {
       titleService.setTitle('Sales Order');
     }
   ngOnInit() {
@@ -312,6 +314,7 @@ export class SellsOrderComponent implements OnInit {
     this.sellsOrdererSvice.save(formData, false).subscribe((res:SellsOrder) => {
       success('Success!', 'The Order is successfully saved.', this._toastr);
       this.initForm();
+     
       this._saving = false;
     }, (err: any) => {
 
@@ -382,7 +385,6 @@ export class SellsOrderComponent implements OnInit {
           else{
             warning('warning!', result.data  , this._toastr);
           }
-
 
       });
     }
