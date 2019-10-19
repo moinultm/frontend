@@ -3,6 +3,7 @@
 
     <div class="content-header">
       <div class="container-fluid">
+          <div class="text-center loading-data"> <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar> </div>
         <!--div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="m-0 text-dark">New Sales</h1>
@@ -30,9 +31,7 @@
               <!-- /.card-header -->
               <!-- form start -->
 
-              <div class="text-center loading-data" *ngIf="loading">
-                <mat-spinner></mat-spinner>
-          </div>
+
 
 
 
@@ -107,7 +106,7 @@
 
                       <div class="col-md-12">
                           <div class="row">
-                         
+
 
 
                               <div class="col-md-4" *ngIf="!loadingCustomer">
@@ -163,7 +162,7 @@
                             </div>
 
                           </div>
- 
+
                       </div>
 
                     </div>
@@ -311,7 +310,7 @@
 
                         </div>
 
-                          
+
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">

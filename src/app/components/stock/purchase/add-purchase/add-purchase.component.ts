@@ -27,7 +27,7 @@ export class AddPurchaseComponent implements OnInit {
 
   orderItemList: Array<PurchaseItems>=[];
 
-  loadingOrder: boolean;
+  loading: boolean;
   loadingSupplier:boolean;
 
   _saving:boolean;
@@ -85,11 +85,11 @@ selectedOrderItem: PurchaseItems;
 
   FillSupplier()
   {
-    this.loadingSupplier=true;
+    this.loading=true;
     this.supplierService.findSupplier()
     .subscribe((res: PartialList<Client>) => {
       this.supplierList = res.data;
-       this.loadingSupplier = false;
+       this.loading = false;
     });
   }
 

@@ -2,19 +2,20 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
-        <div class="row mb-2">
+
+        <!--div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="m-0 text-dark">Purchases</h1>
-          </div><!-- /.col -->
+          </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
               <li class="breadcrumb-item"><a>Stock</a></li>
               <li class="breadcrumb-item active">Manage Purcsase</li>
             </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
+          </div>
+        </div-->
+      </div>
     </div>
 
     <section class="content">
@@ -25,11 +26,11 @@
             <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">List Purchases
-                     
 
-                        <a href="#" [routerLink]="['/purchase/add']" class="nav-link d-inline"   
+
+                        <a href="#" [routerLink]="['/purchase/add']" class="nav-link d-inline"
                         [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
-                          <span class="badge bg-primary">                           
+                          <span class="badge bg-primary">
                             <i class="nav-icon fas fa-cart-plus"></i>
                             New Invoice
                           </span>
@@ -81,7 +82,7 @@
                    (click)="toDetails(item.id)">
                     <mat-icon class="mat-18">flip_to_front</mat-icon>
                   </button>
-                  
+
                   <button mat-icon-button color="accent" matTooltip="Edit invoice"
                   (click)="refereToEditInvoice(result.id)">
                       <mat-icon>edit</mat-icon>
@@ -105,7 +106,7 @@
               <!-- ./Pagination -->
                 </div>
               </div>
- 
+
                  <!--Card-->
             </div>
 

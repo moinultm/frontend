@@ -80,7 +80,7 @@ export class AddComponent implements OnInit {
     this.FillCustomer();
 
     this.mainForm = this._fb.group({
-    sellDate:[new Date(),[Validators.nullValidator]],
+    sellDate:[new Date(),[Validators.required]],
     customerName:[null,[Validators.required]  ],
     paymentMethod:['cash',[Validators.required]  ],
     totalAmount:['0',[Validators.required]  ],
@@ -318,10 +318,15 @@ save(form: any){
   formData.append('shipping_cost', this.mainForm.get('shippingCost').value);
   formData.append('sells', JSON.stringify(this.orderItemList));
 
-  this.sellsOrdererSvice.save(formData, false).subscribe((res:SellsInvoice) => {
+  this.sellsOrdererSvice.save(formData, false).subscribe((res:any) => {
+
+
     success('Success!', 'The Invoice is successfully saved.', this._toastr);
+
+
     this.initForm();
     this._saving = false;
+
   }, (err: any) => {
 
     if (err.status === 403) {
@@ -329,9 +334,9 @@ save(form: any){
       err.error.forEach((e: string) => {
         warning('Warning!', e, this._toastr);
       });
-    } else {
-
-      error('Error!', 'An error has occured when saving the user, please contact system administrator.', this._toastr);
+    }
+       else {
+      error('Error!',  err.response.message, this._toastr);
     }
     this._saving = false;
   });

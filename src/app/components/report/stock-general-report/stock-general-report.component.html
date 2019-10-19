@@ -35,7 +35,7 @@
               <div class="row no-print">
                 <div class="col-md-12">
                   <form [formGroup]="form">
-                    <div class="row">               
+                    <div class="row">
                       <div class="col-md-6">
                         <mat-form-field>
                           <input matInput [matDatepicker]="pickerFrom" placeholder="Start Date"
@@ -43,18 +43,18 @@
                           <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
                           <mat-datepicker #pickerFrom></mat-datepicker>
                         </mat-form-field>
-                   
+
                         <mat-form-field>
                           <input matInput [matDatepicker]="pickerTo" placeholder="End Date" formControlName="toDate"
                             [value]="date.value">
                           <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
                           <mat-datepicker #pickerTo></mat-datepicker>
                         </mat-form-field>
-                  
-                      
+
+
                           <input type="button" name="search" id="search" value="Search" (click)="dateFilter()"
                             class="btn  btn-primary  ">
-                         
+
                       </div>
 
                     </div>
@@ -145,12 +145,12 @@
                       <th>Damage</th>
                       <th>Closing</th>
                       <th>Total</th>
-                     
+
                     </tr>
                   </thead>
                   <tbody>
 
-                
+
 
                     <tr *ngIf="!loading && data && !data.product.length">
                       <td colspan="12" class="text-center loading-data">
@@ -158,21 +158,25 @@
                       </td>
                     </tr>
 
-                   
+
                     <tr *ngFor="let P of data.product; let i = index">
                       <td> {{ i+1 }}</td>
                       <td> {{ P.STOCK_ITEM_NAME }}</td>
                       <td> {{ P.TRAN_QUANTITY }} </td>
                       <td> {{ P.INWARD_QUANTITY }} </td>
-                 
+
 
                       <td *ngFor="let char   of data.characteristics">
-                        <span *ngFor=" let cross   of data.crossData"> 
-                     
-                          
-                          <div *ngIf="cross.id=== P.STOCK_ITEM_ID &&  cross.product_discount_percentage  ===  char.product_discount_percentage ">
+                        <span *ngFor=" let cross   of data.crossData">
+
+
+                          <div *ngIf="cross.id=== P.STOCK_ITEM_ID &&  cross.product_discount_percentage  ===  char.product_discount_percentage  ">
                             {{cross.quantity }}
                           </div>
+
+
+
+
 
                         </span>
                       </td>
@@ -188,11 +192,15 @@
                       <td> {{  _CIP(P.GIFT_QUANTITY) }}</td>
                       <td>  {{  _CIP(P.DAMAGE_QUANTITY) }} </td>
                       <td>{{ _CIN(P.TRAN_QUANTITY)+_CIN(P.OUTWARD_QUANTITY) +_CIN(P.GIFT_QUANTITY) +_CIN(P.DAMAGE_QUANTITY)+_CIN(P.INWARD_QUANTITY)  }}</td>
-                      <td> 0 </td>
-                  
+                      <td>
+
+                          {{ _CIN(P.TRAN_AMOUNT)+_CIN(P.OUTWARD_AMOUNT) +_CIN(P.GIFT_COST) +_CIN(P.DAMAGE_COST)+_CIN(P.INWARD_AMOUNT)  }}
+
+                      </td>
+
                     </tr>
-              
-                    
+
+
                   </tbody>
                 </table>
               </ng-container>

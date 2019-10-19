@@ -3,6 +3,10 @@
 
   <div class="content-header">
     <div class="container-fluid">
+        <div class="text-center loading-data" >
+            <mat-progress-bar mode="indeterminate" *ngIf="loading" ></mat-progress-bar>
+
+      </div>
       <!--div class="row mb-2">
         <div class="col-sm-6">
           <h1 class="m-0 text-dark">New Sales</h1>
@@ -36,17 +40,12 @@
               <div class="card-body  table-responsive">
 
 
-
-
                   <div class="form-group row">
                       <div class="col-sm-12"><h3 class="title text-info">Invoice Properties
                         <a href="#" [routerLink]="['/sell']" class="nav-link d-inline"   [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
                           <span class="badge bg-info">List View</span></a>
                       </h3>
 
-                        <div class="text-center loading-data" *ngIf="loading">
-                            <mat-spinner></mat-spinner>
-                      </div>
 
                       </div>
 
@@ -345,7 +344,7 @@
         <select class="form-control" id="name" formControlName="name" (change)="updatePrice($event.target)">
           <option value="0">--Select--</option>
           <option *ngFor="let product of _productList" [ngValue]="product">
-            {{product.name}}</option>
+            {{product.name}} :: Stock ({{product.quantity}})  </option>
         </select>
       </div>
       <!-- ./name-->
