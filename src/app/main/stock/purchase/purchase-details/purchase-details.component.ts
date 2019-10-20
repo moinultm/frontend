@@ -6,7 +6,7 @@ import { PartialList } from '@models/common/patial-list.model';
 import { PurchaseOrder } from '@models/stock/purchase-order.model';
 import { PurchaseOrderService } from '@services/stock/purchase-order.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import { AddPaymentComponent } from '../../purchase/add-payment/add-payment.component';
+import { AddPaymentComponent } from '../add-payment/add-payment.component';
 import { error, warning, success } from '@services/core/utils/toastr';
 
 @Component({

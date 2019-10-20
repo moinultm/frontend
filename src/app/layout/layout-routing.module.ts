@@ -4,17 +4,21 @@ import { LayoutComponent } from './layout.component';
 
 
 const routes: Routes = [
+  { path: 'auth', loadChildren: () => import('../authentication/authentication.module').then(m => m.AuthenticationModule)  },
+
   {
+
       path: '',
       component: LayoutComponent,
       children: [
           { path: '', redirectTo: 'dashboard', pathMatch: 'prefix' },
-          { path: 'dashboard', loadChildren: () => import('../components/dashboard/dashboard.module').then(m => m.DashboardModule) },
-          { path: '', loadChildren: () => import('../components/security/security.module').then(m => m.SecurityModule) },
-          { path: '', loadChildren: () => import('../components/stock/stock.module').then(m => m.StockModule) },
-          { path: '', loadChildren: () => import('../components/settings/settings.module').then(m => m.SettingsModule) },
-          { path: '', loadChildren: () => import('../components/report/report.module').then(m => m.ReportModule) },
- 
+          { path: 'dashboard', loadChildren: () => import('../main/dashboard/dashboard.module').then(m => m.DashboardModule) },
+          { path: '', loadChildren: () => import('../main/security/security.module').then(m => m.SecurityModule) },
+          { path: '', loadChildren: () => import('../main/stock/stock.module').then(m => m.StockModule) },
+          { path: '', loadChildren: () => import('../main/settings/settings.module').then(m => m.SettingsModule) },
+          { path: '', loadChildren: () => import('../main/report/report.module').then(m => m.ReportModule) },
+
+
       ]
   },
   //{ path: '**',  redirectTo: '/dashboard'  }

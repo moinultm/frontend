@@ -1,8 +1,8 @@
 // Angular modules
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { CanActivate } from '@angular/router/src/interfaces';
-import { ActivatedRouteSnapshot } from '@angular/router/src/router_state';
+import { CanActivate } from   '@angular/router';
+import { ActivatedRouteSnapshot } from   '@angular/router';
 
 // JWT Helper service
 import { JwtHelperService } from '../jwt-helper.service';
@@ -15,7 +15,7 @@ import { constants } from '@env/constants';
   providedIn: 'root'
 })
 /**
- * The role guard 
+ * The role guard
  * >> Used to give access to a specific route for the authenticated users
  *    having a specific list of roles
  *
@@ -25,7 +25,7 @@ export class RoleGuard implements CanActivate {
 
   /**
    * Service constructor
-   * 
+   *
    * @param router The router object
    * @param authenticationService The authentication service
    * @param jwtHelper The jwthelper object
@@ -42,7 +42,7 @@ export class RoleGuard implements CanActivate {
    * Check if the route can be accessed or not
    * >> Check if the access token registred into the localstorage contains
    *    the authorized roles
-   * 
+   *
    * @param route The route object
    *
    * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
@@ -88,7 +88,7 @@ export class RoleGuard implements CanActivate {
 
   /**
    * Check if 'a2' array contains any of the 'a1' roles
-   * 
+   *
    * @param a1 The expected roles that user need to have
    * @param a2 The user's roles
    *
@@ -106,7 +106,7 @@ export class RoleGuard implements CanActivate {
 
   /**
    * Check if 'a2' array contains all the 'a1' roles
-   * 
+   *
    * @param a1 The expected roles that user need to have
    * @param a2 The user's roles
    *

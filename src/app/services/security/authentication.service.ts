@@ -1,7 +1,8 @@
 // Angular modules
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Headers, RequestOptions, Http } from '@angular/http';
+ import { HttpClient,HttpParams, HttpHeaders} from '@angular/common/http';
+
 
 // Observable modules
 import { Observable } from 'rxjs/Observable';
@@ -32,29 +33,29 @@ export class AuthenticationService {
   /**
    * The Oauth client secret
    */
-  CLIENT_SECRET = '11BtWQg9qJWHMEs6EnL5e0X3IZfduiYZbsZEZZ05';
+  CLIENT_SECRET = 'mz2NKWg3usK28TEOQDPoDDO3kTCkLZojX5EK4ukA';
 
   /**
    * Service constructor
-   * >> Here the Http object is used instead of HttpClient, because an interceptor is 
+   * >> Here the Http object is used instead of HttpClient, because an interceptor is
    *    listening to all the HttpClient request to add into it the Oauth Access Token,
    *    here we don't need the access token to be injected.
-   * 
-   * @param _http The Http object 
+   *
+   * @param _http The Http object
    * @param _router The router object
    *
    * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
    */
   constructor(
-    private _http: Http,
+    private _http: HttpClient,
     private _router: Router
   ) { }
 
   /**
    * Obtain the access token from the Oauth server
-   * 
+   *
    * @param loginData Object containing the username and password data
-   * 
+   *
    * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
    */
   obtainAccessToken(loginData: any): Observable<any> {
@@ -64,11 +65,16 @@ export class AuthenticationService {
     params.append('grant_type', 'password');
     params.append('client_id', '' + this.CLIENT_ID);
 
-    const headers = new Headers({
+    let headers = new HttpHeaders({
       'Content-type': 'application/x-www-form-urlencoded; charset=utf-8',
       'Authorization': 'Basic ' + btoa(this.CLIENT_ID + ':' + this.CLIENT_SECRET)
-    });
-    const options = new RequestOptions({ headers: headers });
+   });
+
+   let options = {
+      headers: headers
+   }
+
+
     return this._http.post(environment.auth_url + 'token', params.toString(), options)
       .map((res: any) => res.json())
       .catch(err => ErrorObservable.create(err));
@@ -76,7 +82,7 @@ export class AuthenticationService {
 
   /**
    * Save the token into the localstorage
-   * 
+   *
    * @param token The access token to save
    *
    * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
@@ -97,9 +103,9 @@ export class AuthenticationService {
 
   /**
    * Request a forgot password
-   * 
+   *
    * @param username The user's email address
-   * 
+   *
    * @author EL OUFIR Hatim
    */
   forgotPassword(username: string): Observable<any> {
@@ -108,10 +114,10 @@ export class AuthenticationService {
 
   /**
    * Request a forgot password
-   * 
+   *
    * @param model The object containing the new password information
    * @param token The password token string
-   * 
+   *
    * @author EL OUFIR Hatim
    */
   recoverPassword(model: any, token: string): Observable<any> {
