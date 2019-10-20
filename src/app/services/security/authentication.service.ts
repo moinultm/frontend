@@ -13,52 +13,28 @@ import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 // Environment and application constants
 import { environment } from '@env/environment';
 import { constants } from '@env/constants';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-/**
- * The authentication services
- * >> Contains login / Logout functions
- *
- * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
- */
+
 export class AuthenticationService {
 
-  /**
-   * The Oauth client id
-   */
+  
   CLIENT_ID = 2;
 
-  /**
-   * The Oauth client secret
-   */
-  CLIENT_SECRET = 'mz2NKWg3usK28TEOQDPoDDO3kTCkLZojX5EK4ukA';
 
-  /**
-   * Service constructor
-   * >> Here the Http object is used instead of HttpClient, because an interceptor is
-   *    listening to all the HttpClient request to add into it the Oauth Access Token,
-   *    here we don't need the access token to be injected.
-   *
-   * @param _http The Http object
-   * @param _router The router object
-   *
-   * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
-   */
+  CLIENT_SECRET = 'MBMUeyajycSTtuJivSKAi9XHC6MFP01lkGYFD8zi';
+
+
   constructor(
     private _http: HttpClient,
     private _router: Router
   ) { }
 
-  /**
-   * Obtain the access token from the Oauth server
-   *
-   * @param loginData Object containing the username and password data
-   *
-   * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
-   */
-  obtainAccessToken(loginData: any): Observable<any> {
+
+  obtainAccessToken2(loginData: any): Observable<any> {
     const params = new URLSearchParams();
     params.append('username', loginData.username);
     params.append('password', loginData.password);
@@ -70,57 +46,55 @@ export class AuthenticationService {
       'Authorization': 'Basic ' + btoa(this.CLIENT_ID + ':' + this.CLIENT_SECRET)
    });
 
-   let options = {
-      headers: headers
-   }
+   let options = {      headers: headers   }
 
-
-    return this._http.post(environment.auth_url + 'token', params.toString(), options)
+    return this._http.post(environment.auth_url + 'token', params.toString())
       .map((res: any) => res.json())
       .catch(err => ErrorObservable.create(err));
   }
 
-  /**
-   * Save the token into the localstorage
-   *
-   * @param token The access token to save
-   *
-   * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
-   */
+
+  obtainAccessToken(loginData: any): Observable<any> {
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/x-www-form-urlencoded');
+
+    const body = new URLSearchParams();
+    body.set('grant_type', 'password');
+    body.set('client_id',''+this.CLIENT_ID);
+    body.set('client_secret', this.CLIENT_SECRET);
+    body.set('username', loginData.username);
+    body.set('password', loginData.password);
+    body.set('scope', '*');
+
+    return this._http.post(environment.auth_url + 'token', body.toString(), { headers })
+      .pipe(
+        map((response: any) => {
+          //localStorage.setItem('session', JSON.stringify(response));
+          return response;
+        })
+      );
+  }
+
+
   saveToken(token: string): void {
     localStorage.setItem(constants.access_token, token);
   }
 
-  /**
-   * Remove the access token from localstorage and redirect to authentication route
-   *
-   * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
-   */
   logout(): void {
     localStorage.removeItem(constants.access_token);
     this._router.navigateByUrl(constants.auth_url);
   }
 
-  /**
-   * Request a forgot password
-   *
-   * @param username The user's email address
-   *
-   * @author EL OUFIR Hatim
-   */
+
   forgotPassword(username: string): Observable<any> {
     return this._http.post(environment.auth_url + 'forgot-password', { email: username });
   }
 
-  /**
-   * Request a forgot password
-   *
-   * @param model The object containing the new password information
-   * @param token The password token string
-   *
-   * @author EL OUFIR Hatim
-   */
+
   recoverPassword(model: any, token: string): Observable<any> {
     return this._http.put(environment.auth_url + 'recover-password/' + token, model);
   }
 }
+
+//https://blog.flicher.net/laravel-rest-api-passport-authentication-for-ionic-app/
+//https://github.com/dedd1993/ngx-admin/blob/master/src/app/core/services/auth.service.ts

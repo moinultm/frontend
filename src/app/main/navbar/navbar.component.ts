@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@services/auth/auth.service';
 import { Router } from '@angular/router';
 import { TokenService } from '@services/auth/token.service';
+import { JwtHelperService } from '@services/security/jwt-helper.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,8 @@ public loggedIn :boolean;
 
   constructor(private Auth: AuthService,
     private router: Router,
-    private Token : TokenService) { }
+    private Token : TokenService,
+    public jwtHelper: JwtHelperService) { }
 
   ngOnInit() {
     this.Auth.authStatus.subscribe(value=>this.loggedIn=value);

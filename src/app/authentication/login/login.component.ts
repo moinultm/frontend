@@ -85,11 +85,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
-  /**
-   * Authentication function
-   *
-   * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
-   */
+
   login(): void {
     this.loading = true;
     this.authenticationService.obtainAccessToken({
@@ -97,23 +93,17 @@ export class LoginComponent implements OnInit, OnDestroy {
         password: this.form.get('password').value
       }).subscribe(
         (res: any) => {
-          // Save the access token into the localstorage
           this.authenticationService.saveToken(res.access_token);
           this.loading = false;
-          // Redirect to home
           return this._router.navigate([constants.home_url]);
-        }, () => {
+        }, (error :any) => {
           warning('Authentication error!', 'Username or password entered is incorrect', this._toastr);
           this.loading = false;
         }
       );
   }
 
-  /**
-   * Component OnDestroy phase
-   *
-   * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
-   */
+
   ngOnDestroy(): void {
     this.config.setSettings(this.config.defaultSettings());
   }

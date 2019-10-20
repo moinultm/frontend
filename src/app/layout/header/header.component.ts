@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@services/common/translate.service';
+import { AuthenticationService } from '@services/security/authentication.service';
+import { JwtHelperService } from '@services/security/jwt-helper.service';
 
 @Component({
   selector: 'app-header',
@@ -8,9 +10,15 @@ import { TranslateService } from '@services/common/translate.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private translate: TranslateService) { }
+  constructor(private translate: TranslateService,
+    private Auth: AuthenticationService,
+    public jwtHelper: JwtHelperService
+    ) {
+
+     }
 
   ngOnInit() {
+ 
   }
 
 
@@ -20,5 +28,8 @@ export class HeaderComponent implements OnInit {
   }
 
 
+  logout(): void {
+    this.Auth.logout();
+  }
 
 }

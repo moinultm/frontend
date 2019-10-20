@@ -68,15 +68,7 @@ export class InterceptorService implements HttpInterceptor {
     return this.doRequest(req, next, true);
   }
 
-  /**
-   * Execute the next http request
-   * 
-   * @param req The http request
-   * @param next The next http request to go to it
-   * @param setAuthorization A flag if set to TRUE the access token needs to be injected
-   *
-   * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
-   */
+  
   private doRequest(req: HttpRequest<any>, next: HttpHandler, setAuthorization = false): any {
     if (setAuthorization) {
       req = this.applyCredentials(req);

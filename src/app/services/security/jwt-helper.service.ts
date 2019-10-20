@@ -44,7 +44,7 @@ export class JwtHelperService {
       return null;
     } else {
       const decoded = this.decode(token);
-      return (decoded === null) ? null : decoded.email;
+      return (decoded === 'null') ? null : decoded.email;
     }
   }
 
