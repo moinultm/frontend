@@ -4,10 +4,8 @@ import { LayoutComponent } from './layout.component';
 
 
 const routes: Routes = [
-  { path: 'auth', loadChildren: () => import('../authentication/authentication.module').then(m => m.AuthenticationModule)  },
 
   {
-
       path: '',
       component: LayoutComponent,
       children: [
@@ -17,8 +15,6 @@ const routes: Routes = [
           { path: '', loadChildren: () => import('../main/stock/stock.module').then(m => m.StockModule) },
           { path: '', loadChildren: () => import('../main/settings/settings.module').then(m => m.SettingsModule) },
           { path: '', loadChildren: () => import('../main/report/report.module').then(m => m.ReportModule) },
-
-
       ]
   },
   //{ path: '**',  redirectTo: '/dashboard'  }

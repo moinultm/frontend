@@ -2,20 +2,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
+import { NotFoundComponent } from './not-found/not-found.component';
 
-// Authentication module routes
+// UnAuthenticated module routes
 const routes: Routes = [
+
+  { path: 'auth', redirectTo: 'login', pathMatch: 'prefix' },
+
   {
     path: 'login',
-    loadChildren: './login/login.module#LoginModule'
+    loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
+
   },
   {
     path: 'forgot-password',
-    loadChildren: './forgot-password/forgot-password.module#ForgotPasswordModule'
+    loadChildren: () => import('./forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule)
+
   },
   {
     path: 'recover/:token',
-    loadChildren: './recover/recover.module#RecoverModule'
+    loadChildren: () => import('./recover/recover.module').then(m => m.RecoverModule)
+
   }
 ];
 

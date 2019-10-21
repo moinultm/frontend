@@ -9,6 +9,7 @@ import { MaterialsModule} from '@app/material.module'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { NavbarComponent } from './main/navbar/navbar.component';
 import { LoginComponent } from './main/login/login.component';
 import { SignupComponent } from './main/signup/signup.component';
@@ -28,6 +29,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { TranslateService } from './services/common/translate.service';
 import { TranslateModule } from './shared/translate/translate.module';
 
+import { NotFoundComponent } from './authentication/not-found/not-found.component';
+
+
 
 export function setupTranslateFactory(
   service: TranslateService): Function {
@@ -38,6 +42,8 @@ export function setupTranslateFactory(
 @NgModule({
   declarations: [
     AppComponent,
+    NotFoundComponent,
+
     NavbarComponent,
     LoginComponent,
     SignupComponent,

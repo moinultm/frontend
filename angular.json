@@ -28,32 +28,14 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-                    
-              "node_modules/jqwidgets-ng/jqwidgets/styles/jqx.base.css",
-              "node_modules/jqwidgets-ng/jqwidgets/styles/jqx.material.css"
-
-
-
-
-
+              "src/styles.scss"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
-
-       "node_modules/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js",
-       "node_modules/admin-lte/dist/js/adminlte.js",
-
-       "node_modules/chart.js/dist/Chart.min.js",
-       "node_modules/admin-lte/dist/js/demo.js",
-       "node_modules/admin-lte/dist/js/pages/dashboard3.js",
-
-       "node_modules/admin-lte/plugins/select2/select2.full.js"
-
-
- 
-
-			]
+              "node_modules/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js",
+              "node_modules/admin-lte/dist/js/adminlte.js",
+              "node_modules/admin-lte/plugins/select2/select2.full.js",
+              			]
           },
           "configurations": {
             "production": {
@@ -149,3 +131,5 @@
     }},
   "defaultProject": "frontend"
 }
+
+
