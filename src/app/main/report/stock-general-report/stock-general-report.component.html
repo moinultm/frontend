@@ -52,8 +52,8 @@
                         </mat-form-field>
 
 
-                          <input type="button" name="search" id="search" value="Search" (click)="dateFilter()"
-                            class="btn  btn-primary  ">
+                          <input  type="button" name="search" id="search" value="Search" (click)="dateFilter()"
+                            class="btn  btn-primary"  [disabled]="form.invalid || loading">
 
                       </div>
 

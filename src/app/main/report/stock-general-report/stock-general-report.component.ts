@@ -40,7 +40,6 @@ export class StockGeneralReportComponent implements OnInit{
   	}
 
     ngOnInit(){
-
       this.loadData();
       this.iniForm();
     }
@@ -83,22 +82,24 @@ export class StockGeneralReportComponent implements OnInit{
       });
     }
 
+
+    // [disabled]="form.invalid || loading" and :  new Date() will solve the blank date issue
     iniForm(){
       this.form = this._fb.group({
-        fromDate: [  '',  [Validators.nullValidator],],
-        toDate: [  '',  [Validators.nullValidator],]
+        fromDate: [  new Date(),  [Validators.required],],
+        toDate: [  new Date(),  [Validators.required],]
       });
     }
 
     _CIN(val){
       return parseInt(val);
     }
-    
+
     _CIP(val){
       return parseInt(val)*-1;
     }
-    
-    
+
+
 
   beers:Array<Object> = [
   { id: 27, description: "Product 1",  opening: 0, inward:5,sales:3,damage:2,gift:2},
