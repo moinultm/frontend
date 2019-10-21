@@ -10,7 +10,7 @@
 @import "~@ng-select/ng-select/themes/default.theme.css";
 //@import "../node_modules/jqwidgets-ng/jqwidgets/styles/jqx.base.css";
 
-
+ 
 .loading-data{min-height: 10px;}
 
   /* remove scrollbar space
@@ -147,12 +147,7 @@ border-color: #dc3545!important;
 }
 
 
-::-webkit-scrollbar {
-  width: 0px;
-  /* remove scrollbar space */
-  background: transparent;
-  /* optional: just make scrollbar invisible */
-}
+ 
 
 /* optional: show position indicator in red */
 ::-webkit-scrollbar-thumb {
@@ -207,14 +202,15 @@ body {
   border-right: none;
 }
 
+/*Scrollbar*/
 ::-webkit-scrollbar {
-  width: 0px;
+  width: 8px;
   height: 8px;
   background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #343a40dd;
+  background: #656a71;
   border-radius: 8px;
 }
 
