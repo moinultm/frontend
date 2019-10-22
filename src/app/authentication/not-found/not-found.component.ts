@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { constants } from '@env/constants';
 
 @Component({
   selector: 'app-not-found',
@@ -7,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotFoundComponent implements OnInit {
 
-  constructor() { }
+  constructor(  titleService: Title) {
+    titleService.setTitle('Not Found');
+   }
 
   ngOnInit() {
   }

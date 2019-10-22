@@ -66,7 +66,7 @@ export class AddStockComponent implements OnInit {
    this.total=0;
 
     this.myForm = this._formBuilder.group({
-      bill_date:'',
+      bill_date:[ new Date(),  [Validators.required]],
       user_id:null,
 
       companies: this._formBuilder.array([])

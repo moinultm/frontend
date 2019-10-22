@@ -10,7 +10,7 @@
 @import "~@ng-select/ng-select/themes/default.theme.css";
 //@import "../node_modules/jqwidgets-ng/jqwidgets/styles/jqx.base.css";
 
- 
+
 .loading-data{min-height: 10px;}
 
   /* remove scrollbar space
@@ -30,6 +30,12 @@
 }
 
 */
+
+
+.table-mini td, .table-mini th {
+  padding: .25rem!important;
+}
+
 
 .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-treeview {
 
@@ -147,7 +153,7 @@ border-color: #dc3545!important;
 }
 
 
- 
+
 
 /* optional: show position indicator in red */
 ::-webkit-scrollbar-thumb {

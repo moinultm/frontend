@@ -105,7 +105,6 @@ export class RepresentStockReportComponent implements OnInit {
 
 
     iniForm(){
-
       this.form = this._fb.group({
         fromDate: [  new Date(),  [Validators.required],],
         toDate: [  new Date(),  [Validators.required],],
