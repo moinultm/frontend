@@ -103,5 +103,15 @@ export class ProductReportService extends CrudService<Product> {
     return this.__http.get <PartialList<SellsInvoice>>(this.url + '/'+ id + '/'+'represent-stock-report', this.options);
   }
 
+  public representativePaymentReport(query?: {}): any {
+    if (query) {
+      this.options.params = query;
+    } else {
+      this.options.params = undefined;
+    }
+    return this.__http.get <PartialList<SellsInvoice>>(this.url  + '/'+'represent-payment-report', this.options);
+  }
+
+
 
 }

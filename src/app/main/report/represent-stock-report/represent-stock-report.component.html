@@ -27,13 +27,20 @@
           <div class="card">
 
             <div class="card-header">
-              <h3 class="card-title">Representative General Report</h3>
-              <div class="card-tools">
-                  <span data-toggle="tooltip" title="Print" class="badge bg-primary">Print</span>
-                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-print"></i>
-                 </button>
+              <div class="row">
+                <div class="col-md-6">
+                    <h3 class="card-title">Representative Stock Report</h3>
+                </div>
 
-               </div>
+                <div class="col-md-6 text-right">
+                    <div class="card-tools">
+                        <span data-toggle="tooltip" title="Print" class="badge bg-primary">Print</span>
+                       <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-print"></i>
+                       </button>
+                     </div>
+                  </div>
+              </div>
+             
             </div>
 
             <div id="printableArea" class="card-body">
@@ -42,40 +49,46 @@
                 <div class="col-md-12">
                   <form [formGroup]="form">
                     <div class="row">
-                      <div class="col-md-6">
 
-                        <mat-form-field>
-                          <input matInput [matDatepicker]="pickerFrom" placeholder="Start Date"
-                            formControlName="fromDate" [value]="date.value">
-                          <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
-                          <mat-datepicker #pickerFrom></mat-datepicker>
-                        </mat-form-field>
+                        <div class="col-md-4">                    
 
-                        <mat-form-field>
-                          <input matInput [matDatepicker]="pickerTo" placeholder="End Date" formControlName="toDate"
-                            [value]="date.value">
-                          <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
-                          <mat-datepicker #pickerTo></mat-datepicker>
-                        </mat-form-field>
-
-
-                      </div>
-
-                      <div class="col-md-6">
-
-                          <div class="input-group">
-                            <select class="form-control" formControlName="userId" *ngIf="!loadingUser">
-                              <option value="null">--Select User--</option>
-                              <option *ngFor="let list of users.data" [value]="list.id">
-                                {{list.id}} :: {{list.name}}
-                              </option>
-                            </select>
-                            <span class="input-group-append">
-                              <input type="button" name="search" id="search" value="Search" (click)="dateFilter()" class="btn  btn-primary"
-                                [disabled]="form.invalid || loading"> </span>
                           </div>
 
+                      <div class="col-md-8">
+
+                        <div class="row">
+                            <div class="col-md-4"><mat-form-field>
+                                <input matInput [matDatepicker]="pickerFrom" placeholder="Start Date"
+                                  formControlName="fromDate" [value]="date.value">
+                                <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                                <mat-datepicker #pickerFrom></mat-datepicker>
+                              </mat-form-field></div>
+                            <div class="col-md-4"><mat-form-field>
+                                <input matInput [matDatepicker]="pickerTo" placeholder="End Date" formControlName="toDate"
+                                  [value]="date.value">
+                                <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                                <mat-datepicker #pickerTo></mat-datepicker>
+                              </mat-form-field></div>
+                            <div class="col-md-4 my-auto">      <div class="input-group">
+                                <select class="form-control" formControlName="userId" *ngIf="!loadingUser">
+                                  <option value="null">--Select User--</option>
+                                  <option *ngFor="let list of users.data" [value]="list.id">
+                                    {{list.id}} :: {{list.name}}
+                                  </option>
+                                </select>
+                                <span class="input-group-append">
+                                  <input type="button" name="search" id="search" value="Search" (click)="dateFilter()" class="btn  btn-primary"
+                                    [disabled]="form.invalid || loading"> </span>
+                              </div></div>
+                        </div>
+                        
+
+                        
+
+
                       </div>
+
+                   
 
 
                     </div>
