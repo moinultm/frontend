@@ -28,7 +28,7 @@ import { ToastrService } from 'ngx-toastr';
 
         @Inject(MAT_DIALOG_DATA) public data : SellsInvoice){
         this.formLocalData=data;
-       // console.log(data);
+       console.log(data);
         }
 
     ngOnInit() {
@@ -55,7 +55,8 @@ iniForm( ){
     if (this.form.valid) {
       this.savingPayment = true;
       this.paymentService.save({
-        client_id: this.formLocalData['data'][0]['client_id'] ,
+        client_id: this.formLocalData['data'][0]['client_id'],
+        user_id: this.formLocalData['data'][0]['user_id'],
         amount: this.form.get('amount').value,
         type: 'credit',
         method: this.form.get('method').value,
@@ -78,15 +79,13 @@ iniForm( ){
       }
       this.savingPayment = false;
     });
-
     }
-
   }
 
 
 due ():number{
   let paid =this.formLocalData['data'][0]['total_pay'];
-  let total =this.formLocalData['data'][0]['total'];
+  let total =this.formLocalData['data'][0]['net_total'];
    return    (total-paid);
 
 }

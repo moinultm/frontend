@@ -52,10 +52,32 @@ export class SellsStatusReportComponent implements OnInit {
     });
   }
 
+  dateFilter(page?: number): void {
+    this.page = page ? page : 1;
+    this.loading = true;
+    let formDt = this.datePipe.transform(this.form.get('fromDate').value, 'yyyy-MM-dd');
+    let toDt = this.datePipe.transform(this.form.get('toDate').value, 'yyyy-MM-dd');
+
+    this.sellsService.sellsStatusReport({
+      page: this.page,
+      size: this.size,
+      from:  formDt,
+      to:   toDt
+    }).subscribe((res: PartialList<StockGeneral>) => {
+      this.data = res;
+      console.log( this.data);
+      this.loading = false;
+    });
+  }
+
+
+
+
+
   iniForm(){
     this.form = this._fb.group({
-      fromDate: [  '',  [Validators.nullValidator],],
-      toDate: [  '',  [Validators.nullValidator],]
+      fromDate: [  new Date(),  [Validators.nullValidator],],
+      toDate: [   new Date(),  [Validators.nullValidator],]
     });
   }
 
@@ -80,11 +102,11 @@ export class SellsStatusReportComponent implements OnInit {
   }
 
 
-  print(): void {
+  print(divName): void {
     event.preventDefault()
 
     let printContents, popupWin;
-    printContents = document.getElementById('printableArea').innerHTML;
+    printContents = document.getElementById(divName).innerHTML;
     popupWin = window.open();
     popupWin.document.open();
     popupWin.document.write(`
@@ -100,6 +122,27 @@ export class SellsStatusReportComponent implements OnInit {
     );
     popupWin.document.close();
 }
+
+
+
+printDiv(divName) {
+
+
+  var printContents = document.getElementById(divName).innerHTML;
+  var originalContents = document.body.innerHTML;
+  document.body.innerHTML = printContents;
+
+  window.print();
+
+  document.body.innerHTML = originalContents;
+
+
+
+}
+
+//to minimize time
+
+//npm i ngx-print
 
 
 }

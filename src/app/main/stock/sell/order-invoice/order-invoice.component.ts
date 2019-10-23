@@ -355,15 +355,16 @@ export class OrderInvoiceComponent implements OnInit {
     formData.append('method', this.mainForm.get('paymentMethod').value);
     formData.append('total', this.mainForm.get('grandTotal').value);
     formData.append('paid', this.mainForm.get('paidAmount').value);
-    formData.append('discount', this.mainForm.get('discountAmount').value);
+    formData.append('discount', this.mainForm.get('discountOnTotal').value);
     formData.append('shipping_cost', this.mainForm.get('shippingCost').value);
+    formData.append('discountType', 'flat');
     formData.append('sells', JSON.stringify(this.orderItemList));
 
     this.sellsOrdererSvice.save(formData, false).subscribe((res: SellsInvoice) => {
       success('Success!', 'The Order  is successfully saved to invoice.', this._toastr);
       this.initForm();
       this.router.navigate([`order-list`]);
-     
+
       this._saving = false;
     }, (err: any) => {
 

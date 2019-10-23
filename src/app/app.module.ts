@@ -31,6 +31,8 @@ import { TranslateModule } from './shared/translate/translate.module';
 
 import { NotFoundComponent } from './authentication/not-found/not-found.component';
 
+import {NgxPrintModule} from 'ngx-print';
+
 
 
 export function setupTranslateFactory(
@@ -65,7 +67,8 @@ export function setupTranslateFactory(
       timeOut: 2000,
       positionClass: 'toast-bottom-right'
     }),
-    TranslateModule
+    TranslateModule,
+ 
 
   ],
 

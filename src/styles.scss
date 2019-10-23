@@ -233,3 +233,22 @@ body {
 *:disabled {
   cursor: not-allowed;
 }
+
+
+/**PRINT**/
+/**
+Custom CSS
+*/
+
+
+@media print {
+
+
+
+}
+
+@page {
+  size: auto !important;
+  margin: 10.0in !important;
+}
+/*PRINT END*/

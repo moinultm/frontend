@@ -1,7 +1,7 @@
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <!--div class="container-fluid">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <!--div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="m-0 text-dark">Profiles</h1>
@@ -15,135 +15,154 @@
           </div>
         </div>
       </div-->
-    </div>
+  </div>
 
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div   class="card">
-<div class="card-header">
-<h3>Purchase Report</h3>
-</div>
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
 
+          <div class="card">
 
-
-<div  id="printableArea" class="card-body table-responsive">
-        <div class="row no-print  mb-3">
-                <div class="col-md-12">
-                  <form [formGroup]="form">
-                    <div class="row">
-                      <div class="col-md-6">
-                        <mat-form-field>
-                          <input matInput [matDatepicker]="pickerFrom" placeholder="Start Date"
-                            formControlName="fromDate" [value]="date.value">
-                          <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
-                          <mat-datepicker #pickerFrom></mat-datepicker>
-                        </mat-form-field>
-
-                        <mat-form-field>
-                          <input matInput [matDatepicker]="pickerTo" placeholder="End Date" formControlName="toDate"
-                            [value]="date.value">
-                          <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
-                          <mat-datepicker #pickerTo></mat-datepicker>
-                        </mat-form-field>
-
-
-                          <input type="button" name="search" id="search" value="Search" (click)="dateFilter()"
-                            class="btn  btn-primary  ">
-
+              <div class="card-header">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h3 class="card-title">Purchase Report</h3>
+                    </div>
+                    <div class="col-md-6  text-right">
+                      <div class="card-tools">
+                        <span data-toggle="tooltip" title="Print" class="badge bg-primary">Print</span>
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-print"></i>
+                        </button>
                       </div>
-                      <div class="col-md-6">
-
 
                     </div>
-                    </div>
-                  </form>
+                  </div>
+                </div>
+
+
+
+            <div id="printableArea" class="card-body">
+              <div class="row no-print  table-responsive">
+                <div class="col-md-12">
+                    <form [formGroup]="form">
+                        <div class="row  mb-3">
+                          <div class="col-md-6"></div>
+                          <div class="col-md-6  text-right">
+                            <div class="row">
+                              <div class="col-md-5">
+                                <mat-form-field>
+                                  <input matInput [matDatepicker]="pickerFrom" placeholder="Start Date"
+                                    formControlName="fromDate" [value]="date.value">
+                                  <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                                  <mat-datepicker #pickerFrom></mat-datepicker>
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-5">
+                                <mat-form-field>
+                                  <input matInput [matDatepicker]="pickerTo" placeholder="End Date" formControlName="toDate"
+                                    [value]="date.value">
+                                  <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                                  <mat-datepicker #pickerTo></mat-datepicker>
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-2 my-auto">
+                                <button type="button" class="btn btn-tool text-primary" data-card-widget="collapse"
+                                  [disabled]="form.invalid || loading" (click)="dateFilter(form)">
+                                  <i class="fas fa-search"></i>
+
+                                </button>
+                              </div>
+                            </div>
+
+
+
+                            <!--input  type="button" name="search" id="search" value="Search" (click)="dateFilter()"
+                        class="btn  btn-primary"-->
+
+                          </div>
+
+                        </div>
+                      </form>
                 </div>
               </div>
 
 
               <table class="table table-bordered mb-3">
-                    <thead>
-                        <tr>
-                            <th style="width: 10px">#</th>
-                            <th>Reference No</th>
-                            <th>Supplier</th>
-                            <th>Product</th>
-                            <th>Total</th>
-                            <th>Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                            <tr *ngIf="loading">
-                                    <td colspan="12" class="text-center loading-data">
-                                        <mat-spinner></mat-spinner>
-                                    </td>
-                                  </tr>
+                <thead>
+                  <tr>
+                    <th style="width: 10px">#</th>
+                    <th>Reference No</th>
+                    <th>Supplier</th>
+                    <th>Product</th>
+                    <th>Total</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngIf="loading">
+                    <td colspan="12" class="text-center loading-data">
+                      <mat-spinner></mat-spinner>
+                    </td>
+                  </tr>
 
 
-                                  <ng-container *ngIf="!loading">
+                  <ng-container *ngIf="!loading">
 
-                                    <tr *ngFor="let item of data.data; let i = index">
-                                      <td>{{ i+1 }}</td>
-                                      <td>{{ item.reference_no}}</td>
-                                      <td>{{ item.client_name }}</td>
-                                      <td>
-                                          <div  *ngFor="let P of item.purchases; let i = index">
+                    <tr *ngFor="let item of data.data; let i = index">
+                      <td>{{ i+1 }}</td>
+                      <td>{{ item.reference_no}}</td>
+                      <td>{{ item.client_name }}</td>
+                      <td>
+                        <div *ngFor="let P of item.purchases; let i = index">
 
-                                            {{ i+1}} - {{ P.product.name }}   (  {{ P.product.quantity }}  Pcs)
+                          {{ i+1}} - {{ P.product.name }} ( {{ P.product.quantity }} Pcs)
 
-                                          </div>
-                                        </td>
+                        </div>
+                      </td>
 
-                                        <td>{{ item.net_total }}</td>
-                                        <td>{{ item.date }}</td>
-                                    </tr>
-                                  </ng-container>
-                    </tbody>
-                </table>
-
-
-                <table class="table table-bordered mb-3" style="width: 50%; font-weight: bold;" align="right">
-
-                        <tbody>
+                      <td>{{ item.net_total }}</td>
+                      <td>{{ item.date }}</td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
 
 
-                          <ng-container *ngIf="!loading">
-                          <tr>
-                            <td> Total Purchases Amount</td>
-                            <td>{{totalAmount()}} </td>
-                         </tr>
+              <table class="table table-bordered mb-3" style="width: 50%; font-weight: bold;" align="right">
 
-                       <tr>
-                            <td> Total Paid</td>
-                            <td>{{totalPaidAmount()}} </td>
-                       </tr>
-                        </ng-container>
+                <tbody>
 
 
-                        </tbody>
-                      </table>
+                  <ng-container *ngIf="!loading">
+                    <tr>
+                      <td> Total Purchases Amount</td>
+                      <td>{{totalAmount()}} </td>
+                    </tr>
+
+                    <tr>
+                      <td> Total Paid</td>
+                      <td>{{totalPaidAmount()}} </td>
+                    </tr>
+                  </ng-container>
 
 
+                </tbody>
+              </table>
 
-
-
-</div>
-
-<div class="card-footer clearfix text-center">
-
-    <input type="button" name="pirnt" id="print" value="Print"
-    class="btn btn-warning">
-
-
-   </div>
-
-                </div>
             </div>
+
+            <div class="card-footer clearfix text-center">
+
+
+
+            </div>
+
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-  </div>
-  <!-- Content Wrapper. Contains page content -->
+</div>
+<!-- Content Wrapper. Contains page content -->

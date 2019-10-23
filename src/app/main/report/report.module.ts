@@ -27,6 +27,7 @@ import { StockGeneralReportComponent } from './stock-general-report/stock-genera
 
 import { jqxPivotGridModule } from 'jqwidgets-ng/jqxpivotgrid';
 import { jqxPivotDesignerModule } from 'jqwidgets-ng/jqxpivotdesigner';
+import { NgxPrintModule } from 'ngx-print';
 
 const routes: Routes = [
 
@@ -98,8 +99,7 @@ const routes: Routes = [
     MatFormFieldModule,
     MatProgressSpinnerModule,
     MatInputModule,
-
-    jqxPivotDesignerModule, jqxPivotGridModule,
+    NgxPrintModule
   ]
   ,providers:[DatePipe ]
 

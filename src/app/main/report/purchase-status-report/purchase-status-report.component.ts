@@ -77,8 +77,8 @@ export class PurchaseStatusReportComponent implements OnInit {
 
   iniForm(){
     this.form = this._fb.group({
-      fromDate: [  '',  [Validators.nullValidator],],
-      toDate: [  '',  [Validators.nullValidator],]
+      fromDate: [ new Date(),  [Validators.required],],
+      toDate: [  new Date(),  [Validators.required],]
     });
   }
 

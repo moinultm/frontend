@@ -1,142 +1,162 @@
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
- 
-      </div><!-- /.container-fluid -->
-    </div>
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
 
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
+    </div><!-- /.container-fluid -->
+  </div>
 
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
 
-    <div class="col-md-12">
-        <div class="card">
+        <div class="col-md-12">
+          <div class="card">
 
-          <div class="card-header">
-
+            <div class="card-header">
               <div class="row">
-                  <div class="col-md-6">
-                      <h3 class="card-title">Sales Report
-                       </h3>
+                <div class="col-md-6">
+                  <h3 class="card-title">Sales Report</h3>
+                </div>
+                <div class="col-md-6  text-right">
+                  <div class="card-tools">
+
+
+                    <span data-toggle="tooltip" title="Print" class="badge bg-primary">Print</span>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"
+                    [useExistingCss]="true"
+                     printSectionId="print-section" ngxPrint><i class="fas fa-print"></i>
+                    </button>
                   </div>
-
-
-                  </div>
-
-
-
-            </div>
-          <!-- /.card-header -->
-
-          <div id="printableArea" class="card-body">
-
-        <div class="row no-print">
-          <div class="col-md-12">
-              <form [formGroup]="form">
-              <div class="row">
-
- 
-                  <div class="col-md-6">
-                      <mat-form-field>
-                          <input matInput [matDatepicker]="pickerFrom" placeholder="Start Date" formControlName="fromDate"  [value]="date.value">
-                          <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
-                          <mat-datepicker #pickerFrom></mat-datepicker>
-                        </mat-form-field>
-                   
-                      <mat-form-field>
-                          <input matInput [matDatepicker]="pickerTo" placeholder="End Date" formControlName="toDate"  [value]="date.value">
-                          <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
-                          <mat-datepicker #pickerTo></mat-datepicker>
-                        </mat-form-field>
-              
-                   
-                        <input type="button" name="search" id="search" value="Search" (click)="loadData()" class="btn  btn-primary">
-
-                    
-
-                  </div>
-
-
-              </div>
-            </form>
-          </div>
-        </div>
-
-
-        <hr>
-
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th style="width: 10px">#</th>
-              <th>Invoice No</th>
-              <th>Date</th>
-              <th>Product</th>
-              <th>To Customer</th>
-              <th>Sale by</th>
-              <th>Bill</th>
-              <th>Paid</th>
-
-
-            </tr>
-          </thead>
-          <tbody>
-
-              <tr *ngIf="loading">
-                  <td colspan="12" class="text-center loading-data">
-                      <mat-spinner></mat-spinner>
-                  </td>
-          </tr>
-
-          <tr *ngIf="!loading && data && !data.data.length">
-              <td colspan="12" class="text-center loading-data">
-                No Data created yet!
-              </td>
-            </tr>
-
-            <ng-container *ngIf="!loading">
-            <tr *ngFor="let result of data.data; let i = index">
-              <td>{{ i+1 }}</td>
-              <td>{{result.reference_no}}</td>
-              <td>{{result.date}}</td>
-
-              <td >
-                <div *ngFor="let T of result.sells ;let j = index">
-                        {{j+1}}-  {{T.product.name}} ({{T.product.quantity}} Pcs)
 
                 </div>
-               </td>
+              </div>
+            </div>
+            <!-- /.card-header -->
 
-              <td>{{result.client_name}}</td>
-              <td>{{result.user_name}}</td>
-              <td>{{result.total}}</td>
-              <td>{{result.paid}}</td>
-         
-          </ng-container>
-          </tbody>
-        </table>
+            <div class="card-body">
+
+              <div class="row no-print  table-responsive">
+                <div class="col-md-12">
+                  <form [formGroup]="form">
+                    <div class="row  mb-3">
+                      <div class="col-md-6"></div>
+                      <div class="col-md-6  text-right">
+                        <div class="row">
+                          <div class="col-md-5">
+                            <mat-form-field>
+                              <input matInput [matDatepicker]="pickerFrom" placeholder="Start Date"
+                                formControlName="fromDate" [value]="date.value">
+                              <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                              <mat-datepicker #pickerFrom></mat-datepicker>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-5">
+                            <mat-form-field>
+                              <input matInput [matDatepicker]="pickerTo" placeholder="End Date" formControlName="toDate"
+                                [value]="date.value">
+                              <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                              <mat-datepicker #pickerTo></mat-datepicker>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-2 my-auto">
+                            <button type="button" class="btn btn-tool text-primary" data-card-widget="collapse"
+                              [disabled]="form.invalid || loading" (click)="dateFilter(form)">
+                              <i class="fas fa-search"></i>
+
+                            </button>
+                          </div>
+                        </div>
+
+
+
+                        <!--input  type="button" name="search" id="search" value="Search" (click)="dateFilter()"
+                    class="btn  btn-primary"-->
+
+                      </div>
+
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+
+              <hr>
+
+<div class="print"  id="print-section" >
+
+
+
+              <table class="table table-bordered table-mini" >
+                <thead>
+                  <tr>
+                    <th style="width: 10px">#</th>
+                    <th>Invoice No</th>
+                    <th>Date</th>
+                    <th>Product</th>
+                    <th>To Customer</th>
+                    <th>Sale by</th>
+                    <th>Bill</th>
+                    <th>Paid</th>
+
+
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <tr *ngIf="loading">
+                    <td colspan="12" class="text-center loading-data">
+                      <mat-spinner></mat-spinner>
+                    </td>
+                  </tr>
+
+                  <tr *ngIf="!loading && data && !data.data.length">
+                    <td colspan="12" class="text-center loading-data">
+                      No Data created yet!
+                    </td>
+                  </tr>
+
+                  <ng-container *ngIf="!loading">
+                    <tr *ngFor="let result of data.data; let i = index">
+                      <td>{{ i+1 }}</td>
+                      <td>{{result.reference_no}}</td>
+                      <td>{{result.date}}</td>
+
+                      <td>
+                        <div *ngFor="let T of result.sells ;let j = index">
+                          {{j+1}}- {{T.product.name}} ({{T.product.quantity}} Pcs)
+
+                        </div>
+                      </td>
+
+                      <td>{{result.client_name}}</td>
+                      <td>{{result.user_name}}</td>
+                      <td>{{result.total}}</td>
+                      <td>{{result.paid}}</td>
+
+                  </ng-container>
+                </tbody>
+              </table>
 
 
 
 
-        <table class="table" style="width: 50%; font-weight: bold;" align="right">
+              <table class="table" style="width: 50%; font-weight: bold;" align="right">
 
                 <tbody>
 
 
                   <ng-container *ngIf="!loading">
-                  <tr>
-                    <td> Total Sells Amount</td>
-                    <td>{{totalAmount()}}</td>
-                 </tr>
+                    <tr>
+                      <td> Total Sells Amount</td>
+                      <td>{{totalAmount()}}</td>
+                    </tr>
 
-               <tr>
-                    <td> Total Recived Amount</td>
-                    <td>{{ totalPaidAmount() }}</td>
-               </tr>
-                </ng-container>
+                    <tr>
+                      <td> Total Recived Amount</td>
+                      <td>{{ totalPaidAmount() }}</td>
+                    </tr>
+                  </ng-container>
 
 
                 </tbody>
@@ -144,39 +164,29 @@
 
 
 
+            </div>
 
-          </div>
-          <!-- /.card-body -->
-          <div class="card-footer clearfix">
-
-              <div class="row">
-                <div class="col-sm-12 col-md-5">
-                 </div>
-
-                <div class="col-sm-12 col-md-7">
-                        <input type="button" name="print" id="print" value="Print" (click)="print()" class="btn  btn-warning ">
-
-                   </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer clearfix">
 
 
 
-                    </div>
+
+            </div>
 
 
           </div>
-
+          <!-- /.card -->
 
         </div>
-        <!-- /.card -->
+
 
       </div>
 
+
+    </div>
+  </section>
 
 </div>
-
-
-      </div>
-    </section>
-
-  </div>
-  <!-- Content Wrapper. Contains page content -->
+<!-- Content Wrapper. Contains page content -->
