@@ -162,7 +162,7 @@ name:'admins'
 
 
   save(modal: any): void {
- 
+
  var myArr =    this.selectedUser.profiles.map((p: Profile) => p.id)+'' ;
  var string = myArr.split(',') ;
 
@@ -180,7 +180,7 @@ name:'admins'
       formData.append('password_confirmation', this.form.get('password_confirmation').value);
       formData.append('user_type', this.form.get('user_type').value);
       formData.append('profiles', this.selectedUser.profiles.map((p: Profile) => p.id)+''  );
-     
+
 
       this.userService.save(formData, this.selectedUser.id ? true : false).subscribe((res: User) => {
 

@@ -21,6 +21,9 @@ export class RepresentStatusReportComponent implements OnInit {
 
   form: FormGroup;
 
+  fromDate:any;
+  toDate:any;
+
 
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
@@ -42,6 +45,9 @@ export class RepresentStatusReportComponent implements OnInit {
       this.loading = true;
       let formDt = this.datePipe.transform(this.form.get('fromDate').value, 'yyyy-MM-dd');
       let toDt = this.datePipe.transform(this.form.get('toDate').value, 'yyyy-MM-dd');
+
+      this.fromDate=formDt;
+      this.toDate=toDt;
 
       this.reportService.representativePaymentReport({
         page: this.page,

@@ -28,7 +28,7 @@ export class UserService extends CrudService<User> {
     }
   }
 
-  
+
 
   public findRepresentative(): any {
     this.options.params = undefined;

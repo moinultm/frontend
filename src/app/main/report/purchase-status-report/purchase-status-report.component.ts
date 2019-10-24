@@ -20,6 +20,9 @@ export class PurchaseStatusReportComponent implements OnInit {
   page = 1;
   size = 10;
 
+  fromDate:any;
+  toDate:any;
+
 
   form: FormGroup;
 
@@ -40,6 +43,9 @@ export class PurchaseStatusReportComponent implements OnInit {
     this.loading = true;
     let formDt = this.datePipe.transform(this.form.get('fromDate').value, 'yyyy-MM-dd');
     let toDt = this.datePipe.transform(this.form.get('toDate').value, 'yyyy-MM-dd');
+
+    this.fromDate=formDt;
+    this.toDate=toDt;
 
     this.reportService.purchaseReport({
       page: this.page,

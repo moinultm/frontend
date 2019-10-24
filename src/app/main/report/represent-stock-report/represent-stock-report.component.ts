@@ -15,6 +15,8 @@ import { StockGeneral } from '@models/stock/stock-general.model';
 })
 export class RepresentStockReportComponent implements OnInit {
 
+  name = 'Angular 4';
+ rate="hr"
 
 
   data: PartialList<StockGeneral>;
@@ -26,6 +28,13 @@ export class RepresentStockReportComponent implements OnInit {
   size = 10;
 
   loadingUser:boolean;
+
+  fromDate:any;
+  toDate:any;
+
+ userID:null;
+ userName:null;
+ userAdress:null;
 
 
   form: FormGroup;
@@ -57,10 +66,10 @@ export class RepresentStockReportComponent implements OnInit {
       this.loadingUser = true;
       this.userService.findRepresentative().subscribe((res: PartialList<User>) => {
         this.users = res;
+        console.log(this.users)
          this.loadingUser = false;
       });
     }
-
 
 
 
@@ -70,6 +79,12 @@ export class RepresentStockReportComponent implements OnInit {
       let formDt = this.datePipe.transform(this.form.get('fromDate').value, 'yyyy-MM-dd');
       let toDt = this.datePipe.transform(this.form.get('toDate').value, 'yyyy-MM-dd');
       let id=this.form.get('userId').value;
+
+
+
+      this.fromDate=formDt;
+      this.toDate=toDt;
+
 
       this.reportService.representativeStockReport(id,{
         page: this.page,
@@ -122,6 +137,50 @@ export class RepresentStockReportComponent implements OnInit {
 
 
 
+
+
+
+    private getElementTag(tag: keyof HTMLElementTagNameMap): string {
+      const html: string[] = [];
+      const elements = document.getElementsByTagName(tag);
+      for (let index = 0; index < elements.length; index++) {
+        html.push(elements[index].outerHTML);
+      }
+      return html.join('\r\n');
+    }
+
+
+      print(printSectionId): void {
+        event.preventDefault()
+      let printContents, popupWin, styles = "", links = '';
+
+
+
+        styles = this.getElementTag('style');
+        links = this.getElementTag('link');
+
+
+      printContents = document.getElementById(printSectionId).innerHTML;
+      popupWin = window.open("", "_blank", "top=0,left=0,height=auto,width=auto");
+      popupWin.document.open();
+      popupWin.document.write(`
+        <html>
+          <head>
+            <title>Report</title>
+            ${styles}
+            ${links}
+            <style>
+            @page {
+              size: A4 landscape;
+            }
+          </style>
+          </head>
+          <body onload="window.print(); setTimeout(()=>{ window.close(); }, 0)">
+            ${printContents}
+          </body>
+        </html>`);
+      popupWin.document.close();
+    }
 
 
 

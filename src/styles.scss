@@ -243,12 +243,14 @@ Custom CSS
 
 @media print {
 
+  .print{
+    padding:1in 0.20in;
+    margin: 10px;
+  }
 
 
 }
 
-@page {
-  size: auto !important;
-  margin: 10.0in !important;
-}
+
+
 /*PRINT END*/

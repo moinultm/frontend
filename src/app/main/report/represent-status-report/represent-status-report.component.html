@@ -29,21 +29,23 @@
                   <div class="card-header">
                     <div class="row">
                       <div class="col-md-6">
-                          <h3 class="card-title">Representative Sales Report</h3>
+                          <h3 class="card-title">Report Table</h3>
                       </div>
 
                       <div class="col-md-6 text-right">
                           <div class="card-tools">
                               <span data-toggle="tooltip" title="Print" class="badge bg-primary">Print</span>
-                             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-print"></i>
-                             </button>
-                           </div>
+                              <button type="button" class="btn btn-tool" data-card-widget="collapse" [useExistingCss]="true"
+                                printSectionId="print-section" ngxPrint><i class="fas fa-print"></i>
+                              </button>
+                            </div>
                         </div>
                     </div>
 
                   </div>
 
-                  <div id="printableArea" class="card-body">
+                  <div class="card-body">
+
 
                     <div class="row no-print">
                             <div class="col-md-12">
@@ -78,14 +80,27 @@
                                  </div>
                     </div>
 
-                    <div class="table-responsive ">
+
+
 
 
             <tr *ngIf="loading">
-                    <td colspan="12" class="text-center loading-data">
-                        <mat-spinner></mat-spinner>
-                    </td>
-                  </tr>
+                <td colspan="12" class="text-center loading-data">
+                    <mat-spinner></mat-spinner>
+                </td>
+              </tr>
+
+
+              <div id="print-section">
+                  <div class="print">
+
+                      <h4>Representative Sells and Due Report</h4>
+                      <p>From Date: <strong>{{fromDate| date: 'dd/MM/yyyy'}}</strong>  To: <strong>{{toDate |date: 'dd/MM/yyyy'}}</strong> </p>
+
+
+                    <div class="table-responsive ">
+
+
 
 
       <!--Need provide on click due invoices list-->
@@ -121,6 +136,13 @@
                                     </tbody>
                                   </table>
       </ng-container>
+
+
+    </div>
+  </div>
+
+
+
                     </div>
 
 

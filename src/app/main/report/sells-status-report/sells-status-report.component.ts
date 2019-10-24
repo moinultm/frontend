@@ -22,6 +22,10 @@ export class SellsStatusReportComponent implements OnInit {
 
   form: FormGroup;
 
+  fromDate:any;
+  toDate:any;
+
+
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
 
@@ -31,7 +35,7 @@ export class SellsStatusReportComponent implements OnInit {
 
   ngOnInit() {
     this.iniForm();
-     this.loadData();
+       this.loadData();
   }
 
   loadData(page?: number): void {
@@ -58,6 +62,9 @@ export class SellsStatusReportComponent implements OnInit {
     let formDt = this.datePipe.transform(this.form.get('fromDate').value, 'yyyy-MM-dd');
     let toDt = this.datePipe.transform(this.form.get('toDate').value, 'yyyy-MM-dd');
 
+    this.fromDate=formDt;
+    this.toDate=toDt;
+
     this.sellsService.sellsStatusReport({
       page: this.page,
       size: this.size,
@@ -75,10 +82,16 @@ export class SellsStatusReportComponent implements OnInit {
 
 
   iniForm(){
+
+
     this.form = this._fb.group({
       fromDate: [  new Date(),  [Validators.nullValidator],],
       toDate: [   new Date(),  [Validators.nullValidator],]
     });
+
+    //this.fromDate=  this.datePipe.transform(this.form.get('fromDate').value, 'yyyy-MM-dd');
+   // this.toDate= this.datePipe.transform(this.form.get('toDate').value, 'yyyy-MM-dd');
+
   }
 
 

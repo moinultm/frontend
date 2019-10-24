@@ -16,16 +16,13 @@
             <div class="card-header">
               <div class="row">
                 <div class="col-md-6">
-                  <h3 class="card-title">Sales Report</h3>
+                  <h3 class="card-title">Report Table</h3>
                 </div>
                 <div class="col-md-6  text-right">
                   <div class="card-tools">
-
-
                     <span data-toggle="tooltip" title="Print" class="badge bg-primary">Print</span>
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse"
-                    [useExistingCss]="true"
-                     printSectionId="print-section" ngxPrint><i class="fas fa-print"></i>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" [useExistingCss]="true"
+                      printSectionId="print-section" ngxPrint><i class="fas fa-print"></i>
                     </button>
                   </div>
 
@@ -68,8 +65,6 @@
                           </div>
                         </div>
 
-
-
                         <!--input  type="button" name="search" id="search" value="Search" (click)="dateFilter()"
                     class="btn  btn-primary"-->
 
@@ -81,96 +76,95 @@
               </div>
 
 
-              <hr>
+                <div id="print-section">
+                  <div class="print">
+                    <h4>Sell Report </h4>
+                    <p>From Date: <strong>{{fromDate| date: 'dd/MM/yyyy'}}</strong>  To: <strong>{{toDate |date: 'dd/MM/yyyy'}}</strong> </p>
 
-<div class="print"  id="print-section" >
+                    <table class="table table-bordered table-mini">
+                      <thead>
+                        <tr>
+                          <th style="width: 10px">#</th>
+                          <th>Invoice No</th>
+                          <th>Date</th>
+                          <th>Product</th>
+                          <th>To Customer</th>
+                          <th>Sale by</th>
+                          <th>Total</th>
+                          <th>Paid</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+
+                        <tr *ngIf="loading">
+                          <td colspan="12" class="text-center loading-data">
+                            <mat-spinner></mat-spinner>
+                          </td>
+                        </tr>
+
+                        <tr *ngIf="!loading && data && data.data.count">
+                          <td colspan="12" class="text-center loading-data">
+                            No Data created yet!
+                          </td>
+                        </tr>
 
 
+                        <ng-container *ngIf="!loading">
+                          <tr *ngFor="let result of data.data; let i = index">
+                            <td>{{ i+1 }}</td>
+                            <td>{{result.reference_no}}</td>
+                            <td>{{result.date | date: 'dd/MM/yyyy'}}</td>
 
-              <table class="table table-bordered table-mini" >
-                <thead>
-                  <tr>
-                    <th style="width: 10px">#</th>
-                    <th>Invoice No</th>
-                    <th>Date</th>
-                    <th>Product</th>
-                    <th>To Customer</th>
-                    <th>Sale by</th>
-                    <th>Bill</th>
-                    <th>Paid</th>
+                            <td>
+                              <div *ngFor="let T of result.sells ;let j = index">
+                                {{j+1}}- {{T.product.name}} ({{T.product.quantity}} Pcs)
 
+                              </div>
+                            </td>
 
-                  </tr>
-                </thead>
-                <tbody>
+                            <td>{{result.client_name}}</td>
+                            <td>{{result.user_name}}</td>
+                            <td>{{result.total}}</td>
+                            <td>{{result.paid}}</td>
 
-                  <tr *ngIf="loading">
-                    <td colspan="12" class="text-center loading-data">
-                      <mat-spinner></mat-spinner>
-                    </td>
-                  </tr>
-
-                  <tr *ngIf="!loading && data && !data.data.length">
-                    <td colspan="12" class="text-center loading-data">
-                      No Data created yet!
-                    </td>
-                  </tr>
-
-                  <ng-container *ngIf="!loading">
-                    <tr *ngFor="let result of data.data; let i = index">
-                      <td>{{ i+1 }}</td>
-                      <td>{{result.reference_no}}</td>
-                      <td>{{result.date}}</td>
-
-                      <td>
-                        <div *ngFor="let T of result.sells ;let j = index">
-                          {{j+1}}- {{T.product.name}} ({{T.product.quantity}} Pcs)
-
-                        </div>
-                      </td>
-
-                      <td>{{result.client_name}}</td>
-                      <td>{{result.user_name}}</td>
-                      <td>{{result.total}}</td>
-                      <td>{{result.paid}}</td>
-
-                  </ng-container>
-                </tbody>
-              </table>
-
+                        </ng-container>
+                      </tbody>
+                    </table>
 
 
 
-              <table class="table" style="width: 50%; font-weight: bold;" align="right">
 
-                <tbody>
+                    <table class="table" style="width: 50%; font-weight: bold;" align="right">
 
-
-                  <ng-container *ngIf="!loading">
-                    <tr>
-                      <td> Total Sells Amount</td>
-                      <td>{{totalAmount()}}</td>
-                    </tr>
-
-                    <tr>
-                      <td> Total Recived Amount</td>
-                      <td>{{ totalPaidAmount() }}</td>
-                    </tr>
-                  </ng-container>
+                      <tbody>
 
 
-                </tbody>
-              </table>
+                        <ng-container *ngIf="!loading">
+                          <tr>
+                            <td> Total Sells Amount</td>
+                            <td>{{totalAmount()}}</td>
+                          </tr>
+
+                          <tr>
+                            <td> Total Recived Amount</td>
+                            <td>{{ totalPaidAmount() }}</td>
+                          </tr>
+                        </ng-container>
 
 
+                      </tbody>
+                    </table>
 
-            </div>
+                  </div>
+
+                </div>
+
+
 
             </div>
             <!-- /.card-body -->
             <div class="card-footer clearfix">
-
-
 
 
             </div>

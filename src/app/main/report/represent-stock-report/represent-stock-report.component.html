@@ -1,4 +1,5 @@
-<div class="content-wrapper">
+
+ <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <div class="content-header">
     <!--<div class="container-fluid">
@@ -29,28 +30,34 @@
             <div class="card-header">
               <div class="row">
                 <div class="col-md-6">
-                    <h3 class="card-title">Representative Stock Report</h3>
+                    <h3 class="card-title">Report Table</h3>
                 </div>
 
                 <div class="col-md-6 text-right">
                     <div class="card-tools">
-                        <span data-toggle="tooltip" title="Print" class="badge bg-primary">Print</span>
-                       <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-print"></i>
-                       </button>
-                     </div>
+                        <!--span data-toggle="tooltip" title="Print" class="badge bg-primary">Print</span-->
+                        <!--button type="button" class="btn btn-tool" data-card-widget="collapse" [useExistingCss]="true"
+                          printSectionId="print-section"
+                           ngxPrint><i class="fas fa-print"></i>
+
+                        </button-->
+
+                        <a href="#"  (click)="print('print-section')"  class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+                      </div>
+
                   </div>
               </div>
-             
+
             </div>
 
-            <div id="printableArea" class="card-body">
+            <div  class="card-body">
 
               <div class="row no-print">
                 <div class="col-md-12">
                   <form [formGroup]="form">
                     <div class="row">
 
-                        <div class="col-md-4">                    
+                        <div class="col-md-4">
 
                           </div>
 
@@ -69,8 +76,8 @@
                                 <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
                                 <mat-datepicker #pickerTo></mat-datepicker>
                               </mat-form-field></div>
-                            <div class="col-md-4 my-auto">      <div class="input-group">
-                                <select class="form-control" formControlName="userId" *ngIf="!loadingUser">
+                            <div class="col-md-4 my-auto">      <div class="input-group" *ngIf="!loadingUser">
+                                <select class="form-control" formControlName="userId">
                                   <option value="null">--Select User--</option>
                                   <option *ngFor="let list of users.data" [value]="list.id">
                                     {{list.id}} :: {{list.name}}
@@ -81,14 +88,14 @@
                                     [disabled]="form.invalid || loading"> </span>
                               </div></div>
                         </div>
-                        
 
-                        
+
+
 
 
                       </div>
 
-                   
+
 
 
                     </div>
@@ -96,62 +103,21 @@
                 </div>
               </div>
 
+
+
+
+              <div id="print-section" >
+
+
+
+                  <div class="print">
+
+                      <h4>Represenrative Stock Report Report</h4>
+                      <p>Name:{{userID}}</p>
+                      <p>From Date: <strong>{{fromDate| date: 'dd/MM/yyyy'}}</strong>  To: <strong>{{toDate |date: 'dd/MM/yyyy'}}</strong> </p>
+
               <div class="table-responsive ">
 
-
-
-                <!--table class="table table-striped table-bordered">
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Product Name</th>
-                      <th>opening</th>
-                      <th>In-ward</th>
-                      <th *ngFor="let char of characteristics">
-                        {{ char.discount }} Qty
-                      </th>
-                      <th *ngFor="let char of characteristics">
-                        {{ char.discount }} Value
-                      </th>
-                      <th>Gift</th>
-                      <th>Damage</th>
-                      <th>Closing</th>
-                      <th>Total</th>
-                      <th>Paid</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-
-                    <tr *ngFor="let beer of beers; let i = index">
-                      <td> {{ i+1 }}</td>
-                      <td> {{ beer.description }}</td>
-                      <td> {{ beer.opening }} </td>
-                      <td> {{ beer.inward }} </td>
-
-                      <td *ngFor="let char of characteristics">
-                        <span *ngFor=" let cross of crossData">
-                          <div *ngIf="cross.beerId === beer.id && cross.characteristicId === char.id">
-                            {{cross.quantity }}
-                          </div>
-                        </span>
-                      </td>
-
-                      <td *ngFor="let char of characteristics">
-                        <span *ngFor=" let cross of crossData">
-                          <div *ngIf="cross.beerId === beer.id && cross.characteristicId === char.id">
-                            {{cross.value }}
-                          </div>
-                        </span>
-                      </td>
-
-                      <td> {{ beer.gift }} </td>
-                      <td> {{ beer.damage }} </td>
-                      <td> 0 </td>
-                      <td> 0 </td>
-                      <td> 0 </td>
-                    </tr>
-                  </tbody>
-                </table-->
 
             <!--SECOND TABLE-->
 
@@ -160,6 +126,8 @@
                     <mat-spinner></mat-spinner>
                 </td>
               </tr>
+
+
 
             <ng-container *ngIf="!loading">
                 <table class="table table-striped table-bordered table-mini">
@@ -179,7 +147,7 @@
                       <th>Damage Qty</th>
                       <th>Closing Qty</th>
                       <th>Due</th>
-                      <th>Total</th>
+                      <th>Total Amt</th>
 
                     </tr>
                   </thead>
@@ -243,6 +211,9 @@
               </ng-container>
 
               </div>
+
+
+            </div></div>
 
 
             </div>
