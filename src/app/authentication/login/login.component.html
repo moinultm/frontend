@@ -18,7 +18,7 @@
             <br><br>
 
             <!-- Login form -->
-            <form [formGroup]="form" class="justify-content-center" (submit)="login()">
+            <form [formGroup]="form" class="justify-content-center" (ngSubmit)="login()">
 
               <!-- Username field -->
               <div class="input-group mb-2" [class.has-error]="form.get('username').dirty && form.get('username').invalid">

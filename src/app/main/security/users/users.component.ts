@@ -131,6 +131,10 @@ name:'admins'
         user ? user.name : '',
         [Validators.required, Validators.maxLength(255)]
       ],
+      address: [
+        user ? user.address : '',
+        [Validators.required, Validators.maxLength(255)]
+      ],
       password: [
         '',
         user && user.id ? [] : [Validators.required]
@@ -175,6 +179,7 @@ name:'admins'
       }
       formData.append('id', this.selectedUser.id + '');
       formData.append('name', this.form.get('name').value);
+      formData.append('address', this.form.get('address').value);
       formData.append('email', this.form.get('email').value);
       formData.append('password', this.form.get('password').value);
       formData.append('password_confirmation', this.form.get('password_confirmation').value);

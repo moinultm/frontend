@@ -28,6 +28,9 @@ export class StockGeneralReportComponent implements OnInit{
 
   form: FormGroup;
 
+  fromDate:any;
+  toDate:any;
+
 
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
@@ -49,6 +52,9 @@ export class StockGeneralReportComponent implements OnInit{
       this.loading = true;
       let formDt = this.datePipe.transform(this.form.get('fromDate').value, 'yyyy-MM-dd');
       let toDt = this.datePipe.transform(this.form.get('toDate').value, 'yyyy-MM-dd');
+
+      this.fromDate=formDt;
+      this.toDate=toDt;
 
       this.reportService.stockGeneralReport({
         page: this.page,
@@ -98,6 +104,53 @@ export class StockGeneralReportComponent implements OnInit{
     _CIP(val){
       return parseInt(val)*-1;
     }
+
+
+
+
+    
+private getElementTag(tag: keyof HTMLElementTagNameMap): string {
+  const html: string[] = [];
+  const elements = document.getElementsByTagName(tag);
+  for (let index = 0; index < elements.length; index++) {
+    html.push(elements[index].outerHTML);
+  }
+  return html.join('\r\n');
+}
+
+
+  print(printSectionId): void {
+    event.preventDefault()
+  let printContents, popupWin, styles = "", links = '';
+
+
+
+    styles = this.getElementTag('style');
+    links = this.getElementTag('link');
+
+
+  printContents = document.getElementById(printSectionId).innerHTML;
+  popupWin = window.open("", "_blank", "top=0,left=0,height=auto,width=auto");
+  popupWin.document.open();
+  popupWin.document.write(`
+    <html>
+      <head>
+        <title>Report</title>
+        ${styles}
+        ${links}
+        <style>
+        @page {
+          size: A4 landscape;
+        }
+      </style>
+      </head>
+      <body onload="window.print(); setTimeout(()=>{ window.close(); }, 0)">
+        ${printContents}
+      </body>
+    </html>`);
+  popupWin.document.close();
+}
+
 
 
 

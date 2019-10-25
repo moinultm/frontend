@@ -168,7 +168,6 @@ export class AddComponent implements OnInit {
       sub_total: [
         orderitem ? orderitem.sub_total : '',
         [Validators.required]],
-
         itemTotal:[ orderitem ? orderitem.sub_total : '', [Validators.required]],
 
     });

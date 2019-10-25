@@ -25,9 +25,9 @@ import { StockGeneralReportComponent } from './stock-general-report/stock-genera
 
 
 
-import { jqxPivotGridModule } from 'jqwidgets-ng/jqxpivotgrid';
-import { jqxPivotDesignerModule } from 'jqwidgets-ng/jqxpivotdesigner';
+
 import { NgxPrintModule } from 'ngx-print';
+import { ProfitLossReportComponent } from './profit-loss-report/profit-loss-report.component';
 
 const routes: Routes = [
 
@@ -82,12 +82,16 @@ const routes: Routes = [
     { path: 'stock-general-report',
     component: StockGeneralReportComponent
     },
+    { path: 'profit-loss-report',
+    component: ProfitLossReportComponent
+    },
+
 
 
 ];
 
 @NgModule({
-  declarations: [  ReportMenuComponent, StockReportComponent, ProductReportComponent, DailySalesReportComponent, CustomerSummaryReportComponent, RepresentStockReportComponent, RepresentStockSummaryComponent, RepresentStatusReportComponent, SupplierBillSummaryComponent, ProductSellReportComponent, SellsStatusReportComponent, TransactionStatusReportComponent, PurchaseStatusReportComponent, StockGeneralReportComponent ],
+  declarations: [  ReportMenuComponent, StockReportComponent, ProductReportComponent, DailySalesReportComponent, CustomerSummaryReportComponent, RepresentStockReportComponent, RepresentStockSummaryComponent, RepresentStatusReportComponent, SupplierBillSummaryComponent, ProductSellReportComponent, SellsStatusReportComponent, TransactionStatusReportComponent, PurchaseStatusReportComponent, StockGeneralReportComponent, ProfitLossReportComponent ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

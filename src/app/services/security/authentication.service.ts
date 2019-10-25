@@ -23,7 +23,7 @@ export class AuthenticationService {
 
 
   CLIENT_ID = 2;
-  CLIENT_SECRET = 'mz2NKWg3usK28TEOQDPoDDO3kTCkLZojX5EK4ukA';
+  CLIENT_SECRET = 'MBMUeyajycSTtuJivSKAi9XHC6MFP01lkGYFD8zi';
   //DESK//mz2NKWg3usK28TEOQDPoDDO3kTCkLZojX5EK4ukA
   //LAP//MBMUeyajycSTtuJivSKAi9XHC6MFP01lkGYFD8zi
 
@@ -63,7 +63,7 @@ export class AuthenticationService {
     body.set('client_secret', this.CLIENT_SECRET);
     body.set('username', loginData.username);
     body.set('password', loginData.password);
-    body.set('scope', '*');
+    body.set('scope', '');
 
     return this._http.post(environment.auth_url + 'token', body.toString(), { headers })
       .pipe(

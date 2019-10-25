@@ -15,9 +15,9 @@ import { StockGeneral } from '@models/stock/stock-general.model';
 })
 export class RepresentStockReportComponent implements OnInit {
 
-  name = 'Angular 4';
- rate="hr"
-
+  userName:string;
+  userID:null;
+  userAddress:string;
 
   data: PartialList<StockGeneral>;
 
@@ -32,14 +32,13 @@ export class RepresentStockReportComponent implements OnInit {
   fromDate:any;
   toDate:any;
 
- userID:null;
- userName:null;
- userAdress:null;
+
+ 
 
 
   form: FormGroup;
 
-  users:PartialList <User>;
+  users:Array <User>;
 
 
   date = new FormControl(new Date());
@@ -65,12 +64,16 @@ export class RepresentStockReportComponent implements OnInit {
     loadUser(): void {
       this.loadingUser = true;
       this.userService.findRepresentative().subscribe((res: PartialList<User>) => {
-        this.users = res;
+        this.users = res.data;
         console.log(this.users)
          this.loadingUser = false;
       });
     }
 
+    updateUser(ctrl) {          
+     this.userName= this.users[ctrl.selectedIndex - 1].name,
+     this.userAddress= this.users[ctrl.selectedIndex - 1].address
+  }
 
 
     dateFilter(  page?: number): void {

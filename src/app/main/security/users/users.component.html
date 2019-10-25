@@ -172,6 +172,14 @@
         </div>
         <!-- ./Email address field validations container -->
 
+    <!-- Name field -->
+    <div class="form-group">
+      <label for="address">Address</label>
+      <input type="text" class="form-control" id="address" formControlName="address"
+        [class.has-error]="form.get('address').dirty && form.get('address').invalid" />
+    </div>
+    <!-- ./Name field -->
+
         <!-- Password field -->
         <div class="form-group">
           <label for="password">Password</label>

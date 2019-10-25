@@ -34,18 +34,7 @@ export class LoginComponent implements OnInit, OnDestroy {
    */
   loading: boolean;
 
-  /**
-   * Component constructor
-   *
-   * @param config The configuration service
-   * @param authenticationService The authentication service
-   * @param _fb The form builder object
-   * @param _router The router object
-   * @param _toastr The toastr service
-   * @param titleService The title service
-   *
-   * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
-   */
+ 
   constructor(
     private config: ConfigService,
     private authenticationService: AuthenticationService,
@@ -66,18 +55,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     titleService.setTitle(constants.app_name + ' - Authentication');
   }
 
-  /**
-   * Component OnInit phase
-   *
-   * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
-   */
+ 
   ngOnInit(): void { }
-
-  /**
-   * Build the login form fields
-   *
-   * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
-   */
+ 
   private buildForm(): void {
     this.form = this._fb.group({
       username: [ '', [ Validators.required, Validators.email ] ],
@@ -86,22 +66,27 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
 
-  login(): void {
+  login() {
     this.loading = true;
     this.authenticationService.obtainAccessToken({
         username: this.form.get('username').value,
         password: this.form.get('password').value
       }).subscribe(
         (res: any) => {
-          this.authenticationService.saveToken(res.access_token);
+          this.authenticationService.saveToken(res.access_token);     
           this.loading = false;
-          return this._router.navigate([constants.home_url]);
+          return  this._router.navigateByUrl('/dashboard');
+          //return this._router.navigate([constants.home_url]);
         }, (error :any) => {
           warning('Authentication error!', 'Username or password entered is incorrect', this._toastr);
           this.loading = false;
         }
       );
   }
+
+
+ 
+ 
 
 
   ngOnDestroy(): void {

@@ -77,9 +77,9 @@
                                 <mat-datepicker #pickerTo></mat-datepicker>
                               </mat-form-field></div>
                             <div class="col-md-4 my-auto">      <div class="input-group" *ngIf="!loadingUser">
-                                <select class="form-control" formControlName="userId">
+                                <select class="form-control" formControlName="userId" (change)="updateUser($event.target)">
                                   <option value="null">--Select User--</option>
-                                  <option *ngFor="let list of users.data" [value]="list.id">
+                                  <option *ngFor="let list of users" [value]="list.id">
                                     {{list.id}} :: {{list.name}}
                                   </option>
                                 </select>
@@ -113,7 +113,7 @@
                   <div class="print">
 
                       <h4>Represenrative Stock Report Report</h4>
-                      <p>Name:{{userID}}</p>
+                      <p>Name:{{userName}}, Address:{{userAddress}}</p>
                       <p>From Date: <strong>{{fromDate| date: 'dd/MM/yyyy'}}</strong>  To: <strong>{{toDate |date: 'dd/MM/yyyy'}}</strong> </p>
 
               <div class="table-responsive ">

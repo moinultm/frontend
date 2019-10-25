@@ -4,6 +4,7 @@ export class User {
   id: number;
   name: string;
   email: string;
+  address: string;
   password: string;
   remember_token: string;
   created_at: Date;
