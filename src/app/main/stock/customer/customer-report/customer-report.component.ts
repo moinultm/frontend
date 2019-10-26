@@ -9,13 +9,13 @@ import { Title } from '@angular/platform-browser';
 import { success, warning,error } from '@services/core/utils/toastr';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
- 
+
 
 
 @Component({
   selector: 'app-customer',
   templateUrl: './customer-report.component.html',
- 
+
 })
 export class CustomerReportComponent implements OnInit {
   data: PartialList<Client>;
@@ -27,10 +27,10 @@ export class CustomerReportComponent implements OnInit {
   form: FormGroup;
   selectedCustomer: Client;
 
-  constructor(  
+  constructor(
     private customerService: CustomerService,
- 
- 
+
+
     titleService: Title,
     private route: ActivatedRoute,
 
@@ -45,7 +45,7 @@ export class CustomerReportComponent implements OnInit {
 
   //Loading Data
       loadData(id:number): void {
-     
+
         this.loading = true;
         this.customerService.findCustomerReport(id ).subscribe((res: PartialList<Client>) => {
           this.data = res;
@@ -53,6 +53,10 @@ export class CustomerReportComponent implements OnInit {
         });
       }
 
-  
+
+      close() {
+
+    }
+
 
 }

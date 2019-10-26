@@ -19,7 +19,7 @@ export class RepresentStockReportComponent implements OnInit {
   userID:null;
   userAddress:string;
 
-  data: PartialList<StockGeneral>;
+  data:any;
 
   loading: boolean;
   savingSles: boolean;
@@ -33,7 +33,7 @@ export class RepresentStockReportComponent implements OnInit {
   toDate:any;
 
 
- 
+
 
 
   form: FormGroup;
@@ -70,7 +70,7 @@ export class RepresentStockReportComponent implements OnInit {
       });
     }
 
-    updateUser(ctrl) {          
+    updateUser(ctrl) {
      this.userName= this.users[ctrl.selectedIndex - 1].name,
      this.userAddress= this.users[ctrl.selectedIndex - 1].address
   }

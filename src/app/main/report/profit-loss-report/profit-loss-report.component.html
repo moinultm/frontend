@@ -16,14 +16,14 @@
               </div>
             </div-->
         </div>
-      
+
         <section class="content">
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-12">
-      
+
                 <div class="card">
-      
+
                          <div class="card-header">
                           <div class="row">
                             <div class="col-md-6">
@@ -36,17 +36,17 @@
                                   printSectionId="print-section" ngxPrint><i class="fas fa-print"></i>
                                 </button>
                               </div>
-      
+
                             </div>
                           </div>
                         </div>
-      
+
       <!--card header-->
-      
-      
+
+
                   <div  class="card-body">
                     <div class="row no-print  table-responsive">
-      
+
                       <div class="col-md-12">
                           <form [formGroup]="form">
                               <div class="row  mb-3">
@@ -71,117 +71,116 @@
                                     </div>
                                     <div class="col-md-2 my-auto">
                                       <button type="button" class="btn btn-tool text-primary" data-card-widget="collapse"
-                                        [disabled]="form.invalid || loading" (click)="dateFilter(form)">
+                                        [disabled]="form.invalid || loading" (click)="dateFilter()">
                                         <i class="fas fa-search"></i>
-      
+
                                       </button>
                                     </div>
                                   </div>
-      
-      
-      
+
+
+
                                   <!--input  type="button" name="search" id="search" value="Search" (click)="dateFilter()"
                               class="btn  btn-primary"-->
-      
+
                                 </div>
-      
+
                               </div>
                             </form>
                       </div>
                     </div>
-      
-      
+
+
                     <div id="print-section">
                         <div class="print">
-      
+
                             <h4>Profit & Loss Report</h4>
                             <p>From Date: <strong>{{fromDate| date: 'dd/MM/yyyy'}}</strong>  To: <strong>{{toDate |date: 'dd/MM/yyyy'}}</strong> </p>
-      
+
                     <table class="table table-bordered mb-3 table-mini">
-                 
+
                       <tbody>
                         <tr *ngIf="loading">
                           <td colspan="12" class="text-center loading-data">
                             <mat-spinner></mat-spinner>
                           </td>
                         </tr>
-      
-      
+
+
 
                       </tbody>
                     </table>
-      
-      
+
+
                     <table class="table table-bordered mb-3" style="width: 50%; font-weight: bold;" align="right">
-      
+
                       <tbody>
-      
-      
+
+
                         <ng-container *ngIf="!loading">
                           <tr>
-                            <td>Total Selling Price </td>    
-                            <td>{{data.total_selling_price}}</td>                       
+                            <td>Total Selling Price </td>
+                            <td>{{data.total_selling_price}}</td>
                           </tr>
-      
+
                           <tr>
-                            <td> Total Cost Price  </td>  
-                            <td> {{data.total_cost_price}} </td>                         
+                            <td> Total Cost Price  </td>
+                            <td> {{data.total_cost_price}} </td>
                           </tr>
- 
+
    <tr>
-                                        <td> Total Gross Profit </td>  
-                                        <td> {{data.gross_profit}} </td>                         
+                                        <td> Total Gross Profit </td>
+                                        <td> {{data.gross_profit}} </td>
                                       </tr>
                               <tr>
-                                    <td> Total Expenses </td>  
-                                    <td> {{data.total_expense}} </td>                         
+                                    <td> Total Expenses </td>
+                                    <td> {{data.total_expense}} </td>
                                   </tr>
 
 
                                   <tr>
-                                        <td> Net Profit </td>  
-                                        <td> {{data.net_profit}} </td>                         
+                                        <td> Net Profit </td>
+                                        <td> {{data.net_profit}} </td>
                                       </tr>
-                               
+
 
                                       <tr>
-                                            <td> Total Tax </td>  
-                                            <td> {{data.total_tax}} </td>                         
+                                            <td> Total Tax </td>
+                                            <td> {{data.total_tax}} </td>
                                           </tr>
 
                                           <tr>
-                                                <td> Net Profit after tax</td>  
-                                                <td> {{data.net_profit_after_tax}} </td>                         
+                                                <td> Net Profit after tax</td>
+                                                <td> {{data.net_profit_after_tax}} </td>
                                               </tr>
 
-                                      
 
 
-                                      
+
+
 
                         </ng-container>
-      
-      
+
+
                       </tbody>
                     </table>
-      
+
                   </div>
                 </div><!--print-->
-      
-      
+
+
                   </div>
-      
+
                   <div class="card-footer clearfix text-center">
-           
-      
+
+
                   </div>
-      
+
                 </div>
               </div>
             </div>
           </div>
         </section>
-      
+
       </div>
       <!-- Content Wrapper. Contains page content -->
-      

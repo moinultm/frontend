@@ -121,16 +121,16 @@
                                   <mat-icon class="mat-18">flip_to_front</mat-icon>
                                 </button>
 
-                                    <button  *ngIf="!result.invoiced_qty > 0" mat-icon-button color="accent" matTooltip="Create invoice"
+                                    <button  *ngIf="!(result.invoiced_qty > 0)" mat-icon-button color="accent" matTooltip="Create invoice"
                                     (click)="makeInvoice(result.id)">
                                        <mat-icon>refresh</mat-icon>
                                    </button>
 
 
-                                <button mat-icon-button color="accent" matTooltip="Edit invoice"
+                                <!--button mat-icon-button color="accent" matTooltip="Edit invoice"
                                 (click)="refereToEditInvoice(result.id)">
                                     <mat-icon>edit</mat-icon>
-                                </button>
+                                </button-->
                                 <button mat-icon-button color="accent" matTooltip="Delete invoice">
                                     <mat-icon>restore_from_trash</mat-icon>
                                   </button>

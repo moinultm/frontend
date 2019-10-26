@@ -108,7 +108,7 @@
                     <tbody>
                       <tr>
                         <td class="font-italic text-center" colspan="5" *ngIf="orderItemList.length==0"
-                          [class.text-danger]="!isValid && orderItemList.length==0">
+                          [class.text-danger]="orderItemList.length==0">
                           No product selected for this order.
                         </td>
                       </tr>
@@ -324,7 +324,7 @@
       <div class="modal-footer">
         <div class="">
           <button type="button" class="btn btn-info" (click)="addItemToInvoice(formProducts,modal)"
-            [disabled]="formProducts.invalid || addingItemToInvoice">Add to list</button>
+            [disabled]="formProducts.invalid">Add to list</button>
         </div>
         <div class="">
           <button type="button" class="btn btn-danger" aria-label="Close" (click)="close(modal)">

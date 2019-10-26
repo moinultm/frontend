@@ -18,7 +18,7 @@ import { StockGeneral } from '@models/stock/stock-general.model';
 })
 export class StockGeneralReportComponent implements OnInit{
 
-  data: PartialList<StockGeneral>;
+  data: any;
 
   loading: boolean;
   savingSles: boolean;
@@ -61,7 +61,7 @@ export class StockGeneralReportComponent implements OnInit{
         size: this.size,
         from:  formDt,
         to:   toDt
-      }).subscribe((res: PartialList<StockGeneral>) => {
+      }).subscribe((res:any) => {
         this.data = res;
         console.log( this.data);
         this.loading = false;
@@ -108,7 +108,7 @@ export class StockGeneralReportComponent implements OnInit{
 
 
 
-    
+
 private getElementTag(tag: keyof HTMLElementTagNameMap): string {
   const html: string[] = [];
   const elements = document.getElementsByTagName(tag);

@@ -190,7 +190,7 @@
                             <tbody>
                               <tr>
                                 <td class="font-italic text-center" colspan="6" *ngIf="orderItemList.length==0"
-                                  [class.text-danger]="!isValid && orderItemList.length==0">
+                                  [class.text-danger]="  orderItemList.length==0">
                                   No product selected for this Invoice.
                                 </td>
                               </tr>
@@ -342,7 +342,7 @@
     <!-- Modal body -->
     <div class="modal-body">
 
-      <form [formGroup]="formProducts" *ngIf="!loadingProductList">
+      <form [formGroup]="formProducts" *ngIf="!loading">
         <!--name-->
         <h5>Product</h5>
         <div class="form-group">
@@ -431,14 +431,14 @@
 
       </form>
       <!-- Loading profiles indicator -->
-      <mat-spinner class="loading-profiles" *ngIf="loadingProductList"></mat-spinner>
+      <mat-spinner class="loading-profiles" *ngIf="loading"></mat-spinner>
       <!-- Loading profiles indicator -->
 
       <!-- Modal footer -->
       <div class="modal-footer">
         <div class="">
           <button type="button" class="btn btn-info" (click)="addItemToInvoice(formProducts,modal)"
-            [disabled]="formProducts.invalid || addingItemToInvoice">Add to list</button>
+            [disabled]="formProducts.invalid ">Add to list</button>
         </div>
         <div class="">
           <button type="button" class="btn btn-danger" aria-label="Close" (click)="close(modal)">

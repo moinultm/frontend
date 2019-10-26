@@ -27,7 +27,7 @@ export class SupplierDetailsComponent implements OnInit {
   savingPayment:boolean;
 
 
-  details:PartialList <Client> ;
+  details:any ;
 
   constructor(
     private paymentService:PaymentService,

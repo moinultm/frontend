@@ -144,12 +144,12 @@
       <!-- ./category_name field validations container -->
 
 
-       <!--subcategory checkboxes -->
+       <!--subcategory checkboxes (change)="selectCategory(cat)" -->
        <h5>subcategory(s)</h5>
        <div class="form-group">
          <select class="form-control"  id="subcategory_id" formControlName="category_id">
                 <option *ngFor="let cat of categories" [value]="cat.id"
-                (change)="selectCategory(cat)"
+
                 [selected]="selectedSubHasCategory(cat)"  >
                 {{cat.category_name}}</option>
         </select>
@@ -206,7 +206,7 @@
 
     <!-- Modal footer -->
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-danger" [disabled]="deletingCategory" (click)="delete(modal)">Delete</button>
+      <button type="button" class="btn btn-outline-danger"  (click)="delete(modal)">Delete</button>
     </div>
     <!-- ./Modal footer -->
 

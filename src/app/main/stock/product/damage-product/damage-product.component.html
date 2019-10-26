@@ -106,7 +106,7 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <tr *ngFor="let comp of myForm.get('companies').controls; let i=index; let i=index" [formGroupName]="i">
+                      <tr *ngFor="let comp of myForm.get('companies')['controls']; let i=index; let i=index" [formGroupName]="i">
 
                         <td>
                               <div class="form-group">
@@ -171,7 +171,7 @@
                     <!-- /.card-body -->
 
                     <div class="card-footer">
-                        <button type="submit"  [disabled]="myForm.invalid || _saving" (click)="saveDamage()" class="btn  btn-info float-right">Submit</button>
+                        <button type="submit"  [disabled]="myForm.invalid || _saving" (click)="saveDamage(myForm)" class="btn  btn-info float-right">Submit</button>
                     </div>
 
                   </div>

@@ -42,7 +42,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let comp of myForm.get('companies').controls; let i=index; let i=index" [formGroupName]="i">
+                                        <tr *ngFor="let comp of myForm.get('companies')?.controls; let i=index; let i=index" [formGroupName]="i">
 
                                           <td>
                                                 <div class="form-group">

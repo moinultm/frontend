@@ -79,7 +79,7 @@
                             <mat-icon>edit</mat-icon>
                         </button>
                         <button mat-icon-button color="accent" matTooltip="Delete"
-                        (click)="initDelete(deleteModal, item)">
+                       >
                             <mat-icon>restore_from_trash</mat-icon>
                           </button>
                       </td>
@@ -253,7 +253,7 @@
   <!-- Modal footer -->
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="save(modal)"
-      [disabled]="form.invalid || savingWarehouse">Save</button>
+      [disabled]="form.invalid  ">Save</button>
   </div>
   <!-- ./Modal footer -->
 

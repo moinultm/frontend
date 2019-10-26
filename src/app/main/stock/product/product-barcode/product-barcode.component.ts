@@ -3,7 +3,7 @@ import { PartialList } from '@models/common/patial-list.model';
 import { Product } from '@models/stock/product.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ProductService } from '@services/stock/product.service';
- 
+
 import { ActivatedRoute } from '@angular/router';
 import { Client } from '@models/stock/client.model';
 import { CustomerService } from '@services/stock/customer.service';
@@ -44,11 +44,22 @@ export class ProductBarcodeComponent implements OnInit {
   form: FormGroup;
   selectedProduct: Product;
 
-  barcoded:Barcoded;
+  barcoded:any;
   selectedClientCode:string;
 
   countPrint:number;
   customerList: Array<Client>;
+
+
+
+  ppp:string;
+  isSiteName: boolean;
+  isProductName: boolean;
+  isProductPrice: boolean;
+  isClientCode: boolean;
+  prodDate:string;
+  expdDate:string;
+
 
   constructor(
     private productService: ProductService,
@@ -61,13 +72,21 @@ export class ProductBarcodeComponent implements OnInit {
       isSiteName: true,
       isProductName: true,
       isProductPrice: true,
-      isClientCode: true, 
+      isClientCode: true,
        prodDate:'',
       expdDate:''
     }
 
 
-
+/*
+this.ppp='pp40';
+this.isSiteName= true;
+this.isProductName= true;
+this.isProductPrice= true;
+this.isClientCode= true;
+this.prodDate='';
+this.expdDate='';
+*/
    }
 
   ngOnInit() {
@@ -148,7 +167,7 @@ FillCustomer()
 
 .pp40 {
   width: 2in;
- 
+
   padding: 0.05in;
   border: 1px solid #ddd;
   margin-top: 2px;
@@ -178,7 +197,7 @@ FillCustomer()
 
 }
 
-
+/*
 export interface Barcoded {
   ppp:string,
   isSiteName: boolean;
@@ -188,3 +207,4 @@ export interface Barcoded {
   prodDate:string;
   expdDate:string;
 }
+*/

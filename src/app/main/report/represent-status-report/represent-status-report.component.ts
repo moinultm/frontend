@@ -11,7 +11,7 @@ import { ProductReportService } from '@services/report/product-report.service';
   styleUrls: ['./represent-status-report.component.scss']
 })
 export class RepresentStatusReportComponent implements OnInit {
-  data: PartialList<StockGeneral>;
+  data:any;
 
   loading: boolean;
   savingSles: boolean;
@@ -20,7 +20,6 @@ export class RepresentStatusReportComponent implements OnInit {
   size = 10;
 
   form: FormGroup;
-
   fromDate:any;
   toDate:any;
 
@@ -99,7 +98,7 @@ export class RepresentStatusReportComponent implements OnInit {
     }
 
 
-  
+
 
 
 }

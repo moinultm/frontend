@@ -48,9 +48,9 @@
                                         <thead>
                                             <tr>
                                                 <th style="width: 10px">#</th>
-                                                <th>Product Name</th>  
-                                                <th>Quantity </th>  
-                                                <th>MRP </th>                                                                                       
+                                                <th>Product Name</th>
+                                                <th>Quantity </th>
+                                                <th>MRP </th>
                                                 <th>Discount % </th>
                                                 <th>Discount</th>
                                                 <th>Total</th>
@@ -60,7 +60,7 @@
                                                 <tr *ngIf="loading">
                                                         <td colspan="12" class="text-center loading-data">
                                                           <mat-spinner ></mat-spinner>
-                                                    
+
                                                         </td>
                                                       </tr>
 
@@ -79,9 +79,9 @@
                                                           <td>{{ item.product_discount_percentage }}</td>
                                                           <td>{{item.product_discount_amount}}</td>
                                                           <td>{{item.sub_total}}</td>
-                                                          
+
                                                           <td>{{ item.TotalSell }}</td>
-                                                         
+
                                                         </tr>
                                                       </ng-container>
                                         </tbody>
@@ -115,7 +115,7 @@
         <div class="modal-header">
           <h4 class="modal-title">
             {{ selectedCustomer.id ? ('Update Customer: ' + selectedCustomer.full_name) : 'Create new  Customer' }}</h4>
-          <button type="button" class="close" aria-label="Close" (click)="close(modal)">
+          <button type="button" class="close" aria-label="Close" (click)="close()">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -157,7 +157,7 @@
 
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-dark" (click)="save(modal)"
+          <button type="button" class="btn btn-outline-dark"
             [disabled]="form.invalid || savingCustomer">Save</button>
         </div>
         <!-- ./Modal footer -->

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { SignupComponent } from '../../main/signup/signup.component';
+//import { SignupComponent } from '../../main/signup/signup.component';
 
 
 @Injectable()

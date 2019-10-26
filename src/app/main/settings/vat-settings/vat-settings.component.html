@@ -16,17 +16,17 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-  
+
     <section class="content">
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-12">
-  
+
             <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">List Vat
-  
-  
+
+
                         <a href="#"  (click)="initSave(saveModal)">
                           <span class="badge bg-primary">
                             <i class="nav-icon fas fa-cart-plus"></i>
@@ -37,7 +37,7 @@
                          <i class="nav-icon fas fa-search"></i>
                         Search</span>
                   </h3>
-  
+
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -45,16 +45,16 @@
                     <thead>
                       <tr>
                         <th style="width: 10px">#</th>
-                                
+
                         <th>Name</th>
                         <th>Type</th>
                         <th>Rate</th>
-                   
+
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-  
+
                         <tr *ngIf="loading">
                             <td colspan="12" class="text-center loading-data">
                                 <mat-spinner></mat-spinner>
@@ -65,7 +65,7 @@
                               No data created yet!
                             </td>
                           </tr>
-  
+
                           <ng-container *ngIf="!loading">
                         <tr *ngFor="let item of data.data; let i = index">
                         <td>{{ i+1 }}</td>
@@ -82,7 +82,7 @@
                               <mat-icon>restore_from_trash</mat-icon>
                             </button>
                         </td>
-  
+
                       </tr>
                         </ng-container>
                     </tbody>
@@ -99,15 +99,15 @@
               </div>
                  <!--Card-->
             </div>
-  
+
         </div>
       </div>
     </section>
-  
+
   </div>
   <!-- Content Wrapper. Contains page content -->
-  
-  
+
+
   <!-- vat save modal -->
   <ng-template #saveModal let-modal>
     <!-- Modal header -->
@@ -119,12 +119,12 @@
       </button>
     </div>
     <!-- ./Modal header -->
-  
+
     <!-- Modal body -->
     <div class="modal-body">
-  
+
       <form [formGroup]="form">
-  
+
         <!-- name field -->
         <div class="form-group">
           <label for="name">Name</label>
@@ -132,7 +132,7 @@
             [class.has-error]="form.get('name').dirty && form.get('name').invalid" />
         </div>
         <!-- ./name field -->
-  
+
         <!-- name field validations container -->
         <div class="row" *ngIf="form.get('name').dirty && form.get('name').invalid">
           <div class="col-12">
@@ -147,7 +147,7 @@
           </div>
         </div>
         <!-- ./name field validations container -->
-  
+
 
 
         <!-- rate field -->
@@ -157,7 +157,7 @@
             [class.has-error]="form.get('rate').dirty && form.get('rate').invalid" />
         </div>
         <!-- ./rate field -->
-  
+
         <!-- rate field validations container -->
         <div class="row" *ngIf="form.get('rate').dirty && form.get('rate').invalid">
           <div class="col-12">
@@ -172,7 +172,7 @@
           </div>
         </div>
         <!-- ./rate field validations container -->
-  
+
    <!-- ./Type field validations container -->
         <div class="form-group">
             <label>Select Type</label>
@@ -184,25 +184,25 @@
           </div>
    <!-- ./Type field validations container -->
       </form>
-  
+
     </div>
     <!-- ./Modal body -->
-  
+
     <!-- Modal footer -->
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-dark" (click)="save(modal)"
         [disabled]="form.invalid || savingExpense">Save</button>
     </div>
     <!-- ./Modal footer -->
-  
+
   </ng-template>
   <!-- ./vat save modal -->
-  
-  
-  
+
+
+
     <!-- Vat delete confirmation modal -->
     <ng-template #deleteModal let-modal>
-  
+
       <!-- Modal header -->
       <div class="modal-header">
         <h4 class="modal-title">Delete Vat</h4>
@@ -211,18 +211,18 @@
         </button>
       </div>
       <!-- ./Modal header -->
-  
+
       <!-- Modal body -->
       <div class="modal-body">
         <p>Are you sure you want to delete this Vat?</p>
       </div>
       <!-- ./Modal body -->
-  
+
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline-danger" [disabled]="deletingExpense" (click)="delete(modal)">Delete</button>
+        <button type="button" class="btn btn-outline-danger"   (click)="delete(modal)">Delete</button>
       </div>
       <!-- ./Modal footer -->
-  
+
     </ng-template>
     <!-- ./Vat delete confirmation modal -->

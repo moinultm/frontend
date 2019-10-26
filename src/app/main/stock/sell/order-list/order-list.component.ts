@@ -20,7 +20,7 @@ export class OrderListComponent implements OnInit {
   size = 10;
 
   form: FormGroup;
-  data: PartialList<SellsOrder>;
+  data: any;
 
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
