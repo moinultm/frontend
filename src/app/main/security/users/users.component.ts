@@ -166,7 +166,6 @@ name:'admins'
 
 
   save(modal: any): void {
-
  var myArr =    this.selectedUser.profiles.map((p: Profile) => p.id)+'' ;
  var string = myArr.split(',') ;
 
@@ -177,6 +176,7 @@ name:'admins'
       if (this.selectedUser.picture instanceof File) {
         formData.append('picture', this.selectedUser.picture);
       }
+
       formData.append('id', this.selectedUser.id + '');
       formData.append('name', this.form.get('name').value);
       formData.append('address', this.form.get('address').value);
@@ -186,6 +186,7 @@ name:'admins'
       formData.append('user_type', this.form.get('user_type').value);
       formData.append('profiles', this.selectedUser.profiles.map((p: Profile) => p.id)+''  );
 
+ 
 
       this.userService.save(formData, this.selectedUser.id ? true : false).subscribe((res: User) => {
 

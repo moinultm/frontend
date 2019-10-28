@@ -309,7 +309,7 @@ save(form: any){
   formData.append('customer', this.mainForm.get('customerName').value);
   formData.append('order_no','0');
   formData.append('user_id', this.mainForm.get('user_id').value);
-  formData.append('paid', this.mainForm.get('customerName').value);
+  //formData.append('paid', this.mainForm.get('customerName').value);
   formData.append('method', this.mainForm.get('paymentMethod').value);
   formData.append('total', this.mainForm.get('grandTotal').value);
   formData.append('paid', this.mainForm.get('paidAmount').value);

@@ -24,6 +24,7 @@ export class UserService extends CrudService<User> {
     if (update) {
       return this.__http.post<User>(this.url + '/' + model.get('id'), model, this.options);
     } else {
+      console.log(model)
       return this.__http.post<User>(this.url, model, this.options);
     }
   }

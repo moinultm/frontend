@@ -28,61 +28,75 @@ import { StockGeneralReportComponent } from './stock-general-report/stock-genera
 
 import { NgxPrintModule } from 'ngx-print';
 import { ProfitLossReportComponent } from './profit-loss-report/profit-loss-report.component';
+import { AuthGuard } from '@services/security/guards/auth.guard';
 
 const routes: Routes = [
 
   {
     path: 'report',
+    canActivate: [ AuthGuard],
     component: ReportMenuComponent
   },
     {
       path: 'stock-report',
+      canActivate: [ AuthGuard],
       component: StockReportComponent
     }
     ,
     {
       path: 'product-report',
+      canActivate: [ AuthGuard],
       component: ProductReportComponent
     },
 
     //represent
     { path: 'represent-stock-report',
+    canActivate: [ AuthGuard],
     component: RepresentStockReportComponent
     },
     { path: 'represent-status-report',
+    canActivate: [ AuthGuard],
     component: RepresentStatusReportComponent
     },
     { path: 'represent-stock-summary',
+    canActivate: [ AuthGuard],
     component: RepresentStockSummaryComponent
     },
 
     //Supplier
     { path: 'supplier-bill-summary',
+    canActivate: [ AuthGuard],
     component: SupplierBillSummaryComponent
     },
 
     //product
     { path: 'product-sell-report',
+    canActivate: [ AuthGuard],
     component: ProductSellReportComponent
     },
     //sells status report
 
     { path: 'sells-status-report',
+    canActivate: [ AuthGuard],
     component: SellsStatusReportComponent
     },
     { path: 'purchase-status-report',
+    canActivate: [ AuthGuard],
     component: PurchaseStatusReportComponent
     },
 
     { path: 'transaction-status-report',
+    canActivate: [ AuthGuard],
     component: TransactionStatusReportComponent
     },
 
     //stock-general-report
     { path: 'stock-general-report',
+    canActivate: [ AuthGuard],
     component: StockGeneralReportComponent
     },
     { path: 'profit-loss-report',
+    canActivate: [ AuthGuard],
     component: ProfitLossReportComponent
     },
 

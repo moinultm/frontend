@@ -32,6 +32,8 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body">
+<div class="table-responsive">
+
 
             <table class="table table-bordered">
 
@@ -70,7 +72,7 @@
                     <td>{{ item.updated_at | date:'medium' }}</td>
                     <td class="actions">
                       <button type="button" class="btn  btn-success" (click)="initSave(saveModal, item)">
-                        <i class="fa fa-pencil"></i>
+                        <i class="fas fa-edit"></i>
                       </button>
                       <button type="button" class="btn  btn-danger" (click)="initDelete(deleteModal, item)">
                         <i class="fa fa-trash"></i>
@@ -81,6 +83,8 @@
 
               </tbody>
             </table>
+          </div>
+
           </div>
           <!-- /.card-body -->
           <div class="card-footer clearfix">
@@ -124,7 +128,7 @@
       <!-- Code field -->
       <div class="form-group">
         <label for="code">Code</label>
-        <input type="text" class="form-control" id="code" formControlName="code" 
+        <input type="text" class="form-control" id="code" formControlName="code"
           [class.has-error]="form.get('code').dirty && form.get('code').invalid" />
       </div>
       <!-- ./Code field -->
@@ -143,7 +147,7 @@
         </div>
       </div>
       <!-- ./Code field validations container -->
-      
+
       <!-- Designation field -->
       <div class="form-group">
         <label for="designation">Designation</label>

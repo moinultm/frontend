@@ -33,7 +33,7 @@
 
             <div class="card-body">
 
-              <div class="row no-print  table-responsive">
+              <div class="row no-print">
                 <div class="col-md-12">
                   <form [formGroup]="form">
                     <div class="row  mb-3">
@@ -80,6 +80,9 @@
                   <div class="print">
                     <h4>Sell Report </h4>
                     <p>From Date: <strong>{{fromDate| date: 'dd/MM/yyyy'}}</strong>  To: <strong>{{toDate |date: 'dd/MM/yyyy'}}</strong> </p>
+
+                    <div class="table-responsive">
+
 
                     <table class="table table-bordered table-mini">
                       <thead>
@@ -155,6 +158,8 @@
 
                       </tbody>
                     </table>
+
+                  </div>
 
                   </div>
 

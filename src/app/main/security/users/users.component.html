@@ -38,6 +38,10 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body p-0">
+
+              <div class="table-responsive">
+
+
               <table class="table">
                 <thead>
                   <tr>
@@ -75,7 +79,7 @@
                       <td>{{ item.updated_at | date:'medium' }}</td>
                       <td class="actions">
                         <button type="button" class="btn  btn-success" (click)="initSave(saveModal, item)">
-                          <i class="fa fa-pencil"></i>
+                          <i class="fas fa-edit"></i>
                         </button>
                         <button type="button" class="btn  btn-danger"  >
                           <i class="fa fa-trash"></i>
@@ -86,6 +90,8 @@
                 </tbody>
 
               </table>
+
+            </div>
             </div>
             <!-- /.card-body -->
           </div>

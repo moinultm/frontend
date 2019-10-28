@@ -3,23 +3,16 @@ import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { InterceptorService } from '@services/security/guards/interceptor.service';
+
 
 import { MaterialsModule} from '@app/material.module'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 import { NavbarComponent } from './main/navbar/navbar.component';
-
-
-import { PoolsService } from './services/auth/pools.service';
-import { AuthService } from './services/auth/auth.service';
-import { TokenService } from './services/auth/token.service';
-import { AfterLoginService } from './services/auth/after-login.service';
-import { BeforeLoginService } from './services/auth/before-login.service';
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
-
 import { ToastrModule } from 'ngx-toastr';
 
 import { TranslateService } from './services/common/translate.service';
@@ -27,7 +20,9 @@ import { TranslateModule } from './shared/translate/translate.module';
 
 import { NotFoundComponent } from './authentication/not-found/not-found.component';
 
-import {NgxPrintModule} from 'ngx-print';
+
+
+
 
 
 
@@ -71,14 +66,19 @@ LoginComponent,
 
 
   providers: [
-    PoolsService,
-    AuthService,
-    TokenService,
-    AfterLoginService,
-    BeforeLoginService,
-   { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
-   SnotifyService,
-   TranslateService,
+    SnotifyService,
+    TranslateService,
+
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    },
+
+   { provide: 'SnotifyToastConfig',
+   useValue: ToastDefaults
+  },
+
     {
       provide: APP_INITIALIZER,
       useFactory: setupTranslateFactory,

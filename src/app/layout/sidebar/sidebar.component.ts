@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
+import * as $ from 'jquery';
+import * as AdminLte from 'admin-lte';
+
 
 @Component({
   selector: 'app-sidebar',
@@ -7,9 +11,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
+  @ViewChild('mainSidebar', { static: false }) mainSidebar;
+
+
   constructor() { }
 
   ngOnInit() {
   }
+
+  ngAfterViewInit() {
+
+   $('[data-widget="treeview"]').each(function() {
+      AdminLte.Treeview._jQueryInterface.call($(this), 'init');
+  });
+  }
+
 
 }

@@ -71,7 +71,6 @@ this.initSaveForm(this.LOCAL_data)
       account_no: this.form.get('account_no').value,
       client_code: this.form.get('client_code').value
 
-
     }, this.selectedCustomer.id ? true : false).subscribe((res: Client) => {
       this.savingCustomer = false;
       this.dialogRef.close({ data: 200});

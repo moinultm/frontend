@@ -18,34 +18,17 @@ import { constants } from 'environments/constants';
 @Injectable({
   providedIn: 'root'
 })
-/**
- * The HttpClient request interceptor
- * >> Intercept all the request used by the HttpClient module
- * 
- * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
- */
+
 export class InterceptorService implements HttpInterceptor {
 
-  /**
-   * Service constructor
-   * 
-   * @param router The router object
-   *
-   * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
-   */
+
   constructor(
     private router: Router
   ) {
 
   }
 
-  /**
-   * Inject Authorization header into the request
-   * 
-   * @param req The http request object
-   *
-   * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
-   */
+
   private applyCredentials(req: HttpRequest<any>): HttpRequest<any> {
     return req.clone({
       setHeaders: {
@@ -54,21 +37,14 @@ export class InterceptorService implements HttpInterceptor {
     });
   }
 
-  /**
-   * Intercept all HttpClient request
-   * 
-   * @param req The http request object
-   * @param next The next router to go to it
-   *
-   * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
-   */
+
   intercept(
     req: HttpRequest<any>, next: HttpHandler
   ): Observable<HttpEvent<any>> {
     return this.doRequest(req, next, true);
   }
 
-  
+
   private doRequest(req: HttpRequest<any>, next: HttpHandler, setAuthorization = false): any {
     if (setAuthorization) {
       req = this.applyCredentials(req);
@@ -85,4 +61,6 @@ export class InterceptorService implements HttpInterceptor {
         return ErrorObservable.create(err);
       });
   }
+
+
 }

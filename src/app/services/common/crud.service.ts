@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TokenService } from '../auth/token.service';
-import { HttpClient,HttpParams, HttpHeaders} from '@angular/common/http';
+ import { HttpClient,HttpParams, HttpHeaders} from '@angular/common/http';
 import { PartialList } from '@models/common/patial-list.model';
 
 import { environment } from '@env/environment';
@@ -20,8 +19,10 @@ export class CrudService<T> {
   protected url :string;
 
   constructor(private _http:  HttpClient ) {
+//https://github.com/angular/angular/issues/13241
+
   this.headers = new HttpHeaders({
-      'Accept': 'application/json'
+    'Accept': 'application/json'
     });
   this.options = {headers: this.headers }
    }
@@ -49,6 +50,7 @@ export class CrudService<T> {
     if (update) {
       return this._http.put<T>(this.url + '/' + model.id, model, this.options);
     } else {
+
       return this._http.post<T>(this.url, model, this.options);
     }
   }
