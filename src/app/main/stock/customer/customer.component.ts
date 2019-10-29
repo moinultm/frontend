@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Client } from '@models/stock/client.model';
 import { PartialList } from '@models/common/patial-list.model';
@@ -10,6 +10,8 @@ import { success, warning,error } from '@services/core/utils/toastr';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
+import { fromEvent } from 'rxjs';
+import { map, filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 
 @Component({
@@ -18,7 +20,12 @@ import { CustomerDetailsComponent } from './customer-details/customer-details.co
   styleUrls: ['./customer.component.scss']
 })
 export class CustomerComponent implements OnInit {
-  data: PartialList<Client>;
+  @ViewChild('input', { static: false }) input: ElementRef;
+
+  apiResponse:any;
+  isSearching:boolean;
+
+  data: any;
   loading: boolean;
   savingCustomer: boolean;
   deletingCustomer: boolean;
@@ -38,6 +45,7 @@ export class CustomerComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
+   // console.log(  this.loadData());
   }
 
   //Loading Data
@@ -49,8 +57,7 @@ export class CustomerComponent implements OnInit {
           size: this.size
         }).subscribe((res: PartialList<Client>) => {
           this.data = res;
-          console.log( this.data)
-          this.loading = false;
+           this.loading = false;
         });
       }
 
@@ -135,7 +142,7 @@ export class CustomerComponent implements OnInit {
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
 
-      dialogConfig.width= '25%';
+      //dialogConfig.width= '250px';
 
     if (client)
     {
@@ -192,5 +199,23 @@ export class CustomerComponent implements OnInit {
     }
 
 
+   ngAfterViewInit(){
+  fromEvent(this.input.nativeElement, 'keyup').pipe(
+    map((event: any) => {
+      return event.target.value;
+    })
+    ,filter(res => res.length > 3)
+    ,debounceTime(1000)
+    ,distinctUntilChanged()
+    ).subscribe((text: Text) => {
+      this.isSearching = true;
+       this.customerService.findByPhoneNo(text).subscribe((res)=>{
+        this.loading = false;
+        this.data = res;
+      },(err)=>{
+        this.loading = false;
+      });
+    });
+}
 
 }

@@ -79,7 +79,10 @@ this.sellChartData.push(
   }
 
 
+
 }
+
+
 
 
 //https://medium.com/@DenysVuika/simple-i18n-support-for-your-angular-apps-6138a47eb2a9

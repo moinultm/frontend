@@ -118,8 +118,8 @@ refereToEditInvoice(id:number){
 
 iniForm(){
   this.form = this._fb.group({
-    fromDate: [  '',  [Validators.required],],
-    toDate: [  '',  [Validators.required],]
+    fromDate: [ new Date(),  [Validators.required],],
+    toDate: [  new Date(),  [Validators.required],]
   });
 }
 

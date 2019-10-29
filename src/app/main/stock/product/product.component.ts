@@ -174,7 +174,7 @@ export class ProductComponent implements OnInit {
 
 
   randcode(){
-    return 'G' +  Math.floor(100000 + Math.random() * 900000).toString();
+    return   Math.floor(100000 + Math.random() * 900000).toString();
   }
 
      //Delete

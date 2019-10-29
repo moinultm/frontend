@@ -10,6 +10,7 @@ import { JwtHelperService } from '@services/security/jwt-helper.service';
 })
 export class HeaderComponent implements OnInit {
 
+
   constructor(private translate: TranslateService,
     private Auth: AuthenticationService,
     public jwtHelper: JwtHelperService
@@ -18,7 +19,7 @@ export class HeaderComponent implements OnInit {
      }
 
   ngOnInit() {
- 
+
   }
 
 
@@ -31,5 +32,18 @@ export class HeaderComponent implements OnInit {
   logout(): void {
     this.Auth.logout();
   }
+
+
+  fullScreen(event) {
+    event.preventDefault()
+    let elem = document.documentElement;
+    let methodToBeInvoked = elem.requestFullscreen ||
+      elem["webkitRequestFullScreen"] || elem['mozRequestFullscreen']
+      ||
+      elem['msRequestFullscreen'];
+    if (methodToBeInvoked) methodToBeInvoked.call(elem);
+}
+
+
 
 }

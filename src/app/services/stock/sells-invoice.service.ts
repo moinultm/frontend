@@ -75,8 +75,6 @@ export class SellsInvoiceService extends CrudService<SellsInvoice> {
 
   public findByInvoiceNo(query:Text){
       this.options.params = undefined;
-
-
     return this.__http.get <PartialList<SellsInvoice>>(this.url+'?invoice='+ query ,this.options);
   }
 
@@ -87,7 +85,7 @@ export class SellsInvoiceService extends CrudService<SellsInvoice> {
 
 
 
- 
+
 
 
 }

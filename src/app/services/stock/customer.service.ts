@@ -26,6 +26,12 @@ export class CustomerService extends CrudService<Client> {
     }
 
 
+    public findByPhoneNo(query:Text){
+      this.options.params = undefined;
+    return this.__http.get <PartialList<Client>>(this.url+'?phone='+ query ,this.options);
+  }
+
+
     public findDetailsById(id: number): any {
       this.options.params = undefined;
 

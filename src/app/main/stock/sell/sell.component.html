@@ -46,32 +46,34 @@
 
 
               <form [formGroup]="form">
-                  <div class="row">
+                  <div class="row mb-3">
 
 
                       <div class="col-md-6">
-                          <mat-form-field >
+                        <div class="row mb-3">
+                          <div class="col-md-5"> <mat-form-field >
                               <input matInput [matDatepicker]="pickerFrom" placeholder="Start Date" formControlName="fromDate"  [value]="date.value">
                               <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
                               <mat-datepicker #pickerFrom></mat-datepicker>
-                            </mat-form-field>
-
-
-                            <mat-form-field>
-                                <input matInput [matDatepicker]="pickerTo" placeholder="End Date" formControlName="toDate"  [value]="date.value">
-                                <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
-                                <mat-datepicker #pickerTo></mat-datepicker>
-                              </mat-form-field>
-
-
-
+                            </mat-form-field></div>
+                          <div class="col-md-5">
+                              <mat-form-field>
+                                  <input matInput [matDatepicker]="pickerTo" placeholder="End Date" formControlName="toDate"  [value]="date.value">
+                                  <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                                  <mat-datepicker #pickerTo></mat-datepicker>
+                                </mat-form-field></div>
+                          <div class="col-md-2">
                               <button mat-raised-button color="primary"   (click)="loadData()">
                                   Search
-                              </button>
+                              </button></div>
+                        </div>
+
+
+
                           </div>
 
 
-                          <div class="col-md-3  offset-md-3">
+                          <div class="col-md-3  offset-md-2">
 
                               <div class="card-tools mb-3">
                                   <div class="input-group input-group">

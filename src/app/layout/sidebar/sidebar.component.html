@@ -1,13 +1,11 @@
 <!-- Main Sidebar Container -->
 <aside  #mainSidebar class="main-sidebar sidebar-dark-primary">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="/" class="brand-link">
       <img src="" alt="" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <span class="brand-text font-weight-light">AdminLTE </span>
     </a>
-
-
 
 
     <!-- Sidebar -->
@@ -23,9 +21,6 @@
         </div>
       </div>
 -->
-
-
-
 
 
       <!-- Sidebar Menu -->
@@ -305,12 +300,90 @@
         </ul>
       </li>
 
-    <li class="nav-item">
+    <!--li class="nav-item">
         <a href="#" routerLink="/report" class="nav-link"  routerLinkActive="active">
           <i class="nav-icon fas fa-database"></i>
           <p>Reports Data</p>
         </a>
+      </li-->
+
+
+
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+
+          <i class="nav-icon fas fa-database"></i>
+
+          <p>
+            Reports
+            <i class="fa fa-angle-left right"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+
+      <li class="nav-item">
+        <a href="#" [routerLink]="['/product-report']" class="nav-link"  routerLinkActive="active">
+          <i class="nav-icon far fa-circle"></i>
+          <p> Products Summary</p>
+        </a>
       </li>
+
+      <!--li class="nav-item">
+        <a href="#" [routerLink]="['/transaction-status-report']" class="nav-link"  routerLinkActive="active">
+          <i class="nav-icon far fa-circle"></i>
+          <p>Transaction Report</p>
+        </a>
+      </li-->
+
+      <li class="nav-item">
+          <a href="#" [routerLink]="['/stock-general-report']" class="nav-link" routerLinkActive="active">
+            <i class="nav-icon far fa-circle"></i>
+            <p>Stock General Report</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="#" [routerLink]="['/sells-status-report']" class="nav-link" routerLinkActive="active">
+            <i class="nav-icon far fa-circle"></i>
+            <p> Sales Report</p>
+          </a>
+        </li>
+
+
+        <li class="nav-item">
+          <a href="#"  [routerLink]="['/purchase-status-report']"  class="nav-link" routerLinkActive="active">
+            <i class="nav-icon far fa-circle"></i>
+            <p> Purchase Report</p>
+          </a>
+        </li>
+
+
+        <li class="nav-item">
+          <a href="#" [routerLink]="['/represent-stock-report']" class="nav-link" routerLinkActive="active">
+            <i class="nav-icon far fa-circle"></i>
+            <p> Represenatative Stock</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="#"  [routerLink]="['/represent-status-report']" class="nav-link" routerLinkActive="active">
+            <i class="nav-icon far fa-circle"></i>
+            <p> Rep. Payment Report</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="#"  [routerLink]="['/profit-loss-report']" class="nav-link" routerLinkActive="active">
+            <i class="nav-icon far fa-circle"></i>
+            <p>Profit & Loss</p>
+          </a>
+        </li>
+
+  </ul>
+</li>
+
+
+
 
 
 

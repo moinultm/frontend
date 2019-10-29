@@ -7,11 +7,7 @@ import { RoleGuard } from '@services/security/guards/role.guard';
 const routes: Routes = [
     {
         path: '', component: DashboardComponent,
-        canActivate: [ AuthGuard, RoleGuard ],
-        data: {
-          expectedRolesType: 'any',
-          expectedRoles: [ 'ROLE_DASHBOARD_ACCESS' ]
-        }
+        canActivate: [ AuthGuard ]
     }
 ];
 
