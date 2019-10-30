@@ -2,19 +2,23 @@
   <!-- Content Header (Page header) -->
   <div class="content-header">
     <div class="container-fluid">
-      <div class="row mb-2">
+      <div class="text-center loading-data">
+        <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+
+      </div>
+      <!--div class="row mb-2">
         <div class="col-sm-6">
           <h1 class="m-0 text-dark">List Orders</h1>
-        </div><!-- /.col -->
+        </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
             <li class="breadcrumb-item"><a>Stock</a></li>
             <li class="breadcrumb-item active">List Orders</li>
           </ol>
-        </div><!-- /.col -->
-      </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+        </div>
+      </div-->
+    </div>
   </div>
 
   <section class="content">
@@ -22,147 +26,158 @@
       <div class="row">
 
         <div class="col-md-12">
-            <div class="card  table-responsive">
-                <div class="card-header">
-                    <div class="row no-print">
-                        <div class="col-md-12">
-                            <form [formGroup]="form">
-                            <div class="row">
-                                <div class=" col-md-2">
-                                  <h3 class="card-title">Data table </h3>
-                                </div>
-
-                                <div class=" col-md-1">
-                                    <div class="form-group">
-                                        <a class="form-control btn btn-info text-white" (click)="newOrder()"><i class="fa fa-plus"></i>
-                                         Order</a>
-                                    </div>
-                                  </div>
-
-
-                                <div class="col-md-6  offset-md-3 text-right">
-                                    <mat-form-field >
-                                        <input matInput [matDatepicker]="pickerFrom" placeholder="Start Date" formControlName="fromDate"  [value]="date.value">
-                                        <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
-                                        <mat-datepicker #pickerFrom></mat-datepicker>
-                                      </mat-form-field>
-                                    <mat-form-field >
-                                        <input matInput [matDatepicker]="pickerTo" placeholder="End Date" formControlName="toDate"  [value]="date.value">
-                                        <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
-                                        <mat-datepicker #pickerTo></mat-datepicker>
-                                      </mat-form-field>
-                                      <button mat-raised-button color="primary"  (click)="dateFilter()">
-                                         Search
-                                      </button>
-
-                                 </div>
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Data List</h3>
+              <div class="card-tools">
+                <a href="#" (click)="newOrder()" class="nav-link d-inline" routerLinkActive="active">
+                  <span class="badge bg-primary"> <i class="fas fa-plus"></i> Palce New Order</span>
+                </a>
+                <button type="button" class="btn btn-tool" data-card-widget="maximize">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+            </div>
 
 
 
+            <div class="card-body">
 
-                            </div>
-                          </form>
-                        </div>
+              <div class="row no-print mb-3">
+                <div class="col-md-12">
+                  <form [formGroup]="form">
+                    <div class="row text-right">
+
+
+                      <div class="col-md-4">
+                      </div>
+
+                      <div class=" col-md-3">
+                        <mat-form-field class="full-width">
+                          <input matInput [matDatepicker]="pickerFrom" placeholder="Start Date"
+                            formControlName="fromDate" [value]="date.value">
+                          <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                          <mat-datepicker #pickerFrom></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+
+                      <div class=" col-md-3">
+                        <mat-form-field class="full-width">
+                          <input matInput [matDatepicker]="pickerTo" placeholder="End Date" formControlName="toDate"
+                            [value]="date.value">
+                          <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                          <mat-datepicker #pickerTo></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+                      <div class=" col-md-2  my-auto">
+                        <button class="btn btn-block btn-default btn-sm " (click)="dateFilter()">
+                          <i class="fas fa-search"></i>
+                        </button>
                       </div>
 
 
 
+                    </div>
+                  </form>
                 </div>
-                <div class="card-body">
+              </div>
 
 
-                    <table class="table table-bordered">
-                        <thead>
-                          <tr>
-                            <th style="width: 10px">#</th>
-                            <th>Order#</th>
-                            <th>Customer</th>
-                            <th>Status</th>
-                            <th>Order Date</th>
-                            <th>Amount</th>
-                            <th>Action</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-
-                            <tr *ngIf="!loading && data && !data.data.length">
-                                <td colspan="12" class="text-center loading-data">
-                                  No Data created yet!
-                                </td>
-                              </tr>
-
-                            <tr *ngIf="loading">
-                                <td colspan="12" class="text-center loading-data">
-                                    <mat-spinner></mat-spinner>
-                                </td>
-                        </tr>
-
-                        <ng-container *ngIf="!loading">
-                            <tr *ngFor="let result of data.data; let i = index;">
-                              <td>{{ i+1 }}</td>
-                              <td>{{result.reference_no}}</td>
-                              <td>{{result.clients_name}}</td>
-                              <td>
-
-                                  <div *ngIf="result.invoiced_qty > 0">
-                                 Billed
-                                  </div>
 
 
-                              </td>
-
-                              <td>{{result.date}}</td>
-                              <td>{{result.net_total}}</td>
-
-                              <td>
-                                <button mat-icon-button color="accent"
-                                matTooltip="view details invoice"
-                                 (click)="toDetails(result.id)">
-                                  <mat-icon class="mat-18">flip_to_front</mat-icon>
-                                </button>
-
-                                    <button  *ngIf="!(result.invoiced_qty > 0)" mat-icon-button color="accent" matTooltip="Create invoice"
-                                    (click)="makeInvoice(result.id)">
-                                       <mat-icon>refresh</mat-icon>
-                                   </button>
+              <div class="table-responsive">
 
 
-                                <!--button mat-icon-button color="accent" matTooltip="Edit invoice"
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th style="width: 10px">#</th>
+                      <th>Order#</th>
+                      <th>Customer</th>
+                      <th>Status</th>
+                      <th>Order Date</th>
+                      <th>Amount</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <tr *ngIf="!loading && data && !data.data.length">
+                      <td colspan="12" class="text-center loading-data">
+                        No Data created yet!
+                      </td>
+                    </tr>
+
+
+
+                    <ng-container *ngIf="!loading">
+                      <tr *ngFor="let result of data.data; let i = index;">
+                        <td>{{ i+1 }}</td>
+                        <td>{{result.reference_no}}</td>
+                        <td>{{result.clients_name}}</td>
+                        <td>
+
+                          <div *ngIf="result.invoiced_qty > 0">
+                            Billed
+                          </div>
+
+
+                        </td>
+
+                        <td>{{result.date}}</td>
+                        <td>{{result.net_total}}</td>
+
+                        <td>
+                          <button mat-icon-button color="accent" matTooltip="view details invoice"
+                            (click)="toDetails(result.id)">
+                            <mat-icon class="mat-18">flip_to_front</mat-icon>
+                          </button>
+
+                          <button *ngIf="!(result.invoiced_qty > 0)" mat-icon-button color="accent"
+                            matTooltip="Create invoice" (click)="makeInvoice(result.id)">
+                            <mat-icon>refresh</mat-icon>
+                          </button>
+
+
+                          <!--button mat-icon-button color="accent" matTooltip="Edit invoice"
                                 (click)="refereToEditInvoice(result.id)">
                                     <mat-icon>edit</mat-icon>
                                 </button-->
-                                <button mat-icon-button color="accent" matTooltip="Delete invoice">
-                                    <mat-icon>restore_from_trash</mat-icon>
-                                  </button>
+                          <button mat-icon-button color="accent" matTooltip="Delete invoice">
+                            <mat-icon>restore_from_trash</mat-icon>
+                          </button>
 
-                                </td>
-                            </tr>
-                          </ng-container>
+                        </td>
+                      </tr>
+                    </ng-container>
 
-                        </tbody>
-                      </table>
-
-
-                </div>
-
-                <div class="card-footer">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-5">
-                          <div class="dataTables_info" id="example1_info" role="status" aria-live="polite" *ngIf="!loading && data">Showing  page {{ data.current_page }}  of {{data.last_page}} pages, Total Row   {{data.total}} </div>
-                        </div>
-
-                        <div class="col-sm-12 col-md-7">
-             <ngb-pagination *ngIf="!loading && data" [collectionSize]="data.total" [pageSize]="data.per_page"
-                      [page]="data.current_page" (pageChange)="loadData($event)" class="pagination pagination-sm m-0 float-right">
-                    </ngb-pagination>
-        </div>
-
-
-
-                            </div>
-
-                </div>
+                  </tbody>
+                </table>
               </div>
+
+            </div>
+
+            <div class="card-footer">
+              <div class="row">
+                <div class="col-sm-12 col-md-5">
+                  <div class="dataTables_info" id="example1_info" role="status" aria-live="polite"
+                    *ngIf="!loading && data">Showing page {{ data.current_page }} of {{data.last_page}} pages, Total Row
+                    {{data.total}} </div>
+                </div>
+
+                <div class="col-sm-12 col-md-7">
+                  <ngb-pagination *ngIf="!loading && data" [collectionSize]="data.total" [pageSize]="data.per_page"
+                    [page]="data.current_page" (pageChange)="loadData($event)"
+                    class="pagination pagination-sm m-0 float-right">
+                  </ngb-pagination>
+                </div>
+
+
+
+              </div>
+
+            </div>
+          </div>
         </div>
 
       </div>

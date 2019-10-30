@@ -70,7 +70,7 @@
                         <td>{{item.quantity}} {{item.unit}}</td>
                         <td class="actions">
 
-                          <a href="#" class="dropdown-item" [routerLinkActiveOptions]="{exact: true}"
+                          <a href="#"  [routerLink]="['../edit',item.id]" class="dropdown-item" [routerLinkActiveOptions]="{exact: true}"
                             routerLinkActive="active">
                             <span>
                               <i class="fas fa-edit"></i>
@@ -115,8 +115,6 @@
                     [page]="data.page" (pageChange)="loadData($event)" class="pagination pagination-sm m-0 float-right">
                   </ngb-pagination>
                 </div>
-
-
 
               </div>
 

@@ -27,25 +27,30 @@
       <div class="row">
         <div class="col-md-12">
 
-          <div class="card card-primary">
-            <!--div class="card-header">
-              <h3 class="card-title">Form</h3>
-            </div-->
+          <div class="card card-outline">
+            <div class="card-header">
+              <h3 class="card-title">
+                  <i class="fas fa-edit"></i>
+                  Invoice Form</h3>
+
+                  <div class="card-tools">
+                      <a href="#" [routerLink]="['/sell']" class="nav-link d-inline"
+                      [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+                      <span class="badge">View All List</span></a>
+
+                      <button type="button" class="btn btn-tool" data-card-widget="maximize">
+                        <i class="fas fa-expand"></i>
+                      </button>
+                  </div>
+
+            </div>
             <!-- /.card-header -->
             <!-- form start -->
             <form [formGroup]="mainForm">
 
               <div class="card-body">
 
-                  <div class="form-group row">
-                      <div class="col-sm-12"><h3 class="title text-info">Invoice Properties
-                        <a href="#" [routerLink]="['/sell']" class="nav-link d-inline"   [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
-                          <span class="badge bg-info">List View</span></a>
-                      </h3>
-                      </div>
-                  </div>
-
-                <div class="row">
+                <div class="row row mb-3">
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-4">
@@ -83,7 +88,7 @@
                               </div>
 
                               <div class="col-md-4">
-                                  <mat-form-field>
+                                  <mat-form-field  class="full-width">
                                     <input matInput [matDatepicker]="picker" placeholder="Bill Date" formControlName="sellDate">
                                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                     <mat-datepicker #picker></mat-datepicker>
@@ -131,7 +136,7 @@
                                 <label>Form</label>
 
                                 <div class="form-group">
-                                    <a class="form-control btn btn-success text-white" (click)="initItemModal(addItemModal)"><i class="fa fa-plus"></i>
+                                    <a class="form-control btn btn-primary text-white" (click)="initItemModal(addItemModal)"><i class="fa fa-plus"></i>
                                       Add Item</a>
                                 </div>
                               </div>
@@ -141,14 +146,12 @@
 
                   </div>
 
-                  <div class="row">
 
-                    </div>
 
-                    <div class="table-responsive">
+                    <div class="table-responsive  mb-3">
 
                         <!--order items table-->
-                        <table class="table table-bordered mb-3">
+                        <table class="table table-bordered">
                           <thead class="thead-light">
                             <th>ProductName</th>
                             <th>Quantity</th>
@@ -233,46 +236,56 @@
                         <div class="row">
 
                             <div class="col-md-2">
+                                <div class="form-group">
                                 <label>Total </label>
                                 <input class="form-control" type="text" id="totalAmount" formControlName="totalAmount" readonly>
-
+</div>
                               </div>
 
                               <div class="col-md-2">
+                                  <div class="form-group">
                                   <label>Paid  </label>
                                   <input class="form-control" type="text" id="paidAmount" formControlName="paidAmount" placeholder="Paid Amount"
                                   (keyup)="updateDueAmount()"
                                   [class.has-error]="mainForm.get('paidAmount').dirty && mainForm.get('paidAmount').invalid">
-                              </div>
+                             </div>
+                                </div>
 
 
                           <div class="col-md-2">
+                              <div class="form-group">
                             <label> Discount on product  </label>
                             <input class="form-control" type="text" id="discountAmount" formControlName="discountAmount" readonly>
-
+</div>
                           </div>
                           <div class="col-md-2">
+                              <div class="form-group">
                               <label> Discount on Total  </label>
                             <input class="form-control" type="text" id="discountOnTotal" formControlName="discountOnTotal"  (keyup)="updateGrandTotal()">
-
+</div>
                           </div>
                           <div class="col-md-2">
+                              <div class="form-group">
                               <label>Delivery Costs  </label>
                             <input class="form-control" type="text" id="shippingCost" formControlName="shippingCost"    (keyup)="updateGrandTotal()">
+</div>
 
                           </div>
 
 
                           <div class="col-md-1">
+                              <div class="form-group">
                               <label>Net Total  </label>
                             <input class="form-control" type="text" id="grandTotal" formControlName="grandTotal" readonly>
-
+</div>
                           </div>
 
 
                           <div class="col-md-1">
+                              <div class="form-group">
                               <label>Due </label>
                               <input class="form-control" type="text" id="dueAmount" formControlName="dueAmount" readonly>
+</div>
 
                           </div>
 
