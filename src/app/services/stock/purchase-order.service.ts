@@ -57,5 +57,10 @@ export class PurchaseOrderService extends CrudService<PurchaseOrder> {
     return this.__http.get <PartialList<PurchaseOrder>>(this.url + '/' +'list'+'/'+'pi', this.options);
   }
 
+  public findByInvoiceNo(query:Text){
+    this.options.params = undefined;
+  return this.__http.get <PartialList<PurchaseOrder>>(this.url+'?invoice='+ query ,this.options);
+}
+
 
 }

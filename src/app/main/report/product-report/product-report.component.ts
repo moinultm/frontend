@@ -35,7 +35,8 @@ export class ProductReportComponent implements OnInit {
     private _fb: FormBuilder,private datePipe : DatePipe) { }
 
   ngOnInit() {
-    this.loadData();
+    //this.loadData();
+
     this.iniForm();
   }
 
@@ -53,6 +54,7 @@ export class ProductReportComponent implements OnInit {
 
 
 iniForm(){
+  this.loading=true;
   this.form = this._fb.group({
     fromDate: [  new Date(),  [Validators.required],],
     toDate: [ new Date(),  [Validators.required],]

@@ -35,7 +35,7 @@ export class ProductSellReportComponent implements OnInit {
 
   ngOnInit() {
     this.iniForm();
-    this.loadData();
+    //this.loadData();
   }
 
 

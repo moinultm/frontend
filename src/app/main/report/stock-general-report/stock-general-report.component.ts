@@ -43,7 +43,7 @@ export class StockGeneralReportComponent implements OnInit{
   	}
 
     ngOnInit(){
-      this.loadData();
+     // this.loadData();
       this.iniForm();
     }
 

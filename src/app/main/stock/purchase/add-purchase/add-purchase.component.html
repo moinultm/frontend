@@ -23,76 +23,87 @@
         <div class="row">
           <div class="col-md-12">
 
-            <div class="card card-primary">
-              <!--div class="card-header">
-                <h3 class="card-title">Form</h3>
-              </div-->
+            <div class="card card-outline">
+              <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fas fa-edit"></i>
+                    Purchase PI Form</h3>
+                    <div class="card-tools">
+                        <a href="#" [routerLink]="['/purchase']" class="nav-link d-inline"
+                        [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+                        <span class="badge">View All List</span></a>
+  
+                        <button type="button" class="btn btn-tool" data-card-widget="maximize">
+                          <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+              </div>
               <!-- /.card-header -->
               <!-- form start -->
               <form [formGroup]="mainForm">
 
                 <div class="card-body">
-                  <div class="row">
-                      <div class="col-md-6">
-                          <div class="row">
-                              <div class="col-md-12">
-                                  <div class="form-group">
-                                    <label>Purchase form</label>
-                                    <button class="form-control  btn btn-primary " (click)="openDialog()">
-                                        New Supplier
-                                    </button>
-                                  </div>
-                                </div>
+                  <div class="row mb-3">
 
-                              <div class="col-md-12">
-                                  <div class="form-group">
-                                      <label>Select from existing</label>
-                                      <select class="form-control" formControlName="supplierName">
-                                          <option [value]="null">Supplier Name</option>
-                                        <option *ngFor="let list of supplierList" [value]="list.id">
-                                          {{list.full_name}}
-                                        </option>
-                                      </select>
-                                    </div>
-                                </div>
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Party</label>
+                                <button class="form-control  btn btn-primary " (click)="openDialog()">
+                                    New Supplier
+                                </button>
+                              </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Select from existing</label>
+                                <select class="form-control" formControlName="supplierName">
+                                    <option [value]="null">Supplier Name</option>
+                                  <option *ngFor="let list of supplierList" [value]="list.id">
+                                    {{list.full_name}}
+                                  </option>
+                                </select>
+                              </div>
+                        </div>
+                   
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Payment Method</label>
+              <select class="form-control" formControlName="paymentMethod">
+                <option value="cash">Cash</option>
+                <option value="cheque">Cheque</option>
+              </select>
+            </div>
+          </div>
 
-                          </div>
+
+          <div class="col-md-3">
+
+              <mat-form-field class="full-width">
+                   <input matInput [matDatepicker]="picker" placeholder="PI Date" formControlName="purchaseDate">
+                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                   <mat-datepicker #picker></mat-datepicker>
+                 </mat-form-field>
+                 <!--https://appdividend.com/2018/09/16/angular-datepicker-example-tutorial/-->
+
+
+               </div>
+
+
                       </div>
-
-                      <div class="col-md-2">
-                        </div>
-
-
-                      <div class="col-md-4">
-                          <div class="row">
-
-                                  <div class="col-md-12">
-                                    <mat-form-field>
-                                      <input matInput [matDatepicker]="picker" placeholder="Bill Date" formControlName="purchaseDate">
-                                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                      <mat-datepicker #picker></mat-datepicker>
-                                    </mat-form-field>
-                                    <!--https://appdividend.com/2018/09/16/angular-datepicker-example-tutorial/-->
-                                  </div>
-
-                                  <div class="col-md-12">
-                                      <div class="form-group">
-                                        <label>Payment Method</label>
-                                        <select class="form-control" formControlName="paymentMethod">
-                                          <option value="cash">Cash</option>
-                                          <option value="cheque">Cheque</option>
-                                        </select>
-                                      </div>
-                                    </div>
-                          </div>
-                        </div>
+                      <div class="row"></div>
+                    </div>
+ 
 
                     </div>
+
+<div class="table-responsive">
 
 
 
                   <!-- order items table-->
-                  <table class="table table-borderless">
+                  <table class="table table-bordered table-mini">
                     <thead class="thead-light">
 
                       <th>ProductName</th>
@@ -187,19 +198,14 @@
 
                   </table>
                   <!-- order items table-->
-
-                  <div class="row">
-
-
-
-                  </div>
-
+                </div>
+              
 
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
                   <button type="button" class="btn btn-primary  float-right" (click)="save(mainForm)"
-                    [disabled]="mainForm.invalid || _saving">Save Invoice</button>
+                    [disabled]="mainForm.invalid || _saving">Save</button>
                 </div>
               </form>
               <!-- Loading profiles indicator -->

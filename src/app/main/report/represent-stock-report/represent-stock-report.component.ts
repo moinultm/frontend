@@ -53,7 +53,7 @@ export class RepresentStockReportComponent implements OnInit {
   	}
 
     ngOnInit(){
-      this.loadData(0);
+      //this.loadData(0);
       this.loadUser();
 
       this.iniForm();
@@ -123,6 +123,8 @@ export class RepresentStockReportComponent implements OnInit {
 
 
     iniForm(){
+      this.loading=true;
+
       this.form = this._fb.group({
         fromDate: [  new Date(),  [Validators.required],],
         toDate: [  new Date(),  [Validators.required],],
