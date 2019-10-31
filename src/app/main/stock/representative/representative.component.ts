@@ -5,6 +5,7 @@ import { RepresentStockService } from '@services/stock/represent-stock.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@services/security/jwt-helper.service';
 
 @Component({
   selector: 'app-representative',
@@ -25,12 +26,13 @@ export class RepresentativeComponent implements OnInit {
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
 
-  constructor(  private representService: RepresentStockService,
+  constructor(   public jwtHelper: JwtHelperService, private representService: RepresentStockService,
     private _fb: FormBuilder,
     private datePipe : DatePipe,
     private router:Router,) { }
 
   ngOnInit() {
+
     this.loadData();
     this.iniForm();
   }
@@ -59,7 +61,7 @@ export class RepresentativeComponent implements OnInit {
   }
 
 
-  dateFilter(form:any){    
+  dateFilter(form:any){
    console.log( )
   }
 

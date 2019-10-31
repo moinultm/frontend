@@ -65,7 +65,7 @@ export class RepresentStockReportComponent implements OnInit {
       this.loadingUser = true;
       this.userService.findRepresentative().subscribe((res: PartialList<User>) => {
         this.users = res.data;
-        console.log(this.users)
+        //console.log(this.users)
          this.loadingUser = false;
       });
     }
@@ -96,7 +96,7 @@ export class RepresentStockReportComponent implements OnInit {
         to:   toDt
       }).subscribe((res: PartialList<StockGeneral>) => {
         this.data = res;
-        console.log( this.data);
+        //console.log( this.data);
         this.loading = false;
       });
     }
@@ -116,7 +116,7 @@ export class RepresentStockReportComponent implements OnInit {
         to:   toDt
       }).subscribe((res: PartialList<StockGeneral>) => {
         this.data = res;
-        console.log( this.data);
+       // console.log( this.data);
         this.loading = false;
       });
     }

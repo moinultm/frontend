@@ -3,31 +3,39 @@
 
 <form  [formGroup]="form" class="example-form" >
   <div>
-  <mat-form-field>
+  <mat-form-field class="full-width">
     <input matInput placeholder="Name"  formControlName="full_name">
   </mat-form-field>
 </div>
 
 <div>
-    <mat-form-field >
+    <mat-form-field class="full-width">
         <input matInput placeholder="Contact" formControlName="contact">
       </mat-form-field>
 </div>
+
 <div>
-    <mat-form-field >
+  <mat-form-field class="full-width">
+      <input matInput placeholder="Code" formControlName="client_code">
+    </mat-form-field>
+</div>
+
+
+<div>
+    <mat-form-field class="full-width">
         <input matInput placeholder="Email" formControlName="email">
       </mat-form-field>
 </div>
 
 <div>
-    <mat-form-field >
+    <mat-form-field class="full-width">
         <input matInput placeholder="Company" formControlName="company_name">
       </mat-form-field>
 </div>
 
 
 <div>
-    <mat-form-field >
+    <mat-form-field class="full-width">
         <input matInput placeholder="Address" formControlName="address">
       </mat-form-field>
 </div>
@@ -50,6 +58,6 @@
 
 
 <mat-dialog-actions>
+    <button  mat-button class="mat-raised-button float-right"(click)="save()">Save</button>
   <button  mat-button class="mat-raised-button float-right"(click)="close()">Close</button>
-  <button  mat-button class="mat-raised-button float-right"(click)="save()">Save</button>
 </mat-dialog-actions>

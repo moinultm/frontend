@@ -44,6 +44,7 @@ export class StockGeneralReportComponent implements OnInit{
 
     ngOnInit(){
      // this.loadData();
+
       this.iniForm();
     }
 
@@ -63,7 +64,7 @@ export class StockGeneralReportComponent implements OnInit{
         to:   toDt
       }).subscribe((res:any) => {
         this.data = res;
-        console.log( this.data);
+       // console.log( this.data);
         this.loading = false;
       });
     }
@@ -83,7 +84,7 @@ export class StockGeneralReportComponent implements OnInit{
         to:   toDt
       }).subscribe((res: PartialList<StockGeneral>) => {
         this.data = res;
-        console.log( this.data);
+       // console.log( this.data);
         this.loading = false;
       });
     }
@@ -91,6 +92,7 @@ export class StockGeneralReportComponent implements OnInit{
 
     // [disabled]="form.invalid || loading" and :  new Date() will solve the blank date issue
     iniForm(){
+      this.loading=true;
       this.form = this._fb.group({
         fromDate: [  new Date(),  [Validators.required],],
         toDate: [  new Date(),  [Validators.required],]

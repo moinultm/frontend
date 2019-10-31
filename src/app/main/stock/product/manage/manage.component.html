@@ -1,6 +1,9 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <div class="content-header">
+      <div class="text-center loading-data" >
+          <mat-progress-bar mode="indeterminate" *ngIf="loading" ></mat-progress-bar>
+        </div>
     <!--  <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
@@ -51,11 +54,7 @@
                   </thead>
                   <tbody>
 
-                    <tr *ngIf="loading">
-                      <td colspan="12" class="text-center loading-data">
-                        <mat-spinner></mat-spinner>
-                      </td>
-                    </tr>
+
 
                     <tr *ngIf="!loading && data && !data.data.length">
                       <td colspan="12" class="text-center loading-data">
@@ -81,8 +80,8 @@
                             <span><i class="fa fa-eye"></i> Details</span>
                           </a>
 
-                          <a href="#" class="dropdown-item"> <span> <i class="fa fa-trash"></i>
-                            Delete</span></a>
+                          <!--a href="#" class="dropdown-item"> <span> <i class="fa fa-trash"></i>
+                            Delete</span></a-->
 
 
                             <a class="dropdown-item" href="#" (click)="toBarcode(item.id)">
@@ -183,17 +182,17 @@
           <ul class="list-group list-group-unbordered mb-3">
             <li class="list-group-item">
               <b>Total Sells: </b> <a class="float-right">
-                {{product.total_sells}}
+                {{product.total_sells}} Pcs
 
               </a>
             </li>
             <li class="list-group-item">
               <b>Total Purchase: </b> <a class="float-right">
-                {{product.total_purchase}}
+                {{product.total_purchases}} Pcs
               </a>
             </li>
             <li class="list-group-item">
-              <b>Current Stock: </b> <a class="float-right">{{product.total_quantity_transaction}}</a>
+              <b>Current Stock: </b> <a class="float-right">{{product.total_quantity_transaction}} Pcs</a>
             </li>
           </ul>
         </div>

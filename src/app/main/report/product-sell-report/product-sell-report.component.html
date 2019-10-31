@@ -38,7 +38,7 @@
                     <div class="row">
                       <div class="col-md-3">
                           <div class="form-group">
-                              <mat-form-field>
+                              <mat-form-field class="full-width">
                                   <input matInput [matDatepicker]="pickerFrom" placeholder="Start Date" formControlName="fromDate"  [value]="date.value">
                                   <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
                                   <mat-datepicker #pickerFrom></mat-datepicker>
@@ -47,7 +47,7 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <mat-form-field>
+                                <mat-form-field class="full-width">
                                     <input matInput [matDatepicker]="pickerTo" placeholder="End Date" formControlName="toDate"  [value]="date.value">
                                     <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
                                     <mat-datepicker #pickerTo></mat-datepicker>

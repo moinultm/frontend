@@ -22,9 +22,9 @@ import { map } from 'rxjs/operators';
 export class AuthenticationService {
 
 
-  CLIENT_ID = 2;
-  CLIENT_SECRET = 'ooZ3ofjGnzNNvcQqozTPQ3KHD2zi4rPIQ2PWcvFo';
-  //DESK//mz2NKWg3usK28TEOQDPoDDO3kTCkLZojX5EK4ukA
+  CLIENT_ID = 1;
+  CLIENT_SECRET = 'gazpxz3WCbDtSutFj4AswACs6ArAuszeJwCMnAuS';
+  //DESK//gazpxz3WCbDtSutFj4AswACs6ArAuszeJwCMnAuS
   //LAP//ooZ3ofjGnzNNvcQqozTPQ3KHD2zi4rPIQ2PWcvFo
 
 

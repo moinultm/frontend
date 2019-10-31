@@ -64,13 +64,13 @@
                       <div class="col-md-8">
 
                         <div class="row">
-                            <div class="col-md-4"><mat-form-field>
+                            <div class="col-md-4"><mat-form-field class="full-width">
                                 <input matInput [matDatepicker]="pickerFrom" placeholder="Start Date"
                                   formControlName="fromDate" [value]="date.value">
                                 <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
                                 <mat-datepicker #pickerFrom></mat-datepicker>
                               </mat-form-field></div>
-                            <div class="col-md-4"><mat-form-field>
+                            <div class="col-md-4"><mat-form-field class="full-width">
                                 <input matInput [matDatepicker]="pickerTo" placeholder="End Date" formControlName="toDate"
                                   [value]="date.value">
                                 <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
@@ -85,7 +85,7 @@
                                 </select>
                                 <span class="input-group-append">
                                   <input type="button" name="search" id="search" value="Search" (click)="dateFilter()" class="btn  btn-primary"
-                                    [disabled]="form.invalid || loading"> </span>
+                                    [disabled]="form.invalid"> </span>
                               </div></div>
                         </div>
 
@@ -176,9 +176,6 @@
                           <div *ngIf="cross.id=== P.STOCK_ITEM_ID &&  cross.product_discount_percentage  ===  char.product_discount_percentage  ">
                             {{cross.quantity }}
                           </div>
-
-
-
 
 
                         </span>

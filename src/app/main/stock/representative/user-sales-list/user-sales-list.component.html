@@ -24,11 +24,11 @@
           <div class="card  card-info">
               <div class="card-header" >
                   <h3 class="card-title">
-                    List of user and stock
+                      Stock List of  Mr.  : {{ jwtHelper.name() }}
                   </h3>
                   <div class="card-tools" >
-                      <div class="input-group input-group-sm" *ngIf="!loadingUser">
-                          <label>Search by Rep </label>
+                       <div class="input-group input-group-sm" *ngIf="!loadingUser">
+                          <label>User:</label>
                           <select class="form-control" (change)="changeSelection($event.target.value)">
                             <option [value]="0">--All--</option>
                             <option *ngFor="let list of users.data" [value]="list.id">

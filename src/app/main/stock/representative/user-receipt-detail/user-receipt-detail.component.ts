@@ -23,7 +23,7 @@ export class UserReceiptDetailComponent implements OnInit {
   ngOnInit() {
     let id=this.route.snapshot.params.id;
     this.ShowBillDetails(id);
- 
+
   }
 
   ShowBillDetails(id:number){
@@ -35,29 +35,51 @@ export class UserReceiptDetailComponent implements OnInit {
     });
   }
 
-  print(): void {
-    event.preventDefault()
 
-    let printContents, popupWin;
-    printContents = document.getElementById('print-section').innerHTML;
-    popupWin = window.open();
-    popupWin.document.open();
-    popupWin.document.write(`
-      <html>
-        <head>
-          <title>Print tab</title>
-          <style>
-          .hidden-form {
-            display: none;
-        }
-        
-          </style>
-        </head>
-    <body onload="window.print();window.close()">${printContents}</body>
-      </html>`
-    );
-    popupWin.document.close();
+  private getElementTag(tag: keyof HTMLElementTagNameMap): string {
+    const html: string[] = [];
+    const elements = document.getElementsByTagName(tag);
+    for (let index = 0; index < elements.length; index++) {
+      html.push(elements[index].outerHTML);
+    }
+    return html.join('\r\n');
+  }
+
+
+  print(printSectionId): void {
+    event.preventDefault()
+  let printContents, popupWin, styles = "", links = '';
+
+
+
+    styles = this.getElementTag('style');
+    links = this.getElementTag('link');
+
+
+  printContents = document.getElementById(printSectionId).innerHTML;
+  popupWin = window.open("", "_blank", "top=0,left=0,height=auto,width=auto");
+  popupWin.document.open();
+  popupWin.document.write(`
+    <html>
+      <head>
+        <title>Report</title>
+        ${styles}
+        ${links}
+        <style>
+        body
+          {
+            padding: 50mm  10mm  10mm 10mm;
+          }
+      </style>
+      </head>
+      <body onload="window.print(); setTimeout(()=>{ window.close(); }, 0)">
+        ${printContents}
+      </body>
+    </html>`);
+  popupWin.document.close();
 }
+
+
 
 
 }

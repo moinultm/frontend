@@ -49,7 +49,7 @@ export class ManageComponent implements OnInit {
         size: this.size
       }).subscribe((res: PartialList<Product>) => {
         this.data = res;
-        console.log( this.data )
+      //  console.log( this.data )
         this.loading = false;
       });
     }
@@ -79,7 +79,7 @@ loadDetails(id:number): void {
   this.loadingDetails = true;
   this.productService.findDetailsById(id).subscribe((res: PartialList<Product>) => {
     this.details = res;
-    console.log(this.details);
+ //   console.log(this.details);
     this.loadingDetails = false;
   });
 }

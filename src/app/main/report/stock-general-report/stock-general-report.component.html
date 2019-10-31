@@ -51,20 +51,20 @@
                       <div class="col-md-6"></div>
                       <div class="col-md-6  text-right">
                           <div class="row">
-                            <div class="col-md-5"> <mat-form-field>
+                            <div class="col-md-5"> <mat-form-field class="full-width">
                                 <input matInput [matDatepicker]="pickerFrom" placeholder="Start Date"
                                   formControlName="fromDate" [value]="date.value">
                                 <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
                                 <mat-datepicker #pickerFrom></mat-datepicker>
                               </mat-form-field></div>
-                            <div class="col-md-5"><mat-form-field>
+                            <div class="col-md-5"><mat-form-field class="full-width">
                                 <input matInput [matDatepicker]="pickerTo" placeholder="End Date" formControlName="toDate"
                                   [value]="date.value">
                                 <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
                                 <mat-datepicker #pickerTo></mat-datepicker>
                               </mat-form-field></div>
                             <div class="col-md-2 my-auto">
-                                <button type="button" class="btn btn-tool text-primary" data-card-widget="collapse" [disabled]="form.invalid || loading" (click)="dateFilter()">
+                                <button type="button" class="btn btn-tool text-primary" data-card-widget="collapse" [disabled]="form.invalid" (click)="dateFilter()">
                                     <i class="fas fa-search"></i>
 
                         </button>

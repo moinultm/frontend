@@ -5,6 +5,7 @@ import { RepresentStockService } from '@services/stock/represent-stock.service';
 import { RepresentStock } from '@models/stock/represent-stock.model';
 import { UserService } from '@services/security/user.service';
 import { User } from '@models/security/user.model';
+import { JwtHelperService } from '@services/security/jwt-helper.service';
 
 
 @Component({
@@ -24,15 +25,30 @@ loadingCategory: boolean;
 page = 1;
 size = 10;
 
+currentUserID=0;
+
 users:PartialList <User>;
 
-  constructor(private representService: RepresentStockService,    private userService:UserService) { }
+isRoleViewAll:any;
+
+
+  constructor(    public jwtHelper: JwtHelperService,
+    private representService: RepresentStockService,    private userService:UserService) {
+      this.currentUserID=parseInt(this.jwtHelper.id());
+      this.isRoleViewAll=  this.jwtHelper.hasRole('ROLE_VIEW_ALL');
+    }
 
   ngOnInit() {
 
-    this.loadData(0);
+    console.log(this.jwtHelper.userRoles());
+    if (this.isRoleViewAll){      this.loadUser();    }
+    else{this.loadingUser=true;}
 
-    this.loadUser();
+    let uid =this.currentUserID;
+    this.loadData(uid);
+
+
+
   }
 
 

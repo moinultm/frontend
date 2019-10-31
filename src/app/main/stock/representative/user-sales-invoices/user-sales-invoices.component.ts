@@ -3,6 +3,7 @@ import { RepresentStockService } from '@services/stock/represent-stock.service';
 import { PartialList } from '@models/common/patial-list.model';
 import { SellsInvoice } from '@models/stock/invoice.model';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@services/security/jwt-helper.service';
 
 @Component({
   selector: 'app-user-sales-invoices',
@@ -19,11 +20,18 @@ export class UserSalesInvoicesComponent implements OnInit {
   page = 1;
   size = 10;
 
+  currentUserID=0;
 
-  constructor( private representService: RepresentStockService,    private router:Router) { }
+  constructor(
+    public jwtHelper: JwtHelperService,
+    private representService: RepresentStockService,
+    private router:Router) {
+    this.currentUserID=parseInt(this.jwtHelper.id());
+  }
 
   ngOnInit() {
-    this.loadData(0);
+    let uid =this.currentUserID;
+    this.loadData(uid);
   }
 
   //Loading Data

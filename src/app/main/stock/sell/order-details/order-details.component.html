@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Details</h1>
+            <h1 class="m-0 text-dark">Sells Order Details</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -22,17 +22,17 @@
 
     <mat-spinner class="loading-profiles" *ngIf="loadingDetails"></mat-spinner>
 
-    <section class="content" id="print-section">
+    <section class="content" >
       <div class="container-fluid" *ngIf="!loadingDetails">
         <div class="row">
 <div class="col-md-12">
 
-    <div class="invoice p-3 mb-3">
+    <div class="invoice p-3 mb-3" id="print-section">
         <!-- title row -->
         <div class="row">
           <div class="col-12">
             <h4>
-              <i class="fas fa-globe"></i> Order Details
+              <i class="fas fa-globe no-print"></i> Sells Order
               <small class="float-right" *ngFor="let  T of details.data " >Date: {{T.date}} </small>
             </h4>
           </div>
@@ -112,11 +112,12 @@
         <!-- /.row -->
 
         <div class="row">
+          <div class="col-6"  ></div>
           <!-- accepted payments column -->
-          <div class="col-6"  >
+          <!--div class="col-6"  >
 
             <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-           <h4>View Invoice details</h4>
+           <h4>View payment details</h4>
 
            <div class="direct-over-flow">
 
@@ -124,26 +125,20 @@
 
             <li *ngFor="let TP of T.order_invoices ;">
               <span class="handle ui-sortable-handle">
-                <i class="fas fa-ellipsis-v"></i>
-                <i class="fas fa-ellipsis-v"></i>
+                <i class="fas fa-ellipsis-v no-print"></i>
+                <i class="fas fa-ellipsis-v no-print"></i>
               </span>
 
               <span class="text">Reference: {{ TP.reference_no }} - </span>
 
-              <small class="badge badge-info">Total : {{ TP.total }} </small>
-              <small class="badge badge-info">Paid : {{ TP.paid }} </small>
-              <div class="tools">
-                <i class="fas fa-clock"></i>
-                {{ TP.date }}
-                 </div>
-
+              <small class="badge ">Total : {{ TP.total }} </small>
+              <small class="badge ">Paid : {{ TP.paid }} </small>
+              <small class="badge ">Date :      {{ TP.date }}</small>
             </li>
-
-
           </ul>
-        </div><!--overflow-->
+        </div>
 
-          </div>
+          </div-->
           <!-- /.col -->
 
           <div class="col-6">
@@ -206,7 +201,7 @@
         <!-- this row will not appear when printing -->
         <div class="row no-print">
           <div class="col-12" *ngFor="let  T of details.data ">
-            <a href="#"  (click)="print()"  class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+            <a href="#"  (click)="print('print-section')"  class="btn btn-default"><i class="fas fa-print"></i> Print</a>
             <!--button type="button" class="btn btn-success float-right"
             [disabled]="mainForm.invalid || _saving"
             style="margin-right: 5px;" (click)="makeInvoice(T.id)" ><i class="far fa-credit-card"></i>

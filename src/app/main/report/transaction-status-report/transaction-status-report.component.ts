@@ -46,7 +46,7 @@ export class TransactionStatusReportComponent implements OnInit {
       to:   toDt
     }).subscribe((res: PartialList<any>) => {
       this.data = res;
-      console.log( this.data);
+      //console.log( this.data);
       this.loading = false;
     });
   }

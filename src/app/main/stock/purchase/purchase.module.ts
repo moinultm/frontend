@@ -48,7 +48,7 @@ const routes: Routes = [
     //materials
 
     MaterialsModule,
-    NgSelectModule
+    NgSelectModule,
   ],
   entryComponents:[AddPaymentComponent,AddSupplierComponent],
 })

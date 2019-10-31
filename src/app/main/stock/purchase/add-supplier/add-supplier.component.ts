@@ -62,6 +62,7 @@ this.initSaveForm(this.LOCAL_data)
       id: this.selectedCustomer.id,
       full_name: this.form.get('full_name').value,
       contact: this.form.get('contact').value,
+      client_code: 0,
       email: this.form.get('email').value,
       company_name: this.form.get('company_name').value,
       address: this.form.get('address').value,

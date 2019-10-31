@@ -4,8 +4,7 @@
       <div class="container-fluid">
         <div class="text-center loading-data" >
           <mat-progress-bar mode="indeterminate" *ngIf="loading" ></mat-progress-bar>
-
-    </div>
+        </div>
         <!--div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="m-0 text-dark">Purchases</h1>
@@ -29,9 +28,9 @@
             <div class="card card-outline">
                 <div class="card-header">
                   <h3 class="card-title">
-                      <i class="fas fa-th-list"></i>                    
+                      <i class="fas fa-th-list"></i>
                       List Purchases
-                       </h3>   
+                       </h3>
                        <div class="card-tools">
                           <a href="#" [routerLink]="['/purchase/add']" class="nav-link d-inline"
                           [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
@@ -39,8 +38,8 @@
                           <button type="button" class="btn btn-tool" data-card-widget="maximize">
                             <i class="fas fa-expand"></i>
                           </button>
-                       </div>                 
-                
+                       </div>
+
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -68,9 +67,9 @@
                               Search
                             </button>
                               </div>
-        
+
                           </div>
-        
+
                           <div class="col-md-4 my-auto">
                             <div class="form-field mb-3">
                             <div class="input-group input-group">
@@ -81,7 +80,7 @@
                             </div>
                           </div>
                           </div>
-        
+
                         </div>
                       </form>
 
@@ -104,7 +103,7 @@
                     </thead>
                     <tbody>
 
-                      
+
                           <tr *ngIf="!loading && data && !data.data.length">
                             <td colspan="12" class="text-center loading-data">
                               No category created yet!

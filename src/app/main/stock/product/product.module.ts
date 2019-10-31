@@ -14,6 +14,7 @@ import { ListGiftComponent } from './gift-product/list-gift/list-gift.component'
 import { ListDamageComponent } from './damage-product/list-damage/list-damage.component';
 
 
+
 const routes: Routes = [
   // Roles component
   {path: '',component: ProductComponent },
@@ -24,11 +25,12 @@ const routes: Routes = [
   {path: 'damage',component: DamageProductComponent },
   {path: 'list-damage',component: ListDamageComponent },
   {path: 'list-gift',component: ListGiftComponent },
+
 ];
 
 
 @NgModule({
-  declarations: [ProductComponent, ManageComponent,ProductBarcodeComponent, GiftProductComponent, DamageProductComponent, ListGiftComponent, ListDamageComponent],
+  declarations: [ProductComponent, ManageComponent,ProductBarcodeComponent, GiftProductComponent, DamageProductComponent, ListGiftComponent, ListDamageComponent ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

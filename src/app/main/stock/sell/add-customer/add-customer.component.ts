@@ -45,6 +45,7 @@ this.initSaveForm(this.LOCAL_data)
     this.form = this._formBuilder.group({
       full_name: [ client ? client.full_name : '',  [Validators.required, Validators.maxLength(255)]  ],
       contact: [ client ? client.contact : '',  [Validators.required, Validators.maxLength(255)]  ],
+      client_code:[ client ? client.client_code : '',  [Validators.required, Validators.maxLength(255)]  ],
       email: [ client ? client.email : '',  [Validators.required, Validators.maxLength(255)]  ],
       company_name: [ client ? client.company_name : '',  [Validators.required, Validators.maxLength(255)]  ],
       address: [ client ? client.address : '',  [Validators.nullValidator ]],
@@ -62,6 +63,7 @@ this.initSaveForm(this.LOCAL_data)
       id: this.selectedCustomer.id,
       full_name: this.form.get('full_name').value,
       contact: this.form.get('contact').value,
+      client_code:this.form.get('client_code').value,
       email: this.form.get('email').value,
       company_name: this.form.get('company_name').value,
       address: this.form.get('address').value,
