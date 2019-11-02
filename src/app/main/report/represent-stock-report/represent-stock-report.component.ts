@@ -96,7 +96,7 @@ export class RepresentStockReportComponent implements OnInit {
         to:   toDt
       }).subscribe((res: PartialList<StockGeneral>) => {
         this.data = res;
-        //console.log( this.data);
+       console.log( this.data);
         this.loading = false;
       });
     }
@@ -160,7 +160,6 @@ export class RepresentStockReportComponent implements OnInit {
       let printContents, popupWin, styles = "", links = '';
 
 
-
         styles = this.getElementTag('style');
         links = this.getElementTag('link');
 
@@ -175,6 +174,11 @@ export class RepresentStockReportComponent implements OnInit {
             ${styles}
             ${links}
             <style>
+            body
+            {
+              padding: 20mm  10mm  10mm 10mm;
+            }
+
             @page {
               size: A4 landscape;
             }

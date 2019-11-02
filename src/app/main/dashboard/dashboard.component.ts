@@ -3,6 +3,7 @@ import { TranslateService } from '../../services/common/translate.service';
 import { Dashboard } from '@models/common/dashboard.model';
 import { PartialList } from '@models/common/patial-list.model';
 import { DashboardService } from '@services/common/dashboard.service';
+import { SettingsService } from '@services/common/settings.service';
 
 
 @Component({
@@ -14,6 +15,7 @@ export class DashboardComponent implements OnInit {
 
   data: any;
   loading: boolean;
+location:any;
 
 //general chart
   chartOptions = {
@@ -40,7 +42,9 @@ export class DashboardComponent implements OnInit {
 
 
   constructor(private translate: TranslateService,
-    private dashboard:DashboardService) {
+    private dashboard:DashboardService,
+    private locationService :SettingsService) {
+
 
   }
 
@@ -76,6 +80,19 @@ this.sellChartData.push(
 
   setLang(lang: string) {
     this.translate.use(lang);
+  }
+
+getLoc(){
+
+
+  this.locationService.getPosition().then(pos=>
+    {
+
+
+       console.log(`Positon: ${pos.lng} ${pos.lat}`);
+       this.location=`Positon: ${pos.lng} ${pos.lat}`;
+    });
+
   }
 
 

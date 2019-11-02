@@ -135,8 +135,9 @@
                     <tr>
                       <th>#</th>
                       <th>Product Name</th>
-                      <th>opening</th>
-                      <th>Stock In</th>
+                      <th>Opening Qty</th>
+                      <th>Stock Recived</th>
+                      <th>MRP</th>
                       <th *ngFor="let char of data.characteristics">
                         {{ char.product_discount_percentage }} (%) Qty
                       </th>
@@ -145,15 +146,13 @@
                       </th>
                       <th>Gift Qty</th>
                       <th>Damage Qty</th>
-                      <th>Closing Qty</th>
-                      <th>Due</th>
-                      <th>Total Amt</th>
+                      <th>In-Hand Qty</th>
+
+                      <th>Sales Total</th>
 
                     </tr>
                   </thead>
                   <tbody>
-
-
 
                     <tr *ngIf="!loading && data && !data.product.length">
                       <td colspan="12" class="text-center loading-data">
@@ -161,13 +160,13 @@
                       </td>
                     </tr>
 
-
                     <tr *ngFor="let P of data.product; let i = index">
                       <td> {{ i+1 }}</td>
                       <td> {{ P.STOCK_ITEM_NAME }}</td>
+
                       <td> {{ P.TRAN_QUANTITY }} </td>
                       <td> {{ P.INWARD_QUANTITY }} </td>
-
+                      <td> {{ P.ITEM_MRP }}</td>
 
                       <td *ngFor="let char   of data.characteristics">
                         <span *ngFor=" let cross   of data.crossData">
@@ -192,10 +191,10 @@
                       <td> {{  _CIP(P.GIFT_QUANTITY) }}</td>
                       <td>  {{  _CIP(P.DAMAGE_QUANTITY) }} </td>
                       <td>{{ _CIN(P.TRAN_QUANTITY)+_CIN(P.OUTWARD_QUANTITY) +_CIN(P.GIFT_QUANTITY) +_CIN(P.DAMAGE_QUANTITY)+_CIN(P.INWARD_QUANTITY)  }}</td>
-                     <td>0</td>
+
                       <td>
 
-                          {{ _CIN(P.TRAN_AMOUNT)+_CIN(P.OUTWARD_AMOUNT) +_CIN(P.GIFT_COST) +_CIN(P.DAMAGE_COST)+_CIN(P.INWARD_AMOUNT)  }}
+                          {{ _CIN(P.OUTWARD_AMOUNT) +_CIN(P.GIFT_COST) +_CIN(P.DAMAGE_COST)+_CIN(P.INWARD_AMOUNT)  }}
 
                       </td>
 
