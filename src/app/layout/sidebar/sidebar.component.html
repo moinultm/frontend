@@ -39,6 +39,8 @@
           </li>
 
 
+          <li class="nav-header">STOCK</li>
+
           <li class="nav-item has-treeview">
             <a href="#"  class="nav-link">
 
@@ -308,6 +310,13 @@
       </li-->
 
 
+      <li class="nav-item">
+          <a href="#" [routerLink]="['/expenses']"   class="nav-link"   [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" >
+
+            <i class="nav-icon  fas fa-feather-alt"></i>
+            <p>Expenses</p>
+          </a>
+        </li>
 
       <li class="nav-item has-treeview">
         <a href="#" class="nav-link">
@@ -357,7 +366,6 @@
           </a>
         </li>
 
-
         <li class="nav-item">
           <a href="#" [routerLink]="['/represent-stock-report']" class="nav-link" routerLinkActive="active">
             <i class="nav-icon far fa-circle"></i>
@@ -368,7 +376,7 @@
         <li class="nav-item">
           <a href="#"  [routerLink]="['/represent-status-report']" class="nav-link" routerLinkActive="active">
             <i class="nav-icon far fa-circle"></i>
-            <p> Rep. Payment Report</p>
+            <p> Rep.Payment Report</p>
           </a>
         </li>
 
@@ -385,16 +393,47 @@
 
 
 
+<li class="nav-header">HRM</li>
+
+<li class="nav-item has-treeview">
+  <a href="#" class="nav-link">
+
+    <i class="nav-icon fas fa-user-tie"></i>
+    <p>
+        Attandance
+      <i class="fa fa-angle-left right"></i>
+    </p>
+  </a>
+
+  <ul class="nav nav-treeview">
+    <li class="nav-item">
+      <a href="#" [routerLink]="['/product-report']" class="nav-link"  routerLinkActive="active">
+        <i class="nav-icon far fa-circle"></i>
+        <p>Employee Attandance</p>
+      </a>
+
+    </li>
+<li class="nav-item">
+  <a href="#" [routerLink]="['/product-report']" class="nav-link"  routerLinkActive="active">
+    <i class="nav-icon far fa-circle"></i>
+    <p>Attandance Report</p>
+  </a>
+</li>
+
+<li class="nav-item">
+    <a href="#" [routerLink]="['/product-report']" class="nav-link"  routerLinkActive="active">
+      <i class="nav-icon far fa-circle"></i>
+      <p>Notice Board</p>
+    </a>
+  </li>
 
 
+</ul>
 
-          <li class="nav-item">
-            <a href="#" [routerLink]="['/expenses']"   class="nav-link"   [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" >
 
-              <i class="nav-icon  fas fa-feather-alt"></i>
-              <p>Expenses</p>
-            </a>
-          </li>
+</li>
+
+
 
 
 
@@ -469,6 +508,14 @@
 
         </ul>
       </li>
+    </ul>
+
+
+  </nav>
+  <!-- /.sidebar-menu -->
+</div>
+<!-- /.sidebar -->
+</aside>
 
           <!--=============Dummy Menus=====================
           <li class="nav-item">
@@ -719,14 +766,4 @@
             </a>
           </li>-->
 
-        </ul>
 
-
-      </nav>
-      <!-- /.sidebar-menu -->
-
-
-
-    </div>
-    <!-- /.sidebar -->
-  </aside>

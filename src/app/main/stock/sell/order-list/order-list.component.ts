@@ -92,6 +92,7 @@ makeInvoice(id:number){
 
 
 newOrder(){
+  event.preventDefault();
   this.router.navigate([`sell/order`]);
 }
 

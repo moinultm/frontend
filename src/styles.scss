@@ -11,6 +11,11 @@
 //@import "../node_modules/jqwidgets-ng/jqwidgets/styles/jqx.base.css";
 
 
+label:not(.form-check-label):not(.custom-file-label) {
+  font-weight: normal!important;
+}
+
+
 .loading-data{min-height: 10px;}
 
   /* remove scrollbar space
