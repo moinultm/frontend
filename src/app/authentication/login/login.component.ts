@@ -75,8 +75,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         (res: any) => {
           this.authenticationService.saveToken(res.access_token);
           this.loading = false;
-          return  this._router.navigateByUrl('/dashboard');
-          //return this._router.navigate([constants.home_url]);
+          //return  this._router.navigateByUrl('/dashboard');
+        return this._router.navigate([constants.home_url]);
         }, (error :any) => {
           warning('Authentication error!', 'Username or password entered is incorrect', this._toastr);
           this.loading = false;
