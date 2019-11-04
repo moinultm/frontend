@@ -7,7 +7,7 @@ import { Title } from '@angular/platform-browser';
 import { ConfigService } from '@app/core/services/config.service';
 
 // Application services
-import { AuthenticationService } from '@services/security/authentication.service';
+import { AuthenticationService } from '@app/core/services/security/authentication.service';
 import { Router } from '@angular/router';
 
 // Application constants
@@ -43,7 +43,7 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
    * @param _router The router object
    * @param _toastr The toastr service
    * @param titleService The title service
-   * 
+   *
    * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
    */
   constructor(
@@ -68,14 +68,14 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
 
   /**
    * Component OnInit phase
-   * 
+   *
    * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
    */
   ngOnInit(): void { }
 
   /**
    * Build the login form fields
-   * 
+   *
    * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
    */
   private buildForm(): void {
@@ -86,7 +86,7 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
 
   /**
    * Forgot password main function
-   * 
+   *
    * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
    */
   forgot(): void {

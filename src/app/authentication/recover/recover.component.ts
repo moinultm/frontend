@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ConfigService } from '@app/core/services/config.service';
 
 // Application services
-import { AuthenticationService } from '@services/security/authentication.service';
+import { AuthenticationService } from '@app/core/services/security/authentication.service';
 
 // Application constants
 import { constants } from '@env/constants';
@@ -49,7 +49,7 @@ export class RecoverComponent implements OnInit, OnDestroy {
    * @param _router The router object
    * @param _route The route object
    * @param titleService The title service
-   * 
+   *
    * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
    */
   constructor(
@@ -79,14 +79,14 @@ export class RecoverComponent implements OnInit, OnDestroy {
 
   /**
    * Component OnInit phase
-   * 
+   *
    * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
    */
   ngOnInit(): void { }
 
   /**
    * Build the login form fields
-   * 
+   *
    * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
    */
   private buildForm(): void {
@@ -98,7 +98,7 @@ export class RecoverComponent implements OnInit, OnDestroy {
 
   /**
    * Forgot password main function
-   * 
+   *
    * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
    */
   recover(): void {

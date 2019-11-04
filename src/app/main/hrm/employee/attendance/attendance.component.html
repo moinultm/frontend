@@ -1,0 +1,199 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+        <div class="text-center loading-data">
+            <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+          </div>
+    </div>
+  </div>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+
+          <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">
+                      <i class="fas fa-bars"></i>
+                    Attendance List</h3>
+                  <div class="card-tools">
+                    <a href="#" (click)="initSave(saveModal, item)" class="nav-link d-inline" routerLinkActive="active">
+                      <span class="badge bg-primary"> <i class="fas fa-plus"></i> Add Attendance</span>
+                    </a>
+                    <button type="button" class="btn btn-tool" data-card-widget="maximize">
+                      <i class="fas fa-expand"></i>
+                    </button>
+                  </div>
+                </div>
+
+
+
+                <div class="card-body">
+                    <div class="row no-print mb-3">
+                    <div class="col-md-12">
+                      <form [formGroup]="form">
+                        <div class="row text-right">
+
+
+                          <div class="col-md-4">
+                          </div>
+
+                          <div class=" col-md-3">
+                            <mat-form-field class="full-width">
+                              <input matInput [matDatepicker]="pickerFrom" placeholder="Start Date"
+                                formControlName="fromDate" [value]="date.value">
+                              <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                              <mat-datepicker #pickerFrom></mat-datepicker>
+                            </mat-form-field>
+                          </div>
+
+                          <div class=" col-md-3">
+                            <mat-form-field class="full-width">
+                              <input matInput [matDatepicker]="pickerTo" placeholder="End Date" formControlName="toDate"
+                                [value]="date.value">
+                              <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                              <mat-datepicker #pickerTo></mat-datepicker>
+                            </mat-form-field>
+                          </div>
+
+                          <div class=" col-md-2  my-auto">
+                              <button class="btn btn-block btn-default btn-sm " (click)="dateFilter()">
+                                <i class="fas fa-search"></i>
+                              </button>
+                            </div>
+
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+
+
+
+
+                <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th style="width: 10px">#</th>
+                      <th>Order#</th>
+                      <th>Customer</th>
+                      <th>Status</th>
+                      <th>Order Date</th>
+                      <th>Amount</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+
+
+                  </tbody>
+                </table>
+              </div>
+</div>
+
+        </div>
+
+        </div>
+        </div>
+
+
+    </div>
+  </section>
+
+
+
+  <ng-template #saveModal let-modal>
+
+      <!-- Modal header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Add Attandance
+
+            <button type="button" class="btn btn-tool" data-card-widget="maximize">
+                <i class="fas fa-check"></i>
+              </button>
+        </h4>
+
+
+        <button type="button" class="close" aria-label="Close" (click)="close(modal)">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- ./Modal header -->
+
+      <!-- Modal body -->
+      <div class="modal-body">
+
+        <div class="row">
+
+          <div class="col-md-12">
+              <div class="form-group">
+                  <label>User</label>
+                  <select class="form-control">
+                      <option>Present</option>
+                    <option>Absent</option>
+                    <option>Leave</option>
+                  </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="text" class="form-control" placeholder="Date">
+                  </div>
+
+                  <div class="row">
+
+                      <div class="col-md-6 col-sm-6">
+                          <div class="form-group">
+                              <label>Time picker:</label>
+
+                              <div class="input-group date" id="timepicker" data-target-input="nearest">
+                                <input type="text" class="form-control datetimepicker-input" data-target="#timepicker">
+                                <div class="input-group-append" data-target="#timepicker" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="far fa-clock"></i></div>
+                                </div>
+                                </div>
+                              <!-- /.input group -->
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                          </div>
+
+                  </div>
+
+                    <div class="form-group">
+                        <label>Note</label>
+                        <input type="text" class="form-control" placeholder="Notes">
+                      </div>
+
+                      <div class="form-group">
+                          <label>Status</label>
+                          <select class="form-control">
+                              <option>Present</option>
+                            <option>Absent</option>
+                            <option>Leave</option>
+                          </select>
+                        </div>
+
+          </div>
+        </div>
+
+
+       </div>
+      <!-- ./Modal body -->
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger"  [disabled]="form.invalid" (click)="save(modal)">Save</button>
+      </div>
+      <!-- ./Modal footer -->
+
+    </ng-template>
+
+
+
+</div>
+<!-- Content Wrapper. Contains page content -->

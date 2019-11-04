@@ -1,14 +1,14 @@
 
 import { Component, OnInit } from '@angular/core';
-import { Vat } from '@models/common/Vat.model';
-import { PartialList } from '@models/common/patial-list.model';
+import { Vat } from '@app/shared/models/common/Vat.model';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {VatService } from '@services/common/vat.service';
+import {VatService } from '@app/core/services/common/vat.service';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { success, warning, error } from '@services/core/utils/toastr';
+import { success, warning, error } from '@app/core/services/core/utils/toastr';
 
 @Component({
   selector: 'app-vat-settings',

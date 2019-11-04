@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Client } from '@models/stock/client.model';
-import { PartialList } from '@models/common/patial-list.model';
-import { CustomerService } from '@services/stock/customer.service';
+import { Client } from '@app/shared/models/stock/client.model';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
+import { CustomerService } from '@app/core/services/stock/customer.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Title } from '@angular/platform-browser';
-import { success, warning,error } from '@services/core/utils/toastr';
+import { success, warning,error } from '@app/core/services/core/utils/toastr';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
 
-import { JwtHelperService } from '@services/security/jwt-helper.service';
+import { JwtHelperService } from '@app/core/services/security/jwt-helper.service';
 
 @Component({
   selector: 'app-navbar',

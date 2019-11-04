@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { PartialList } from '@models/common/patial-list.model';
-import { Product } from '@models/stock/product.model';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
+import { Product } from '@app/shared/models/stock/product.model';
 import { DatePipe } from '@angular/common';
-import { ProductReportService } from '@services/report/product-report.service';
-import { UserService } from '@services/security/user.service';
-import { User } from '@models/security/user.model';
-import { StockGeneral } from '@models/stock/stock-general.model';
+import { ProductReportService } from '@app/core/services/report/product-report.service';
+import { UserService } from '@app/core/services/security/user.service';
+import { User } from '@app/shared/models/security/user.model';
+import { StockGeneral } from '@app/shared/models/stock/stock-general.model';
 
 @Component({
   selector: 'app-represent-stock-report',

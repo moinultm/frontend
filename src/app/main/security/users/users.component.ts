@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { PartialList } from '@models/common/patial-list.model';
-import { UserService } from '@services/security/user.service'
-import { ProfileService } from '@services/security/profile.service';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
+import { UserService } from '@app/core/services/security/user.service'
+import { ProfileService } from '@app/core/services/security/profile.service';
 
-import { success, error, warning } from '@app/services/core/utils/toastr';
+import { success, error, warning } from '@app/core/services/core/utils/toastr';
 
 import { constants } from '@env/constants';
-import { User } from '@models/security/user.model';
-import { Profile } from '@models/security/profile.model';
+import { User } from '@app/shared/models/security/user.model';
+import { Profile } from '@app/shared/models/security/profile.model';
 import { Title } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
@@ -186,7 +186,7 @@ name:'admins'
       formData.append('user_type', this.form.get('user_type').value);
       formData.append('profiles', this.selectedUser.profiles.map((p: Profile) => p.id)+''  );
 
- 
+
 
       this.userService.save(formData, this.selectedUser.id ? true : false).subscribe((res: User) => {
 

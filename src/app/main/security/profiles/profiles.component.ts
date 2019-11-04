@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { PartialList } from '@models/common/patial-list.model';
-import { Profile } from '@models/security/profile.model';
-import { Role } from '@models/security/role.model';
-import { ProfileService } from '@services/security/profile.service';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
+import { Profile } from '@app/shared/models/security/profile.model';
+import { Role } from '@app/shared/models/security/role.model';
+import { ProfileService } from '@app/core/services/security/profile.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { RoleService } from '@services/security/role.service';
+import { RoleService } from '@app/core/services/security/role.service';
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
 import { constants } from '@env/constants';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { success, error, warning } from '@app/services/core/utils/toastr';
+import { success, error, warning } from '@app/core/services/core/utils/toastr';
 
 
 @Component({

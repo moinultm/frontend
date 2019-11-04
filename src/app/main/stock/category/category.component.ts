@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryService } from '@services/stock/category.service';
+import { CategoryService } from '@app/core/services/stock/category.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Title } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PartialList } from '@models/common/patial-list.model';
-import { Category } from '@models/stock/category.model';
-import { success, warning, error } from '@services/core/utils/toastr';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
+import { Category } from '@app/shared/models/stock/category.model';
+import { success, warning, error } from '@app/core/services/core/utils/toastr';
 
 @Component({
   selector: 'app-category',
@@ -122,7 +122,7 @@ export class CategoryComponent implements OnInit {
           this.selectedCategory = new Category();
         });
     }
-  
+
      //Delete
      delete(modal: any): void {
       event.preventDefault();
@@ -135,7 +135,7 @@ export class CategoryComponent implements OnInit {
         this.deletingCategory = false;
       },
       (err: any) => {
-        if (err.status === 403) {          
+        if (err.status === 403) {
           warning('Warning!', err.error.error, this._toastr);
           this.close(modal, true);
         } else {

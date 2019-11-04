@@ -2,12 +2,12 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, Input } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PartialList } from '@models/common/patial-list.model';
-import {SellsInvoice } from '@models/stock/invoice.model';
-import { SellsInvoiceService } from '@services/stock/sells-invoice.service';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
+import {SellsInvoice } from '@app/shared/models/stock/invoice.model';
+import { SellsInvoiceService } from '@app/core/services/stock/sells-invoice.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddPaymentComponent } from '../add-payment/add-payment.component';
-import { error, warning, success } from '@services/core/utils/toastr';
+import { error, warning, success } from '@app/core/services/core/utils/toastr';
 
 @Component({
   selector: 'app-order-details',

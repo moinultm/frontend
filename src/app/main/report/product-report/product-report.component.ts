@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PartialList } from '@models/common/patial-list.model';
-import { Product } from '@models/stock/product.model';
-import { ProductReportService } from '@services/report/product-report.service';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
+import { Product } from '@app/shared/models/stock/product.model';
+import { ProductReportService } from '@app/core/services/report/product-report.service';
 import { Validators, FormGroup, FormBuilder, FormControl } from '@angular/forms';
 
 import { DatePipe } from '@angular/common';
@@ -69,7 +69,7 @@ dateFilter(){
   this.fromDate=formDt;
   this.toDate=toDt;
 
-  
+
   this.loading = true;
   this.categoryService.postProductSummary({
     from:  formDt,

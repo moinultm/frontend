@@ -2,11 +2,11 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, Inject } from 
 
 import { FormGroup, FormBuilder, Validators, FormControl, ValidatorFn, FormArray } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { PartialList } from '@models/common/patial-list.model';
-import { SellsInvoice } from '@models/stock/invoice.model';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
+import { SellsInvoice } from '@app/shared/models/stock/invoice.model';
 import { ActivatedRoute } from '@angular/router';
-import { SellsInvoiceService } from '@services/stock/sells-invoice.service';
-import { Transaction } from '@models/stock/transaction.model';
+import { SellsInvoiceService } from '@app/core/services/stock/sells-invoice.service';
+import { Transaction } from '@app/shared/models/stock/transaction.model';
 import { MatPrefix } from '@angular/material';
 
 @Component({

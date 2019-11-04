@@ -28,7 +28,7 @@ import { StockGeneralReportComponent } from './stock-general-report/stock-genera
 
 import { NgxPrintModule } from 'ngx-print';
 import { ProfitLossReportComponent } from './profit-loss-report/profit-loss-report.component';
-import { AuthGuard } from '@services/security/guards/auth.guard';
+import { AuthGuard } from '@app/core/services/security/guards/auth.guard';
 
 const routes: Routes = [
 

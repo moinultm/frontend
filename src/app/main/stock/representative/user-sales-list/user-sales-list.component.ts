@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { PartialList } from '@models/common/patial-list.model';
-import { SellsInvoice } from '@models/stock/invoice.model';
-import { RepresentStockService } from '@services/stock/represent-stock.service';
-import { RepresentStock } from '@models/stock/represent-stock.model';
-import { UserService } from '@services/security/user.service';
-import { User } from '@models/security/user.model';
-import { JwtHelperService } from '@services/security/jwt-helper.service';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
+import { SellsInvoice } from '@app/shared/models/stock/invoice.model';
+import { RepresentStockService } from '@app/core/services/stock/represent-stock.service';
+import { RepresentStock } from '@app/shared/models/stock/represent-stock.model';
+import { UserService } from '@app/core/services/security/user.service';
+import { User } from '@app/shared/models/security/user.model';
+import { JwtHelperService } from '@app/core/services/security/jwt-helper.service';
 
 
 @Component({

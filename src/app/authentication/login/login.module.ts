@@ -11,7 +11,7 @@ import { LoginComponent } from './login.component';
 import { MatProgressSpinnerModule } from '@angular/material';
 
 // Routes guards
-import { NoAuthGuard } from '@services/security/guards/no-auth.guard';
+import { NoAuthGuard } from '@app/core/services/security/guards/no-auth.guard';
 
 // Module routes
 const routes: Routes = [

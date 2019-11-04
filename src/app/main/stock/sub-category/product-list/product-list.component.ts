@@ -1,9 +1,9 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef, MatSort, MatPaginator} from "@angular/material";
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { TablesDataSource } from '@services/stock/lessons.datasource';
-import { ProductService } from '@services/stock/product.service';
-import { SubcategoryService } from '@services/stock/subcategory.service';
+import { TablesDataSource } from '@app/core/services/stock/lessons.datasource';
+import { ProductService } from '@app/core/services/stock/product.service';
+import { SubcategoryService } from '@app/core/services/stock/subcategory.service';
 
 
 

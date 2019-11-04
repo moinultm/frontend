@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { PurchaseOrderService } from '@services/stock/purchase-order.service';
-import { Client } from '@models/stock/client.model';
+import { PurchaseOrderService } from '@app/core/services/stock/purchase-order.service';
+import { Client } from '@app/shared/models/stock/client.model';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { PurchaseOrder } from '@models/stock/purchase-order.model';
-import { PartialList } from '@models/common/patial-list.model';
-import { SupplierService } from '@services/stock/supplier.service';
+import { PurchaseOrder } from '@app/shared/models/stock/purchase-order.model';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
+import { SupplierService } from '@app/core/services/stock/supplier.service';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
-import { ProductService } from '@services/stock/product.service';
-import { Product } from '@models/stock/product.model';
-import { OrderItems } from '@models/stock/order-items.model ';
+import { ProductService } from '@app/core/services/stock/product.service';
+import { Product } from '@app/shared/models/stock/product.model';
+import { OrderItems } from '@app/shared/models/stock/order-items.model ';
 import { ToastrService } from 'ngx-toastr';
-import { success, error, warning } from '@app/services/core/utils/toastr';
-import { PurchaseItems } from '@models/stock/purchase-items';
+import { success, error, warning } from '@app/core/services/core/utils/toastr';
+import { PurchaseItems } from '@app/shared/models/stock/purchase-items';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 
 import { AddSupplierComponent } from '../add-supplier/add-supplier.component';

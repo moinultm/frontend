@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { PartialList } from '@models/common/patial-list.model';
-import { Damage } from '@models/stock/damage.model';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
+import { Damage } from '@app/shared/models/stock/damage.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { DamageService } from '@services/stock/damage.service';
+import { DamageService } from '@app/core/services/stock/damage.service';
 
 @Component({
   selector: 'app-list-damage',
@@ -23,7 +23,7 @@ export class ListDamageComponent implements OnInit {
   form: FormGroup;
   //selectedCategory: Category;
 
-  
+
   constructor(
     private damageService: DamageService,
     private _toastr: ToastrService,

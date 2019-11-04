@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Expense } from '@models/stock/expense.model';
-import { PartialList } from '@models/common/patial-list.model';
+import { Expense } from '@app/shared/models/stock/expense.model';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {ExpenseService } from '@services/stock/expense.service';
+import {ExpenseService } from '@app/core/services/stock/expense.service';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { success, warning, error } from '@services/core/utils/toastr';
+import { success, warning, error } from '@app/core/services/core/utils/toastr';
 
 @Component({
   selector: 'app-expense',

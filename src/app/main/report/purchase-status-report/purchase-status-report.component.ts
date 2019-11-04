@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
-import { PartialList } from '@models/common/patial-list.model';
-import { StockGeneral } from '@models/stock/stock-general.model';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
+import { StockGeneral } from '@app/shared/models/stock/stock-general.model';
 import { DatePipe } from '@angular/common';
-import { ProductReportService } from '@services/report/product-report.service';
+import { ProductReportService } from '@app/core/services/report/product-report.service';
 
 @Component({
   selector: 'app-purchase-status-report',

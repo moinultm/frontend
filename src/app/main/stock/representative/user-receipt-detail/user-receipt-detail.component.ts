@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RepresentStock } from '@models/stock/represent-stock.model';
-import { PartialList } from '@models/common/patial-list.model';
-import { RepresentStockService } from '@services/stock/represent-stock.service';
+import { RepresentStock } from '@app/shared/models/stock/represent-stock.model';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
+import { RepresentStockService } from '@app/core/services/stock/represent-stock.service';
 
 @Component({
   selector: 'app-user-receipt-detail',

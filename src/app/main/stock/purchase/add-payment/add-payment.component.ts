@@ -1,12 +1,12 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef, MatSort, MatPaginator} from "@angular/material";
 import { FormGroup, FormBuilder, Validators, FormControl, ValidatorFn } from '@angular/forms';
-import { PartialList } from '@models/common/patial-list.model';
-import { SellsInvoice } from '@models/stock/invoice.model';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
+import { SellsInvoice } from '@app/shared/models/stock/invoice.model';
 import { AbstractControl } from '@angular/forms';
-import { PaymentService } from '@services/stock/payment.service';
-import { Payment } from '@models/stock/payment.model';
-import { success, warning } from '@services/core/utils/toastr';
+import { PaymentService } from '@app/core/services/stock/payment.service';
+import { Payment } from '@app/shared/models/stock/payment.model';
+import { success, warning } from '@app/core/services/core/utils/toastr';
 import { ToastrService } from 'ngx-toastr';
 
 

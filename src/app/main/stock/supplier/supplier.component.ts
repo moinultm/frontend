@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { PartialList } from '@models/common/patial-list.model';
-import { Client } from '@models/stock/client.model';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
+import { Client } from '@app/shared/models/stock/client.model';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { Title } from '@angular/platform-browser';
-import { SupplierService } from '@services/stock/supplier.service';
-import { success, warning, error } from '@services/core/utils/toastr';
-import { CommonService } from '@services/common/common.services';
+import { SupplierService } from '@app/core/services/stock/supplier.service';
+import { success, warning, error } from '@app/core/services/core/utils/toastr';
+import { CommonService } from '@app/core/services/common/common.services';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { SupplierDetailsComponent } from './supplier-details/supplier-details.component';
 @Component({

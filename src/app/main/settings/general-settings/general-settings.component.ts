@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Settings } from '@models/common/settings.model';
-import { PartialList } from '@models/common/patial-list.model';
+import { Settings } from '@app/shared/models/common/settings.model';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Vat } from '@models/common/Vat.model';
-import { VatService } from '@services/common/vat.service';
+import { Vat } from '@app/shared/models/common/Vat.model';
+import { VatService } from '@app/core/services/common/vat.service';
 import { Title } from '@angular/platform-browser';
-import { SettingsService } from '@services/common/settings.service';
-import { warning, success, error } from '@services/core/utils/toastr';
+import { SettingsService } from '@app/core/services/common/settings.service';
+import { warning, success, error } from '@app/core/services/core/utils/toastr';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 

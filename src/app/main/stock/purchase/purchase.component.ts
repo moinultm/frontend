@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { PurchaseOrder } from '@models/stock/purchase-order.model';
-import { PartialList } from '@models/common/patial-list.model';
+import { PurchaseOrder } from '@app/shared/models/stock/purchase-order.model';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
-import { PurchaseOrderService } from '@services/stock/purchase-order.service';
+import { PurchaseOrderService } from '@app/core/services/stock/purchase-order.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { fromEvent } from 'rxjs/internal/observable/fromEvent';
@@ -47,7 +47,7 @@ export class PurchaseComponent implements OnInit {
     });
   }
 
-  
+
   loadData(page?: number): void {
     this.page = page ? page : 1;
     this.loading = true;

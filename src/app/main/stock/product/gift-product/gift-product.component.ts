@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '@services/stock/product.service';
-import { Product } from '@models/stock/product.model';
-import { PartialList } from '@models/common/patial-list.model';
+import { ProductService } from '@app/core/services/stock/product.service';
+import { Product } from '@app/shared/models/stock/product.model';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { Title } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
-import { UserService } from '@services/security/user.service';
-import { RepresentStockService } from '@services/stock/represent-stock.service';
+import { UserService } from '@app/core/services/security/user.service';
+import { RepresentStockService } from '@app/core/services/stock/represent-stock.service';
 import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
-import { User } from '@models/security/user.model';
-import { success, warning, error } from '@services/core/utils/toastr';
-import { CustomerService } from '@services/stock/customer.service';
-import { Client } from '@models/stock/client.model';
-import { GiftService } from '@services/stock/gift.service';
-import { Gift } from '@models/stock/gift.model';
+import { User } from '@app/shared/models/security/user.model';
+import { success, warning, error } from '@app/core/services/core/utils/toastr';
+import { CustomerService } from '@app/core/services/stock/customer.service';
+import { Client } from '@app/shared/models/stock/client.model';
+import { GiftService } from '@app/core/services/stock/gift.service';
+import { Gift } from '@app/shared/models/stock/gift.model';
 
 @Component({
   selector: 'app-gift-product',

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@services/common/translate.service';
-import { AuthenticationService } from '@services/security/authentication.service';
-import { JwtHelperService } from '@services/security/jwt-helper.service';
+import { TranslateService } from '@app/core/services/common/translate.service';
+import { AuthenticationService } from '@app/core/services/security/authentication.service';
+import { JwtHelperService } from '@app/core/services/security/jwt-helper.service';
 
 @Component({
   selector: 'app-header',

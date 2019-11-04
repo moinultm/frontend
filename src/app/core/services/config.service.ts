@@ -16,14 +16,7 @@ export class ConfigService {
   settings: ConfigObject;
   onSettingsChanged: BehaviorSubject<ConfigObject>;
 
-  /**
-   * Config service constructor
-   * 
-   * @param platform 
-   *    The angular/cdk platform object
-   * 
-   * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
-   */
+
   constructor(
     public platform: Platform
   ) {
@@ -34,14 +27,7 @@ export class ConfigService {
     this.onSettingsChanged = new BehaviorSubject(this.settings);
   }
 
-  /**
-   * Sets settings
-   * 
-   * @param settings 
-   *    The configuration object
-   * 
-   * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
-   */
+
   setSettings(settings: ConfigObject) {
     // Set the settings from the given object
     this.settings = Object.assign({}, this.settings, settings);
@@ -50,11 +36,7 @@ export class ConfigService {
     this.onSettingsChanged.next(this.settings);
   }
 
-  /**
-   * Get default settings
-   * 
-   * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
-   */
+
   defaultSettings(): ConfigObject {
     return {
       navbar: true,

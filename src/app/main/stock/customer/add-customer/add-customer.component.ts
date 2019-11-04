@@ -1,10 +1,10 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef, MatSort, MatPaginator} from "@angular/material";
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { Client } from '@models/stock/client.model';
-import { CustomerService } from '@services/stock/customer.service';
+import { Client } from '@app/shared/models/stock/client.model';
+import { CustomerService } from '@app/core/services/stock/customer.service';
 import { ToastrService } from 'ngx-toastr';
-import { warning } from '@services/core/utils/toastr';
+import { warning } from '@app/core/services/core/utils/toastr';
 
 
 @Component({

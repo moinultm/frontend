@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RepresentativeComponent } from './representative.component';
 import { AddStockComponent } from './add-stock/add-stock.component';
-import { AddPaymentComponent } from './add-payment/add-payment.component';
-import { RouterModule, Routes } from '@angular/router';
+ import { RouterModule, Routes } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule, MatFormFieldModule, MatProgressSpinnerModule, MatInputModule } from '@angular/material';
@@ -23,10 +22,7 @@ const routes: Routes = [
       component: AddStockComponent
     },
 
-    {
-      path: 'add-payment',
-      component: AddPaymentComponent
-    },
+
 
     {
       path: 'user-sales-list',
@@ -44,7 +40,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [RepresentativeComponent, AddStockComponent, AddPaymentComponent, UserSalesListComponent, UserSalesInvoicesComponent, UserReceiptDetailComponent],
+  declarations: [RepresentativeComponent, AddStockComponent, UserSalesListComponent, UserSalesInvoicesComponent, UserReceiptDetailComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

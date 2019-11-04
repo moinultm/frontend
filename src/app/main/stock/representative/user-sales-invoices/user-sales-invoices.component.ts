@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { RepresentStockService } from '@services/stock/represent-stock.service';
-import { PartialList } from '@models/common/patial-list.model';
-import { SellsInvoice } from '@models/stock/invoice.model';
+import { RepresentStockService } from '@app/core/services/stock/represent-stock.service';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
+import { SellsInvoice } from '@app/shared/models/stock/invoice.model';
 import { Router } from '@angular/router';
-import { JwtHelperService } from '@services/security/jwt-helper.service';
+import { JwtHelperService } from '@app/core/services/security/jwt-helper.service';
 
 @Component({
   selector: 'app-user-sales-invoices',

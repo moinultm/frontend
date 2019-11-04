@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Product } from '@models/stock/product.model';
-import { PurchaseOrderService } from '@services/stock/purchase-order.service';
-import { PurchaseOrder } from '@models/stock/purchase-order.model';
-import { PartialList } from '@models/common/patial-list.model';
+import { Product } from '@app/shared/models/stock/product.model';
+import { PurchaseOrderService } from '@app/core/services/stock/purchase-order.service';
+import { PurchaseOrder } from '@app/shared/models/stock/purchase-order.model';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { FormGroup, FormControl } from '@angular/forms';
-import { SellsInvoiceService } from '@services/stock/sells-invoice.service';
-import { SellsInvoice } from '@models/stock/invoice.model';
+import { SellsInvoiceService } from '@app/core/services/stock/sells-invoice.service';
+import { SellsInvoice } from '@app/shared/models/stock/invoice.model';
 
 
 @Component({

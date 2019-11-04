@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { PartialList } from '@models/common/patial-list.model';
-import { Product } from '@models/stock/product.model';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
+import { Product } from '@app/shared/models/stock/product.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { ProductService } from '@services/stock/product.service';
+import { ProductService } from '@app/core/services/stock/product.service';
 
 import { ActivatedRoute } from '@angular/router';
-import { Client } from '@models/stock/client.model';
-import { CustomerService } from '@services/stock/customer.service';
+import { Client } from '@app/shared/models/stock/client.model';
+import { CustomerService } from '@app/core/services/stock/customer.service';
 
 @Component({
   selector: 'app-product-barcode',

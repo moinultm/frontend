@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Client } from '@models/stock/client.model';
+import { Client } from '@app/shared/models/stock/client.model';
 import { FormGroup } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
-import { PartialList } from '@models/common/patial-list.model';
-import { SupplierService } from '@services/stock/supplier.service';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
+import { SupplierService } from '@app/core/services/stock/supplier.service';
 
 @Component({
   selector: 'app-supplier-bill-summary',

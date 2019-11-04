@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { SellsOrderService } from '@services/stock/sells-order.service';
-import { PartialList } from '@models/common/patial-list.model';
-import { SellsOrder } from '@models/stock/sells-order.model';
+import { SellsOrderService } from '@app/core/services/stock/sells-order.service';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
+import { SellsOrder } from '@app/shared/models/stock/sells-order.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -41,8 +41,8 @@ export class OrderListComponent implements OnInit {
 
   iniForm(){
     this.form = this._fb.group({
-      fromDate: [  '',  [Validators.nullValidator],],
-      toDate: [  '',  [Validators.nullValidator],]
+      fromDate: [  new Date(),  [Validators.required],],
+      toDate: [   new Date(),  [Validators.required],]
     });
   }
 

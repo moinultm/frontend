@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialsModule } from '@app/material.module';
-import { AuthGuard } from '@services/security/guards/auth.guard';
+import { AuthGuard } from '@app/core/services/security/guards/auth.guard';
 
 
 // Module routes

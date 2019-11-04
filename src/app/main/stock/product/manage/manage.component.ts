@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Product } from '@models/stock/product.model';
-import { PartialList } from '@models/common/patial-list.model';
+import { Product } from '@app/shared/models/stock/product.model';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { Title } from '@angular/platform-browser';
-import { ProductService } from '@services/stock/product.service';
+import { ProductService } from '@app/core/services/stock/product.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';

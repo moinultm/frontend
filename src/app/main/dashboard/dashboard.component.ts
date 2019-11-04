@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '../../services/common/translate.service';
-import { Dashboard } from '@models/common/dashboard.model';
-import { PartialList } from '@models/common/patial-list.model';
-import { DashboardService } from '@services/common/dashboard.service';
-import { SettingsService } from '@services/common/settings.service';
+import { TranslateService } from '../../core/services/common/translate.service';
+import { Dashboard } from '@app/shared/models/common/dashboard.model';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
+import { DashboardService } from '@app/core/services/common/dashboard.service';
+import { SettingsService } from '@app/core/services/common/settings.service';
 
 
 @Component({

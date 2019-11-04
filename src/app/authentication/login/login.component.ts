@@ -7,14 +7,14 @@ import { Title } from '@angular/platform-browser';
 import { ConfigService } from '../../../app/core/services/config.service';
 
 // Application services
-import { AuthenticationService } from '@services/security/authentication.service';
+import { AuthenticationService } from '@app/core/services/security/authentication.service';
 import { Router } from '@angular/router';
 
 // Application constants
 import { constants } from '@env/constants';
 
 // Toastr services
-import { warning } from '../../../app/services/core/utils/toastr';
+import { warning } from '../../core/services/core/utils/toastr';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit, OnDestroy {
    */
   loading: boolean;
 
- 
+
   constructor(
     private config: ConfigService,
     private authenticationService: AuthenticationService,
@@ -55,9 +55,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     titleService.setTitle(constants.app_name + ' - Authentication');
   }
 
- 
+
   ngOnInit(): void { }
- 
+
   private buildForm(): void {
     this.form = this._fb.group({
       username: [ '', [ Validators.required, Validators.email ] ],
@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         password: this.form.get('password').value
       }).subscribe(
         (res: any) => {
-          this.authenticationService.saveToken(res.access_token);     
+          this.authenticationService.saveToken(res.access_token);
           this.loading = false;
           return  this._router.navigateByUrl('/dashboard');
           //return this._router.navigate([constants.home_url]);
@@ -85,8 +85,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
 
- 
- 
+
+
 
 
   ngOnDestroy(): void {

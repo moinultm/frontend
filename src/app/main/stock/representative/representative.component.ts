@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { RepresentStock } from '@models/stock/represent-stock.model';
-import { PartialList } from '@models/common/patial-list.model';
-import { RepresentStockService } from '@services/stock/represent-stock.service';
+import { RepresentStock } from '@app/shared/models/stock/represent-stock.model';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
+import { RepresentStockService } from '@app/core/services/stock/represent-stock.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
-import { JwtHelperService } from '@services/security/jwt-helper.service';
+import { JwtHelperService } from '@app/core/services/security/jwt-helper.service';
 
 @Component({
   selector: 'app-representative',

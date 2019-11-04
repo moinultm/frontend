@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { PartialList } from '@models/common/patial-list.model';
-import { Product } from '@models/stock/product.model';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
+import { Product } from '@app/shared/models/stock/product.model';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
-import { ProductReportService } from '@services/report/product-report.service';
+import { ProductReportService } from '@app/core/services/report/product-report.service';
 import { DatePipe } from '@angular/common';
 
 @Component({

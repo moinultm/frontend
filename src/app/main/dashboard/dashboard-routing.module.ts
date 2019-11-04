@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
-import { AuthGuard } from '@services/security/guards/auth.guard';
-import { RoleGuard } from '@services/security/guards/role.guard';
+import { AuthGuard } from '@app/core/services/security/guards/auth.guard';
+import { RoleGuard } from '@app/core/services/security/guards/role.guard';
 
 const routes: Routes = [
     {

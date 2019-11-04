@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { GiftService } from '@services/stock/gift.service';
+import { GiftService } from '@app/core/services/stock/gift.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Title } from '@angular/platform-browser';
-import { PartialList } from '@models/common/patial-list.model';
-import { Damage } from '@models/stock/damage.model';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
+import { Damage } from '@app/shared/models/stock/damage.model';
 
 @Component({
   selector: 'app-list-gift',

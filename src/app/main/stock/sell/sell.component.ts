@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
-import { PartialList } from '@models/common/patial-list.model';
-import { SellsInvoice } from '@models/stock/invoice.model';
-import { SellsInvoiceService } from '@services/stock/sells-invoice.service';
-import{TablesDataSource} from '@services/stock/lessons.datasource'
+import { PartialList } from '@app/shared/models/common/patial-list.model';
+import { SellsInvoice } from '@app/shared/models/stock/invoice.model';
+import { SellsInvoiceService } from '@app/core/services/stock/sells-invoice.service';
+import{TablesDataSource} from '@app/core/services/stock/lessons.datasource'
 import { fromEvent, merge, Observable } from 'rxjs';
 import { tap, distinctUntilChanged, debounceTime, filter, map } from 'rxjs/operators';
-import { ProductService } from '@services/stock/product.service';
-import { UserService } from '@services/security/user.service';
+import { ProductService } from '@app/core/services/stock/product.service';
+import { UserService } from '@app/core/services/security/user.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 import { DatePipe } from '@angular/common';

@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
- import { CustomerService } from '@services/stock/customer.service';
-import { ProductService } from '@services/stock/product.service';
+ import { CustomerService } from '@app/core/services/stock/customer.service';
+import { ProductService } from '@app/core/services/stock/product.service';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { UserService } from '@services/security/user.service';
+import { UserService } from '@app/core/services/security/user.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import { Client } from '@models/stock/client.model';
-import { OrderItems } from '@models/stock/order-items.model ';
-import { SellsOrder } from '@models/stock/sells-order.model';
-import { Product } from '@models/stock/product.model';
-import { PartialList } from '@models/common/patial-list.model';
-import { User } from '@models/security/user.model';
+import { Client } from '@app/shared/models/stock/client.model';
+import { OrderItems } from '@app/shared/models/stock/order-items.model ';
+import { SellsOrder } from '@app/shared/models/stock/sells-order.model';
+import { Product } from '@app/shared/models/stock/product.model';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
+import { User } from '@app/shared/models/security/user.model';
 
-import { success, error, warning } from '@app/services/core/utils/toastr';
+import { success, error, warning } from '@app/core/services/core/utils/toastr';
 import { AddCustomerComponent } from '../../customer/add-customer/add-customer.component';
-import { SellsOrderService } from '@services/stock/sells-order.service';
+import { SellsOrderService } from '@app/core/services/stock/sells-order.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -314,7 +314,7 @@ export class SellsOrderComponent implements OnInit {
     this.sellsOrdererSvice.save(formData, false).subscribe((res:SellsOrder) => {
       success('Success!', 'The Order is successfully saved.', this._toastr);
       this.initForm();
-     
+
       this._saving = false;
     }, (err: any) => {
 

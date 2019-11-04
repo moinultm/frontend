@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryService } from '@services/stock/category.service';
-import { PartialList } from '@models/common/patial-list.model';
-import { Category } from '@models/stock/category.model';
-import { Subcategory } from '@models/stock/subcategory.model';
-import { SubcategoryService } from '@services/stock/subcategory.service';
+import { CategoryService } from '@app/core/services/stock/category.service';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
+import { Category } from '@app/shared/models/stock/category.model';
+import { Subcategory } from '@app/shared/models/stock/subcategory.model';
+import { SubcategoryService } from '@app/core/services/stock/subcategory.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Product } from '@models/stock/product.model';
-import { ParentcategoryService } from '@services/stock/parentcategory.service';
-import { ProductService } from '@services/stock/product.service';
-import { success, warning } from '@services/core/utils/toastr';
+import { Product } from '@app/shared/models/stock/product.model';
+import { ParentcategoryService } from '@app/core/services/stock/parentcategory.service';
+import { ProductService } from '@app/core/services/stock/product.service';
+import { success, warning } from '@app/core/services/core/utils/toastr';
 import { error } from 'util';
 import { ActivatedRoute, Router } from '@angular/router';
 

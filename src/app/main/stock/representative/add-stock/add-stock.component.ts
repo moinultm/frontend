@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
-import { User } from '@models/security/user.model';
-import { PartialList } from '@models/common/patial-list.model';
-import { UserService } from '@services/security/user.service';
-import { Product } from '@models/stock/product.model';
-import { ProductService } from '@services/stock/product.service';
-import { RepresentStockService } from '@services/stock/represent-stock.service';
-import { success, error, warning } from '@services/core/utils/toastr';
-import { RepresentStock } from '@models/stock/represent-stock.model';
+import { User } from '@app/shared/models/security/user.model';
+import { PartialList } from '@app/shared/models/common/patial-list.model';
+import { UserService } from '@app/core/services/security/user.service';
+import { Product } from '@app/shared/models/stock/product.model';
+import { ProductService } from '@app/core/services/stock/product.service';
+import { RepresentStockService } from '@app/core/services/stock/represent-stock.service';
+import { success, error, warning } from '@app/core/services/core/utils/toastr';
+import { RepresentStock } from '@app/shared/models/stock/represent-stock.model';
 import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 

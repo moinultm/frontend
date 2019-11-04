@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { InterceptorService } from '@services/security/guards/interceptor.service';
+import { InterceptorService } from '@app/core/services/security/guards/interceptor.service';
 
 
 import { MaterialsModule} from '@app/material.module'
@@ -15,7 +15,7 @@ import { NavbarComponent } from './main/navbar/navbar.component';
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { ToastrModule } from 'ngx-toastr';
 
-import { TranslateService } from './services/common/translate.service';
+import { TranslateService } from './core/services/common/translate.service';
 import { TranslateModule } from './shared/translate/translate.module';
 
 import { NotFoundComponent } from './authentication/not-found/not-found.component';
