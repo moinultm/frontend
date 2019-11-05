@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '@app/core/services/stock/category.service';
 import { ToastrService } from 'ngx-toastr';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { Title } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PartialList } from '@app/shared/models/common/patial-list.model';
@@ -14,6 +14,8 @@ import { success, warning, error } from '@app/core/services/core/utils/toastr';
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
+  modalOption: NgbModalOptions = {};
+
   data: PartialList<Category>;
   loading: boolean;
   savingCategory: boolean;
@@ -27,7 +29,8 @@ export class CategoryComponent implements OnInit {
     private _toastr: ToastrService,
     private modalService: NgbModal,
     titleService: Title,
-    private _formBuilder: FormBuilder) {
+    private _formBuilder: FormBuilder,
+    ) {
       titleService.setTitle('Stock - Category');
     }
 
@@ -51,10 +54,12 @@ export class CategoryComponent implements OnInit {
        //Save Data
     initSave(modal: any, category?: Category): void {
       event.preventDefault();
+      this.modalOption.backdrop = 'static';
+      this.modalOption.keyboard = false;
 
       this.initSaveForm(category);
       this.modalService
-        .open(modal)
+        .open(modal,this.modalOption)
         .result
         .then((result) => {
           if (result) {

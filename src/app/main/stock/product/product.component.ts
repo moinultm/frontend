@@ -168,6 +168,8 @@ export class ProductComponent implements OnInit {
       this.savingProduct = false;
 
     });
+
+
   }
 }
 

@@ -10,6 +10,6 @@ export class AttendanceService extends CrudService <Category> {
 
   constructor( _http: HttpClient ) {
     super(_http);
-    this.setUrl('category');
+    this.setUrl('attendance');
   }
 }
