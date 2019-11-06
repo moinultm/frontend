@@ -6,7 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RoleService } from '@app/core/services/security/role.service';
 import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { ToastrService } from 'ngx-toastr';
-import { success, error, warning } from '@app/core/services/core/utils/toastr';
+import { success, error, warning } from '@app/core/utils/toastr';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({

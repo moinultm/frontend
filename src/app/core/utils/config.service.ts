@@ -20,19 +20,15 @@ export class ConfigService {
   constructor(
     public platform: Platform
   ) {
-    // Set the settings
     this.settings = this.defaultSettings();
 
-    // Create the behavior subject
     this.onSettingsChanged = new BehaviorSubject(this.settings);
   }
 
 
   setSettings(settings: ConfigObject) {
-    // Set the settings from the given object
     this.settings = Object.assign({}, this.settings, settings);
 
-    // Trigger the event
     this.onSettingsChanged.next(this.settings);
   }
 

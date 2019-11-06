@@ -7,7 +7,7 @@ import { PurchaseOrder } from '@app/shared/models/stock/purchase-order.model';
 import { PurchaseOrderService } from '@app/core/services/stock/purchase-order.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddPaymentComponent } from '../add-payment/add-payment.component';
-import { error, warning, success } from '@app/core/services/core/utils/toastr';
+import { error, warning, success } from '@app/core/utils/toastr';
 
 @Component({
   selector: 'app-purchase-details',

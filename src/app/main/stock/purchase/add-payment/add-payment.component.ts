@@ -6,7 +6,7 @@ import { SellsInvoice } from '@app/shared/models/stock/invoice.model';
 import { AbstractControl } from '@angular/forms';
 import { PaymentService } from '@app/core/services/stock/payment.service';
 import { Payment } from '@app/shared/models/stock/payment.model';
-import { success, warning } from '@app/core/services/core/utils/toastr';
+import { success, warning } from '@app/core/utils/toastr';
 import { ToastrService } from 'ngx-toastr';
 
 

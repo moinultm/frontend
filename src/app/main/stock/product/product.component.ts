@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Product } from '@app/shared/models/stock/product.model';
 import { ParentcategoryService } from '@app/core/services/stock/parentcategory.service';
 import { ProductService } from '@app/core/services/stock/product.service';
-import { success, warning } from '@app/core/services/core/utils/toastr';
+import { success, warning } from '@app/core/utils/toastr';
 import { error } from 'util';
 import { ActivatedRoute, Router } from '@angular/router';
 

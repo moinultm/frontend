@@ -17,6 +17,8 @@ import { SellsOrderComponent } from './sells-order/sells-order.component';
 import { OrderListComponent } from './order-list/order-list.component';
 import { OrderInvoiceComponent } from './order-invoice/order-invoice.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
+import { AppDateAdapter, APP_DATE_FORMATS } from '@app/core/utils/format-datepicker';
+import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 
 
 const routes: Routes = [
@@ -69,6 +71,7 @@ const routes: Routes = [
     //materials
   ],
   entryComponents:[AddPaymentComponent,AddCustomerComponent],
-  providers: [ MatDatepickerModule ],
+  providers: [ MatDatepickerModule,  {provide: DateAdapter, useClass: AppDateAdapter},
+    {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS} ],
 })
 export class SellModule { }

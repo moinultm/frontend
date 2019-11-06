@@ -7,7 +7,7 @@ import { NgbModal,NgbTimepicker, NgbTimepickerConfig, NgbTimeStruct, NgbTimeAdap
   import { ToastrService } from 'ngx-toastr';
  import { AttendanceService } from '@app/core/services/employee/attendance.service';
 import { success, warning, error } from '@app/core/utils/toastr';
-import { Attandance } from '@app/shared/models/employee/vat.model';
+import { Attandance } from '@app/shared/models/employee/attendance.model';
 import { UserService } from '@app/core/services/security/user.service';
 import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { User } from '@app/shared/models/security/user.model';
@@ -40,14 +40,13 @@ export class AttendanceComponent implements OnInit {
 
   date = new FormControl(new Date());
 
-  todaydate: Date;
 
   serializedDate = new FormControl((new Date()).toISOString());
 
-  model: NgbDateStruct;
-  today = this.calendar.getToday();
-
   selectedRow:Attandance;
+
+
+
 
   constructor(  private _fb: FormBuilder,
     private datePipe : DatePipe,
@@ -55,15 +54,13 @@ export class AttendanceComponent implements OnInit {
     private modalService: NgbModal,
     private _toastr: ToastrService,
     private attService: AttendanceService,
-    config: NgbTimepickerConfig,
-    private calendar: NgbCalendar,
     private userService:UserService,) {   }
 
   ngOnInit() {
     this.iniForm();
     this.loadData();
 
-  }
+   }
 
 
   iniForm(){
@@ -72,6 +69,7 @@ export class AttendanceComponent implements OnInit {
       toDate: [   new Date(),  [Validators.required],]
     });
   }
+
 
 
 
@@ -86,7 +84,7 @@ export class AttendanceComponent implements OnInit {
     }
 
 
-    AddForm( attendance?: Attandance){
+    AddForm( attendance?: Attandance):void{
 
       this.loadUser();
 
@@ -96,26 +94,28 @@ export class AttendanceComponent implements OnInit {
       this.selectedRow = new Attandance();
     }
 
+
+
        this.myForm = this._fb.group({
-        employee_id:[null,  [Validators.required]],
-        todaydate:[ new Date(),  [Validators.required]],
-        clock_in:['08:30:00',  [Validators.required]],
-        clock_out:['16:30:00',  [Validators.required]],
-         location:['Office',  [Validators.nullValidator]],
-         notes:[ '',  [Validators.nullValidator]],
-          status:[ 'present',  [Validators.required]],
+        employee_id:[   attendance ? attendance.employee_id : null,  [Validators.required]],
+        todaydate:[  attendance ? attendance.date :  new Date(),  [Validators.required]],
+        clock_in:[attendance ? attendance.clock_in : '08:30:00',  [Validators.required]],
+        clock_out:[attendance ? attendance.clock_out : '16:30:00',  [Validators.required]],
+         location:[attendance ? attendance.location : 'Office',  [Validators.nullValidator]],
+         notes:[ attendance ? attendance.notes : '',  [Validators.nullValidator]],
+          status:[ attendance ? attendance.status : 'present',  [Validators.required]],
        });
 
      }
 
-  initSave(modal: any): void {
+  initSave(modal: any,attendance?: Attandance): void {
     event.preventDefault();
 
     this.modalOption.backdrop = 'static';
     this.modalOption.keyboard = false;
 
 
-    this.AddForm();
+    this.AddForm(attendance);
 
     // Open the delete confirmation modal
     this.modalService
@@ -173,7 +173,7 @@ export class AttendanceComponent implements OnInit {
 
       formData.append('id', this.selectedRow.id + '');
       formData.append('employee_id', this.myForm.get('employee_id').value);
-      formData.append('todaydate', this.todaydate + '');
+      formData.append('todaydate',  this.myForm.get('todaydate').value );
       formData.append('clock_in', this.myForm.get('clock_in').value);
       formData.append('clock_out', this.myForm.get('clock_out').value);
       formData.append('location','Office');

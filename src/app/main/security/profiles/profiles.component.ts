@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
 import { constants } from '@env/constants';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { success, error, warning } from '@app/core/services/core/utils/toastr';
+import { success, error, warning } from '@app/core/utils/toastr';
 
 
 @Component({

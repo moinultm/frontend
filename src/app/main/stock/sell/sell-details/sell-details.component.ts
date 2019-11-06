@@ -7,7 +7,7 @@ import { SellsInvoice } from '@app/shared/models/stock/invoice.model';
 import { SellsInvoiceService } from '@app/core/services/stock/sells-invoice.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddPaymentComponent } from '../add-payment/add-payment.component';
-import { error, warning, success } from '@app/core/services/core/utils/toastr';
+import { error, warning, success } from '@app/core/utils/toastr';
 
 @Component({
   selector: 'app-sell-details',

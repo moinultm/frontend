@@ -5,7 +5,7 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 
 // Application layout configuration service
-import { ConfigService } from '@app/core/services/config.service';
+import { ConfigService } from '@app/core/utils/config.service';
 
 // Application services
 import { AuthenticationService } from '@app/core/services/security/authentication.service';

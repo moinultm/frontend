@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { Title } from '@angular/platform-browser';
 import { SupplierService } from '@app/core/services/stock/supplier.service';
-import { success, warning, error } from '@app/core/services/core/utils/toastr';
+import { success, warning, error } from '@app/core/utils/toastr';
 import { CommonService } from '@app/core/services/common/common.services';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { SupplierDetailsComponent } from './supplier-details/supplier-details.component';

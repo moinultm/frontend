@@ -14,7 +14,7 @@ import { Product } from '@app/shared/models/stock/product.model';
 import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { User } from '@app/shared/models/security/user.model';
 
-import { success, error, warning } from '@app/core/services/core/utils/toastr';
+import { success, error, warning } from '@app/core/utils/toastr';
 import { AddCustomerComponent } from '../../customer/add-customer/add-customer.component';
 import { SellsOrderService } from '@app/core/services/stock/sells-order.service';
 import { Router } from '@angular/router';

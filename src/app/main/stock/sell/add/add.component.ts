@@ -10,7 +10,7 @@ import { ProductService } from '@app/core/services/stock/product.service';
 import { Product } from '@app/shared/models/stock/product.model';
 import { OrderItems } from '@app/shared/models/stock/order-items.model ';
 import { ToastrService } from 'ngx-toastr';
-import { success, error, warning } from '@app/core/services/core/utils/toastr';
+import { success, error, warning } from '@app/core/utils/toastr';
 import { UserService } from '@app/core/services/security/user.service';
 import { User } from '@app/shared/models/security/user.model';
 import { MatDialog, MatDialogConfig } from '@angular/material';

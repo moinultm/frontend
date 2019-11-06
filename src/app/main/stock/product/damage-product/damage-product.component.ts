@@ -8,7 +8,7 @@ import { UserService } from '@app/core/services/security/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 import { User } from '@app/shared/models/security/user.model';
-import { success, warning, error } from '@app/core/services/core/utils/toastr';
+import { success, warning, error } from '@app/core/utils/toastr';
 import { CustomerService } from '@app/core/services/stock/customer.service';
 import { Client } from '@app/shared/models/stock/client.model';
 import { DamageService } from '@app/core/services/stock/damage.service';

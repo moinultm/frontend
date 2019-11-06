@@ -14,6 +14,8 @@ import { InvoiceBarcodedComponent } from './invoice-barcoded/invoice-barcoded.co
 import { NgSelectModule } from '@ng-select/ng-select';
 
 import { NgxBarcodeModule } from 'ngx-barcode';
+import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
+import { AppDateAdapter, APP_DATE_FORMATS } from '@app/core/utils/format-datepicker';
 const routes: Routes = [
   // Roles component
   {
@@ -51,5 +53,7 @@ const routes: Routes = [
     NgSelectModule,
   ],
   entryComponents:[AddPaymentComponent,AddSupplierComponent],
+  providers: [  {provide: DateAdapter, useClass: AppDateAdapter},
+    {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS} ],
 })
 export class PurchaseModule { }

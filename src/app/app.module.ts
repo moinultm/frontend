@@ -19,10 +19,8 @@ import { TranslateService } from './core/services/common/translate.service';
 import { TranslateModule } from './shared/translate/translate.module';
 
 import { NotFoundComponent } from './authentication/not-found/not-found.component';
-
-
-
-
+import { AppConfigService } from './core/services/config/appconfig.service';
+import { AppConfigModule } from './appconfig.module';
 
 
 
@@ -60,7 +58,7 @@ LoginComponent,
       positionClass: 'toast-bottom-right'
     }),
     TranslateModule,
-
+    AppConfigModule
 
   ],
 
@@ -68,25 +66,27 @@ LoginComponent,
   providers: [
     SnotifyService,
     TranslateService,
-
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
       multi: true
-    },
+     },
 
    { provide: 'SnotifyToastConfig',
    useValue: ToastDefaults
   },
-
     {
       provide: APP_INITIALIZER,
       useFactory: setupTranslateFactory,
       deps: [ TranslateService ],
       multi: true
-    }
+    },
+
+    AppConfigService
 
 ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
+
 })
 export class AppModule { }

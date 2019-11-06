@@ -1,28 +1,30 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-import { MaterialsModule } from '@app/material.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '@app/core/services/security/guards/auth.guard';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
+import { AppDateAdapter, APP_DATE_FORMATS } from '@app/core/utils/format-datepicker';
 
 const routes: Routes = [
   {
     path: 'employee',
-    canActivate: [ AuthGuard],
+    canActivate: [AuthGuard],
    loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule)
-  },
+  }
 ]
 
 @NgModule({
-  declarations: [ ],
+  declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes),
-
+    RouterModule.forChild(routes)
   ],
-  exports: [RouterModule]
-  ,providers:[DatePipe ]
+  exports: [RouterModule],
+  providers: [
+    DatePipe,
+    {provide: DateAdapter, useClass: AppDateAdapter},
+    {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}
+  ]
 })
 export class HrmModule { }

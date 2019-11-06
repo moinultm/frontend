@@ -4,7 +4,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Client } from '@app/shared/models/stock/client.model';
 import { CustomerService } from '@app/core/services/stock/customer.service';
 import { ToastrService } from 'ngx-toastr';
-import { warning, success } from '@app/core/services/core/utils/toastr';
+import { warning, success } from '@app/core/utils/toastr';
 import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { Payment } from '@app/shared/models/stock/payment.model';
 import { PaymentService } from '@app/core/services/stock/payment.service';

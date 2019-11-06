@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 
 // Application layout configuration service
-import { ConfigService } from '../../../app/core/services/config.service';
+import { ConfigService } from '../../core/utils/config.service';
 
 // Application services
 import { AuthenticationService } from '@app/core/services/security/authentication.service';
@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 import { constants } from '@env/constants';
 
 // Toastr services
-import { warning } from '../../core/services/core/utils/toastr';
+import { warning } from '../../core/utils/toastr';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

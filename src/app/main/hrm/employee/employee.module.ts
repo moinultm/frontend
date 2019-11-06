@@ -9,8 +9,10 @@ import { AddNewComponent } from './attendance/add-new/add-new.component';
 import { NoticeBoardComponent } from './notice-board/notice-board.component';
 
 import { AttendanceReportComponent } from './attendance-report/attendance-report.component';
-import { NgbTimeStringAdapter } from './attendance/NgbTimeAdapter.directive';
 
+
+import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
+import { AppDateAdapter, APP_DATE_FORMATS } from '@app/core/utils/format-datepicker';
 
 const routes: Routes = [
   {    path: 'attendance',    component: AttendanceComponent  },
@@ -31,7 +33,11 @@ const routes: Routes = [
     ReactiveFormsModule,
     MaterialsModule,
   ],
-  providers: [{provide: NgbTimeAdapter, useClass: NgbTimeStringAdapter}]
+  providers: [
+
+    {provide: DateAdapter, useClass: AppDateAdapter},
+    {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}
+  ]
 
 })
 export class EmployeeModule { }

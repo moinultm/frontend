@@ -6,7 +6,7 @@ import { Vat } from '@app/shared/models/common/Vat.model';
 import { VatService } from '@app/core/services/common/vat.service';
 import { Title } from '@angular/platform-browser';
 import { SettingsService } from '@app/core/services/common/settings.service';
-import { warning, success, error } from '@app/core/services/core/utils/toastr';
+import { warning, success, error } from '@app/core/utils/toastr';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
@@ -116,7 +116,7 @@ lteActivity:Array<Object>=
       enable_purchaser: [settings ? settings.enable_purchaser : '',      [Validators.nullValidator]  ],
       enable_customer: [settings ? settings.enable_customer : '',      [Validators.nullValidator]  ],
       pos_invoice_footer_text: [settings ? settings.pos_invoice_footer_text : '',      [Validators.nullValidator]  ],
-      dashboard: [settings ? settings.dashboard : '',      [Validators.required]  ],
+      dashboard: [settings ? settings.dashboard : '',      [Validators.nullValidator]  ],
       product_tax: [settings ? settings.product_tax : '',      [Validators.nullValidator]  ]
     });
   }

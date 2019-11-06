@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 
 // Application layout configuration service
-import { ConfigService } from '@app/core/services/config.service';
+import { ConfigService } from '@app/core/utils/config.service';
 
 // Application services
 import { AuthenticationService } from '@app/core/services/security/authentication.service';
@@ -66,29 +66,16 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
     titleService.setTitle(constants.app_name + ' - Forgot password?');
   }
 
-  /**
-   * Component OnInit phase
-   *
-   * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
-   */
+ 
   ngOnInit(): void { }
 
-  /**
-   * Build the login form fields
-   *
-   * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
-   */
   private buildForm(): void {
     this.form = this._fb.group({
       username: [ '', [ Validators.required, Validators.email ] ]
     });
   }
 
-  /**
-   * Forgot password main function
-   *
-   * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
-   */
+
   forgot(): void {
     this.loading = true;
     this.authenticationService.forgotPassword(this.form.get('username').value)
@@ -106,11 +93,6 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
       });
   }
 
-  /**
-   * Component OnDestroy phase
-   *
-   * @author EL OUFIR Hatim <eloufirhatim@gmail.com>
-   */
   ngOnDestroy(): void {
     this.config.setSettings(this.config.defaultSettings());
   }

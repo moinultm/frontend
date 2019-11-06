@@ -4,6 +4,7 @@ import { Dashboard } from '@app/shared/models/common/dashboard.model';
 import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { DashboardService } from '@app/core/services/common/dashboard.service';
 import { SettingsService } from '@app/core/services/common/settings.service';
+import { AppConfigService } from '@app/core/services/config/appconfig.service';
 
 
 @Component({
@@ -22,15 +23,17 @@ location:any;
     responsive: true
   };
 
-  sellChartData :any[] = [] ;
-
+  sellChartData :any[] = [];
   chartLabels :any[]=[];
+
+  settings: any;
 
   //barchart
   public barChartOptions = {
     scaleShowVerticalLines: false,
     responsive: true
   };
+
   public barChartLabels :  string[]= []  ;
   public barChartType = 'bar';
   public barChartLegend = true;
@@ -43,7 +46,8 @@ location:any;
 
   constructor(private translate: TranslateService,
     private dashboard:DashboardService,
-    private locationService :SettingsService) {
+    private locationService :SettingsService,
+    private appConfigService: AppConfigService) {
 
 
   }
@@ -52,7 +56,7 @@ location:any;
 
   ngOnInit() {
     this.loadData();
-
+    this.settings = this.appConfigService.settings;
     //console.log(this.data['data']);
 
   }

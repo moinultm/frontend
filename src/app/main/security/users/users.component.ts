@@ -4,7 +4,7 @@ import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { UserService } from '@app/core/services/security/user.service'
 import { ProfileService } from '@app/core/services/security/profile.service';
 
-import { success, error, warning } from '@app/core/services/core/utils/toastr';
+import { success, error, warning } from '@app/core/utils/toastr';
 
 import { constants } from '@env/constants';
 import { User } from '@app/shared/models/security/user.model';

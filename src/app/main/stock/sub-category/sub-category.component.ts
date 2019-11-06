@@ -2,7 +2,7 @@ import { Component, OnInit  } from '@angular/core';
 import { Subcategory } from '@app/shared/models/stock/subcategory.model';
 import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { error, warning, success } from '@app/core/services/core/utils/toastr';
+import { error, warning, success } from '@app/core/utils/toastr';
 
 import { Category } from '@app/shared/models/stock/category.model';
 import { CategoryService } from '@app/core/services/stock/category.service';

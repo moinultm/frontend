@@ -29,6 +29,7 @@ import { StockGeneralReportComponent } from './stock-general-report/stock-genera
 import { NgxPrintModule } from 'ngx-print';
 import { ProfitLossReportComponent } from './profit-loss-report/profit-loss-report.component';
 import { AuthGuard } from '@app/core/services/security/guards/auth.guard';
+import { AppDateAdapter, APP_DATE_FORMATS } from '@app/core/utils/format-datepicker';
 
 const routes: Routes = [
 
@@ -119,7 +120,8 @@ const routes: Routes = [
     MatInputModule,
     NgxPrintModule
   ]
-  ,providers:[DatePipe ]
+  ,providers:[DatePipe,  {provide: DateAdapter, useClass: AppDateAdapter},
+    {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS} ]
 
 })
 export class ReportModule { }

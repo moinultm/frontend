@@ -7,7 +7,7 @@ import { UserService } from '@app/core/services/security/user.service';
 import { Product } from '@app/shared/models/stock/product.model';
 import { ProductService } from '@app/core/services/stock/product.service';
 import { RepresentStockService } from '@app/core/services/stock/represent-stock.service';
-import { success, error, warning } from '@app/core/services/core/utils/toastr';
+import { success, error, warning } from '@app/core/utils/toastr';
 import { RepresentStock } from '@app/shared/models/stock/represent-stock.model';
 import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';

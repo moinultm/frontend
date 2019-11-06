@@ -6,7 +6,7 @@ import { CustomerService } from '@app/core/services/stock/customer.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Title } from '@angular/platform-browser';
-import { success, warning,error } from '@app/core/services/core/utils/toastr';
+import { success, warning,error } from '@app/core/utils/toastr';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';

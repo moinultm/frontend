@@ -95,6 +95,9 @@ export class AuthenticationService {
   recoverPassword(model: any, token: string): Observable<any> {
     return this._http.put(environment.auth_url + 'recover-password/' + token, model);
   }
+
+
+
 }
 
 //https://blog.flicher.net/laravel-rest-api-passport-authentication-for-ionic-app/

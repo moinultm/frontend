@@ -6,7 +6,7 @@ import { Title } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { Category } from '@app/shared/models/stock/category.model';
-import { success, warning, error } from '@app/core/services/core/utils/toastr';
+import { success, warning, error } from '@app/core/utils/toastr';
 
 @Component({
   selector: 'app-category',
@@ -58,6 +58,7 @@ export class CategoryComponent implements OnInit {
       this.modalOption.keyboard = false;
 
       this.initSaveForm(category);
+
       this.modalService
         .open(modal,this.modalOption)
         .result

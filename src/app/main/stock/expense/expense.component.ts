@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { success, warning, error } from '@app/core/services/core/utils/toastr';
+import { success, warning, error } from '@app/core/utils/toastr';
 
 @Component({
   selector: 'app-expense',
