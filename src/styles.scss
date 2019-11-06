@@ -14,8 +14,8 @@
 label:not(.form-check-label):not(.custom-file-label) {
   font-weight: normal!important;
 }
-
-
+.cdk-overlay-pane {  z-index: 1051!important;}
+.cdk-overlay-container{ z-index: 1051!important;}
 .loading-data{min-height: 10px;}
 
   /* remove scrollbar space

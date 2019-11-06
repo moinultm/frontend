@@ -13,6 +13,7 @@ import { AttendanceReportComponent } from './attendance-report/attendance-report
 
 import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
 import { AppDateAdapter, APP_DATE_FORMATS } from '@app/core/utils/format-datepicker';
+import { NgbTimeStringAdapter } from './attendance/NgbTimeAdapter.directive';
 
 const routes: Routes = [
   {    path: 'attendance',    component: AttendanceComponent  },
@@ -34,7 +35,7 @@ const routes: Routes = [
     MaterialsModule,
   ],
   providers: [
-
+  {provide: NgbTimeAdapter, useClass: NgbTimeStringAdapter},
     {provide: DateAdapter, useClass: AppDateAdapter},
     {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}
   ]

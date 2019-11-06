@@ -35,8 +35,9 @@ export class AttendanceComponent implements OnInit {
   myForm: FormGroup;
   data: any;
 
-  clock_in: '08:30:00';
-  clock_out:'16:30:00';
+  
+
+time:'16:30:00';
 
   date = new FormControl(new Date());
 
@@ -94,7 +95,7 @@ export class AttendanceComponent implements OnInit {
       this.selectedRow = new Attandance();
     }
 
-
+    clock_in: '13:30:00';
 
        this.myForm = this._fb.group({
         employee_id:[   attendance ? attendance.employee_id : null,  [Validators.required]],
@@ -175,7 +176,7 @@ export class AttendanceComponent implements OnInit {
       formData.append('employee_id', this.myForm.get('employee_id').value);
       formData.append('todaydate',  this.myForm.get('todaydate').value );
       formData.append('clock_in', this.myForm.get('clock_in').value);
-      formData.append('clock_out', this.myForm.get('clock_out').value);
+      formData.append('clock_out',this.myForm.get('clock_out').value);
       formData.append('location','Office');
       formData.append('notes', this.myForm.get('notes').value);
       formData.append('status', this.myForm.get('status').value);

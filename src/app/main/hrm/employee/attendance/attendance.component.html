@@ -179,12 +179,14 @@
 
                     <div class="col-md-12">
 
-
-                        <mat-form-field class="full-width">
-                            <input matInput [matDatepicker]="pickerAtt" placeholder="Date" formControlName="todaydate" >
-                            <mat-datepicker-toggle matSuffix [for]="pickerAtt"></mat-datepicker-toggle>
-                            <mat-datepicker #pickerAtt></mat-datepicker>
-                          </mat-form-field>
+                      <mat-form-field class="full-width">
+                        <input matInput [matDatepicker]="pickerTo" placeholder="End Date" formControlName="todaydate"
+                          [value]="date.value">
+                        <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerTo></mat-datepicker>
+                      </mat-form-field>
+                      
+                   
 
                       </div>
                     </div>
@@ -193,15 +195,17 @@
                         <div class="col-md-6 col-xs-6">
                             <div class="form-group mx-auto" style="width: 200px;">
                                 <label>In-Time:</label>
-                                <ngb-timepicker   formControlName="clock_in"></ngb-timepicker>
+                                <ngb-timepicker  [(ngModel)]="clock_in"  formControlName="clock_in"></ngb-timepicker>
                                  <!-- /.input group -->
                               </div>
                           </div>
                           <div class="col-md-6 col-xs-6">
                               <div class="form-group mx-auto" style="width: 200px;">
                                   <label>Out-Time:</label>
-                                  <ngb-timepicker   formControlName="clock_out"></ngb-timepicker>
+                                  <ngb-timepicker   [(ngModel)]="clock_out"  formControlName="clock_out"></ngb-timepicker>
                                   <!-- /.input group -->
+
+                                  <pre>Selected time: {{ clock_out }}</pre>
                                 </div>
                             </div>
                     </div>
