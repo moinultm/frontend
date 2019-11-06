@@ -95,8 +95,7 @@ time:'16:30:00';
       this.selectedRow = new Attandance();
     }
 
-    clock_in: '13:30:00';
-
+ 
        this.myForm = this._fb.group({
         employee_id:[   attendance ? attendance.employee_id : null,  [Validators.required]],
         todaydate:[  attendance ? attendance.date :  new Date(),  [Validators.required]],

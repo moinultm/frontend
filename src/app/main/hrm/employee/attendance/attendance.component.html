@@ -94,7 +94,7 @@
                         <ng-container *ngIf="!loading">
                             <tr *ngFor="let result of data.data; let i = index;">
                               <td>{{ i+1 }}</td>
-                              <td>{{result.employee_id}}</td>
+                              <td>{{result.user_name}}</td>
                               <td>{{result.date}}</td>
                               <td>{{result.clock_in}}</td>
                               <td>{{result.clock_out}}</td>
@@ -205,8 +205,7 @@
                                   <ngb-timepicker   [(ngModel)]="clock_out"  formControlName="clock_out"></ngb-timepicker>
                                   <!-- /.input group -->
 
-                                  <pre>Selected time: {{ clock_out }}</pre>
-                                </div>
+                                 </div>
                             </div>
                     </div>
 
