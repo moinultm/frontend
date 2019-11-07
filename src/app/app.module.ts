@@ -19,14 +19,18 @@ import { TranslateService } from './core/services/common/translate.service';
 import { TranslateModule } from './shared/translate/translate.module';
 
 import { NotFoundComponent } from './authentication/not-found/not-found.component';
-import { AppConfigService } from './core/services/config/appconfig.service';
-import { AppConfigModule } from './appconfig.module';
+import { ConfigService } from './core/services/common/config.service';
 
 
 
 export function setupTranslateFactory(
   service: TranslateService): Function {
   return () => service.use('en');
+}
+
+export function setupConfigFactory(
+  service: TranslateService): Function {
+  return () => service.use('1');
 }
 
 /*
@@ -58,12 +62,12 @@ LoginComponent,
       positionClass: 'toast-bottom-right'
     }),
     TranslateModule,
-    AppConfigModule
 
   ],
 
 
   providers: [
+
     SnotifyService,
     TranslateService,
     {
@@ -82,8 +86,12 @@ LoginComponent,
       multi: true
     },
 
-    AppConfigService
-
+    {
+      provide: APP_INITIALIZER,
+      useFactory: setupConfigFactory,
+      deps: [ ConfigService ],
+      multi: true
+    },
 ],
   bootstrap: [AppComponent],
 

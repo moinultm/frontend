@@ -18,6 +18,10 @@ label:not(.form-check-label):not(.custom-file-label) {
 .cdk-overlay-container{ z-index: 1051!important;}
 .loading-data{min-height: 10px;}
 
+
+.print-only {display: none;}
+
+
   /* remove scrollbar space
 .modal-dialog{
   animation-name: example;
@@ -245,6 +249,7 @@ Custom CSS
 
 
 @media print {
+  .print-only{display: inline;}
 /*
   .print{
     padding:1.5in 0.20in;

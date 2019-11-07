@@ -15,9 +15,11 @@
       <li class="nav-item d-none d-sm-inline-block">
           <a href="#" class="nav-link" (click)="logout()" >Logout</a>
         </li>
+
+
     </ul>
 
-    <!-- SEARCH FORM -->
+    <!-- SEARCH FORM
     <form class="form-inline ml-3">
       <div class="input-group input-group-sm">
         <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
@@ -27,31 +29,47 @@
           </button>
         </div>
       </div>
-    </form>
+    </form> -->
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
 
-        <li class="nav-item dropdown">
-
-
+        <li class="nav-item">
+          <div class="nav-link">
+              {{ time | date: 'hh:mm:ss a' }}
+          </div>
         </li>
 
-        <li class="nav-item">
 
+        <div *ngIf="checkedIn; else elseBlock">
+          <li class="nav-item">
+              <a href="#"  (click)="doChekOut()" class="nav-link">
+              <i class="fas fa-stopwatch"></i>
+              </a>
           </li>
+        </div>
+
+        <ng-template #elseBlock>
+          <li class="nav-item">
+              <a href="#" (click)="doChekIn()" class="nav-link">
+              <i class="far fa-clock"></i>
+             </a>
+          </li>
+        </ng-template>
 
 
 
-          <li class="nav-item" >
-            <a class="nav-link"   href="#" (click)="fullScreen($event)">
-              <i class="fas fa-expand"></i>
+
+        <li class="nav-item">
+            <a href="#" [routerLink]="['/dashboard']" class="nav-link" [routerLinkActiveOptions]="{exact: true}"
+            routerLinkActive="active">
+            <i class="fas fa-home"></i>
           </a>
-
-            </li>
+        </li>
 
 
             <li class="nav-item dropdown">
+
                 <a class="nav-link" data-toggle="dropdown" href="#">
                     <i class="fas fa-globe-asia"></i>
                 </a>
@@ -73,33 +91,35 @@
 
 
 
-      <!-- Notifications Dropdown Menu -->
+      <!-- Notifications Dropdown Menu
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="fab fa-gg-circle"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
-        </a>
+          <i class="fas fa-business-time"></i>
+         </a>
+
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">15 Notifications</span>
+          <span class="dropdown-item dropdown-header">Attandance</span>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
-            <i class="fa fa-envelope mr-2"></i> 4 new messages
+            <i class="fa fa-clock mr-2"></i> Clock In
             <span class="float-right text-muted text-sm">3 mins</span>
           </a>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
-            <i class="fa fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fa fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-        </div>
+              <i class="fa fa-stopwatch mr-2"></i> Clock Out
+              <span class="float-right text-muted text-sm">3 mins</span>
+            </a>
+
+         </div>
+      </li> -->
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="#" (click)="fullScreen($event)">
+          <i class="fas fa-expand"></i>
+        </a>
       </li>
+
 
     </ul>
   </nav>

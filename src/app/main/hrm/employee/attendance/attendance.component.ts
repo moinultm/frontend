@@ -35,7 +35,11 @@ export class AttendanceComponent implements OnInit {
   myForm: FormGroup;
   data: any;
 
-  
+
+  fromDate:any;
+  toDate:any;
+
+
 
 time:'16:30:00';
 
@@ -60,7 +64,6 @@ time:'16:30:00';
   ngOnInit() {
     this.iniForm();
     this.loadData();
-
    }
 
 
@@ -95,7 +98,7 @@ time:'16:30:00';
       this.selectedRow = new Attandance();
     }
 
- 
+
        this.myForm = this._fb.group({
         employee_id:[   attendance ? attendance.employee_id : null,  [Validators.required]],
         todaydate:[  attendance ? attendance.date :  new Date(),  [Validators.required]],
@@ -124,6 +127,7 @@ time:'16:30:00';
       .then((result) => {
         if (result) {
           this.AddForm();
+          this.loadData();
         }
        }, () => {
         //If the modal is dismissed
@@ -134,14 +138,14 @@ time:'16:30:00';
   loadData(page?: number): void {
     this.page = page ? page : 1;
     this.loading = true;
-    let formDt = this.datePipe.transform(this.form.get('fromDate').value, 'yyyy-MM-dd');
-    let toDt = this.datePipe.transform(this.form.get('toDate').value, 'yyyy-MM-dd');
+    this.fromDate = this.datePipe.transform(this.form.get('fromDate').value, 'yyyy-MM-dd');
+    this.toDate = this.datePipe.transform(this.form.get('toDate').value, 'yyyy-MM-dd');
 
     this.attService.find({
       page: this.page,
       size: this.size,
-      from:  formDt,
-      to:   toDt
+      from:   this.fromDate,
+      to:   this.toDate
     }).subscribe((res: PartialList<Attandance>) => {
       this.data = res;
      // console.log(  this.data);
@@ -195,7 +199,6 @@ time:'16:30:00';
           error('Error!', 'An error has occured when saving the Time, please contact system administrator.', this._toastr);
         }
         this.saving = false;
-
       });
 
 

@@ -14,6 +14,7 @@ import { AttendanceReportComponent } from './attendance-report/attendance-report
 import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
 import { AppDateAdapter, APP_DATE_FORMATS } from '@app/core/utils/format-datepicker';
 import { NgbTimeStringAdapter } from './attendance/NgbTimeAdapter.directive';
+import { NgxPrintModule } from 'ngx-print';
 
 const routes: Routes = [
   {    path: 'attendance',    component: AttendanceComponent  },
@@ -33,6 +34,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     MaterialsModule,
+    NgxPrintModule
   ],
   providers: [
   {provide: NgbTimeAdapter, useClass: NgbTimeStringAdapter},

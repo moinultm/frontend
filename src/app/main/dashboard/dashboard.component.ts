@@ -3,8 +3,8 @@ import { TranslateService } from '../../core/services/common/translate.service';
 import { Dashboard } from '@app/shared/models/common/dashboard.model';
 import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { DashboardService } from '@app/core/services/common/dashboard.service';
+
 import { SettingsService } from '@app/core/services/common/settings.service';
-import { AppConfigService } from '@app/core/services/config/appconfig.service';
 
 
 @Component({
@@ -46,8 +46,8 @@ location:any;
 
   constructor(private translate: TranslateService,
     private dashboard:DashboardService,
-    private locationService :SettingsService,
-    private appConfigService: AppConfigService) {
+    private locationService :SettingsService
+     ) {
 
 
   }
@@ -55,10 +55,7 @@ location:any;
 
 
   ngOnInit() {
-    this.loadData();
-    this.settings = this.appConfigService.settings;
-    //console.log(this.data['data']);
-
+     this.loadData();
   }
    //Load Data
    loadData() {
@@ -91,8 +88,6 @@ getLoc(){
 
   this.locationService.getPosition().then(pos=>
     {
-
-
        console.log(`Positon: ${pos.lng} ${pos.lat}`);
        this.location=`Positon: ${pos.lng} ${pos.lat}`;
     });

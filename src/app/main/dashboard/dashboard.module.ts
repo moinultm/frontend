@@ -6,8 +6,7 @@ import { ChartsModule } from 'ng2-charts';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { TranslateModule } from '@app/shared/translate/translate.module';
-import { AppConfigService } from '@app/core/services/config/appconfig.service';
-import { AppConfigModule } from '@app/appconfig.module';
+import { ConfigModule } from '@app/shared/config/config.module';
 
 
 
@@ -23,10 +22,13 @@ import { AppConfigModule } from '@app/appconfig.module';
         DashboardRoutingModule,
         ChartsModule,
         TranslateModule,
-        AppConfigModule
-    ],
+        ConfigModule
 
-    providers:[    AppConfigService]
+    ],
+    providers: [
+       ]
+
+
 })
 
 export class DashboardModule {

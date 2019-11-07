@@ -7,6 +7,9 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class SettingsService extends CrudService <Settings> {
+
+  data: any = {};
+
   constructor(private __http: HttpClient ) {
     super(__http);
     this.setUrl('settings');
@@ -34,6 +37,8 @@ export class SettingsService extends CrudService <Settings> {
         });
     });
   }
+
+
 
 
 
