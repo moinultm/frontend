@@ -1,19 +1,18 @@
-// Angular components
-import { Component, OnInit, OnDestroy } from '@angular/core';
+
+import { Component, OnInit, OnDestroy, Renderer2 } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 
-// Application layout configuration service
+
 import { ConfigService } from '../../core/utils/config.service';
 
-// Application services
 import { AuthenticationService } from '@app/core/services/security/authentication.service';
 import { Router } from '@angular/router';
 
-// Application constants
+
 import { constants } from '@env/constants';
 
-// Toastr services
+
 import { warning } from '../../core/utils/toastr';
 import { ToastrService } from 'ngx-toastr';
 
@@ -24,14 +23,9 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
-  /**
-   * Form
-   */
   form: FormGroup;
 
-  /**
-   * An indicator for login in progress
-   */
+
   loading: boolean;
 
 
@@ -41,18 +35,20 @@ export class LoginComponent implements OnInit, OnDestroy {
     private _fb: FormBuilder,
     private _router: Router,
     private _toastr: ToastrService,
-    titleService: Title
+    titleService: Title,
+    private renderer: Renderer2
   ) {
-    // Update application layout settings
-    this.config.setSettings({
+    this.renderer.addClass(document.body, 'login-page');
+
+     this.config.setSettings({
       navbar: false,
       sidebar: false,
       footer: false
     });
-    // Build the login form
-    this.buildForm();
-    // Set the page title
-    titleService.setTitle(constants.app_name + ' - Authentication');
+     this.buildForm();
+     titleService.setTitle(constants.app_name + ' - Authentication');
+
+
   }
 
 
@@ -91,6 +87,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.config.setSettings(this.config.defaultSettings());
+    this.renderer.removeClass(document.body, 'login-page');
+
   }
+
+
 
 }

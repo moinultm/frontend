@@ -70,7 +70,9 @@ ngOnDestroy(){
 
 
 isCheckedIn(){
-  this.attservice.checkAttandance(this.user)
+  this.attservice.checkAttandance({
+    id:  this.user,
+  })
     .subscribe((data: boolean) =>   {
       this.checkedIn=data;
       //console.log( this.checkedIn)
@@ -79,10 +81,13 @@ isCheckedIn(){
 //   warning('Warning!', e, this._toastr);
 doChekIn(){
   event.preventDefault()
-  this.attservice.inAttandance(this.user)
+  this.attservice.inAttandance({
+    id:  this.user,
+  })
     .subscribe((data: any) =>   {
       this.checkedIn=true;
       //console.log( this.checkedIn)
+      success('Info!', data.user_name +' - Checkin time added', this._toastr);
     }, (err: any) => {
       if (err.status === 403) {
         this.checkedIn=true;
@@ -97,7 +102,9 @@ doChekIn(){
 
 doChekOut(){
   event.preventDefault()
-  this.attservice.outAttandance(this.user)
+  this.attservice.outAttandance({
+    id:  this.user,
+  })
     .subscribe((data: any) =>   {
      // this.checkedIn=false;
       success('Info!', data.user_name +' - Checkout time updated', this._toastr);

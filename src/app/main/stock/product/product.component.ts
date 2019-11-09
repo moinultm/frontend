@@ -12,6 +12,7 @@ import { ProductService } from '@app/core/services/stock/product.service';
 import { success, warning } from '@app/core/utils/toastr';
 import { error } from 'util';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-product',
@@ -31,7 +32,6 @@ export class ProductComponent implements OnInit {
 
   loading: boolean;
   picturePreview: any;
-
 
 
   constructor(

@@ -14,17 +14,45 @@ export class AttendanceService extends CrudService <Attandance> {
     this.setUrl('attendance');
   }
 
-  public checkAttandance(id: number): any {
+
+
+
+  public save(model: any, update?: boolean): any {
     this.options.params = undefined;
-    return this.__http.get (this.url + '/' + id +'/'+'get', this.options);
+    if (update) {
+      return this.__http.post<Attandance>(this.url + '/' + model.get('id'), model, this.options);
+    } else {
+      console.log(model)
+      return this.__http.post<Attandance>(this.url, model, this.options);
+    }
   }
-  public outAttandance(id: number): any {
-    this.options.params = undefined;
-    return this.__http.get (this.url + '/' + id +'/'+'out', this.options);
+
+
+
+  public checkAttandance(query?: {}): any {
+    if (query) {
+      this.options.params = query;
+    } else {
+      this.options.params = undefined;
+    }
+    return this.__http.get (this.url + '/' +'get' , this.options);
   }
-  public inAttandance(id: number): any {
-    this.options.params = undefined;
-    return this.__http.get (this.url + '/' + id +'/'+'in', this.options);
+  public outAttandance(query?: {}): any {
+    if (query) {
+      this.options.params = query;
+    } else {
+      this.options.params = undefined;
+    }
+    return this.__http.get (this.url + '/'+'out' , this.options);
+  }
+
+  public inAttandance(query?: {}): any {
+    if (query) {
+      this.options.params = query;
+    } else {
+      this.options.params = undefined;
+    }
+    return this.__http.get (this.url + '/' +'in' , this.options);
   }
 
 }

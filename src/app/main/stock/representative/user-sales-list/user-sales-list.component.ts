@@ -35,7 +35,7 @@ isRoleViewAll:any;
   constructor(    public jwtHelper: JwtHelperService,
     private representService: RepresentStockService,    private userService:UserService) {
       this.currentUserID=parseInt(this.jwtHelper.id());
-      this.isRoleViewAll=  this.jwtHelper.hasRole('ROLE_VIEW_ALL');
+      this.isRoleViewAll=  this.jwtHelper.hasRole('ROLE_MANAGER_PRIVILEGE');
     }
 
   ngOnInit() {

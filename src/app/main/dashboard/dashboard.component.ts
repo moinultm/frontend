@@ -5,6 +5,7 @@ import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { DashboardService } from '@app/core/services/common/dashboard.service';
 
 import { SettingsService } from '@app/core/services/common/settings.service';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -46,10 +47,10 @@ location:any;
 
   constructor(private translate: TranslateService,
     private dashboard:DashboardService,
-    private locationService :SettingsService
+    private locationService :SettingsService,
+    titleService: Title,
      ) {
-
-
+      titleService.setTitle('::G Admin - Dashboard');
   }
 
 

@@ -34,6 +34,17 @@ export class ProductService extends CrudService <Product> {
   }
 
 
+  public updatePrice(query?: {}): any {
+    if (query) {
+      this.options.params = query;
+    } else {
+      this.options.params = undefined;
+    }
+
+    return this.__http.get (this.url + '/'+'p'+'/'+'update-price' , this.options);
+
+  }
+
   public saveGift(model: any, update?: boolean): any {
     this.options.params = undefined;
     if (update) {

@@ -83,6 +83,9 @@
                           <!--a href="#" class="dropdown-item"> <span> <i class="fa fa-trash"></i>
                             Delete</span></a-->
 
+                            <a href="#" class="dropdown-item" (click)="initUpdate(updateValueModal, item,item.id)">
+                              <span><i class="fa fa-dollar-sign"></i> Update Value</span>
+                            </a>
 
                             <a class="dropdown-item" href="#" (click)="toBarcode(item.id)">
                                 <span> <i class="fas fa-barcode"></i> Barcode </span>
@@ -273,3 +276,65 @@
 
 
 </ng-template>
+
+
+
+     <!-- User values confirmation modal -->
+     <ng-template #updateValueModal let-modal>
+
+      <!-- Modal header -->
+      <div class="modal-header">
+        <h4 class="modal-title">
+          {{ selectedProduct.name ? ('Update Price: ' + selectedProduct.name) : 'New' }}
+          </h4>
+        <button type="button" class="close" aria-label="Close" (click)="close(modal)">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- ./Modal header -->
+
+      <!-- Modal body -->
+      <div class="modal-body">
+          <form  role="form"  [formGroup]="myUpdateForm">
+
+              <label class="col-form-label" for="inputSuccess"><i class="fas fa-check"></i> Cost Purchase</label>
+
+                <div class="input-group  mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="fas fa-dollar-sign"></i>
+                      </span>
+                    </div>
+                    <input type="text" class="form-control"  formControlName="cost_price">
+                    <div class="input-group-append">
+                      <div class="input-group-text"><i class="fas fa-ambulance"></i></div>
+                    </div>
+                  </div>
+
+                  <label class="col-form-label" for="inputSuccess"><i class="far fa-bell"></i> MRP
+                    Sales</label>
+                  <div class="input-group  mb-3">
+
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="fas fa-dollar-sign"></i>
+                        </span>
+                      </div>
+                      <input type="text" class="form-control"  formControlName="mrp">
+                      <div class="input-group-append">
+                        <div class="input-group-text"><i class="fas fa-ambulance"></i></div>
+                      </div>
+                    </div>
+
+            </form>
+       </div>
+      <!-- ./Modal body -->
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" [disabled]="updateProduct" (click)="updateValue()">Update</button>
+      </div>
+      <!-- ./Modal footer -->
+
+    </ng-template>
+    <!-- ./User values confirmation modal -->

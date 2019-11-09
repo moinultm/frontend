@@ -11,6 +11,16 @@
 //@import "../node_modules/jqwidgets-ng/jqwidgets/styles/jqx.base.css";
 
 
+
+/*pace*/
+ .pace-activity {
+  z-index: 2000!important;
+  position: fixed!important;
+  top:  0!important;
+  right: 0!important;
+}
+
+
 label:not(.form-check-label):not(.custom-file-label) {
   font-weight: normal!important;
 }

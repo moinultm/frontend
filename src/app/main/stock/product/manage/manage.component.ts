@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Product } from '@app/shared/models/stock/product.model';
 import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { Title } from '@angular/platform-browser';
 import { ProductService } from '@app/core/services/stock/product.service';
 import { ToastrService } from 'ngx-toastr';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import { success, warning, error } from '@app/core/utils/toastr';
 
 @Component({
   selector: 'app-manage',
@@ -15,17 +16,23 @@ import { Router } from '@angular/router';
 })
 export class ManageComponent implements OnInit {
 
+  modalOption: NgbModalOptions = {};
+
+
   data: PartialList<Product>;
   details:PartialList<Product>;
   loadingDetails:boolean;
   loading: boolean;
   savingProduct: boolean;
-  deletingProduct: boolean;
+ updateProduct: boolean;
   page = 1;
   size = 10;
   form: FormGroup;
   selectedProduct: Product;
 
+  selectedProductId:number;
+
+  myUpdateForm: FormGroup;
 
   //https://stackoverflow.com/questions/45467550/angular-2-how-to-sum-column-ngfor
 
@@ -34,7 +41,8 @@ export class ManageComponent implements OnInit {
     private modalService: NgbModal,
     titleService: Title,
     private _formBuilder: FormBuilder,
-    private router:Router,) { }
+    private router:Router,
+    private _fb: FormBuilder) { }
 
   ngOnInit() {
     this.loadData();
@@ -83,6 +91,83 @@ loadDetails(id:number): void {
     this.loadingDetails = false;
   });
 }
+
+
+
+
+
+initUpdate(modal: any,product?: Product,id?:number): void {
+  event.preventDefault();
+
+  this.modalOption.backdrop = 'static';
+  this.modalOption.keyboard = false;
+
+
+  this.UpdateForm(product,id);
+
+  // Open the delete confirmation modal
+  this.modalService
+    .open(modal,this.modalOption)
+    .result
+    .then((result) => {
+      if (result) {
+        this.UpdateForm();
+        this.loadData();
+      }
+     }, () => {
+      //If the modal is dismissed
+     });
+}
+
+UpdateForm( product?: Product,id?:number):void{
+
+
+   if (product) {
+
+    this.selectedProduct = product;
+    this.selectedProductId = id;
+
+    this.myUpdateForm = this._fb.group({
+
+       mrp:[product ? product.mrp : '0',  [Validators.required]],
+      cost_price:[product ? product.cost_price : '0',  [Validators.required]],
+
+     });
+
+  } else {
+
+}
+
+ }
+
+
+
+updateValue(){
+
+  this.updateProduct=true;
+
+  this.productService.updatePrice({
+    id:  this.selectedProductId,
+   mrp: this.myUpdateForm.get('mrp').value,
+   cost_price: this.myUpdateForm.get('cost_price').value,
+  })
+    .subscribe((data: any) =>   {
+      success('Info!', 'Product data updated', this._toastr);
+    }, (err: any) => {
+      if (err.status === 403) {
+        warning('Warning!', err.error.error, this._toastr);
+      } else {
+        error('Error!', 'An error has occured when updating , please contact system administrator.', this._toastr);
+      }
+
+    });
+
+
+  }
+
+
+
+
 
 toBarcode(id:number){
   event.preventDefault();

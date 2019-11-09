@@ -126,7 +126,7 @@
                                       (click)="initSave(saveModal, result)">
                                           <mat-icon>edit</mat-icon>
                                   </button>
-                                <button mat-icon-button color="accent" matTooltip="Delete Row">
+                                <button mat-icon-button color="accent" matTooltip="Delete Row" (click)="initDelete(deleteModal, result)">
                                   <mat-icon>restore_from_trash</mat-icon>
                                 </button>
 
@@ -258,15 +258,7 @@
 
                       </div>
 
-
               </form>
-
-
-
-
-
-
-
 
 
           </div>
@@ -278,12 +270,39 @@
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline-danger"  [disabled]="myForm.invalid"  (click)="save(myForm)">Save</button>
+        <button type="button" class="btn btn-outline-danger"  [disabled]="myForm.invalid"  (click)="save(modal)">Save</button>
       </div>
       <!-- ./Modal footer -->
 
     </ng-template>
 
+
+     <!-- User delete confirmation modal -->
+  <ng-template #deleteModal let-modal>
+
+    <!-- Modal header -->
+    <div class="modal-header">
+      <h4 class="modal-title">Delete row</h4>
+      <button type="button" class="close" aria-label="Close" (click)="close(modal)">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <!-- ./Modal header -->
+
+    <!-- Modal body -->
+    <div class="modal-body">
+      <p>Are you sure you want to delete this row?</p>
+    </div>
+    <!-- ./Modal body -->
+
+    <!-- Modal footer -->
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-danger" [disabled]="deletingRow" (click)="delete(modal)">Delete</button>
+    </div>
+    <!-- ./Modal footer -->
+
+  </ng-template>
+  <!-- ./User delete confirmation modal -->
 
 
 </div>

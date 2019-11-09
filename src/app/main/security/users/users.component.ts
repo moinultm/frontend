@@ -41,14 +41,12 @@ export class UsersComponent implements OnInit {
 
 
   userTypeList = [
-    {
-      id:1,
-name:'admins'
-    },
-    {
-      id:2,
-      name:'sales'
-    }]
+    {id:2,name:'owner'},
+    {id:3,name:'general manager'},
+    {id:4,name:'sales manager'},
+    {id:4,name:'sales person'},
+    {id:4,name:'stock manager'},
+  ]
 
   constructor(
     private userService: UserService,

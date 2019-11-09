@@ -24,33 +24,26 @@ export class AttendanceComponent implements OnInit {
 
   loading: boolean;
   saving: boolean;
-  deletingSales: boolean;
+  deletingRow: boolean;
   page = 1;
   size = 10;
 
   users:PartialList <User>;
 
-
   form: FormGroup;
   myForm: FormGroup;
   data: any;
 
-
   fromDate:any;
   toDate:any;
 
-
-
-time:'16:30:00';
+  time:'16:30:00';
 
   date = new FormControl(new Date());
-
 
   serializedDate = new FormControl((new Date()).toISOString());
 
   selectedRow:Attandance;
-
-
 
 
   constructor(  private _fb: FormBuilder,
@@ -75,8 +68,6 @@ time:'16:30:00';
   }
 
 
-
-
     //Load Data
     loadUser(): void {
       this.loading = true;
@@ -93,7 +84,7 @@ time:'16:30:00';
       this.loadUser();
 
       if (attendance) {
-        this.selectedRow = attendance;
+        this.selectedRow =  Object.assign({}, attendance);
      } else {
       this.selectedRow = new Attandance();
     }
@@ -168,7 +159,7 @@ time:'16:30:00';
 
   }
 
-  save(myForm: any): void {
+  save(modal: any): void {
 
     if (this.myForm.valid) {
       this.saving = true;
@@ -187,24 +178,58 @@ time:'16:30:00';
       this.attService.save(formData, this.selectedRow.id ? true : false).subscribe((res: Attandance) => {
         success('Success!', 'The Time is successfully saved.', this._toastr);
         this.saving = false;
-        this.close(myForm, true);
         this.AddForm();
+        this.close(modal, true);
         this.router.navigate(['/employee/attendance']);
       }, (err: any) => {
         if (err.status === 403) {
-          err.error.forEach((e: string) => {
-            warning('Warning!', e, this._toastr);
-          });
+          warning('Warning!', err.error.error, this._toastr);
         } else {
           error('Error!', 'An error has occured when saving the Time, please contact system administrator.', this._toastr);
         }
         this.saving = false;
       });
-
-
     }
+  }
 
 
+  initDelete(modal: any, profile: Attandance): void {
+    this.selectedRow = profile;
+    // Open the delete confirmation modal
+    this.modalService
+      .open(modal)
+      .result
+      .then((result) => {
+        if (result) {
+          this.loadData();
+        }
+        this.selectedRow = new Attandance();
+      }, () => {
+        // If the modal is dismissed
+        this.selectedRow = new Attandance();
+      });
+  }
+
+
+  delete(modal: any): void {
+    this.deletingRow = true;
+    this.attService.delete({
+      id: this.selectedRow.id
+    }).subscribe(() => {
+      this.close(modal, true);
+      this.deletingRow = false;
+    }, (err: any) => {
+      if (err.status === 403) {
+        err.error.forEach((e: string) => {
+          warning('Warning!', e, this._toastr);
+          this.close(modal, true);
+        });
+      } else {
+        error('Error!', 'An error has occured Server side deleting , please contact system administrator.', this._toastr);
+        this.close(modal, true);
+      }
+      this.saving = false;
+    });
   }
 
 

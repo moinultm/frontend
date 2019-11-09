@@ -8,7 +8,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LoginComponent } from './login.component';
 
 // Material modules
-import { MatProgressSpinnerModule } from '@angular/material';
+import { MatProgressSpinnerModule, MatProgressBarModule } from '@angular/material';
 
 // Routes guards
 import { NoAuthGuard } from '@app/core/services/security/guards/no-auth.guard';
@@ -36,7 +36,9 @@ const routes: Routes = [
     // Application routes injection into the application forChild() routes
     RouterModule.forChild(routes),
     // Material modules
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatProgressBarModule
+
   ]
 })
 export class LoginModule { }
