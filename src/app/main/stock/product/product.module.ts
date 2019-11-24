@@ -13,6 +13,8 @@ import { DamageProductComponent } from './damage-product/damage-product.componen
 import { ListGiftComponent } from './gift-product/list-gift/list-gift.component';
 import { ListDamageComponent } from './damage-product/list-damage/list-damage.component';
 
+import { TranslateModule } from '@app/shared/translate/translate.module';
+import { ConfigModule} from '@app/shared/config/config.module';
 
 
 const routes: Routes = [
@@ -44,7 +46,9 @@ const routes: Routes = [
     MatFormFieldModule,
     MatProgressSpinnerModule,
     MatInputModule,
-    NgxBarcodeModule
+    NgxBarcodeModule,
+    TranslateModule,
+    ConfigModule
   ],
   exports: [RouterModule]
 })

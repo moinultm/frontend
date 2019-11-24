@@ -147,16 +147,14 @@
                         <div  [ngClass]="barcoded.ppp" >
 
                     <p *ngIf="barcoded.isSiteName" class="barcode-info-p">
-                     Company
+                     {{ 'site_name' | configure }}
                       </p>
                       <p  *ngIf="barcoded.isProductName"  class="barcode-info-p">
-                          {{item.name}}
+                          {{item.name}} /    {{item.code}}
                         </p>
-                        <p  *ngIf="barcoded.isClientCode"  class="barcode-info-p">
-                          {{selectedClientCode}}
-                            </p>
-                        <ngx-barcode [bc-element-type]="elementType" [bc-value]="item.code" [bc-format]="format"
-                        [bc-line-color]="lineColor" [bc-width]="width" [bc-height]="50"  [bc-display-value]="displayValue">
+
+                        <ngx-barcode *ngIf="barcoded.isClientCode" [bc-element-type]="elementType" [bc-value]="selectedClientCode" [bc-format]="format"
+                        [bc-line-color]="lineColor" [bc-width]="1" [bc-height]="50"  [bc-display-value]="False">
                       </ngx-barcode>
                       <p class="barcode-info-p"  *ngIf="barcoded.isProductPrice" >
                           MRP: {{item.mrp}} + Vat

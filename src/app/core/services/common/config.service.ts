@@ -7,7 +7,7 @@ import { Settings } from '@app/shared/models/common/settings.model';
 @Injectable({
   providedIn: 'root'
 })
-export class ConfigService extends CrudService <Settings> {
+export class ConfigureService extends CrudService <Settings> {
   data: any = {};
 
   constructor(private __http: HttpClient ) {

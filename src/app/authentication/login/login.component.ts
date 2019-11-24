@@ -45,10 +45,9 @@ export class LoginComponent implements OnInit, OnDestroy {
       sidebar: false,
       footer: false
     });
+
      this.buildForm();
      titleService.setTitle(constants.app_name + ' - Authentication');
-
-
   }
 
 
@@ -79,11 +78,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         }
       );
   }
-
-
-
-
-
 
   ngOnDestroy(): void {
     this.config.setSettings(this.config.defaultSettings());

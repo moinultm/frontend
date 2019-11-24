@@ -1,20 +1,20 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ConfigService } from '../common/config.service';
+import { ConfigureService } from '../common/config.service';
 
 @Pipe({
-  name: 'config',
+  name: 'configure',
   pure: false
 })
 
 
-export class ConfigPipe implements PipeTransform {
+export class ConfigurePipe implements PipeTransform {
 
-  constructor(private config: ConfigService) {
+  constructor(private configure: ConfigureService) {
   }
 
 
   transform(key: any): any {
-    return this.config.data[key] || key;
+    return this.configure.data[key] || key;
   }
 
 

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ConfigPipe } from '../../core/services/pipes/config.pipe';
+import { ConfigurePipe } from '../../core/services/pipes/config.pipe';
 
 
 @NgModule({
-  declarations: [ConfigPipe],
+  declarations: [ConfigurePipe],
 
-  exports: [ConfigPipe]
+  exports: [ConfigurePipe]
 })
 export class ConfigModule { }

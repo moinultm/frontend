@@ -16,7 +16,6 @@ export class ConfigService {
   settings: ConfigObject;
   onSettingsChanged: BehaviorSubject<ConfigObject>;
 
-
   constructor(
     public platform: Platform
   ) {
@@ -25,13 +24,11 @@ export class ConfigService {
     this.onSettingsChanged = new BehaviorSubject(this.settings);
   }
 
-
   setSettings(settings: ConfigObject) {
     this.settings = Object.assign({}, this.settings, settings);
 
     this.onSettingsChanged.next(this.settings);
   }
-
 
   defaultSettings(): ConfigObject {
     return {
@@ -40,4 +37,6 @@ export class ConfigService {
       footer: true
     };
   }
+
+
 }

@@ -142,7 +142,7 @@ export class CustomerComponent implements OnInit {
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
 
-      //dialogConfig.width= '250px';
+     dialogConfig.width= '350px';
 
     if (client)
     {

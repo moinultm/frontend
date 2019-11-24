@@ -7,6 +7,8 @@ import { ProductService } from '@app/core/services/stock/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { Client } from '@app/shared/models/stock/client.model';
 import { CustomerService } from '@app/core/services/stock/customer.service';
+ import { ConfigureService } from '@app/core/services/common/config.service';
+import { TranslateService } from '@app/core/services/common/translate.service';
 
 @Component({
   selector: 'app-product-barcode',
@@ -62,6 +64,8 @@ export class ProductBarcodeComponent implements OnInit {
 
 
   constructor(
+    private translate: TranslateService,
+    private configure:ConfigureService,
     private productService: ProductService,
     private route: ActivatedRoute,
     private customeService:CustomerService
@@ -95,6 +99,13 @@ this.expdDate='';
     this.FillCustomer();
   }
 
+  setConfig(configure: string) {
+    this.configure.use(configure);
+  }
+
+  setLang(lang: string) {
+    this.translate.use(lang);
+  }
 
   get values(): string[] {
     return this.value.split('\n');

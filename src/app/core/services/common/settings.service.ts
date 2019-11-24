@@ -39,8 +39,4 @@ export class SettingsService extends CrudService <Settings> {
   }
 
 
-
-
-
-
 }

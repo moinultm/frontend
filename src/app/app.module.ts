@@ -19,7 +19,7 @@ import { TranslateService } from './core/services/common/translate.service';
 import { TranslateModule } from './shared/translate/translate.module';
 
 import { NotFoundComponent } from './authentication/not-found/not-found.component';
-import { ConfigService } from './core/services/common/config.service';
+import { ConfigureService } from './core/services/common/config.service';
 
 
 
@@ -29,7 +29,7 @@ export function setupTranslateFactory(
 }
 
 export function setupConfigFactory(
-  service: TranslateService): Function {
+  service: ConfigureService): Function {
   return () => service.use('1');
 }
 
@@ -89,7 +89,7 @@ LoginComponent,
     {
       provide: APP_INITIALIZER,
       useFactory: setupConfigFactory,
-      deps: [ ConfigService ],
+      deps: [ ConfigureService ],
       multi: true
     },
 ],

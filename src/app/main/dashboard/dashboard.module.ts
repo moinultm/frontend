@@ -6,14 +6,13 @@ import { ChartsModule } from 'ng2-charts';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { TranslateModule } from '@app/shared/translate/translate.module';
-import { ConfigModule } from '@app/shared/config/config.module';
+import { ConfigModule} from '@app/shared/config/config.module';
 
 
 
 @NgModule({
      declarations: [
         DashboardComponent,
-
     ],
      imports: [
         CommonModule,
@@ -23,7 +22,6 @@ import { ConfigModule } from '@app/shared/config/config.module';
         ChartsModule,
         TranslateModule,
         ConfigModule
-
     ],
     providers: [
        ]

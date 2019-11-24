@@ -7,19 +7,17 @@ import { DashboardService } from '@app/core/services/common/dashboard.service';
 import { SettingsService } from '@app/core/services/common/settings.service';
 import { Title } from '@angular/platform-browser';
 
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
   data: any;
   loading: boolean;
-location:any;
+  location:any;
 
-//general chart
+  //general chart
   chartOptions = {
     responsive: true
   };
@@ -74,8 +72,6 @@ this.chartLabels= this.data['months'];
 this.sellChartData.push(
   { data:this.data['sells']  ,  label: 'Sales Value'},
   { data:this.data['purchases']  ,  label: 'Purchase Value'});
-
-
      this.loading = false;
     });
   }
@@ -85,17 +81,12 @@ this.sellChartData.push(
   }
 
 getLoc(){
-
-
   this.locationService.getPosition().then(pos=>
     {
        console.log(`Positon: ${pos.lng} ${pos.lat}`);
        this.location=`Positon: ${pos.lng} ${pos.lat}`;
     });
-
   }
-
-
 
 }
 
