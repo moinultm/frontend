@@ -17,6 +17,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { Title } from '@angular/platform-browser';
 import { AddCustomerComponent } from '../add-customer/add-customer.component';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add',
@@ -24,7 +26,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./add.component.scss']
 })
 export class AddComponent implements OnInit {
-  loading:boolean;
+  loading=true;
   modalOption: NgbModalOptions = {};
   customerList:any;
   orderItemList: Array<OrderItems>=[];
@@ -41,6 +43,11 @@ export class AddComponent implements OnInit {
 
   users:any;
 
+  _loading = true;
+  error = false;
+
+  data$: Observable<any>;
+
   constructor(private sellsOrdererSvice:SellsInvoiceService,
     private customeService:CustomerService,
     private productService:ProductService,
@@ -52,6 +59,10 @@ export class AddComponent implements OnInit {
     private dialog: MatDialog,
     private actRoute: ActivatedRoute
     ) {
+
+
+
+
       titleService.setTitle('Sales Invoice');
     }
 
@@ -64,13 +75,14 @@ export class AddComponent implements OnInit {
   fillCustomer(){
   this.actRoute.data.subscribe(data => {
     this.customerList=data.CustomerResolver.data;
-
+    this.loading = false;
   });
   }
 
   fillUser(){
     this.actRoute.data.subscribe(data => {
       this.users=data.UserResolver.data;
+      this.loading = false;
       console.log(data.UserResolver.data)
     });
   }
