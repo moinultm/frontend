@@ -107,7 +107,7 @@
                                     </div>
                                     <select class="form-control" formControlName="user_id">
                                         <option [value]="null">Select Representative</option>
-                                       <option *ngFor="let list of users.data" [value]="list.id">
+                                       <option *ngFor="let list of users" [value]="list.id">
                                          {{list.name}}
                                        </option>
                                      </select>

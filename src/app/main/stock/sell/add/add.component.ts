@@ -16,6 +16,7 @@ import { User } from '@app/shared/models/security/user.model';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { Title } from '@angular/platform-browser';
 import { AddCustomerComponent } from '../add-customer/add-customer.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add',
@@ -25,7 +26,7 @@ import { AddCustomerComponent } from '../add-customer/add-customer.component';
 export class AddComponent implements OnInit {
   loading:boolean;
   modalOption: NgbModalOptions = {};
-  customerList: Array<Client>;
+  customerList:any;
   orderItemList: Array<OrderItems>=[];
 
 
@@ -38,7 +39,7 @@ export class AddComponent implements OnInit {
   _productList: Array<Product>;
 
 
-  users:PartialList <User>;
+  users:any;
 
   constructor(private sellsOrdererSvice:SellsInvoiceService,
     private customeService:CustomerService,
@@ -49,14 +50,32 @@ export class AddComponent implements OnInit {
     private userService:UserService,
     titleService: Title,
     private dialog: MatDialog,
+    private actRoute: ActivatedRoute
     ) {
       titleService.setTitle('Sales Invoice');
     }
 
   ngOnInit() {
+    this.fillCustomer();
+    this.fillUser();
     this.initForm();
   }
 
+  fillCustomer(){
+  this.actRoute.data.subscribe(data => {
+    this.customerList=data.CustomerResolver.data;
+
+  });
+  }
+
+  fillUser(){
+    this.actRoute.data.subscribe(data => {
+      this.users=data.UserResolver.data;
+      console.log(data.UserResolver.data)
+    });
+  }
+
+/*
   loadUser(): void {
     this.loading = true;
     this.userService.findRepresentative().subscribe((res: PartialList<User>) => {
@@ -64,12 +83,12 @@ export class AddComponent implements OnInit {
        this.loading = false;
     });
   }
+*/
 
   initForm(order?:SellsInvoice): void {
-    this.loadUser();
+    //this.fillUser();
 
     if (order){
-
     }
     else{
       this.selectedOrder =new SellsInvoice();
@@ -77,7 +96,7 @@ export class AddComponent implements OnInit {
     }
 
 
-    this.FillCustomer();
+    //this.FillCustomer();
 
     this.mainForm = this._fb.group({
     sellDate:[new Date(),[Validators.required]],
@@ -95,6 +114,10 @@ export class AddComponent implements OnInit {
   });
   }
 
+
+
+
+/*
   FillCustomer()
   {
     this.loading=true;
@@ -104,7 +127,7 @@ export class AddComponent implements OnInit {
        this.loading = false;
     });
   }
-
+*/
   initItemModal(modal: any, product?: Product){
   this.modalOption.backdrop = 'static';
   this.modalOption.keyboard = false;

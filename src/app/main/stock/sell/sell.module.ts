@@ -19,13 +19,19 @@ import { OrderInvoiceComponent } from './order-invoice/order-invoice.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { AppDateAdapter, APP_DATE_FORMATS } from '@app/core/utils/format-datepicker';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
+import { CustomerResolver } from '@app/core/resolvers/customer.resolver';
+import { UserResolver } from '@app/core/resolvers/user.resolver';
 
 
 const routes: Routes = [
   // Roles component
   {
     path: 'add',
-    component: AddComponent
+    component: AddComponent,
+    resolve: {
+      UserResolver,
+      CustomerResolver
+    },
   },
   {
     path: '',
@@ -71,7 +77,9 @@ const routes: Routes = [
     //materials
   ],
   entryComponents:[AddPaymentComponent,AddCustomerComponent],
-  providers: [ MatDatepickerModule,  {provide: DateAdapter, useClass: AppDateAdapter},
+  providers: [UserResolver,CustomerResolver,
+     MatDatepickerModule,  {provide: DateAdapter, useClass: AppDateAdapter},
     {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS} ],
+
 })
 export class SellModule { }
