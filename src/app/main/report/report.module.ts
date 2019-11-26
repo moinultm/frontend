@@ -50,6 +50,12 @@ const routes: Routes = [
       component: ProductReportComponent
     },
 
+   //stock-general-report
+   { path: 'stock-general-report',
+   canActivate: [ AuthGuard],
+   component: StockGeneralReportComponent
+   },
+
     //represent
     { path: 'represent-stock-report',
     canActivate: [ AuthGuard],
@@ -91,11 +97,7 @@ const routes: Routes = [
     component: TransactionStatusReportComponent
     },
 
-    //stock-general-report
-    { path: 'stock-general-report',
-    canActivate: [ AuthGuard],
-    component: StockGeneralReportComponent
-    },
+
     { path: 'profit-loss-report',
     canActivate: [ AuthGuard],
     component: ProfitLossReportComponent

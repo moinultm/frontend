@@ -148,8 +148,8 @@
                         <th class="tg-0pky" rowspan="2">Sl</th>
                         <th class="tg-0pky" rowspan="2">Product Name</th>
                         <th class="tg-0pky" colspan="2">Opening</th>
+                        <th class="tg-0pky" colspan="2"> Inward</th>
                         <th class="tg-0pky" colspan="2">Outward</th>
-                        <th class="tg-0pky" colspan="2">Inward</th>
                         <th class="tg-0pky" colspan="2">Closing</th>
                       </tr>
                       <tr>
@@ -166,6 +166,7 @@
                         <td class="tg-0pky">Value</td>
 
                       </tr>
+                      
                     </thead>
                     <tbody>
                             <tr *ngIf="loading">
@@ -184,12 +185,15 @@
                                     <tr *ngFor="let item of data.data; let i = index">
                                       <td>{{ i+1 }}</td>
                                       <td>{{ item.STOCK_ITEM_NAME }}</td>
-                                      <td>{{ item.TRAN_QUANTITY }}</td>
+                                      <td>{{  _CIN(item.TRAN_QUANTITY) }}</td>
                                       <td>{{ item.TRAN_AMOUNT }}</td>
-                                      <td>{{ _CIP(item.OUTWARD_QUANTITY) }}</td>
-                                      <td>{{ _CIP(item.OUTWARD_AMOUNT) }}</td>
+
                                       <td>{{ item.INWARD_QUANTITY }}</td>
                                       <td>{{ item.INWARD_AMOUNT }}</td>
+
+                                      <td>{{ _CIP(item.OUTWARD_QUANTITY) }}</td>
+                                      <td>{{ _CIP(item.OUTWARD_AMOUNT) }}</td>
+
                                       <td>{{ _CIN(item.TRAN_QUANTITY)+_CIN(item.OUTWARD_QUANTITY)+_CIN(item.INWARD_QUANTITY)  }}</td>
                                       <td>{{ _CIN(item.TRAN_AMOUNT)+_CIN(item.OUTWARD_AMOUNT)+_CIN(item.INWARD_AMOUNT)  }}</td>
                                     </tr>
@@ -197,6 +201,11 @@
                     </tbody>
                 </table>
 </div>
+
+
+
+
+
 </div>
 </div>
           </div>

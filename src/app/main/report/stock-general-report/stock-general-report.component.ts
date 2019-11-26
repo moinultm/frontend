@@ -18,6 +18,8 @@ import { StockGeneral } from '@app/shared/models/stock/stock-general.model';
 })
 export class StockGeneralReportComponent implements OnInit{
 
+  todayDate=this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+
   data: any;
 
   loading: boolean;
@@ -43,7 +45,7 @@ export class StockGeneralReportComponent implements OnInit{
   	}
 
     ngOnInit(){
-     // this.loadData();
+      this.loadData();
 
       this.iniForm();
     }
@@ -74,8 +76,8 @@ export class StockGeneralReportComponent implements OnInit{
       this.page = page ? page : 1;
       this.loading = true;
 
-      let formDt ='';
-      let toDt = '';
+      let formDt =this.todayDate;
+      let toDt = this.todayDate;
 
       this.reportService.stockGeneralReport({
         page: this.page,

@@ -7,6 +7,7 @@ import { ProductReportService } from '@app/core/services/report/product-report.s
 import { UserService } from '@app/core/services/security/user.service';
 import { User } from '@app/shared/models/security/user.model';
 import { StockGeneral } from '@app/shared/models/stock/stock-general.model';
+import { JwtHelperService } from '@app/core/services/security/jwt-helper.service';
 
 @Component({
   selector: 'app-represent-stock-report',
@@ -14,6 +15,8 @@ import { StockGeneral } from '@app/shared/models/stock/stock-general.model';
   styleUrls: ['./represent-stock-report.component.scss']
 })
 export class RepresentStockReportComponent implements OnInit {
+
+  todayDate=this.datePipe.transform(new Date(), 'yyyy-MM-dd');
 
   userName:string;
   userID:null;
@@ -34,12 +37,11 @@ export class RepresentStockReportComponent implements OnInit {
 
 
 
-
-
   form: FormGroup;
 
   users:Array <User>;
 
+  user:number;
 
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
@@ -48,12 +50,14 @@ export class RepresentStockReportComponent implements OnInit {
     private _fb: FormBuilder,
     private datePipe : DatePipe,
     private reportService:ProductReportService,
-    private userService:UserService)	{
+    private userService:UserService,
+    public jwtHelper: JwtHelperService)	{
 
   	}
 
     ngOnInit(){
-      //this.loadData(0);
+      this.user=parseInt (this.jwtHelper.id());
+      this.loadData(this.user);
       this.loadUser();
 
       this.iniForm();

@@ -4,7 +4,7 @@
   <div class="content-header">
     <div class="container-fluid">
         <div class="text-center loading-data" >
-          
+
             <mat-progress-bar mode="indeterminate" *ngIf="loading" ></mat-progress-bar>
 
       </div>
@@ -332,7 +332,7 @@
         <select class="form-control" id="name" formControlName="name" (change)="updatePrice($event.target)">
           <option value="0">--Select--</option>
           <option *ngFor="let product of _productList" [ngValue]="product">
-            {{product.name}} :: Stock ({{product.quantity}})  </option>
+            {{product.name}}   </option>
         </select>
       </div>
       <!-- ./name-->

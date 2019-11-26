@@ -26,6 +26,8 @@ export class ProductReportComponent implements OnInit {
   fromDate:any;
   toDate:any;
 
+  //solution for today date
+todayDate=this.datePipe.transform(new Date(), 'yyyy-MM-dd');
 
 
   date = new FormControl(new Date());
@@ -35,7 +37,7 @@ export class ProductReportComponent implements OnInit {
     private _fb: FormBuilder,private datePipe : DatePipe) { }
 
   ngOnInit() {
-    //this.loadData();
+    this.loadData();
 
     this.iniForm();
   }
@@ -43,9 +45,9 @@ export class ProductReportComponent implements OnInit {
       //Loading Data
       loadData(page?: number): void {
         this.loading = true;
-        this.categoryService.postProductSummary({
-          from:  '',
-          to:   ''
+        this.categoryService.postProductReport({
+          from:  this.todayDate,
+          to:  this.todayDate
         }).subscribe((res: PartialList<Product>) => {
           this.data = res;
           this.loading = false;
@@ -71,7 +73,7 @@ dateFilter(){
 
 
   this.loading = true;
-  this.categoryService.postProductSummary({
+  this.categoryService.postProductReport({
     from:  formDt,
     to:   toDt
   }).subscribe((res: PartialList<Product>) => {

@@ -139,7 +139,7 @@
 
 
 
-            <ng-container *ngIf="!loading">
+              <ng-container *ngIf="!loading">
                 <table class="table table-striped table-bordered table-mini">
                   <thead>
                     <tr>
@@ -214,6 +214,93 @@
 
                   </tbody>
                 </table>
+              </ng-container>
+
+
+
+                  <ng-container *ngIf="!loading">
+                      <table class="table table-striped table-bordered table-mini">
+                        <thead>
+                          <tr>
+                            <th rowspan="2">#</th>
+                            <th rowspan="2">Product Name</th>
+                            <th rowspan="2">Opening Qty</th>
+                            <th rowspan="2">Stock Recived</th>
+                            <th rowspan="2">MRP</th>
+
+                            <th *ngFor="let char of data.product">
+                              {{ char.STOCK_ITEM_NAME }}
+                            </th>
+
+                            <th rowspan="2">Gift Qty</th>
+                            <th rowspan="2">Damage Qty</th>
+                            <th rowspan="2">In-Hand Qty</th>
+
+                            <th rowspan="2">Sales Total</th>
+
+                          </tr>
+
+                          <tr>
+
+                              <td class="tg-0pky">Qty</td>
+                              <td class="tg-0pky">Value</td>
+
+                            </tr>
+
+                        </thead>
+                        <tbody>
+
+                          <tr *ngIf="!loading && data && !users">
+                            <td colspan="12" class="text-center loading-data">
+                              No Data created yet!
+                            </td>
+                          </tr>
+
+                          <tr *ngFor="let P of users; let i = index">
+                            <td> {{ i+1 }}</td>
+                            <td> {{ P.name }}</td>
+
+                            <td> {{ P.TRAN_QUANTITY }} </td>
+                            <td> {{ P.INWARD_QUANTITY }} </td>
+                            <td> {{ P.ITEM_MRP }}</td>
+
+                            <td *ngFor="let char   of data.characteristics">
+                              <span *ngFor=" let cross   of data.crossData">
+
+
+                                <div *ngIf="cross.id=== P.STOCK_ITEM_ID &&  cross.product_discount_percentage  ===  char.product_discount_percentage  ">
+                                  {{cross.quantity }}
+                                </div>
+
+
+                              </span>
+                            </td>
+
+                            <td *ngFor="let char  of data.characteristics">
+                              <span *ngFor=" let cross of data.crossData">
+                                <div *ngIf="cross.id === P.STOCK_ITEM_ID && _CIN(cross.product_discount_percentage) === _CIN(char.product_discount_percentage)">
+                                    {{cross.product_discount_amount }}
+                                </div>
+                              </span>
+                            </td>
+
+                            <td> {{  _CIP(P.GIFT_QUANTITY) }}</td>
+                            <td>  {{  _CIP(P.DAMAGE_QUANTITY) }} </td>
+                            <td>{{ _CIN(P.TRAN_QUANTITY)+_CIN(P.OUTWARD_QUANTITY) +_CIN(P.GIFT_QUANTITY) +_CIN(P.DAMAGE_QUANTITY)+_CIN(P.INWARD_QUANTITY)  }}</td>
+
+                            <td>
+
+                                {{ _CIN(P.OUTWARD_AMOUNT) +_CIN(P.GIFT_COST) +_CIN(P.DAMAGE_COST)+_CIN(P.INWARD_AMOUNT)  }}
+
+                            </td>
+
+
+                          </tr>
+
+
+                        </tbody>
+                      </table>
+
               </ng-container>
 
               </div>

@@ -17,19 +17,19 @@ export class ProductReportService extends CrudService<Product> {
    }
 
 
-   public getProductSummary(model: any): any {
+   public getProductReport(model: any): any {
     this.options.params = undefined;
-    return this.__http.get <PartialList<Product>>(this.url + '/'+'product-summary', this.options);
+    return this.__http.get <PartialList<Product>>(this.url + '/'+'product-report', this.options);
   }
 
 
-  public postProductSummary(query?: {}): any {
+  public postProductReport(query?: {}): any {
     if (query) {
       this.options.params = query;
     } else {
       this.options.params = undefined;
     }
-    return this.__http.get <PartialList<Product>>(this.url + '/' +'product-summary', this.options);
+    return this.__http.get <PartialList<Product>>(this.url + '/' +'product-report', this.options);
   }
 
 
