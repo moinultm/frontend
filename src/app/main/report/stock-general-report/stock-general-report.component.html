@@ -88,7 +88,7 @@
 
 
 
-                <!--table class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered">
                   <thead>
                     <tr>
                       <th>#</th>
@@ -96,11 +96,9 @@
                       <th>opening</th>
                       <th>In-ward</th>
                       <th *ngFor="let char of characteristics">
-                        {{ char.discount }} Qty
+                        {{ char.discount }} Qty char
                       </th>
-                      <th *ngFor="let char of characteristics">
-                        {{ char.discount }} Value
-                      </th>
+
                       <th>Gift</th>
                       <th>Damage</th>
                       <th>Closing</th>
@@ -112,7 +110,7 @@
 
                     <tr *ngFor="let beer of beers; let i = index">
                       <td> {{ i+1 }}</td>
-                      <td> {{ beer.description }}</td>
+                      <td> {{ beer.description }} beer</td>
                       <td> {{ beer.opening }} </td>
                       <td> {{ beer.inward }} </td>
 
@@ -124,13 +122,7 @@
                         </span>
                       </td>
 
-                      <td *ngFor="let char of characteristics">
-                        <span *ngFor=" let cross of crossData">
-                          <div *ngIf="cross.beerId === beer.id && cross.characteristicId === char.id">
-                            {{cross.value }}
-                          </div>
-                        </span>
-                      </td>
+
 
                       <td> {{ beer.gift }} </td>
                       <td> {{ beer.damage }} </td>
@@ -139,7 +131,7 @@
                       <td> 0 </td>
                     </tr>
                   </tbody>
-                </table-->
+                </table>
 
 
 

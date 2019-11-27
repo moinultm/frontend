@@ -159,16 +159,15 @@ private getElementTag(tag: keyof HTMLElementTagNameMap): string {
 
 
   beers:Array<Object> = [
-  { id: 27, description: "Product 1",  opening: 0, inward:5,sales:3,damage:2,gift:2},
-  { id: 28, description: "Product 2",opening: 0, inward:5,sales:3,damage:2,gift:2 },
-  { id: 29, description: "Product 3",opening: 0, inward:5,sales:3,damage:2,gift:2 } ];
+  { id: 27, description: "user 1",  opening: 0, inward:5,sales:3,damage:2,gift:2},
+  { id: 28, description: "user 2",opening: 0, inward:5,sales:3,damage:2,gift:2 },
+  { id: 29, description: "user 3",opening: 0, inward:5,sales:3,damage:2,gift:2 } ];
 
 
   characteristics:Array<Object> = [
-    { id: 3, discount: "50%" },
-    { id: 4, discount: "25%" },
-    { id: 5, discount: "20%" },
-    { id: 6, discount: "10%"}];
+    { id: 3, discount: "Product 1" },
+    { id: 4, discount: "Product 2" },
+    { id: 5, discount: "Product 3" } ];
 
 
     crossData:Array<Object> = [

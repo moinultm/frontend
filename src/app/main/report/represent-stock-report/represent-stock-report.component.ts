@@ -36,7 +36,6 @@ export class RepresentStockReportComponent implements OnInit {
   toDate:any;
 
 
-
   form: FormGroup;
 
   users:Array <User>;
@@ -120,7 +119,7 @@ export class RepresentStockReportComponent implements OnInit {
         to:   toDt
       }).subscribe((res: PartialList<StockGeneral>) => {
         this.data = res;
-       // console.log( this.data);
+   console.log( this.data);
         this.loading = false;
       });
     }

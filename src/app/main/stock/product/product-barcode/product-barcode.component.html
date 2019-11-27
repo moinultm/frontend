@@ -154,7 +154,7 @@
                         </p>
 
                         <ngx-barcode *ngIf="barcoded.isClientCode" [bc-element-type]="elementType" [bc-value]="selectedClientCode" [bc-format]="format"
-                        [bc-line-color]="lineColor" [bc-width]="1" [bc-height]="50"  [bc-display-value]="False">
+                        [bc-line-color]="lineColor" [bc-width]="1" [bc-height]="50"  [bc-display-value]="false">
                       </ngx-barcode>
                       <p class="barcode-info-p"  *ngIf="barcoded.isProductPrice" >
                           MRP: {{item.mrp}} + Vat
