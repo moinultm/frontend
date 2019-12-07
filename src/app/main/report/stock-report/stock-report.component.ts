@@ -44,7 +44,6 @@ export class StockReportComponent implements OnInit {
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
 
-
   constructor(
     private _fb: FormBuilder,
     private datePipe : DatePipe,
@@ -58,24 +57,20 @@ export class StockReportComponent implements OnInit {
     this.user=parseInt (this.jwtHelper.id());
     this.loadData(this.user);
    // this.loadUser();
-
     this.iniForm();
   }
-
-
 
   dateFilter(  page?: number): void {
     this.page = page ? page : 1;
     this.loading = true;
     let formDt = this.datePipe.transform(this.form.get('fromDate').value, 'yyyy-MM-dd');
     let toDt = this.datePipe.transform(this.form.get('toDate').value, 'yyyy-MM-dd');
-    let id=this.form.get('userId').value;
+
 
     this.fromDate=formDt;
     this.toDate=toDt;
 
-
-    this.reportService.representativeStockReport(id,{
+    this.reportService.stockReport( {
       page: this.page,
       size: this.size,
       from:  formDt,

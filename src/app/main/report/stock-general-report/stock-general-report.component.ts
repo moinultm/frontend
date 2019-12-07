@@ -158,31 +158,35 @@ private getElementTag(tag: keyof HTMLElementTagNameMap): string {
 
 
 
-  beers:Array<Object> = [
-  { id: 27, description: "user 1",  opening: 0, inward:5,sales:3,damage:2,gift:2},
-  { id: 28, description: "user 2",opening: 0, inward:5,sales:3,damage:2,gift:2 },
-  { id: 29, description: "user 3",opening: 0, inward:5,sales:3,damage:2,gift:2 } ];
+//as user
+  users:Array<Object> = [
+  { id: 27, description: "user 1"},
+  { id: 28, description: "user 2"},
+  { id: 29, description: "user 3"}
+];
 
 
-  characteristics:Array<Object> = [
-    { id: 3, discount: "Product 1" },
-    { id: 4, discount: "Product 2" },
-    { id: 5, discount: "Product 3" } ];
-
+  //as product
+  products:Array<Object> = [
+    { id: 3, name: "Product 1" },
+    { id: 4, name: "Product 2" },
+    { id: 5, name: "Product 3" }
+  ];
 
     crossData:Array<Object> = [
-      { beerId: 27, characteristicId: 3, quantity: 1,value:100 },
-      { beerId: 27, characteristicId: 4, quantity: 2,value:100  },
-      { beerId: 27, characteristicId: 5, quantity: 1,value:100  },
-      { beerId: 27, characteristicId: 6, quantity: 3,value:100  },
-      { beerId: 28, characteristicId: 3, quantity: 1,value:100  },
-      { beerId: 28, characteristicId: 4, quantity: 1,value:100  },
-      { beerId: 28, characteristicId: 5, quantity: 4,value:100  },
-      { beerId: 28, characteristicId: 6, quantity: 5,value:100  },
-      { beerId: 29, characteristicId: 3, quantity: 6,value:100  },
-      { beerId: 29, characteristicId: 4, quantity: 5,value:100  },
-      { beerId: 29, characteristicId: 5, quantity: 6,value:100  },
-      { beerId: 29, characteristicId: 6, quantity: 1,value:100  }];
+      { userId: 27, productId: 3, quantity: 1,value:100 },
+      { userId: 27, productId: 4, quantity: 2,value:100  },
+      { userId: 27, productId: 5, quantity: 1,value:100  },
+      { userId: 27, productId: 6, quantity: 3,value:100  },
+      { userId: 28, productId: 3, quantity: 1,value:100  },
+      { userId: 28, productId: 4, quantity: 1,value:100  },
+      { userId: 28, productId: 5, quantity: 4,value:100  },
+      { userId: 28, productId: 6, quantity: 5,value:100  },
+      { userId: 29, productId: 3, quantity: 6,value:100  },
+      { userId: 29, productId: 4, quantity: 5,value:100  },
+      { userId: 29, productId: 5, quantity: 6,value:100  },
+      { userId: 29, productId: 6, quantity: 1,value:100  }
+    ];
 
 
 }
