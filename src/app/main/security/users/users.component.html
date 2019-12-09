@@ -123,7 +123,7 @@
         <!-- Picture field -->
         <div class="img-uploader">
           <div class="img-preview">
-            <img [src]="picturePreview" />
+            <img height="100" [src]="imagePreview" />
           </div>
           <div class="img-input">
             <input type="file" id="image" #file (change)="onImageChanged(file.files[0])" />

@@ -12,7 +12,7 @@ export class User {
   password_token: string;
   //ProfileSection
   profiles: Array<Profile>;
-  picture: any;
+  image: any;
   user_type:number;
   constructor() {
       this.profiles = [];

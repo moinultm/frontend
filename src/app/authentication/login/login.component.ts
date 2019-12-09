@@ -82,7 +82,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.config.setSettings(this.config.defaultSettings());
     this.renderer.removeClass(document.body, 'login-page');
-
   }
 
 

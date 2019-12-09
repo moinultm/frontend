@@ -37,7 +37,7 @@ export class UsersComponent implements OnInit {
   form: FormGroup;
   profiles: Array<Profile>;
   selectedUser: User;
-  picturePreview: any;
+  imagePreview: any;
 
 
   userTypeList = [
@@ -114,10 +114,12 @@ export class UsersComponent implements OnInit {
     } else {
       this.selectedUser = new User();
     }
-    if (!this.selectedUser.picture) {
-      this.picturePreview = 'assets/images/faces/avatar.png';
+
+    if (!this.selectedUser.image) {
+      this.imagePreview = 'assets/images/faces/avatar.png';
     } else {
-      this.picturePreview = environment.web_url + 'users/picture/' + this.selectedUser.id + '?v=' + Math.random();
+      //      this.imagePreview = environment.web_url + 'users/image/' + this.selectedUser.id + '?v=' + Math.random();
+      this.imagePreview = environment.uploads_url + 'users/images/' + this.selectedUser.image ;
     }
 
     this.form = this._fb.group({
@@ -171,9 +173,13 @@ export class UsersComponent implements OnInit {
       this.savingUser = true;
 
       const formData = new FormData();
-      if (this.selectedUser.picture instanceof File) {
-        formData.append('picture', this.selectedUser.picture);
+
+
+
+      if (this.selectedUser.image instanceof File) {
+        formData.append('image', this.selectedUser.image);
       }
+
 
       formData.append('id', this.selectedUser.id + '');
       formData.append('name', this.form.get('name').value);
@@ -209,22 +215,22 @@ export class UsersComponent implements OnInit {
 
 
   onImageChanged(file): void {
-    this.selectedUser.picture = file;
-    if (this.selectedUser && this.selectedUser.picture && this.selectedUser.picture instanceof File) {
-      this.previewImage(this.selectedUser.picture);
+    this.selectedUser.image = file;
+    if (this.selectedUser && this.selectedUser.image && this.selectedUser.image instanceof File) {
+      this.previewImage(this.selectedUser.image);
     } else {
-      this.picturePreview = 'assets/images/faces/avatar.png';
+      this.imagePreview = 'assets/images/faces/avatar.png';
     }
   }
 
   private previewImage(file: File): void {
     if (file.type.match(/image\/*/) == null) {
-      this.picturePreview = 'assets/images/faces/avatar.png';
+      this.imagePreview = 'assets/images/faces/avatar.png';
     } else {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = (_event) => {
-        this.picturePreview = reader.result;
+        this.imagePreview = reader.result;
       };
     }
   }

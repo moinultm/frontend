@@ -38,7 +38,7 @@ export class SupplierComponent implements OnInit {
      }
 
   ngOnInit() {
-    this.loadData()
+    this.loadData();
   }
 
   loadData(page?: number): void {

@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import * as $ from 'jquery';
 import * as AdminLte from 'admin-lte';
 import { AuthenticationService } from '@app/core/services/security/authentication.service';
+import { ConfigureService } from '@app/core/services/common/config.service';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class SidebarComponent implements OnInit {
   @ViewChild('mainSidebar', { static: false }) mainSidebar;
 
 
-  constructor(  private Auth: AuthenticationService,) { }
+  constructor(  private Auth: AuthenticationService,
+      private configure:ConfigureService) { }
 
   ngOnInit() {
   }

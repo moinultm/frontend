@@ -6,6 +6,8 @@ import { DashboardService } from '@app/core/services/common/dashboard.service';
 
 import { SettingsService } from '@app/core/services/common/settings.service';
 import { Title } from '@angular/platform-browser';
+import { ConfigureService } from '@app/core/services/common/config.service';
+import { constants } from '@env/constants';
 
 @Component({
   selector: 'app-dashboard',
@@ -42,13 +44,26 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  title:any;
 
-  constructor(private translate: TranslateService,
+  constructor(
     private dashboard:DashboardService,
     private locationService :SettingsService,
+    private translate: TranslateService,
+    private configure:ConfigureService,
     titleService: Title,
      ) {
-      titleService.setTitle('::G Admin - Dashboard');
+      titleService.setTitle(constants.app_name+ '-Dashboard');
+  }
+
+  //language and Setttings
+
+  setConfig(configure: string) {
+   return this.configure.use(configure);
+  }
+
+  setLang(lang: string) {
+    this.translate.use(lang);
   }
 
 
@@ -56,9 +71,10 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
      this.loadData();
   }
+
+
    //Load Data
    loadData() {
-
     this.loading = true;
     this.dashboard.find().subscribe((res: PartialList<Dashboard>) => {
 
@@ -76,9 +92,6 @@ this.sellChartData.push(
     });
   }
 
-  setLang(lang: string) {
-    this.translate.use(lang);
-  }
 
 getLoc(){
   this.locationService.getPosition().then(pos=>
