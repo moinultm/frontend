@@ -7,6 +7,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { TranslateModule } from '@app/shared/translate/translate.module';
 import { ConfigModule} from '@app/shared/config/config.module';
+import { DashboardResolver } from '@app/core/resolvers/dashboard.resolver';
 
 
 
@@ -24,6 +25,7 @@ import { ConfigModule} from '@app/shared/config/config.module';
         ConfigModule
     ],
     providers: [
+      DashboardResolver
        ]
 
 

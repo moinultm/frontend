@@ -9,6 +9,7 @@ import { SettingsService } from '@app/core/services/common/settings.service';
 import { warning, success, error } from '@app/core/utils/toastr';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-general-settings',
@@ -28,6 +29,9 @@ export class GeneralSettingsComponent implements OnInit {
   form: FormGroup;
   listVat: PartialList <Vat>;
   selectedSetup: Settings;
+
+  logoPreview: any;
+  invoicePreview: any;
 
  lteThemes:Array<Object>=
     [    {id:1,name:'admin-lte-3'}
@@ -98,6 +102,20 @@ lteActivity:Array<Object>=
       this.selectedSetup = new Settings();
     }
 
+    if (!this.selectedSetup.site_logo) {
+      this.logoPreview = 'assets/images/menu_icons/30.png';
+    } else {
+      //      this.imagePreview = environment.web_url + 'users/image/' + this.selectedUser.id + '?v=' + Math.random();
+      this.logoPreview = environment.uploads_url + 'site/' + this.selectedSetup.site_logo ;
+    }
+
+    if (!this.selectedSetup.invoice_header) {
+      this.invoicePreview = 'assets/images/menu_icons/28.png';
+    } else {
+      //      this.imagePreview = environment.web_url + 'users/image/' + this.selectedUser.id + '?v=' + Math.random();
+      this.invoicePreview = environment.uploads_url + 'site/' + this.selectedSetup.invoice_header ;
+    }
+
     this.form = this._formBuilder.group({
       site_name: [settings ? settings.site_name : '', [Validators.required, Validators.maxLength(255)] ],
       slogan: [settings ? settings.slogan : '', [Validators.nullValidator ]],
@@ -105,7 +123,7 @@ lteActivity:Array<Object>=
       email: [settings ? settings.email : '',      [Validators.required]  ],
       phone: [settings ? settings.phone : '',      [Validators.required]  ],
       owner_name: [settings ? settings.owner_name : '',      [Validators.nullValidator]  ],
-      site_logo: [settings ? settings.site_logo : '',      [Validators.nullValidator]  ],
+      //site_logo: [settings ? settings.site_logo : '',      [Validators.nullValidator]  ],
       currency_code: [settings ? settings.currency_code : '',      [Validators.nullValidator]  ],
       alert_quantity: [settings ? settings.alert_quantity : 0,      [Validators.nullValidator]  ],
       invoice_tax: [settings ? settings.invoice_tax : '',      [Validators.nullValidator]  ],
@@ -127,6 +145,17 @@ lteActivity:Array<Object>=
 
       const formData = new FormData();
 
+
+      if (this.selectedSetup.site_logo instanceof File) {
+        formData.append('invoice_header', this.selectedSetup.site_logo);
+      }
+
+      if (this.selectedSetup.invoice_header instanceof File) {
+        formData.append('site_logo', this.selectedSetup.invoice_header);
+      }
+
+
+
       formData.append('id', this.selectedSetup.id + '');
       formData.append('site_name', this.form.get('site_name').value);
       formData.append('slogan', this.form.get('slogan').value);
@@ -134,7 +163,7 @@ lteActivity:Array<Object>=
       formData.append('email', this.form.get('email').value);
       formData.append('phone', this.form.get('phone').value);
       formData.append('owner_name', this.form.get('owner_name').value);
-      formData.append('site_logo', this.form.get('site_logo').value);
+      //formData.append('site_logo', this.form.get('site_logo').value);
       formData.append('currency_code', this.form.get('currency_code').value);
       formData.append('alert_quantity', this.form.get('alert_quantity').value);
       formData.append('invoice_tax', this.form.get('invoice_tax').value);
@@ -168,6 +197,51 @@ lteActivity:Array<Object>=
     }
     }
 
+
+
+    //Image workings
+    onLogoImageChanged(file): void {
+      this.selectedSetup.site_logo = file;
+      if (this.selectedSetup && this.selectedSetup.site_logo && this.selectedSetup.site_logo instanceof File) {
+        this.previewLogoImage(this.selectedSetup.site_logo);
+      } else {
+        this.logoPreview = 'assets/images/menu_icons/30.png';
+      }
+    }
+
+    private previewLogoImage(file: File): void {
+      if (file.type.match(/image\/*/) == null) {
+        this.logoPreview = 'assets/images/menu_icons/30.png';
+      } else {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (_event) => {
+          this.logoPreview = reader.result;
+        };
+      }
+    }
+
+//Image workings
+onInvoiceImageChanged(file): void {
+  this.selectedSetup.invoice_header = file;
+  if (this.selectedSetup && this.selectedSetup.invoice_header && this.selectedSetup.invoice_header instanceof File) {
+    this.previewInvoiceImage(this.selectedSetup.invoice_header);
+  } else {
+    this.invoicePreview = 'assets/images/menu_icons/28.png';
+  }
+}
+
+private previewInvoiceImage(file: File): void {
+  if (file.type.match(/image\/*/) == null) {
+    this.invoicePreview = 'assets/images/menu_icons/28.png';
+  } else {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (_event) => {
+      this.invoicePreview = reader.result;
+    };
+  }
+}
 
 
   }

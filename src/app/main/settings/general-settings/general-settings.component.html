@@ -88,10 +88,22 @@
                       <input type="text" class="form-control" formControlName="owner_name"
                         placeholder="Name of product">
                     </div>
+
                     <div class="col-md-6">
                       <label>Site Logo</label>
-                      <input type="text" class="form-control" formControlName="site_logo" placeholder="Site Logo">
+                      <!-- Picture field -->
+                        <div class="logo-uploader">
+                          <div class="logo-preview">
+                            <img height="100" [src]="logoPreview" />
+                          </div>
+                          <div class="logo-input">
+                            <input type="file" id="logo" #file2 (change)="onLogoImageChanged(file2.files[0])" />
+                            <label for="logo"><i class="mdi mdi-cloud-upload"></i></label>
+                          </div>
+                        </div>
+                        <!-- ./Picture field -->
                     </div>
+
                   </div>
                   <!--Row-->
                 </div>
@@ -114,6 +126,22 @@
 
                 <div class="form-group">
                   <div class="row">
+                      <div class="col-md-12">
+                          <label>Invoice Heading</label>
+
+                          <!-- Picture field -->
+                            <div class="logo-uploader">
+                              <div class="logo-preview">
+                                <img height="100" [src]="invoicePreview" />
+                              </div>
+                              <div class="logo-input">
+                                <input type="file" id="invoice" #file (change)="onInvoiceImageChanged(file.files[0])" />
+                                <label for="invoice"><i class="mdi mdi-cloud-upload"></i></label>
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row">
                     <div class="col-md-6">
                       <label>Invoice Tax</label>
                       <input type="text" class="form-control" formControlName="invoice_tax" placeholder="Invoice Tax">

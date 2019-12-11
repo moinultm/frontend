@@ -59,10 +59,6 @@ export class AddComponent implements OnInit {
     private dialog: MatDialog,
     private actRoute: ActivatedRoute
     ) {
-
-
-
-
       titleService.setTitle('Sales Invoice');
     }
 
@@ -125,7 +121,6 @@ export class AddComponent implements OnInit {
     user_id:[null, [Validators.required]],
   });
   }
-
 
 
 

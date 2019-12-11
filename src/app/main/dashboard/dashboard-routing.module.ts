@@ -3,11 +3,16 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { AuthGuard } from '@app/core/services/security/guards/auth.guard';
 import { RoleGuard } from '@app/core/services/security/guards/role.guard';
+import { DashboardResolver } from '@app/core/resolvers/dashboard.resolver';
+
 
 const routes: Routes = [
     {
         path: '', component: DashboardComponent,
-        canActivate: [ AuthGuard ]
+        canActivate: [ AuthGuard ],
+        resolve: {
+          DashboardResolver
+        },
     }
 ];
 

@@ -1,8 +1,4 @@
 
-
-
-
-
 import { Component, OnInit } from '@angular/core';
 import { SellsInvoiceService } from '@app/core/services/stock/sells-invoice.service';
 import { Client } from '@app/shared/models/stock/client.model';
@@ -42,8 +38,6 @@ export class OrderInvoiceComponent implements OnInit {
   orderItemList: OrderItems [];
 
 
-
-
   _saving: boolean;
   mainForm: FormGroup;
   formProducts: FormGroup;
@@ -51,8 +45,6 @@ export class OrderInvoiceComponent implements OnInit {
   selectedOrderItem: OrderItems;
 
   _productList: Array<Product>;
-
-
   users: PartialList<User>;
 
   loadingDetails: boolean;

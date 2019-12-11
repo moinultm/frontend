@@ -2,10 +2,10 @@
   <!-- Content Header (Page header) -->
   <div class="content-header">
     <div class="container-fluid">
-        <div class="text-center loading-data" >
-            <mat-progress-bar mode="indeterminate" *ngIf="loading" ></mat-progress-bar>
 
-      </div>
+
+
+
       <!--div class="row mb-2">
         <div class="col-sm-6">
           <h1 class="m-0 text-dark">Sales Invoices</h1>
@@ -31,7 +31,7 @@
           <div class="card-header">
 
                       <h3 class="card-title">
-                          <i class="fas fa-th-list"></i>                        
+                          <i class="fas fa-th-list"></i>
                           List Invoices
                        </h3>
 
@@ -111,7 +111,12 @@
               </thead>
               <tbody>
 
-
+                    <tr *ngIf="loading">
+                        <td colspan="12" class="text-center loading-data">
+                            <mat-progress-spinner class="corner-load" mode="indeterminate" diameter="40">
+                            </mat-progress-spinner>
+                          </td>
+                      </tr>
 
               <tr *ngIf="!loading && data && !data.data.length">
                   <td colspan="12" class="text-center loading-data">

@@ -11,6 +11,9 @@
 //@import "../node_modules/jqwidgets-ng/jqwidgets/styles/jqx.base.css";
 
 
+.corner-load{
+  margin: 0 auto;
+}
 
 /*pace*/
  .pace-activity {
@@ -26,7 +29,7 @@ label:not(.form-check-label):not(.custom-file-label) {
 }
 .cdk-overlay-pane {  z-index: 1051!important;}
 .cdk-overlay-container{ z-index: 1051!important;}
-.loading-data{min-height: 10px;}
+.loading-data{}
 
 
 .print-only {display: none;}

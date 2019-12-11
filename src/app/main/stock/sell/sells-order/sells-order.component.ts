@@ -17,7 +17,8 @@ import { User } from '@app/shared/models/security/user.model';
 import { success, error, warning } from '@app/core/utils/toastr';
 import { AddCustomerComponent } from '../../customer/add-customer/add-customer.component';
 import { SellsOrderService } from '@app/core/services/stock/sells-order.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-sells-order',
@@ -38,6 +39,8 @@ export class SellsOrderComponent implements OnInit {
   _productList: Array<Product>;
   users:PartialList <User>;
 
+  data$: Observable<any>;
+
   constructor(private sellsOrdererSvice:SellsOrderService,
     private customeService:CustomerService,
     private productService:ProductService,
@@ -47,13 +50,34 @@ export class SellsOrderComponent implements OnInit {
     private userService:UserService,
     titleService: Title,
     private dialog: MatDialog,
-    private router:Router,) {
+    private router:Router,
+    private actRoute: ActivatedRoute) {
       titleService.setTitle('Sales Order');
     }
   ngOnInit() {
-    this.initForm();
 
+    this.initForm();
+    this.fillUser();
+    this.initForm();
    }
+
+
+   fillCustomer(){
+    this.actRoute.data.subscribe(data => {
+      this.customerList=data.CustomerResolver.data;
+      this.loading = false;
+    });
+    }
+
+    fillUser(){
+      this.actRoute.data.subscribe(data => {
+        this.users=data.UserResolver.data;
+        this.loading = false;
+        console.log(data.UserResolver.data)
+      });
+    }
+
+/*
 
   loadUser(): void {
     this.loading = true;
@@ -63,8 +87,20 @@ export class SellsOrderComponent implements OnInit {
     });
   }
 
+  FillCustomer()
+  {
+    this.loading=true;
+    this.customeService.findCustomer()
+    .subscribe((res: PartialList<Client>) => {
+      this.customerList = res.data;
+       this.loading = false;
+    });
+  }
+
+*/
+
   initForm(order?:SellsOrder): void {
-    this.loadUser();
+    //this.loadUser();
     if (order){
     }
     else{
@@ -72,7 +108,7 @@ export class SellsOrderComponent implements OnInit {
       this.orderItemList =[];
     }
 
-    this.FillCustomer();
+   // this.FillCustomer();
     this.mainForm = this._fb.group({
     sellDate:[new Date(),[Validators.nullValidator]],
     customerName:[null,[Validators.required]  ],
@@ -84,16 +120,6 @@ export class SellsOrderComponent implements OnInit {
     grandTotal:['0',[Validators.required]  ],
     user_id:[null, [Validators.required]],
   });
-  }
-
-  FillCustomer()
-  {
-    this.loading=true;
-    this.customeService.findCustomer()
-    .subscribe((res: PartialList<Client>) => {
-      this.customerList = res.data;
-       this.loading = false;
-    });
   }
 
 

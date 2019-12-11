@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UserService } from '@app/core/services/security/user.service';
+import { DashboardService } from '@app/core/services/common/dashboard.service';
 import { Resolve } from '@angular/router';
 
 import { Observable, of } from 'rxjs';
@@ -7,10 +7,10 @@ import { map, catchError } from 'rxjs/operators';
 
 
 @Injectable()
-export class UserResolver implements Resolve<any> {
-   constructor(public userListService: UserService) { }
+export class DashboardResolver implements Resolve<any> {
+   constructor(public dashboardDataService: DashboardService) { }
    resolve() {
-      return this.userListService.findRepresentative().pipe(
+      return this.dashboardDataService.getDashboardSummary().pipe(
          catchError((error) => {
             return of('No data');
          })

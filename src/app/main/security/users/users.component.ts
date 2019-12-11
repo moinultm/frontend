@@ -175,7 +175,6 @@ export class UsersComponent implements OnInit {
       const formData = new FormData();
 
 
-
       if (this.selectedUser.image instanceof File) {
         formData.append('image', this.selectedUser.image);
       }

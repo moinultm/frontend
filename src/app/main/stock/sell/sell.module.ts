@@ -36,6 +36,7 @@ const routes: Routes = [
   {
     path: '',
     component: SellComponent
+    
   },
   {
     path: 'details/:id',
@@ -47,7 +48,11 @@ const routes: Routes = [
   },
   {
     path: 'order',
-    component: SellsOrderComponent
+    component: SellsOrderComponent,
+    resolve: {
+      UserResolver,
+      CustomerResolver
+    },
   },
   {
     path: 'order-list',

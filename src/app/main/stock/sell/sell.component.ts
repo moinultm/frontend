@@ -8,7 +8,7 @@ import { fromEvent, merge, Observable } from 'rxjs';
 import { tap, distinctUntilChanged, debounceTime, filter, map } from 'rxjs/operators';
 import { ProductService } from '@app/core/services/stock/product.service';
 import { UserService } from '@app/core/services/security/user.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 
@@ -51,13 +51,17 @@ export class SellComponent implements OnInit {
   constructor(
     private sellsService:SellsInvoiceService,
     private router:Router,
-    private _fb: FormBuilder,private datePipe : DatePipe
+    private _fb: FormBuilder,private datePipe : DatePipe,
+    private actRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
     this.iniForm();
     this.loadData();
   }
+
+  data$: Observable<any>;
+
 //Loading Data
 loadData(page?: number): void {
   this.page = page ? page : 1;
@@ -76,6 +80,15 @@ loadData(page?: number): void {
     this.loading = false;
   });
 }
+
+fillList(){
+  this.actRoute.data.subscribe(data => {
+    this.data=data.SellsListResolver;
+    this.loading = false;
+  });
+  }
+
+
 
 //Search
 dateFilter(){

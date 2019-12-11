@@ -8,6 +8,8 @@ import { SettingsService } from '@app/core/services/common/settings.service';
 import { Title } from '@angular/platform-browser';
 import { ConfigureService } from '@app/core/services/common/config.service';
 import { constants } from '@env/constants';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -28,6 +30,8 @@ export class DashboardComponent implements OnInit {
   chartLabels :any[]=[];
 
   settings: any;
+
+  data$: Observable<any>;
 
   //barchart
   public barChartOptions = {
@@ -52,6 +56,7 @@ export class DashboardComponent implements OnInit {
     private translate: TranslateService,
     private configure:ConfigureService,
     titleService: Title,
+    private actRoute: ActivatedRoute
      ) {
       titleService.setTitle(constants.app_name+ '-Dashboard');
   }
@@ -69,9 +74,25 @@ export class DashboardComponent implements OnInit {
 
 
   ngOnInit() {
-     this.loadData();
+     //this.loadData();
+     this.preloadData();
   }
 
+
+  preloadData(){
+    this.actRoute.data.subscribe(data => {
+       this.data =data.DashboardResolver;
+       console.log(this.data);
+
+      this.barChartLabels=  this.data['top_product_name'];
+      this.barChartData.push({  data:this.data['selling_quantity']  ,  label: 'Quantity Sold'});
+      this.chartLabels= this.data['months'];
+      this.sellChartData.push(
+        { data:this.data['sells']  ,  label: 'Sales Value'},
+        { data:this.data['purchases']  ,  label: 'Purchase Value'});
+          this.loading = false;
+          });
+    }
 
    //Load Data
    loadData() {
@@ -79,7 +100,7 @@ export class DashboardComponent implements OnInit {
     this.dashboard.find().subscribe((res: PartialList<Dashboard>) => {
 
       this.data = res;
-      console.log(this.data);
+    //  console.log(this.data);
 
  this.barChartLabels=  this.data['top_product_name'];
  this.barChartData.push({  data:this.data['selling_quantity']  ,  label: 'Quantity Sold'});
@@ -90,7 +111,9 @@ this.sellChartData.push(
   { data:this.data['purchases']  ,  label: 'Purchase Value'});
      this.loading = false;
     });
+
   }
+
 
 
 getLoc(){
