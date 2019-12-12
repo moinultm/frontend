@@ -7,6 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { fromEvent } from 'rxjs/internal/observable/fromEvent';
 import { map, filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-purchase',
@@ -28,17 +29,33 @@ export class PurchaseComponent implements OnInit {
   selectedInvoice: PurchaseOrder;
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
+  data$: Observable<any>;
+
 
   constructor(
     private purchaseService: PurchaseOrderService,
     private _fb: FormBuilder,
     private datePipe : DatePipe,
-     private router:Router) { }
+     private router:Router,
+     private actRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.iniForm();
-    this.loadData();
+   //this.loadData();
+   this.fillList();
   }
+
+
+
+
+fillList(){
+  this.actRoute.data.subscribe(data => {
+    this.data=data.PurchaseListResolver;
+    this.loading = false;
+  });
+  }
+
+
 
   iniForm(){
     this.form = this._fb.group({

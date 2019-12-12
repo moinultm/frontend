@@ -15,6 +15,8 @@ import { PurchaseItems } from '@app/shared/models/stock/purchase-items';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 
 import { AddSupplierComponent } from '../add-supplier/add-supplier.component';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add-purchase',
@@ -23,7 +25,7 @@ import { AddSupplierComponent } from '../add-supplier/add-supplier.component';
 export class AddPurchaseComponent implements OnInit {
   modalOption: NgbModalOptions = {};
 
-  supplierList: Array<Client>;
+  supplierList: any;
 
   orderItemList: Array<PurchaseItems>=[];
 
@@ -39,6 +41,7 @@ selectedOrderItem: PurchaseItems;
 
   _productList: Array<Product>;
   loadingProductList:boolean;
+  data$: Observable<any>;
 
 
   constructor(private purchaseOrderSvice: PurchaseOrderService,
@@ -48,11 +51,33 @@ selectedOrderItem: PurchaseItems;
     private _fb: FormBuilder,
     private _toastr: ToastrService,
     private dialog: MatDialog,
+    private actRoute: ActivatedRoute
     ) { }
 
   ngOnInit() {
     this.initForm();
+    this.fillList();
   }
+
+  fillList(){
+    this.actRoute.data.subscribe(data => {
+      this.supplierList=data.SupplierListResolver.data;
+
+      this.loading = false;
+    });
+    }
+
+
+  FillSupplier()
+  {
+    this.loading=true;
+    this.supplierService.findSupplier()
+    .subscribe((res: PartialList<Client>) => {
+      this.supplierList = res.data;
+       this.loading = false;
+    });
+  }
+
 
 
   initForm(order?: PurchaseOrder): void {
@@ -68,7 +93,7 @@ selectedOrderItem: PurchaseItems;
 
 
 
-    this.FillSupplier();
+   // this.FillSupplier();
 
     this.mainForm = this._fb.group({
       purchaseDate:[new Date(),[Validators.nullValidator]],
@@ -83,15 +108,8 @@ selectedOrderItem: PurchaseItems;
   });
   }
 
-  FillSupplier()
-  {
-    this.loading=true;
-    this.supplierService.findSupplier()
-    .subscribe((res: PartialList<Client>) => {
-      this.supplierList = res.data;
-       this.loading = false;
-    });
-  }
+
+
 
   initItemModal(modal: any, product?: Product){
   this.modalOption.backdrop = 'static';

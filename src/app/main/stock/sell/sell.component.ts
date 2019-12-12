@@ -57,7 +57,8 @@ export class SellComponent implements OnInit {
 
   ngOnInit() {
     this.iniForm();
-    this.loadData();
+   // this.loadData();
+   this.fillList();
   }
 
   data$: Observable<any>;
@@ -80,6 +81,7 @@ loadData(page?: number): void {
     this.loading = false;
   });
 }
+
 
 fillList(){
   this.actRoute.data.subscribe(data => {

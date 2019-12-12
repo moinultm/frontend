@@ -4,32 +4,27 @@ import { Resolve } from '@angular/router';
 
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { SellsInvoiceService } from '../services/stock/sells-invoice.service';
+import { ProductService } from '../services/stock/product.service';
 import { FormControl } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 
 
 @Injectable()
-export class SellsListResolver implements Resolve<any> {
+export class ProductListResolver implements Resolve<any> {
 
   page = 1;
   size = 10;
 
-  //solution for today date
-todayDate=this.datePipe.transform(new Date(), 'yyyy-MM-dd');
-
 
   date = new FormControl(new Date());
 
-   constructor(public sellsListService: SellsInvoiceService,
+   constructor(public productListService: ProductService,
               private datePipe : DatePipe) { }
 
    resolve() {
-      return this.sellsListService.find({
+      return this.productListService.find({
         page: this.page,
         size: this.size,
-        from:  this.todayDate,
-        to:   this.todayDate
       }).pipe(
          catchError((error) => {
             return of('No data');

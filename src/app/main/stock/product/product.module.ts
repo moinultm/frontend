@@ -16,12 +16,17 @@ import { ListDamageComponent } from './damage-product/list-damage/list-damage.co
 import { TranslateModule } from '@app/shared/translate/translate.module';
 import { ConfigModule} from '@app/shared/config/config.module';
 
+import { ProductListResolver } from '@app/core/resolvers/productlist.resolver';
+
 
 const routes: Routes = [
   // Roles component
   {path: '',component: ProductComponent },
   {path: 'edit/:id',component: ProductComponent },
-  {path: 'manage',component: ManageComponent },
+  {path: 'manage',component: ManageComponent,
+  resolve: {
+    ProductListResolver,
+  }, },
   {path: 'barcode/:id',component: ProductBarcodeComponent },
   {path: 'gift',component: GiftProductComponent },
   {path: 'damage',component: DamageProductComponent },
@@ -50,6 +55,8 @@ const routes: Routes = [
     TranslateModule,
     ConfigModule
   ],
+  providers: [ProductListResolver],
+
   exports: [RouterModule]
 })
 export class ProductModule { }

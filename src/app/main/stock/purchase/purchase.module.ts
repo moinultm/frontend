@@ -16,15 +16,25 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxBarcodeModule } from 'ngx-barcode';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { AppDateAdapter, APP_DATE_FORMATS } from '@app/core/utils/format-datepicker';
+import { PurchaseListResolver } from '@app/core/resolvers/purchaseslist.resolver';
+import { SupplierListResolver } from '@app/core/resolvers/supplierlist.resolver';
+
 const routes: Routes = [
   // Roles component
   {
     path: 'add',
-    component: AddPurchaseComponent
+    component: AddPurchaseComponent,
+    resolve: {
+
+      SupplierListResolver
+    },
   },
   {
     path: '',
-    component: PurchaseComponent
+    component: PurchaseComponent,
+    resolve: {
+      PurchaseListResolver
+    },
   },
   {
     path: 'details/:id',
@@ -53,7 +63,7 @@ const routes: Routes = [
     NgSelectModule,
   ],
   entryComponents:[AddPaymentComponent,AddSupplierComponent],
-  providers: [  {provide: DateAdapter, useClass: AppDateAdapter},
+  providers: [PurchaseListResolver,SupplierListResolver,  {provide: DateAdapter, useClass: AppDateAdapter},
     {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS} ],
 })
 export class PurchaseModule { }

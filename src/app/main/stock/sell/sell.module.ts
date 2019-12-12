@@ -21,7 +21,7 @@ import { AppDateAdapter, APP_DATE_FORMATS } from '@app/core/utils/format-datepic
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { CustomerResolver } from '@app/core/resolvers/customer.resolver';
 import { UserResolver } from '@app/core/resolvers/user.resolver';
-
+import { SellsListResolver } from '@app/core/resolvers/sellslist.resolver';
 
 const routes: Routes = [
   // Roles component
@@ -35,8 +35,11 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: SellComponent
-    
+    component: SellComponent,
+    resolve: {
+      SellsListResolver,
+
+    },
   },
   {
     path: 'details/:id',
@@ -82,7 +85,7 @@ const routes: Routes = [
     //materials
   ],
   entryComponents:[AddPaymentComponent,AddCustomerComponent],
-  providers: [UserResolver,CustomerResolver,
+  providers: [UserResolver,CustomerResolver,SellsListResolver,
      MatDatepickerModule,  {provide: DateAdapter, useClass: AppDateAdapter},
     {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS} ],
 

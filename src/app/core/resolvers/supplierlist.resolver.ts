@@ -7,30 +7,21 @@ import { map, catchError } from 'rxjs/operators';
 import { SellsInvoiceService } from '../services/stock/sells-invoice.service';
 import { FormControl } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { SupplierService } from '../services/stock/supplier.service';
 
 
 @Injectable()
-export class SellsListResolver implements Resolve<any> {
+export class SupplierListResolver implements Resolve<any> {
 
-  page = 1;
-  size = 10;
 
-  //solution for today date
-todayDate=this.datePipe.transform(new Date(), 'yyyy-MM-dd');
 
 
   date = new FormControl(new Date());
 
-   constructor(public sellsListService: SellsInvoiceService,
-              private datePipe : DatePipe) { }
+   constructor(public supplierService: SupplierService   ) { }
 
    resolve() {
-      return this.sellsListService.find({
-        page: this.page,
-        size: this.size,
-        from:  this.todayDate,
-        to:   this.todayDate
-      }).pipe(
+      return this.supplierService.findSupplier().pipe(
          catchError((error) => {
             return of('No data');
          })

@@ -10,6 +10,9 @@ import { UserSalesListComponent } from './user-sales-list/user-sales-list.compon
 import { UserSalesInvoicesComponent } from './user-sales-invoices/user-sales-invoices.component';
 import { UserReceiptDetailComponent } from './user-receipt-detail/user-receipt-detail.component';
 
+import { UserResolver } from '@app/core/resolvers/user.resolver';
+
+
 const routes: Routes = [
 
   {
@@ -19,7 +22,10 @@ const routes: Routes = [
 
     {
       path: 'add-stock',
-      component: AddStockComponent
+      component: AddStockComponent,
+      resolve: {
+        UserResolver,
+      }
     },
 
 
@@ -51,6 +57,7 @@ const routes: Routes = [
     MatFormFieldModule,
     MatProgressSpinnerModule,
     MatInputModule
-  ]
+  ],
+  providers: [UserResolver],
 })
 export class RepresentativeModule { }

@@ -11,6 +11,7 @@ import { success, error, warning } from '@app/core/utils/toastr';
 import { RepresentStock } from '@app/shared/models/stock/represent-stock.model';
 import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-stock',
@@ -19,7 +20,7 @@ import { DatePipe } from '@angular/common';
 })
 export class AddStockComponent implements OnInit {
   loading:boolean;
-  users:PartialList <User>;
+  users:any;
   _productList: Array<Product>;
   loadingProducts:boolean;
   total:number;
@@ -30,16 +31,25 @@ export class AddStockComponent implements OnInit {
     private productService:ProductService,
     private __StockService: RepresentStockService,
     private _toastr: ToastrService,
-  private datePipe : DatePipe
-
+  private datePipe : DatePipe,
+  private actRoute: ActivatedRoute
     ) {
     titleService.setTitle('Stock - Represtative Stock'); }
 
   ngOnInit() {
     this.iniForm();
-    this.loadUser();
+    //this.loadUser();
+    this.fillUser();
   }
 
+
+  fillUser(){
+    this.actRoute.data.subscribe(data => {
+      this.users=data.UserResolver.data;
+      this.loading = false;
+      console.log(data.UserResolver.data)
+    });
+  }
 
   //Load Data
   loadUser(): void {

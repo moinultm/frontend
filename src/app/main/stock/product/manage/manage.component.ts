@@ -6,7 +6,7 @@ import { Title } from '@angular/platform-browser';
 import { ProductService } from '@app/core/services/stock/product.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { success, warning, error } from '@app/core/utils/toastr';
 
 @Component({
@@ -19,7 +19,7 @@ export class ManageComponent implements OnInit {
   modalOption: NgbModalOptions = {};
 
 
-  data: PartialList<Product>;
+  data: any;
   details:PartialList<Product>;
   loadingDetails:boolean;
   loading: boolean;
@@ -42,11 +42,22 @@ export class ManageComponent implements OnInit {
     titleService: Title,
     private _formBuilder: FormBuilder,
     private router:Router,
-    private _fb: FormBuilder) { }
+    private _fb: FormBuilder,
+    private actRoute: ActivatedRoute
+    ) { }
 
   ngOnInit() {
-    this.loadData();
+    //this.loadData();
+    this.fillList();
   }
+
+  fillList(){
+    this.actRoute.data.subscribe(data => {
+      this.data=data.ProductListResolver;
+      this.loading = false;
+    });
+    }
+
 
      //Loading Data
      loadData(page?: number): void {
