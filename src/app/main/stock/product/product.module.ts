@@ -17,7 +17,8 @@ import { TranslateModule } from '@app/shared/translate/translate.module';
 import { ConfigModule} from '@app/shared/config/config.module';
 
 import { ProductListResolver } from '@app/core/resolvers/productlist.resolver';
-
+import { CustomerResolver } from '@app/core/resolvers/customer.resolver';
+import { UserResolver } from '@app/core/resolvers/user.resolver';
 
 const routes: Routes = [
   // Roles component
@@ -28,8 +29,21 @@ const routes: Routes = [
     ProductListResolver,
   }, },
   {path: 'barcode/:id',component: ProductBarcodeComponent },
-  {path: 'gift',component: GiftProductComponent },
-  {path: 'damage',component: DamageProductComponent },
+  {path: 'gift',
+  component: GiftProductComponent,
+  resolve: {
+    CustomerResolver,
+    UserResolver,
+    ProductListResolver
+        }  },
+  {path: 'damage',
+  component: DamageProductComponent,
+  resolve: {
+    CustomerResolver,
+    UserResolver,
+    ProductListResolver
+  }
+ },
   {path: 'list-damage',component: ListDamageComponent },
   {path: 'list-gift',component: ListGiftComponent },
 
@@ -55,7 +69,7 @@ const routes: Routes = [
     TranslateModule,
     ConfigModule
   ],
-  providers: [ProductListResolver],
+  providers: [ProductListResolver,CustomerResolver,UserResolver],
 
   exports: [RouterModule]
 })

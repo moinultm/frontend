@@ -38,7 +38,7 @@ export class AddComponent implements OnInit {
   selectedOrder:SellsInvoice;
   selectedOrderItem: OrderItems;
 
-  _productList: Array<Product>;
+  _productList:any;
 
 
   users:any;
@@ -63,9 +63,10 @@ export class AddComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.initForm();
     this.fillCustomer();
     this.fillUser();
-    this.initForm();
+    this.fillProduct();
   }
 
   fillCustomer(){
@@ -79,9 +80,18 @@ export class AddComponent implements OnInit {
     this.actRoute.data.subscribe(data => {
       this.users=data.UserResolver.data;
       this.loading = false;
-      console.log(data.UserResolver.data)
+     // console.log(data.UserResolver.data)
     });
   }
+
+  fillProduct(){
+    this.actRoute.data.subscribe(data => {
+      this._productList=data.ProductListResolver.data;
+      this.loading = false;
+  // console.log(data.ProductListResolver.data)
+    });
+  }
+
 
 /*
   loadUser(): void {
@@ -95,7 +105,6 @@ export class AddComponent implements OnInit {
 
   initForm(order?:SellsInvoice): void {
     //this.fillUser();
-
     if (order){
     }
     else{
@@ -135,18 +144,25 @@ export class AddComponent implements OnInit {
     });
   }
 */
+
+
+
+
   initItemModal(modal: any, product?: Product){
   this.modalOption.backdrop = 'static';
   this.modalOption.keyboard = false;
 
     this.initItemsForm();
 
+
+/*
     this.loading=true;
     this.productService.find()
     .subscribe((res: PartialList<Product>) => {
       this._productList = res.data;
       this.loading = false;
     });
+*/
 
     this.modalService
     .open(modal,this.modalOption)

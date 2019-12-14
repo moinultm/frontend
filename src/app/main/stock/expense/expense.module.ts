@@ -6,13 +6,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialsModule } from '@app/material.module';
 
-
+import { UserResolver } from '@app/core/resolvers/user.resolver';
 
 const routes: Routes = [
 
   {
     path: '',
-    component: ExpenseComponent
+    component: ExpenseComponent,
+    resolve: {
+      UserResolver,
+
+    },
   }
 ];
 
@@ -28,6 +32,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     MaterialsModule,
-  ]
+  ],
+  providers: [UserResolver]
 })
 export class ExpenseModule { }

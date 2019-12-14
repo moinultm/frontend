@@ -62,7 +62,7 @@
 
                 </form-->
 
-                <div class="responsive-table">
+                <div class="responsive-table table-mini">
                 <table class="table">
                     <thead>
                         <tr>
@@ -70,7 +70,9 @@
                             <th>Receipt No.</th>
                             <th>Total Qty</th>
                             <th>Date</th>
+                            <th>Conforming</th>
                             <th>Action</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -92,9 +94,27 @@
                                       <td>{{ item.total_quantity }}</td>
                                       <td>{{ item.date |  date:'dd/MM/yyyy'}}</td>
                                       <td>
-                                          <button type="button" class="btn btn-primary float-left" (click)="toDetails(item.id)"> View Recipt</button>
+
+                                         <p *ngIf="item.receiving">
+                                            Already Conformed
+                                         </p>
+
+                                         <p *ngIf="!item.receiving">
+                                            <button type="button" class="btn btn-success btn-sm float-left" (click)="updateConformed(item.id)">
+                                                Conform Recipt
+                                            </button>
+
+                                          </p>
+
 
                                         </td>
+
+                                        <td>
+                                            <button type="button" class="btn btn-primary btn-sm float-left" (click)="toDetails(item.id)">
+                                              View Recipt</button>
+
+                                        </td>
+
 
                                     </tr>
                                   </ng-container>

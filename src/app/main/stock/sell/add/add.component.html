@@ -54,26 +54,10 @@
                 <div class="row  mb-3">
                     <div class="col-md-12">
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                  <label>Bill to </label>
-
-                                  <div class="input-group">
-                                      <div class="input-group-prepend">
-                                        <span class="input-group-text"> <i class="far fa-user-circle"></i></span>
-                                      </div>
-                                      <button class="form-control btn btn-default " (click)="openDialog()">
-                                          Add new customer
-                                      </button>
-                                    </div>
-
-                                </div>
-                              </div>
-
 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Customer Name</label>
+                                    <label>Bill to:</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                           <span class="input-group-text"> <i class="fas fa-user-tag"></i></span>
@@ -88,6 +72,25 @@
                                   </div>
                               </div>
 
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                  <label>Not in list:</label>
+
+                                  <div class="input-group">
+                                      <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="far fa-user-circle"></i></span>
+                                      </div>
+                                      <button class="form-control btn btn-default " (click)="openDialog()">
+                                          Add new customer
+                                      </button>
+                                    </div>
+
+                                </div>
+                              </div>
+
+
+
+
                               <div class="col-md-4">
                                   <mat-form-field  class="full-width">
                                     <input matInput [matDatepicker]="picker" placeholder="Bill Date" formControlName="sellDate">
@@ -101,7 +104,7 @@
                         <div class="row">
                             <div class="col-md-4" *ngIf="!loading">
                                 <div class="form-group">
-                                 <label>Sales Representative</label>
+                                 <label>Sales By:</label>
                                  <div class="input-group">
                                     <div class="input-group-prepend">
                                       <span class="input-group-text"><i class="fas fa-user-tie"></i> </span>
@@ -119,7 +122,7 @@
 
                            <div class="col-md-4">
                               <div class="form-group">
-                                <label>Payment Method</label>
+                                <label>Payment Method:</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                       <span class="input-group-text"><i class="fas fa-money-bill-wave"></i></span>
@@ -134,19 +137,13 @@
 
 
                             <div class="col-md-4">
-                                <label>Form</label>
 
-                                <div class="form-group">
-                                    <a class="form-control btn btn-primary text-white" (click)="initItemModal(addItemModal)"><i class="fa fa-plus"></i>
-                                      Add Item</a>
-                                </div>
                               </div>
 
                         </div>
                     </div>
 
                   </div>
-
 
 
                     <div class="table-responsive  mb-3">
@@ -156,10 +153,12 @@
                           <thead class="thead-light">
                             <th>ProductName</th>
                             <th>Quantity</th>
-                            <th>Discount</th>
+                            <th>Discount %</th>
                             <th>MRP</th>
                             <th>Subtotal</th>
-                            <th>
+                            <th style="text-align: right;">
+                                <a class=" btn btn-success btn-sm text-white" (click)="initItemModal(addItemModal)"><i class="fa fa-plus"></i>
+                                  Add Item to bill</a>
                             </th>
                           </thead>
                           <tbody>
@@ -172,7 +171,7 @@
                             <tr *ngFor="let item of orderItemList;let i=index;">
                               <td>{{item.product_name}}</td>
                               <td>{{item.quantity}}</td>
-                              <td>{{item.product_discount_percentage}}</td>
+                              <td>{{item.product_discount_percentage}} %</td>
                               <td>{{item.mrp}}</td>
                               <td>{{item.sub_total}}</td>
                               <td>
@@ -182,93 +181,102 @@
                               </td>
                             </tr>
                           </tbody>
-                          <!--tfoot>
+                          <tfoot>
                             <tr>
                               <td colspan="3" style="text-align: right; font-weight: bold;">
-                                Total
+                                  <label>Total </label>
                               </td>
                               <td colspan="3">
-                                <input class="form-control" type="text" id="totalAmount" formControlName="totalAmount" readonly>
-                              </td>
-
-                            </tr>
-                            <tr>
-                              <td colspan="3" style="text-align: right; font-weight: bold;">
-                                Discount on product
-                              </td>
-                              <td colspan="3">
+                                  <input class="form-control" type="text" id="totalAmount" formControlName="totalAmount" readonly>
                                </td>
                             </tr>
                             <tr>
                               <td colspan="3" style="text-align: right; font-weight: bold;">
-                                Shipping Cost
+                                  <label>Paid  </label>
                               </td>
                               <td colspan="3">
+                                  <input class="form-control" type="text" id="paidAmount" formControlName="paidAmount" placeholder="Paid Amount"
+                                  (keyup)="updateDueAmount()"
+                                  [class.has-error]="mainForm.get('paidAmount').dirty && mainForm.get('paidAmount').invalid">
                                </td>
                             </tr>
                             <tr>
                               <td colspan="3" style="text-align: right; font-weight: bold;">
-                                Net Total
+                                  <label> Discount on product  </label>
                               </td>
                               <td colspan="3">
+                                  <input class="form-control" type="text" id="discountAmount" formControlName="discountAmount" readonly>
 
                                </td>
                             </tr>
                             <tr>
                               <td colspan="3" style="text-align: right; font-weight: bold;">
-                                Paid
+                                  <label> Discount on Total  </label>
                               </td>
                               <td colspan="3">
+                                  <input class="form-control" type="text" id="discountOnTotal" formControlName="discountOnTotal"  (keyup)="updateGrandTotal()">
+
+                               </td>
+                            </tr>
+                            <tr>
+                              <td colspan="3" style="text-align: right; font-weight: bold;">
+                                  <label>Delivery Costs  </label>
+                              </td>
+                              <td colspan="3">
+                                  <input class="form-control" type="text" id="shippingCost" formControlName="shippingCost"    (keyup)="updateGrandTotal()">
 
                             </tr>
                             <tr>
                               <td colspan="3" style="text-align: right; font-weight: bold;">
-                                Due
+                                  <label>Net Total  </label>
                               </td>
                               <td colspan="3">
+                                  <input class="form-control" type="text" id="grandTotal" formControlName="grandTotal" readonly>
 
                                </td>
                             </tr>
-                          </tfoot-->
+                            <tr>
+                              <td colspan="3" style="text-align: right; font-weight: bold;">
+                                  <label>Due </label>
+                              </td>
+                              <td colspan="3">
+                                  <input class="form-control" type="text" id="dueAmount" formControlName="dueAmount" readonly>
+
+                               </td>
+                            </tr>
+                          </tfoot>
                         </table>
                         <!-- order items table-->
                       </div>
 
-                        <div class="row">
+                        <!--div class="row">
 
                             <div class="col-md-2">
                                 <div class="form-group">
-                                <label>Total </label>
-                                <input class="form-control" type="text" id="totalAmount" formControlName="totalAmount" readonly>
-</div>
+
+                                </div>
                               </div>
 
                               <div class="col-md-2">
                                   <div class="form-group">
-                                  <label>Paid  </label>
-                                  <input class="form-control" type="text" id="paidAmount" formControlName="paidAmount" placeholder="Paid Amount"
-                                  (keyup)="updateDueAmount()"
-                                  [class.has-error]="mainForm.get('paidAmount').dirty && mainForm.get('paidAmount').invalid">
+
                              </div>
                                 </div>
 
 
                           <div class="col-md-2">
                               <div class="form-group">
-                            <label> Discount on product  </label>
-                            <input class="form-control" type="text" id="discountAmount" formControlName="discountAmount" readonly>
+
 </div>
                           </div>
                           <div class="col-md-2">
                               <div class="form-group">
-                              <label> Discount on Total  </label>
-                            <input class="form-control" type="text" id="discountOnTotal" formControlName="discountOnTotal"  (keyup)="updateGrandTotal()">
+
 </div>
                           </div>
                           <div class="col-md-2">
                               <div class="form-group">
-                              <label>Delivery Costs  </label>
-                            <input class="form-control" type="text" id="shippingCost" formControlName="shippingCost"    (keyup)="updateGrandTotal()">
+
 </div>
 
                           </div>
@@ -276,23 +284,19 @@
 
                           <div class="col-md-1">
                               <div class="form-group">
-                              <label>Net Total  </label>
-                            <input class="form-control" type="text" id="grandTotal" formControlName="grandTotal" readonly>
+
 </div>
                           </div>
 
 
                           <div class="col-md-1">
                               <div class="form-group">
-                              <label>Due </label>
-                              <input class="form-control" type="text" id="dueAmount" formControlName="dueAmount" readonly>
+
 </div>
 
                           </div>
 
-                        </div>
-
-
+                        </div-->
 
               </div>
               <!-- /.card-body -->

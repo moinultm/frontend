@@ -14,6 +14,7 @@ import { CustomerService } from '@app/core/services/stock/customer.service';
 import { Client } from '@app/shared/models/stock/client.model';
 import { GiftService } from '@app/core/services/stock/gift.service';
 import { Gift } from '@app/shared/models/stock/gift.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-gift-product',
@@ -23,9 +24,11 @@ import { Gift } from '@app/shared/models/stock/gift.model';
 export class GiftProductComponent implements OnInit {
 
 
-  _productList: Array<Product>;
+  _productList:any;
   loading:boolean;
-  _users:PartialList <User>;
+
+
+  users:any;
 
   loadingProducts:boolean;
   total:number;
@@ -40,11 +43,40 @@ export class GiftProductComponent implements OnInit {
     private customeService:CustomerService,
     private __giftService:GiftService,
     private _toastr: ToastrService,
-  private datePipe : DatePipe) {   titleService.setTitle('Stock - Gift Product'); }
+  private datePipe : DatePipe,
+  private actRoute: ActivatedRoute) {   titleService.setTitle('Stock - Gift Product'); }
 
   ngOnInit() {
     this.iniForm();
+    this.fillCustomer();
+    this.fillUser();
+    this.fillProduct();
   }
+
+
+  fillCustomer(){
+    this.actRoute.data.subscribe(data => {
+      this.customerList=data.CustomerResolver.data;
+      this.loading = false;
+    });
+    }
+
+    fillUser(){
+      this.actRoute.data.subscribe(data => {
+        this.users=data.UserResolver;
+        this.loading = false;
+       // console.log(data.UserResolver.data)
+      });
+    }
+
+    fillProduct(){
+      this.actRoute.data.subscribe(data => {
+        this._productList=data.ProductListResolver.data;
+        this.loading = false;
+    // console.log(data.ProductListResolver.data)
+      });
+    }
+
 
 
  loadProducts()
@@ -61,23 +93,12 @@ export class GiftProductComponent implements OnInit {
   loadUser(): void {
     this.loading = true;
     this.userService.findRepresentative().subscribe((res: PartialList<User>) => {
-      this._users = res;
+      this.users = res;
        //console.log( this.users);
       this.loading = false;
     });
   }
 
-
-
-  fillCustomer()
-  {
-    this.loading=true;
-    this.customeService.findCustomer()
-    .subscribe((res: PartialList<Client>) => {
-      this.customerList = res.data;
-       this.loading = false;
-    });
-  }
 
 
   iniForm(){
@@ -91,8 +112,8 @@ export class GiftProductComponent implements OnInit {
 
        companies: this._formBuilder.array([])
      });
-     this.loadUser();
-     this.loadProducts();
+    // this.loadUser();
+    // this.loadProducts();
      this.fillCustomer();
      this.addNewCompany();
    }

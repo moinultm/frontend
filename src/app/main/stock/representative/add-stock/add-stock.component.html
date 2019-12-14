@@ -85,7 +85,7 @@
                                     <select class="form-control"   formControlName="product_id" (change)="updatePrice($event.target,i)">
                                         <option value="null">--Select--</option>
                                         <option *ngFor="let product of _productList" [ngValue]="product.id">
-                                           {{product.name}}  | {{product.quantity}} </option>
+                                           {{product.name}}   </option>
                                       </select>
 
                               </div>

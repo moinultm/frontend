@@ -44,6 +44,15 @@ export class RepresentStockService extends CrudService <RepresentStock> {
     return this.__http.get <PartialList<RepresentStock>>(this.url + '/'+id+'/'+ 'details' , this.options);
   }
 
+  public updateReceiving(id:number,query?: {}): any {
+    if (query) {
+      this.options.params = query;
+    } else {
+      this.options.params = undefined;
+    }
+    return this.__http.get <PartialList<RepresentStock>>(this.url +'/'+id+'/'+ 'receiving' , this.options);
+  }
+
 
 
 

@@ -13,6 +13,7 @@ import { CustomerService } from '@app/core/services/stock/customer.service';
 import { Client } from '@app/shared/models/stock/client.model';
 import { DamageService } from '@app/core/services/stock/damage.service';
 import { Damage } from '@app/shared/models/stock/damage.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-damage-product',
@@ -21,9 +22,9 @@ import { Damage } from '@app/shared/models/stock/damage.model';
 })
 export class DamageProductComponent implements OnInit {
 
-  _productList: Array<Product>;
+  _productList: any;
   loading: boolean;
-  _users: PartialList<User>;
+  _users:any;
 
   loadingProducts: boolean;
   total: number;
@@ -38,11 +39,38 @@ export class DamageProductComponent implements OnInit {
     private customeService: CustomerService,
     private __damageService: DamageService,
     private _toastr: ToastrService,
-    private datePipe: DatePipe) { titleService.setTitle('Stock - Damage Product'); }
+    private datePipe: DatePipe,
+    private actRoute: ActivatedRoute) { titleService.setTitle('Stock - Damage Product'); }
 
   ngOnInit() {
     this.iniForm();
+    this.fillUser();
+    this.fillProduct();
+    this.fillCustomer();
   }
+
+  fillUser(){
+    this.actRoute.data.subscribe(data => {
+      this._users=data.UserResolver;
+      this.loading = false;
+     // console.log(data.UserResolver.data)
+    });
+  }
+
+  fillProduct(){
+    this.actRoute.data.subscribe(data => {
+      this._productList=data.ProductListResolver.data;
+      this.loading = false;
+  // console.log(data.ProductListResolver.data)
+    });
+  }
+
+  fillCustomer(){
+    this.actRoute.data.subscribe(data => {
+      this.customerList=data.CustomerResolver.data;
+      this.loading = false;
+    });
+    }
 
 
   loadProducts() {
@@ -64,7 +92,7 @@ export class DamageProductComponent implements OnInit {
     });
   }
 
-  fillCustomer() {
+ LoadCustomer() {
     this.loading = true;
     this.customeService.findCustomer()
       .subscribe((res: PartialList<Client>) => {
@@ -82,9 +110,8 @@ export class DamageProductComponent implements OnInit {
       customer_id:[null,Validators.nullValidator],
       companies: this._formBuilder.array([])
     });
-    this.loadUser();
-    this.loadProducts();
-    this.fillCustomer();
+
+
     this.addNewCompany();
   }
 

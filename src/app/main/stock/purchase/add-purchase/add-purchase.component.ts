@@ -57,6 +57,7 @@ selectedOrderItem: PurchaseItems;
   ngOnInit() {
     this.initForm();
     this.fillList();
+    this.fillProduct();
   }
 
   fillList(){
@@ -78,6 +79,13 @@ selectedOrderItem: PurchaseItems;
     });
   }
 
+  fillProduct(){
+    this.actRoute.data.subscribe(data => {
+      this._productList=data.ProductListResolver.data;
+      this.loading = false;
+   console.log(data.ProductListResolver.data)
+    });
+  }
 
 
   initForm(order?: PurchaseOrder): void {
@@ -344,7 +352,7 @@ openDialog(client?:Client): void {
   dialogConfig.disableClose = true;
   dialogConfig.autoFocus = true;
 
-  dialogConfig.width= '25%';
+  dialogConfig.width= '250px';
 
 if (client)
 {

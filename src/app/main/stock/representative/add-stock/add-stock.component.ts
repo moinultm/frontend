@@ -40,14 +40,23 @@ export class AddStockComponent implements OnInit {
     this.iniForm();
     //this.loadUser();
     this.fillUser();
+    this.fillProduct();
   }
 
 
   fillUser(){
     this.actRoute.data.subscribe(data => {
-      this.users=data.UserResolver.data;
+      this.users=data.UserResolver;
       this.loading = false;
-      console.log(data.UserResolver.data)
+     // console.log(data.UserResolver.data)
+    });
+  }
+
+  fillProduct(){
+    this.actRoute.data.subscribe(data => {
+      this._productList=data.ProductListResolver.data;
+      this.loading = false;
+     // console.log(data.ProductListResolver.data)
     });
   }
 
@@ -81,7 +90,7 @@ export class AddStockComponent implements OnInit {
 
       companies: this._formBuilder.array([])
     });
-    this.loadProducts()
+   // this.loadProducts()
     this.addNewCompany();
   }
 

@@ -15,7 +15,6 @@ export class ProductListResolver implements Resolve<any> {
   page = 1;
   size = 10;
 
-
   date = new FormControl(new Date());
 
    constructor(public productListService: ProductService,

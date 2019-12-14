@@ -11,6 +11,7 @@ import { UserSalesInvoicesComponent } from './user-sales-invoices/user-sales-inv
 import { UserReceiptDetailComponent } from './user-receipt-detail/user-receipt-detail.component';
 
 import { UserResolver } from '@app/core/resolvers/user.resolver';
+import { ProductListResolver } from '@app/core/resolvers/productlist.resolver';
 
 
 const routes: Routes = [
@@ -25,6 +26,8 @@ const routes: Routes = [
       component: AddStockComponent,
       resolve: {
         UserResolver,
+        ProductListResolver
+
       }
     },
 
@@ -58,6 +61,6 @@ const routes: Routes = [
     MatProgressSpinnerModule,
     MatInputModule
   ],
-  providers: [UserResolver],
+  providers: [UserResolver,ProductListResolver],
 })
 export class RepresentativeModule { }

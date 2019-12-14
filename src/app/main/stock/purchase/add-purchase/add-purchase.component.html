@@ -46,29 +46,32 @@
 
                     <div class="col-md-12">
                       <div class="row">
+
+                          <div class="col-md-3">
+                              <div class="form-group">
+                                  <label>Purhase from:</label>
+                                  <select class="form-control" formControlName="supplierName">
+                                      <option [value]="null">Listed Supplier's</option>
+                                    <option *ngFor="let list of supplierList" [value]="list.id">
+                                      {{list.full_name}}
+                                    </option>
+                                  </select>
+                                </div>
+                          </div>
+
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Party</label>
+                                <label>Not Listed:</label>
                                 <button class="form-control  btn btn-primary " (click)="openDialog()">
-                                    New Supplier
+                                    Add Supplier to list
                                 </button>
                               </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Select from existing</label>
-                                <select class="form-control" formControlName="supplierName">
-                                    <option [value]="null">Supplier Name</option>
-                                  <option *ngFor="let list of supplierList" [value]="list.id">
-                                    {{list.full_name}}
-                                  </option>
-                                </select>
-                              </div>
-                        </div>
+
 
           <div class="col-md-3">
             <div class="form-group">
-              <label>Payment Method</label>
+              <label>Payment Method:</label>
               <select class="form-control" formControlName="paymentMethod">
                 <option value="cash">Cash</option>
                 <option value="cheque">Cheque</option>
@@ -102,15 +105,15 @@
 
 
                   <!-- order items table-->
-                  <table class="table table-bordered table-mini">
+                  <table class="table table-bordered">
                     <thead class="thead-light">
 
                       <th>ProductName</th>
                       <th>Quantity</th>
                       <th>Discount(%)</th>
-                      <th>Price(MRP)</th>
+                      <th>Price</th>
                       <th>Subtotal</th>
-                      <th>
+                      <th style="text-align: right;">
                         <a class="btn btn-sm btn-success text-white" (click)="initItemModal(addItemModal)"><i
                             class="fa fa-plus"></i> Add Item</a>
                       </th>

@@ -3,7 +3,7 @@ import { Expense } from '@app/shared/models/stock/expense.model';
 import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {ExpenseService } from '@app/core/services/stock/expense.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
@@ -25,12 +25,14 @@ export class ExpenseComponent implements OnInit {
   form: FormGroup;
   selectedExpense: Expense;
 
+  users:any;
+
   constructor( private expenseService: ExpenseService,  private router:Router,
 
     private _toastr: ToastrService,
     private modalService: NgbModal,
     titleService: Title,
-
+    private actRoute: ActivatedRoute,
     private _formBuilder: FormBuilder,) {
 
       titleService.setTitle('General - Expense management');
@@ -40,8 +42,19 @@ export class ExpenseComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.loadData()
+    this.fillUser();
+    this.loadData();
   }
+
+
+  fillUser(){
+    this.actRoute.data.subscribe(data => {
+      this.users=data.UserResolver.data;
+      this.loading = false;
+     // console.log(data.UserResolver.data)
+    });
+  }
+
 
   loadData(page?: number): void {
     this.page = page ? page : 1;
@@ -91,7 +104,8 @@ export class ExpenseComponent implements OnInit {
       amount: [
         expense ? expense.amount : '',
         [Validators.required, Validators.maxLength(255)]
-      ]
+      ],
+      user_id:[null, [Validators.required]],
 
 
 
@@ -106,7 +120,7 @@ export class ExpenseComponent implements OnInit {
         id: this.selectedExpense.id,
         purpose: this.form.get('purpose').value,
         amount: this.form.get('amount').value,
-
+        user_id: this.form.get('user_id').value,
 
       }, this.selectedExpense.id ? true : false).subscribe((res: Expense) => {
         success('Success!', 'The expense is successfully saved.', this._toastr);

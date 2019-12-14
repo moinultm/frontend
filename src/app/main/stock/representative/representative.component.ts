@@ -6,6 +6,8 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@app/core/services/security/jwt-helper.service';
+import { success, warning, error } from '@app/core/utils/toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-representative',
@@ -29,10 +31,10 @@ export class RepresentativeComponent implements OnInit {
   constructor(   public jwtHelper: JwtHelperService, private representService: RepresentStockService,
     private _fb: FormBuilder,
     private datePipe : DatePipe,
-    private router:Router,) { }
+    private router:Router,    private _toastr: ToastrService
+    ) { }
 
   ngOnInit() {
-
     this.loadData();
     this.iniForm();
   }
@@ -56,6 +58,7 @@ export class RepresentativeComponent implements OnInit {
       size: this.size
     }).subscribe((res: PartialList<RepresentStock>) => {
       this.data = res;
+      
       this.loading = false;
     });
   }
@@ -68,6 +71,25 @@ export class RepresentativeComponent implements OnInit {
 
   toDetails(id:number){
     this.router.navigate([`representative/receipt-detail/${id}`]);
+  }
+
+
+updateConformed(id){
+
+
+  this.representService.updateReceiving(  id )
+    .subscribe((data: any) =>   {
+      success('Info!', 'Receiving Challan Conformed', this._toastr);
+    }, (err: any) => {
+      if (err.status === 403) {
+        warning('Warning!', err.error.error, this._toastr);
+      } else {
+        error('Error!', 'An error has occured when updating , please contact system administrator.', this._toastr);
+      }
+
+    });
+
+
   }
 
 

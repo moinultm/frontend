@@ -26,20 +26,16 @@
                     <h3 class="card-title">Add Gift
                       <a href="#" [routerLink]="['/product','list-damage']" class="nav-link d-inline"   [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active"><span class="badge bg-danger">View All</span></a>
 
-
                     </h3>
                   </div>
 
                   <div class="card-body">
 
-                  <div *ngIf="loading" class="text-center loading-profiles">
+                  <!--div *ngIf="loading" class="text-center loading-profiles">
                       <mat-spinner></mat-spinner>
-                    </div>
-
-
+                    </div-->
 
             <form  role="form"  [formGroup]="myForm">
-
                 <div class="row" *ngIf="!loading">
                     <div class="col-md-12">
                         <div class="form-group">
@@ -66,7 +62,7 @@
                       <select class="form-control"  formControlName="user_id">
                           <option value="null">--Select--</option>
 
-                          <option *ngFor="let U of _users.data" [value]="U.id">
+                          <option *ngFor="let U of users.data" [value]="U.id">
                            {{U.id}} - {{U.name}} </option>
                   </select>
                   </div>
@@ -124,7 +120,7 @@
                                 <select class="form-control"   formControlName="product_id" (change)="updatePrice($event.target,i)">
                                     <option value="null">--Select--</option>
                                     <option *ngFor="let product of _productList" [ngValue]="product.id">
-                                      {{product.name}} |    {{product.quantity}}</option>
+                                      {{product.name}} </option>
                                   </select>
 
                           </div>
