@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { JwtHelperService } from '@app/core/services/security/jwt-helper.service';
 import { success, warning, error } from '@app/core/utils/toastr';
 import { ToastrService } from 'ngx-toastr';
+import { UserService } from '@app/core/services/security/user.service';
+import { User } from '@app/shared/models/security/user.model';
 
 @Component({
   selector: 'app-representative',
@@ -24,6 +26,13 @@ export class RepresentativeComponent implements OnInit {
   page = 1;
   size = 10;
 
+  users:PartialList <User>;
+  loadingUser:boolean;
+  loadingPermission:boolean;
+  currentUserID=0;
+  isRoleViewAll:any;
+
+
   form: FormGroup;
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
@@ -31,11 +40,26 @@ export class RepresentativeComponent implements OnInit {
   constructor(   public jwtHelper: JwtHelperService, private representService: RepresentStockService,
     private _fb: FormBuilder,
     private datePipe : DatePipe,
-    private router:Router,    private _toastr: ToastrService
-    ) { }
+    private router:Router,
+    private _toastr: ToastrService,
+    private userService:UserService
+    ) {
+      this.currentUserID=parseInt(this.jwtHelper.id());
+      this.isRoleViewAll=  this.jwtHelper.hasRole('ROLE_MANAGER_PRIVILEGE');
+    }
 
   ngOnInit() {
-    this.loadData();
+   // console.log(this.jwtHelper.userRoles());
+    if (this.isRoleViewAll)
+        {this.loadUser();}
+    else{
+     // this.loadingUser=true;
+    this.loadingPermission=true;}
+
+    let uid =this.currentUserID;
+
+    this.loadData(uid);
+   // this.loadUser();
     this.iniForm();
   }
 
@@ -47,22 +71,35 @@ export class RepresentativeComponent implements OnInit {
     });
   }
 
+  loadUser(): void {
+    this.loadingUser = true;
+    this.userService.findRepresentative().subscribe((res: PartialList<User>) => {
+      this.users = res;
+       this.loadingUser = false;
+    });
+  }
 
 
   //Loading Data
-  loadData(page?: number): void {
+  loadData(id:number,page?: number): void {
     this.page = page ? page : 1;
     this.loading = true;
-    this.representService.find({
+    this.representService.findChallans(id,{
       page: this.page,
       size: this.size
     }).subscribe((res: PartialList<RepresentStock>) => {
       this.data = res;
-      
+      console.log(this.data)
       this.loading = false;
     });
   }
 
+
+
+  changeSelection(id:number){
+    //console.log(id)
+    this.loadData(id);
+  }
 
   dateFilter(form:any){
    console.log( )

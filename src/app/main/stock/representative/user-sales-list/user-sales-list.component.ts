@@ -26,22 +26,26 @@ page = 1;
 size = 10;
 
 currentUserID=0;
+isRoleViewAll:any;
 
 users:PartialList <User>;
 
-isRoleViewAll:any;
+
 
 
   constructor(    public jwtHelper: JwtHelperService,
     private representService: RepresentStockService,    private userService:UserService) {
       this.currentUserID=parseInt(this.jwtHelper.id());
       this.isRoleViewAll=  this.jwtHelper.hasRole('ROLE_MANAGER_PRIVILEGE');
+
     }
 
   ngOnInit() {
 
     console.log(this.jwtHelper.userRoles());
-    if (this.isRoleViewAll){      this.loadUser();    }
+    if (this.isRoleViewAll){
+      this.loadUser();
+     }
     else{this.loadingUser=true;}
 
     let uid =this.currentUserID;

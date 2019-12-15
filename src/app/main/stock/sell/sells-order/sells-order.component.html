@@ -176,8 +176,53 @@
                       </tr>
                     </tbody>
                     <tfoot>
+                        <tr>
+                          <td colspan="3" style="text-align: right; font-weight: bold;">
+                              <label>Total </label>
+                          </td>
+                          <td colspan="3">
+                              <input class="form-control" type="text" id="totalAmount" formControlName="totalAmount" readonly>
+                            </td>
+                        </tr>
+                        <tr>
+                          <td colspan="3" style="text-align: right; font-weight: bold;">
+                              <label> Discount on product </label>
+                           </td>
+                          <td colspan="3">
+                              <input class="form-control" type="text" id="discountAmount" formControlName="discountAmount"
+                              readonly>
+                           </td>
+                        </tr>
+                        <tr>
+                          <td colspan="3" style="text-align: right; font-weight: bold;">
+                              <label> Discount on Total </label>
+                           </td>
+                          <td colspan="3">
+                              <input class="form-control" type="text" id="discountOnTotal" formControlName="discountOnTotal"
+                              (keyup)="updateGrandTotal()">
+                           </td>
+                        </tr>
+                        <tr>
+                          <td colspan="3" style="text-align: right; font-weight: bold;">
+                              <label>Delivery Costs </label>
 
-                    </tfoot>
+                           </td>
+                          <td colspan="3">
+                              <input class="form-control" type="text" id="shippingCost" formControlName="shippingCost"
+                              (keyup)="updateGrandTotal()">
+                           </td>
+                        </tr>
+                        <tr>
+                          <td colspan="3" style="text-align: right; font-weight: bold;">
+                              <label>Net Total </label>
+                           </td>
+                          <td colspan="3">
+                              <input class="form-control" type="text" id="grandTotal" formControlName="grandTotal" readonly>
+                            </td>
+                        </tr>
+  
+
+                      </tfoot>
                   </table>
                   <!-- order items table-->
                 </div>
@@ -186,35 +231,27 @@
 
                   <div class="col-md-2">
                     <div class="form-group">
-                      <label>Total </label>
-                      <input class="form-control" type="text" id="totalAmount" formControlName="totalAmount" readonly>
+
                     </div>
                   </div>
                   <div class="col-md-2">
                     <div class="form-group">
-                      <label> Discount on product </label>
-                      <input class="form-control" type="text" id="discountAmount" formControlName="discountAmount"
-                        readonly>
+
                     </div>
                   </div>
                   <div class="col-md-2">
                     <div class="form-group">
-                      <label> Discount on Total </label>
-                      <input class="form-control" type="text" id="discountOnTotal" formControlName="discountOnTotal"
-                        (keyup)="updateGrandTotal()">
+
                     </div>
                   </div>
                   <div class="col-md-3">
                     <div class="form-group">
-                      <label>Delivery Costs </label>
-                      <input class="form-control" type="text" id="shippingCost" formControlName="shippingCost"
-                        (keyup)="updateGrandTotal()">
+
                     </div>
                   </div>
                   <div class="col-md-3">
                     <div class="form-group">
-                      <label>Net Total </label>
-                      <input class="form-control" type="text" id="grandTotal" formControlName="grandTotal" readonly>
+
                     </div>
                   </div>
                 </div>

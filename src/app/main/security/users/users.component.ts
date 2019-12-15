@@ -42,10 +42,8 @@ export class UsersComponent implements OnInit {
 
   userTypeList = [
     {id:2,name:'owner'},
-    {id:3,name:'general manager'},
-    {id:4,name:'sales manager'},
-    {id:4,name:'sales person'},
-    {id:4,name:'stock manager'},
+    {id:1,name:'admin'},
+    {id:3,name:'user'}
   ]
 
   constructor(
