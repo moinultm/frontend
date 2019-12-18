@@ -30,6 +30,7 @@ import { NgxPrintModule } from 'ngx-print';
 import { ProfitLossReportComponent } from './profit-loss-report/profit-loss-report.component';
 import { AuthGuard } from '@app/core/services/security/guards/auth.guard';
 import { AppDateAdapter, APP_DATE_FORMATS } from '@app/core/utils/format-datepicker';
+import { ChallanProductReportComponent } from './challan-product-report/challan-product-report.component';
 
 const routes: Routes = [
 
@@ -103,12 +104,15 @@ const routes: Routes = [
     component: ProfitLossReportComponent
     },
 
-
+    { path: 'challan-product-report',
+    canActivate: [ AuthGuard],
+    component: ChallanProductReportComponent
+    },
 
 ];
 
 @NgModule({
-  declarations: [  ReportMenuComponent, StockReportComponent, ProductReportComponent, DailySalesReportComponent, CustomerSummaryReportComponent, RepresentStockReportComponent, RepresentStockSummaryComponent, RepresentStatusReportComponent, SupplierBillSummaryComponent, ProductSellReportComponent, SellsStatusReportComponent, TransactionStatusReportComponent, PurchaseStatusReportComponent, StockGeneralReportComponent, ProfitLossReportComponent ],
+  declarations: [  ReportMenuComponent, StockReportComponent, ProductReportComponent, DailySalesReportComponent, CustomerSummaryReportComponent, RepresentStockReportComponent, RepresentStockSummaryComponent, RepresentStatusReportComponent, SupplierBillSummaryComponent, ProductSellReportComponent, SellsStatusReportComponent, TransactionStatusReportComponent, PurchaseStatusReportComponent, StockGeneralReportComponent, ProfitLossReportComponent, ChallanProductReportComponent ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

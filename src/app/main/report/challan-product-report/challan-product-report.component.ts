@@ -1,20 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { ProductReportService } from '@app/core/services/report/product-report.service';
 import { UserService } from '@app/core/services/security/user.service';
 import { JwtHelperService } from '@app/core/services/security/jwt-helper.service';
 import { PartialList } from '@app/shared/models/common/patial-list.model';
-import { User } from '@app/shared/models/security/user.model';
 import { StockGeneral } from '@app/shared/models/stock/stock-general.model';
 
 @Component({
-  selector: 'app-stock-report',
-  templateUrl: './stock-report.component.html',
-  styleUrls: ['./stock-report.component.scss']
+  selector: 'app-challan-product-report',
+  templateUrl: './challan-product-report.component.html',
+  styleUrls: ['./challan-product-report.component.scss']
 })
-export class StockReportComponent implements OnInit {
-
+export class ChallanProductReportComponent implements OnInit {
 
   todayDate=this.datePipe.transform(new Date(), 'yyyy-MM-dd');
 
@@ -44,19 +42,36 @@ export class StockReportComponent implements OnInit {
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
 
-  constructor(
-    private _fb: FormBuilder,
+  constructor( private _fb: FormBuilder,
     private datePipe : DatePipe,
     private reportService:ProductReportService,
     private userService:UserService,
-    public jwtHelper: JwtHelperService
-  ) { }
+    public jwtHelper: JwtHelperService) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.user=parseInt (this.jwtHelper.id());
-    this.loadData(this.user);
-   // this.loadUser();
+     this.loadData(this.user);
+   //this.loadUser();
     this.iniForm();
+  }
+
+  loadData(id:number,page?: number): void {
+    this.page = page ? page : 1;
+    this.loading = true;
+
+    let formDt ='';
+    let toDt = '';
+
+    this.reportService.stockReport({
+      page: this.page,
+      size: this.size,
+      from:  formDt,
+      to:   toDt
+    }).subscribe((res: PartialList<StockGeneral>) => {
+      this.data = res;
+    console.log( this.data);
+      this.loading = false;
+    });
   }
 
   dateFilter(  page?: number): void {
@@ -81,27 +96,6 @@ export class StockReportComponent implements OnInit {
     });
   }
 
-
-  loadData(id:number,page?: number): void {
-    this.page = page ? page : 1;
-    this.loading = true;
-
-    let formDt ='';
-    let toDt = '';
-
-    this.reportService.stockReport({
-      page: this.page,
-      size: this.size,
-      from:  formDt,
-      to:   toDt
-    }).subscribe((res: PartialList<StockGeneral>) => {
-      this.data = res;
-    console.log( this.data);
-      this.loading = false;
-    });
-  }
-
-
   iniForm(){
     this.loading=true;
 
@@ -121,7 +115,7 @@ export class StockReportComponent implements OnInit {
 
 
 
-  //PRINT*******************************************************
+  //PRINT*******************************************************//
 
   private getElementTag(tag: keyof HTMLElementTagNameMap): string {
     const html: string[] = [];
@@ -168,6 +162,7 @@ export class StockReportComponent implements OnInit {
       </html>`);
     popupWin.document.close();
   }
+
 
 
 }
