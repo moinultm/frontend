@@ -108,7 +108,7 @@ export class ProductReportService extends CrudService<Product> {
     } else {
       this.options.params = undefined;
     }
-    return this.__http.get <any>(this.url + '/'+ id + '/' + '/'+'challan-report', this.options);
+    return this.__http.get <any>(this.url + '/'+ id  + '/'+'challan-report', this.options);
   }
 
 

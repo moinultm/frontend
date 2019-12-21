@@ -115,7 +115,8 @@ export class ChallanProductReportComponent implements OnInit {
 
     this.form = this._fb.group({
       fromDate: [  new Date(),  [Validators.required],],
-      toDate: [  new Date(),  [Validators.required],]
+      toDate: [  new Date(),  [Validators.required],],
+      userId:[ null,  [Validators.required]]
     });
   }
 
