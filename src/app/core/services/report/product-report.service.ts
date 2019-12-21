@@ -102,6 +102,15 @@ export class ProductReportService extends CrudService<Product> {
   }
 
 
+  public challanReport(id:number,query?: {}): any {
+    if (query) {
+      this.options.params = query;
+    } else {
+      this.options.params = undefined;
+    }
+    return this.__http.get <any>(this.url + '/'+ id + '/' + '/'+'challan-report', this.options);
+  }
+
 
   public representativeStockReport(id:number,query?: {}): any {
     if (query) {

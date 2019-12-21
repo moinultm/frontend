@@ -6,6 +6,7 @@ import { UserService } from '@app/core/services/security/user.service';
 import { JwtHelperService } from '@app/core/services/security/jwt-helper.service';
 import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { StockGeneral } from '@app/shared/models/stock/stock-general.model';
+import { User } from '@app/shared/models/security/user.model';
 
 @Component({
   selector: 'app-challan-product-report',
@@ -35,9 +36,10 @@ export class ChallanProductReportComponent implements OnInit {
 
   form: FormGroup;
 
-  //users:Array <User>;
+  users:Array <User>;
 
   user:number;
+
 
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
@@ -51,9 +53,21 @@ export class ChallanProductReportComponent implements OnInit {
   ngOnInit() {
     this.user=parseInt (this.jwtHelper.id());
      this.loadData(this.user);
-   //this.loadUser();
+   this.loadUser();
     this.iniForm();
   }
+
+
+  loadUser(): void {
+    this.loadingUser = true;
+    this.userService.findRepresentative().subscribe((res: PartialList<User>) => {
+      this.users = res.data;
+      //console.log(this.users)
+       this.loadingUser = false;
+    });
+  }
+
+
 
   loadData(id:number,page?: number): void {
     this.page = page ? page : 1;
@@ -62,7 +76,7 @@ export class ChallanProductReportComponent implements OnInit {
     let formDt ='';
     let toDt = '';
 
-    this.reportService.stockReport({
+    this.reportService.challanReport(id,{
       page: this.page,
       size: this.size,
       from:  formDt,
@@ -74,7 +88,7 @@ export class ChallanProductReportComponent implements OnInit {
     });
   }
 
-  dateFilter(  page?: number): void {
+  dateFilter(  id:number,page?: number): void {
     this.page = page ? page : 1;
     this.loading = true;
     let formDt = this.datePipe.transform(this.form.get('fromDate').value, 'yyyy-MM-dd');
@@ -84,7 +98,7 @@ export class ChallanProductReportComponent implements OnInit {
     this.fromDate=formDt;
     this.toDate=toDt;
 
-    this.reportService.stockReport( {
+    this.reportService.challanReport(id, {
       page: this.page,
       size: this.size,
       from:  formDt,

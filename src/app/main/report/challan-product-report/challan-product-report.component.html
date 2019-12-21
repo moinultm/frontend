@@ -40,24 +40,42 @@
 
                           </div>
 
-                      <div class="col-md-8">
+                      <div class="col-md-12">
 
                         <div class="row">
-                            <div class="col-md-4"><mat-form-field class="full-width">
+                            <div class="col-md-3"><mat-form-field class="full-width">
                                 <input matInput [matDatepicker]="pickerFrom" placeholder="Start Date"
                                   formControlName="fromDate" [value]="date.value">
                                 <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
                                 <mat-datepicker #pickerFrom></mat-datepicker>
                               </mat-form-field></div>
-                            <div class="col-md-4"><mat-form-field class="full-width">
+                            <div class="col-md-3">
+                              <mat-form-field class="full-width">
                                 <input matInput [matDatepicker]="pickerTo" placeholder="End Date" formControlName="toDate"
                                   [value]="date.value">
                                 <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
                                 <mat-datepicker #pickerTo></mat-datepicker>
-                              </mat-form-field></div>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                              <div class="input-group">
+                                <span class="input-group-append">
+                                  <input type="button" name="search" id="search" value="Search" (click)="dateFilter()" class="btn  btn-primary"
+                                    [disabled]="form.invalid">
+                                   </span>
+                              </div>
+                            </div>
 
-                              <div class="col-md-4 my-auto">
-                                <div class="input-group">
+
+                              <div class="col-md-3 my-auto">
+                                <div class="input-group" *ngIf="!loadingUser">
+                                  <select class="form-control" formControlName="userId" (change)="updateUser($event.target)">
+                                    <option value="null">--Select User--</option>
+                                    <option *ngFor="let list of users" [value]="list.id">
+                                      {{list.id}} :: {{list.name}}
+                                    </option>
+                                  </select>
+
                                   <span class="input-group-append">
                                     <input type="button" name="search" id="search" value="Search" (click)="dateFilter()" class="btn  btn-primary"
                                       [disabled]="form.invalid">
@@ -108,27 +126,23 @@
                           </tr>
                         </thead>
                         <tbody>
-
                           <tr *ngFor="let user of data.users; let i = index">
-                            <td> {{ i+1 }}</td>
-                            <td> {{ user.name }}</td>
-                            <td> #12</td>
+                            <td>{{ i+1 }}</td>
+                            <td>{{ user.name }}</td>
+                            <td>{{ user.ref_no }}</td>
 
                             <td *ngFor="let product of data.products">
                               <span *ngFor=" let cross of data.crossData">
-                                <div *ngIf="cross.USER_ID === user.id && cross.STOCK_ITEM_ID === product.id">
-                                  {{  _CIN(cross.TRAN_QUANTITY)+  _CIN(cross.INWARD_QUANTITY)      }}
+                                <div *ngIf="cross.REF_NO === user.ref_no && cross.STOCK_ITEM_ID === product.id">
+                                  {{  _CIN(cross.TRAN_QUANTITY)   }}
                                 </div>
                               </span>
                             </td>
 
                             <td>200</td>
                           </tr>
-
                         </tbody>
                       </table>
-
-
             </ng-container>
 
               </div>
