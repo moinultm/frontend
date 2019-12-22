@@ -31,8 +31,6 @@ const routes: Routes = [
       }
     },
 
-
-
     {
       path: 'user-sales-list',
       component: UserSalesListComponent

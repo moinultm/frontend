@@ -57,12 +57,13 @@
                                 <mat-datepicker #pickerTo></mat-datepicker>
                               </mat-form-field>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 my-auto">
                               <div class="input-group">
-                                <span class="input-group-append">
-                                  <input type="button" name="search" id="search" value="Search" (click)="dateFilter()" class="btn  btn-primary"
-                                    [disabled]="form.invalid">
-                                   </span>
+
+                                <button type="button" class="btn btn-tool text-primary" data-card-widget="collapse" [disabled]="form.invalid" (click)="dateFilter()">
+                                  <i class="fas fa-search"></i>
+                                </button>
+
                               </div>
                             </div>
 
@@ -99,14 +100,15 @@
 
      <!--HEADER-->
     <div class="print-only">
-        <div class="row mb-3">
+        <div class="row">
           <div class="col-md-12">
-            <img src="/assets/images/trade-2.jpg" height="120">
+            <img src="/assets/images/trade-2.jpg" height="80">
           </div>
         </div>
         </div>
 
                     <h4>Challan Report</h4>
+                    <p>Name:{{userName}}, Address:{{userAddress}}</p>
                        <p>From Date: <strong>{{fromDate| date: 'dd/MM/yyyy'}}</strong>  To: <strong>{{toDate |date: 'dd/MM/yyyy'}}</strong> </p>
 
             <div class="table-responsive ">

@@ -102,19 +102,18 @@ export class RepresentativeComponent implements OnInit {
   }
 
   dateFilter(form:any){
-   console.log( )
+   console.log()
   }
 
 
-  toDetails(id:number){
+  toDetails(id?:string){
     this.router.navigate([`representative/receipt-detail/${id}`]);
   }
 
 
-updateConformed(id){
+updateConformed(ref?){  
 
-
-  this.representService.updateReceiving(  id )
+  this.representService.updateReceiving( {ref:ref} )
     .subscribe((data: any) =>   {
       success('Info!', 'Receiving Challan Conformed', this._toastr);
     }, (err: any) => {
@@ -128,6 +127,7 @@ updateConformed(id){
 
 
   }
+
 
 
 }

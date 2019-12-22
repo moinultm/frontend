@@ -261,8 +261,13 @@ Custom CSS
 */
 
 
+.table-responsive {    font-size: small!important; }
+
 @media print {
   .print-only{display: inline;}
+  .table-responsive { font-size: small!important; }
+
+
 /*
   .print{
     padding:1.5in 0.20in;

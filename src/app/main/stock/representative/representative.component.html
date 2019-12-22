@@ -45,9 +45,6 @@
                       </button>
 
 
-
-
-
                  </div>
 
             </div>
@@ -60,6 +57,7 @@
                  <div class="col-md-3">
 
                 <div class="input-group input-group-sm" *ngIf="!loadingPermission">
+                  <span *ngIf="!loadingUser">
                     <label>User:- </label>
                     <select class="form-control" (change)="changeSelection($event.target.value)">
                       <option [value]="0">--All--</option>
@@ -67,6 +65,8 @@
                         {{list.id}} :: {{list.name}}
                       </option>
                     </select>
+                  </span>
+
                 </div>
 
                 </div>
@@ -141,7 +141,7 @@
                                          </p>
 
                                          <p *ngIf="!item.receiving">
-                                            <button type="button" class="btn btn-success btn-sm float-left" (click)="updateConformed(item.id)">
+                                            <button type="button" class="btn btn-success btn-sm float-left" (click)="updateConformed(item.ref_no)">
                                                 Confirmation
                                             </button>
 
@@ -151,7 +151,7 @@
                                         </td>
 
                                         <td>
-                                            <button type="button" class="btn btn-primary btn-sm float-left" (click)="toDetails(item.id)">
+                                            <button type="button" class="btn btn-primary btn-sm float-left" (click)="toDetails(item.ref_no)">
                                               View Recipt</button>
 
                                         </td>

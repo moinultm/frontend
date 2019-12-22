@@ -74,8 +74,10 @@ export class RepresentStockReportComponent implements OnInit {
     }
 
     updateUser(ctrl) {
-     this.userName= this.users[ctrl.selectedIndex - 1].name,
-     this.userAddress= this.users[ctrl.selectedIndex - 1].address
+      if (ctrl.selectedIndex - 1 >= 0){
+        this.userName= this.users[ctrl.selectedIndex - 1].name,
+        this.userAddress= this.users[ctrl.selectedIndex - 1].address
+       }
   }
 
 

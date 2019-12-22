@@ -113,7 +113,6 @@
                               <td> {{ i+1 }}</td>
                               <td> {{ user.name }}</td>
 
-
                               <td *ngFor="let product of data.products">
                                 <span *ngFor=" let cross of data.crossData">
                                   <div *ngIf="cross.USER_ID === user.id && cross.STOCK_ITEM_ID === product.id">

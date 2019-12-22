@@ -55,7 +55,7 @@ export class StockReportComponent implements OnInit {
   ngOnInit(){
     this.user=parseInt (this.jwtHelper.id());
     this.loadData(this.user);
-   // this.loadUser();
+   //this.loadUser();
     this.iniForm();
   }
 
@@ -154,12 +154,17 @@ export class StockReportComponent implements OnInit {
           <style>
           body
           {
-            padding: 20mm  10mm  10mm 10mm;
+            padding: 10mm  10mm  10mm 10mm;
           }
+
 
           @page {
             size: A4 landscape;
+            font-size: small;
           }
+
+
+
         </style>
         </head>
         <body onload="window.print(); setTimeout(()=>{ window.close(); }, 0)">

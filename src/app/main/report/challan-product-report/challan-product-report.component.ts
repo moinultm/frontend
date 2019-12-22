@@ -88,12 +88,13 @@ export class ChallanProductReportComponent implements OnInit {
     });
   }
 
-  dateFilter(  id:number,page?: number): void {
+  dateFilter(  page?: number): void {
     this.page = page ? page : 1;
     this.loading = true;
     let formDt = this.datePipe.transform(this.form.get('fromDate').value, 'yyyy-MM-dd');
     let toDt = this.datePipe.transform(this.form.get('toDate').value, 'yyyy-MM-dd');
 
+    let id=this.form.get('userId').value;
 
     this.fromDate=formDt;
     this.toDate=toDt;
@@ -127,6 +128,13 @@ export class ChallanProductReportComponent implements OnInit {
   _CIP(val){
     return parseInt(val)*-1;
   }
+
+  updateUser(ctrl) {
+ if (ctrl.selectedIndex - 1 >= 0){
+  this.userName= this.users[ctrl.selectedIndex - 1].name,
+  this.userAddress= this.users[ctrl.selectedIndex - 1].address
+ }
+ }
 
 
 
@@ -163,12 +171,16 @@ export class ChallanProductReportComponent implements OnInit {
           <style>
           body
           {
-            padding: 20mm  10mm  10mm 10mm;
+            padding: 10mm  10mm  10mm 10mm;
+
           }
 
           @page {
             size: A4 landscape;
+
           }
+
+
         </style>
         </head>
         <body onload="window.print(); setTimeout(()=>{ window.close(); }, 0)">

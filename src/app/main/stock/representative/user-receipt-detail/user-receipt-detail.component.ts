@@ -23,18 +23,16 @@ export class UserReceiptDetailComponent implements OnInit {
   ngOnInit() {
     let id=this.route.snapshot.params.id;
     this.ShowBillDetails(id);
-
   }
 
-  ShowBillDetails(id:number){
+  ShowBillDetails(ref:string){
     this.loadingDetails = true;
-    this.sellsService.viewInvoice(id).subscribe((res:PartialList <RepresentStock>) => {
+    this.sellsService.viewInvoice({ref:ref}).subscribe((res:PartialList <RepresentStock>) => {
       this.details = res;
        console.log(res);
       this.loadingDetails = false;
     });
   }
-
 
   private getElementTag(tag: keyof HTMLElementTagNameMap): string {
     const html: string[] = [];
@@ -49,8 +47,6 @@ export class UserReceiptDetailComponent implements OnInit {
   print(printSectionId): void {
     event.preventDefault()
   let printContents, popupWin, styles = "", links = '';
-
-
 
     styles = this.getElementTag('style');
     links = this.getElementTag('link');
