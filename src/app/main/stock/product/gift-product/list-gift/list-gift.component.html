@@ -19,7 +19,7 @@
 
     <section class="content">
       <div class="container-fluid">
-        <div class="row">
+
           <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -28,7 +28,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <div class="table-responsive">
+                        <div class="table-responsive table-mini">
                       <table class="table table-bordered">
                         <thead>
                           <tr>
@@ -55,12 +55,12 @@
                                 <tr *ngFor="let item of data.data; let i = index">
                                   <td>{{ i+1 }}</td>
                                   <td>{{ item.reference_no }}</td>
-                                  <td>{{ item.date }}</td>
+                                  <td>{{ item.date |  date:'dd/MMM/yyyy' }}</td>
                                   <td class="actions">
 
                                         <div class="btn-group">
                                             <!--button type="button" class="btn btn-default" (click)="initSave(saveModal, item)"><i class="fa fa-pencil"></i></button-->
-                                            <!--button type="button" class="btn btn-default" (click)="initDelete(deleteModal, item)"><i class="fa fa-trash"></i></button-->
+                                            <button type="button" class="btn btn-default" (click)="initDelete(deleteModal, item)"><i class="fa fa-trash"></i></button>
                                           </div>
 
                                   </td>
@@ -80,7 +80,7 @@
                   </div>
             </div>
         </div>
-        </div>
+
       </div>
     </section>
 

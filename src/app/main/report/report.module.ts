@@ -31,6 +31,8 @@ import { ProfitLossReportComponent } from './profit-loss-report/profit-loss-repo
 import { AuthGuard } from '@app/core/services/security/guards/auth.guard';
 import { AppDateAdapter, APP_DATE_FORMATS } from '@app/core/utils/format-datepicker';
 import { ChallanProductReportComponent } from './challan-product-report/challan-product-report.component';
+import { DamageProductReportComponent } from './damage-product-report/damage-product-report.component';
+import { GiftProductReportComponent } from './gift-product-report/gift-product-report.component';
 
 const routes: Routes = [
 
@@ -108,11 +110,19 @@ const routes: Routes = [
     canActivate: [ AuthGuard],
     component: ChallanProductReportComponent
     },
+    { path: 'damage-product-report',
+    canActivate: [ AuthGuard],
+    component:DamageProductReportComponent
+    },
+    { path: 'gift-product-report',
+    canActivate: [ AuthGuard],
+    component: GiftProductReportComponent
+    },
 
 ];
 
 @NgModule({
-  declarations: [  ReportMenuComponent, StockReportComponent, ProductReportComponent, DailySalesReportComponent, CustomerSummaryReportComponent, RepresentStockReportComponent, RepresentStockSummaryComponent, RepresentStatusReportComponent, SupplierBillSummaryComponent, ProductSellReportComponent, SellsStatusReportComponent, TransactionStatusReportComponent, PurchaseStatusReportComponent, StockGeneralReportComponent, ProfitLossReportComponent, ChallanProductReportComponent ],
+  declarations: [  ReportMenuComponent, StockReportComponent, ProductReportComponent, DailySalesReportComponent, CustomerSummaryReportComponent, RepresentStockReportComponent, RepresentStockSummaryComponent, RepresentStatusReportComponent, SupplierBillSummaryComponent, ProductSellReportComponent, SellsStatusReportComponent, TransactionStatusReportComponent, PurchaseStatusReportComponent, StockGeneralReportComponent, ProfitLossReportComponent, ChallanProductReportComponent, DamageProductReportComponent, GiftProductReportComponent ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
