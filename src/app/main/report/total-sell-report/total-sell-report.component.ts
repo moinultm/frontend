@@ -129,55 +129,7 @@ private el: ElementRef;
 
 
 
-  ngAfterViewInit(){
 
-    if (!this.el ||
-        !this.el.nativeElement ||
-        !this.el.nativeElement.children){
-            console.log('cant build without element');
-            return;
-     }
-
-      var container = this.el.nativeElement;
-      var inst = jQuery(container);
-      var targetElement = inst.find('#output');
-
-      if (!targetElement){
-        console.log('cant find the pivot element');
-        return;
-      }
-
-
-     while (targetElement.firstChild){
-        targetElement.removeChild(targetElement.firstChild);
-      }
-
-
-      //here is the magic
-      var sum = $.pivotUtilities.aggregatorTemplates.sum;
-      var numberFormat = $.pivotUtilities.numberFormat;
-      var intFormat = numberFormat({digitsAfterDecimal: 0});
-
-      targetElement.pivot(
-        [
-          {"Province": "Quebec", "Party": "Bloc Quebecois", "Age": 43, "Name": "Mourani, Maria", "Gender": "Female"},
-          {"Province": "Quebec", "Party": "NDP", "Age": "", "Name": "Sellah, Djaouida", "Gender": "Female"},
-          {"Province": "Quebec", "Party": "Liberal", "Age": 72, "Name": "Cotler, Irwin", "Gender": "Male"},
-
-          {"Province": "Ontario", "Party": "Conservative", "Age": 72, "Name": "Oliver, Joe", "Gender": "Male"},
-          {"Province": "Ontario", "Party": "Conservative", "Age": 71, "Name": "Tilson, David Allan", "Gender": "Male"}
-      ],
-
-        {
-          rows: ["Province"],
-          cols: ["Party","Gender"],
-          aggregator: sum(intFormat)(["Age"])
-
-         });
-
-
-
-      }
 
 
 

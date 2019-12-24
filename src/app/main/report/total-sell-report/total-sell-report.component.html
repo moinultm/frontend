@@ -102,45 +102,55 @@
                 <colgroup span="2"></colgroup>
                 <colgroup span="2"></colgroup>
                 <tr>
-                  <td rowspan="2"></td>
+                  <td rowspan="2">Sl</td>
+                  <td rowspan="2">Name</td>
 
-                  <th colspan="2" scope="colgroup">Mars</th>
-                  <th colspan="2" scope="colgroup">Venus</th>
 
                   <th  colspan="2" scope="colgroup" *ngFor="let product of data.products">
                     {{ product.name }}
                   </th>
 
-                </tr>
-                <tr>
-                  <th scope="col">Produced</th>
-                  <th scope="col">Sold</th>
-                  <th scope="col">Produced</th>
-                  <th scope="col">Sold</th>
-
-                  <th scope="col" *ngFor="let product of data.products">
-                    Produced
-                  </th>
-                  <th scope="col" *ngFor="let product of data.products">
-                    Sold
-                  </th>
+                  <td rowspan="2">Totals</td>
 
                 </tr>
-                
                 <tr>
-                  <th scope="row">Teddy Bears</th>
-                  <td>50,000</td>
-                  <td>30,000</td>
-                  <td>100,000</td>
-                  <td>80,000</td>
+                  <ng-container *ngFor="let product of data.products">
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Amount</th>
+                  </ng-container>
                 </tr>
-                <tr>
-                  <th scope="row">Board Games</th>
-                  <td>10,000</td>
-                  <td>5,000</td>
-                  <td>12,000</td>
-                  <td>9,000</td>
+
+
+                <tr *ngFor="let user of data.users; let i = index">
+
+                  <th scope="row"> {{ i+1 }}</th>
+                  <th scope="row"> {{ user.name }}</th>
+
+                  <ng-container *ngFor="let product of data.products">
+
+                  <td>
+
+                    <span *ngFor=" let cross of data.crossData">
+                      <div *ngIf="cross.USER_ID === user.id && cross.STOCK_ITEM_ID === product.id">
+                         {{  _CIN(cross.TRAN_QUANTITY)+  _CIN(cross.INWARD_QUANTITY)  }}
+                      </div>
+                    </span>
+                  </td>
+
+                  <td >
+
+                  <span *ngFor=" let cross of data.crossData">
+                    <div *ngIf="cross.USER_ID === user.id && cross.STOCK_ITEM_ID === product.id">
+                 {{ _CIN(cross.INWARD_AMOUNT)      }}
+                    </div>
+                  </span>
+                  </td>
+
+                  </ng-container>
+
+                  <th scope="row"> 0 </th>
                 </tr>
+
               </table>
 
 
