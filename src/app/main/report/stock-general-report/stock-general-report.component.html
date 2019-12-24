@@ -85,34 +85,7 @@
 
 
 
-                <table class="table table-striped table-bordered">
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Product/User Name</th>
-                      <th *ngFor="let char of products">
-                        {{ char.name }}
-                      </th>
-                      <th>Total</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-
-                    <tr *ngFor="let user of users; let i = index">
-                      <td> {{ i+1 }}</td>
-                      <td> {{ user.description }}</td>
-                      <td *ngFor="let char of products">
-                        <span *ngFor=" let cross of crossData">
-                          <div *ngIf="cross.userId === user.id && cross.productId === char.id">
-                            {{cross.quantity }}
-                          </div>
-                        </span>
-                      </td>
-                      <td> 0 </td>
-                    </tr>
-
-                  </tbody>
-                </table>
+           
 
 
 

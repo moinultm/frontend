@@ -33,6 +33,10 @@ import { AppDateAdapter, APP_DATE_FORMATS } from '@app/core/utils/format-datepic
 import { ChallanProductReportComponent } from './challan-product-report/challan-product-report.component';
 import { DamageProductReportComponent } from './damage-product-report/damage-product-report.component';
 import { GiftProductReportComponent } from './gift-product-report/gift-product-report.component';
+import { MonthlySalesReportComponent } from './monthly-sales-report/monthly-sales-report.component';
+import { StockInReportComponent } from './stock-in-report/stock-in-report.component';
+import { StockOutReportComponent } from './stock-out-report/stock-out-report.component';
+import { TotalSellReportComponent } from './total-sell-report/total-sell-report.component';
 
 const routes: Routes = [
 
@@ -118,11 +122,15 @@ const routes: Routes = [
     canActivate: [ AuthGuard],
     component: GiftProductReportComponent
     },
+    { path: 'total-sell-report',
+    canActivate: [ AuthGuard],
+    component: TotalSellReportComponent
+    },
 
 ];
 
 @NgModule({
-  declarations: [  ReportMenuComponent, StockReportComponent, ProductReportComponent, DailySalesReportComponent, CustomerSummaryReportComponent, RepresentStockReportComponent, RepresentStockSummaryComponent, RepresentStatusReportComponent, SupplierBillSummaryComponent, ProductSellReportComponent, SellsStatusReportComponent, TransactionStatusReportComponent, PurchaseStatusReportComponent, StockGeneralReportComponent, ProfitLossReportComponent, ChallanProductReportComponent, DamageProductReportComponent, GiftProductReportComponent ],
+  declarations: [  ReportMenuComponent, StockReportComponent, ProductReportComponent, DailySalesReportComponent, CustomerSummaryReportComponent, RepresentStockReportComponent, RepresentStockSummaryComponent, RepresentStatusReportComponent, SupplierBillSummaryComponent, ProductSellReportComponent, SellsStatusReportComponent, TransactionStatusReportComponent, PurchaseStatusReportComponent, StockGeneralReportComponent, ProfitLossReportComponent, ChallanProductReportComponent, DamageProductReportComponent, GiftProductReportComponent, MonthlySalesReportComponent, StockInReportComponent, StockOutReportComponent, TotalSellReportComponent ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

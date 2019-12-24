@@ -41,6 +41,7 @@
     "ngx-print": "^1.2.0-beta.3",
     "ngx-toastr": "^10.0.4",
     "overlayscrollbars-ngx": "^0.1.1",
+    "pivottable": "^2.23.0",
     "rxjs": "~6.4.0",
     "rxjs-compat": "^6.5.3",
     "select2": "^4.0.8",

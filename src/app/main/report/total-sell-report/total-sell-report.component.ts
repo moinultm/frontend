@@ -1,19 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { ProductReportService } from '@app/core/services/report/product-report.service';
 import { UserService } from '@app/core/services/security/user.service';
 import { JwtHelperService } from '@app/core/services/security/jwt-helper.service';
 import { PartialList } from '@app/shared/models/common/patial-list.model';
-import { User } from '@app/shared/models/security/user.model';
 import { StockGeneral } from '@app/shared/models/stock/stock-general.model';
 
+import jQuery from 'jquery';
+
+declare var jQuery:any;
+declare var $:any;
+import 'pivottable/dist/pivot.min.js';
+import 'pivottable/dist/pivot.min.css';
+
+
 @Component({
-  selector: 'app-stock-report',
-  templateUrl: './stock-report.component.html',
-  styleUrls: ['./stock-report.component.scss']
+  selector: 'app-total-sell-report',
+  templateUrl: './total-sell-report.component.html',
+  styleUrls: ['./total-sell-report.component.scss']
 })
-export class StockReportComponent implements OnInit {
+export class TotalSellReportComponent implements OnInit {
 
 
   todayDate=this.datePipe.transform(new Date(), 'yyyy-MM-dd');
@@ -43,14 +50,14 @@ export class StockReportComponent implements OnInit {
 
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
-
-  constructor(
+private el: ElementRef;
+  constructor(@Inject(ElementRef)el: ElementRef,
     private _fb: FormBuilder,
     private datePipe : DatePipe,
     private reportService:ProductReportService,
     private userService:UserService,
     public jwtHelper: JwtHelperService
-  ) { }
+  ) { this.el = el;}
 
   ngOnInit(){
     this.user=parseInt (this.jwtHelper.id());
@@ -121,6 +128,59 @@ export class StockReportComponent implements OnInit {
 
 
 
+
+  ngAfterViewInit(){
+
+    if (!this.el ||
+        !this.el.nativeElement ||
+        !this.el.nativeElement.children){
+            console.log('cant build without element');
+            return;
+     }
+
+      var container = this.el.nativeElement;
+      var inst = jQuery(container);
+      var targetElement = inst.find('#output');
+
+      if (!targetElement){
+        console.log('cant find the pivot element');
+        return;
+      }
+
+
+     while (targetElement.firstChild){
+        targetElement.removeChild(targetElement.firstChild);
+      }
+
+
+      //here is the magic
+      var sum = $.pivotUtilities.aggregatorTemplates.sum;
+      var numberFormat = $.pivotUtilities.numberFormat;
+      var intFormat = numberFormat({digitsAfterDecimal: 0});
+
+      targetElement.pivot(
+        [
+          {"Province": "Quebec", "Party": "Bloc Quebecois", "Age": 43, "Name": "Mourani, Maria", "Gender": "Female"},
+          {"Province": "Quebec", "Party": "NDP", "Age": "", "Name": "Sellah, Djaouida", "Gender": "Female"},
+          {"Province": "Quebec", "Party": "Liberal", "Age": 72, "Name": "Cotler, Irwin", "Gender": "Male"},
+
+          {"Province": "Ontario", "Party": "Conservative", "Age": 72, "Name": "Oliver, Joe", "Gender": "Male"},
+          {"Province": "Ontario", "Party": "Conservative", "Age": 71, "Name": "Tilson, David Allan", "Gender": "Male"}
+      ],
+
+        {
+          rows: ["Province"],
+          cols: ["Party","Gender"],
+          aggregator: sum(intFormat)(["Age"])
+
+         });
+
+
+
+      }
+
+
+
   //PRINT*******************************************************
 
   private getElementTag(tag: keyof HTMLElementTagNameMap): string {
@@ -170,6 +230,7 @@ export class StockReportComponent implements OnInit {
       </html>`);
     popupWin.document.close();
   }
+
 
 
 }
