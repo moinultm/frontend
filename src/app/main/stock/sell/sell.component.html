@@ -129,7 +129,7 @@
                   <td>{{ i+1 }}</td>
                   <td>{{result.order_no}}</td>
                   <td>{{result.reference_no}}</td>
-                  <td>{{result.date}}</td>
+                  <td>{{result.date | date:'dd/MMM/yyyy' }}</td>
                   <td>{{result.client_name}}</td>
                   <td>{{result.total}}</td>
                   <td>{{result.paid}}</td>

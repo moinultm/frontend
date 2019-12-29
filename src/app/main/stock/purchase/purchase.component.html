@@ -121,7 +121,7 @@
                         <td>{{item.client_name}}</td>
                         <td>{{item.net_total}}</td>
                         <td>{{item.paid}}</td>
-                        <td>{{item.date}}</td>
+                        <td>{{item.date  | date:'dd/MMM/yyyy'}}</td>
                         <td>
                             <button mat-icon-button color="accent"
                   matTooltip="view details invoice"

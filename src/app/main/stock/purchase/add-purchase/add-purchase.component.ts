@@ -165,7 +165,7 @@ selectedOrderItem: PurchaseItems;
       ] ,
     productMRP: [        orderitem ? orderitem.mrp : '',        [Validators.required]      ] ,
 
-     discountOnMRP: [        orderitem ? orderitem.product_discount_percentage : '',        [Validators.required]      ] ,
+     discountOnMRP: [        orderitem ? orderitem.product_discount_percentage : 0,        [Validators.required]      ] ,
 
     itemDiscountAmt:[ orderitem ? orderitem.product_discount_amount : '', [Validators.required]],
 

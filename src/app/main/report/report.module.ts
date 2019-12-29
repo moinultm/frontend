@@ -126,6 +126,20 @@ const routes: Routes = [
     canActivate: [ AuthGuard],
     component: TotalSellReportComponent
     },
+    { path: 'stock-in-report',
+    canActivate: [ AuthGuard],
+    component: StockInReportComponent
+    },
+
+    { path: 'stock-out-report',
+    canActivate: [ AuthGuard],
+    component: StockOutReportComponent
+    },
+
+    { path: 'monthly-sales-report',
+    canActivate: [ AuthGuard],
+    component: MonthlySalesReportComponent
+    },
 
 ];
 
