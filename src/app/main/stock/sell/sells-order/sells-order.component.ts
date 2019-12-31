@@ -58,7 +58,7 @@ export class SellsOrderComponent implements OnInit {
 
     this.initForm();
     this.fillUser();
-    this.initForm();
+this.fillCustomer();
    }
 
 

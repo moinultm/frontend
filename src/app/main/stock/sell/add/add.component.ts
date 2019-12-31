@@ -126,7 +126,7 @@ export class AddComponent implements OnInit {
     discountOnTotal:['0', [Validators.required]  ],
     shippingCost:['0', [Validators.required]  ],
     grandTotal:['0',[Validators.required]  ],
-
+    direct:['0',[Validators.required]  ],
     user_id:[null, [Validators.required]],
   });
   }
@@ -362,6 +362,9 @@ save(form: any){
   formData.append('discount', this.mainForm.get('discountOnTotal').value);
   formData.append('shipping_cost', this.mainForm.get('shippingCost').value);
   formData.append('discountType', 'flat');
+  formData.append('direct',this.mainForm.get('direct').value);
+
+
   formData.append('sells', JSON.stringify(this.orderItemList));
 
 

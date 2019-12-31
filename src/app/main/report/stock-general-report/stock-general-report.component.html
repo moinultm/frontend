@@ -85,7 +85,7 @@
 
 
 
-           
+
 
 
 
@@ -102,7 +102,7 @@
           </div>
           </div>
 
-                    <h4>Stock Report </h4>
+                    <h4>Stock In-Hand Report, Reprensatative not included need to add </h4>
 
                     <p>From Date: <strong>{{fromDate| date: 'dd/MM/yyyy'}}</strong>  To: <strong>{{toDate |date: 'dd/MM/yyyy'}}</strong> </p>
 
@@ -120,18 +120,13 @@
                     <tr>
                       <th>#</th>
                       <th>Product Name</th>
-                      <th>opening</th>
+                      <th>Opening</th>
                       <th>Stock In</th>
-                      <th *ngFor="let char of data.products">
-                        {{ char.product_discount_percentage }} (%) Qty
-                      </th>
-                      <th *ngFor="let char of data.products">
-                        {{ char.product_discount_percentage }}  (%) Value
-                      </th>
+                      <th>Stock Out</th>
                       <th>Gift</th>
                       <th>Damage</th>
-                      <th>Closing</th>
-                      <th>Total</th>
+                      <th>Closing(In-Hand)</th>
+                      <th>Amount</th>
 
                     </tr>
                   </thead>
@@ -151,21 +146,7 @@
                       <td> {{ P.TRAN_QUANTITY }} </td>
                       <td> {{ P.INWARD_QUANTITY }} </td>
 
-                      <td *ngFor="let char   of data.products">
-                        <span *ngFor=" let cross   of data.crossData">
-                          <div *ngIf="cross.id=== P.STOCK_ITEM_ID &&  cross.product_discount_percentage  ===  char.product_discount_percentage  ">
-                            {{cross.quantity }}
-                          </div>
-                        </span>
-                      </td>
-
-                      <td *ngFor="let char  of data.products">
-                        <span *ngFor=" let cross of data.crossData">
-                          <div *ngIf="cross.id === P.STOCK_ITEM_ID && _CIN(cross.product_discount_percentage) === _CIN(char.product_discount_percentage)">
-                              {{cross.product_discount_amount }}
-                          </div>
-                        </span>
-                      </td>
+                       <td>{{ _CIP(P.OUTWARD_QUANTITY) }}</td>
 
                       <td> {{  _CIP(P.GIFT_QUANTITY) }}</td>
                       <td>  {{  _CIP(P.DAMAGE_QUANTITY) }} </td>
