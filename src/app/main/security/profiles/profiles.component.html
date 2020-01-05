@@ -88,6 +88,7 @@
           </div>
           <!-- /.card-body -->
           <div class="card-footer clearfix">
+            ::Must Login / Logout After Changes::
             <!-- Pagination -->
             <ngb-pagination *ngIf="!loading && data" [collectionSize]="data.count" [pageSize]="size" [page]="data.page"
               (pageChange)="loadData($event)" class="pagination pagination-sm m-0 float-right">

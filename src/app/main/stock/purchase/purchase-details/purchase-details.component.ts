@@ -100,9 +100,21 @@ export class PurchaseDetailsComponent implements OnInit {
         ${styles}
         ${links}
         <style>
+        @media screen {
+          div.divFooter {
+            display: none;
+          }
+        }
+        @media print {
+          div.divFooter {
+            position: fixed;
+            bottom: 0;
+          }
+        }
+
         body
           {
-            padding: 50mm  10mm  10mm 10mm;
+            padding: 5mm  10mm  10mm 10mm;
           }
       </style>
       </head>

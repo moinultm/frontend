@@ -13,7 +13,7 @@ import { DatePipe } from '@angular/common';
 export class SellsListResolver implements Resolve<any> {
 
   page = 1;
-  size = 10;
+  size =25;
 
   //solution for today date
 todayDate=this.datePipe.transform(new Date(), 'yyyy-MM-dd');

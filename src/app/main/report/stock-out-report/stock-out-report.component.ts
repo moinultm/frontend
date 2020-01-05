@@ -69,7 +69,7 @@ export class StockOutReportComponent implements OnInit {
     this.fromDate=formDt;
     this.toDate=toDt;
 
-    this.reportService.stockInReport( {
+    this.reportService.stockOutReport( {
       page: this.page,
       size: this.size,
       from:  formDt,
@@ -89,7 +89,7 @@ export class StockOutReportComponent implements OnInit {
     let formDt ='';
     let toDt = '';
 
-    this.reportService.stockInReport({
+    this.reportService.stockOutReport({
       page: this.page,
       size: this.size,
       from:  formDt,

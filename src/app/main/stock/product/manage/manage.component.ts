@@ -164,6 +164,7 @@ updateValue(){
   })
     .subscribe((data: any) =>   {
       success('Info!', 'Product data updated', this._toastr);
+     
     }, (err: any) => {
       if (err.status === 403) {
         warning('Warning!', err.error.error, this._toastr);

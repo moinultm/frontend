@@ -64,6 +64,11 @@ export class RepresentStockService extends CrudService <RepresentStock> {
   }
 
 
+  public delete(model: any): any {
+    this.options.params = undefined;
+    return this.__http.post <PartialList<RepresentStock>>  (this.url + '/'+   model.id   + '/'+ 'delete' , model, this.options)
+  }
+
 
 
 }

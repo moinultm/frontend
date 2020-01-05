@@ -129,6 +129,7 @@ selectedOrderItem: PurchaseItems;
     this.productService.find()
     .subscribe((res: PartialList<Product>) => {
       this._productList = res.data;
+      //console.log(res.data)
       this.loadingProductList = false;
     });
 

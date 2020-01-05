@@ -10,6 +10,7 @@ import { success, warning, error } from '@app/core/utils/toastr';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '@app/core/services/security/user.service';
 import { User } from '@app/shared/models/security/user.model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-representative',
@@ -26,30 +27,42 @@ export class RepresentativeComponent implements OnInit {
   page = 1;
   size = 10;
 
+  selectedInvoice:RepresentStock;
+  deletingInvoice:boolean;
+
   users:PartialList <User>;
   loadingUser:boolean;
   loadingPermission:boolean;
   currentUserID=0;
   isRoleViewAll:any;
 
+  CanManage:any;
 
   form: FormGroup;
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
 
-  constructor(   public jwtHelper: JwtHelperService, private representService: RepresentStockService,
+  constructor(
+     public jwtHelper: JwtHelperService,
+    private representService: RepresentStockService,
     private _fb: FormBuilder,
     private datePipe : DatePipe,
     private router:Router,
     private _toastr: ToastrService,
-    private userService:UserService
+    private userService:UserService,
+    private modalService: NgbModal
     ) {
       this.currentUserID=parseInt(this.jwtHelper.id());
       this.isRoleViewAll=  this.jwtHelper.hasRole('ROLE_MANAGER_PRIVILEGE');
+      this.CanManage= this.jwtHelper.hasRole('ROLE_SALES_MANAGE');
     }
 
   ngOnInit() {
    // console.log(this.jwtHelper.userRoles());
+   if (this.CanManage)
+   {this.CanManage=true}
+    else{ this.CanManage=false}
+
     if (this.isRoleViewAll)
         {this.loadUser();}
     else{
@@ -111,7 +124,7 @@ export class RepresentativeComponent implements OnInit {
   }
 
 
-updateConformed(ref?){  
+updateConformed(ref?){
 
   this.representService.updateReceiving( {ref:ref} )
     .subscribe((data: any) =>   {
@@ -122,12 +135,42 @@ updateConformed(ref?){
       } else {
         error('Error!', 'An error has occured when updating , please contact system administrator.', this._toastr);
       }
-
     });
-
-
   }
 
+
+
+  initDelete(modal: any, invoice: RepresentStock): void {
+    this.selectedInvoice = invoice;
+    // Open the delete confirmation modal
+    this.modalService
+      .open(modal)
+      .result
+      .then((result) => {
+        if (result) {
+          this.loadData(this.currentUserID);
+        }
+        this.selectedInvoice = new RepresentStock();
+      }, () => {
+        // If the modal is dismissed
+        this.selectedInvoice = new RepresentStock();
+      });
+  }
+
+  delete(modal: any): void {
+    this.deletingInvoice = true;
+    this.representService.delete({
+      id: this.selectedInvoice.id
+    }).subscribe(() => {
+      this.close(modal, true);
+      this.deletingInvoice = false;
+    });
+  }
+
+
+  close(modal: any, flag?: boolean): void {
+    modal.close(flag ? true : false);
+  }
 
 
 }

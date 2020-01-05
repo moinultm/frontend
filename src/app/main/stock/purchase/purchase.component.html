@@ -91,6 +91,7 @@
                     <thead>
                       <tr>
                         <th style="width: 10px">#</th>
+                        <th>Transaction No</th>
                         <th>Invoice No</th>
                         <th>Party Name</th>
                         <th>Total</th>
@@ -117,6 +118,7 @@
                           <ng-container *ngIf="!loading">
                         <tr *ngFor="let item of data.data; let i = index">
                         <td>{{ i+1 }}</td>
+                        <td>{{item.id}}</td>
                         <td>{{item.reference_no}}</td>
                         <td>{{item.client_name}}</td>
                         <td>{{item.net_total}}</td>
@@ -133,7 +135,8 @@
                   (click)="refereToEditInvoice(result.id)">
                       <mat-icon>edit</mat-icon>
                   </button-->
-                  <button mat-icon-button color="accent" matTooltip="Delete invoice">
+
+                  <button *ngIf="isRoleViewAll" mat-icon-button color="accent" matTooltip="Delete invoice" (click)="initDelete(deleteModal, item)">
                     	<mat-icon>restore_from_trash</mat-icon>
                     </button>
 
@@ -148,6 +151,8 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
+                  ::Account with (ROLE_PURCHASE_MANAGE) Can Delete Invoices::
+
                 <!-- Pagination -->
                 <ngb-pagination *ngIf="!loading && data" [collectionSize]="data.count" [pageSize]="size"
                 [page]="data.page" (pageChange)="loadData($event)" class="pagination pagination-sm m-0 float-right">
@@ -155,7 +160,6 @@
               <!-- ./Pagination -->
                 </div>
               </div>
-
                  <!--Card-->
             </div>
 
@@ -165,3 +169,32 @@
 
   </div>
   <!-- Content Wrapper. Contains page content -->
+
+
+  <!--  delete confirmation modal -->
+<ng-template #deleteModal let-modal>
+
+  <!-- Modal header -->
+  <div class="modal-header">
+    <h4 class="modal-title">Delete Item</h4>
+    <button type="button" class="close" aria-label="Close" (click)="close(modal)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <!-- ./Modal header -->
+
+  <!-- Modal body -->
+  <div class="modal-body">
+    <p>Are you sure you want to delete this item?</p>
+  </div>
+  <!-- ./Modal body -->
+
+  <!-- Modal footer -->
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-danger" [disabled]="deletingItem" (click)="delete(modal)">Delete</button>
+  </div>
+  <!-- ./Modal footer -->
+
+</ng-template>
+<!-- ./ delete confirmation modal -->
+

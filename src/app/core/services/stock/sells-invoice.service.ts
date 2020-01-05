@@ -43,6 +43,10 @@ export class SellsInvoiceService extends CrudService<SellsInvoice> {
   }
 
 
+  public delete(model: any): any {
+    this.options.params = undefined;
+    return this.__http.post <PartialList<SellsInvoice>>  (this.url + '/'+   model.id   + '/'+ 'delete' , model, this.options)
+  }
 
 
   public findOrderById(id: number): any {

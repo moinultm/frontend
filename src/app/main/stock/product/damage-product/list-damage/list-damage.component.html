@@ -25,7 +25,7 @@
                     <div class="card-header">
                       <h3 class="card-title">Bordered Table</h3>
                       <div class="card-tools">
-                        <a *ngIf="!loadingPermission" href="#" [routerLink]="['/damage-product-report']" class="nav-link d-inline"
+                        <a href="#" [routerLink]="['/damage-product-report']" class="nav-link d-inline"
                         [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
                         <span class="badge">View Report</span></a>
                       </div>
@@ -64,7 +64,7 @@
 
                                         <div class="btn-group">
                                             <!--button type="button" class="btn btn-default" (click)="initSave(saveModal, item)"><i class="fa fa-pencil"></i></button-->
-                                            <button type="button" class="btn btn-default" (click)="initDelete(deleteModal, item)"><i class="fa fa-trash"></i></button>
+                                            <!--button type="button" class="btn btn-default" (click)="initDelete(deleteModal, item)"><i class="fa fa-trash"></i></!--button-->
                                           </div>
 
                                   </td>

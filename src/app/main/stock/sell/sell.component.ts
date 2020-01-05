@@ -11,6 +11,8 @@ import { UserService } from '@app/core/services/security/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { JwtHelperService } from '@app/core/services/security/jwt-helper.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -36,6 +38,9 @@ export class SellComponent implements OnInit {
   page = 1;
   size = 10;
 
+  selectedInvoice: SellsInvoice;
+  deletingInvoice:boolean;
+
   form: FormGroup;
 
   //dataSource: TablesDataSource;
@@ -48,14 +53,29 @@ export class SellComponent implements OnInit {
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
 
+  loadingPermission:boolean;
+  currentUserID=0;
+  isRoleViewAll:any;
+
   constructor(
     private sellsService:SellsInvoiceService,
     private router:Router,
     private _fb: FormBuilder,private datePipe : DatePipe,
-    private actRoute: ActivatedRoute
-  ) { }
+    private actRoute: ActivatedRoute,
+    public jwtHelper: JwtHelperService,
+    private modalService: NgbModal,
+  ) {
+    this.currentUserID=parseInt(this.jwtHelper.id());
+    this.isRoleViewAll=  this.jwtHelper.hasRole('ROLE_SALES_MANAGE');
+   }
 
   ngOnInit() {
+
+    if (this.isRoleViewAll)
+    {this.isRoleViewAll=true}
+    else
+    {this.isRoleViewAll=false}
+
     this.iniForm();
    // this.loadData();
    this.fillList();
@@ -158,8 +178,41 @@ ngAfterViewInit(){
         this.loading = false;
        // console.log('error',err);
       });
-
-
     });
 }
+
+
+initDelete(modal: any, invoice: SellsInvoice): void {
+  this.selectedInvoice = invoice;
+  // Open the delete confirmation modal
+  this.modalService
+    .open(modal)
+    .result
+    .then((result) => {
+      if (result) {
+        this.loadData();
+      }
+      this.selectedInvoice = new SellsInvoice();
+    }, () => {
+      // If the modal is dismissed
+      this.selectedInvoice = new SellsInvoice();
+    });
+}
+
+delete(modal: any): void {
+  this.deletingInvoice = true;
+  this.sellsService.delete({
+    id: this.selectedInvoice.id
+  }).subscribe(() => {
+    this.close(modal, true);
+    this.deletingInvoice = false;
+  });
+}
+
+
+close(modal: any, flag?: boolean): void {
+  modal.close(flag ? true : false);
+}
+
+
 }

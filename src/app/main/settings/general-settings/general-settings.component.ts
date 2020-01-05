@@ -116,6 +116,7 @@ lteActivity:Array<Object>=
       this.invoicePreview = environment.uploads_url + 'site/' + this.selectedSetup.invoice_header ;
     }
 
+    
     this.form = this._formBuilder.group({
       site_name: [settings ? settings.site_name : '', [Validators.required, Validators.maxLength(255)] ],
       slogan: [settings ? settings.slogan : '', [Validators.nullValidator ]],

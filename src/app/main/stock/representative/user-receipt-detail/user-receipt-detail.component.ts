@@ -64,7 +64,7 @@ export class UserReceiptDetailComponent implements OnInit {
         <style>
         body
           {
-            padding: 50mm  10mm  10mm 10mm;
+            padding: 5mm  10mm  10mm 10mm;
           }
       </style>
       </head>

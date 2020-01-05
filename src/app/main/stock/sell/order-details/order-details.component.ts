@@ -109,7 +109,7 @@ export class OrderDetailsComponent implements OnInit {
         <style>
         body
           {
-            padding: 50mm  10mm  10mm 10mm;
+            padding: 1mm  10mm  10mm 10mm;
           }
       </style>
       </head>

@@ -40,7 +40,7 @@ export class SellDetailsComponent implements OnInit {
     this.loadingDetails = true;
     this.sellsService.findDetailsById(id).subscribe((res:PartialList <SellsInvoice>) => {
       this.details = res;
-       //console.log(res);
+        console.log(res);
       this.loadingDetails = false;
     });
   }
@@ -102,9 +102,22 @@ export class SellDetailsComponent implements OnInit {
         ${styles}
         ${links}
         <style>
+        
+        @media screen {
+          div.divFooter {
+            display: none;
+          }
+        }
+        @media print {
+          div.divFooter {
+            position: fixed;
+            bottom: 0;
+          }
+        }
+
         body
           {
-            padding: 50mm  10mm  10mm 10mm;
+            padding:1mm  10mm  10mm 10mm;
           }
       </style>
       </head>

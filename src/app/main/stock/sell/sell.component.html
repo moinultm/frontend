@@ -140,15 +140,15 @@
                      (click)="toDetails(result.id)">
                       <mat-icon class="mat-18">flip_to_front</mat-icon>
                     </button>
-                    <button mat-icon-button color="accent" matTooltip="Return Items"
+                    <!--button mat-icon-button color="accent" matTooltip="Return Items"
                      (click)="refereToReturnSell(result.id)">
                         <mat-icon>refresh</mat-icon>
-                    </button>
-                    <button mat-icon-button color="accent" matTooltip="Edit invoice"
+                    </!--button-->
+                    <!--button mat-icon-button color="accent" matTooltip="Edit invoice"
                     (click)="refereToEditInvoice(result.id)">
                         <mat-icon>edit</mat-icon>
-                    </button>
-                    <button mat-icon-button color="accent" matTooltip="Delete invoice">
+                    </!--button-->
+                    <button  *ngIf="isRoleViewAll" mat-icon-button color="accent" matTooltip="Delete invoice" (click)="initDelete(deleteModal, result)">
                         <mat-icon>restore_from_trash</mat-icon>
                       </button>
                     </td>
@@ -163,6 +163,7 @@
           </div>
           <!-- /.card-body -->
           <div class="card-footer clearfix">
+            ::Account with (ROLE_SALES_MANAGE) Can Delete Invoices::
 
               <div class="row">
                 <div class="col-sm-12 col-md-5">
@@ -170,7 +171,7 @@
                 </div>
 
                 <div class="col-sm-12 col-md-7">
-     <ngb-pagination *ngIf="!loading && data" [collectionSize]="data.count" [pageSize]="size"
+         <ngb-pagination *ngIf="!loading && data" [collectionSize]="data.count" [pageSize]="size"
               [page]="data.page" (pageChange)="loadData($event)" class="pagination pagination-sm m-0 float-right">
             </ngb-pagination>
 </div>
@@ -308,5 +309,35 @@
   </section>
 
 </div>
+
+
+  <!--  delete confirmation modal -->
+  <ng-template #deleteModal let-modal>
+
+    <!-- Modal header -->
+    <div class="modal-header">
+      <h4 class="modal-title">Delete Item</h4>
+      <button type="button" class="close" aria-label="Close" (click)="close(modal)">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <!-- ./Modal header -->
+
+    <!-- Modal body -->
+    <div class="modal-body">
+      <p>Are you sure you want to delete this item?</p>
+    </div>
+    <!-- ./Modal body -->
+
+    <!-- Modal footer -->
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-danger" [disabled]="deletingItem" (click)="delete(modal)">Delete</button>
+    </div>
+    <!-- ./Modal footer -->
+
+  </ng-template>
+  <!-- ./ delete confirmation modal -->
+
+
 <!-- Content Wrapper. Contains page content -->
  <!-- https://www.angularjswiki.com/angular/angular-material-icons-list-mat-icon-list/-->
