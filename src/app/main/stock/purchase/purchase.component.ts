@@ -23,10 +23,12 @@ export class PurchaseComponent implements OnInit {
   isSearching:boolean;
   data: any;
   loading: boolean;
-  
+
   savingSupplier: boolean;
   deletingSupplier: boolean;
   deletingInvoice:boolean;
+
+  deletingItem:boolean;
 
   page = 1;
   size = 10;

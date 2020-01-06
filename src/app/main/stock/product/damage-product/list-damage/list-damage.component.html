@@ -64,7 +64,7 @@
 
                                         <div class="btn-group">
                                             <!--button type="button" class="btn btn-default" (click)="initSave(saveModal, item)"><i class="fa fa-pencil"></i></button-->
-                                            <!--button type="button" class="btn btn-default" (click)="initDelete(deleteModal, item)"><i class="fa fa-trash"></i></!--button-->
+                                            <button type="button" *ngIf="CanManage" class="btn btn-default" (click)="initDelete(deleteModal, item)"><i class="fa fa-trash"></i></button>
                                           </div>
 
                                   </td>
@@ -77,6 +77,8 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer clearfix">
+                      ::Account with (ROLE_PRODUCT_MANAGE) Can Delete Invoices::
+
                         <ngb-pagination *ngIf="!loading && data" [collectionSize]="data.count" [pageSize]="size"
                         [page]="data.page" (pageChange)="loadData($event)" class="pagination pagination-sm m-0 float-right">
                       </ngb-pagination>

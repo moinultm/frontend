@@ -6,6 +6,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Title } from '@angular/platform-browser';
 import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { Damage } from '@app/shared/models/stock/damage.model';
+import { JwtHelperService } from '@app/core/services/security/jwt-helper.service';
+import { Gift } from '@app/shared/models/stock/gift.model';
 
 @Component({
   selector: 'app-list-gift',
@@ -16,27 +18,34 @@ export class ListGiftComponent implements OnInit {
   data:any;
   loading:boolean;
 
+  selectedInvoice:Gift;
 
+  deletingInvoice:boolean;
   savingCategory: boolean;
   deletingCategory: boolean;
   page = 1;
   size = 10;
   form: FormGroup;
   //selectedCategory: Category;
-
+  CanManage:any;
 
   constructor(
     private giftService: GiftService,
     private _toastr: ToastrService,
     private modalService: NgbModal,
     titleService: Title,
-    private _formBuilder: FormBuilder) {
-
+    private _formBuilder: FormBuilder,
+    public jwtHelper: JwtHelperService) {
       titleService.setTitle('Stock - GIFT List');
+      this.CanManage= this.jwtHelper.hasRole('ROLE_PRODUCT_MANAGE');
 
      }
 
   ngOnInit() {
+    if (this.CanManage)
+    {this.CanManage=true}
+     else{ this.CanManage=false}
+
     this.loadData();
   }
 
@@ -51,6 +60,39 @@ export class ListGiftComponent implements OnInit {
       this.data = res;
       this.loading = false;
     });
+  }
+
+
+  initDelete(modal: any, invoice: Gift): void {
+    this.selectedInvoice = invoice;
+    // Open the delete confirmation modal
+    this.modalService
+      .open(modal)
+      .result
+      .then((result) => {
+        if (result) {
+          this.loadData();
+        }
+        this.selectedInvoice = new Gift();
+      }, () => {
+        // If the modal is dismissed
+        this.selectedInvoice = new Gift();
+      });
+  }
+
+  delete(modal: any): void {
+    this.deletingInvoice = true;
+    this.giftService.delete({
+      id: this.selectedInvoice.id
+    }).subscribe(() => {
+      this.close(modal, true);
+      this.deletingInvoice = false;
+    });
+  }
+
+
+  close(modal: any, flag?: boolean): void {
+    modal.close(flag ? true : false);
   }
 
 }

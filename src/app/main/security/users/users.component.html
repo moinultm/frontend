@@ -65,13 +65,13 @@
 
                   <tr *ngIf="!loading && data && !data.data.length">
                     <td colspan="6" class="text-center loading-data">
-                      No roles created yet!
+                      No data created yet!
                     </td>
                   </tr>
 
                   <ng-container *ngIf="!loading">
                     <tr *ngFor="let item of data.data; let i = index">
-                      <td>{{ i+1 }}</td>
+                      <td>{{ item.id }}</td>
                       <td>{{ item.name }}</td>
                       <td>{{ item.email }}</td>
                       <td>{{ item.profiles.length }}</td>

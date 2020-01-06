@@ -6,6 +6,7 @@ import { Title } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { DamageService } from '@app/core/services/stock/damage.service';
+import { JwtHelperService } from '@app/core/services/security/jwt-helper.service';
 
 @Component({
   selector: 'app-list-damage',
@@ -13,6 +14,9 @@ import { DamageService } from '@app/core/services/stock/damage.service';
   styleUrls: ['./list-damage.component.scss']
 })
 export class ListDamageComponent implements OnInit {
+
+  selectedInvoice:Damage;
+  deletingInvoice:boolean;
 
   data: PartialList<Damage>;
   loading: boolean;
@@ -22,20 +26,24 @@ export class ListDamageComponent implements OnInit {
   size = 10;
   form: FormGroup;
   //selectedCategory: Category;
-
+  CanManage:any;
 
   constructor(
     private damageService: DamageService,
     private _toastr: ToastrService,
     private modalService: NgbModal,
     titleService: Title,
-    private _formBuilder: FormBuilder) {
-
+    private _formBuilder: FormBuilder,
+    public jwtHelper: JwtHelperService) {
+      this.CanManage= this.jwtHelper.hasRole('ROLE_PRODUCT_MANAGE');
       titleService.setTitle('Stock - Damage List');
 
      }
 
   ngOnInit() {
+    if (this.CanManage)
+    {this.CanManage=true}
+     else{ this.CanManage=false}
     this.loadData();
   }
 
@@ -52,5 +60,38 @@ export class ListDamageComponent implements OnInit {
     });
   }
 
+
+
+  initDelete(modal: any, invoice: Damage): void {
+    this.selectedInvoice = invoice;
+    // Open the delete confirmation modal
+    this.modalService
+      .open(modal)
+      .result
+      .then((result) => {
+        if (result) {
+          this.loadData();
+        }
+        this.selectedInvoice = new Damage();
+      }, () => {
+        // If the modal is dismissed
+        this.selectedInvoice = new Damage();
+      });
+  }
+
+  delete(modal: any): void {
+    this.deletingInvoice = true;
+    this.damageService.delete({
+      id: this.selectedInvoice.id
+    }).subscribe(() => {
+      this.close(modal, true);
+      this.deletingInvoice = false;
+    });
+  }
+
+
+  close(modal: any, flag?: boolean): void {
+    modal.close(flag ? true : false);
+  }
 
 }

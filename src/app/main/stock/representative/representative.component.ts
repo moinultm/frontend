@@ -38,6 +38,7 @@ export class RepresentativeComponent implements OnInit {
 
   CanManage:any;
 
+  deletingItem:boolean;
   form: FormGroup;
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());

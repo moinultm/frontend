@@ -23,5 +23,10 @@ export class DamageService extends CrudService <Product> {
   }
 
 
+  public delete(model: any): any {
+    this.options.params = undefined;
+    return this.__http.post <any>  (this.url + '/'+   model.id   + '/'+ 'delete' , model, this.options)
+  }
+
 
 }

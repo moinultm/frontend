@@ -56,6 +56,7 @@ export class SellComponent implements OnInit {
   loadingPermission:boolean;
   currentUserID=0;
   isRoleViewAll:any;
+  deletingItem:boolean;
 
   constructor(
     private sellsService:SellsInvoiceService,
