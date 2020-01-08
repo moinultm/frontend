@@ -7,6 +7,7 @@ export class Product {
     category_id:number;
     subcategory_id:number;
     quantity:number;
+    general_quantity:number;
     details:number;
     cost_price:number;
     mrp:number;

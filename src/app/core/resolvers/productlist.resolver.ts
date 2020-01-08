@@ -13,7 +13,7 @@ import { DatePipe } from '@angular/common';
 export class ProductListResolver implements Resolve<any> {
 
   page = 1;
-  size = 50;
+  size = 100;
 
   date = new FormControl(new Date());
 

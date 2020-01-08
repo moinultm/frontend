@@ -51,6 +51,7 @@
             <div class="card-body">
 
                 <div class="row mb-3">
+
                  <div class="col-md-3">
 
                 <div class="input-group input-group-sm" *ngIf="!loadingPermission">
@@ -62,11 +63,15 @@
                         {{list.id}} :: {{list.name}}
                       </option>
                     </select>
+
+                    <button type="button" *ngIf="!loadingPermission" class="btn btn-primary float-left" (click)="loadData(0)">All Find</button>
+
                   </span>
 
-                </div>
 
                 </div>
+
+                  </div>
                 </div>
 
                 <!--form [formGroup]="form">

@@ -44,36 +44,41 @@ export class UserReceiptDetailComponent implements OnInit {
   }
 
 
+
+  printNew(){
+
+  }
+
   print(printSectionId): void {
-    event.preventDefault()
-  let printContents, popupWin, styles = "", links = '';
+    event.preventDefault();
+
+    let printContents, popupWin, styles = "", links = '';
 
     styles = this.getElementTag('style');
     links = this.getElementTag('link');
 
 
-  printContents = document.getElementById(printSectionId).innerHTML;
-  popupWin = window.open("", "_blank", "top=0,left=0,height=auto,width=auto");
-  popupWin.document.open();
-  popupWin.document.write(`
-    <html>
-      <head>
-        <title>Report</title>
+    printContents = document.getElementById(printSectionId).innerHTML;
+    popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    popupWin.document.open();
+    popupWin.document.write(`
+      <html>
+        <head>
         ${styles}
         ${links}
-        <style>
-        body
-          {
-            padding: 5mm  10mm  10mm 10mm;
-          }
-      </style>
-      </head>
-      <body onload="window.print(); setTimeout(()=>{ window.close(); }, 0)">
-        ${printContents}
-      </body>
-    </html>`);
-  popupWin.document.close();
+          <title>Print Challan</title>
+          <style>
+        
+          </style>
+        </head>
+    <body onload="window.print();window.close()">${printContents}</body>
+      </html>`
+    );
+    popupWin.document.close();
+
 }
+
+
 
 
 

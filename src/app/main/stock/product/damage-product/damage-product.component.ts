@@ -108,6 +108,7 @@ export class DamageProductComponent implements OnInit {
       bill_date: [new Date(), [Validators.required]],
       user_id:[null,Validators.required],
       customer_id:[null,Validators.nullValidator],
+      notes:[null,Validators.nullValidator],
       companies: this._formBuilder.array([])
     });
 
@@ -149,7 +150,7 @@ export class DamageProductComponent implements OnInit {
     else {
 
       arrayControl.at(index).patchValue({
-        stock_quantity: this._productList[ctrl.selectedIndex - 1].quantity,
+        stock_quantity: this._productList[ctrl.selectedIndex - 1].general_quantity,
         mrp: this._productList[ctrl.selectedIndex - 1].mrp,
         cost_price: this._productList[ctrl.selectedIndex - 1].cost_price
       });
@@ -171,6 +172,7 @@ export class DamageProductComponent implements OnInit {
     formData.append('user_id', this.myForm.get('user_id').value);
     formData.append('customer', this.myForm.get('customer_id').value);
     formData.append('date', formDt);
+    formData.append('notes', this.myForm.get('notes').value);
     formData.append('items', JSON.stringify(this.myForm.get('companies').value));
 
     this.__damageService.save(formData, false).subscribe((res: Damage) => {

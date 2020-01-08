@@ -70,18 +70,13 @@
               </div>
               <div class="col-md-4">
                   <div class="form-group">
-                      <label>To Customer</label>
+                      <label>Notes</label>
 
                       <div class="input-group">
                           <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fas fa-user-tag"></i></span>
                           </div>
-                          <select class="form-control" formControlName="customer_id">
-                              <option [value]="null">Select Customer</option>
-                            <option *ngFor="let list of customerList" [value]="list.id">
-                              {{list.full_name}} {{list.client_code}}
-                            </option>
-                          </select>
+                          <input type="text" class="form-control" formControlName="notes">
                         </div>
                     </div>
               </div>

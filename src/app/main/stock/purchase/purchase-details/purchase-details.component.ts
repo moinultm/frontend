@@ -85,7 +85,6 @@ export class PurchaseDetailsComponent implements OnInit {
   let printContents, popupWin, styles = "", links = '';
 
 
-
     styles = this.getElementTag('style');
     links = this.getElementTag('link');
 
@@ -100,22 +99,7 @@ export class PurchaseDetailsComponent implements OnInit {
         ${styles}
         ${links}
         <style>
-        @media screen {
-          div.divFooter {
-            display: none;
-          }
-        }
-        @media print {
-          div.divFooter {
-            position: fixed;
-            bottom: 0;
-          }
-        }
 
-        body
-          {
-            padding: 5mm  10mm  10mm 10mm;
-          }
       </style>
       </head>
       <body onload="window.print(); setTimeout(()=>{ window.close(); }, 0)">

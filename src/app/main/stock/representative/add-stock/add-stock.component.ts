@@ -56,7 +56,7 @@ export class AddStockComponent implements OnInit {
     this.actRoute.data.subscribe(data => {
       this._productList=data.ProductListResolver.data;
       this.loading = false;
-     // console.log(data.ProductListResolver.data)
+      console.log(data.ProductListResolver.data)
     });
   }
 
@@ -135,7 +135,7 @@ get employees(): FormArray {
     else {
 
    arrayControl.at(index).patchValue({
-   quantity:this._productList[ctrl.selectedIndex - 1].quantity,
+   quantity:this._productList[ctrl.selectedIndex - 1].general_quantity,
    mrp:this._productList[ctrl.selectedIndex - 1].mrp
   });
     }
