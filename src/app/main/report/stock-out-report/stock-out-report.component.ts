@@ -76,7 +76,7 @@ export class StockOutReportComponent implements OnInit {
       to:   toDt
     }).subscribe((res: PartialList<StockGeneral>) => {
       this.data = res;
-     console.log( this.data);
+     //console.log( this.data);
       this.loading = false;
     });
   }
@@ -96,7 +96,7 @@ export class StockOutReportComponent implements OnInit {
       to:   toDt
     }).subscribe((res: PartialList<StockGeneral>) => {
       this.data = res;
-    console.log( this.data);
+    //console.log( this.data);
       this.loading = false;
     });
   }

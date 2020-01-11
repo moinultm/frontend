@@ -19,6 +19,8 @@ export class ChallanProductReportComponent implements OnInit {
 
   userName:string;
   userID:null;
+  userIDSelected:number;
+
   userAddress:string;
 
   data:any;
@@ -38,8 +40,11 @@ export class ChallanProductReportComponent implements OnInit {
 
   users:Array <User>;
 
+  currentUserID=0;
   user:number;
-
+  isRoleViewAll:any;
+  CanManage:any;
+  loadingPermission:boolean;
 
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
@@ -48,12 +53,21 @@ export class ChallanProductReportComponent implements OnInit {
     private datePipe : DatePipe,
     private reportService:ProductReportService,
     private userService:UserService,
-    public jwtHelper: JwtHelperService) { }
+    public jwtHelper: JwtHelperService,) {
+      this.currentUserID=parseInt(this.jwtHelper.id());
+      this.isRoleViewAll=  this.jwtHelper.hasRole('ROLE_MANAGER_PRIVILEGE');
+     }
 
   ngOnInit() {
     this.user=parseInt (this.jwtHelper.id());
      this.loadData(this.user);
-   this.loadUser();
+
+     if (this.isRoleViewAll)
+     {this.loadUser();}
+    else{
+    this.loadingPermission=true;}
+
+  this.loadUser();
     this.iniForm();
   }
 
@@ -66,7 +80,6 @@ export class ChallanProductReportComponent implements OnInit {
        this.loadingUser = false;
     });
   }
-
 
 
   loadData(id:number,page?: number): void {
@@ -88,13 +101,22 @@ export class ChallanProductReportComponent implements OnInit {
     });
   }
 
-  dateFilter(  page?: number): void {
+  dateFilter(uid?:number,  page?: number): void {
     this.page = page ? page : 1;
     this.loading = true;
     let formDt = this.datePipe.transform(this.form.get('fromDate').value, 'yyyy-MM-dd');
     let toDt = this.datePipe.transform(this.form.get('toDate').value, 'yyyy-MM-dd');
+    let id;
 
-    let id=this.form.get('userId').value;
+    //console.log(uid);
+
+    if (!uid){
+      id=this.form.get('userId').value;
+    }
+    else{
+      id=uid;
+    }
+
 
     this.fromDate=formDt;
     this.toDate=toDt;
@@ -117,7 +139,7 @@ export class ChallanProductReportComponent implements OnInit {
     this.form = this._fb.group({
       fromDate: [  new Date(),  [Validators.required],],
       toDate: [  new Date(),  [Validators.required],],
-      userId:[ null,  [Validators.required]]
+      userId:[   this.user,  [Validators.required]]
     });
   }
 
@@ -131,6 +153,7 @@ export class ChallanProductReportComponent implements OnInit {
 
   updateUser(ctrl) {
  if (ctrl.selectedIndex - 1 >= 0){
+  this.userIDSelected= this.users[ctrl.selectedIndex - 1].id,
   this.userName= this.users[ctrl.selectedIndex - 1].name,
   this.userAddress= this.users[ctrl.selectedIndex - 1].address
  }

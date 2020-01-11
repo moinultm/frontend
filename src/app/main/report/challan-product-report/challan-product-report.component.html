@@ -58,21 +58,20 @@
                               </mat-form-field>
                             </div>
                             <div class="col-md-3 my-auto">
-                              <div class="input-group">
-
-                                <button type="button" class="btn btn-tool text-primary" data-card-widget="collapse" [disabled]="form.invalid" (click)="dateFilter()">
-                                  <i class="fas fa-search"></i>
+                                <button type="button" class="btn btn-info float-left" data-card-widget="collapse"   (click)="dateFilter()">
+                                 Search Date
                                 </button>
 
-                              </div>
+                                <button type="button"  *ngIf="!loadingPermission" class="btn btn-default float-right" data-card-widget="collapse"   (click)="dateFilter('0')">
+                                  All
+                                 </button>
                             </div>
 
-
-                              <div class="col-md-3 my-auto">
+                              <div class="col-md-3 my-auto" *ngIf="!loadingPermission">
                                 <div class="input-group" *ngIf="!loadingUser">
                                   <select class="form-control" formControlName="userId" (change)="updateUser($event.target)">
-                                    <option value="null">--Select User--</option>
-                                    <option *ngFor="let list of users" [value]="list.id">
+                                    <option value="0">--Selected User--</option>
+                                      <option *ngFor="let list of users" [value]="list.id">
                                       {{list.id}} :: {{list.name}}
                                     </option>
                                   </select>
@@ -81,8 +80,13 @@
                                     <input type="button" name="search" id="search" value="Search" (click)="dateFilter()" class="btn  btn-primary"
                                       [disabled]="form.invalid">
                                      </span>
+
+
+
                                 </div>
                               </div>
+
+
                         </div>
 
 
@@ -108,7 +112,7 @@
         </div>
 
                     <h4>Challan Report</h4>
-                    <p>Name:{{userName}}, Address:{{userAddress}}</p>
+                    <p>Name:{{userName}}, ID: {{userIDSelected}}, Address:{{userAddress}}</p>
                        <p>From Date: <strong>{{fromDate| date: 'dd/MM/yyyy'}}</strong>  To: <strong>{{toDate |date: 'dd/MM/yyyy'}}</strong> </p>
 
             <div class="table-responsive ">
@@ -120,7 +124,7 @@
                           <tr>
                             <th>#</th>
                             <th>Name</th>
-                            <th>Challan</th>
+                            <th style="width: 80px;">Challan</th>
                             <th *ngFor="let product of data.products">
                               {{ product.name }}
                             </th>
@@ -130,18 +134,18 @@
                         <tbody>
                           <tr *ngFor="let user of data.users; let i = index">
                             <td>{{ i+1 }}</td>
-                            <td>{{ user.name }}</td>
-                            <td>{{ user.ref_no }}</td>
+                            <td>{{ user.user_name }}</td>
+                            <td>{{ user.reference_no }}</td>
 
                             <td *ngFor="let product of data.products">
                               <span *ngFor=" let cross of data.crossData">
-                                <div *ngIf="cross.REF_NO === user.ref_no && cross.STOCK_ITEM_ID === product.id">
+                                <div *ngIf="cross.REF_NO === user.reference_no && cross.STOCK_ITEM_ID === product.id">
                                   {{  _CIN(cross.TRAN_QUANTITY)   }}
                                 </div>
                               </span>
                             </td>
 
-                            <td>200</td>
+                            <td>  {{  _CIN(user.total_quantity_challan)   }}</td>
                           </tr>
                         </tbody>
                       </table>
@@ -155,7 +159,11 @@
 
         </div>
         <!-- /.card-body -->
+        <div class="card-footer clearfix">
+         <p>::Account with (   ROLE_MANAGER_PRIVILEGE) Can view All::</p>
+          </div>
       </div>
+
 
 </div>
       </div>

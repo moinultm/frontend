@@ -41,6 +41,8 @@ export class PurchaseComponent implements OnInit {
   loadingPermission:boolean;
   currentUserID=0;
   isRoleViewAll:any;
+  CanManage:any;
+
 
   constructor(
     private purchaseService: PurchaseOrderService,

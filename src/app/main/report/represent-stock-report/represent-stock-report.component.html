@@ -30,7 +30,7 @@
             <div class="card-header">
               <div class="row">
                 <div class="col-md-6">
-                    <h3 class="card-title">Report Table</h3>
+                    <h3 class="card-title">Report Table / Mr.  : {{ jwtHelper.name() }}</h3>
                 </div>
 
                 <div class="col-md-6 text-right">
@@ -76,7 +76,8 @@
                                 <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
                                 <mat-datepicker #pickerTo></mat-datepicker>
                               </mat-form-field></div>
-                            <div class="col-md-4 my-auto">      <div class="input-group" *ngIf="!loadingUser">
+                            <div class="col-md-4 my-auto" *ngIf="!loadingPermission">
+                              <div class="input-group" *ngIf="!loadingUser">
                                 <select class="form-control" formControlName="userId" (change)="updateUser($event.target)">
                                   <option value="null">--Select User--</option>
                                   <option *ngFor="let list of users" [value]="list.id">
@@ -88,6 +89,9 @@
                                   <input type="button" name="search" id="search" value="Search" (click)="dateFilter()" class="btn  btn-primary"
                                     [disabled]="form.invalid">
                                    </span>
+
+                                   <button type="button" *ngIf="!loadingPermission" class="btn btn-primary float-left" (click)="loadData(0)">All Find</button>
+
                               </div>
 
                             </div>
@@ -219,7 +223,7 @@
 
 
             <div class="card-footer clearfix">
-
+           ::ROLE_MANAGER_PRIVILEGE is allowed to sell all user
 
               <!--Card body-->
 

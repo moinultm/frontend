@@ -8,6 +8,9 @@ import { ToastrService } from 'ngx-toastr';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { Router, ActivatedRoute } from '@angular/router';
 import { success, warning, error } from '@app/core/utils/toastr';
+import { JwtHelperService } from '@app/core/services/security/jwt-helper.service';
+
+import { constants } from '@env/constants';
 
 @Component({
   selector: 'app-manage',
@@ -34,6 +37,12 @@ export class ManageComponent implements OnInit {
 
   myUpdateForm: FormGroup;
 
+  loadingPermission:boolean;
+  currentUserID=0;
+  isRoleViewAll:any;
+
+  CanManage:any;
+
   //https://stackoverflow.com/questions/45467550/angular-2-how-to-sum-column-ngfor
 
   constructor(private productService: ProductService,
@@ -43,10 +52,18 @@ export class ManageComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private router:Router,
     private _fb: FormBuilder,
-    private actRoute: ActivatedRoute
-    ) { }
+    private actRoute: ActivatedRoute, public jwtHelper: JwtHelperService
+    ) {
+      this.currentUserID=parseInt(this.jwtHelper.id());
+      this.CanManage= this.jwtHelper.hasRole('ROLE_PRODUCT_MANAGE');
+      titleService.setTitle(constants.app_name + ' - Product - Management');
+      }
 
   ngOnInit() {
+    if (this.CanManage)
+    {this.CanManage=true}
+     else{ this.CanManage=false}
+
     //this.loadData();
     this.fillList();
   }
@@ -164,7 +181,7 @@ updateValue(){
   })
     .subscribe((data: any) =>   {
       success('Info!', 'Product data updated', this._toastr);
-     
+
     }, (err: any) => {
       if (err.status === 403) {
         warning('Warning!', err.error.error, this._toastr);

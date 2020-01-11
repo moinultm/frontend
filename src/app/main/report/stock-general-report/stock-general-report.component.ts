@@ -66,7 +66,7 @@ export class StockGeneralReportComponent implements OnInit{
         to:   toDt
       }).subscribe((res:any) => {
         this.data = res;
-       // console.log( this.data);
+      console.log( this.data);
         this.loading = false;
       });
     }
@@ -86,7 +86,7 @@ export class StockGeneralReportComponent implements OnInit{
         to:   toDt
       }).subscribe((res: PartialList<StockGeneral>) => {
         this.data = res;
-       // console.log( this.data);
+       console.log( this.data);
         this.loading = false;
       });
     }
@@ -155,6 +155,17 @@ private getElementTag(tag: keyof HTMLElementTagNameMap): string {
   popupWin.document.close();
 }
 
+
+
+
+ private getTotal(){
+  var total = 0;
+  for(var i = 0; i < this.data.product.length; i++){
+      var product = this.data.product[i];
+      total += product.TRAN_QUANTITY;
+  }
+  return total;
+}
 
 
 

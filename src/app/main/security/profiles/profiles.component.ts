@@ -10,6 +10,7 @@ import { Title } from '@angular/platform-browser';
 import { constants } from '@env/constants';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { success, error, warning } from '@app/core/utils/toastr';
+import { JwtHelperService } from '@app/core/services/security/jwt-helper.service';
 
 
 @Component({
@@ -30,18 +31,28 @@ export class ProfilesComponent implements OnInit {
   roles: Array<Role>;
   selectedProfile: Profile;
 
+  CanManage:any;
+  currentUserID=0;
+
   constructor(
     private profileService: ProfileService,
     private roleService: RoleService,
     private modalService: NgbModal,
     private _fb: FormBuilder,
     private _toastr: ToastrService,
-    titleService: Title
+    titleService: Title,
+    public jwtHelper: JwtHelperService
   ) {
+    this.currentUserID=parseInt(this.jwtHelper.id());
+    this.CanManage= this.jwtHelper.hasRole('ROLE_ACL_MANAGE');
     titleService.setTitle(constants.app_name + ' - Security - Profiles management');
    }
 
   ngOnInit() {
+    if (this.CanManage)
+    {this.CanManage=true}
+     else{ this.CanManage=false}
+
     this.loadData();
   }
 

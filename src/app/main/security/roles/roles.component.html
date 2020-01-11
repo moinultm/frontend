@@ -66,10 +66,10 @@
                       <td>{{ item.code }}</td>
                       <td>{{ item.designation }}</td>
                       <td class="actions">
-                        <button type="button" class="btn  btn-success" (click)="initSave(saveModal, item)">
+                        <button *ngIf="CanManage"  type="button" class="btn  btn-success" (click)="initSave(saveModal, item)">
                           <i class="fas fa-edit"></i>
                         </button>
-                        <button type="button" class="btn  btn-danger" >
+                        <button *ngIf="CanManage"  type="button" class="btn  btn-danger" >
                           <i class="fa fa-trash"></i>
                         </button>
                       </td>

@@ -69,7 +69,7 @@
                         <td>{{item.quantity}} {{item.unit}}</td>
                         <td class="actions">
 
-                          <a href="#"  [routerLink]="['../edit',item.id]" class="dropdown-item" [routerLinkActiveOptions]="{exact: true}"
+                          <a href="#"   *ngIf="CanManage" [routerLink]="['../edit',item.id]" class="dropdown-item" [routerLinkActiveOptions]="{exact: true}"
                             routerLinkActive="active">
                             <span>
                               <i class="fas fa-edit"></i>
@@ -83,7 +83,7 @@
                           <!--a href="#" class="dropdown-item"> <span> <i class="fa fa-trash"></i>
                             Delete</span></a-->
 
-                            <a href="#" class="dropdown-item" (click)="initUpdate(updateValueModal, item,item.id)">
+                            <a href="#"  *ngIf="CanManage" class="dropdown-item" (click)="initUpdate(updateValueModal, item,item.id)">
                               <span><i class="fa fa-dollar-sign"></i> Update Value</span>
                             </a>
 
@@ -105,6 +105,8 @@
             <!-- /.card-body -->
 
             <div class="card-footer clearfix">
+
+              ::Account with (ROLE_PRODUCT_MANAGE) Can Edit Products::
 
               <div class="row">
                 <div class="col-sm-12 col-md-5">

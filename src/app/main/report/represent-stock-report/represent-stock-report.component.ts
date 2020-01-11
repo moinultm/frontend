@@ -45,20 +45,44 @@ export class RepresentStockReportComponent implements OnInit {
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
 
+  CanManage:any;
+  currentUserID=0;
+  isRoleViewAll:any;
+  loadingPermission:boolean;
+
   constructor(
     private _fb: FormBuilder,
     private datePipe : DatePipe,
     private reportService:ProductReportService,
     private userService:UserService,
     public jwtHelper: JwtHelperService)	{
-
+      this.isRoleViewAll=  this.jwtHelper.hasRole('ROLE_MANAGER_PRIVILEGE');
+      this.CanManage= this.jwtHelper.hasRole('ROLE_MANAGER_PRIVILEGE');
   	}
 
     ngOnInit(){
       this.user=parseInt (this.jwtHelper.id());
-      this.loadData(this.user);
-      this.loadUser();
 
+      if (this.CanManage)
+      {
+        this.CanManage=true
+        this.loadUser();
+      }
+       else{
+         this.CanManage=false;
+        }
+
+
+    if (this.isRoleViewAll)
+    {
+      this.loadUser();
+    }
+    else{
+    // this.loadingUser=true;
+    this.loadingPermission=true;}
+
+
+      this.loadData(this.user);
       this.iniForm();
     }
 

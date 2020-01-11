@@ -126,7 +126,7 @@
                       <th>Gift</th>
                       <th>Damage</th>
                       <th>Closing(In-Hand)</th>
-                      <th>Amount</th>
+
 
                     </tr>
                   </thead>
@@ -151,17 +151,23 @@
                       <td> {{  _CIP(P.GIFT_QUANTITY) }}</td>
                       <td>  {{  _CIP(P.DAMAGE_QUANTITY) }} </td>
                       <td>{{ _CIN(P.TRAN_QUANTITY)+_CIN(P.OUTWARD_QUANTITY) +_CIN(P.GIFT_QUANTITY) +_CIN(P.DAMAGE_QUANTITY)+_CIN(P.INWARD_QUANTITY)  }}</td>
-                      <td>
 
-                          {{ _CIN(P.TRAN_AMOUNT)+_CIN(P.OUTWARD_AMOUNT) +_CIN(P.GIFT_COST) +_CIN(P.DAMAGE_COST)+_CIN(P.INWARD_AMOUNT)  }}
-
-                      </td>
 
                     </tr>
 
+                    <tr>
+                      <td></td>
+                      <td>Total :</td>
+                      <td>   Total {{ getTotal () }} </td> <!-- Here is the total value of my cart -->
+                  </tr>
+
                   </tbody>
+
+
+
                 </table>
               </ng-container>
+
 
         </div>
         </div>

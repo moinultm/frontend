@@ -8,6 +8,7 @@ import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { ToastrService } from 'ngx-toastr';
 import { success, error, warning } from '@app/core/utils/toastr';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { JwtHelperService } from '@app/core/services/security/jwt-helper.service';
 
 @Component({
   selector: 'app-roles',
@@ -25,18 +26,27 @@ export class RolesComponent implements OnInit {
   form: FormGroup;
   selectedRole: Role;
 
+  CanManage:any;
+  currentUserID=0;
+
   constructor(
     private roleService: RoleService,
     private _toastr: ToastrService,
     private modalService: NgbModal,
     titleService: Title,
-
-    private _formBuilder: FormBuilder,) {
+        private _formBuilder: FormBuilder,
+        public jwtHelper: JwtHelperService) {
       titleService.setTitle('Security - Roles management');
+      this.currentUserID=parseInt(this.jwtHelper.id());
+      this.CanManage= this.jwtHelper.hasRole('ROLE_ACL_MANAGE');
 
     }
 
   ngOnInit(): void {
+    if (this.CanManage)
+    {this.CanManage=true}
+     else{ this.CanManage=false}
+
      this.loadData();
      }
 
