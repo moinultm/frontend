@@ -19,7 +19,7 @@ export class ListGiftComponent implements OnInit {
   loading:boolean;
 
   selectedInvoice:Gift;
-
+  deletingItem:boolean;
   deletingInvoice:boolean;
   savingCategory: boolean;
   deletingCategory: boolean;

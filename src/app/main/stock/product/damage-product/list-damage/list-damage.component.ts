@@ -18,6 +18,7 @@ export class ListDamageComponent implements OnInit {
   selectedInvoice:Damage;
   deletingInvoice:boolean;
 
+  deletingItem:boolean;
   data: PartialList<Damage>;
   loading: boolean;
   savingCategory: boolean;

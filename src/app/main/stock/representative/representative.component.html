@@ -173,7 +173,7 @@
               ::Account with (ROLE_SALES_MANAGE) Can Delete Invoices::
                 <!-- Pagination -->
             <ngb-pagination *ngIf="!loading && data" [collectionSize]="data.count" [pageSize]="size"
-            [page]="data.page" (pageChange)="loadData($event)" class="pagination pagination-sm m-0 float-right">
+            [page]="data.page" (pageChange)="loadData(0,$event)" class="pagination pagination-sm m-0 float-right">
           </ngb-pagination>
           <!-- ./Pagination -->
             </div>

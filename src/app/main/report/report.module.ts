@@ -37,107 +37,188 @@ import { MonthlySalesReportComponent } from './monthly-sales-report/monthly-sale
 import { StockInReportComponent } from './stock-in-report/stock-in-report.component';
 import { StockOutReportComponent } from './stock-out-report/stock-out-report.component';
 import { TotalSellReportComponent } from './total-sell-report/total-sell-report.component';
+import { RoleGuard } from '@app/core/services/security/guards/role.guard';
 
 const routes: Routes = [
 
   {
     path: 'report',
-    canActivate: [ AuthGuard],
+    canActivate: [ AuthGuard,RoleGuard],
+    data: {
+      expectedRolesType: 'any',
+      expectedRoles: [ 'ROLE_REPORT_ACCESS' ]
+    },
     component: ReportMenuComponent
   },
     {
       path: 'stock-report',
-      canActivate: [ AuthGuard],
+      canActivate: [ AuthGuard,RoleGuard],
+      data: {
+        expectedRolesType: 'any',
+        expectedRoles: [ 'ROLE_REPORT_ACCESS' ]
+      },
       component: StockReportComponent
     }
     ,
     {
       path: 'product-report',
-      canActivate: [ AuthGuard],
+      canActivate: [ AuthGuard,RoleGuard],
+      data: {
+        expectedRolesType: 'any',
+        expectedRoles: [ 'ROLE_REPORT_ACCESS' ]
+      },
       component: ProductReportComponent
     },
 
    //stock-general-report
    { path: 'stock-general-report',
-   canActivate: [ AuthGuard],
+   canActivate: [ AuthGuard,RoleGuard],
+   data: {
+     expectedRolesType: 'any',
+     expectedRoles: [ 'ROLE_REPORT_ACCESS' ]
+   },
    component: StockGeneralReportComponent
    },
 
     //represent
     { path: 'represent-stock-report',
-    canActivate: [ AuthGuard],
+    canActivate: [ AuthGuard,RoleGuard],
+    data: {
+      expectedRolesType: 'any',
+      expectedRoles: [ 'ROLE_REPRESENT_ACCESS' ]
+    },
     component: RepresentStockReportComponent
     },
     { path: 'represent-status-report',
-    canActivate: [ AuthGuard],
+    canActivate: [ AuthGuard,RoleGuard],
+    data: {
+      expectedRolesType: 'any',
+      expectedRoles: [ 'ROLE_REPORT_ACCESS' ]
+    },
     component: RepresentStatusReportComponent
     },
     { path: 'represent-stock-summary',
-    canActivate: [ AuthGuard],
+    canActivate: [ AuthGuard,RoleGuard],
+    data: {
+      expectedRolesType: 'any',
+      expectedRoles: [ 'ROLE_REPORT_ACCESS' ]
+    },
     component: RepresentStockSummaryComponent
     },
 
     //Supplier
     { path: 'supplier-bill-summary',
-    canActivate: [ AuthGuard],
+    canActivate: [ AuthGuard,RoleGuard],
+    data: {
+      expectedRolesType: 'any',
+      expectedRoles: [ 'ROLE_REPORT_ACCESS' ]
+    },
     component: SupplierBillSummaryComponent
     },
 
     //product
     { path: 'product-sell-report',
-    canActivate: [ AuthGuard],
+    canActivate: [ AuthGuard,RoleGuard],
+    data: {
+      expectedRolesType: 'any',
+      expectedRoles: [ 'ROLE_REPORT_ACCESS' ]
+    },
     component: ProductSellReportComponent
     },
     //sells status report
 
     { path: 'sells-status-report',
-    canActivate: [ AuthGuard],
+    canActivate: [ AuthGuard,RoleGuard],
+    data: {
+      expectedRolesType: 'any',
+      expectedRoles: [ 'ROLE_REPORT_ACCESS' ]
+    },
     component: SellsStatusReportComponent
     },
     { path: 'purchase-status-report',
-    canActivate: [ AuthGuard],
+    canActivate: [ AuthGuard,RoleGuard],
+    data: {
+      expectedRolesType: 'any',
+      expectedRoles: [ 'ROLE_REPORT_ACCESS' ]
+    },
     component: PurchaseStatusReportComponent
     },
 
     { path: 'transaction-status-report',
-    canActivate: [ AuthGuard],
+    canActivate: [ AuthGuard,RoleGuard],
+    data: {
+      expectedRolesType: 'any',
+      expectedRoles: [ 'ROLE_REPORT_ACCESS' ]
+    },
     component: TransactionStatusReportComponent
     },
 
 
     { path: 'profit-loss-report',
-    canActivate: [ AuthGuard],
+    canActivate: [ AuthGuard,RoleGuard],
+    data: {
+      expectedRolesType: 'any',
+      expectedRoles: [ 'ROLE_REPORT_ACCESS' ]
+    },
     component: ProfitLossReportComponent
     },
 
     { path: 'challan-product-report',
-    canActivate: [ AuthGuard],
+    canActivate: [ AuthGuard,RoleGuard],
+    data: {
+      expectedRolesType: 'any',
+      expectedRoles: [ 'ROLE_REPORT_ACCESS' ]
+    },
     component: ChallanProductReportComponent
     },
     { path: 'damage-product-report',
-    canActivate: [ AuthGuard],
+    canActivate: [ AuthGuard,RoleGuard],
+    data: {
+      expectedRolesType: 'any',
+      expectedRoles: [ 'ROLE_REPORT_ACCESS' ]
+    },
     component:DamageProductReportComponent
     },
     { path: 'gift-product-report',
-    canActivate: [ AuthGuard],
+    canActivate: [ AuthGuard,RoleGuard],
+    data: {
+      expectedRolesType: 'any',
+      expectedRoles: [ 'ROLE_REPORT_ACCESS' ]
+    },
     component: GiftProductReportComponent
     },
     { path: 'total-sell-report',
-    canActivate: [ AuthGuard],
+    canActivate: [ AuthGuard,RoleGuard],
+    data: {
+      expectedRolesType: 'any',
+      expectedRoles: [ 'ROLE_REPORT_ACCESS' ]
+    },
     component: TotalSellReportComponent
     },
     { path: 'stock-in-report',
-    canActivate: [ AuthGuard],
+    canActivate: [ AuthGuard,RoleGuard],
+    data: {
+      expectedRolesType: 'any',
+      expectedRoles: [ 'ROLE_REPORT_ACCESS' ]
+    },
     component: StockInReportComponent
     },
 
     { path: 'stock-out-report',
-    canActivate: [ AuthGuard],
+    canActivate: [ AuthGuard,RoleGuard],
+    data: {
+      expectedRolesType: 'any',
+      expectedRoles: [ 'ROLE_REPORT_ACCESS' ]
+    },
     component: StockOutReportComponent
     },
 
     { path: 'monthly-sales-report',
-    canActivate: [ AuthGuard],
+    canActivate: [ AuthGuard,RoleGuard],
+    data: {
+      expectedRolesType: 'any',
+      expectedRoles: [ 'ROLE_REPORT_ACCESS' ]
+    },
     component: MonthlySalesReportComponent
     },
 

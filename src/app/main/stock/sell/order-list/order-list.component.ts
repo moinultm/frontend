@@ -5,6 +5,9 @@ import { SellsOrderService } from '@app/core/services/stock/sells-order.service'
 import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { SellsOrder } from '@app/shared/models/stock/sells-order.model';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@app/core/services/security/jwt-helper.service';
+import { OrderItems } from '@app/shared/models/stock/order-items.model ';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-order-list',
@@ -25,13 +28,22 @@ export class OrderListComponent implements OnInit {
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
 
+  loadingPermission:boolean;
+  currentUserID=0;
+  isRoleViewAll:any;
+  deletingItem:boolean;
+  selectedInvoice: SellsOrder;
+  deletingInvoice:boolean;
 
   constructor(
     private _fb: FormBuilder,
     private datePipe : DatePipe,
     private sellsService:SellsOrderService,
     private router:Router,
-  ) { }
+    public jwtHelper: JwtHelperService,
+    private modalService: NgbModal
+  ) {   this.currentUserID=parseInt(this.jwtHelper.id());
+    this.isRoleViewAll=  this.jwtHelper.hasRole('ROLE_SALES_MANAGE'); }
 
   ngOnInit() {
     this.iniForm();
@@ -96,6 +108,41 @@ newOrder(){
   event.preventDefault();
   this.router.navigate([`sell/order`]);
 }
+
+
+
+initDelete(modal: any, invoice: SellsOrder): void {
+  this.selectedInvoice = invoice;
+  // Open the delete confirmation modal
+  this.modalService
+    .open(modal)
+    .result
+    .then((result) => {
+      if (result) {
+        this.loadData();
+      }
+      this.selectedInvoice = new SellsOrder();
+    }, () => {
+      // If the modal is dismissed
+      this.selectedInvoice = new SellsOrder();
+    });
+}
+
+delete(modal: any): void {
+  this.deletingInvoice = true;
+  this.sellsService.deleteOrder({
+    id: this.selectedInvoice.id
+  }).subscribe(() => {
+    this.close(modal, true);
+    this.deletingInvoice = false;
+  });
+}
+
+
+close(modal: any, flag?: boolean): void {
+  modal.close(flag ? true : false);
+}
+
 
 
 }

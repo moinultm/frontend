@@ -88,7 +88,7 @@
         </div>
         </div>
 
-                    <h4>  Total Product Sale Report</h4>
+                    <h4>Total Product Sale Report (Sales by representative and direct)</h4>
                        <p>From Date: <strong>{{fromDate| date: 'dd/MM/yyyy'}}</strong>  To: <strong>{{toDate |date: 'dd/MM/yyyy'}}</strong> </p>
 
             <div class="table-responsive ">
@@ -132,7 +132,7 @@
 
                     <span *ngFor=" let cross of data.crossData">
                       <div *ngIf="cross.USER_ID === user.id && cross.STOCK_ITEM_ID === product.id">
-                         {{  _CIN(cross.TRAN_QUANTITY)+  _CIN(cross.INWARD_QUANTITY)  }}
+                         {{  _CIP(cross.TRAN_QUANTITY) +  _CIP(cross.OUTWARD_QUANTITY)  }}
                       </div>
                     </span>
                   </td>

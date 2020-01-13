@@ -20,9 +20,8 @@
 
   <mat-spinner class="loading-profiles" *ngIf="loadingDetails"></mat-spinner>
 
-  <section class="content " >
+  <section class="content">
     <div class="container-fluid" *ngIf="!loadingDetails">
-
 
       <div class="page frontpage" id="print-section" style="background-color:ghostwhite;">
 
@@ -31,16 +30,14 @@
           <div class="col-12" *ngFor="let  T of details.data ">
             <a href="#" (click)="print('print-section')" class="btn btn-success float-right"><i class="fas fa-print"></i>
               Print</a>
-
-
           </div>
         </div>
 
 
         <div class="row">
          <div class="col-md-12">
-
           <div class="invoice p-3 mb-3">
+
             <div class="header">
               <div class="row mb-3">
                 <div class="col-md-9">
@@ -60,10 +57,10 @@
 
                 <div class="col-md-4 invoice-col">
                   <address>
-                    Trade License No.<br>
-                    TIN No.<br>
-                    IRC N.<br>
-                    VAT Reg. No.
+                    Trade License No.<strong>TRAD/DSCC/290376/2019</strong> <br>
+                    TIN No. <strong>125371773865</strong><br>
+                    IRC No.  <strong>114768</strong><br>
+                    VAT Reg. No. <strong>000966909-0208</strong>
                   </address>
                 </div>
               </div>
