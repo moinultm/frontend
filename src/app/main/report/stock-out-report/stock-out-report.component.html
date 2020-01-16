@@ -91,9 +91,9 @@
                     <h4>Stock Out Report</h4>
                        <p>From Date: <strong>{{fromDate| date: 'dd/MM/yyyy'}}</strong>  To: <strong>{{toDate |date: 'dd/MM/yyyy'}}</strong> </p>
 
-            <div class="table-responsive ">
+            <div class="table-responsive">
 
-                <ng-container *ngIf="!loading">
+                <!--ng-container-- *ngIf="!loading">
 
                     <table class="table table-striped table-bordered table-mini">
                         <thead>
@@ -113,22 +113,27 @@
 
                             <td *ngFor="let product of data.products">
                               <span *ngFor=" let cross of data.crossData">
-                                <div *ngIf="cross.REF_NO === user.reference_no && cross.STOCK_ITEM_ID === product.id">
+                                <div *ngIf="cross.TRAN_DATE === user.date && cross.STOCK_ITEM_ID === product.id">
                                    {{  _CIN(cross.OUTWARD_QUANTITY )}}
                                 </div>
                               </span>
                             </td>
-
-
                           </tr>
+
+
+
+
+
 
                         </tbody>
                       </table>
-
-
-            </ng-container>
-
+            </ng-container-->
               </div>
+
+
+              <div id="output"></div>
+
+
              </div>
 
 

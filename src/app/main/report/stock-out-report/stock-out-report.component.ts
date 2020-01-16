@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { ProductReportService } from '@app/core/services/report/product-report.service';
@@ -6,6 +6,12 @@ import { UserService } from '@app/core/services/security/user.service';
 import { JwtHelperService } from '@app/core/services/security/jwt-helper.service';
 import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { StockGeneral } from '@app/shared/models/stock/stock-general.model';
+
+import 'pivottable/dist/pivot.min.js';
+import 'pivottable/dist/pivot.min.css';
+
+declare var jQuery:any;
+declare var $:any;
 
 
 @Component({
@@ -23,6 +29,7 @@ export class StockOutReportComponent implements OnInit {
   userAddress:string;
 
   data:any;
+
 
   loading: boolean;
   savingSles: boolean;
@@ -44,13 +51,18 @@ export class StockOutReportComponent implements OnInit {
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
 
+  private el: ElementRef;
+
   constructor(
+    @Inject(ElementRef)el: ElementRef,
     private _fb: FormBuilder,
     private datePipe : DatePipe,
     private reportService:ProductReportService,
     private userService:UserService,
     public jwtHelper: JwtHelperService
-  ) { }
+  ) {
+    this.el = el;
+   }
 
   ngOnInit(){
     this.user=parseInt (this.jwtHelper.id());
@@ -65,7 +77,6 @@ export class StockOutReportComponent implements OnInit {
     let formDt = this.datePipe.transform(this.form.get('fromDate').value, 'yyyy-MM-dd');
     let toDt = this.datePipe.transform(this.form.get('toDate').value, 'yyyy-MM-dd');
 
-
     this.fromDate=formDt;
     this.toDate=toDt;
 
@@ -76,9 +87,12 @@ export class StockOutReportComponent implements OnInit {
       to:   toDt
     }).subscribe((res: PartialList<StockGeneral>) => {
       this.data = res;
-     //console.log( this.data);
+      this.loadPivot(res);
       this.loading = false;
     });
+
+
+
   }
 
 
@@ -96,7 +110,8 @@ export class StockOutReportComponent implements OnInit {
       to:   toDt
     }).subscribe((res: PartialList<StockGeneral>) => {
       this.data = res;
-    //console.log( this.data);
+      this.loadPivot(res);
+     //console.log( this.data);
       this.loading = false;
     });
   }
@@ -120,6 +135,56 @@ export class StockOutReportComponent implements OnInit {
   }
 
 
+
+  //***************POVIT TABLE**********************************/
+  ngAfterViewInit(){
+
+      }
+
+      loadPivot(data){
+        if (!this.el ||
+          !this.el.nativeElement ||
+          !this.el.nativeElement.children){
+              console.log('cant build without element');
+              return;
+       }
+
+        var container = this.el.nativeElement;
+        var inst = jQuery(container);
+        var targetElement = inst.find('#output');
+
+
+        if (!targetElement){
+          console.log('cant find the pivot element');
+          return;
+        }
+
+
+       while (targetElement.firstChild){
+          targetElement.removeChild(targetElement.firstChild);
+        }
+
+        console.log(data.crossData)
+
+
+        $.pivotUtilities.tipsData=data.crossData;
+
+        var utils = $.pivotUtilities;
+
+        var sum = $.pivotUtilities.aggregatorTemplates.sum;
+                  var numberFormat = $.pivotUtilities.numberFormat;
+                  var intFormat = numberFormat({digitsAfterDecimal: 0});
+
+            $("#output").pivot(
+              utils.tipsData, {
+                rows: ["Date"],
+                cols: ["Name"],
+                aggregator: sum(intFormat)(["OUTWARD_QUANTITY"])
+              });
+
+
+
+      }
 
   //PRINT*******************************************************
 

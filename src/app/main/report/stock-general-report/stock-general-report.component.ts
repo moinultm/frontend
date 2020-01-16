@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ElementRef, Inject } from '@angular/core';
 
 
 import{ jqxPivotGridComponent } from 'jqwidgets-ng/jqxpivotgrid';
@@ -10,6 +10,11 @@ import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { SellsInvoice } from '@app/shared/models/stock/invoice.model';
 import { StockGeneral } from '@app/shared/models/stock/stock-general.model';
 
+import 'pivottable/dist/pivot.min.js';
+import 'pivottable/dist/pivot.min.css';
+
+declare var jQuery:any;
+declare var $:any;
 
 @Component({
   selector: 'app-stock-general-report',
@@ -34,14 +39,17 @@ export class StockGeneralReportComponent implements OnInit{
   toDate:any;
 
 
+  private el: ElementRef;
+
+
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
 
-  constructor(
+  constructor(@Inject(ElementRef)el: ElementRef,
     private _fb: FormBuilder,
     private datePipe : DatePipe,
     private reportService:ProductReportService)	{
-
+      this.el = el;
   	}
 
     ngOnInit(){
@@ -66,6 +74,7 @@ export class StockGeneralReportComponent implements OnInit{
         to:   toDt
       }).subscribe((res:any) => {
         this.data = res;
+        this.loadPivot(res);
       console.log( this.data);
         this.loading = false;
       });
@@ -86,6 +95,7 @@ export class StockGeneralReportComponent implements OnInit{
         to:   toDt
       }).subscribe((res: PartialList<StockGeneral>) => {
         this.data = res;
+        this.loadPivot(res);
        console.log( this.data);
         this.loading = false;
       });
@@ -109,9 +119,56 @@ export class StockGeneralReportComponent implements OnInit{
       return parseInt(val)*-1;
     }
 
+       //***************POVIT TABLE**********************************/
+       ngAfterViewInit(){  }
+
+      loadPivot(data){
+        if (!this.el ||
+          !this.el.nativeElement ||
+          !this.el.nativeElement.children){
+              console.log('cant build without element');
+              return;
+       }
+
+        var container = this.el.nativeElement;
+        var inst = jQuery(container);
+        var targetElement = inst.find('#output');
+
+
+        if (!targetElement){
+          console.log('cant find the pivot element');
+          return;
+        }
+
+
+       while (targetElement.firstChild){
+          targetElement.removeChild(targetElement.firstChild);
+        }
+
+        console.log(data.product)
+
+
+        $.pivotUtilities.tipsData=data.product;
+
+        var utils = $.pivotUtilities;
+
+        var sum = $.pivotUtilities.aggregatorTemplates.sum;
+                  var numberFormat = $.pivotUtilities.numberFormat;
+                  var intFormat = numberFormat({digitsAfterDecimal: 0});
+
+            $("#output").pivot(
+              utils.tipsData, {
+                rows: ["Name"],
+                cols: ["Transaction"],
+                aggregator: sum(intFormat)(["TRAN_QUANTITY"])
+              });
+
+
+      }
 
 
 
+//============================PRINT***************************************
 
 private getElementTag(tag: keyof HTMLElementTagNameMap): string {
   const html: string[] = [];
