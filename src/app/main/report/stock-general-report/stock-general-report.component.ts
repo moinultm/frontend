@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild, AfterViewInit, ElementRef, Inject } from 
 
 import{ jqxPivotGridComponent } from 'jqwidgets-ng/jqxpivotgrid';
 import { jqxPivotDesignerComponent } from 'jqwidgets-ng/jqxpivotdesigner';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators, NumberValueAccessor } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { ProductReportService } from '@app/core/services/report/product-report.service';
 import { PartialList } from '@app/shared/models/common/patial-list.model';
@@ -38,6 +38,11 @@ export class StockGeneralReportComponent implements OnInit{
   fromDate:any;
   toDate:any;
 
+  openingTotal=0;
+inTotal=0;
+outTotal=0;
+dmgTotal=0;
+gftTotal=0;
 
   private el: ElementRef;
 
@@ -74,10 +79,14 @@ export class StockGeneralReportComponent implements OnInit{
         to:   toDt
       }).subscribe((res:any) => {
         this.data = res;
-        this.loadPivot(res);
+       // this.loadPivot(res);
+
       console.log( this.data);
+      this.summaries();
         this.loading = false;
       });
+
+
     }
 
 
@@ -95,10 +104,12 @@ export class StockGeneralReportComponent implements OnInit{
         to:   toDt
       }).subscribe((res: PartialList<StockGeneral>) => {
         this.data = res;
-        this.loadPivot(res);
+       // this.loadPivot(res);
        console.log( this.data);
+       this.summaries();
         this.loading = false;
       });
+    //  this.summaries();
     }
 
 
@@ -112,6 +123,7 @@ export class StockGeneralReportComponent implements OnInit{
     }
 
     _CIN(val){
+
       return parseInt(val);
     }
 
@@ -166,6 +178,38 @@ export class StockGeneralReportComponent implements OnInit{
 
       }
 
+//Arra summary invalid functions
+
+
+totalOpeningAmount (){
+
+  var total = 0;
+  for(var count=0;count<this.data.product.length;count++){
+      total += parseInt(this.data.product[count].TRAN_QUANTITY,10);
+  }
+  console.log(total);
+ this.openingTotal=total;
+};
+
+
+getTotal(type:string) {
+  console.log(type)
+  var total = 0;
+  for(var count=0;count<this.data.product.length;count++){
+    total += parseInt(this.data.product[count][type],10);
+}
+  return total;
+};
+
+summaries(){
+
+  this.openingTotal = this.data.product.reduce((prev, cur) => parseInt(prev) + parseInt(cur.TRAN_QUANTITY), 0);
+  this.inTotal = this.data.product.reduce((prev, cur) => parseInt(prev) + parseInt(cur.INWARD_QUANTITY), 0);
+  this.outTotal  = this.data.product.reduce((prev, cur) => parseInt(prev) + parseInt(cur.OUTWARD_QUANTITY), 0);
+  this.gftTotal= this.data.product.reduce((prev, cur) => parseInt(prev) + parseInt(cur.GIFT_QUANTITY), 0);
+  this.dmgTotal = this.data.product.reduce((prev, cur) => prev + parseInt(cur.DAMAGE_QUANTITY), 0);
+
+}
 
 
 //============================PRINT***************************************
@@ -200,6 +244,7 @@ private getElementTag(tag: keyof HTMLElementTagNameMap): string {
         ${styles}
         ${links}
         <style>
+
         @page {
           size: A4 landscape;
         }
@@ -214,15 +259,6 @@ private getElementTag(tag: keyof HTMLElementTagNameMap): string {
 
 
 
-
- private getTotal(){
-  var total = 0;
-  for(var i = 0; i < this.data.product.length; i++){
-      var product = this.data.product[i];
-      total += product.TRAN_QUANTITY;
-  }
-  return total;
-}
 
 
 

@@ -38,6 +38,7 @@ import { StockInReportComponent } from './stock-in-report/stock-in-report.compon
 import { StockOutReportComponent } from './stock-out-report/stock-out-report.component';
 import { TotalSellReportComponent } from './total-sell-report/total-sell-report.component';
 import { RoleGuard } from '@app/core/services/security/guards/role.guard';
+import { ConfigModule } from '@app/shared/config/config.module';
 
 const routes: Routes = [
 
@@ -237,7 +238,8 @@ const routes: Routes = [
     MatFormFieldModule,
     MatProgressSpinnerModule,
     MatInputModule,
-    NgxPrintModule
+    NgxPrintModule,
+    ConfigModule
   ]
   ,providers:[DatePipe,  {provide: DateAdapter, useClass: AppDateAdapter},
     {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS} ]

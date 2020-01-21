@@ -29,25 +29,23 @@
 
     <div class="invoice p-3 mb-3" id="print-section">
 
-      <div class="print-only">
+
         <div class="row mb-3">
-          <div class="col-md-12">
+          <div class="col-md-8">
             <img src="/assets/images/trade-2.jpg" height="150">
           </div>
-        </div>
-        </div>
 
-
-        <!-- title row -->
-        <div class="row">
-          <div class="col-12">
+          <div class="col-md-4">
             <h4>
-              <i class="fas fa-globe no-print"></i> Purchase Invoice Details
-              <small class="float-right" *ngFor="let  T of details.data" >Date:{{T.date |  date:'dd/MMM/yyyy'}} </small>
+              Purchase Invoice Details
+
             </h4>
+            <small class="float-right" *ngFor="let  T of details.data" >Date:{{T.date |  date:'dd/MMM/yyyy'}} </small>
           </div>
-          <!-- /.col -->
         </div>
+
+
+
 
         <!-- info row -->
         <div class="row invoice-info" >
@@ -202,14 +200,15 @@
         </div>
         <!-- /.row -->
 
-        <div class="divFooter">
-          <div class="print-only">
-            <div class="row">
-              <div class="col-md-12">
-                <img src="/assets/images/trade-footer.jpg" height="110">
-              </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <div class="page-footer">
+              Head Office: 81/2(Ground floor), Nayapaltan,Dhaka-1000,Bangladesh<br>
+              Cell:+8801793000277,Email:giasuddin8832@gmail.com, gmtradeint2004@gmail.com<br>
+              Web:www.gmtradeinternational.com, F /gmtradeinternational&zarifcorporation
             </div>
-            </div>
+
+          </div>
         </div>
 
         <!-- this row will not appear when printing -->

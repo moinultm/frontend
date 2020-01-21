@@ -10,6 +10,8 @@ import { StockGeneral } from '@app/shared/models/stock/stock-general.model';
 
 import 'pivottable/dist/pivot.min.js';
 import 'pivottable/dist/pivot.min.css';
+import { ConfigureService } from '@app/core/services/common/config.service';
+import { environment } from '@env/environment';
 
 declare var jQuery:any;
 declare var $:any;
@@ -52,21 +54,30 @@ export class StockInReportComponent implements OnInit {
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
 
+  logoPreview: any;
+
+
   constructor(
     @Inject(ElementRef)el: ElementRef,
     private _fb: FormBuilder,
     private datePipe : DatePipe,
     private reportService:ProductReportService,
     private userService:UserService,
-    public jwtHelper: JwtHelperService
+    public jwtHelper: JwtHelperService,
+    private configure:ConfigureService
   ) {   this.el = el; }
 
   ngOnInit(){
+    this.logoPreview = environment.uploads_url + 'site/';
     this.user=parseInt (this.jwtHelper.id());
     this.loadData(this.user);
    //this.loadUser();
     this.iniForm();
   }
+
+  setConfig(configure: string) {
+    return this.configure.use(configure);
+   }
 
   dateFilter(  page?: number): void {
     this.page = page ? page : 1;
@@ -184,6 +195,7 @@ export class StockInReportComponent implements OnInit {
   //PRINT*******************************************************
 
   private getElementTag(tag: keyof HTMLElementTagNameMap): string {
+
     const html: string[] = [];
     const elements = document.getElementsByTagName(tag);
     for (let index = 0; index < elements.length; index++) {
@@ -194,7 +206,9 @@ export class StockInReportComponent implements OnInit {
 
 
     print(printSectionId): void {
-      event.preventDefault()
+
+      //event.preventDefault()
+
     let printContents, popupWin, styles = "", links = '';
 
 

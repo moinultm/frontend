@@ -4,6 +4,7 @@ import * as $ from 'jquery';
 import * as AdminLte from 'admin-lte';
 import { AuthenticationService } from '@app/core/services/security/authentication.service';
 import { ConfigureService } from '@app/core/services/common/config.service';
+import { environment } from '@env/environment';
 
 
 @Component({
@@ -15,19 +16,24 @@ export class SidebarComponent implements OnInit {
 
   @ViewChild('mainSidebar', { static: false }) mainSidebar;
 
-
+  logoPreview: any;
   constructor(  private Auth: AuthenticationService,
       private configure:ConfigureService) { }
 
   ngOnInit() {
+    this.logoPreview = environment.uploads_url + 'site/';
   }
 
-  ngAfterViewInit() {
+  setConfig(configure: string) {
+    return this.configure.use(configure);
+   }
 
+  ngAfterViewInit() {
    $('[data-widget="treeview"]').each(function() {
       AdminLte.Treeview._jQueryInterface.call($(this), 'init');
   });
   }
+
 
 
   logout(): void {

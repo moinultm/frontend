@@ -21,7 +21,7 @@
     <div class="container-fluid">
       <div class="row">
 <div class="col-md-12">
-    <div class="card">
+    <div class="card" style="min-height:500px">
         <div class="card-header">
           <h3 class="card-title">Stock Out Report</h3>
           <div class="card-tools">
@@ -77,19 +77,23 @@
 
 
 
-   <div id="print-section">
+   <div id="print-section" class="pagelandscape frontpage"  style="min-height:500px"  >
 
      <!--HEADER-->
-    <div class="print-only">
-        <div class="row mb-3">
-          <div class="col-md-12">
-            <img src="/assets/images/trade-2.jpg" height="120">
-          </div>
-        </div>
-        </div>
+     <div class="row mb-3">
+      <div class="col-md-8">
+        <img src="/assets/images/trade-2.jpg" height="100">
+      </div>
 
-                    <h4>Stock Out Report</h4>
+      <div class="col-md-4">
+        <p></p>
+        <h4>Stock Out Report</h4>
                        <p>From Date: <strong>{{fromDate| date: 'dd/MM/yyyy'}}</strong>  To: <strong>{{toDate |date: 'dd/MM/yyyy'}}</strong> </p>
+        </div>
+    </div>
+
+
+
 
             <div class="table-responsive">
 
@@ -134,9 +138,20 @@
               <div id="output"></div>
 
 
+
+              <div class="row">
+                <div class="col-md-12 text-center">
+                  <div class="page-footer">
+                    Head Office: 81/2(Ground floor), Nayapaltan,Dhaka-1000,Bangladesh<br>
+                    Cell:+8801793000277,Email:giasuddin8832@gmail.com, gmtradeint2004@gmail.com<br>
+                    Web:www.gmtradeinternational.com, F /gmtradeinternational&zarifcorporation
+                  </div>
+
+                </div>
+              </div>
+
+
              </div>
-
-
 
 
         </div>

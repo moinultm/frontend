@@ -116,7 +116,7 @@ lteActivity:Array<Object>=
       this.invoicePreview = environment.uploads_url + 'site/' + this.selectedSetup.invoice_header ;
     }
 
-    
+
     this.form = this._formBuilder.group({
       site_name: [settings ? settings.site_name : '', [Validators.required, Validators.maxLength(255)] ],
       slogan: [settings ? settings.slogan : '', [Validators.nullValidator ]],
@@ -148,11 +148,11 @@ lteActivity:Array<Object>=
 
 
       if (this.selectedSetup.site_logo instanceof File) {
-        formData.append('invoice_header', this.selectedSetup.site_logo);
+        formData.append('site_logo', this.selectedSetup.site_logo);
       }
 
       if (this.selectedSetup.invoice_header instanceof File) {
-        formData.append('site_logo', this.selectedSetup.invoice_header);
+        formData.append('invoice_header', this.selectedSetup.invoice_header);
       }
 
 

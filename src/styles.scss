@@ -232,8 +232,8 @@ body {
 
 /*Scrollbar*/
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 10px;
+  height: 7px;
   background: transparent;
 }
 
@@ -265,9 +265,21 @@ Custom CSS
 
 
 
+
 .page {
   width: 21cm;
   min-height: 29.7cm;
+  padding: 0.1cm;
+  margin: 0.1cm auto;
+  border: 1px #D3D3D3 solid;
+  border-radius: 5px;
+  background: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.pagelandscape {
+  width:29.7cm  ;
+  min-height: 21cm;
   padding: 0.1cm;
   margin: 0.1cm auto;
   border: 1px #D3D3D3 solid;
@@ -281,10 +293,19 @@ Custom CSS
     position: fixed;
     bottom: 0;
     width: 100%;
-    border-top: 1px solid black;
+border-top: 1px solid #348dfa;
   }
 }
 
+table.pvtTable thead tr th, table.pvtTable tbody tr th {  border: 1px solid #000000 !important;}
 
+table.pvtTable {  font-family: sans-serif !important;}
 
+table.pvtTable tbody tr td {border: 1px solid #000000 !important;}
 /*PRINT END*/
+
+
+
+.tool-style{
+  padding: 1em 1em 0 1em;
+ }
