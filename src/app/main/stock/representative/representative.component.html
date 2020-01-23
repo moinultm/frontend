@@ -52,26 +52,25 @@
 
                 <div class="row mb-3">
 
-                 <div class="col-md-3">
+                 <div class="col-md-4">
+                  <div class="form-group row" *ngIf="!loadingPermission">
 
-                <div class="input-group input-group-sm" *ngIf="!loadingPermission">
-                  <span *ngIf="!loadingUser">
-                    <label>User:- </label>
-                    <select class="form-control" (change)="changeSelection($event.target.value)">
-                      <option [value]="0">--All--</option>
-                      <option *ngFor="let list of users.data" [value]="list.id">
-                        {{list.id}} :: {{list.name}}
-                      </option>
-                    </select>
-
-                    <button type="button" *ngIf="!loadingPermission" class="btn btn-primary float-left" (click)="loadData(0)">All Find</button>
-
-                  </span>
-
-
-                </div>
-
+                    <label class="col-sm-2 col-form-label">User</label>
+                    <div class="col-sm-10">
+                      <select class="form-control" (change)="changeSelection($event.target.value)"  *ngIf="!loadingUser">
+                        <option [value]="0">--All--</option>
+                        <option *ngFor="let list of users.data" [value]="list.id">
+                          {{list.id}} :: {{list.name}}
+                        </option>
+                      </select>
+                    </div>
                   </div>
+                 </div>
+
+                  <div class="col-md-3">
+                    <button type="button" *ngIf="!loadingPermission" class="btn btn-primary float-left" (click)="loadData(0)">All Find</button>
+                    </div>
+
                 </div>
 
                 <!--form [formGroup]="form">

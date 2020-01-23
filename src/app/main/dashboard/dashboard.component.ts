@@ -62,7 +62,6 @@ export class DashboardComponent implements OnInit {
   }
 
   //language and Setttings
-
   setConfig(configure: string) {
    return this.configure.use(configure);
   }
@@ -70,7 +69,6 @@ export class DashboardComponent implements OnInit {
   setLang(lang: string) {
     this.translate.use(lang);
   }
-
 
 
   ngOnInit() {
@@ -125,7 +123,6 @@ getLoc(){
   }
 
 }
-
 
 
 

@@ -54,10 +54,6 @@ label:not(.form-check-label):not(.custom-file-label) {
 */
 
 
-.table-mini td, .table-mini th {
-  padding: .25rem!important;
-}
-
 
 .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-treeview {
 
@@ -255,57 +251,64 @@ body {
 }
 
 
-/**PRINT**/
-/**
-Custom CSS
-*/
+/**Custom CSS*/
 
-
-.table-responsive {    font-size: small!important; }
-
-
-
-
-.page {
-  width: 21cm;
-  min-height: 29.7cm;
-  padding: 0.1cm;
-  margin: 0.1cm auto;
-  border: 1px #D3D3D3 solid;
-  border-radius: 5px;
-  background: white;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+.table-mini{font-size: small;}
+.table-mini td {
+  padding: 0.25rem!important;
 }
 
-.pagelandscape {
-  width:29.7cm  ;
-  min-height: 21cm;
-  padding: 0.1cm;
-  margin: 0.1cm auto;
-  border: 1px #D3D3D3 solid;
-  border-radius: 5px;
-  background: white;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+.table-bordered td, .table-bordered th {
+  border: 1px solid #000000!important;
+}
+.table thead th {
+  background:#e6EEEE;
 }
 
-@media print {
-  .page-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-border-top: 1px solid #348dfa;
-  }
-}
+.bg-light-green{background:#e6EEEE;}
+
+.table-responsive {  }
+
 
 table.pvtTable thead tr th, table.pvtTable tbody tr th {  border: 1px solid #000000 !important;}
 
 table.pvtTable {  font-family: sans-serif !important;}
 
 table.pvtTable tbody tr td {border: 1px solid #000000 !important;}
-/*PRINT END*/
 
 
 
 .tool-style{
   padding: 1em 1em 0 1em;
  }
+
+ .page-footer{
+  font-size: small;
+ }
+
+
+
+
+/*PRINT*/
+@media print {
+
+  .pageA4landscape{
+     border: 0px solid black;
+     padding: 2px;
+     size: A4 landscape;
+   }
+
+   .pageA4portrait{
+     border: 2px solid black;
+     size: A4 portrait;
+   }
+
+   .page-footer {
+     position: fixed;
+     bottom: 0;
+     width: 100%;
+     border-top: 1px solid #000000;
+   }
+
+ }
+/*PRINT END*/

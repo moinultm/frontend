@@ -211,10 +211,8 @@ export class StockInReportComponent implements OnInit {
 
     let printContents, popupWin, styles = "", links = '';
 
-
       styles = this.getElementTag('style');
       links = this.getElementTag('link');
-
 
     printContents = document.getElementById(printSectionId).innerHTML;
     popupWin = window.open("", "_blank", "top=0,left=0,height=auto,width=auto");
@@ -222,21 +220,14 @@ export class StockInReportComponent implements OnInit {
     popupWin.document.write(`
       <html>
         <head>
-          <title>Report</title>
+          <title>Reports</title>
           ${styles}
           ${links}
           <style>
-          body
-          {
-            padding: 10mm  10mm  10mm 10mm;
-          }
-
           @page {
             size: A4 landscape;
-            font-size: small;
           }
-
-        </style>
+          </style>
         </head>
         <body onload="window.print(); setTimeout(()=>{ window.close(); }, 0)">
           ${printContents}

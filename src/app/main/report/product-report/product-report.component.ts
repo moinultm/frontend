@@ -71,13 +71,13 @@ dateFilter(){
   this.fromDate=formDt;
   this.toDate=toDt;
 
-
   this.loading = true;
   this.categoryService.postProductReport({
     from:  formDt,
     to:   toDt
   }).subscribe((res: PartialList<Product>) => {
     this.data = res;
+    console.log(   this.data);
     this.loading = false;
   });
 

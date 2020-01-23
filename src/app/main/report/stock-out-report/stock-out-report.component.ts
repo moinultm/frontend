@@ -7,8 +7,11 @@ import { JwtHelperService } from '@app/core/services/security/jwt-helper.service
 import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { StockGeneral } from '@app/shared/models/stock/stock-general.model';
 
+import { environment } from '@env/environment';
+
 import 'pivottable/dist/pivot.min.js';
 import 'pivottable/dist/pivot.min.css';
+import { ConfigureService } from '@app/core/services/common/config.service';
 
 declare var jQuery:any;
 declare var $:any;
@@ -52,6 +55,7 @@ export class StockOutReportComponent implements OnInit {
   serializedDate = new FormControl((new Date()).toISOString());
 
   private el: ElementRef;
+  logoPreview: any;
 
   constructor(
     @Inject(ElementRef)el: ElementRef,
@@ -59,17 +63,24 @@ export class StockOutReportComponent implements OnInit {
     private datePipe : DatePipe,
     private reportService:ProductReportService,
     private userService:UserService,
-    public jwtHelper: JwtHelperService
+    public jwtHelper: JwtHelperService,
+    private configure:ConfigureService
   ) {
     this.el = el;
    }
 
   ngOnInit(){
+    this.logoPreview = environment.uploads_url + 'site/';
     this.user=parseInt (this.jwtHelper.id());
     this.loadData(this.user);
    //this.loadUser();
     this.iniForm();
   }
+
+
+  setConfig(configure: string) {
+    return this.configure.use(configure);
+   }
 
   dateFilter(  page?: number): void {
     this.page = page ? page : 1;
@@ -213,20 +224,13 @@ export class StockOutReportComponent implements OnInit {
     popupWin.document.write(`
       <html>
         <head>
-          <title>Report</title>
+          <title>Reports</title>
           ${styles}
           ${links}
           <style>
-          body
-          {
-            padding: 10mm  10mm  10mm 10mm;
-          }
-
           @page {
             size: A4 landscape;
-            font-size: small;
           }
-
         </style>
         </head>
         <body onload="window.print(); setTimeout(()=>{ window.close(); }, 0)">

@@ -228,8 +228,6 @@ private getElementTag(tag: keyof HTMLElementTagNameMap): string {
     event.preventDefault()
   let printContents, popupWin, styles = "", links = '';
 
-
-
     styles = this.getElementTag('style');
     links = this.getElementTag('link');
 
@@ -244,7 +242,6 @@ private getElementTag(tag: keyof HTMLElementTagNameMap): string {
         ${styles}
         ${links}
         <style>
-
         @page {
           size: A4 landscape;
         }
