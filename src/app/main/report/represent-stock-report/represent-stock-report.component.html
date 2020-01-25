@@ -1,144 +1,123 @@
-
  <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
-  <div class="content-header">
-    <!--<div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1 class="m-0 text-dark">Report</h1>
-        </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
-            <li class="breadcrumb-item"><a>Report</a></li>
-            <li class="breadcrumb-item active">Representative Report</li>
-          </ol>
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Representative  Stock Report</h1>
+            <span><small>Current user: {{ jwtHelper.name() }}</small> </span>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
+              <li class="breadcrumb-item"><a>Report</a></li>
+              <li class="breadcrumb-item active">Representative Report</li>
+            </ol>
+          </div>
         </div>
       </div>
-    </div> /.container-fluid -->
-  </div>
+    </div>
+   <!-- Content Header (Page header) -->
 
   <section class="content">
     <div class="container-fluid">
       <div class="row">
-
-
         <div class="col-md-12">
 
-          <div class="card">
+          <div class="card mb-3">
+            <div class="col-md-12 text-center mx-auto">
 
-            <div class="card-header">
-              <div class="row">
-                <div class="col-md-6">
-                    <h3 class="card-title">Report Table / Mr.  : {{ jwtHelper.name() }}</h3>
-                </div>
+              <form [formGroup]="form">
+                <div class="tool-style">
+                  <div class="row">
 
-                <div class="col-md-6 text-right">
-                    <div class="card-tools">
-                        <!--span data-toggle="tooltip" title="Print" class="badge bg-primary">Print</span-->
-                        <!--button type="button" class="btn btn-tool" data-card-widget="collapse" [useExistingCss]="true"
-                          printSectionId="print-section"
-                           ngxPrint><i class="fas fa-print"></i>
-
-                        </button-->
-
-                        <a href="#"  (click)="print('print-section')"  class="btn btn-default"><i class="fas fa-print"></i> Print</a>
-                      </div>
-
-                  </div>
-              </div>
-
-            </div>
-
-            <div  class="card-body">
-
-              <div class="row no-print">
-                <div class="col-md-12">
-                  <form [formGroup]="form">
-                    <div class="row">
+                    <div class="col-md-12 mb-3">
+                      <div class="row">
+                        <div class="col-md-1"></div>
 
                         <div class="col-md-2">
+                          <mat-form-field class="full-width">
+                            <input matInput [matDatepicker]="pickerFrom" placeholder="Start Date"
+                              formControlName="fromDate" [value]="date.value">
+                            <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerFrom></mat-datepicker>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-2">
+                          <mat-form-field class="full-width">
+                            <input matInput [matDatepicker]="pickerTo" placeholder="End Date" formControlName="toDate"
+                              [value]="date.value">
+                            <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerTo></mat-datepicker>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-md-3 my-auto" *ngIf="!loadingPermission">
+                          <div class="input-group" *ngIf="!loadingUser">
+                            <select class="form-control" formControlName="userId" (change)="updateUser($event.target)">
+                              <option value="null">--Select User--</option>
+                              <option *ngFor="let list of users" [value]="list.id">
+                                {{list.id}} :: {{list.name}}
+                              </option>
+                            </select>
+
+                            <span class="input-group-append">
+                              <input type="button" name="search" id="search" value="Search" (click)="dateFilter()" class="btn  btn-primary"
+                                [disabled]="form.invalid">
+                               </span>
 
                           </div>
+                        </div>
 
-                      <div class="col-md-10">
+                        <div class="col-md-2 my-auto">
+                          <button type="button" *ngIf="!loadingPermission" class="btn btn-success" (click)="loadData(0)">Load All User</button>
+                        </div>
 
-                        <div class="row">
-                            <div class="col-md-3"><mat-form-field class="full-width">
-                                <input matInput [matDatepicker]="pickerFrom" placeholder="Start Date"
-                                  formControlName="fromDate" [value]="date.value">
-                                <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
-                                <mat-datepicker #pickerFrom></mat-datepicker>
-                              </mat-form-field></div>
-                            <div class="col-md-3"><mat-form-field class="full-width">
-                                <input matInput [matDatepicker]="pickerTo" placeholder="End Date" formControlName="toDate"
-                                  [value]="date.value">
-                                <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
-                                <mat-datepicker #pickerTo></mat-datepicker>
-                              </mat-form-field></div>
-
-                            <div class="col-md-4 my-auto" *ngIf="!loadingPermission">
-                              <div class="input-group" *ngIf="!loadingUser">
-                                <select class="form-control" formControlName="userId" (change)="updateUser($event.target)">
-                                  <option value="null">--Select User--</option>
-                                  <option *ngFor="let list of users" [value]="list.id">
-                                    {{list.id}} :: {{list.name}}
-                                  </option>
-                                </select>
-
-                                <span class="input-group-append">
-                                  <input type="button" name="search" id="search" value="Search" (click)="dateFilter()" class="btn  btn-primary"
-                                    [disabled]="form.invalid">
-                                   </span>
-
-
-                              </div>
-
-                            </div>
-
-                            <div class="col-md-2 my-auto">
-                              <button type="button" *ngIf="!loadingPermission" class="btn btn-primary float-left" (click)="loadData(0)">Load All User</button>
-
-                            </div>
-
+                        <div class="col-md-2 my-auto">
+                          <a href="#"  (click)="print('print-section')"  class="btn btn-default"><i class="fas fa-print"></i> Print</a>
                         </div>
 
                       </div>
-
                     </div>
-                  </form>
-                </div>
-              </div>
 
-
-              <div id="print-section" >
-
-                  <div class="print">
-
-            <!--HEADER-->
-            <div class="print-only">
-                <div class="row mb-3">
-                  <div class="col-md-12">
-                    <img src="/assets/images/trade-2.jpg" height="120">
                   </div>
                 </div>
+              </form>
+
+            </div>
+          </div>
+
+          <div class="card">
+            <div  class="card-body">
+
+                <div id="print-section" style="min-height:500px">
+
+                <div class="print">
+                    <!--HEADER-->
+
+            <div class="row mb-3">
+              <div class="col-md-8">
+                <img src="/assets/images/trade-2.jpg" height="100">
+              </div>
+
+              <div class="col-md-4">
+                <p></p>
+                <h4>Representative Stock  Report</h4>
+                Name:<strong>{{userName}}</strong><br>Address:<strong>{{userAddress}}</strong><br>
+                <p>From Date:<strong>{{fromDate| date: 'dd/MM/yyyy'}}</strong>  To: <strong>{{toDate |date: 'dd/MM/yyyy'}}</strong> </p>
                 </div>
+            </div>
 
-                      <h4>Represenrative Stock Report Report</h4>
-                      <p>Name:{{userName}},Address:{{userAddress}}</p>
-                      <p>From Date:<strong>{{fromDate| date: 'dd/MM/yyyy'}}</strong>  To: <strong>{{toDate |date: 'dd/MM/yyyy'}}</strong> </p>
 
-              <div class="table-responsive ">
 
+          <div class="table-responsive" style="min-height: 250px;">
 
             <!--SECOND TABLE-->
 
-            <tr *ngIf="loading">
-                <td colspan="12" class="text-center loading-data">
-                    <mat-spinner></mat-spinner>
-                </td>
-              </tr>
-
+            <div *ngIf="loading">
+                  <p><strong>Report Data Not Generated</strong> </p>
+                    <!--mat-spinner></mat-spinner-->
+              </div>
 
 
               <ng-container *ngIf="!loading">
@@ -146,28 +125,28 @@
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Product Name</th>
-                      <th>Opening Qty</th>
-                      <th>*Stock Recived</th>
-                      <th>*Total Qty</th>
+                      <th style="width: 180px;">Product Name</th>
+                      <th>Opening</th>
+                      <th>Stock Recived</th>
+                      <th>Total Qty</th>
                       <th>MRP</th>
-                      <th>*Total Value</th>
+                      <th>Total Value</th>
 
                       <th *ngFor="let char of data.characteristics">
-                        Qty of {{ char.product_discount_percentage }}&#37;
+                        Qty of  <br> {{ char.product_discount_percentage }}&#37;
                       </th>
                       <th *ngFor="let char of data.characteristics">
-                        Value of {{ char.product_discount_percentage }}&#37;
+                        Value of <br> {{ char.product_discount_percentage }}&#37;
                       </th>
 
-                      <th>*Sales Qty</th>
-                      <th>*Sales Amount</th>
+                      <th>Sales Qty</th>
+                      <th>Sales Amount</th>
                       <th>Gift Qty</th>
                       <th>Damage Qty</th>
                       <th>In-Hand Qty</th>
-                      <th>*In-Hand Value</th>
-                      <th>*Sales Total</th>
-                      <th>*Dues Total</th>
+                      <th>In-Hand Value</th>
+                      <th>Sales Total</th>
+                      <th>Dues Total</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -191,30 +170,28 @@
 
                       <td *ngFor="let char   of data.characteristics">
                         <span *ngFor=" let cross   of data.crossData">
-
-
                           <div *ngIf="cross.id=== P.STOCK_ITEM_ID &&  cross.product_discount_percentage  ===  char.product_discount_percentage  ">
                             {{cross.quantity }}
                           </div>
-
                         </span>
                       </td>
 
                       <td *ngFor="let char  of data.characteristics">
                         <span *ngFor=" let cross of data.crossData">
                           <div *ngIf="cross.id === P.STOCK_ITEM_ID && _CIN(cross.product_discount_percentage) === _CIN(char.product_discount_percentage)">
-                              {{cross.product_discount_amount }}
+                              {{cross.sub_total }}
                           </div>
                         </span>
                       </td>
-                      <td>  0</td>
-                      <td>  0</td>
+                      <td> <strong>{{  _CIP(P.OUTWARD_QUANTITY) }}</strong> </td>
+                      <td><strong>{{ P.OUTWARD_AMOUNT }}</strong> </td>
+
                       <td> {{  _CIP(P.GIFT_QUANTITY) }}</td>
                       <td>  {{  _CIP(P.DAMAGE_QUANTITY) }} </td>
 
                       <td>{{ _CIN(P.TRAN_QUANTITY)+_CIN(P.OUTWARD_QUANTITY) +_CIN(P.GIFT_QUANTITY) +_CIN(P.DAMAGE_QUANTITY)+_CIN(P.INWARD_QUANTITY)  }}</td>
 
-                      <td>  0</td>
+                      <td> {{ ( _CIN(P.TRAN_QUANTITY)+_CIN(P.OUTWARD_QUANTITY) +_CIN(P.GIFT_QUANTITY) +_CIN(P.DAMAGE_QUANTITY)+_CIN(P.INWARD_QUANTITY) ) *  P.ITEM_MRP }}</td>
 
                       <td>
                           {{ _CIN(P.OUTWARD_AMOUNT) +_CIN(P.GIFT_COST) +_CIN(P.DAMAGE_COST)+_CIN(P.INWARD_AMOUNT)  }}
@@ -233,7 +210,20 @@
               </div>
 
 
-            </div></div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 text-center">
+                <div class="page-footer">
+                  Head Office: 81/2(Ground floor), Nayapaltan,Dhaka-1000,Bangladesh<br>
+                  Cell:+8801793000277,Email:giasuddin8832@gmail.com, gmtradeint2004@gmail.com<br>
+                  Web:www.gmtradeinternational.com, F /gmtradeinternational&zarifcorporation
+                </div>
+
+              </div>
+            </div>
+
+          </div><!--Print-->
 
 
             </div>

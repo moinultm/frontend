@@ -159,6 +159,7 @@ UpdateForm( product?: Product,id?:number):void{
 
        mrp:[product ? product.mrp : '0',  [Validators.required]],
       cost_price:[product ? product.cost_price : '0',  [Validators.required]],
+      minimum_retail_price:[product ? product.minimum_retail_price : '0',  [Validators.required]]
 
      });
 
@@ -178,6 +179,7 @@ updateValue(){
     id:  this.selectedProductId,
    mrp: this.myUpdateForm.get('mrp').value,
    cost_price: this.myUpdateForm.get('cost_price').value,
+   minimum_retail_price: this.myUpdateForm.get('minimum_retail_price').value,
   })
     .subscribe((data: any) =>   {
       success('Info!', 'Product data updated', this._toastr);

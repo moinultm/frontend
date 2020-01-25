@@ -29,7 +29,7 @@
                with font-awesome or any other icon font library -->
 
                <li class="nav-item">
-                <a href="#" class="nav-link" (click)="logout()">
+                <a  href="#"  routerLink="/" class="nav-link" (click)="logout()">
                   <i class="nav-icon fas fa-sign-out-alt"></i>
                   <p>Logout</p>
                 </a>
@@ -184,31 +184,6 @@
           </ul>
         </li>
 
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
-
-            <i class="nav-icon fas fa-boxes"></i>
-            <p>
-              Classification
-              <i class="fa fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="#" routerLink="/category" class="nav-link" routerLinkActive="active">
-                <i class="nav-icon  fab fa-audible"></i>
-                <p>Category</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" routerLink="/subcategory" class="nav-link" routerLinkActive="active">
-                <i class="nav-icon  fab fa-accusoft"></i>
-                <p>Subcategory</p>
-              </a>
-            </li>
-
-          </ul>
-        </li>
 
 
         <li class="nav-item has-treeview">
@@ -289,58 +264,14 @@
         </li>
 
 
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
-
-            <i class="nav-icon fas fa-users"></i>
-
-
-            <p>
-              Cilents
-              <i class="fa fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="#" routerLink="/customer" class="nav-link" routerLinkActive="active">
-                <i class="nav-icon fas fa-user-friends"></i>
-                <p>Customer</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="/supplier" class="nav-link" routerLinkActive="active">
-                <i class="nav-icon fas fa-users"></i>
-                <p>Supplier</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-
-        <!--li class="nav-item">
-        <a href="#" routerLink="/report" class="nav-link"  routerLinkActive="active">
-          <i class="nav-icon fas fa-database"></i>
-          <p>Reports Data</p>
-        </a>
-      </li-->
-
-
-        <li class="nav-item">
-          <a href="#" [routerLink]="['/expenses']" class="nav-link" [routerLinkActiveOptions]="{exact: true}"
-            routerLinkActive="active">
-
-            <i class="nav-icon  fas fa-feather-alt"></i>
-            <p>Expenses</p>
-          </a>
-        </li>
 
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
-
-            <i class="nav-icon fas fa-database"></i>
+            <i class="nav-icon fas fa-database text-info"></i>
 
             <p>
               Reports
-              <i class="fa fa-angle-left right"></i>
+              <i class="fa fa-angle-left right "></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
@@ -349,14 +280,14 @@
 
             <li class="nav-item">
               <a href="#" [routerLink]="['/stock-in-report']" class="nav-link" routerLinkActive="active">
-                <i class="nav-icon far fa-circle"></i>
+                <i class="nav-icon far fa-circle text-warning"></i>
                 <p>Stock-In Report</p>
               </a>
             </li>
 
             <li class="nav-item">
               <a href="#" [routerLink]="['/stock-out-report']" class="nav-link" routerLinkActive="active">
-                <i class="nav-icon far fa-circle"></i>
+                <i class="nav-icon far fa-circle text-info"></i>
                 <p>Stock-Out Report</p>
               </a>
             </li>
@@ -370,28 +301,28 @@
 
             <li class="nav-item">
               <a href="#" [routerLink]="['/stock-general-report']" class="nav-link" routerLinkActive="active">
-                <i class="nav-icon far fa-circle"></i>
+                <i class="nav-icon far fa-circle text-warning"></i>
                 <p>Stock In-Hand Report</p>
               </a>
             </li>
 
             <li class="nav-item">
               <a href="#" [routerLink]="['/total-sell-report']" class="nav-link" routerLinkActive="active">
-                <i class="nav-icon far fa-circle"></i>
+                <i class="nav-icon far fa-circle text-info"></i>
                 <p>Total Sell Report</p>
               </a>
             </li>
 
             <li class="nav-item">
               <a href="#" [routerLink]="['/represent-stock-report']" class="nav-link" routerLinkActive="active">
-                <i class="nav-icon far fa-circle"></i>
+                <i class="nav-icon far fa-circle text-warning"></i>
                 <p>Rep-Stock Report</p>
               </a>
             </li>
 
             <li class="nav-item">
               <a href="#" [routerLink]="['/represent-status-report']" class="nav-link" routerLinkActive="active">
-                <i class="nav-icon far fa-circle"></i>
+                <i class="nav-icon far fa-circle text-info"></i>
                 <p>Rep-Payment Report</p>
               </a>
             </li>
@@ -470,6 +401,79 @@
 
           </ul>
         </li>
+
+
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+
+            <i class="nav-icon fas fa-boxes"></i>
+            <p>
+              Classification
+              <i class="fa fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="#" routerLink="/category" class="nav-link" routerLinkActive="active">
+                <i class="nav-icon  fab fa-audible"></i>
+                <p>Category</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" routerLink="/subcategory" class="nav-link" routerLinkActive="active">
+                <i class="nav-icon  fab fa-accusoft"></i>
+                <p>Subcategory</p>
+              </a>
+            </li>
+
+          </ul>
+        </li>
+
+
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+
+            <i class="nav-icon fas fa-users"></i>
+
+
+            <p>
+              Cilents
+              <i class="fa fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="#" routerLink="/customer" class="nav-link" routerLinkActive="active">
+                <i class="nav-icon fas fa-user-friends"></i>
+                <p>Customer</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/supplier" class="nav-link" routerLinkActive="active">
+                <i class="nav-icon fas fa-users"></i>
+                <p>Supplier</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!--li class="nav-item">
+        <a href="#" routerLink="/report" class="nav-link"  routerLinkActive="active">
+          <i class="nav-icon fas fa-database"></i>
+          <p>Reports Data</p>
+        </a>
+      </li-->
+
+
+        <li class="nav-item">
+          <a href="#" [routerLink]="['/expenses']" class="nav-link" [routerLinkActiveOptions]="{exact: true}"
+            routerLinkActive="active">
+
+            <i class="nav-icon  fas fa-feather-alt"></i>
+            <p>Expenses</p>
+          </a>
+        </li>
+
 
 
         <li class="nav-header">HRM</li>
@@ -581,7 +585,7 @@
 
 
         <li class="nav-item">
-          <a href="#" class="nav-link" (click)="logout()">
+          <a href="#"  routerLink="/" class="nav-link" (click)="logout()">
             <i class="nav-icon fas fa-sign-out-alt"></i>
             <p>Logout</p>
           </a>

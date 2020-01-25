@@ -51,14 +51,16 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
 
-  ngOnInit(): void { }
+  ngOnInit(): void {this.loading = false; }
 
   private buildForm(): void {
     this.form = this._fb.group({
       username: [ '', [ Validators.required, Validators.email ] ],
       password: [ '', Validators.required ]
     });
+
   }
+
 
 
   login() {

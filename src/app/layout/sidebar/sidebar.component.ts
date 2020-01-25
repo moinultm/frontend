@@ -17,7 +17,8 @@ export class SidebarComponent implements OnInit {
   @ViewChild('mainSidebar', { static: false }) mainSidebar;
 
   logoPreview: any;
-  constructor(  private Auth: AuthenticationService,
+  constructor(
+    private authenticationService: AuthenticationService,
       private configure:ConfigureService) { }
 
   ngOnInit() {
@@ -37,7 +38,7 @@ export class SidebarComponent implements OnInit {
 
 
   logout(): void {
-    this.Auth.logout();
+    this.authenticationService.logout();
   }
 
 

@@ -82,7 +82,7 @@ export class RepresentStockReportComponent implements OnInit {
     this.loadingPermission=true;}
 
 
-      this.loadData(this.user);
+      //this.loadData(this.user);
       this.iniForm();
     }
 
@@ -203,13 +203,11 @@ export class RepresentStockReportComponent implements OnInit {
             ${styles}
             ${links}
             <style>
-            body
-            {
-              padding: 20mm  10mm  10mm 10mm;
-            }
+            body{zoom: 85%;}
 
             @page {
               size: A4 landscape;
+              font-size:small !Important;
             }
           </style>
           </head>

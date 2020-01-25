@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { JwtHelperService } from '@app/core/services/security/jwt-helper.service';
+import { AuthenticationService } from '@app/core/services/security/authentication.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,16 +15,17 @@ public loggedIn :boolean;
 
   constructor(
     private router: Router,
-
+    private authenticationService: AuthenticationService,
     public jwtHelper: JwtHelperService) { }
 
   ngOnInit() {
 
    }
 
-logout(Event: MouseEvent){
-  event.preventDefault();
-  this.router.navigateByUrl('/login');
+logout() : void{
+
+  this.authenticationService.logout();
+
 }
 
 }

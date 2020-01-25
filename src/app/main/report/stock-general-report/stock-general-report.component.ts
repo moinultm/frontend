@@ -10,6 +10,9 @@ import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { SellsInvoice } from '@app/shared/models/stock/invoice.model';
 import { StockGeneral } from '@app/shared/models/stock/stock-general.model';
 
+import { environment } from '@env/environment';
+
+
 import 'pivottable/dist/pivot.min.js';
 import 'pivottable/dist/pivot.min.css';
 

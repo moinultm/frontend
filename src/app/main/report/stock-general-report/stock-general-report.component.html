@@ -16,7 +16,7 @@
       </div>
     </div>
   </div>
-
+ <!-- Content Header (Page header) -->
 
 
   <section class="content">
@@ -88,19 +88,20 @@
             </div>
 
 
-    <div class="table-responsive">
-              <tr *ngIf="loading">
-                  <td colspan="12" class="text-center loading-data">
+    <div class="table-responsive" style="min-height:500px">
+
+
+              <div *ngIf="loading">
                       <mat-spinner></mat-spinner>
-                  </td>
-                </tr>
-  <!--Replacing with controller2 for Pivot Table-->
+              </div>
+
+          <!--Replacing with controller2 for Pivot Table-->
               <ng-container *ngIf="!loading">
-                  <table class="table  table-bordered table-mini">
+                  <table class="table  table-bordered table-mini table-hover dataTable">
                     <thead>
                       <tr>
                         <th>#</th>
-                        <th>Product Name</th>
+                        <th >Product Name</th>
                         <th>Opening</th>
                         <th>Stock In</th>
                         <th>Stock Total </th>
@@ -126,12 +127,12 @@
                         <td class="bg-light-green"> {{ P.STOCK_ITEM_NAME }}</td>
                         <td> {{ P.TRAN_QUANTITY }} </td>
                         <td> {{ P.INWARD_QUANTITY }} </td>
-                        <td class="bg-light-green"> <strong>{{ _CIN(P.TRAN_QUANTITY)+_CIN(P.INWARD_QUANTITY) }}</strong></td>
+                        <td > <strong>{{ _CIN(P.TRAN_QUANTITY)+_CIN(P.INWARD_QUANTITY) }}</strong></td>
                          <td>{{ _CIP(P.OUTWARD_QUANTITY) }}</td>
-                         <td class="bg-light-green"><strong>{{ _CIN(P.TRAN_QUANTITY)+_CIN(P.OUTWARD_QUANTITY) +_CIN(P.INWARD_QUANTITY)  }}</strong></td>
+                         <td ><strong>{{ _CIN(P.TRAN_QUANTITY)+_CIN(P.OUTWARD_QUANTITY) +_CIN(P.INWARD_QUANTITY)  }}</strong></td>
                         <td> {{  _CIP(P.GIFT_QUANTITY) }}</td>
                         <td>  {{  _CIP(P.DAMAGE_QUANTITY) }} </td>
-                        <td class="bg-light-green"><strong>{{ _CIN(P.TRAN_QUANTITY)+_CIN(P.OUTWARD_QUANTITY) +_CIN(P.GIFT_QUANTITY) +_CIN(P.DAMAGE_QUANTITY)+_CIN(P.INWARD_QUANTITY)  }}</strong></td>
+                        <td><strong>{{ _CIN(P.TRAN_QUANTITY)+_CIN(P.OUTWARD_QUANTITY) +_CIN(P.GIFT_QUANTITY) +_CIN(P.DAMAGE_QUANTITY)+_CIN(P.INWARD_QUANTITY)  }}</strong></td>
 
                       </tr>
 
@@ -169,7 +170,7 @@
             </div>
           </div>
 
-                </div> <!--page end-->
+                </div> <!--print-section end-->
 
 
             </div>
