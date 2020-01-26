@@ -24,7 +24,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                      <h3 class="card-title">Bordered Table</h3>
+                      <h3 class="card-title">Gift Table</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -34,7 +34,9 @@
                           <tr>
                             <th style="width: 10px">#</th>
                             <th>Ref.No</th>
+                            <th>Details</th>
                             <th>Date</th>
+                            <th>Note</th>
                             <th style="width: 40px">Action</th>
                           </tr>
                         </thead>
@@ -55,7 +57,18 @@
                                 <tr *ngFor="let item of data.data; let i = index">
                                   <td>{{ i+1 }}</td>
                                   <td>{{ item.reference_no }}</td>
+
+                                  <td>
+                                    <span *ngFor="let GIFT of item.gifts; let j = index">
+                                      {{ j+1 }}-{{GIFT.product.name}} {{ GIFT.quantity }} Pcs <br>
+                                    </span>
+
+                                  </td>
+
                                   <td>{{ item.date |  date:'dd/MMM/yyyy' }}</td>
+                                  <td>{{ item.notes }}</td>
+
+
                                   <td class="actions">
                                         <div class="btn-group">
                                             <!--button type="button" class="btn btn-default" (click)="initSave(saveModal, item)"><i class="fa fa-pencil"></i></button-->

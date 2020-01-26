@@ -38,7 +38,9 @@
                           <tr>
                             <th style="width: 10px">#</th>
                             <th>Ref.No</th>
+                            <th>Details</th>
                             <th>Date</th>
+                            <th>Note</th>
                             <th style="width: 40px">Action</th>
                           </tr>
                         </thead>
@@ -59,7 +61,17 @@
                                 <tr *ngFor="let item of data.data; let i = index">
                                   <td>{{ i+1 }}</td>
                                   <td>{{ item.reference_no }}</td>
+
+                                  <td >
+                                    <span *ngFor="let DAMG of item.damages; let j = index">
+                                      {{ j+1 }}-{{DAMG.product.name}} {{ DAMG.quantity }} Pcs <br>
+                                    </span>
+
+                                  </td>
+
+
                                   <td>{{ item.date  |  date:'dd/MMM/yyyy' }}</td>
+                                  <td>{{ item.notes }}</td>
                                   <td class="actions">
 
                                         <div class="btn-group">

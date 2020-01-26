@@ -116,7 +116,7 @@
 
             <div *ngIf="loading">
                   <p><strong>Report Data Not Generated</strong> </p>
-                    <!--mat-spinner></mat-spinner-->
+                    <mat-spinner></mat-spinner>
               </div>
 
 
@@ -128,6 +128,7 @@
                       <th style="width: 180px;">Product Name</th>
                       <th>Opening</th>
                       <th>Stock Recived</th>
+
                       <th>Total Qty</th>
                       <th>MRP</th>
                       <th>Total Value</th>
@@ -141,12 +142,14 @@
 
                       <th>Sales Qty</th>
                       <th>Sales Amount</th>
+
                       <th>Gift Qty</th>
                       <th>Damage Qty</th>
+
                       <th>In-Hand Qty</th>
-                      <th>In-Hand Value</th>
-                      <th>Sales Total</th>
-                      <th>Dues Total</th>
+                      <th>In-Hand Value (Due)</th>
+
+
                     </tr>
                   </thead>
                   <tbody>
@@ -188,18 +191,39 @@
 
                       <td> {{  _CIP(P.GIFT_QUANTITY) }}</td>
                       <td>  {{  _CIP(P.DAMAGE_QUANTITY) }} </td>
+                      <td> <strong>{{ _CIN(P.TRAN_QUANTITY)+_CIN(P.OUTWARD_QUANTITY) +_CIN(P.GIFT_QUANTITY) +_CIN(P.DAMAGE_QUANTITY)+_CIN(P.INWARD_QUANTITY)  }}</strong></td>
+                      <td>  <strong>{{ ( _CIN(P.TRAN_QUANTITY)+_CIN(P.OUTWARD_QUANTITY) +_CIN(P.GIFT_QUANTITY) +_CIN(P.DAMAGE_QUANTITY)+_CIN(P.INWARD_QUANTITY) ) *  P.ITEM_MRP }}</strong></td>
 
-                      <td>{{ _CIN(P.TRAN_QUANTITY)+_CIN(P.OUTWARD_QUANTITY) +_CIN(P.GIFT_QUANTITY) +_CIN(P.DAMAGE_QUANTITY)+_CIN(P.INWARD_QUANTITY)  }}</td>
-
-                      <td> {{ ( _CIN(P.TRAN_QUANTITY)+_CIN(P.OUTWARD_QUANTITY) +_CIN(P.GIFT_QUANTITY) +_CIN(P.DAMAGE_QUANTITY)+_CIN(P.INWARD_QUANTITY) ) *  P.ITEM_MRP }}</td>
-
-                      <td>
-                          {{ _CIN(P.OUTWARD_AMOUNT) +_CIN(P.GIFT_COST) +_CIN(P.DAMAGE_COST)+_CIN(P.INWARD_AMOUNT)  }}
-                      </td>
-
-                      <td>  0</td>
                     </tr>
 
+
+                    <tr *ngIf="!loading" class="bg-light-green">
+                      <td>#</td>
+                      <td><b>Summary </b></td>
+                      <td ><b> {{ OpeningStock }}</b></td >
+                      <td><b> {{ StockRecived }}</b></td>
+                      <td><b>{{ OpeningStock+StockRecived }}</b></td>
+                      <td><b> MRP</b></td>
+                      <td><b> {{TotalValue}}</b></td>
+
+                      <td *ngFor="let char   of data.characteristics">
+
+                        {{char.quantity}}
+
+                      </td>
+
+                      <td *ngFor="let char  of data.characteristics">
+                        {{char.sub_total  }}
+
+                      </td>
+
+                      <td><b>{{SalesQty*-1}}</b></td>
+                      <td><b> {{SalesAmount}}</b></td>
+                      <td><b>{{GiftQty*-1}}</b></td>
+                      <td><b>{{DamageQty*-1}}</b></td>
+                      <td><b>{{InHandQty}}</b></td>
+                      <td><b>{{InHandValue}}</b></td>
+                    </tr>
 
                   </tbody>
                 </table>
@@ -230,7 +254,7 @@
 
 
             <div class="card-footer clearfix">
-           ::ROLE_MANAGER_PRIVILEGE is allowed to sell all user
+           ::ROLE_MANAGER_PRIVILEGE is allowed to see all user
 
               <!--Card body-->
 

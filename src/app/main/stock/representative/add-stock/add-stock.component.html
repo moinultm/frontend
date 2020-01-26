@@ -21,7 +21,7 @@
           <div class="container-fluid">
               <div class="card">
                   <div class="card-header">
-                    <h3 class="card-title">Represtative Stock </h3>
+                    <h3 class="card-title">Product Challan /Represtative Transfer</h3>
                     <div class="card-tools">
                       <a href="#" [routerLink]="['/representative']" class="nav-link d-inline"
                       [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
@@ -45,7 +45,7 @@
                   <div class="row" *ngIf="!loading">
                   <div class="col-md-4">
                       <div class="form-group">
-                          <label for="name">Represtative Name</label>
+                          <label for="name">To Represtative Name</label>
                           <select class="form-control"  formControlName="user_id">
                               <option value="null">--Select--</option>
                               <option *ngFor="let U of users.data" [value]="U.id">
@@ -107,7 +107,7 @@
                             </td>
 
                             <td>
-                                <div class="form-group" (keyup)="summaryQty()">
+                                <div class="form-group" (keypress)="summaryQty()">
                                    <input type="text" class="form-control" formControlName="add_quantity">
                                 </div>
                             </td>

@@ -50,6 +50,20 @@ export class RepresentStockReportComponent implements OnInit {
   isRoleViewAll:any;
   loadingPermission:boolean;
 
+
+  OpeningStock=0;
+     StockRecived=0;
+      TotalValue=0;
+        SalesQty=0;
+          SalesAmount=0;
+            GiftQty=0;
+              DamageQty=0;
+                InHandQty=0;
+                  InHandValue=0;
+
+
+
+
   constructor(
     private _fb: FormBuilder,
     private datePipe : DatePipe,
@@ -93,6 +107,7 @@ export class RepresentStockReportComponent implements OnInit {
       this.userService.findRepresentative().subscribe((res: PartialList<User>) => {
         this.users = res.data;
         //console.log(this.users)
+
          this.loadingUser = false;
       });
     }
@@ -112,11 +127,8 @@ export class RepresentStockReportComponent implements OnInit {
       let toDt = this.datePipe.transform(this.form.get('toDate').value, 'yyyy-MM-dd');
       let id=this.form.get('userId').value;
 
-
-
       this.fromDate=formDt;
       this.toDate=toDt;
-
 
       this.reportService.representativeStockReport(id,{
         page: this.page,
@@ -126,8 +138,11 @@ export class RepresentStockReportComponent implements OnInit {
       }).subscribe((res: PartialList<StockGeneral>) => {
         this.data = res;
        console.log( this.data);
+        this.summaries();
         this.loading = false;
       });
+
+
     }
 
 
@@ -171,7 +186,38 @@ export class RepresentStockReportComponent implements OnInit {
 
 
 
+    summaries(){
+      let opVal,inVal;
 
+
+      this.OpeningStock = this.data.product.reduce((prev, cur) => parseInt(prev) + parseInt(cur.TRAN_QUANTITY), 0);
+      this.StockRecived = this.data.product.reduce((prev, cur) => parseInt(prev) + parseInt(cur.INWARD_QUANTITY), 0);
+
+     opVal = this.data.product.reduce((prev, cur) => parseInt(prev) + parseInt(cur.TRAN_QUANTITY) * parseInt(cur.ITEM_MRP), 0);
+     inVal= this.data.product.reduce((prev, cur) => parseInt(prev) + parseInt(cur.INWARD_QUANTITY) * parseInt(cur.ITEM_MRP) , 0);
+
+      this.TotalValue= opVal+ inVal;
+
+      this.SalesQty= this.data.product.reduce((prev, cur) => parseInt(prev) + parseInt(cur.OUTWARD_QUANTITY), 0);
+      this.SalesAmount= this.data.product.reduce((prev, cur) => parseInt(prev) + parseInt(cur.OUTWARD_AMOUNT), 0);
+
+      this.GiftQty= this.data.product.reduce((prev, cur) => parseInt(prev) + parseInt(cur.GIFT_QUANTITY), 0);
+      this.DamageQty= this.data.product.reduce((prev, cur) => parseInt(prev) + parseInt(cur.DAMAGE_QUANTITY), 0);
+
+      //_CIN(P.TRAN_QUANTITY)+_CIN(P.OUTWARD_QUANTITY) +_CIN(P.GIFT_QUANTITY) +_CIN(P.DAMAGE_QUANTITY)+_CIN(P.INWARD_QUANTITY)
+      this.InHandQty=this.OpeningStock + this.StockRecived+this.SalesQty+this.GiftQty+this.DamageQty;
+
+      //( _CIN(P.TRAN_QUANTITY)+_CIN(P.OUTWARD_QUANTITY) +_CIN(P.GIFT_QUANTITY) +_CIN(P.DAMAGE_QUANTITY)+_CIN(P.INWARD_QUANTITY) ) *  P.ITEM_MRP
+
+      this.InHandValue= this.data.product.reduce((prev, cur) => parseInt(prev) + (parseInt(cur.TRAN_QUANTITY)+parseInt(cur.OUTWARD_QUANTITY)+parseInt(cur.GIFT_QUANTITY)+parseInt(cur.DAMAGE_QUANTITY)+parseInt(cur.INWARD_QUANTITY)) *parseInt(cur.ITEM_MRP), 0);
+
+       
+
+    }
+
+
+
+//==============================Print=======================
 
 
     private getElementTag(tag: keyof HTMLElementTagNameMap): string {

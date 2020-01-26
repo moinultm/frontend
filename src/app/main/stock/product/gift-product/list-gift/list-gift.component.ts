@@ -58,6 +58,7 @@ export class ListGiftComponent implements OnInit {
       size: this.size
     }).subscribe((res: PartialList<Damage>) => {
       this.data = res;
+      console.log( this.data)
       this.loading = false;
     });
   }
