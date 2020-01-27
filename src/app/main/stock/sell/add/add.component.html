@@ -53,6 +53,7 @@
 
                 <div class="row  mb-3">
                     <div class="col-md-12">
+
                         <div class="row">
 
                             <div class="col-md-4">
@@ -88,9 +89,6 @@
                                 </div>
                               </div>
 
-
-
-
                               <div class="col-md-4">
                                   <mat-form-field  class="full-width">
                                     <input matInput [matDatepicker]="picker" placeholder="Bill Date" formControlName="sellDate">
@@ -99,6 +97,7 @@
                                   </mat-form-field>
                                   <!--https://appdividend.com/2018/09/16/angular-datepicker-example-tutorial/-->
                                 </div>
+
                         </div>
 
                         <div class="row">
@@ -312,6 +311,7 @@
               </div>
               <!-- /.card-body -->
               <div class="card-footer">
+                <code>Bill Date is effective on every day</code>
                 <button type="button" class="btn btn-primary btn-lg float-right" [disabled]="mainForm.invalid || _saving" (click)="save(mainForm)"
                   [disabled]="mainForm.invalid || _saving">Save Invoice</button>
               </div>

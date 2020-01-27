@@ -98,7 +98,7 @@ loadData(page?: number): void {
     to:   toDt
   }).subscribe((res: PartialList<SellsInvoice>) => {
     this.data = res;
-
+console.log(this.data)
     this.loading = false;
   });
 }

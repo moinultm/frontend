@@ -19,6 +19,7 @@ import { AddCustomerComponent } from '../add-customer/add-customer.component';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-add',
@@ -57,7 +58,8 @@ export class AddComponent implements OnInit {
     private userService:UserService,
     titleService: Title,
     private dialog: MatDialog,
-    private actRoute: ActivatedRoute
+    private actRoute: ActivatedRoute,
+    private datePipe : DatePipe
     ) {
       titleService.setTitle('Sales Invoice');
     }
@@ -363,7 +365,7 @@ save(form: any){
   formData.append('shipping_cost', this.mainForm.get('shippingCost').value);
   formData.append('discountType', 'flat');
   formData.append('direct',this.mainForm.get('direct').value);
-
+  formData.append('date',  this.datePipe.transform(this.mainForm.get('sellDate').value, 'yyyy-MM-dd'));
 
   formData.append('sells', JSON.stringify(this.orderItemList));
 
@@ -411,6 +413,7 @@ if (orderItemID != null){
   this.orderItemList.splice(i, 1);
 this.updateGrandTotal();
 }
+
  }
 
   }

@@ -36,7 +36,8 @@
               "node_modules/pivottable/dist/pivot.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/admin-lte/dist/js/plugins/bootstrap/js/bootstrap.bundle.min.js",
-              "node_modules/admin-lte/plugins/select2/select2.full.js"
+              "node_modules/admin-lte/plugins/select2/select2.full.js",
+        
 
               			]
           },

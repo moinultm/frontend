@@ -89,11 +89,10 @@
                     <h4>Total Product Sale Report (Sales by representative and direct)</h4>
                     <p>From Date: <strong>{{fromDate| date: 'dd/MM/yyyy'}}</strong>  To: <strong>{{toDate |date: 'dd/MM/yyyy'}}</strong> </p>
 
-            <div class="table-responsive ">
+            <div class="page">
 
               <ng-container *ngIf="!loading">
-
-              <table class="table table-striped table-bordered table-mini ">
+              <table class="table table-striped table-bordered table-mini table-responsive ">
                 <col>
                 <colgroup span="2"></colgroup>
                 <colgroup span="2"></colgroup>
@@ -111,8 +110,8 @@
                 </tr>
                 <tr>
                   <ng-container *ngFor="let product of data.products">
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Amount</th>
+                    <th scope="col">Qty</th>
+                    <th scope="col">Amt</th>
                   </ng-container>
                 </tr>
 
@@ -120,7 +119,7 @@
                 <tr *ngFor="let user of data.users; let i = index">
 
                   <th scope="row"> {{ i+1 }}</th>
-                  <th scope="row">  {{ user.name }}</th>
+                  <th scope="row">{{ user.name }}</th>
 
                   <ng-container *ngFor="let product of data.products">
 
@@ -128,16 +127,16 @@
 
                     <span *ngFor=" let cross of data.crossData">
                       <div *ngIf="cross.USER_ID === user.id && cross.STOCK_ITEM_ID === product.id">
-                         {{  _CIP(cross.TRAN_QUANTITY) +  _CIP(cross.OUTWARD_QUANTITY)  }}
+                         {{    _CIP(cross.OUTWARD_QUANTITY)  }}
                       </div>
                     </span>
                   </td>
 
-                  <td >
+                  <td>
 
                   <span *ngFor=" let cross of data.crossData">
                     <div *ngIf="cross.USER_ID === user.id && cross.STOCK_ITEM_ID === product.id">
-                 {{ _CIN(cross.INWARD_AMOUNT)      }}
+                 {{ _CIN(cross.OUTWARD_AMOUNT)      }}
                     </div>
                   </span>
                   </td>
@@ -147,6 +146,11 @@
                   <th scope="row"> 0 </th>
                 </tr>
 
+                <tr>
+                  <td>Summary</td>
+
+                </tr>
+
               </table>
 
 
@@ -154,41 +158,13 @@
 
 
 
-                    <!--table class="table table-striped table-bordered table-mini">
-                        <thead>
-                          <tr>
-                            <th>#</th>
-                            <th>Product/User Name</th>
-
-                            <th *ngFor="let product of data.products">
-                              {{ product.name }}<br>
-                              <span>Qty,Amt</span>
-                            </th>
-
-                          </tr>
-                        </thead>
-                        <tbody>
-
-                          <tr *ngFor="let user of data.users; let i = index">
-                            <td> {{ i+1 }}</td>
-                            <td> {{ user.name }}</td>
-
-                            <td *ngFor="let product of data.products">
-                              <span *ngFor=" let cross of data.crossData">
-                                <div *ngIf="cross.USER_ID === user.id && cross.STOCK_ITEM_ID === product.id">
-                                   {{  _CIN(cross.TRAN_QUANTITY)+  _CIN(cross.INWARD_QUANTITY)  }} , {{ _CIN(cross.INWARD_AMOUNT)      }}
-                                </div>
-                              </span>
-                            </td>
-
-
-                          </tr>
-
-                        </tbody>
-                      </!--table-->
-
-
             </ng-container>
+
+            <!--NEW PIVOT TABLE-->
+            <p>Details Data:-</p>
+            <div id="output"></div>
+
+            <!--NEW PIVOT TABLE-->
 
               </div>
              </div>

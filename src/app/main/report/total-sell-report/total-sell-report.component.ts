@@ -84,6 +84,7 @@ private el: ElementRef;
     }).subscribe((res: PartialList<StockGeneral>) => {
       this.data = res;
      console.log( this.data);
+     this.loadPivot(this.data);
       this.loading = false;
     });
   }
@@ -104,6 +105,7 @@ private el: ElementRef;
     }).subscribe((res: PartialList<StockGeneral>) => {
       this.data = res;
     console.log( this.data);
+    this.loadPivot(this.data);
       this.loading = false;
     });
   }
@@ -128,7 +130,53 @@ private el: ElementRef;
 
 
 
+  //***************POVIT TABLE**********************************/
+  ngAfterViewInit(){
+  }
 
+  loadPivot(data){
+    if (!this.el ||
+      !this.el.nativeElement ||
+      !this.el.nativeElement.children){
+          console.log('cant build without element');
+          return;
+   }
+
+    var container = this.el.nativeElement;
+    var inst = jQuery(container);
+    var targetElement = inst.find('#output');
+
+
+    if (!targetElement){
+      console.log('cant find the pivot element');
+      return;
+    }
+
+
+   while (targetElement.firstChild){
+      targetElement.removeChild(targetElement.firstChild);
+    }
+
+    console.log(data.crossData)
+
+
+    $.pivotUtilities.tipsData=data.crossData;
+
+    var utils = $.pivotUtilities;
+
+    var sum = $.pivotUtilities.aggregatorTemplates.sum;
+              var numberFormat = $.pivotUtilities.numberFormat;
+              var intFormat = numberFormat({digitsAfterDecimal: 0});
+
+        $("#output").pivot(
+          utils.tipsData, {
+            rows: ["USER_NAME"],
+            cols: ["STOCK_ITEM_NAME","TRAN_TYPE"],
+            aggregator: sum(intFormat)(["OUTWARD"])
+          });
+
+
+  }
 
 
 
@@ -166,7 +214,7 @@ private el: ElementRef;
           <style>
           body
           {
-            padding: 10mm  10mm  10mm 10mm;
+
           }
 
           @page {

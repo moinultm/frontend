@@ -12,7 +12,7 @@ import { UserReceiptDetailComponent } from './user-receipt-detail/user-receipt-d
 
 import { UserResolver } from '@app/core/resolvers/user.resolver';
 import { ProductListResolver } from '@app/core/resolvers/productlist.resolver';
-
+ 
 
 const routes: Routes = [
 
@@ -57,7 +57,8 @@ const routes: Routes = [
     MatDatepickerModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
-    MatInputModule
+    MatInputModule,
+
   ],
   providers: [UserResolver,ProductListResolver],
 })

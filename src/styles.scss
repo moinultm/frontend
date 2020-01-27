@@ -315,3 +315,15 @@ table.pvtTable tbody tr td {border: 1px solid #000000 !important;}
 
  }
 /*PRINT END*/
+
+
+table { width: 100%; }
+.short {
+    background: lightblue;
+    width: 20%
+}
+.long {
+    background: lightgreen;
+    width: 40%;
+}
+.multiCells { background: #F3A633; }
