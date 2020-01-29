@@ -102,7 +102,7 @@
               </tr>
               </thead>
               <tbody  *ngFor="let T of details.data ;">
-                  <tr *ngFor="let TD of T.order ; let i = index">
+                  <tr *ngFor="let TD of T.orders ; let i = index">
                 <td>{{i+1}}</td>
                 <td>{{TD.product.name}}</td>
                 <td>{{TD.quantity}} </td>

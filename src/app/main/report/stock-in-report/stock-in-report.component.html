@@ -24,7 +24,7 @@
 
   <div class="card mb-3">
     <div class="col-md-9 text-center mx-auto">
-    <form [formGroup]="form">
+     <form [formGroup]="form">
             <div class="tool-style">
               <div class="row">
 
@@ -75,7 +75,7 @@
 
 <div class="card">
  <div class="card-body">
-   <div id="print-section" style="min-height:500px">
+   <div id="print-section">
 
     <div class="pageA4landscape">
       <!--HEADER-->
@@ -97,6 +97,12 @@
       <div class="table-responsive">
         <p></p>
         <p>Details Data:-</p>
+
+        <div *ngIf="loading" style="  min-height: 225px; ">
+          <p><strong>Report Data Not Generated</strong> </p>
+            <mat-spinner></mat-spinner>
+          </div>
+
         <div id="output"></div>
 
         <!--ng-container *ngIf="!loading">

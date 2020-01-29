@@ -1,5 +1,13 @@
 
         <form  [formGroup]="form" class="example-form">
+
+          <div class="form-group">
+            <mat-form-field class="full-width">
+              <input matInput [matDatepicker]="picker" placeholder="Pay Date" formControlName="payDate">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
 <div class="form-group">
   <mat-form-field>
     <input  matInput placeholder="Amount" formControlName="amount" >
@@ -25,6 +33,8 @@
               <mat-select placeholder="Select Method" formControlName="method">
                 <mat-option value="cash">Cash</mat-option>
                 <mat-option value="cheque">Cheque</mat-option>
+                <mat-option value="bank">Bank</mat-option>
+                <mat-option value="md">MD</mat-option>
               </mat-select>
             </mat-form-field>
   </div>

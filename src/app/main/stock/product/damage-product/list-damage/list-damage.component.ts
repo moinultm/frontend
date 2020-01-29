@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { Damage } from '@app/shared/models/stock/damage.model';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
@@ -35,13 +35,16 @@ export class ListDamageComponent implements OnInit {
     private modalService: NgbModal,
     titleService: Title,
     private _formBuilder: FormBuilder,
-    public jwtHelper: JwtHelperService) {
+    public jwtHelper: JwtHelperService,
+    private _fb: FormBuilder) {
       this.CanManage= this.jwtHelper.hasRole('ROLE_PRODUCT_MANAGE');
       titleService.setTitle('Stock - Damage List');
 
      }
 
   ngOnInit() {
+    this.iniForm();
+
     if (this.CanManage)
     {this.CanManage=true}
      else{ this.CanManage=false}
@@ -58,6 +61,15 @@ export class ListDamageComponent implements OnInit {
     }).subscribe((res: PartialList<Damage>) => {
       this.data = res;
       this.loading = false;
+    });
+  }
+
+
+
+  iniForm(){
+    this.form = this._fb.group({
+      fromDate: [ new Date(),  [Validators.required],],
+      toDate: [  new Date(),  [Validators.required],]
     });
   }
 

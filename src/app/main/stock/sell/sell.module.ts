@@ -25,6 +25,7 @@ import { UserResolver } from '@app/core/resolvers/user.resolver';
 import { SellsListResolver } from '@app/core/resolvers/sellslist.resolver';
 import { ProductListResolver } from '@app/core/resolvers/productlist.resolver';
 
+import { ConfigModule } from '@app/shared/config/config.module';
 
 const routes: Routes = [
   // Roles component
@@ -86,7 +87,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     //materials
     MatDatepickerModule,
-    MaterialsModule
+    MaterialsModule,
+    ConfigModule
     //materials
   ],
   entryComponents:[AddPaymentComponent,AddCustomerComponent],

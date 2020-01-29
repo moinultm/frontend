@@ -13,6 +13,9 @@ declare var jQuery:any;
 declare var $:any;
 import 'pivottable/dist/pivot.min.js';
 import 'pivottable/dist/pivot.min.css';
+import { ConfigureService } from '@app/core/services/common/config.service';
+
+import { environment } from '@env/environment';
 
 
 @Component({
@@ -47,6 +50,9 @@ export class TotalSellReportComponent implements OnInit {
   //users:Array <User>;
 
   user:number;
+  logoPreview: any;
+
+  TotalAmount:number;
 
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
@@ -56,15 +62,22 @@ private el: ElementRef;
     private datePipe : DatePipe,
     private reportService:ProductReportService,
     private userService:UserService,
-    public jwtHelper: JwtHelperService
+    public jwtHelper: JwtHelperService,
+    private configure:ConfigureService
   ) { this.el = el;}
 
   ngOnInit(){
+    this.logoPreview = environment.uploads_url + 'site/';
+
     this.user=parseInt (this.jwtHelper.id());
-    this.loadData(this.user);
+   // this.loadData(this.user);
    //this.loadUser();
     this.iniForm();
   }
+
+  setConfig(configure: string) {
+    return this.configure.use(configure);
+   }
 
   dateFilter(  page?: number): void {
     this.page = page ? page : 1;
@@ -84,7 +97,8 @@ private el: ElementRef;
     }).subscribe((res: PartialList<StockGeneral>) => {
       this.data = res;
      console.log( this.data);
-     this.loadPivot(this.data);
+   // this.loadPivot(this.data);
+   this.GetTotal()
       this.loading = false;
     });
   }
@@ -105,7 +119,8 @@ private el: ElementRef;
     }).subscribe((res: PartialList<StockGeneral>) => {
       this.data = res;
     console.log( this.data);
-    this.loadPivot(this.data);
+    //this.loadPivot(this.data);
+    this.GetTotal()
       this.loading = false;
     });
   }
@@ -128,7 +143,10 @@ private el: ElementRef;
     return parseInt(val)*-1;
   }
 
-
+  CSUM(val){
+    let sum=0;
+    return sum =+val;
+  }
 
   //***************POVIT TABLE**********************************/
   ngAfterViewInit(){
@@ -168,6 +186,16 @@ private el: ElementRef;
               var numberFormat = $.pivotUtilities.numberFormat;
               var intFormat = numberFormat({digitsAfterDecimal: 0});
 
+              var count = function(data, rowKey, colKey) {
+                return {
+                  count: 0,
+                  push: function(record) { this.count++; },
+                  value: function() { return this.count; },
+                  format: function(x) { return x; },
+               };
+              };
+         //sum(intFormat)(["OUTWARD"])
+
         $("#output").pivot(
           utils.tipsData, {
             rows: ["USER_NAME"],
@@ -178,6 +206,10 @@ private el: ElementRef;
 
   }
 
+  GetTotal(){
+    this.TotalAmount = this.data.charUser.reduce((prev, cur) => parseInt(prev) + parseInt(cur.Amount), 0);
+
+  }
 
 
 
@@ -212,10 +244,8 @@ private el: ElementRef;
           ${styles}
           ${links}
           <style>
-          body
-          {
 
-          }
+          .page-footer { position: relative !important;}
 
           @page {
             size: A4 landscape;

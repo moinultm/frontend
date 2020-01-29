@@ -103,6 +103,10 @@
                   <div class="table-responsive">
                     <p></p>
                     <p>Details Data:-</p>
+                    <div *ngIf="loading" style="min-height:250px">
+                      <p><strong>Report Data Not Generated</strong> </p>
+                        <mat-spinner></mat-spinner>
+                      </div>
                     <div id="output"></div>
                     <!--ng-container-- *ngIf="!loading">
 

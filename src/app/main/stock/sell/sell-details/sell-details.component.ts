@@ -9,6 +9,10 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddPaymentComponent } from '../add-payment/add-payment.component';
 import { error, warning, success } from '@app/core/utils/toastr';
 
+
+import { environment } from '@env/environment';
+import { ConfigureService } from '@app/core/services/common/config.service';
+
 @Component({
   selector: 'app-sell-details',
   templateUrl: './sell-details.component.html',
@@ -22,19 +26,28 @@ export class SellDetailsComponent implements OnInit {
   loadingDetails:boolean;
   details:PartialList <SellsInvoice> ;
 
+  logoPreview: any;
+
   constructor(  private _toastr: ToastrService,
     private route: ActivatedRoute,
     private router: Router,
     private sellsService: SellsInvoiceService,
     private dialog: MatDialog,
+    private configure:ConfigureService
 
   ) { }
 
   ngOnInit() {
+    this.logoPreview = environment.uploads_url + 'site/';
+
     let id=this.route.snapshot.params.id;
     this.ShowBillDetails(id);
 
   }
+
+  setConfig(configure: string) {
+    return this.configure.use(configure);
+   }
 
   ShowBillDetails(id:number){
     this.loadingDetails = true;
@@ -47,12 +60,11 @@ export class SellDetailsComponent implements OnInit {
 
 
   openDialogPayments(){
-
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 
-      dialogConfig.width= '250px';
+      dialogConfig.width= '350px';
 
       dialogConfig.data = this.details
 
@@ -102,7 +114,7 @@ export class SellDetailsComponent implements OnInit {
         ${styles}
         ${links}
         <style>
-        
+
         @media screen {
           div.divFooter {
             display: none;

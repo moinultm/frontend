@@ -40,8 +40,8 @@
 
             <div class="header">
               <div class="row mb-3">
-                <div class="col-md-9">
-                  <img src="/assets/images/trade-2.jpg" height="180">
+                <div class="col-md-8">
+                  <img src="{{logoPreview}}{{'invoice_header' | configure }}" alt="" class="img-fluid">
                 </div>
               </div>
 
@@ -154,10 +154,16 @@
             <div class="row">
               <div class="col-md-12 text-center">
                 <div class="page-footer">
+                  {{'address' | configure }}<br>
+                  Cell:{{'phone' | configure }}&#44;Email:{{'email' | configure }}<br>
+                  {{'pos_invoice_footer_text' | configure }}
+                </div>
+
+                <!--div class="page-footer">
                   Head Office: 81/2(Ground floor), Nayapaltan,Dhaka-1000,Bangladesh<br>
                   Cell:+8801793000277,Email:giasuddin8832@gmail.com, gmtradeint2004@gmail.com<br>
                   Web:www.gmtradeinternational.com, F /gmtradeinternational&zarifcorporation
-                </div>
+                </div-->
 
               </div>
             </div>

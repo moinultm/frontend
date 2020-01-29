@@ -307,6 +307,7 @@ table.pvtTable tbody tr td {border: 1px solid #000000 !important;}
    }
 
    .page-footer {
+    
      position: fixed;
      bottom: 0;
      width: 100%;
@@ -327,3 +328,20 @@ table { width: 100%; }
     width: 40%;
 }
 .multiCells { background: #F3A633; }
+
+.table-xsmall  td, .table-xsmall  th{  padding: 0.2em !important;}
+.table-xsmall {font-size: 12px;}
+.pageA4landscape{
+
+  display: block;
+  size: A4 landscape;
+  margin: 10px auto;
+
+  page-break-after: always;
+}
+
+
+@media print
+{
+    .page-break { display:block; page-break-before:always; }
+}

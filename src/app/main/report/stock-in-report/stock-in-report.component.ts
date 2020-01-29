@@ -70,7 +70,7 @@ export class StockInReportComponent implements OnInit {
   ngOnInit(){
     this.logoPreview = environment.uploads_url + 'site/';
     this.user=parseInt (this.jwtHelper.id());
-    this.loadData(this.user);
+    //this.loadData(this.user);
    //this.loadUser();
     this.iniForm();
   }

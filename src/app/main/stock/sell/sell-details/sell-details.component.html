@@ -29,7 +29,11 @@
 
           <!-- this row will not appear when printing -->
           <div class="row no-print">
-           <div class="col-12" *ngFor="let  T of details.data ">
+           <div class="col-12" >
+            <button type="button" class="btn btn-info float-right" style="margin-right: 5px;" (click)="openDialogPayments()" ><i class="far fa-credit-card"></i>
+              Add Payment
+            </button>
+
              <a href="#" (click)="print('print-section')" class="btn btn-success float-right"><i class="fas fa-print"></i>
                Print</a>
            </div>
@@ -43,8 +47,8 @@
 
               <div class="header">
                 <div class="row mb-3">
-                  <div class="col-md-8">
-                    <img src="/assets/images/trade-2.jpg"  style="width: 100%;">
+                  <div class="col-md-7">
+                    <img src="{{logoPreview}}{{'invoice_header' | configure }}" alt="" class="img-fluid">
                   </div>
 
                   <div class="col-md-4 invoice-col" *ngFor="let  T of details.data ">
@@ -126,10 +130,22 @@
                 <td>{{TD.product.mrp}}  </td>
                 <td>{{TD.product_discount_percentage}} </td>
                 <td>{{TD.sub_total}} </td>
+              </tr>
 
+              <tr>
+
+                <td></td>
+                <td>
+                 <b> Total:</b>
+                </td>
+                <td>  <b>{{ T.total_quantity_sells }}</b></td>
+                <td></td>
+                <td></td>
+                <td> <b>{{ T.net_total }}</b></td>
               </tr>
 
               </tbody>
+
             </table>
 
           </div>
@@ -139,42 +155,49 @@
 
         <div class="row">
           <!-- accepted payments column -->
-          <div class="col-6"  >
-
-
+          <div class="col-6">
 
             <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-           <h4>Payment History:</h4>
+           <h6><strong>Payment Details:</strong></h6>
 
            <div class="direct-over-flow">
 
-           <ul class="todo-list ui-sortable" data-widget="todo-list" *ngFor="let T of details.data ;" >
+            <table class="table-bordered" *ngFor="let T of details.data ;" >
+              <thead>
+                <tr>
+                  <th width="20px">Sl</th>
+                  <th>Ref.</th>
+                  <th>Date</th>
+                  <th>Type</th>
+                  <th>Notes</th>
+                  <th>Amt</th>
+                </tr>
+                </thead>
 
-            <li *ngFor="let TP of T.payments ;">
-              <span class="handle ui-sortable-handle">
-                <i class="fas fa-ellipsis-v"></i>
-                <i class="fas fa-ellipsis-v"></i>
-              </span>
+                <tbody>
 
-              <span class="text">Reference: {{ TP.reference_no }}</span>
+                  <tr  *ngFor="let TP of T.payments ;">
+                    <td># </td>
+                    <td>{{ TP.reference_no }}</td>
+                    <td>{{ TP.date  |  date:'dd/MMM/yyyy' }}</td>
+                    <td>{{ TP.method }}</td>
+                    <td>{{ TP.note }}</td>
+                    <td>{{ TP.amount }}</td>
+                  </tr>
 
-              <small class="badge badge-info">Paid : <i class="fas fa-check"></i>{{ TP.amount }} </small>
-              <div class="tools">
-                <i class="fas fa-clock"></i>
-                {{ TP.date }}
-                 </div>
+                </tbody>
 
-            </li>
+            </table>
 
 
-          </ul>
         </div><!--overflow-->
 
           </div>
           <!-- /.col -->
 
           <div class="col-6">
-            <p class="lead">Amount</p>
+
+            <h5 class="lead">Bill Totals</h5>
 
             <div class="table-responsive" >
               <table class="table  table-bordered table-mini" *ngFor="let T of details.data ;">
@@ -219,7 +242,9 @@
 
             <div class="row">
               <div class="col-md-12">
-                <img src="/assets/images/trade-footer.jpg" style="width: 100%;">
+                <!--img src="/assets/images/trade-footer.jpg" style="width: 100%;"-->
+                <img src="{{logoPreview}}{{'invoice_footer_image' | configure }}" alt="" class="img-fluid" style="width: 100%;">
+
               </div>
             </div>
 
@@ -227,7 +252,7 @@
 
         <!-- this row will not appear when printing -->
         <div class="row no-print">
-          <div class="col-12" *ngFor="let  T of details.data ">
+          <div class="col-12" >
             <a href="#"  (click)="print('print-section')"  class="btn btn-default"><i class="fas fa-print"></i> Print</a>
             <button type="button" class="btn btn-success float-right" style="margin-right: 5px;" (click)="openDialogPayments()" ><i class="far fa-credit-card"></i>
               Add Payment

@@ -40,6 +40,7 @@ export class RepresentativeComponent implements OnInit {
 
   deletingItem:boolean;
   form: FormGroup;
+
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
 
@@ -80,8 +81,8 @@ export class RepresentativeComponent implements OnInit {
 
   iniForm(){
     this.form = this._fb.group({
-      fromDate: [  '',  [Validators.nullValidator],],
-      toDate: [  '',  [Validators.nullValidator],]
+      fromDate: [ new Date(),  [Validators.required],],
+      toDate: [  new Date(),  [Validators.required],]
     });
   }
 
@@ -109,15 +110,31 @@ export class RepresentativeComponent implements OnInit {
   }
 
 
+  //Search
+dateFilter(){
+  let formDt = this.datePipe.transform(this.form.get('fromDate').value, 'yyyy-MM-dd');
+  let toDt = this.datePipe.transform(this.form.get('toDate').value, 'yyyy-MM-dd');
+
+  this.loading = true;
+  this.representService.find({
+    from:  formDt,
+    to:   toDt
+  }).subscribe((res: PartialList<RepresentStock>) => {
+    this.data = res;
+    this.loading = false;
+  });
+
+}
+
+
+
 
   changeSelection(id:number){
     //console.log(id)
     this.loadData(id);
   }
 
-  dateFilter(form:any){
-   console.log()
-  }
+
 
 
   toDetails(id?:string){

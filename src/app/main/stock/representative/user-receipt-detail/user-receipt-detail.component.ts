@@ -5,6 +5,12 @@ import { RepresentStock } from '@app/shared/models/stock/represent-stock.model';
 import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { RepresentStockService } from '@app/core/services/stock/represent-stock.service';
 
+import { environment } from '@env/environment';
+import { ConfigureService } from '@app/core/services/common/config.service';
+
+
+
+
 @Component({
   selector: 'app-user-receipt-detail',
   templateUrl: './user-receipt-detail.component.html',
@@ -14,16 +20,26 @@ export class UserReceiptDetailComponent implements OnInit {
   loadingDetails:boolean;
   details:PartialList <RepresentStock> ;
 
+  logoPreview: any;
+
   constructor(private _toastr: ToastrService,
     private route: ActivatedRoute,
     private router: Router,
     private sellsService: RepresentStockService,
+    private configure:ConfigureService
  ) { }
 
   ngOnInit() {
+    this.logoPreview = environment.uploads_url + 'site/';
+
     let id=this.route.snapshot.params.id;
     this.ShowBillDetails(id);
   }
+
+  setConfig(configure: string) {
+    return this.configure.use(configure);
+   }
+
 
   ShowBillDetails(ref:string){
     this.loadingDetails = true;
@@ -46,7 +62,6 @@ export class UserReceiptDetailComponent implements OnInit {
 
 
   printNew(){
-
   }
 
   print(printSectionId): void {
@@ -66,9 +81,9 @@ export class UserReceiptDetailComponent implements OnInit {
         <head>
         ${styles}
         ${links}
-          <title>Print Challan</title>
+          <title>Print</title>
           <style>
-        
+
           </style>
         </head>
     <body onload="window.print();window.close()">${printContents}</body>

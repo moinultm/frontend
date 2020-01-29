@@ -22,6 +22,7 @@
       <div class="row">
         <div class="col-md-12">
         <div class="card">
+
             <div class="card-header">
                 <h3 class="card-title">Reciving List/ Mr.  : {{ jwtHelper.name() }}
 
@@ -67,42 +68,47 @@
                   </div>
                  </div>
 
-                  <div class="col-md-3">
+                  <div class="col-md-2">
                     <button type="button" *ngIf="!loadingPermission" class="btn btn-primary float-left" (click)="loadData(0)">All Find</button>
+                    </div>
+
+
+                    <div class="col-md-6">
+                      <form [formGroup]="form">
+
+                        <div class="row">
+                          <div class="col-md-5">
+                              <div class="form-group">
+                                  <mat-form-field>
+                                      <input matInput [matDatepicker]="pickerFrom" placeholder="Date" formControlName="fromDate"  [value]="date.value">
+                                      <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                                      <mat-datepicker #pickerFrom></mat-datepicker>
+                                    </mat-form-field>
+                                  </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <mat-form-field>
+                                        <input matInput [matDatepicker]="pickerTo" placeholder="Date" formControlName="toDate"  [value]="date.value">
+                                        <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                                        <mat-datepicker #pickerTo></mat-datepicker>
+                                      </mat-form-field>
+                                    </div>
+                              </div>
+                              <div class="col-md-2">
+                                  <button type="button" class="btn btn-primary float-left" (click)="dateFilter()">Filter</button>
+                                </div>
+                        </div>
+
+                    </form>
+
                     </div>
 
                 </div>
 
-                <!--form [formGroup]="form">
 
-                    <div class="row">
-                      <div class="col-md-4">
-                          <div class="form-group">
-                              <mat-form-field>
-                                  <input matInput [matDatepicker]="pickerFrom" placeholder="Date" formControlName="fromDate"  [value]="date.value">
-                                  <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
-                                  <mat-datepicker #pickerFrom></mat-datepicker>
-                                </mat-form-field>
-                              </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <mat-form-field>
-                                    <input matInput [matDatepicker]="pickerTo" placeholder="Date" formControlName="toDate"  [value]="date.value">
-                                    <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
-                                    <mat-datepicker #pickerTo></mat-datepicker>
-                                  </mat-form-field>
-                                </div>
-                          </div>
-                          <div class="col-md-4">
-                              <button type="button" class="btn btn-primary float-left" (click)="dateFilter(form)">Filter</button>
-                            </div>
-                    </div>
-
-                </form-->
-
-                <div class="responsive-table table-mini">
-                <table class="table table-bordered">
+                <div class="table-responsive">
+                <table class="table table-bordered table-mini">
                     <thead>
                         <tr>
                             <th style="width: 10px">#</th>
@@ -166,7 +172,7 @@
                 </div>
 
 
-                
+
 
               </div>
             <!-- /.card-body -->

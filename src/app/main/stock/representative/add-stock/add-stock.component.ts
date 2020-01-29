@@ -26,6 +26,11 @@ export class AddStockComponent implements OnInit {
   total:number;
   _saving:boolean;
   myForm: FormGroup;
+
+  date = new FormControl(new Date());
+  serializedDate = new FormControl((new Date()).toISOString());
+
+
   constructor(    titleService: Title,private _formBuilder: FormBuilder,
     private userService:UserService,
     private productService:ProductService,

@@ -8,6 +8,8 @@ import { UserService } from '@app/core/services/security/user.service';
 import { User } from '@app/shared/models/security/user.model';
 import { StockGeneral } from '@app/shared/models/stock/stock-general.model';
 import { JwtHelperService } from '@app/core/services/security/jwt-helper.service';
+import { environment } from '@env/environment';
+import { ConfigureService } from '@app/core/services/common/config.service';
 
 @Component({
   selector: 'app-represent-stock-report',
@@ -35,6 +37,7 @@ export class RepresentStockReportComponent implements OnInit {
   fromDate:any;
   toDate:any;
 
+  logoPreview: any;
 
   form: FormGroup;
 
@@ -62,19 +65,19 @@ export class RepresentStockReportComponent implements OnInit {
                   InHandValue=0;
 
 
-
-
   constructor(
     private _fb: FormBuilder,
     private datePipe : DatePipe,
     private reportService:ProductReportService,
     private userService:UserService,
-    public jwtHelper: JwtHelperService)	{
+    public jwtHelper: JwtHelperService,
+    private configure:ConfigureService)	{
       this.isRoleViewAll=  this.jwtHelper.hasRole('ROLE_MANAGER_PRIVILEGE');
       this.CanManage= this.jwtHelper.hasRole('ROLE_MANAGER_PRIVILEGE');
   	}
 
     ngOnInit(){
+      this.logoPreview = environment.uploads_url + 'site/';
       this.user=parseInt (this.jwtHelper.id());
 
       if (this.CanManage)
@@ -101,6 +104,9 @@ export class RepresentStockReportComponent implements OnInit {
     }
 
 
+    setConfig(configure: string) {
+      return this.configure.use(configure);
+     }
 
     loadUser(): void {
       this.loadingUser = true;
@@ -211,7 +217,7 @@ export class RepresentStockReportComponent implements OnInit {
 
       this.InHandValue= this.data.product.reduce((prev, cur) => parseInt(prev) + (parseInt(cur.TRAN_QUANTITY)+parseInt(cur.OUTWARD_QUANTITY)+parseInt(cur.GIFT_QUANTITY)+parseInt(cur.DAMAGE_QUANTITY)+parseInt(cur.INWARD_QUANTITY)) *parseInt(cur.ITEM_MRP), 0);
 
-       
+
 
     }
 

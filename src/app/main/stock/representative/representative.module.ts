@@ -5,14 +5,17 @@ import { AddStockComponent } from './add-stock/add-stock.component';
  import { RouterModule, Routes } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatDatepickerModule, MatFormFieldModule, MatProgressSpinnerModule, MatInputModule } from '@angular/material';
+import { MatDatepickerModule, MatFormFieldModule, MatProgressSpinnerModule, MatInputModule, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { UserSalesListComponent } from './user-sales-list/user-sales-list.component';
 import { UserSalesInvoicesComponent } from './user-sales-invoices/user-sales-invoices.component';
 import { UserReceiptDetailComponent } from './user-receipt-detail/user-receipt-detail.component';
 
 import { UserResolver } from '@app/core/resolvers/user.resolver';
 import { ProductListResolver } from '@app/core/resolvers/productlist.resolver';
- 
+import { AppDateAdapter, APP_DATE_FORMATS } from '@app/core/utils/format-datepicker';
+
+
+import { ConfigModule } from '@app/shared/config/config.module';
 
 const routes: Routes = [
 
@@ -58,8 +61,11 @@ const routes: Routes = [
     MatFormFieldModule,
     MatProgressSpinnerModule,
     MatInputModule,
-
+    ConfigModule
   ],
-  providers: [UserResolver,ProductListResolver],
+  providers: [UserResolver,ProductListResolver,
+    MatDatepickerModule,  {provide: DateAdapter, useClass: AppDateAdapter},
+    {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS} ]
+
 })
 export class RepresentativeModule { }

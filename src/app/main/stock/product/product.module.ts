@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductComponent } from './product.component';
 import { RouterModule, Routes } from '@angular/router';
-import { MatProgressBarModule, MatProgressSpinnerModule, MatDatepickerModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatProgressBarModule, MatProgressSpinnerModule, MatDatepickerModule, MatFormFieldModule, MatInputModule, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ManageComponent } from './manage/manage.component';
@@ -19,6 +19,7 @@ import { ConfigModule} from '@app/shared/config/config.module';
 import { ProductListResolver } from '@app/core/resolvers/productlist.resolver';
 import { CustomerResolver } from '@app/core/resolvers/customer.resolver';
 import { UserResolver } from '@app/core/resolvers/user.resolver';
+import { AppDateAdapter, APP_DATE_FORMATS } from '@app/core/utils/format-datepicker';
 
 const routes: Routes = [
   // Roles component
@@ -69,7 +70,9 @@ const routes: Routes = [
     TranslateModule,
     ConfigModule
   ],
-  providers: [ProductListResolver,CustomerResolver,UserResolver],
+  providers: [ProductListResolver,CustomerResolver,UserResolver,
+    MatDatepickerModule,  {provide: DateAdapter, useClass: AppDateAdapter},
+    {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}],
 
   exports: [RouterModule]
 })

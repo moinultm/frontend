@@ -156,10 +156,25 @@
               </a>
             </li>
 
+
+            <li class="nav-item">
+              <a href="#" routerLink="/category" class="nav-link" routerLinkActive="active">
+                <i class="nav-icon  fab fa-audible"></i>
+                <p>Category</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" routerLink="/subcategory" class="nav-link" routerLinkActive="active">
+                <i class="nav-icon  fab fa-accusoft"></i>
+                <p>Subcategory</p>
+              </a>
+            </li>
+
+
             <li class="nav-item">
               <a href="#" class="nav-link" [routerLink]="['/representative/add-stock']"
                 [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
-                <i class="nav-icon fas fa-dolly-flatbed"></i>
+                <i class="nav-icon fas fa-dolly-flatbed text-info"></i>
                 <p>Product Transfer/Challan</p>
               </a>
             </li>
@@ -405,59 +420,9 @@
         </li>
 
 
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
-
-            <i class="nav-icon fas fa-boxes"></i>
-            <p>
-              Classification
-              <i class="fa fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="#" routerLink="/category" class="nav-link" routerLinkActive="active">
-                <i class="nav-icon  fab fa-audible"></i>
-                <p>Category</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" routerLink="/subcategory" class="nav-link" routerLinkActive="active">
-                <i class="nav-icon  fab fa-accusoft"></i>
-                <p>Subcategory</p>
-              </a>
-            </li>
-
-          </ul>
-        </li>
 
 
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
 
-            <i class="nav-icon fas fa-users"></i>
-
-
-            <p>
-              Cilents
-              <i class="fa fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="#" routerLink="/customer" class="nav-link" routerLinkActive="active">
-                <i class="nav-icon fas fa-user-friends"></i>
-                <p>Customer</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="/supplier" class="nav-link" routerLinkActive="active">
-                <i class="nav-icon fas fa-users"></i>
-                <p>Supplier</p>
-              </a>
-            </li>
-          </ul>
-        </li>
 
         <!--li class="nav-item">
         <a href="#" routerLink="/report" class="nav-link"  routerLinkActive="active">
@@ -541,6 +506,20 @@
                 <p>Vat</p>
               </a>
             </li>
+
+            <li class="nav-item">
+              <a href="#" routerLink="/customer" class="nav-link" routerLinkActive="active">
+                <i class="nav-icon fas fa-user-friends"></i>
+                <p>Customer</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a routerLink="/supplier" class="nav-link" routerLinkActive="active">
+                <i class="nav-icon fas fa-users"></i>
+                <p>Supplier</p>
+              </a>
+            </li>
+
             <li class="nav-item">
               <a href="#" routerLink="/warehouse" class="nav-link" routerLinkActive="active">
                 <i class="nav-icon  fas fa-city"></i>

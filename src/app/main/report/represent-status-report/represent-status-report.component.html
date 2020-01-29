@@ -124,6 +124,7 @@
                                         <th>User  Name</th>
                                         <th>Total Sale</th>
                                         <th>Paid</th>
+                                        <th>Remainng</th>
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -140,7 +141,7 @@
                                 <td> {{ P.USER_NAME }}</td>
                                 <td> {{ P.TOTAL }} </td>
                                 <td> {{ P.PAY }} </td>
-
+                                <td>{{  (P.TOTAL) - (P.PAY)    }} </td>
                           </tr>
 
                                     </tbody>

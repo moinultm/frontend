@@ -38,6 +38,7 @@ import { ToastrService } from 'ngx-toastr';
 
 iniForm( ){
   this.form = this._formBuilder.group({
+    payDate:[new Date(),[Validators.nullValidator]],
     amount: ['',  [Validators.required,dueAmountValidator(this.due()), Validators.pattern(/^[.\d]+$/) ]],
     note: ['',  [Validators.required, Validators.maxLength(255)]],
     method: ['',  [Validators.required, Validators.maxLength(255)]]
@@ -58,6 +59,7 @@ iniForm( ){
         client_id: this.formLocalData['data'][0]['client_id'],
         user_id: this.formLocalData['data'][0]['user_id'],
         amount: this.form.get('amount').value,
+        date: this.form.get('payDate').value,
         type: 'credit',
         method: this.form.get('method').value,
         note: this.form.get('note').value,

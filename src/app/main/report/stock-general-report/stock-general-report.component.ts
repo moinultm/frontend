@@ -15,6 +15,7 @@ import { environment } from '@env/environment';
 
 import 'pivottable/dist/pivot.min.js';
 import 'pivottable/dist/pivot.min.css';
+import { ConfigureService } from '@app/core/services/common/config.service';
 
 declare var jQuery:any;
 declare var $:any;
@@ -49,6 +50,7 @@ gftTotal=0;
 
   private el: ElementRef;
 
+  logoPreview: any;
 
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
@@ -56,15 +58,22 @@ gftTotal=0;
   constructor(@Inject(ElementRef)el: ElementRef,
     private _fb: FormBuilder,
     private datePipe : DatePipe,
-    private reportService:ProductReportService)	{
+    private reportService:ProductReportService,
+    private configure:ConfigureService)	{
       this.el = el;
   	}
 
     ngOnInit(){
-      this.loadData();
+      this.logoPreview = environment.uploads_url + 'site/';
+      //this.loadData();
 
       this.iniForm();
     }
+
+    setConfig(configure: string) {
+      return this.configure.use(configure);
+     }
+
 
     dateFilter(page?: number): void {
       this.page = page ? page : 1;

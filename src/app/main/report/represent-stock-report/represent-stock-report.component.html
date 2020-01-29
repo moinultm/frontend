@@ -95,14 +95,16 @@
                 <div class="print">
                     <!--HEADER-->
 
-            <div class="row mb-3">
-              <div class="col-md-8">
-                <img src="/assets/images/trade-2.jpg" height="100">
+            <div class="row mb-3  text-center">
+              <div class="col-md-5">
+                <img src="{{logoPreview}}{{'invoice_header' | configure }}" alt="" class="img-fluid">
+                <!--img src="/assets/images/trade-2.jpg" class="img-fluid"-->
               </div>
-
+              <div class="col-md-2">
+              </div>
               <div class="col-md-4">
                 <p></p>
-                <h4>Representative Stock  Report</h4>
+                <h5>Representative Stock  Report</h5>
                 Name:<strong>{{userName}}</strong><br>Address:<strong>{{userAddress}}</strong><br>
                 <p>From Date:<strong>{{fromDate| date: 'dd/MM/yyyy'}}</strong>  To: <strong>{{toDate |date: 'dd/MM/yyyy'}}</strong> </p>
                 </div>
@@ -110,11 +112,11 @@
 
 
 
-          <div class="table-responsive" style="min-height: 250px;">
+          <div class="table-responsive" >
 
             <!--SECOND TABLE-->
 
-            <div *ngIf="loading">
+            <div *ngIf="loading" style="min-height: 250px;">
                   <p><strong>Report Data Not Generated</strong> </p>
                     <mat-spinner></mat-spinner>
               </div>
@@ -239,10 +241,16 @@
             <div class="row">
               <div class="col-md-12 text-center">
                 <div class="page-footer">
+                  {{'address' | configure }}<br>
+                  Cell:{{'phone' | configure }}&#44;Email:{{'email' | configure }}<br>
+                  {{'pos_invoice_footer_text' | configure }}
+                </div>
+
+                <!--div class="page-footer">
                   Head Office: 81/2(Ground floor), Nayapaltan,Dhaka-1000,Bangladesh<br>
                   Cell:+8801793000277,Email:giasuddin8832@gmail.com, gmtradeint2004@gmail.com<br>
                   Web:www.gmtradeinternational.com, F /gmtradeinternational&zarifcorporation
-                </div>
+                </div-->
 
               </div>
             </div>

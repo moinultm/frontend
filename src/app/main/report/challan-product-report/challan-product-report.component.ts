@@ -8,6 +8,9 @@ import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { StockGeneral } from '@app/shared/models/stock/stock-general.model';
 import { User } from '@app/shared/models/security/user.model';
 
+import { environment } from '@env/environment';
+import { ConfigureService } from '@app/core/services/common/config.service';
+
 @Component({
   selector: 'app-challan-product-report',
   templateUrl: './challan-product-report.component.html',
@@ -40,6 +43,8 @@ export class ChallanProductReportComponent implements OnInit {
 
   users:Array <User>;
 
+  logoPreview: any;
+
   currentUserID=0;
   user:number;
   isRoleViewAll:any;
@@ -53,14 +58,16 @@ export class ChallanProductReportComponent implements OnInit {
     private datePipe : DatePipe,
     private reportService:ProductReportService,
     private userService:UserService,
-    public jwtHelper: JwtHelperService,) {
+    public jwtHelper: JwtHelperService,
+      private configure:ConfigureService) {
       this.currentUserID=parseInt(this.jwtHelper.id());
       this.isRoleViewAll=  this.jwtHelper.hasRole('ROLE_MANAGER_PRIVILEGE');
      }
 
   ngOnInit() {
+    this.logoPreview = environment.uploads_url + 'site/';
     this.user=parseInt (this.jwtHelper.id());
-     this.loadData(this.user);
+    // this.loadData(this.user);
 
      if (this.isRoleViewAll)
      {this.loadUser();}
@@ -71,6 +78,10 @@ export class ChallanProductReportComponent implements OnInit {
     this.iniForm();
   }
 
+
+  setConfig(configure: string) {
+    return this.configure.use(configure);
+   }
 
   loadUser(): void {
     this.loadingUser = true;
@@ -194,13 +205,11 @@ export class ChallanProductReportComponent implements OnInit {
           <style>
           body
           {
-            padding: 10mm  10mm  10mm 10mm;
 
           }
 
           @page {
             size: A4 landscape;
-
           }
 
 

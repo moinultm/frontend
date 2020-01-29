@@ -70,16 +70,16 @@
             <div  class="card-body">
 
             <!--SECOND TABLE-->
-    <div id="print-section" style="min-height:500px">
-
-      <div class="print">
+    <div id="print-section" >
+      <div class="pageA4landscape">
          <!--HEADER-->
-
-            <div class="row mb-3">
-              <div class="col-md-8">
-                <img src="/assets/images/trade-2.jpg" height="100">
+            <div class="row mb-3  text-center">
+              <div class="col-md-5">
+                <img src="{{logoPreview}}{{'invoice_header' | configure }}" alt="" class="img-fluid">
+                <!--img src="/assets/images/trade-2.jpg" height="100"-->
               </div>
-
+              <div class="col-md-2">
+              </div>
               <div class="col-md-4">
                 <p></p>
                 <h5>Stock In-Hand Report</h5>
@@ -87,13 +87,12 @@
                 </div>
             </div>
 
+        <div class="table-responsive">
 
-    <div class="table-responsive" style="min-height:500px">
-
-
-              <div *ngIf="loading">
-                      <mat-spinner></mat-spinner>
-              </div>
+          <div *ngIf="loading" style="min-height:250px">
+            <p><strong>Report Data Not Generated</strong> </p>
+              <mat-spinner></mat-spinner>
+            </div>
 
           <!--Replacing with controller2 for Pivot Table-->
               <ng-container *ngIf="!loading">
@@ -162,10 +161,16 @@
           <div class="row">
             <div class="col-md-12 text-center">
               <div class="page-footer">
+                {{'address' | configure }}<br>
+                Cell:{{'phone' | configure }}&#44;Email:{{'email' | configure }}<br>
+                {{'pos_invoice_footer_text' | configure }}
+              </div>
+
+              <!--div class="page-footer">
                 Head Office: 81/2(Ground floor), Nayapaltan,Dhaka-1000,Bangladesh<br>
                 Cell:+8801793000277,Email:giasuddin8832@gmail.com, gmtradeint2004@gmail.com<br>
                 Web:www.gmtradeinternational.com, F /gmtradeinternational&zarifcorporation
-              </div>
+              </div-->
 
             </div>
           </div>

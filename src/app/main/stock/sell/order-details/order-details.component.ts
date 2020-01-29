@@ -42,14 +42,14 @@ export class OrderDetailsComponent implements OnInit {
     this.loadingDetails = true;
     this.ordersService.findOrderDetailsId(id).subscribe((res:PartialList <SellsInvoice>) => {
       this.details = res;
-    // console.log(res);
+    console.log(res);
       this.loadingDetails = false;
     });
   }
 
 
   openDialogPayments(){
-
+    
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
