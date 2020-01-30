@@ -20,6 +20,7 @@ import { TranslateModule } from './shared/translate/translate.module';
 
 import { NotFoundComponent } from './authentication/not-found/not-found.component';
 import { ConfigureService } from './core/services/common/config.service';
+import { SafePipe } from './core/services/pipes/safe.pipe';
 
 
 
@@ -45,7 +46,8 @@ LoginComponent,
   declarations: [
     AppComponent,
     NotFoundComponent,
-    NavbarComponent
+    NavbarComponent,
+    SafePipe 
 
   ],
 
