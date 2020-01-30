@@ -39,6 +39,7 @@ import { StockOutReportComponent } from './stock-out-report/stock-out-report.com
 import { TotalSellReportComponent } from './total-sell-report/total-sell-report.component';
 import { RoleGuard } from '@app/core/services/security/guards/role.guard';
 import { ConfigModule } from '@app/shared/config/config.module';
+import { RepresentCollectionReportComponent } from './represent-collection-report/represent-collection-report.component';
 
 const routes: Routes = [
 
@@ -98,13 +99,13 @@ const routes: Routes = [
     },
     component: RepresentStatusReportComponent
     },
-    { path: 'represent-stock-summary',
+    { path: 'represent-collection-report',
     canActivate: [ AuthGuard,RoleGuard],
     data: {
       expectedRolesType: 'any',
       expectedRoles: [ 'ROLE_REPORT_ACCESS' ]
     },
-    component: RepresentStockSummaryComponent
+    component: RepresentCollectionReportComponent
     },
 
     //Supplier
@@ -226,7 +227,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [  ReportMenuComponent, StockReportComponent, ProductReportComponent, DailySalesReportComponent, CustomerSummaryReportComponent, RepresentStockReportComponent, RepresentStockSummaryComponent, RepresentStatusReportComponent, SupplierBillSummaryComponent, ProductSellReportComponent, SellsStatusReportComponent, TransactionStatusReportComponent, PurchaseStatusReportComponent, StockGeneralReportComponent, ProfitLossReportComponent, ChallanProductReportComponent, DamageProductReportComponent, GiftProductReportComponent, MonthlySalesReportComponent, StockInReportComponent, StockOutReportComponent, TotalSellReportComponent ],
+  declarations: [  ReportMenuComponent, StockReportComponent, ProductReportComponent, DailySalesReportComponent, CustomerSummaryReportComponent, RepresentStockReportComponent, RepresentStockSummaryComponent, RepresentStatusReportComponent, SupplierBillSummaryComponent, ProductSellReportComponent, SellsStatusReportComponent, TransactionStatusReportComponent, PurchaseStatusReportComponent, StockGeneralReportComponent, ProfitLossReportComponent, ChallanProductReportComponent, DamageProductReportComponent, GiftProductReportComponent, MonthlySalesReportComponent, StockInReportComponent, StockOutReportComponent, TotalSellReportComponent, RepresentCollectionReportComponent ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

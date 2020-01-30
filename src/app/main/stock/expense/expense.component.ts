@@ -106,7 +106,7 @@ export class ExpenseComponent implements OnInit {
         [Validators.required, Validators.maxLength(255)]
       ],
       user_id:[null, [Validators.required]],
-
+      date:[new Date(), [Validators.required]],
 
 
     });
