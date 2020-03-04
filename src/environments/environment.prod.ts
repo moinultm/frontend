@@ -15,5 +15,4 @@ export const environment = {
   auth_url: 'https://staritbd.com/oauth/',
   uploads_url: 'ttps://staritbd.com/uploads/',
 };
-
  */
