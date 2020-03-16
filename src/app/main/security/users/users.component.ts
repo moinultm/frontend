@@ -129,6 +129,10 @@ export class UsersComponent implements OnInit {
         user ? user.name : '',
         [Validators.required, Validators.maxLength(255)]
       ],
+      phone: [
+        user ? user.phone : '01',
+        [Validators.required, Validators.maxLength(55)]
+      ],
       address: [
         user ? user.address : '',
         [Validators.required, Validators.maxLength(255)]
@@ -180,6 +184,7 @@ export class UsersComponent implements OnInit {
 
       formData.append('id', this.selectedUser.id + '');
       formData.append('name', this.form.get('name').value);
+      formData.append('phone', this.form.get('phone').value);
       formData.append('address', this.form.get('address').value);
       formData.append('email', this.form.get('email').value);
       formData.append('password', this.form.get('password').value);

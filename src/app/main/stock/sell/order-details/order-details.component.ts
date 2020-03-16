@@ -49,7 +49,7 @@ export class OrderDetailsComponent implements OnInit {
 
 
   openDialogPayments(){
-    
+
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;

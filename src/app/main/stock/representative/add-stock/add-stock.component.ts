@@ -98,17 +98,17 @@ export class AddStockComponent implements OnInit {
    // this.loadProducts()
     this.addNewCompany();
   }
- 
-//, Validators.pattern(/^[.\d]+$/)
+
+// Validators.pattern(/^[.\d]+$/) only number
+//(/^-?(0|[1-9]\d*)?$/) integers alowed
   addNewCompany() {
     let control = <FormArray>this.myForm.controls.companies;
     control.push(
       this._formBuilder.group({
         product_id:[null,Validators.required],
           quantity: 0,
-          add_quantity: [0,[Validators.required,Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+          add_quantity: [0,[Validators.required,Validators.pattern(/^[.\d]+$/)]],
           mrp:0
-
       })
     )
   }
@@ -126,8 +126,6 @@ get employees(): FormArray {
   //other function
   updatePrice(ctrl,index) {
 
-
-
      const arrayControl = this.myForm.get('companies') as FormArray;
 
 
@@ -139,7 +137,6 @@ get employees(): FormArray {
        });
     }
     else {
-
    arrayControl.at(index).patchValue({
    quantity:this._productList[ctrl.selectedIndex - 1].general_quantity,
    mrp:this._productList[ctrl.selectedIndex - 1].mrp

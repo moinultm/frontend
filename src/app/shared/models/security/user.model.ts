@@ -3,6 +3,7 @@ import { Profile } from './profile.model';
 export class User {
   id: number;
   name: string;
+  phone: string;
   email: string;
   address: string;
   password: string;
