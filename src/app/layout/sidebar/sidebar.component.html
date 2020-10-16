@@ -427,10 +427,6 @@
         </li>
 
 
-
-
-
-
         <!--li class="nav-item">
         <a href="#" routerLink="/report" class="nav-link"  routerLinkActive="active">
           <i class="nav-icon fas fa-database"></i>
@@ -439,15 +435,30 @@
       </li-->
 
 
+      <li class="nav-header">Account</li>
         <li class="nav-item">
           <a href="#" [routerLink]="['/expenses']" class="nav-link" [routerLinkActiveOptions]="{exact: true}"
             routerLinkActive="active">
-
             <i class="nav-icon  fas fa-feather-alt"></i>
             <p>Expenses</p>
           </a>
         </li>
 
+        <li class="nav-item">
+          <a href="#" [routerLink]="['/expensecategory']" class="nav-link" [routerLinkActiveOptions]="{exact: true}"
+            routerLinkActive="active">
+            <i class="nav-icon  fas fa-feather-alt"></i>
+            <p>expense category</p>
+          </a>
+        </li>
+        
+        <li class="nav-item">
+          <a href="#" [routerLink]="['/productconsumal']" class="nav-link" [routerLinkActiveOptions]="{exact: true}"
+            routerLinkActive="active">
+            <i class="nav-icon  fas fa-feather-alt"></i>
+            <p>product consumal</p>
+          </a>
+        </li>
 
 
         <li class="nav-header">HRM</li>

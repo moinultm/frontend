@@ -91,6 +91,17 @@ const routes: Routes = [
     },
     loadChildren: () => import('./expense/expense.module').then(m => m.ExpenseModule)
   },
+
+  {
+    path: 'expensecategory',
+    canActivate: [ AuthGuard,RoleGuard],
+    data: {
+      expectedRolesType: 'any',
+      expectedRoles: [ 'ROLE_EXPENSE_ACCESS' ]
+    },
+    loadChildren: () => import('./expensecategory/expensecategory.module').then(m => m.ExpensecategoryModule)
+  },
+
   {
     path: 'representative',
     canActivate: [ AuthGuard,RoleGuard],
@@ -99,6 +110,16 @@ const routes: Routes = [
       expectedRoles: [ 'ROLE_REPRESENT_ACCESS' ]
     },
     loadChildren: () => import('./representative/representative.module').then(m => m.RepresentativeModule)
+  },
+
+  {
+    path: 'productconsumal',
+    canActivate: [ AuthGuard,RoleGuard],
+    data: {
+      expectedRolesType: 'any',
+      expectedRoles: [ 'ROLE_PRODUCT_ACCESS' ]
+    },
+    loadChildren: () => import('./productconsumal/productconsumal.module').then(m => m.ProductconsumalModule)
   }
 
 ];

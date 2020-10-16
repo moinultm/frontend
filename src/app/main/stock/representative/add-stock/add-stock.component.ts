@@ -100,15 +100,15 @@ export class AddStockComponent implements OnInit {
   }
  
 //, Validators.pattern(/^[.\d]+$/)
+///^-?(0|[1-9]\d*)?$/
   addNewCompany() {
     let control = <FormArray>this.myForm.controls.companies;
     control.push(
       this._formBuilder.group({
         product_id:[null,Validators.required],
           quantity: 0,
-          add_quantity: [0,[Validators.required,Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+          add_quantity: [0,[Validators.required,Validators.pattern(/^[.\d]+$/)]],
           mrp:0
-
       })
     )
   }

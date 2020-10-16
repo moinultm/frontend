@@ -101,6 +101,11 @@ export class ExpenseComponent implements OnInit {
         expense ? expense.purpose : '',
         [Validators.required, Validators.maxLength(255)]
       ],
+
+      category: [
+        expense ? expense.category : '',
+        [Validators.required, Validators.maxLength(255)]
+      ],
       amount: [
         expense ? expense.amount : '',
         [Validators.required, Validators.maxLength(255)]
