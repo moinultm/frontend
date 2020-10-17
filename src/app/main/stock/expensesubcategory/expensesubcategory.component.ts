@@ -1,28 +1,28 @@
-import { Component, OnInit  } from '@angular/core';
-import { Subcategory } from '@app/shared/models/stock/subcategory.model';
+import { Component, OnInit } from '@angular/core';
+import { ExpenseSubcategory } from '@app/shared/models/stock/expensesubcategory.model';
 import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { error, warning, success } from '@app/core/utils/toastr';
 
-import { Category } from '@app/shared/models/stock/category.model';
-import { CategoryService } from '@app/core/services/stock/category.service';
-import { SubcategoryService } from '@app/core/services/stock/subcategory.service';
+import { ExpenseCategory } from '@app/shared/models/stock/expensecategory.model';
+import { ExpenseCategoryService } from '@app/core/services/stock/expensecategory.service';
+import { ExpenseSubcategoryService } from '@app/core/services/stock/expensesubcategory.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
 import { constants } from '@env/constants';
 
 import {MatDialog, MatDialogConfig} from "@angular/material";
-import { ProductListComponent } from './product-list/product-list.component';
+
 
 
 @Component({
-  selector: 'app-sub-category',
-  templateUrl: './sub-category.component.html',
-  styleUrls: ['./sub-category.component.scss']
+  selector: 'app-expensesubcategory',
+  templateUrl: './expensesubcategory.component.html',
+  styleUrls: ['./expensesubcategory.component.scss']
 })
-export class SubCategoryComponent implements OnInit {
-  data: PartialList<Subcategory>;
+export class ExpensesubcategoryComponent implements OnInit {
+  data: PartialList<ExpenseSubcategory>;
   loading: boolean;
   savingSubcategory: boolean;
   deletingSubcategory: boolean;
@@ -32,21 +32,22 @@ export class SubCategoryComponent implements OnInit {
   size = 10;
 
   form: FormGroup;
-  categories: Array<Category>;
-  selectedSub: Subcategory;
+  categories: Array<ExpenseCategory>;
+  selectedSub: ExpenseSubcategory;
 
   constructor(
     private dialog: MatDialog,
-    private subcategoryService: SubcategoryService,
-    private categoryService: CategoryService,
+    private subcategoryService: ExpenseSubcategoryService,
+    private categoryService: ExpenseCategoryService,
     private modalService: NgbModal,
     private _fb: FormBuilder,
     private _toastr: ToastrService,
     titleService: Title) {
-      titleService.setTitle(constants.app_name + ' - Stock - Subcategory management');
+      titleService.setTitle(constants.app_name + ' - Stock - Expense Subcategory management');
     }
 
   ngOnInit() {
+
   this.loadData()
   }
   //Loading Data
@@ -56,19 +57,20 @@ export class SubCategoryComponent implements OnInit {
     this.subcategoryService.find({
       page: this.page,
       size: this.size
-    }).subscribe((res: PartialList<Subcategory>) => {
+    }).subscribe((res: PartialList<ExpenseSubcategory>) => {
       this.data = res;
+      console.log(res);
       this.loading = false;
     });
   }
 
   //Save Data
-  initSave(modal: any, subcategory?: Subcategory): void {
+  initSave(modal: any, subcategory?: ExpenseSubcategory): void {
     this.initSaveForm(subcategory);
 
     this.loadingCategory=true;
     this.categoryService.find()
-    .subscribe((res: PartialList<Category>) => {
+    .subscribe((res: PartialList<ExpenseCategory>) => {
       this.categories = res.data;
       this.loadingCategory = false;
     });
@@ -89,11 +91,11 @@ export class SubCategoryComponent implements OnInit {
   }
 
 
-  initSaveForm(subcategory?: Subcategory): void {
+  initSaveForm(subcategory?: ExpenseSubcategory): void {
      if (subcategory) {
-      this.selectedSub =  Object.assign(Subcategory, subcategory);
+      this.selectedSub =  Object.assign(ExpenseSubcategory, subcategory);
     } else {
-      this.selectedSub = new Subcategory();
+      this.selectedSub = new ExpenseSubcategory();
     }
     this.form = this._fb.group({
       subcategory_name: [
@@ -107,7 +109,7 @@ export class SubCategoryComponent implements OnInit {
     });
   }
 
-  selectedSubHasCategory(cat: Category): boolean {
+  selectedSubHasCategory(cat: ExpenseCategory): boolean {
     if( this.selectedSub.category_id==cat.id)
     {
       return true;
@@ -119,7 +121,7 @@ export class SubCategoryComponent implements OnInit {
  }
 
 
-  selectedSubCats(cat:Category): void {
+  selectedSubCats(cat:ExpenseCategory): void {
     if (this.selectedSubHasCategory(cat)) {
       this.selectedSub.category_id == cat.id;
     } else {
@@ -136,7 +138,7 @@ export class SubCategoryComponent implements OnInit {
         id: this.selectedSub.id,
         subcategory_name: this.form.get('subcategory_name').value,
         category_id: this.form.get('category_id').value,
-      }, this.selectedSub.id ? true : false).subscribe((res: Subcategory) => {
+      }, this.selectedSub.id ? true : false).subscribe((res: ExpenseSubcategory) => {
 
         success('Success!', 'The profile is successfully saved.', this._toastr);
         this.savingSubcategory = false;
@@ -159,7 +161,7 @@ export class SubCategoryComponent implements OnInit {
   }
 
 
-  initProducts(modal: any, subcategory: Subcategory){
+  initProducts(modal: any, subcategory: ExpenseSubcategory){
     this.selectedSub = subcategory;
 
     this.modalService
@@ -169,15 +171,15 @@ export class SubCategoryComponent implements OnInit {
         if (result) {
           this.loadData();
         }
-        this.selectedSub = new Subcategory();
+        this.selectedSub = new ExpenseSubcategory();
       }, () => {
 
-        this.selectedSub = new Subcategory();
+        this.selectedSub = new ExpenseSubcategory();
       });
   }
 
   //DeleteFunction
-  initDelete(modal: any, subcategory: Subcategory): void {
+  initDelete(modal: any, subcategory: ExpenseSubcategory): void {
     this.selectedSub = subcategory;
     // Open the delete confirmation modal
     this.modalService
@@ -187,10 +189,10 @@ export class SubCategoryComponent implements OnInit {
         if (result) {
           this.loadData();
         }
-        this.selectedSub = new Subcategory();
+        this.selectedSub = new ExpenseSubcategory();
       }, () => {
         // If the modal is dismissed
-        this.selectedSub = new Subcategory();
+        this.selectedSub = new ExpenseSubcategory();
       });
   }
 
@@ -201,7 +203,7 @@ export class SubCategoryComponent implements OnInit {
     this.subcategoryService.delete({
       id: this.selectedSub.id
     }).subscribe(() => {
-       success('Success!', 'The Subcategory is successfully saved.', this._toastr);
+       success('Success!', 'The Expense  Subcategory is successfully saved.', this._toastr);
       this.close(modal, true);
       this.deletingSubcategory = false;
     },
@@ -223,6 +225,7 @@ export class SubCategoryComponent implements OnInit {
 
 
 //mat Dialog
+/*
 openDialog(number:number) {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
@@ -235,7 +238,7 @@ openDialog(number:number) {
     };
 
       this.dialog.open(ProductListComponent, dialogConfig,);
-  }
+  }*/
 
 
 

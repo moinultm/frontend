@@ -201,83 +201,6 @@
 
 
 
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-user-tie"></i>
-
-            <p>
-              Representative
-              <i class="fa fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-align-justify"></i>
-                <p>
-                  list
-                  <i class="fa fa-angle-left right"></i>
-                </p>
-              </a>
-
-              <ul class="nav nav-treeview">
-
-
-
-                <li class="nav-item">
-                  <a href="#" class="nav-link" [routerLink]="['/representative']"
-                    [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
-                    <i class="nav-icon  far fa-file-alt"></i>
-                    <p>Transfer Challan List</p>
-                  </a>
-                </li>
-
-                <!--li class="nav-item has-treeview">
-            <a  class="nav-link"   [routerLink]="['/representative']"     [routerLinkActiveOptions]="{exact: true}"  routerLinkActive="active">
-                    <i class="nav-icon  fab fa-angellist"></i>
-                    <p>Recipt Quantity</p>
-                  </a>
-                </li-->
-
-                <li class="nav-item">
-                  <a href="#" class="nav-link" [routerLink]="['/representative','user-sales-invoices']"
-                    [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
-                    <i class="nav-icon  fab fa-angellist"></i>
-                    <p>Sales Invoices</p>
-                  </a>
-                </li>
-
-                <li class="nav-item">
-                  <a href="#" class="nav-link" [routerLink]="['/representative','user-sales-list']"
-                    [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
-                    <i class="nav-icon  far fa-file-alt"></i>
-                    <p>Sales Quantity</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-
-
-            <li class="nav-item">
-              <a href="#" class="nav-link" [routerLink]="['/sell/add']" [routerLinkActiveOptions]="{exact: true}"
-                routerLinkActive="active">
-                <i class="nav-icon  fas fa-file-invoice-dollar"></i>
-
-                <p>Add Sales</p>
-              </a>
-            </li>
-
-
-            <!--  <li class="nav-item">
-              <a   class="nav-link"  [routerLink]="['/representative/add-payment']"     [routerLinkActiveOptions]="{exact: true}"  routerLinkActive="active" >
-                <i class="nav-icon fab fa-codiepie"></i>
-                <p>Add Payments</p>
-              </a>
-            </li> -->
-          </ul>
-        </li>
-
 
 
         <li class="nav-item has-treeview">
@@ -440,7 +363,15 @@
           <a href="#" [routerLink]="['/expenses']" class="nav-link" [routerLinkActiveOptions]="{exact: true}"
             routerLinkActive="active">
             <i class="nav-icon  fas fa-feather-alt"></i>
-            <p>Expenses</p>
+            <p>Acount Expenses</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="#" [routerLink]="['/expenseitem']" class="nav-link" [routerLinkActiveOptions]="{exact: true}"
+            routerLinkActive="active">
+            <i class="nav-icon  fas fa-feather-alt"></i>
+            <p>account Items</p>
           </a>
         </li>
 
@@ -448,10 +379,18 @@
           <a href="#" [routerLink]="['/expensecategory']" class="nav-link" [routerLinkActiveOptions]="{exact: true}"
             routerLinkActive="active">
             <i class="nav-icon  fas fa-feather-alt"></i>
-            <p>expense category</p>
+            <p>account category</p>
           </a>
         </li>
-        
+
+        <li class="nav-item">
+          <a href="#" [routerLink]="['/expensesubcategory']" class="nav-link" [routerLinkActiveOptions]="{exact: true}"
+            routerLinkActive="active">
+            <i class="nav-icon  fas fa-feather-alt"></i>
+            <p>account subcategory</p>
+          </a>
+        </li>
+
         <li class="nav-item">
           <a href="#" [routerLink]="['/productconsumal']" class="nav-link" [routerLinkActiveOptions]="{exact: true}"
             routerLinkActive="active">
@@ -462,6 +401,84 @@
 
 
         <li class="nav-header">HRM</li>
+
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-user-tie"></i>
+
+            <p>
+              Representative
+              <i class="fa fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+
+            <li class="nav-item has-treeview">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-align-justify"></i>
+                <p>
+                  list
+                  <i class="fa fa-angle-left right"></i>
+                </p>
+              </a>
+
+              <ul class="nav nav-treeview">
+
+
+
+                <li class="nav-item">
+                  <a href="#" class="nav-link" [routerLink]="['/representative']"
+                    [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+                    <i class="nav-icon  far fa-file-alt"></i>
+                    <p>Transfer Challan List</p>
+                  </a>
+                </li>
+
+                <!--li class="nav-item has-treeview">
+            <a  class="nav-link"   [routerLink]="['/representative']"     [routerLinkActiveOptions]="{exact: true}"  routerLinkActive="active">
+                    <i class="nav-icon  fab fa-angellist"></i>
+                    <p>Recipt Quantity</p>
+                  </a>
+                </li-->
+
+                <li class="nav-item">
+                  <a href="#" class="nav-link" [routerLink]="['/representative','user-sales-invoices']"
+                    [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+                    <i class="nav-icon  fab fa-angellist"></i>
+                    <p>Sales Invoices</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="#" class="nav-link" [routerLink]="['/representative','user-sales-list']"
+                    [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+                    <i class="nav-icon  far fa-file-alt"></i>
+                    <p>Sales Quantity</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+
+            <li class="nav-item">
+              <a href="#" class="nav-link" [routerLink]="['/sell/add']" [routerLinkActiveOptions]="{exact: true}"
+                routerLinkActive="active">
+                <i class="nav-icon  fas fa-file-invoice-dollar"></i>
+
+                <p>Add Sales</p>
+              </a>
+            </li>
+            <!--  <li class="nav-item">
+              <a   class="nav-link"  [routerLink]="['/representative/add-payment']"     [routerLinkActiveOptions]="{exact: true}"  routerLinkActive="active" >
+                <i class="nav-icon fab fa-codiepie"></i>
+                <p>Add Payments</p>
+              </a>
+            </li> -->
+          </ul>
+        </li>
+
+
+
 
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">

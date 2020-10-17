@@ -91,7 +91,15 @@ const routes: Routes = [
     },
     loadChildren: () => import('./expense/expense.module').then(m => m.ExpenseModule)
   },
-
+  {
+    path: 'expenseitem',
+    canActivate: [ AuthGuard,RoleGuard],
+    data: {
+      expectedRolesType: 'any',
+      expectedRoles: [ 'ROLE_EXPENSE_ACCESS' ]
+    },
+    loadChildren: () => import('./expenseitem/expenseitem.module').then(m => m.ExpenseitemModule)
+  },
   {
     path: 'expensecategory',
     canActivate: [ AuthGuard,RoleGuard],
@@ -100,6 +108,15 @@ const routes: Routes = [
       expectedRoles: [ 'ROLE_EXPENSE_ACCESS' ]
     },
     loadChildren: () => import('./expensecategory/expensecategory.module').then(m => m.ExpensecategoryModule)
+  },
+  {
+    path: 'expensesubcategory',
+    canActivate: [ AuthGuard,RoleGuard],
+    data: {
+      expectedRolesType: 'any',
+      expectedRoles: [ 'ROLE_EXPENSE_ACCESS' ]
+    },
+    loadChildren: () => import('./expensesubcategory/expensesubcategory.module').then(m => m.ExpensesubcategoryModule)
   },
 
   {

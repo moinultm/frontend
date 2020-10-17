@@ -1,4 +1,4 @@
-<div class="content-wrapper">
+-<div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
@@ -26,9 +26,7 @@
                             <h3 class="card-title">List of categories |
                          Add categories <i class="fa fa-plus" (click)="initSave(saveModal)"></i>   </h3>
 
-
                             <div class="card-tools">
-
                                 <div class="input-group input-group-sm" style="width: 150px;">
                                     <input type="text" name="table_search" class="form-control float-right"
                                         placeholder="Search">
@@ -37,7 +35,6 @@
                                         <button type="submit" class="btn btn-default"><i
                                                 class="fa fa-search" ></i></button>
                                     </div>
-
                             </div>
                         </div>
 
@@ -68,14 +65,12 @@
                                               <ng-container *ngIf="!loading">
                                                 <tr *ngFor="let item of data.data; let i = index">
                                                   <td>{{ i+1 }}</td>
-                                                  <td>{{ item.name }}</td>
+                                                  <td>{{ item.category_name }}</td>
                                                   <td class="actions">
-
                                                         <div class="btn-group">
                                                             <button type="button" class="btn btn-default" (click)="initSave(saveModal, item)"><i class="fas fa-edit"></i></button>
                                                             <button type="button" class="btn btn-default" (click)="initDelete(deleteModal, item)"><i class="fas fa-trash"></i></button>
                                                           </div>
-
                                                   </td>
                                                 </tr>
                                               </ng-container>
@@ -111,7 +106,7 @@
     <!-- Modal header -->
     <div class="modal-header">
       <h4 class="modal-title">
-        {{ selectedCategory.id ? ('Update ExpenseCategory: ' + selectedCategory.name) : 'Create new  Expense Category' }}</h4>
+        {{ selectedCategory.id ? ('Update ExpenseCategory: ' + selectedCategory.category_name) : 'Create new  Expense Category' }}</h4>
       <button type="button" class="close" aria-label="Close" (click)="close(modal)">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -125,25 +120,26 @@
 
         <!-- name field -->
         <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" class="form-control" id="name" formControlName="name"
-            [class.has-error]="form.get('name').dirty && form.get('name').invalid" />
+          <label for="category_name">Name</label>
+          <input type="text" class="form-control" id="category_name" formControlName="category_name"
+            [class.has-error]="form.get('category_name').dirty && form.get('category_name').invalid" />
         </div>
         <!-- ./name field -->
 
         <!-- name field validations container -->
-        <div class="row" *ngIf="form.get('name').dirty && form.get('name').invalid">
+        <div class="row" *ngIf="form.get('category_name').dirty && form.get('category_name').invalid">
           <div class="col-12">
             <div class="alert alert-danger alert-transparent-left" role="alert"
-              *ngIf="form.get('name').dirty && form.controls['name'].hasError('required')">
-              The name is required
+              *ngIf="form.get('category_name').dirty && form.controls['category_name'].hasError('required')">
+              The category_name is required
             </div>
             <div class="alert alert-danger alert-transparent-left" role="alert"
-              *ngIf="form.get('name').dirty && form.get('name').hasError('maxLength')">
-              The name must be less than 255 Digits
+              *ngIf="form.get('category_name').dirty && form.get('category_name').hasError('maxLength')">
+              The category_name must be less than 255 Digits
             </div>
           </div>
         </div>
+
         <!-- ./name field validations container -->
 
 

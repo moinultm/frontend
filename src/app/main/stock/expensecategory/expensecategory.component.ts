@@ -17,6 +17,7 @@ export class ExpensecategoryComponent implements OnInit {
   modalOption: NgbModalOptions = {};
 
   data: PartialList<ExpenseCategory>;
+  categories: Array<ExpenseCategory>;
   loading: boolean;
   savingCategory: boolean;
   deletingCategory: boolean;
@@ -34,7 +35,7 @@ export class ExpensecategoryComponent implements OnInit {
       this.loadData()
     }
 
-  
+
       //Loading Data
       loadData(page?: number): void {
         this.page = page ? page : 1;
@@ -76,10 +77,12 @@ export class ExpensecategoryComponent implements OnInit {
         this.selectedCategory = new ExpenseCategory();
       }
       this.form = this._formBuilder.group({
-        name: [
-          category ? category.name : '',
+        category_name: [
+          category ? category.category_name : '',
           [Validators.required, Validators.maxLength(255)]
-        ]
+        ],
+
+
       });
     }
 
@@ -89,7 +92,7 @@ export class ExpensecategoryComponent implements OnInit {
         this.savingCategory = true;
         this.categoryService.save({
           id: this.selectedCategory.id,
-          name: this.form.get('name').value,
+          category_name: this.form.get('category_name').value,
 
         }, this.selectedCategory.id ? true : false).subscribe((res: ExpenseCategory) => {
           success('Success!', 'The data is successfully saved.', this._toastr);
@@ -153,5 +156,8 @@ export class ExpensecategoryComponent implements OnInit {
       close(modal: any, flag?: boolean): void {
         modal.close(flag ? true : false);
       }
+
+
+
 
 }

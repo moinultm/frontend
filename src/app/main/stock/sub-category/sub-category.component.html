@@ -148,8 +148,8 @@
        <h5>subcategory(s)</h5>
        <div class="form-group">
          <select class="form-control"  id="subcategory_id" formControlName="category_id">
-                <option *ngFor="let cat of categories" [value]="cat.id"
 
+                <option *ngFor="let cat of categories" [value]="cat.id"
                 [selected]="selectedSubHasCategory(cat)"  >
                 {{cat.category_name}}</option>
         </select>

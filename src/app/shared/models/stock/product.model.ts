@@ -17,7 +17,7 @@ export class Product {
     status:number;
     image:any;
     opening_stock:number;
-
+    product_type:number;
     sells:Array<SellsInvoice>;
 
     data:[]

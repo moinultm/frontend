@@ -1,1 +1,198 @@
-<p>productconsumal works!</p>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Consumable Products</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
+            <li class="breadcrumb-item"><a>Stock</a></li>
+            <li class="breadcrumb-item active">Consumable products</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+
+  <section class="content">
+    <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12 ">
+              <div class="card card-success">
+                  <div class="card-header">
+                    <h3 class="card-title">Add Consumable
+                      <a href="#" [routerLink]="['/product','list-damage']" class="nav-link d-inline"   [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active"><span class="badge bg-danger">View All</span></a>
+                    </h3>
+                  </div>
+
+                  <div class="card-body">
+
+                  <div *ngIf="loading" class="text-center loading-profiles">
+                      <mat-spinner></mat-spinner>
+                    </div>
+
+
+
+            <form  role="form"  [formGroup]="myForm">
+                <div class="row" *ngIf="!loading">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                        <mat-form-field>
+                            <input matInput [matDatepicker]="picker" placeholder="Date" formControlName="bill_date">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                          </mat-form-field>
+                          </div>
+                    </div>
+                </div>
+               <div class="row" *ngIf="!loading">
+
+
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <label for="name">Post under</label>
+
+                      <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fas fa-user-tag"></i></span>
+                          </div>
+
+                      <select class="form-control"  formControlName="user_id">
+                          <option value="null">--Select--</option>
+
+                          <option *ngFor="let U of _users.data" [value]="U.id">
+                           {{U.id}} - {{U.name}} </option>
+                  </select>
+                  </div>
+                    </div>
+              </div>
+              <!--div class="col-md-4">
+                  <div class="form-group">
+                      <label>To Customer</label>
+
+                      <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fas fa-user-tag"></i></span>
+                          </div>
+                          <select class="form-control" formControlName="customer_id">
+                              <option [value]="null">Select Customer</option>
+                            <option *ngFor="let list of customerList" [value]="list.id">
+                              {{list.full_name}} {{list.client_code}}
+                            </option>
+                          </select>
+                        </div>
+                    </div>
+              </div-->
+              <div class="col-md-4">
+                <div class="form-group">
+                    <label>Notes</label>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"> <i class="fas fa-user-tag"></i></span>
+                        </div>
+                        <input type="text" class="form-control" formControlName="notes">
+                      </div>
+                  </div>
+            </div>
+        </div>
+
+        <div class="row ">
+            <div class="col-md-12 table-responsive">
+            <div formArrayName="companies">
+                <div class="c">
+            <table class="table  stock-add-tablet able table-bordered">
+                <thead>
+                    <tr>
+                        <th style="width: 10px">#</th>
+                        <th>Product Name</th>
+                        <th style="width: 150px">Stock</th>
+                        <th style="width: 150px">Quantity</th>
+                        <th style="width: 100px">MRP Price</th>
+                        <th style="width: 100px">Control</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let comp of myForm.get('companies')['controls']; let i=index; let i=index" [formGroupName]="i">
+
+                      <td>
+                            <div class="form-group">
+                                {{i+1}}
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="form-group" *ngIf="!loadingProducts">
+                                <select class="form-control"   formControlName="product_id" (change)="updatePrice($event.target,i)">
+                                    <option value="null">--Select--</option>
+                                    <option *ngFor="let product of _productList" [ngValue]="product.id">
+                                      {{product.name}}</option>
+                                  </select>
+
+                          </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                               <input type="text" class="form-control" formControlName="stock_quantity" readonly>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="form-group" (keypress)="summaryQty()">
+                               <input type="text" class="form-control" formControlName="quantity">
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="form-group">
+                               <input type="text" class="form-control" formControlName="mrp" readonly>
+                               <input  type="hidden"  class="form-control" formControlName="cost_price" readonly>
+
+                            </div>
+                        </td>
+
+                        <td >
+                            <button class="btn btn-danger" (click)="deleteCompany(i)">-</button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+
+                      <td  colspan="3">
+                          <button class="btn btn-success" (click)="addNewCompany()">Add Row</button>
+                      </td>
+                      <td></td>
+                      <td  colspan="2">Quantity Total :{{ total }}</td>
+                    </tr>
+                </tfoot>
+            </table>
+            </div>
+          </div>
+
+
+        </div>
+        </div>
+
+</form>
+              </div>
+                  <!-- /.card-body -->
+
+                  <div class="card-footer">
+                      <button type="submit"  [disabled]="myForm.invalid || _saving" (click)="saveConsumable(myForm)" class="btn  btn-info float-right">Submit</button>
+                  </div>
+
+                </div>
+
+          </div><!--Row-->
+
+
+        </div>
+    </div>
+  </section>
+
+</div>
+<!-- Content Wrapper. Contains page content -->
