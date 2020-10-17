@@ -20,6 +20,7 @@ import { ProductListResolver } from '@app/core/resolvers/productlist.resolver';
 import { CustomerResolver } from '@app/core/resolvers/customer.resolver';
 import { UserResolver } from '@app/core/resolvers/user.resolver';
 import { AppDateAdapter, APP_DATE_FORMATS } from '@app/core/utils/format-datepicker';
+import { ProductconsumalComponent } from '../productconsumal/productconsumal.component';
 
 const routes: Routes = [
   // Roles component
@@ -45,6 +46,14 @@ const routes: Routes = [
     ProductListResolver
   }
  },
+
+ {path: 'productconsumal',
+ component: ProductconsumalComponent,
+ resolve: {
+
+ }
+}
+,
   {path: 'list-damage',component: ListDamageComponent },
   {path: 'list-gift',component: ListGiftComponent },
 
@@ -52,7 +61,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [ProductComponent, ManageComponent,ProductBarcodeComponent, GiftProductComponent, DamageProductComponent, ListGiftComponent, ListDamageComponent ],
+  declarations: [ProductComponent, ManageComponent,ProductBarcodeComponent, GiftProductComponent, DamageProductComponent, ListGiftComponent, ListDamageComponent,ProductconsumalComponent ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

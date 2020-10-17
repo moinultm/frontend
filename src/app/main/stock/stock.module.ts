@@ -129,15 +129,7 @@ const routes: Routes = [
     loadChildren: () => import('./representative/representative.module').then(m => m.RepresentativeModule)
   },
 
-  {
-    path: 'productconsumal',
-    canActivate: [ AuthGuard,RoleGuard],
-    data: {
-      expectedRolesType: 'any',
-      expectedRoles: [ 'ROLE_PRODUCT_ACCESS' ]
-    },
-    loadChildren: () => import('./productconsumal/productconsumal.module').then(m => m.ProductconsumalModule)
-  }
+
 
 ];
 
