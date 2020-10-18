@@ -170,14 +170,13 @@
               </a>
             </li>
 
-
-            <li class="nav-item">
+            <!--li class="nav-item">
               <a href="#" class="nav-link" [routerLink]="['/representative/add-stock']"
                 [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
                 <i class="nav-icon fas fa-dolly-flatbed text-info"></i>
                 <p>Product Transfer/Challan</p>
               </a>
-            </li>
+            </li-->
 
             <li class="nav-item">
               <a href="#" [routerLink]="['/product','gift']" class="nav-link" [routerLinkActiveOptions]="{exact: true}"
@@ -357,13 +356,12 @@
         </a>
       </li-->
 
-
       <li class="nav-header">Account</li>
         <li class="nav-item">
           <a href="#" [routerLink]="['/expenses']" class="nav-link" [routerLinkActiveOptions]="{exact: true}"
             routerLinkActive="active">
             <i class="nav-icon  fas fa-feather-alt"></i>
-            <p>Acount Expenses</p>
+            <p>Acount Transactions</p>
           </a>
         </li>
 
@@ -371,15 +369,7 @@
           <a href="#" [routerLink]="['/expenseitem']" class="nav-link" [routerLinkActiveOptions]="{exact: true}"
             routerLinkActive="active">
             <i class="nav-icon  fas fa-feather-alt"></i>
-            <p>account Items</p>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a href="#" [routerLink]="['/expensecategory']" class="nav-link" [routerLinkActiveOptions]="{exact: true}"
-            routerLinkActive="active">
-            <i class="nav-icon  fas fa-feather-alt"></i>
-            <p>account category</p>
+            <p>Account Items</p>
           </a>
         </li>
 
@@ -387,15 +377,25 @@
           <a href="#" [routerLink]="['/expensesubcategory']" class="nav-link" [routerLinkActiveOptions]="{exact: true}"
             routerLinkActive="active">
             <i class="nav-icon  fas fa-feather-alt"></i>
-            <p>account subcategory</p>
+            <p>Account subcategory</p>
           </a>
         </li>
+
+        <li class="nav-item">
+          <a href="#" [routerLink]="['/expensecategory']" class="nav-link" [routerLinkActiveOptions]="{exact: true}"
+            routerLinkActive="active">
+            <i class="nav-icon  fas fa-feather-alt"></i>
+            <p>Account category</p>
+          </a>
+        </li>
+
+
 
         <li class="nav-item">
           <a href="#" [routerLink]="['/product','productconsumal']" class="nav-link" [routerLinkActiveOptions]="{exact: true}"
             routerLinkActive="active">
             <i class="nav-icon  fas fa-feather-alt"></i>
-            <p>product consumal</p>
+            <p>Product consumal</p>
           </a>
         </li>
 
