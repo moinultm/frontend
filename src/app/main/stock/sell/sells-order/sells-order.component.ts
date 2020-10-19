@@ -313,6 +313,7 @@ this.fillCustomer();
     //console.log(JSON.stringify(this.orderItemList));
 
     this._saving=true;
+
     if(parseFloat(this.mainForm.get('discountOnTotal').value) > this.mainForm.get('totalAmount').value ){
       error('Error!', "Discount  amount (" + this.mainForm.get('discountOnTotal').value + ") cant\'be greater than total amount (" + this.mainForm.get('grandTotal').value  + ")", this._toastr);
      this._saving = false

@@ -130,6 +130,8 @@
         </li>
 
 
+
+
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
             <i class="nav-icon fab fa-buffer"></i>
@@ -201,6 +203,51 @@
 
 
 
+      <li class="nav-header">Account</li>
+      <li class="nav-item">
+        <a href="#" [routerLink]="['/expenses']" class="nav-link" [routerLinkActiveOptions]="{exact: true}"
+          routerLinkActive="active">
+          <i class="nav-icon  fas fa-feather-alt"></i>
+          <p>Income&Expense Transactions</p>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a href="#" [routerLink]="['/expenseitem']" class="nav-link" [routerLinkActiveOptions]="{exact: true}"
+          routerLinkActive="active">
+          <i class="nav-icon  fas fa-feather-alt"></i>
+          <p>Income&Expense Items</p>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a href="#" [routerLink]="['/expensesubcategory']" class="nav-link" [routerLinkActiveOptions]="{exact: true}"
+          routerLinkActive="active">
+          <i class="nav-icon  fas fa-feather-alt"></i>
+          <p>Income&Expense subcategory</p>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a href="#" [routerLink]="['/expensecategory']" class="nav-link" [routerLinkActiveOptions]="{exact: true}"
+          routerLinkActive="active">
+          <i class="nav-icon  fas fa-feather-alt"></i>
+          <p>Income&Expense category</p>
+        </a>
+      </li>
+
+
+
+      <li class="nav-item">
+        <a href="#" [routerLink]="['/product','productconsumal']" class="nav-link" [routerLinkActiveOptions]="{exact: true}"
+          routerLinkActive="active">
+          <i class="nav-icon  fas fa-feather-alt"></i>
+          <p>Product consumal</p>
+        </a>
+      </li>
+
+
+      <li class="nav-header">Reports</li>
 
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
@@ -250,12 +297,12 @@
               </a>
             </li>
 
-            <li class="nav-item">
+            <!---li class="nav-item">
               <a href="#" [routerLink]="['/represent-stock-report']" class="nav-link" routerLinkActive="active">
                 <i class="nav-icon far fa-circle text-warning"></i>
                 <p>Rep-Stock Report</p>
               </a>
-            </li>
+            </li-->
 
             <li class="nav-item">
               <a href="#" [routerLink]="['/represent-status-report']" class="nav-link" routerLinkActive="active">
@@ -267,18 +314,19 @@
             <li class="nav-item">
               <a href="#" [routerLink]="['/represent-collection-report']" class="nav-link" routerLinkActive="active">
                 <i class="nav-icon far fa-circle text-warning"></i>
-                <p>Rep-Accounts Collection Rpt</p>
+                <p>Collection Report </p>
               </a>
             </li>
 
-            <li class="nav-item">
+            <!--li class="nav-item">
               <a href="#" [routerLink]="['/challan-product-report']" class="nav-link" routerLinkActive="active">
                 <i class="nav-icon far fa-circle text-info"></i>
                 <p>Challan Report</p>
               </a>
-            </li>
+            </li-->
 
-            <li class="nav-header">Default</li>
+
+     <li class="nav-header">Default</li>
 
       <li class="nav-item">
         <a href="#" [routerLink]="['/stock-report']" class="nav-link" routerLinkActive="active">
@@ -290,7 +338,7 @@
             <li class="nav-item">
               <a href="#" [routerLink]="['/product-report']" class="nav-link" routerLinkActive="active">
                 <i class="nav-icon far fa-circle"></i>
-                <p>Products Stock Report</p>
+                <p>Stock Summary Report</p>
               </a>
             </li>
 
@@ -356,48 +404,6 @@
         </a>
       </li-->
 
-      <li class="nav-header">Account</li>
-        <li class="nav-item">
-          <a href="#" [routerLink]="['/expenses']" class="nav-link" [routerLinkActiveOptions]="{exact: true}"
-            routerLinkActive="active">
-            <i class="nav-icon  fas fa-feather-alt"></i>
-            <p>Acount Transactions</p>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a href="#" [routerLink]="['/expenseitem']" class="nav-link" [routerLinkActiveOptions]="{exact: true}"
-            routerLinkActive="active">
-            <i class="nav-icon  fas fa-feather-alt"></i>
-            <p>Account Items</p>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a href="#" [routerLink]="['/expensesubcategory']" class="nav-link" [routerLinkActiveOptions]="{exact: true}"
-            routerLinkActive="active">
-            <i class="nav-icon  fas fa-feather-alt"></i>
-            <p>Account subcategory</p>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a href="#" [routerLink]="['/expensecategory']" class="nav-link" [routerLinkActiveOptions]="{exact: true}"
-            routerLinkActive="active">
-            <i class="nav-icon  fas fa-feather-alt"></i>
-            <p>Account category</p>
-          </a>
-        </li>
-
-
-
-        <li class="nav-item">
-          <a href="#" [routerLink]="['/product','productconsumal']" class="nav-link" [routerLinkActiveOptions]="{exact: true}"
-            routerLinkActive="active">
-            <i class="nav-icon  fas fa-feather-alt"></i>
-            <p>Product consumal</p>
-          </a>
-        </li>
 
 
         <li class="nav-header">HRM</li>

@@ -72,7 +72,7 @@ export class SellsInvoiceService extends CrudService<SellsInvoice> {
 
   public postReturnSellById(model: any): any {
     this.options.params = undefined;
-    return this.__http.post <PartialList<SellsInvoice>>  (this.url + '/'+'return' + model.id, model, this.options)
+    return this.__http.post <PartialList<SellsInvoice>>  (this.url + '/'+'return' , model, this.options)
 
   }
 

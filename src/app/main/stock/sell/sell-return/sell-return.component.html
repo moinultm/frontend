@@ -29,7 +29,7 @@
                   <div class="card-body">
 
 
-                        <form novalidate role="form" [formGroup]="myForm">
+                        <form  role="form"  [formGroup]="myForm">
                             <div formArrayName="companies">
                                 <table class="table table-bordered">
                                     <thead>
@@ -82,7 +82,9 @@
                   </div>
                   <!-- /.card-body -->
                   <div class="card-footer clearfix">
-                      <button type="submit" class="btn btn-primary" (click)="saveReturn()">Submit</button>
+                      <button type="button" class="btn btn-info btn-lg float-right"
+                      [disabled]="myForm.invalid || _saving" (click)="saveReturn(myForm)"
+                      [disabled]="myForm.invalid || _saving">Submit</button>
                   </div>
                 </div>
                 <!-- /.card -->

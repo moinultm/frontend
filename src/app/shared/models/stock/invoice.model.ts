@@ -19,5 +19,5 @@ export class SellsInvoice {
     mrp:number;
     net_total:number;
     discount:number;
-    
+    minimum_retail:number;
 }

@@ -121,6 +121,8 @@ export class ProductComponent implements OnInit {
       product_details:[product ? product.details : '',  [Validators.nullValidator]  ],
       opening_stock:[product ? product.opening_stock : '',  [Validators.required]   ],
       product_type:[product ? product.product_type : '',  [Validators.required]   ],
+      opening_stock_value:[product ? product.opening_stock_value : '',  [Validators.required]   ],
+
 
        image:[product ? product.image : '',  [Validators.nullValidator]  ]
     });
@@ -151,6 +153,7 @@ export class ProductComponent implements OnInit {
     formData.append('unit', this.form.get('product_unit').value);
     formData.append('details', this.form.get('product_details').value);
     formData.append('opening_stock', this.form.get('opening_stock').value);
+    formData.append('opening_stock_value', this.form.get('opening_stock_value').value);
     formData.append('product_type', this.form.get('product_type').value);
     formData.append('status', this.form.get('product_status').value);
 
@@ -169,16 +172,11 @@ export class ProductComponent implements OnInit {
         error('Error!', 'An error has occured when saving the Product, please contact system administrator.', this._toastr);
       }
       this.savingProduct = false;
-
     });
-
-
   }
 }
 
-
-
-  randcode(){
+randcode(){
     return   Math.floor(100000 + Math.random() * 900000).toString();
   }
 

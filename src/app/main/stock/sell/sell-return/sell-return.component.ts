@@ -8,32 +8,27 @@ import { ActivatedRoute } from '@angular/router';
 import { SellsInvoiceService } from '@app/core/services/stock/sells-invoice.service';
 import { Transaction } from '@app/shared/models/stock/transaction.model';
 import { MatPrefix } from '@angular/material';
+import { success, error, warning } from '@app/core/utils/toastr';
 
 @Component({
   selector: 'app-sell-return',
   templateUrl: './sell-return.component.html'
-
 })
-
 
 
 export class SellReturnComponent implements OnInit {
 
-
+  _saving:boolean;
   loadingDetails:boolean;
   details:PartialList <Transaction> ;
   form: FormGroup;
 
-
-
-
   myForm: FormGroup;
-
 
   constructor(private _formBuilder: FormBuilder,
     private _toastr: ToastrService,
     private route: ActivatedRoute,
-    private sellsService: SellsInvoiceService,
+    private sellsInvoiceSvice:SellsInvoiceService
      ){
 
     }
@@ -48,9 +43,9 @@ export class SellReturnComponent implements OnInit {
 
   ShowBillDetails(id:number){
     this.loadingDetails = true;
-    this.sellsService.getReturnSellById(id).subscribe((res:PartialList <Transaction>) => {
+    this.sellsInvoiceSvice.getReturnSellById(id).subscribe((res:PartialList <Transaction>) => {
       this.details = res;
-       console.log( 'ppp',this.details);
+       //console.log( 'ppp',this.details);
 
        this.setCompanies(res);
       this.loadingDetails = false;
@@ -67,28 +62,68 @@ iniForm( ){
 }
 
 setCompanies(datas: PartialList <Transaction>) {
-//console.log( 'mmnk',datas.data);
+  console.log( 'mmnk',datas.data);
   let control = <FormArray>this.myForm.controls.companies;
+  let price=0;
+
    datas.data.forEach(x => {
      x.sells.forEach( s =>{
+
+       if(s.quantity !=0){
+      price=s.sub_total/s.quantity;
+       }else{
+        price=s.minimum_retail;
+       }
+
       control.push(
         this._formBuilder.group({
           product_name: s.product_name,
           quantity: s.quantity,
           quantity_return: [0,[Validators.required, Validators.pattern(/^[.\d]+$/)]],
-          mrp:s.mrp
+          mrp:price
           }));
      })
-
   })
 }
 
 
+//SaveReturn
+  saveReturn(form: any){
+   console.log( this.myForm);
 
-  //SaveReturn
-  saveReturn(){
-    console.log( this.myForm)
+  this._saving=true;
+  const formData = new FormData();
+
+  formData.append('items', JSON.stringify(this.myForm.get('companies').value));
+
+
+  this.sellsInvoiceSvice.postReturnSellById(formData).subscribe((res:any) => {
+
+    success('Success!', 'The Invoice is successfully saved.', this._toastr);
+
+
+
+    this._saving = false;
+
+  }, (err: any) => {
+
+    if (err.status === 403) {
+
+      err.error.forEach((e: string) => {
+        warning('Warning!', e, this._toastr);
+      });
+      this._saving = false;
+    }
+       else {
+      error('Error!',  err.response.message, this._toastr);
+      this._saving = false;
+    }
+    this._saving = false;
+  });
+
   }
+
+
 
    //only number
    numberOnly(event): boolean {
