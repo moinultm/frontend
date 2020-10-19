@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { CrudService } from '@app/core/services/common/crud.service';
-import { PurchaseOrder } from '@app/shared/models/stock/purchase-order.model';
+import { SellsInvoice } from '@app/shared/models/stock/invoice.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PartialList } from '@app/shared/models/common/patial-list.model';
@@ -9,13 +9,15 @@ import { PartialList } from '@app/shared/models/common/patial-list.model';
 @Injectable({
   providedIn: 'root'
 })
-export class PurchaseOrderService extends CrudService<PurchaseOrder> {
+export class SellsReturnService extends CrudService<SellsInvoice> {
 
+  list : PartialList<SellsInvoice>;
 
   constructor(private __http: HttpClient ) {
     super(__http);
-    this.setUrl('purchase');
+    this.setUrl('return');
   }
+
 
   findTable(
     filter :string,
@@ -32,30 +34,24 @@ export class PurchaseOrderService extends CrudService<PurchaseOrder> {
     }).pipe(map(res =>  res["data"]) );
 
   }
-
+ 
 
   public delete(model: any): any {
     this.options.params = undefined;
-    return this.__http.post <PartialList<PurchaseOrder>>  (this.url + '/'+   model.id   + '/'+ 'delete' , model, this.options)
+    return this.__http.post <PartialList<SellsInvoice>>  (this.url + '/'+   model.id   + '/'+ 'delete' , model, this.options)
   }
+ 
 
-
-  public findDetailsById(id: number): any {
+  public findOrderDetailsId(id: number): any {
     this.options.params = undefined;
 
-    return this.__http.get <PartialList<PurchaseOrder>>(this.url + '/' + id +'/'+'details', this.options);
+    return this.__http.get<PartialList<SellsInvoice>>(this.url + '/' + id+'/'+'details', this.options);
   }
 
+ 
+ 
 
-  public getList(): any {
-    this.options.params = undefined;
-    return this.__http.get <PartialList<PurchaseOrder>>(this.url + '/' +'list'+'/'+'pi', this.options);
-  }
 
-  public findByInvoiceNo(query:Text){
-    this.options.params = undefined;
-  return this.__http.get <PartialList<PurchaseOrder>>(this.url+'?invoice='+ query ,this.options);
-}
 
 
 }

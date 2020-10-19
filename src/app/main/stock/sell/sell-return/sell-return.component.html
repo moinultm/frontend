@@ -30,6 +30,9 @@
 
 
                         <form  role="form"  [formGroup]="myForm">
+
+                          <input type="text" class="form-control" formControlName="transaction_id" readonly>
+
                             <div formArrayName="companies">
                                 <table class="table table-bordered">
                                     <thead>
@@ -63,7 +66,7 @@
 
                                             <td>
                                                 <div class="form-group">
-                                                   <input type="text" class="form-control" formControlName="quantity_return" >
+                                                   <input type="number" class="form-control" formControlName="quantity_return" >
                                                 </div>
                                             </td>
 

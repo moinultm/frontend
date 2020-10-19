@@ -63,18 +63,7 @@ export class SellsInvoiceService extends CrudService<SellsInvoice> {
     return this.__http.get<PartialList<SellsInvoice>>(this.url + '/' + id+'/'+'order-details', this.options);
   }
 
-
-
-  public getReturnSellById(id: number): any {
-    this.options.params = undefined;
-    return this.__http.get <PartialList<SellsInvoice>>(this.url + '/' +'return'+ '/' + id , this.options);
-  }
-
-  public postReturnSellById(model: any): any {
-    this.options.params = undefined;
-    return this.__http.post <PartialList<SellsInvoice>>  (this.url + '/'+'return' , model, this.options)
-
-  }
+ 
 
 
   public findByInvoiceNo(query:Text){

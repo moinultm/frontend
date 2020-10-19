@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { SellsInvoice } from '@app/shared/models/stock/invoice.model';
 import { ActivatedRoute } from '@angular/router';
-import { SellsInvoiceService } from '@app/core/services/stock/sells-invoice.service';
+import { SellsReturnService } from '@app/core/services/stock/sells-return.service';
 import { Transaction } from '@app/shared/models/stock/transaction.model';
 import { MatPrefix } from '@angular/material';
 import { success, error, warning } from '@app/core/utils/toastr';
@@ -28,7 +28,7 @@ export class SellReturnComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder,
     private _toastr: ToastrService,
     private route: ActivatedRoute,
-    private sellsInvoiceSvice:SellsInvoiceService
+    private sellsInvoiceSvice:SellsReturnService
      ){
 
     }
@@ -37,15 +37,15 @@ export class SellReturnComponent implements OnInit {
   ngOnInit() {
     let id=this.route.snapshot.params.id;
     this.ShowBillDetails(id);
-
-    this.iniForm();
+    //console.log( 'ppp',this.details);
+    this.iniForm(id);
   }
 
   ShowBillDetails(id:number){
     this.loadingDetails = true;
-    this.sellsInvoiceSvice.getReturnSellById(id).subscribe((res:PartialList <Transaction>) => {
+    this.sellsInvoiceSvice.findOrderDetailsId(id).subscribe((res:PartialList <Transaction>) => {
       this.details = res;
-       //console.log( 'ppp',this.details);
+      //console.log( 'ppp',res);
 
        this.setCompanies(res);
       this.loadingDetails = false;
@@ -54,18 +54,19 @@ export class SellReturnComponent implements OnInit {
 
 
 
-iniForm( ){
+iniForm( id:number){
   this.myForm = this._formBuilder.group({
-    companies: this._formBuilder.array([])
+    companies: this._formBuilder.array([]),
+    transaction_id:id
   });
 
 }
 
 setCompanies(datas: PartialList <Transaction>) {
-  console.log( 'mmnk',datas.data);
+ // console.log( 'mmnk',datas);
   let control = <FormArray>this.myForm.controls.companies;
   let price=0;
-
+ // console.log( 'mmnk',datas);
    datas.data.forEach(x => {
      x.sells.forEach( s =>{
 
@@ -80,7 +81,8 @@ setCompanies(datas: PartialList <Transaction>) {
           product_name: s.product_name,
           quantity: s.quantity,
           quantity_return: [0,[Validators.required, Validators.pattern(/^[.\d]+$/)]],
-          mrp:price
+          mrp:price,
+         
           }));
      })
   })
@@ -88,20 +90,20 @@ setCompanies(datas: PartialList <Transaction>) {
 
 
 //SaveReturn
-  saveReturn(form: any){
-   console.log( this.myForm);
+  saveReturn(form: any,id:number){
+   //console.log( this.myForm);
 
   this._saving=true;
   const formData = new FormData();
 
   formData.append('items', JSON.stringify(this.myForm.get('companies').value));
 
+  formData.append('transaction_id', this.myForm.get('transaction_id').value);
+  
 
-  this.sellsInvoiceSvice.postReturnSellById(formData).subscribe((res:any) => {
+  this.sellsInvoiceSvice.save(formData).subscribe((res:any) => {
 
     success('Success!', 'The Invoice is successfully saved.', this._toastr);
-
-
 
     this._saving = false;
 

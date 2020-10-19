@@ -52,6 +52,10 @@ const routes: Routes = [
     component: SellDetailsComponent
   },
   {
+    path: 'return',
+    component: SellReturnComponent
+  },
+  {
     path: 'return/:id',
     component: SellReturnComponent
   },
