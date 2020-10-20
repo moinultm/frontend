@@ -72,7 +72,7 @@ export class ExpensecategoryComponent implements OnInit {
     }
     initSaveForm(category?: ExpenseCategory): void {
       if (category) {
-        this.selectedCategory = Object.assign(ExpenseCategory, category);
+        this.selectedCategory =  category;
       } else {
         this.selectedCategory = new ExpenseCategory();
       }

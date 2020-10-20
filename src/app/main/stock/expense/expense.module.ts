@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialsModule } from '@app/material.module';
 
 import { UserResolver } from '@app/core/resolvers/user.resolver';
+import { AddExpenseComponent } from './add-expense/add-expense.component';
 
 const routes: Routes = [
 
@@ -17,12 +18,23 @@ const routes: Routes = [
       UserResolver,
 
     },
+    
+  },
+
+  {
+    path: 'add-expense',
+    component: AddExpenseComponent,
+    resolve: {
+      UserResolver,
+
+    },
+    
   }
 ];
 
 
 @NgModule({
-  declarations: [ExpenseComponent],
+  declarations: [ExpenseComponent, AddExpenseComponent],
   imports: [
 
     CommonModule,
