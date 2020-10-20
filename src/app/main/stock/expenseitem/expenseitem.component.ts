@@ -113,12 +113,16 @@ FillCategory()
     }
 
     initSaveForm(category?: ExpenseItem): void {
+
       if (category) {
-        this.selectedCategory = Object.assign(ExpenseCategory, category);
+        this.selectedCategory =  category ;
+        this.FillSubcategory(category.expense_subcategory_id);
       } else {
         this.selectedCategory = new ExpenseItem();
       }
+
       this.FillCategory();
+
       this.form = this._formBuilder.group({
         ledger_name: [
           category ? category.ledger_name : '',
@@ -126,12 +130,12 @@ FillCategory()
         ],
 
         ledger_category: [
-          category ? category.ledger_name : '',
+          category ? category.expense_category_id :0,
           [Validators.required, Validators.maxLength(255)]
         ],
 
         ledger_subcategory: [
-          category ? category.ledger_name : '',
+          category ? category.expense_subcategory_id : 0,
           [Validators.required, Validators.maxLength(255)]
         ],
 
@@ -139,16 +143,27 @@ FillCategory()
       });
     }
 
+
     //main Save function
     save(modal: any): void {
+
+        const formData = new FormData();
+
+
+
       if (this.form.valid) {
         this.savingCategory = true;
+
+     /*   formData.append('id', this.selectedCategory.id + '');
+        formData.append('ledger_name', this.form.get('ledger_name').value);
+        formData.append('expense_category_id', this.form.get('ledger_category').value);
+        formData.append('ledger_subcategory', this.form.get('ledger_subcategory').value);*/
+
         this.itemService.save({
           id: this.selectedCategory.id,
           ledger_name: this.form.get('ledger_name').value,
           expense_category_id: this.form.get('ledger_category').value,
           expense_subcategory_id: this.form.get('ledger_subcategory').value,
-
         }, this.selectedCategory.id ? true : false).subscribe((res: ExpenseItemService) => {
           success('Success!', 'The data is successfully saved.', this._toastr);
           this.savingCategory = false;

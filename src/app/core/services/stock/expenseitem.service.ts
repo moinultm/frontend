@@ -24,7 +24,7 @@ export class ExpenseItemService extends CrudService <ExpenseItem> {
   public save(model: any, update?: boolean): any {
     this.options.params = undefined;
     if (update) {
-      return this.__http.post<ExpenseItem>(this.url + '/' + model.get('id'), model, this.options);
+      return this.__http.post<ExpenseItem>(this.url + '/' + model.id, model, this.options);
     } else {
       return this.__http.post<ExpenseItem>(this.url, model, this.options);
     }

@@ -66,7 +66,9 @@ setCompanies(datas: PartialList <Transaction>) {
  // console.log( 'mmnk',datas);
   let control = <FormArray>this.myForm.controls.companies;
   let price=0;
- // console.log( 'mmnk',datas);
+
+  console.log( 'mmnk',datas);
+
    datas.data.forEach(x => {
      x.sells.forEach( s =>{
 
@@ -82,7 +84,9 @@ setCompanies(datas: PartialList <Transaction>) {
           quantity: s.quantity,
           quantity_return: [0,[Validators.required, Validators.pattern(/^[.\d]+$/)]],
           mrp:price,
-         
+          sell_id:s.id,
+          product_tax:0,
+          sub_total:s.sub_total
           }));
      })
   })
@@ -99,18 +103,17 @@ setCompanies(datas: PartialList <Transaction>) {
   formData.append('items', JSON.stringify(this.myForm.get('companies').value));
 
   formData.append('transaction_id', this.myForm.get('transaction_id').value);
-  
+
 
   this.sellsInvoiceSvice.save(formData).subscribe((res:any) => {
 
     success('Success!', 'The Invoice is successfully saved.', this._toastr);
 
+    this.iniForm(id);
     this._saving = false;
 
-  }, (err: any) => {
-
+    }, (err: any) => {
     if (err.status === 403) {
-
       err.error.forEach((e: string) => {
         warning('Warning!', e, this._toastr);
       });

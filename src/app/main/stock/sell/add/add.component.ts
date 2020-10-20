@@ -128,7 +128,7 @@ export class AddComponent implements OnInit {
     discountOnTotal:['0', [Validators.required]  ],
     shippingCost:['0', [Validators.required]  ],
     grandTotal:['0',[Validators.required]  ],
-    direct:['0',[Validators.required]  ],
+    direct:['1',[Validators.required]  ],
     user_id:[null, [Validators.required]],
   });
   }
@@ -198,25 +198,25 @@ export class AddComponent implements OnInit {
       ],
 
        quantity: [
-        orderitem ? orderitem.quantity : '',
+        orderitem ? orderitem.quantity :0,
         [Validators.required]
       ] ,
       productMRP: [
-        orderitem ? orderitem.mrp : '',
+        orderitem ? orderitem.mrp : 0,
         [Validators.required]
       ] ,
 
       discountOnMRP: [
-        orderitem ? orderitem.product_discount_percentage : '',
+        orderitem ? orderitem.product_discount_percentage : 15,
         [Validators.required]
       ] ,
 
-      itemDiscountAmt:[ orderitem ? orderitem.product_discount_amount : '', [Validators.required]],
+      itemDiscountAmt:[ orderitem ? orderitem.product_discount_amount : 0, [Validators.required]],
 
       sub_total: [
-        orderitem ? orderitem.sub_total : '',
+        orderitem ? orderitem.sub_total : 0,
         [Validators.required]],
-        itemTotal:[ orderitem ? orderitem.sub_total : '', [Validators.required]],
+        itemTotal:[ orderitem ? orderitem.sub_total : 0, [Validators.required]],
 
     });
   }

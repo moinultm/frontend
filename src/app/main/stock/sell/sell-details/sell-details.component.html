@@ -118,8 +118,8 @@
                 <th>Product Name</th>
                 <th>Qty</th>
                 <th>Rate(MRP)</th>
-
                 <th>Discount(%)</th>
+                <th>Discount </th>
                 <th>Item Total</th>
               </tr>
               </thead>
@@ -130,16 +130,16 @@
                 <td>{{TD.quantity}} </td>
                 <td>{{TD.product.mrp}}  </td>
                 <td>{{TD.product_discount_percentage}} </td>
+                <td>{{TD.product_discount_amount}} </td>
                 <td>{{TD.sub_total}} </td>
               </tr>
-
               <tr>
-
                 <td></td>
                 <td>
                  <b> Total:</b>
                 </td>
                 <td>  <b>{{ T.total_quantity_sells }}</b></td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td> <b>{{ T.net_total }}</b></td>
@@ -206,14 +206,14 @@
                   <th style="width:50%">Total:</th>
                   <td>{{T.total + T.discount }} </td>
                 </tr>
-                <tr>
+                <!--tr>
                   <th>Tax  </th>
                   <td>{{T.total_tax}} </td>
-                </tr>
-                <tr>
+                </tr-->
+                <!--tr>
                   <th>Shipping:</th>
                   <td>{{T.labor_cost}}</td>
-                </tr>
+                </tr-->
                 <tr>
                     <th>Discount:</th>
                     <td>{{T.discount}}</td>
@@ -226,9 +226,12 @@
                         <small>(Has return item)</small>
                       </div>
                     </td>
-
                   </tr>
 
+                  <tr>
+                    <th>Total:</th>
+                    <td> {{T.total - T.paid}}  </td>
+                  </tr>
               </tbody></table>
 
 
