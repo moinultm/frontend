@@ -8,6 +8,9 @@ import { MaterialsModule } from '@app/material.module';
 
 import { UserResolver } from '@app/core/resolvers/user.resolver';
 import { AddExpenseComponent } from './add-expense/add-expense.component';
+import { ProductListResolver } from '@app/core/resolvers/productlist.resolver';
+import { CustomerResolver } from '@app/core/resolvers/customer.resolver';
+
 
 const routes: Routes = [
 
@@ -18,7 +21,7 @@ const routes: Routes = [
       UserResolver,
 
     },
-    
+
   },
 
   {
@@ -26,9 +29,10 @@ const routes: Routes = [
     component: AddExpenseComponent,
     resolve: {
       UserResolver,
+      CustomerResolver,
 
     },
-    
+
   }
 ];
 
