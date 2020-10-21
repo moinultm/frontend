@@ -42,7 +42,7 @@ export class AddExpenseComponent implements OnInit {
     private __giftService:GiftService,
     private _toastr: ToastrService,
   private datePipe : DatePipe,
-  private actRoute: ActivatedRoute) {   titleService.setTitle('Stock - Gift Product'); }
+  private actRoute: ActivatedRoute) {   titleService.setTitle('Account-Transaction'); }
 
   ngOnInit() {
     this.iniForm();

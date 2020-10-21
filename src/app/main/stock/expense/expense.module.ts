@@ -30,7 +30,7 @@ const routes: Routes = [
     resolve: {
       UserResolver,
       CustomerResolver,
-
+      ProductListResolver
     },
 
   }
@@ -49,6 +49,6 @@ const routes: Routes = [
     ReactiveFormsModule,
     MaterialsModule,
   ],
-  providers: [UserResolver]
+  providers: [UserResolver,ProductListResolver,CustomerResolver,UserResolver,]
 })
 export class ExpenseModule { }
