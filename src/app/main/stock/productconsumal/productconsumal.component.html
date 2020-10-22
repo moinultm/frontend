@@ -62,8 +62,8 @@
 
                         <select class="form-control"  formControlName="user_id">
                             <option value="null">--Select--</option>
-
-                            <option *ngFor="let U of _users.data" [value]="U.id">
+                            <option *ngFor="let U of
+                            users.data" [value]="U.id">
                              {{U.id}} - {{U.name}} </option>
                     </select>
                     </div>
@@ -86,7 +86,7 @@
                           </div>
                       </div>
                 </div-->
-       
+
           </div>
 
           <div class="row ">
@@ -177,7 +177,7 @@
                   </div>
               </div>
         </div>
-        
+
           </div>
 
   </form>

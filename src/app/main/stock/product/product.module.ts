@@ -51,7 +51,9 @@ const routes: Routes = [
  {path: 'productconsumal',
  component: ProductconsumalComponent,
  resolve: {
-
+  CustomerResolver,
+  UserResolver,
+  ProductListResolver
  }
 }
 ,
