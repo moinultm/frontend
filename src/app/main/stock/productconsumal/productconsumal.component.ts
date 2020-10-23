@@ -11,7 +11,7 @@ import { User } from '@app/shared/models/security/user.model';
 import { success, warning, error } from '@app/core/utils/toastr';
 import { CustomerService } from '@app/core/services/stock/customer.service';
 import { Client } from '@app/shared/models/stock/client.model';
-import { GiftService } from '@app/core/services/stock/gift.service';
+import { ConsumeService  } from '@app/core/services/stock/consume.service';
 import { Gift } from '@app/shared/models/stock/gift.model';
 import { ActivatedRoute } from '@angular/router';
 
@@ -37,7 +37,7 @@ export class ProductconsumalComponent implements OnInit {
     private userService:UserService,
     private __productService:ProductService,
     private customeService:CustomerService,
-    private __giftService:GiftService,
+    private __giftService:ConsumeService,
     private _toastr: ToastrService,
   private datePipe : DatePipe,
   private actRoute: ActivatedRoute) {   titleService.setTitle('Stock - Consumal Product'); }
@@ -164,7 +164,7 @@ export class ProductconsumalComponent implements OnInit {
  // console.log("Reactive Form submitted: ", this.myForm.get('companies').value);
 
  }
- saveGift(form: any){
+ saveConsum(form: any){
 
      this._saving=true;
      const formData = new FormData();

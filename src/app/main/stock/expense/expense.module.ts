@@ -10,6 +10,7 @@ import { UserResolver } from '@app/core/resolvers/user.resolver';
 import { AddExpenseComponent } from './add-expense/add-expense.component';
 import { ProductListResolver } from '@app/core/resolvers/productlist.resolver';
 import { CustomerResolver } from '@app/core/resolvers/customer.resolver';
+import { ExpenseListResolver } from '@app/core/resolvers/expenselist.resolver';
 
 
 const routes: Routes = [
@@ -19,7 +20,6 @@ const routes: Routes = [
     component: ExpenseComponent,
     resolve: {
       UserResolver,
-
     },
 
   },
@@ -30,7 +30,8 @@ const routes: Routes = [
     resolve: {
       UserResolver,
       CustomerResolver,
-      ProductListResolver
+      ProductListResolver,
+      ExpenseListResolver
     },
 
   }
@@ -49,6 +50,6 @@ const routes: Routes = [
     ReactiveFormsModule,
     MaterialsModule,
   ],
-  providers: [UserResolver,ProductListResolver,CustomerResolver,UserResolver,]
+  providers: [UserResolver,ProductListResolver,CustomerResolver,UserResolver,ExpenseListResolver,]
 })
 export class ExpenseModule { }

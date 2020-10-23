@@ -15,6 +15,9 @@ import { Client } from '@app/shared/models/stock/client.model';
 import { GiftService } from '@app/core/services/stock/gift.service';
 import { Gift } from '@app/shared/models/stock/gift.model';
 import { ActivatedRoute } from '@angular/router';
+import { ExpenseItem } from '@app/shared/models/stock/expenseitem.model';
+import { ExpenseItemService } from '@app/core/services/stock/expenseitem.service';
+import { ExpenseService } from '@app/core/services/stock/expense.service';
 @Component({
   selector: 'app-add-expense',
   templateUrl: './add-expense.component.html',
@@ -22,7 +25,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AddExpenseComponent implements OnInit {
 
-  _productList:any;
+  _expenseList:any;
   loading:boolean;
 
 
@@ -37,9 +40,9 @@ export class AddExpenseComponent implements OnInit {
   constructor(
     titleService: Title,private _formBuilder: FormBuilder,
     private userService:UserService,
-    private __productService:ProductService,
+    private __productService:ExpenseItemService,
     private customeService:CustomerService,
-    private __giftService:GiftService,
+    private __giftService:ExpenseService,
     private _toastr: ToastrService,
   private datePipe : DatePipe,
   private actRoute: ActivatedRoute) {   titleService.setTitle('Account-Transaction'); }
@@ -69,7 +72,7 @@ export class AddExpenseComponent implements OnInit {
 
     fillProduct(){
       this.actRoute.data.subscribe(data => {
-        this._productList=data.ProductListResolver.data;
+        this._expenseList=data.ExpenseListResolver.data;
         this.loading = false;
     // console.log(data.ProductListResolver.data)
       });
@@ -81,8 +84,8 @@ export class AddExpenseComponent implements OnInit {
 {
   this.loading=true;
   this.__productService.listProduct()
-  .subscribe((res: PartialList<Product>) => {
-    this._productList = res.data;
+  .subscribe((res: PartialList<ExpenseItem>) => {
+    this._expenseList = res.data;
      this.loading = false;
   });
 }
@@ -120,7 +123,7 @@ export class AddExpenseComponent implements OnInit {
      let control = <FormArray>this.myForm.controls.companies;
      control.push(
        this._formBuilder.group({
-         product_id:null,
+        expense_id:null,
          bill_date:[new Date(),[Validators.required]],
            stock_quantity: 0,
            quantity: [0,[Validators.required, Validators.pattern(/^[.\d]+$/)]],
@@ -154,9 +157,9 @@ export class AddExpenseComponent implements OnInit {
      else {
 
     arrayControl.at(index).patchValue({
-      stock_quantity:this._productList[ctrl.selectedIndex - 1].general_quantity,
-    mrp:this._productList[ctrl.selectedIndex - 1].mrp,
-    cost_price:this._productList[ctrl.selectedIndex - 1].cost_price
+      stock_quantity:this._expenseList[ctrl.selectedIndex - 1].general_quantity,
+    mrp:this._expenseList[ctrl.selectedIndex - 1].mrp,
+    cost_price:this._expenseList[ctrl.selectedIndex - 1].cost_price
    });
      }
      //this.updateSubTotal();

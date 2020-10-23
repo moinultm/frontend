@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Expense } from '@app/shared/models/stock/expense.model';
 import { PartialList } from '@app/shared/models/common/patial-list.model';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import {ExpenseService } from '@app/core/services/stock/expense.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { success, warning, error } from '@app/core/utils/toastr';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-expense',
@@ -27,23 +28,45 @@ export class ExpenseComponent implements OnInit {
 
   users:any;
 
+  date = new FormControl(new Date());
+  serializedDate = new FormControl((new Date()).toISOString());
+
   constructor( private expenseService: ExpenseService,  private router:Router,
 
     private _toastr: ToastrService,
     private modalService: NgbModal,
     titleService: Title,
     private actRoute: ActivatedRoute,
-    private _formBuilder: FormBuilder,) {
+    private _formBuilder: FormBuilder,    private _fb: FormBuilder,  private datePipe : DatePipe,) {
 
       titleService.setTitle('General - Expense management');
-
-
-
     }
 
   ngOnInit() {
     this.fillUser();
     this.loadData();
+    this.iniForm();
+  }
+
+  iniForm(){
+    this.form = this._fb.group({
+      fromDate: [  new Date(),  [Validators.required],],
+      toDate: [   new Date(),  [Validators.required],]
+    });
+  }
+
+
+  dateFilter(){
+    let formDt = this.datePipe.transform(this.form.get('fromDate').value, 'yyyy-MM-dd');
+    let toDt = this.datePipe.transform(this.form.get('toDate').value, 'yyyy-MM-dd');
+    this.loading = true;
+    this.expenseService.find({
+      from:  formDt,
+      to:   toDt
+    }).subscribe((res: PartialList<Expense>) => {
+      this.data = res;
+      this.loading = false;
+    });
   }
 
 

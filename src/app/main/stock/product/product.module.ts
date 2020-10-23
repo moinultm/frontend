@@ -12,6 +12,8 @@ import { GiftProductComponent } from './gift-product/gift-product.component';
 import { DamageProductComponent } from './damage-product/damage-product.component';
 import { ListGiftComponent } from './gift-product/list-gift/list-gift.component';
 import { ListDamageComponent } from './damage-product/list-damage/list-damage.component';
+import { MaterialsModule } from '@app/material.module';
+
 
 import { TranslateModule } from '@app/shared/translate/translate.module';
 import { ConfigModule} from '@app/shared/config/config.module';
@@ -19,6 +21,8 @@ import { ConfigModule} from '@app/shared/config/config.module';
 import { ProductListResolver } from '@app/core/resolvers/productlist.resolver';
 import { CustomerResolver } from '@app/core/resolvers/customer.resolver';
 import { UserResolver } from '@app/core/resolvers/user.resolver';
+
+
 import { AppDateAdapter, APP_DATE_FORMATS } from '@app/core/utils/format-datepicker';
 import { ProductconsumalComponent } from '../productconsumal/productconsumal.component';
 import { ListConsumComponent } from '../productconsumal/list-consum/list-consum.component';
@@ -53,7 +57,8 @@ const routes: Routes = [
  resolve: {
   CustomerResolver,
   UserResolver,
-  ProductListResolver
+  ProductListResolver,
+  
  }
 }
 ,
@@ -73,8 +78,12 @@ const routes: Routes = [
     MatProgressSpinnerModule,
     NgbModule,
     FormsModule,
+    FormsModule,
     ReactiveFormsModule,
-    ReactiveFormsModule,
+   
+    MatDatepickerModule,
+    MaterialsModule,
+    ConfigModule,   
     MatDatepickerModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
