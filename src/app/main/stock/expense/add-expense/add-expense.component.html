@@ -38,7 +38,7 @@
           <form  role="form"  [formGroup]="myForm">
               <div class="row" *ngIf="!loading">
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <div class="form-group">
                     <label for="name">Transaction Type</label>
 
@@ -47,16 +47,53 @@
                           <span class="input-group-text"> <i class="fas fa-user-tag"></i></span>
                         </div>
 
-                    <select class="form-control"  formControlName="user_id">
+                    <select class="form-control"  formControlName="transaction">
                         <option value="null">--Select--</option>
                         <option value="expense">Expense</option>
                         <option value="income">Income</option>
                 </select>
+
                 </div>
+
+                  </div>
+
+                </div>
+
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="name">Payment Type</label>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"> <i class="fas fa-user-tag"></i></span>
+                        </div>
+
+                    <select class="form-control"  formControlName="payment_by">
+                        <option value="null">--Select--</option>
+                        <option value="cash">Cash</option>
+                        <option value="bank">Bank</option>
+                        
+                </select>
+
+                </div>
+
+                  </div>
+
+                </div>
+
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Payment Detail</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"> <i class="fas fa-user-tag"></i></span>
+                        </div>
+                        <input type="text" class="form-control" formControlName="payment_details">
+                      </div>
                   </div>
                 </div>
 
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                       <div class="form-group">
                       <mat-form-field>
                           <input matInput [matDatepicker]="picker" placeholder="Transaction Date" formControlName="bill_date">
@@ -67,12 +104,13 @@
                   </div>
 
               </div>
+
              <div class="row" *ngIf="!loading">
 
 
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="name">User</label>
+                    <label for="name">Post by</label>
 
                     <div class="input-group">
                         <div class="input-group-prepend">
@@ -81,7 +119,6 @@
 
                     <select class="form-control"  formControlName="user_id">
                         <option value="null">--Select--</option>
-
                         <option *ngFor="let U of users.data" [value]="U.id">
                          {{U.id}} - {{U.name}} </option>
                 </select>
@@ -89,16 +126,16 @@
                   </div>
             </div>
             <div class="col-md-8">
-                <div class="form-group">
-                    <label>Notes</label>
-
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text"> <i class="fas fa-user-tag"></i></span>
-                        </div>
-                        <input type="text" class="form-control" formControlName="notes">
-                      </div>
+              <div class="form-group">
+                <label>Note</label>
+    
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"> <i class="fas fa-user-tag"></i></span>
+                    </div>
+                    <input type="text" class="form-control" formControlName="purpose">
                   </div>
+              </div>
             </div>
             
       </div>
@@ -127,9 +164,9 @@
                       </td>
                       <td>
                           <div class="form-group" *ngIf="!loadingProducts">
-                              <select class="form-control"   formControlName="expense_id" (change)="updatePrice($event.target,i)">
+                              <select class="form-control"   formControlName="expense_id" >
                                   <option value="null">--Select--</option>
-                                  <option *ngFor="let expense of _expenseList" [ngValue]="expense.id">
+                                  <option *ngFor="let expense of _expenseList" [ngValue]="expense.ledger_name">
                                     {{expense.ledger_name}} </option>
                                 </select>
 
@@ -137,7 +174,7 @@
                       </td>
                       <td>
                           <div class="form-group">
-                             <input type="text" class="form-control" formControlName="stock_quantity">
+                             <input type="text" class="form-control" formControlName="details">
                           </div>
                       </td>
 
@@ -165,6 +202,11 @@
                   </tr>
               </tfoot>
           </table>
+
+
+   
+
+
         </div>
 </div>
 
@@ -173,10 +215,10 @@
 
 </form>
             </div>
-                <!-- /.card-body -->
+                <!-- /.card-body myForm.invalid || -->
 
                 <div class="card-footer">
-                    <button type="submit"  [disabled]="myForm.invalid || _saving" (click)="saveGift(myForm)" class="btn  btn-info float-right">Submit</button>
+                    <button type="submit"  [disabled]=" _saving" (click)="saveGift(myForm)" class="btn  btn-info float-right">Submit</button>
                 </div>
 
               </div>

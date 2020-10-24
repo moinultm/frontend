@@ -13,7 +13,7 @@ import { success, warning, error } from '@app/core/utils/toastr';
 import { CustomerService } from '@app/core/services/stock/customer.service';
 import { Client } from '@app/shared/models/stock/client.model';
 import { GiftService } from '@app/core/services/stock/gift.service';
-import { Gift } from '@app/shared/models/stock/gift.model';
+import { Expense } from '@app/shared/models/stock/expense.model';
 import { ActivatedRoute } from '@angular/router';
 import { ExpenseItem } from '@app/shared/models/stock/expenseitem.model';
 import { ExpenseItemService } from '@app/core/services/stock/expenseitem.service';
@@ -109,8 +109,11 @@ export class AddExpenseComponent implements OnInit {
 
       bill_date: [new Date(), [Validators.required]],
       user_id:[null,Validators.required],
-      notes:[null,Validators.nullValidator],
-
+      purpose:[null,Validators.nullValidator],
+      transaction:[null,Validators.required],
+      payment_by:[null,Validators.required],
+      payment_details:[null,Validators.nullValidator],
+      amont:[null,Validators.required],
        companies: this._formBuilder.array([])
      });
     // this.loadUser();
@@ -122,17 +125,14 @@ export class AddExpenseComponent implements OnInit {
    addNewCompany() {
      let control = <FormArray>this.myForm.controls.companies;
      control.push(
-       this._formBuilder.group({
-        expense_id:null,
-         bill_date:[new Date(),[Validators.required]],
-           stock_quantity: 0,
-           quantity: [0,[Validators.required, Validators.pattern(/^[.\d]+$/)]],
-           mrp:0,
-           cost_price:0
-
+       this._formBuilder.group({  
+        expense_id:[null,Validators.required],
+         details: 'N/A',
+           quantity: [0,[Validators.required, Validators.pattern(/^[.\d]+$/)]],        
        })
      )
    }
+
    deleteCompany(index) {
      let control = <FormArray>this.myForm.controls.companies;
      control.removeAt(index)
@@ -144,26 +144,7 @@ export class AddExpenseComponent implements OnInit {
    return this.myForm.get('companies') as FormArray;
  }
 
-   //other function
-   updatePrice(ctrl,index) {
-      const arrayControl = this.myForm.get('companies') as FormArray;
-     if (ctrl.selectedIndex == 0) {
-       arrayControl.at(index).patchValue({
-        stock_quantity:0,
-         mrp:0,
-         cost_price:0
-        });
-     }
-     else {
-
-    arrayControl.at(index).patchValue({
-      stock_quantity:this._expenseList[ctrl.selectedIndex - 1].general_quantity,
-    mrp:this._expenseList[ctrl.selectedIndex - 1].mrp,
-    cost_price:this._expenseList[ctrl.selectedIndex - 1].cost_price
-   });
-     }
-     //this.updateSubTotal();
-   }
+ 
  //Saavestock
 
  viewData(){
@@ -176,14 +157,22 @@ export class AddExpenseComponent implements OnInit {
      const formData = new FormData();
      let formDt = this.datePipe.transform(this.myForm.get('bill_date').value, 'yyyy-MM-dd');
 
+  
+     
+     formData.append('transaction', this.myForm.get('transaction').value);
+    
+     formData.append('payment_by', this.myForm.get('payment_by').value);
+     formData.append('payment_details', this.myForm.get('payment_details').value);
+
+      formData.append('date', formDt);
      formData.append('user_id', this.myForm.get('user_id').value);
-     formData.append('customer', '0');
-     formData.append('date', formDt);
-     formData.append('notes', this.myForm.get('notes').value);
+     formData.append('purpose', this.myForm.get('purpose').value);
+ 
+     
      formData.append('items', JSON.stringify(this.myForm.get('companies').value));
 
-     this.__giftService.save(formData, false).subscribe((res: Gift) => {
-       success('Success!', 'The Gift items are successfully saved.', this._toastr);
+     this.__giftService.save(formData, false).subscribe((res: Expense) => {
+       success('Success!', 'The Expense items are successfully saved.', this._toastr);
        this.iniForm();
        this._saving = false;
      }, (err: any) => {
