@@ -16,6 +16,8 @@ import { environment } from '@env/environment';
 import 'pivottable/dist/pivot.min.js';
 import 'pivottable/dist/pivot.min.css';
 import { ConfigureService } from '@app/core/services/common/config.service';
+import { CategoryService } from '@app/core/services/stock/category.service';
+import { Category } from '@app/shared/models/stock/category.model';
 
 declare var jQuery:any;
 declare var $:any;
@@ -30,6 +32,7 @@ export class StockGeneralReportComponent implements OnInit{
   todayDate=this.datePipe.transform(new Date(), 'yyyy-MM-dd');
 
   data: any;
+  categories: Array<Category>;
 
   loading: boolean;
   savingSles: boolean;
@@ -47,7 +50,7 @@ inTotal=0;
 outTotal=0;
 dmgTotal=0;
 gftTotal=0;
-
+consumTotal=0;
   private el: ElementRef;
 
   logoPreview: any;
@@ -59,7 +62,8 @@ gftTotal=0;
     private _fb: FormBuilder,
     private datePipe : DatePipe,
     private reportService:ProductReportService,
-    private configure:ConfigureService)	{
+    private configure:ConfigureService,
+    private categoryService: CategoryService,)	{
       this.el = el;
   	}
 
@@ -80,11 +84,12 @@ gftTotal=0;
       this.loading = true;
       let formDt = this.datePipe.transform(this.form.get('fromDate').value, 'yyyy-MM-dd');
       let toDt = this.datePipe.transform(this.form.get('toDate').value, 'yyyy-MM-dd');
-
+      let category_id =  this.form.get('category_id').value;
       this.fromDate=formDt;
       this.toDate=toDt;
 
       this.reportService.stockGeneralReport({
+        category_id:category_id,
         page: this.page,
         size: this.size,
         from:  formDt,
@@ -108,8 +113,9 @@ gftTotal=0;
 
       let formDt =this.todayDate;
       let toDt = this.todayDate;
-
+      let category_id =  this.form.get('category_id').value;
       this.reportService.stockGeneralReport({
+        category_id:category_id,
         page: this.page,
         size: this.size,
         from:  formDt,
@@ -128,7 +134,13 @@ gftTotal=0;
     // [disabled]="form.invalid || loading" and :  new Date() will solve the blank date issue
     iniForm(){
       this.loading=true;
+      this.categoryService.find()
+      .subscribe((res: PartialList<Category>) => {
+        this.categories = res.data;       
+      });
+
       this.form = this._fb.group({
+        category_id:[1,[Validators.required]],
         fromDate: [  new Date(),  [Validators.required],],
         toDate: [  new Date(),  [Validators.required],]
       });
@@ -173,9 +185,7 @@ gftTotal=0;
 
 
         $.pivotUtilities.tipsData=data.product;
-
         var utils = $.pivotUtilities;
-
         var sum = $.pivotUtilities.aggregatorTemplates.sum;
                   var numberFormat = $.pivotUtilities.numberFormat;
                   var intFormat = numberFormat({digitsAfterDecimal: 0});
@@ -220,7 +230,7 @@ summaries(){
   this.outTotal  = this.data.product.reduce((prev, cur) => parseInt(prev) + parseInt(cur.OUTWARD_QUANTITY), 0);
   this.gftTotal= this.data.product.reduce((prev, cur) => parseInt(prev) + parseInt(cur.GIFT_QUANTITY), 0);
   this.dmgTotal = this.data.product.reduce((prev, cur) => prev + parseInt(cur.DAMAGE_QUANTITY), 0);
-
+  this.consumTotal = this.data.product.reduce((prev, cur) => prev + parseInt(cur.CONSUME_QUANTITY), 0);
 }
 
 

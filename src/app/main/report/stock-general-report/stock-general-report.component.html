@@ -48,6 +48,33 @@
                       </mat-form-field>
                     </div>
 
+
+                    <div class="col-md-4">
+                      <!--subcategory checkboxes (change)="selectCategory(cat)" -->
+                    <h5>Category(s)</h5>
+                    <div class="form-group">
+                      <select class="form-control"  id="category_id" formControlName="category_id">
+                        <option   [value]="0" >
+                          ALL</option>
+              
+                             <option *ngFor="let cat of categories" [value]="cat.id" >
+                             {{cat.category_name}}</option>
+                     </select>
+                    </div>
+                    <!-- ./subcategory checkboxes -->
+             
+                    <div class="row" *ngIf="form.get('category_id').dirty && form.get('category_id').invalid">
+                       <div class="col-12">
+                         <div class="alert alert-danger alert-transparent-left" role="alert"
+                           *ngIf="form.get('category_id').dirty && form.controls['category_id'].hasError('required')">
+                           The category_id is required
+                         </div>
+                         </div>
+                       </div>
+                     </div>
+
+
+
                       <div class="col-md-2 mb-3 my-auto">
                         <button type="button" name="search" id="search" value="Search" (click)="dateFilter()" class="btn btn-success"
                         [disabled]="form.invalid"><i class="fas fa-search"></i>&nbsp;Search</button>
@@ -108,6 +135,7 @@
                         <th>Stock Total </th>
                         <th>Gift&Sample</th>
                         <th>Damage</th>
+                        <th>Consume</th>
                         <th>Running Stock</th>
                       </tr>
                     </thead>
@@ -131,7 +159,8 @@
                          <td ><strong>{{ _CIN(P.TRAN_QUANTITY)+_CIN(P.OUTWARD_QUANTITY) +_CIN(P.INWARD_QUANTITY)  }}</strong></td>
                         <td> {{  _CIP(P.GIFT_QUANTITY) }}</td>
                         <td>  {{  _CIP(P.DAMAGE_QUANTITY) }} </td>
-                        <td><strong>{{ _CIN(P.TRAN_QUANTITY)+_CIN(P.OUTWARD_QUANTITY) +_CIN(P.GIFT_QUANTITY) +_CIN(P.DAMAGE_QUANTITY)+_CIN(P.INWARD_QUANTITY)  }}</strong></td>
+                        <td>  {{  _CIP(P.CONSUME_QUANTITY) }} </td>
+                        <td><strong>{{ _CIN(P.TRAN_QUANTITY)+_CIN(P.OUTWARD_QUANTITY) +_CIN(P.GIFT_QUANTITY)+_CIN(P.CONSUME_QUANTITY) +_CIN(P.DAMAGE_QUANTITY)+_CIN(P.INWARD_QUANTITY)  }}</strong></td>
 
                       </tr>
 
@@ -145,7 +174,8 @@
                         <td><b> {{openingTotal + inTotal+  _CIN(outTotal) }}</b></td>
                         <td><b> {{  _CIP(gftTotal) }}</b></td>
                         <td><b> {{  _CIP(dmgTotal) }}</b></td>
-                        <td><b>{{openingTotal + inTotal+ outTotal + dmgTotal +gftTotal}}</b></td>
+                        <td><b> {{  _CIP(consumTotal) }}</b></td>
+                        <td><b>{{openingTotal + inTotal+ outTotal + dmgTotal +gftTotal+consumTotal}}</b></td>
                       </tr>
                     </tbody>
 

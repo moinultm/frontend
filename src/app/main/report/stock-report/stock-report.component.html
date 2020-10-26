@@ -112,11 +112,10 @@
                             <tr *ngFor="let user of data.users; let i = index">
                               <td> {{ i+1 }}</td>
                               <td> {{ user.name }}</td>
-
                               <td *ngFor="let product of data.products">
                                 <span *ngFor=" let cross of data.crossData">
                                   <div *ngIf="cross.USER_ID === user.id && cross.STOCK_ITEM_ID === product.id">
-                                     {{  _CIN(cross.TRAN_QUANTITY)+  _CIN(cross.INWARD_QUANTITY)      }}
+                                     {{  _CIN(cross.TRAN_QUANTITY)+  _CIN(cross.OUTWARD_QUANTITY)      }}
                                   </div>
                                 </span>
                               </td>
