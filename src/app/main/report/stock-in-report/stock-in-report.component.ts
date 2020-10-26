@@ -12,6 +12,8 @@ import 'pivottable/dist/pivot.min.js';
 import 'pivottable/dist/pivot.min.css';
 import { ConfigureService } from '@app/core/services/common/config.service';
 import { environment } from '@env/environment';
+import { Category } from '@app/shared/models/stock/category.model';
+import { CategoryService } from '@app/core/services/stock/category.service';
 
 declare var jQuery:any;
 declare var $:any;
@@ -27,7 +29,8 @@ export class StockInReportComponent implements OnInit {
   private el: ElementRef;
 
   todayDate=this.datePipe.transform(new Date(), 'yyyy-MM-dd');
-
+  categories: Array<Category>;
+  
   userName:string;
   userID:null;
   userAddress:string;
@@ -64,7 +67,8 @@ export class StockInReportComponent implements OnInit {
     private reportService:ProductReportService,
     private userService:UserService,
     public jwtHelper: JwtHelperService,
-    private configure:ConfigureService
+    private configure:ConfigureService,
+    private categoryService: CategoryService,
   ) {   this.el = el; }
 
   ngOnInit(){
@@ -84,16 +88,17 @@ export class StockInReportComponent implements OnInit {
     this.loading = true;
     let formDt = this.datePipe.transform(this.form.get('fromDate').value, 'yyyy-MM-dd');
     let toDt = this.datePipe.transform(this.form.get('toDate').value, 'yyyy-MM-dd');
-
+    let category_id =  this.form.get('category_id').value;
 
     this.fromDate=formDt;
     this.toDate=toDt;
 
     this.reportService.stockInReport( {
+      category_id:category_id,
       page: this.page,
       size: this.size,
       from:  formDt,
-      to:   toDt
+      to:   toDt   
     }).subscribe((res: PartialList<StockGeneral>) => {
       this.data = res;
       this.loadPivot(res);
@@ -106,11 +111,13 @@ export class StockInReportComponent implements OnInit {
   loadData(id:number,page?: number): void {
     this.page = page ? page : 1;
     this.loading = true;
+    let category_id =  this.form.get('category_id').value;
 
     let formDt ='';
     let toDt = '';
 
     this.reportService.stockInReport({
+      category_id:category_id,
       page: this.page,
       size: this.size,
       from:  formDt,
@@ -127,7 +134,15 @@ export class StockInReportComponent implements OnInit {
   iniForm(){
     this.loading=true;
 
+   
+    this.categoryService.find()
+    .subscribe((res: PartialList<Category>) => {
+      this.categories = res.data;       
+    });
+
     this.form = this._fb.group({
+      category_id:[1,[Validators.required]],
+
       fromDate: [  new Date(),  [Validators.required],],
       toDate: [  new Date(),  [Validators.required],]
     });

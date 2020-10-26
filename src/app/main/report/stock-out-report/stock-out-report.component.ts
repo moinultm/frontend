@@ -12,6 +12,8 @@ import { environment } from '@env/environment';
 import 'pivottable/dist/pivot.min.js';
 import 'pivottable/dist/pivot.min.css';
 import { ConfigureService } from '@app/core/services/common/config.service';
+import { Category } from '@app/shared/models/stock/category.model';
+import { CategoryService } from '@app/core/services/stock/category.service';
 
 declare var jQuery:any;
 declare var $:any;
@@ -24,7 +26,7 @@ declare var $:any;
 })
 export class StockOutReportComponent implements OnInit {
 
-
+  categories: Array<Category>;
   todayDate=this.datePipe.transform(new Date(), 'yyyy-MM-dd');
 
   userName:string;
@@ -64,7 +66,8 @@ export class StockOutReportComponent implements OnInit {
     private reportService:ProductReportService,
     private userService:UserService,
     public jwtHelper: JwtHelperService,
-    private configure:ConfigureService
+    private configure:ConfigureService,
+    private categoryService: CategoryService,
   ) {
     this.el = el;
    }
@@ -87,11 +90,13 @@ export class StockOutReportComponent implements OnInit {
     this.loading = true;
     let formDt = this.datePipe.transform(this.form.get('fromDate').value, 'yyyy-MM-dd');
     let toDt = this.datePipe.transform(this.form.get('toDate').value, 'yyyy-MM-dd');
-
+    let category_id =  this.form.get('category_id').value;
+    
     this.fromDate=formDt;
     this.toDate=toDt;
 
     this.reportService.stockOutReport( {
+      category_id:category_id,
       page: this.page,
       size: this.size,
       from:  formDt,
@@ -113,8 +118,9 @@ export class StockOutReportComponent implements OnInit {
 
     let formDt ='';
     let toDt = '';
-
+    let category_id =  this.form.get('category_id').value;
     this.reportService.stockOutReport({
+      category_id:category_id,
       page: this.page,
       size: this.size,
       from:  formDt,
@@ -130,8 +136,12 @@ export class StockOutReportComponent implements OnInit {
 
   iniForm(){
     this.loading=true;
-
+    this.categoryService.find()
+    .subscribe((res: PartialList<Category>) => {
+      this.categories = res.data;       
+    });
     this.form = this._fb.group({
+      category_id:[1,[Validators.required]],
       fromDate: [  new Date(),  [Validators.required],],
       toDate: [  new Date(),  [Validators.required],]
     });

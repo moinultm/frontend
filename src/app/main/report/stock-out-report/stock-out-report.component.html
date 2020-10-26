@@ -50,6 +50,30 @@
                           </mat-form-field>
                         </div>
 
+
+                        <div class="col-md-4">
+                          <!--subcategory checkboxes (change)="selectCategory(cat)" -->
+                        <h5>Category(s)</h5>
+                        <div class="form-group">
+                          <select class="form-control"  id="category_id" formControlName="category_id">
+                 
+                                 <option *ngFor="let cat of categories" [value]="cat.id" >
+                                 {{cat.category_name}}</option>
+                         </select>
+                        </div>
+                        <!-- ./subcategory checkboxes -->
+                 
+                        <div class="row" *ngIf="form.get('category_id').dirty && form.get('category_id').invalid">
+                           <div class="col-12">
+                             <div class="alert alert-danger alert-transparent-left" role="alert"
+                               *ngIf="form.get('category_id').dirty && form.controls['category_id'].hasError('required')">
+                               The category_id is required
+                             </div>
+                             </div>
+                           </div>
+                         </div>
+
+                         
                         <div class="col-md-2 mb-3 my-auto">
                           <button type="button" name="search" id="search" value="Search" (click)="dateFilter()"
                             class="btn btn-success" [disabled]="form.invalid"><i
