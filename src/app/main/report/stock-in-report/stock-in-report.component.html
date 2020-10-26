@@ -52,6 +52,8 @@
        <h5>Category(s)</h5>
        <div class="form-group">
          <select class="form-control"  id="category_id" formControlName="category_id">
+          <option   [value]="0" >
+            ALL</option>
 
                 <option *ngFor="let cat of categories" [value]="cat.id" >
                 {{cat.category_name}}</option>
