@@ -115,8 +115,13 @@
               <thead>
               <tr>
                 <th width="20px">Sl</th>
-                <th>Product Name</th>
+                <th width="200px">Product Name</th>
                 <th>Qty</th>
+                <th>Batch No.</th>
+                <th>Lot No.</th>
+                <th>Pack Size</th>
+                <th>Mfg. Date</th>
+                <th>Exp. Date</th>
                 <th>Rate(MRP)</th>
                 <th>Discount(%)</th>
                 <th>Discount </th>
@@ -128,6 +133,11 @@
                 <td>{{i+1}}</td>
                 <td>{{TD.product.name}}</td>
                 <td>{{TD.quantity}} </td>
+                <td> </td>
+                <td></td>
+                <td> </td>
+                <td></td>
+                <td></td>
                 <td>{{TD.product.mrp}}  </td>
                 <td>{{TD.product_discount_percentage}} </td>
                 <td>{{TD.product_discount_amount}} </td>
@@ -142,6 +152,11 @@
                 <td></td>
                 <td></td>
                 <td></td>
+                <td></td>
+                <td></td>              
+                <td></td>      
+                <td></td>      
+                <td></td>   
                 <td> <b>{{ T.net_total }}</b></td>
               </tr>
 
