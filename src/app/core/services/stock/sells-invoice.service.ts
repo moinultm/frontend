@@ -42,6 +42,12 @@ export class SellsInvoiceService extends CrudService<SellsInvoice> {
     return this.__http.get <PartialList<SellsInvoice>>(this.url + '/' + id +'/'+'details', this.options);
   }
 
+  public findReturnDetailsById(id: number): any {
+    this.options.params = undefined;
+
+    return this.__http.get <PartialList<SellsInvoice>>(this.url + '/' + id +'/'+'return-details', this.options);
+  }
+
 
   public delete(model: any): any {
     this.options.params = undefined;
@@ -63,7 +69,7 @@ export class SellsInvoiceService extends CrudService<SellsInvoice> {
     return this.__http.get<PartialList<SellsInvoice>>(this.url + '/' + id+'/'+'order-details', this.options);
   }
 
- 
+
 
 
   public findByInvoiceNo(query:Text){

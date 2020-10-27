@@ -136,10 +136,12 @@
                         <td>{{result.paid}}</td>
                         <td>{{result.user_name}}</td>
                         <td>
-                          <button mat-icon-button color="accent" matTooltip="view details invoice"
+
+                          <button
                             (click)="toDetails(result.id)">
-                            <mat-icon class="mat-18">flip_to_front</mat-icon>
+                         Details
                           </button>
+
                           <button   (click)="refereToReturnSell(result.id)">
                           Return Items
                           </button>
@@ -147,10 +149,14 @@
                     (click)="refereToEditInvoice(result.id)">
                         <mat-icon>edit</mat-icon>
                     </!--button-->
-                          <button *ngIf="isRoleViewAll" mat-icon-button color="accent" matTooltip="Delete invoice"
-                            (click)="initDelete(deleteModal, result)">
-                            <mat-icon>restore_from_trash</mat-icon>
+                          <button *ngIf="isRoleViewAll"    (click)="initDelete(deleteModal, result)">
+                           Delete
                           </button>
+
+                          <button   (click)="toReturnDetails(result.id)">
+                            Return Details
+                            </button>
+
                         </td>
                       </tr>
                     </ng-container>

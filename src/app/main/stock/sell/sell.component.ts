@@ -146,6 +146,10 @@ refereToReturnSell(id:number){
   this.router.navigate([`sell/return/${id}`]);
 }
 
+toReturnDetails(id:number){
+  this.router.navigate([`sell/return-details/${id}`]);
+}
+
 
 refereToEditInvoice(id:number){
 

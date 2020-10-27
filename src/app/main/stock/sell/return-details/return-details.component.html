@@ -1,0 +1,259 @@
+
+
+<div class="content-wrapper" >
+
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Return</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
+            <li class="breadcrumb-item"><a>Sells</a></li>
+            <li class="breadcrumb-item active">Return</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+
+  <mat-spinner class="loading-profiles" *ngIf="loadingDetails"></mat-spinner>
+
+  <section class="content">
+    <div class="container-fluid" *ngIf="!loadingDetails">
+
+      <div class="page frontpage" id="print-section" style="background-color:ghostwhite;">
+
+        <!-- this row will not appear when printing -->
+        <div class="row no-print">
+         <div class="col-12" >
+          <button type="button" class="btn btn-info float-right" style="margin-right: 5px;" (click)="openDialogPayments()" ><i class="far fa-credit-card"></i>
+            Add Payment
+          </button>
+
+           <a href="#" (click)="print('print-section')" class="btn btn-success float-right"><i class="fas fa-print"></i>
+             Print</a>
+         </div>
+       </div>
+
+
+
+      <div class="row">
+        <div class="col-md-12">
+           <div class="invoice p-3 mb-3">
+
+            <div class="header">
+              <div class="row mb-3">
+                <div class="col-md-7" style="
+                width: 400px;
+            ">
+ <!--img src="{{logoPreview}}{{'invoice_header' | configure }} " alt="" class="img-fluid"-->
+             <img src="/assets/images/trade-2.jpg"  width="400" class="img-fluid">
+                  </div>
+
+                <div class="col-md-4 invoice-col" *ngFor="let  T of details.data ">
+                  <br>
+                  <h4>
+                    <strong>Invoice</strong>
+                  </h4>
+
+                  <address>
+
+                    Trade License No.<strong>TRAD/DSCC/290376/2019</strong> <br>
+                    TIN No. <strong>125371773865</strong><br>
+                    IRC No.  <strong>260326110965120</strong><br>
+                    VAT Reg. No. <strong>000966909-0208</strong>
+
+                  </address>
+                </div>
+              </div>
+            </div> <!--Invoice header-->
+
+      <!-- title row -->
+      <div class="row">
+        <div class="col-12">
+          <h4>
+            <small class="float-right" *ngFor="let  T of details.data " >Date: {{T.date |  date:'dd/MMM/yyyy'}} </small>
+          </h4>
+        </div>
+        <!-- /.col -->
+      </div>
+
+
+
+      <!-- info row -->
+      <div class="row invoice-info" >
+
+        <div class="col-sm-4 invoice-col">
+          To
+          <address *ngFor="let  T of details.data ">
+            <strong>{{ T.client.full_name }}</strong> &#44;  Code: {{ T.client.client_code }}<br>
+           Adress:  {{  T.client.address }}&#44;   Phone: {{  T.client.contact }}&#44; Email: {{  T.client.email }}
+          </address>
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-4 invoice-col"  *ngFor="let  T of details.data ">
+         Invoice# {{T.reference_no}}<br>
+          Order# {{T.order_no}}&#44;  transaction ID: {{T.id}}<br>
+         Sells by: {{T.   user_name}}
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <!-- Table row -->
+      <div class="row">
+
+        <div class="col-12 table-responsive">
+          <br>
+          <p>Description:</p>
+
+          <table class="table table-striped table-bordered table-mini"  *ngIf="!loadingDetails">
+            <thead>
+            <tr>
+              <th width="20px">Sl</th>
+              <th width="300px">Product Name</th>
+              <th width="80px">Batch No.</th>
+              <th width="80px">Pack Size</th>
+              <th width="80px">Mfg.Date</th>
+              <th width="80px">Exp.Date</th>
+              <th>Return Qty</th>
+              <th>Cost </th>
+              <th>Amount Return</th>
+
+            </tr>
+            </thead>
+            <tbody  *ngFor="let T of details.data;">
+            <tr *ngFor="let TD of T.return_sales ; let i = index">
+              <td>{{i+1}}</td>
+              <td>{{TD.sells.product.name}}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>{{TD.return_units}}</td>
+              <td>{{TD.sells.product.cost_price}} </td>
+              <td>{{TD.return_amount}}  </td>
+
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+               <b> Total:</b>
+              </td>
+
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>  <b>{{ T.total_quantity_sells }}</b></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td> <b>{{ T.net_total }}</b></td>
+            </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <div class="row">
+        <!-- accepted payments column -->
+        <div class="col-6">
+
+
+        </div>
+        <!-- /.col -->
+
+        <div class="col-6">
+
+          <h6 class="lead">Bill Totals</h6>
+<style>
+
+</style>
+          <div class="table-responsive" >
+            <table class="table-bordered table-mini table-striped" *ngFor="let T of details.data ;">
+              <tbody><tr>
+                <th style="width:50%">Total:</th>
+                <td>{{T.total + T.discount }} </td>
+              </tr>
+              <!--tr>
+                <th>Tax  </th>
+                <td>{{T.total_tax}} </td>
+              </tr-->
+              <!--tr>
+                <th>Shipping:</th>
+                <td>{{T.labor_cost}}</td>
+              </tr-->
+              <tr>
+                  <th>Discount:</th>
+                  <td>{{T.discount}}</td>
+                </tr>
+
+                <tr>
+                  <th>Paid:</th>
+                  <td>{{T.paid}}
+                    <div *ngIf="T.return == 1">
+                      <small>(Has return item)</small>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th>Total:</th>
+                  <td> {{T.total - T.paid}}  </td>
+                </tr>
+            </tbody></table>
+
+
+          </div>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+
+      <div class="divFooter">
+
+          <div class="row">
+            <div class="col-md-12">
+              <img src="/assets/images/trade-footer.jpg" style="width: 90%;">
+              <!--img src="{{logoPreview}}{{'invoice_footer_image' | configure }}" alt="" class="img-fluid" style="width: 100%;"-->
+<p>printerd by online software www.gmtradeinternational.com</p>
+            </div>
+          </div>
+
+      </div>
+
+      <!-- this row will not appear when printing -->
+      <div class="row no-print">
+        <div class="col-12" >
+          <a href="#"  (click)="print('print-section')"  class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+          <button type="button" class="btn btn-success float-right" style="margin-right: 5px;" (click)="openDialogPayments()" ><i class="far fa-credit-card"></i>
+            Add Payment
+          </button>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+      </div>
+
+    </div> <!--close of frontpage-->
+
+<!--here willbe frontpage close--->
+
+    </div>
+  </section>
+
+</div>
+<!-- Content Wrapper. Contains page content -->

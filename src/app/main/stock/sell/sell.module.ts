@@ -26,6 +26,7 @@ import { SellsListResolver } from '@app/core/resolvers/sellslist.resolver';
 import { ProductListResolver } from '@app/core/resolvers/productlist.resolver';
 
 import { ConfigModule } from '@app/shared/config/config.module';
+import { ReturnDetailsComponent } from './return-details/return-details.component';
 
 const routes: Routes = [
   // Roles component
@@ -60,6 +61,10 @@ const routes: Routes = [
     component: SellReturnComponent
   },
   {
+    path: 'return-details/:id',
+    component: ReturnDetailsComponent
+  },
+  {
     path: 'order',
     component: SellsOrderComponent,
     resolve: {
@@ -82,7 +87,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [SellComponent, AddComponent,SellDetailsComponent,AddPaymentComponent,SellReturnComponent,AddCustomerComponent, SellsOrderComponent, OrderListComponent, OrderInvoiceComponent, OrderDetailsComponent],
+  declarations: [SellComponent, AddComponent,SellDetailsComponent,AddPaymentComponent,SellReturnComponent,AddCustomerComponent, SellsOrderComponent, OrderListComponent, OrderInvoiceComponent, OrderDetailsComponent, ReturnDetailsComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
