@@ -121,7 +121,7 @@
                     </table>
 
 
-                    <table class="table table-bordered mb-3" style="width: 70%; font-weight: bold;" align="left">
+                    <table class="table table-mini table-bordered mb-3" style="width: 70%; font-weight: bold;" align="left">
 
                       <tbody>
 
@@ -132,19 +132,46 @@
                             <td>{{data.total_selling_price}}</td>
                           </tr>
 
-                          <tr>
+                          <!--tr>
                             <td> Total Cost Price  </td>
                             <td> {{data.total_cost_price}} </td>
                           </tr>
 
-   <tr>
-                                        <td> Total Gross Profit </td>
-                                        <td> {{data.gross_profit}} </td>
-                                      </tr>
-                              <tr>
-                                    <td> Total Expenses </td>
+                         <tr>
+                             <td> Total Gross Profit </td>
+                             <td> {{data.gross_profit}} </td>
+                          </tr-->
+
+               
+                              <tr>                             
+                                 <td>                                      
+                                      <div class=" invoice-col"  *ngFor="let  T of data.expenses.data ">
+
+                                         <div class="invoice-col"  *ngFor="let  TD of T.expense_transactions">
+                                          {{TD.ledger_name}}  - {{TD.total}}  
+                                        </div>                                      
+          
+                                            </div>
+                                      Total Expenses </td>
                                     <td> {{data.total_expense}} </td>
+
                                   </tr>
+
+                                  
+                                  <tr>                             
+                                    <td>                                      
+                                         <div class=" invoice-col"  *ngFor="let  T of data.payments_tran.payment ">
+                                        
+                                          {{T.client.full_name}} - {{T.amount}}                                      
+                                          
+             
+                                               </div>
+                                         Total Payment </td>
+
+                                         
+                                       <td> {{data.total_payments}} </td>
+   
+                                     </tr>
 
 
                                   <tr>
@@ -153,7 +180,7 @@
                                       </tr>
 
 
-                                      <tr>
+                                      <!---tr>
                                             <td> Total Tax </td>
                                             <td> {{data.total_tax}} </td>
                                           </tr>
@@ -161,10 +188,7 @@
                                           <tr>
                                                 <td> Net Profit after tax</td>
                                                 <td> {{data.net_profit_after_tax}} </td>
-                                              </tr>
-
-
-
+                                              </tr--->
 
 
 
