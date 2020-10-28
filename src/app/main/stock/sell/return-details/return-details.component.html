@@ -30,16 +30,14 @@
         <!-- this row will not appear when printing -->
         <div class="row no-print">
          <div class="col-12" >
-          <button type="button" class="btn btn-info float-right" style="margin-right: 5px;" (click)="openDialogPayments()" ><i class="far fa-credit-card"></i>
+          <!--button type="button" class="btn btn-info float-right" style="margin-right: 5px;" (click)="openDialogPayments()" ><i class="far fa-credit-card"></i>
             Add Payment
-          </button>
+          </button-->
 
            <a href="#" (click)="print('print-section')" class="btn btn-success float-right"><i class="fas fa-print"></i>
              Print</a>
          </div>
        </div>
-
-
 
       <div class="row">
         <div class="col-md-12">
@@ -57,7 +55,7 @@
                 <div class="col-md-4 invoice-col" *ngFor="let  T of details.data ">
                   <br>
                   <h4>
-                    <strong>Invoice</strong>
+                    <strong>Return</strong>
                   </h4>
 
                   <address>
@@ -74,14 +72,13 @@
 
       <!-- title row -->
       <div class="row">
-        <div class="col-12">
+        <!--div class="col-12">
           <h4>
             <small class="float-right" *ngFor="let  T of details.data " >Date: {{T.date |  date:'dd/MMM/yyyy'}} </small>
           </h4>
-        </div>
+        </div-->
         <!-- /.col -->
       </div>
-
 
 
       <!-- info row -->
@@ -97,8 +94,8 @@
         <!-- /.col -->
         <div class="col-sm-4 invoice-col"  *ngFor="let  T of details.data ">
          Invoice# {{T.reference_no}}<br>
-          Order# {{T.order_no}}&#44;  transaction ID: {{T.id}}<br>
-         Sells by: {{T.   user_name}}
+          Order# {{T.order_no}}<br>
+         Return by: {{T.   user_name}}
         </div>
         <!-- /.col -->
       </div>
@@ -116,44 +113,37 @@
             <tr>
               <th width="20px">Sl</th>
               <th width="300px">Product Name</th>
-              <th width="80px">Batch No.</th>
+              <!--th width="80px">Batch No.</th>
               <th width="80px">Pack Size</th>
               <th width="80px">Mfg.Date</th>
-              <th width="80px">Exp.Date</th>
+              <th width="80px">Exp.Date</th-->
               <th>Return Qty</th>
-              <th>Cost </th>
+              <th>Cost</th>
               <th>Amount Return</th>
-
+              <th>Date</th>
             </tr>
             </thead>
             <tbody  *ngFor="let T of details.data;">
             <tr *ngFor="let TD of T.return_sales ; let i = index">
               <td>{{i+1}}</td>
               <td>{{TD.sells.product.name}}</td>
+              <!--td></td>
               <td></td>
               <td></td>
-              <td></td>
-              <td></td>
+              <td></td-->
               <td>{{TD.return_units}}</td>
               <td>{{TD.sells.product.cost_price}} </td>
               <td>{{TD.return_amount}}  </td>
-
+              <td> Date: {{TD.created_at |  date:'dd/MMM/yyyy'}}</td>
             </tr>
             <tr>
               <td></td>
-              <td>
-               <b> Total:</b>
-              </td>
+              <td> </td>
+              <td></td>
 
               <td></td>
               <td></td>
               <td></td>
-              <td></td>
-              <td>  <b>{{ T.total_quantity_sells }}</b></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td> <b>{{ T.net_total }}</b></td>
             </tr>
 
             </tbody>
@@ -173,31 +163,18 @@
         </div>
         <!-- /.col -->
 
-        <div class="col-6">
-
+        <!--div class="col-6">
           <h6 class="lead">Bill Totals</h6>
-<style>
-
-</style>
           <div class="table-responsive" >
             <table class="table-bordered table-mini table-striped" *ngFor="let T of details.data ;">
               <tbody><tr>
                 <th style="width:50%">Total:</th>
                 <td>{{T.total + T.discount }} </td>
               </tr>
-              <!--tr>
-                <th>Tax  </th>
-                <td>{{T.total_tax}} </td>
-              </tr-->
-              <!--tr>
-                <th>Shipping:</th>
-                <td>{{T.labor_cost}}</td>
-              </tr-->
               <tr>
                   <th>Discount:</th>
                   <td>{{T.discount}}</td>
                 </tr>
-
                 <tr>
                   <th>Paid:</th>
                   <td>{{T.paid}}
@@ -206,7 +183,6 @@
                     </div>
                   </td>
                 </tr>
-
                 <tr>
                   <th>Total:</th>
                   <td> {{T.total - T.paid}}  </td>
@@ -215,7 +191,7 @@
 
 
           </div>
-        </div>
+        </div-->
         <!-- /.col -->
       </div>
       <!-- /.row -->
@@ -234,7 +210,7 @@
       </div>
 
       <!-- this row will not appear when printing -->
-      <div class="row no-print">
+      <!--div class="row no-print">
         <div class="col-12" >
           <a href="#"  (click)="print('print-section')"  class="btn btn-default"><i class="fas fa-print"></i> Print</a>
           <button type="button" class="btn btn-success float-right" style="margin-right: 5px;" (click)="openDialogPayments()" ><i class="far fa-credit-card"></i>
@@ -242,7 +218,7 @@
           </button>
 
         </div>
-      </div>
+      </div-->
     </div>
 
   </div>

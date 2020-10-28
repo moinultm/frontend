@@ -129,7 +129,7 @@ export class AddComponent implements OnInit {
     shippingCost:['0', [Validators.required]  ],
     grandTotal:['0',[Validators.required]  ],
     direct:['1',[Validators.required]  ],
-    user_id:[null, [Validators.required]],
+    user_id:  [null,[Validators.required]  ]
   });
   }
 
@@ -217,6 +217,12 @@ export class AddComponent implements OnInit {
         orderitem ? orderitem.sub_total : 0,
         [Validators.required]],
         itemTotal:[ orderitem ? orderitem.sub_total : 0, [Validators.required]],
+
+        batch_no:['', [Validators.nullValidator]],
+        lot_no:['', [Validators.nullValidator]],
+        pack_size:['', [Validators.nullValidator]],
+        mfg_date:['', [Validators.nullValidator]],
+        exp_date:['', [Validators.nullValidator]],
 
     });
   }
@@ -310,6 +316,11 @@ export class AddComponent implements OnInit {
    formItem.product_id=formProducts.value.name.id;
    formItem.product_name= formProducts.value.name.name ;
 
+   formItem.batch_no= formProducts.value.batch_no ;
+   formItem.pack_size= formProducts.value.pack_size ;
+   formItem.mfg_date= formProducts.value.mfg_date ;
+   formItem.exp_date= formProducts.value.exp_date ;
+
    formItem.quantity=formProducts.value.quantity;
    formItem.mrp=formProducts.value.productMRP;
    formItem.sub_total=formProducts.value.itemTotal;
@@ -320,6 +331,7 @@ export class AddComponent implements OnInit {
    formItem.sub_total=formProducts.value.sub_total;
 
    formItem.cost_price=formProducts.value.name.cost_price;
+
 
     if (this.formProducts.valid) {
       this.orderItemList.push(formItem);

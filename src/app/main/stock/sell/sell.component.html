@@ -137,25 +137,28 @@
                         <td>{{result.user_name}}</td>
                         <td>
 
-                          <button
-                            (click)="toDetails(result.id)">
-                         Details
+                          <button  (click)="toDetails(result.id)">
+                            Details
                           </button>
 
-                          <button   (click)="refereToReturnSell(result.id)">
-                          Return Items
-                          </button>
                           <!--button mat-icon-button color="accent" matTooltip="Edit invoice"
                     (click)="refereToEditInvoice(result.id)">
                         <mat-icon>edit</mat-icon>
                     </!--button-->
-                          <button *ngIf="isRoleViewAll"    (click)="initDelete(deleteModal, result)">
-                           Delete
-                          </button>
 
-                          <button   (click)="toReturnDetails(result.id)">
+                          <button   (click)="refereToReturnSell(result.id)">
+                            Return
+                            </button>
+                          <div *ngIf="result.return == 1">
+                          <button  (click)="toReturnDetails(result.id)">
                             Return Details
                             </button>
+
+                            <button *ngIf="isRoleViewAll"    (click)="initDelete(deleteModal, result)">
+                              Delete
+                             </button>
+                             
+                          </div>
 
                         </td>
                       </tr>

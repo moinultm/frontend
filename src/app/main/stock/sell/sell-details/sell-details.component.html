@@ -131,10 +131,10 @@
               <tr *ngFor="let TD of T.sells ; let i = index">
                 <td>{{i+1}}</td>
                 <td>{{TD.product.name}}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{TD.batch_no}}</td>
+                <td>{{TD.pack_size}}</td>
+                <td>{{TD.mfg_date}}</td>
+                <td>{{TD.exp_date}}</td>
                 <td>{{TD.quantity}}</td>
                 <td>{{TD.product.mrp}}  </td>
                 <td>{{TD.product_discount_percentage}} </td>
