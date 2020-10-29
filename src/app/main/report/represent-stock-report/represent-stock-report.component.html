@@ -128,12 +128,12 @@
                     <tr>
                       <th>#</th>
                       <th style="width: 180px;">Product Name</th>
-                      <th>Opening</th>
-                      <th>Stock Recived</th>
+                      <!--th>Opening</th>
+                      <th>Stock Recived</th-->
 
-                      <th>Total Qty</th>
+                      <!--th>Total Qty</th-->
                       <th>MRP</th>
-                      <th>Total Value</th>
+                      <!--th>Total Value</th-->
 
                       <th *ngFor="let char of data.characteristics">
                         Qty of  <br> {{ char.product_discount_percentage }}&#37;
@@ -148,8 +148,8 @@
                       <th>Gift Qty</th>
                       <th>Damage Qty</th>
 
-                      <th>In-Hand Qty</th>
-                      <th>In-Hand Value (Due)</th>
+                      <!--th>In-Hand Qty</th>
+                      <th>In-Hand Value (Due)</th-->
 
 
                     </tr>
@@ -166,12 +166,12 @@
                       <td> {{ i+1 }}</td>
                       <td> {{ P.STOCK_ITEM_NAME }}</td>
 
-                      <td> {{ P.TRAN_QUANTITY }} </td>
-                      <td> {{ P.INWARD_QUANTITY }} </td>
-                      <td>  <strong>{{ _CIN(P.TRAN_QUANTITY) +  _CIN(P.INWARD_QUANTITY)  }}</strong> </td>
+                      <!--td> {{ P.TRAN_QUANTITY }} </td>
+                      <td> {{ P.INWARD_QUANTITY }} </td-->
+                      <!--td>  <strong>{{ _CIN(P.TRAN_QUANTITY) +  _CIN(P.INWARD_QUANTITY)  }}</strong> </td-->
                       <td> {{ P.ITEM_MRP }}</td>
 
-                      <td><strong> {{   _CIN(P.ITEM_MRP)  * (_CIN(P.TRAN_QUANTITY) +  _CIN(P.INWARD_QUANTITY))   }} </strong> </td>
+                      <!--td><strong> {{   _CIN(P.ITEM_MRP)  * (_CIN(P.TRAN_QUANTITY) +  _CIN(P.INWARD_QUANTITY))   }} </strong> </td-->
 
                       <td *ngFor="let char   of data.characteristics">
                         <span *ngFor=" let cross   of data.crossData">
@@ -193,8 +193,8 @@
 
                       <td> {{  _CIP(P.GIFT_QUANTITY) }}</td>
                       <td>  {{  _CIP(P.DAMAGE_QUANTITY) }} </td>
-                      <td> <strong>{{ _CIN(P.TRAN_QUANTITY)+_CIN(P.OUTWARD_QUANTITY) +_CIN(P.GIFT_QUANTITY) +_CIN(P.DAMAGE_QUANTITY)+_CIN(P.INWARD_QUANTITY)  }}</strong></td>
-                      <td>  <strong>{{ ( _CIN(P.TRAN_QUANTITY)+_CIN(P.OUTWARD_QUANTITY) +_CIN(P.GIFT_QUANTITY) +_CIN(P.DAMAGE_QUANTITY)+_CIN(P.INWARD_QUANTITY) ) *  P.ITEM_MRP }}</strong></td>
+                      <!--td> <strong>{{ _CIN(P.TRAN_QUANTITY)+_CIN(P.OUTWARD_QUANTITY) +_CIN(P.GIFT_QUANTITY) +_CIN(P.DAMAGE_QUANTITY)+_CIN(P.INWARD_QUANTITY)  }}</strong></td>
+                      <td><strong>{{ ( _CIN(P.TRAN_QUANTITY)+_CIN(P.OUTWARD_QUANTITY) +_CIN(P.GIFT_QUANTITY) +_CIN(P.DAMAGE_QUANTITY)+_CIN(P.INWARD_QUANTITY) ) *  P.ITEM_MRP }}</strong></td-->
 
                     </tr>
 
@@ -202,12 +202,12 @@
                     <tr *ngIf="!loading" class="bg-light-green">
                       <td>#</td>
                       <td><b>Summary </b></td>
-                      <td ><b> {{ OpeningStock }}</b></td >
+                      <!--td ><b> {{ OpeningStock }}</b></td >
                       <td><b> {{ StockRecived }}</b></td>
                       <td><b>{{ OpeningStock+StockRecived }}</b></td>
-                      <td><b> MRP</b></td>
-                      <td><b> {{TotalValue}}</b></td>
 
+                      <td><b> {{TotalValue}}</b></td-->
+                        <td><b> MRP</b></td>
                       <td *ngFor="let char   of data.characteristics">
 
                         {{char.quantity}}
@@ -223,8 +223,8 @@
                       <td><b> {{SalesAmount}}</b></td>
                       <td><b>{{GiftQty*-1}}</b></td>
                       <td><b>{{DamageQty*-1}}</b></td>
-                      <td><b>{{InHandQty}}</b></td>
-                      <td><b>{{InHandValue}}</b></td>
+                      <!--td><b>{{InHandQty}}</b></td>
+                      <td><b>{{InHandValue}}</b></td-->
                     </tr>
 
                   </tbody>

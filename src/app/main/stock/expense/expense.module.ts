@@ -11,6 +11,7 @@ import { AddExpenseComponent } from './add-expense/add-expense.component';
 import { ProductListResolver } from '@app/core/resolvers/productlist.resolver';
 import { CustomerResolver } from '@app/core/resolvers/customer.resolver';
 import { ExpenseListResolver } from '@app/core/resolvers/expenselist.resolver';
+import { ExpenseDetailsComponent } from './expense-details/expense-details.component';
 
 
 const routes: Routes = [
@@ -39,7 +40,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [ExpenseComponent, AddExpenseComponent],
+  declarations: [ExpenseComponent, AddExpenseComponent, ExpenseDetailsComponent],
   imports: [
 
     CommonModule,
