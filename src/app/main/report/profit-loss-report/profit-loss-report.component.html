@@ -30,12 +30,8 @@
                               <h3 class="card-title">Report Table</h3>
                             </div>
                             <div class="col-md-6  text-right">
-                              <div class="card-tools">
-                                <span data-toggle="tooltip" title="Print" class="badge bg-primary">Print</span>
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse" [useExistingCss]="true"
-                                  printSectionId="print-section" ngxPrint><i class="fas fa-print"></i>
-                                </button>
-                              </div>
+                              <a href="#" (click)="print('print-section')" class="btn btn-success float-right"><i class="fas fa-print"></i>
+                                Print</a>
 
                             </div>
                           </div>
@@ -48,6 +44,7 @@
                     <div class="row no-print  table-responsive">
 
                       <div class="col-md-12">
+                        
                           <form [formGroup]="form">
                               <div class="row  mb-3">
                                 <div class="col-md-6"></div>
@@ -71,7 +68,7 @@
                                     </div>
                                     <div class="col-md-2 my-auto">
                                       <button type="button" class="btn btn-tool text-primary" data-card-widget="collapse"
-                                        [disabled]="form.invalid || loading" (click)="dateFilter()">
+                                        [disabled]="form.invalid || loading" (click)="dateFilter()"> Generate
                                         <i class="fas fa-search"></i>
 
                                       </button>
@@ -95,10 +92,25 @@
                         <div class="print">
 
        <!--HEADER-->
-      <div class="print-only">
+      <div class="">
           <div class="row mb-3">
             <div class="col-md-12">
-              <img src="/assets/images/trade-2.jpg" height="120">
+              
+
+              <div class="header">
+                <div class="row mb-3">
+                  <div class="col-md-7" style="
+                  width: 400px;
+              ">
+   <!--img src="{{logoPreview}}{{'invoice_header' | configure }} " alt="" class="img-fluid"-->
+               <img src="/assets/images/trade-2.jpg"  width="400" class="img-fluid">
+                    </div>
+
+            
+                </div>
+              </div> <!--Invoice header-->
+
+
             </div>
           </div>
           </div>
@@ -121,14 +133,20 @@
                     </table>
 
 
-                    <table class="table table-mini table-bordered mb-3" style="width: 70%; font-weight: bold;" align="left">
+                    <table class="table table-mini table-bordered mb-3" style="width: 100%; " align="left">
 
                       <tbody>
 
 
                         <ng-container *ngIf="!loading">
+
+                          <tr> 
+                            <td  style="  font-weight: bold;">Income</td>
+                            <td></td>
+                          </tr>
+
                           <tr>
-                            <td>Total Selling Price </td>
+                            <td>Total Sells </td>
                             <td>{{data.total_selling_price}}</td>
                           </tr>
 
@@ -140,38 +158,53 @@
                          <tr>
                              <td> Total Gross Profit </td>
                              <td> {{data.gross_profit}} </td>
+
+                             
                           </tr-->
 
-               
-                              <tr>                             
-                                 <td>                                      
-                                      <div class=" invoice-col"  *ngFor="let  T of data.expenses.data ">
 
-                                         <div class="invoice-col"  *ngFor="let  TD of T.expense_transactions">
-                                          {{TD.ledger_name}}  - {{TD.total}}  
-                                        </div>                                      
-          
-                                            </div>
-                                      Total Expenses </td>
-                                    <td> {{data.total_expense}} </td>
+                      
 
-                                  </tr>
+                          <tr> 
+                            <td  style="  font-weight: bold;">Expenses</td>
+                            <td></td>
+                          </tr>
+                                                    
+                              <tr *ngFor="let  T of data.expenses.data ">
+              
+                  <td  *ngFor="let  TD of T.expense_transactions">{{TD.ledger_name}}</td>
+                  <td  *ngFor="let  TD of T.expense_transactions"> {{TD.total}} </td>
+                                                      
+                    
+                              </tr>                        
+                      
+                              <tr  style="  font-weight: bold;">                             
+                                <td>Total Expenses </td>
+                                   <td> {{data.total_expense}} </td>
+    
+                                 </tr>
+                     
+                             
+                             <tr  style="  font-weight: bold;">  
+                               <td>Payment </td>
+                               <td> </td>
+                             </tr>
 
-                                  
-                                  <tr>                             
-                                    <td>                                      
-                                         <div class=" invoice-col"  *ngFor="let  T of data.payments_tran.payment ">
-                                        
-                                          {{T.client.full_name}} - {{T.amount}}                                      
-                                          
-             
-                                               </div>
-                                         Total Payment </td>
+                             <tr *ngFor="let  T of data.payments_tran.payment ">   
 
-                                         
-                                       <td> {{data.total_payments}} </td>
-   
-                                     </tr>
+                               <td>  
+                                 {{T.client.full_name}}                                     
+                               </td>  
+                               <td> 
+                              {{T.amount}}                                      
+                                </td>              
+                                   </tr>
+
+                         <tr  style="  font-weight: bold;">
+                           <td>Total Payment </td>  
+                           <td> {{data.total_payments}} </td>  
+                         </tr>
+                               
 
 
                                   <tr>
@@ -198,7 +231,48 @@
                       </tbody>
                     </table>
 
+
+                    <div class='col-md-12' style="margin-top: 100px;">
+                      <div class="table-responsive" >
+                          <table class=" table-mini " >
+                            <tbody>        
+                  
+                              <tr>
+                                <td>Accoutns  Signature</td>
+                                <td> Auditor   Signature</td>
+                                <td> Director Signature</td>
+                              </tr>
+                          </tbody></table>
+                  
+                  
+                     </div>
+                   
+                          </div>
+
+
                   </div>
+
+
+                  <div class="divFooter">
+
+                    <div class="row">
+                      <div class="col-md-12  text-center">
+                        <!--img src="/assets/images/trade-footer.jpg" style="width: 90%;"-->
+                        <!--img src="{{logoPreview}}{{'invoice_footer_image' | configure }}" alt="" class="img-fluid" style="width: 100%;"-->
+                        <div class="page-footer">
+                            {{'address' | configure }}<br>
+                            Cell:{{'phone' | configure }}&#44;Email:{{'email' | configure }}<br>
+                            {{'pos_invoice_footer_text' | configure }}
+                            <p>printerd by sit-online software www.gmtradeinternational.com</p>
+                          </div>
+        
+        
+                      </div>
+                    </div>
+        
+                </div>
+
+
                 </div><!--print-->
 
 

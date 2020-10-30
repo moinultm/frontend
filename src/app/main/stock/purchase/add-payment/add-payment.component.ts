@@ -40,7 +40,8 @@ iniForm( ){
   this.form = this._formBuilder.group({
     amount: ['',  [Validators.required,dueAmountValidator(this.due()), Validators.pattern(/^[.\d]+$/) ]],
     note: ['',  [Validators.required, Validators.maxLength(255)]],
-    method: ['',  [Validators.required, Validators.maxLength(255)]]
+    method: ['',  [Validators.required, Validators.maxLength(255)]],
+   
   });
 }
 
@@ -56,8 +57,9 @@ iniForm( ){
       this.savingPayment = true;
       this.paymentService.save({
         client_id: this.formLocalData['data'][0]['client_id'] ,
+        user_id: this.formLocalData['data'][0]['user_id'] ,
         amount: this.form.get('amount').value,
-        type: 'credit',
+        type: 'debit',
         method: this.form.get('method').value,
         note: this.form.get('note').value,
         reference_no: this.formLocalData['data'][0]['reference_no'],

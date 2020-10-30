@@ -24,6 +24,16 @@
 
     <section class="content" >
       <div class="container-fluid" *ngIf="!loadingDetails">
+
+        <div class="row no-print">
+          <div class="col-12" *ngFor="let  T of details.data ">
+            <a href="#"  (click)="print('print-section')"  class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+            <button type="button" class="btn btn-success float-right" style="margin-right: 5px;" (click)="openDialogPayments()" ><i class="far fa-credit-card"></i>
+              Add Payment
+            </button>
+
+          </div>
+        </div>
         <div class="row">
 <div class="col-md-12">
 
@@ -44,7 +54,7 @@
         </div>
 
 
-
+  
 
         <!-- info row -->
         <div class="row invoice-info" >
@@ -165,40 +175,38 @@
           <!-- /.col -->
 
           <div class="col-6">
-            <p class="lead">Amount</p>
+            <p class="lead">Total</p>
 
             <div class="table-responsive" >
-              <table class="table table-bordered table-mini" *ngFor="let T of details.data ;">
+              <table class=" table-bordered table-mini" *ngFor="let T of details.data ;">
                 <tbody><tr>
                   <th style="width:50%">Total:</th>
-                  <td>{{T.total + T.discount }} </td>
+                  <td>{{T.total  }} </td>
                 </tr>
-                <tr>
+                <!--tr>
                   <th>Tax  </th>
                   <td>{{T.total_tax}} </td>
-                </tr>
-                <tr>
+                </tr-->
+                <!--tr>
                   <th>Shipping:</th>
                   <td>{{T.labor_cost}}</td>
                 </tr>
                 <tr>
                     <th>Discount:</th>
                     <td>{{T.discount}}</td>
-                  </tr>
+                  </tr-->
 
                   <tr>
                     <th>Paid:</th>
-                    <td>{{T.paid}}
-                      <div *ngIf="T.return == 1">
-                        <small>(Has return item)</small>
-                      </div>
+                    <td>{{T.total_paid}}
+                       
                     </td>
 
                   </tr>
 
-                <tr *ngIf="T.return == 1 || (T.net_total - T.paid) > 0">
+                <tr *ngIf="(T.net_total - T.paid) > 0">
                   <th>Due:</th>
-                  <td *ngIf="T.net_total - T.paid > 0">{{T.net_total- T.paid }}</td>
+                  <td *ngIf="T.net_total - T.paid > 0">{{T.total- T.total_paid }}</td>
 
                 </tr>
               </tbody></table>
@@ -209,6 +217,25 @@
             </div>
           </div>
           <!-- /.col -->
+
+          <div class='col-md-12' style="margin-top: 100px;">
+            <div class="table-responsive" >
+                <table class=" table-mini " *ngFor="let T of details.data ;">
+                  <tbody>        
+        
+                    <tr>
+                      <td>Accoutns  Signature</td>
+                      <td> Auditor   Signature</td>
+                      <td> Director Signature</td>
+                    </tr>
+                </tbody></table>
+        
+        
+           </div>
+         
+                </div>
+
+
         </div>
         <!-- /.row -->
 

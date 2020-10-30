@@ -195,6 +195,11 @@ initDelete(modal: any, role: Expense): void {
     });
 }
 
+//Redirection
+toDetails(id:number){
+  this.router.navigate([`expenses/details/${id}`]);
+}
+
 //Close Module
 close(modal: any, flag?: boolean): void {
   modal.close(flag ? true : false);

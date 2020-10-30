@@ -1,1 +1,269 @@
-<p>expense-details works!</p>
+
+
+<div class="content-wrapper" >
+
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Voucher Details</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
+              <li class="breadcrumb-item"><a>Voucher</a></li>
+              <li class="breadcrumb-item active">Details</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+
+    <mat-spinner class="loading-profiles" *ngIf="loadingDetails"></mat-spinner>
+
+    <section class="content">
+      <div class="container-fluid" *ngIf="!loadingDetails">
+
+        <div class="page frontpage" id="print-section" style="background-color:ghostwhite;">
+
+          <!-- this row will not appear when printing -->
+          <div class="row no-print">
+           <div class="col-12" >
+         
+
+             <a href="#" (click)="print('print-section')" class="btn btn-success float-right"><i class="fas fa-print"></i>
+               Print</a>
+           </div>
+         </div>
+
+
+
+        <div class="row">
+          <div class="col-md-12">
+             <div class="invoice p-3 mb-3">
+
+              <div class="header">
+                <div class="row mb-3">
+                  <div class="col-md-7" style="
+                  width: 400px;
+              ">
+   <!--img src="{{logoPreview}}{{'invoice_header' | configure }} " alt="" class="img-fluid"-->
+               <img src="/assets/images/trade-2.jpg"  width="400" class="img-fluid">
+                    </div>
+
+                  <div class="col-md-4 invoice-col" *ngFor="let  T of details.data ">
+                    <br>
+                    <h4>
+                     
+                    </h4>
+
+                    <!--address>
+
+                      Trade License No.<strong>TRAD/DSCC/290376/2019</strong> <br>
+                      TIN No. <strong>125371773865</strong><br>
+                      IRC No.  <strong>260326110965120</strong><br>
+                      VAT Reg. No. <strong>000966909-0208</strong>
+
+                    </address-->
+                  </div>
+                </div>
+              </div> <!--Invoice header-->
+
+        <!-- title row -->
+        <div class="row" style="text-align: center;">
+          <div class="col-12">
+            <h4>
+              <small class="" *ngFor="let  T of details.data " >
+                <strong> Voucher</strong><br>
+                ( {{ T.transaction }}) 
+              </small>
+            </h4>
+          </div>
+          <!-- /.col -->
+        </div>
+
+        <!-- info row -->
+        <div class="row invoice-info" >
+          <div class="col-sm-4 invoice-col">
+       
+            <address *ngFor="let  T of details.data ">
+                <strong>  Date: {{T.date |  date:'dd/MMM/yyyy'}} </strong> <br>
+              <strong>Method: {{ T.payment_by ||'' }}</strong> <br>
+              <strong>  {{ T.payment_details ||'' }}</strong> <br>
+              <strong>Notes: {{ T.purpose ||'' }}</strong> <br> 
+            </address>
+          </div>
+          <!-- /.col -->
+          <div class="col-sm-4 invoice-col"  *ngFor="let  T of details.data ">
+         Voucher# {{T.reference_no}}<br>
+         Type# {{ T.transaction }} <br>
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+        <!-- Table row -->
+        <div class="row">
+
+          <div class="col-12 table-responsive">
+            <br>
+            <p>Description:</p>
+
+            <table class="table table-striped table-bordered table-mini"  *ngIf="!loadingDetails">
+              <thead>
+              <tr>
+                <th width="20px">Sl</th>
+                <th width="300px">Name</th>
+            
+                <th>Details</th>
+                <th>Amount</th>
+              
+              </tr>
+              </thead>
+              <tbody  *ngFor="let T of details.data ;">
+              <tr *ngFor="let TD of T.expense_transactions ; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{TD.ledger_name}}</td>          
+                <td>{{TD.details}}</td>
+                <td>{{TD.total}}  </td>
+    
+              </tr>
+              <tr>
+             
+                <td></td>
+                <td>
+                 <b> Total:</b>
+                </td>
+                <td></td>
+               
+                <td>  <b>{{ T.amount }}</b></td>
+                
+               
+              </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+          <!-- accepted payments column -->
+          <!--div class="col-6">
+
+            <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
+           <h6><strong>Payment Details:</strong></h6>
+
+           <div class="direct-over-flow">
+
+            <table class="table-bordered" *ngFor="let T of details.data ;" >
+              <thead>
+                <tr>
+                  <th width="20px">Sl</th>
+                  <th>Ref.</th>
+                  <th>Date</th>
+                  <th>Type</th>
+                  <th>Notes</th>
+                  <th>Amt</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                  <tr  *ngFor="let TP of T.payments ;">
+                    <td># </td>
+                    <td>{{ TP.reference_no }}</td>
+                    <td>{{ TP.date  |  date:'dd/MMM/yyyy' }}</td>
+                    <td>{{ TP.method }}</td>
+                    <td>{{ TP.note }}</td>
+                    <td>{{ TP.amount }}</td>
+                  </tr>
+
+                </tbody>
+
+            </table>
+
+
+            </div> 
+
+          </div-->
+          <!-- /.col -->
+          <div class="col-6">
+          </div>
+          <div class="col-6">
+
+            <h6 class="lead"> Totals</h6>
+<style>
+
+</style>
+            <div class="table-responsive" >
+              <table class="table-bordered table-mini table-striped" *ngFor="let T of details.data ;">
+                <tbody>
+              
+
+                  <tr>
+                    <th>Total:</th>
+                    <td> {{T.amount}}  </td>
+                  </tr>
+              </tbody></table>
+
+
+            </div>
+          </div>
+          <!-- /.col -->
+<div class='col-md-12' style="margin-top: 100px;">
+    <div class="table-responsive" >
+        <table class=" table-mini " >
+          <tbody>        
+
+            <tr>
+              <td>Accoutns  Signature</td>
+              <td> Auditor   Signature</td>
+              <td> Director Signature</td>
+            </tr>
+        </tbody></table>
+
+
+   </div>
+ 
+        </div>
+        </div>
+        <!-- /.row -->
+
+
+        <div class="divFooter">
+
+            <div class="row">
+              <div class="col-md-12  text-center">
+                <!--img src="/assets/images/trade-footer.jpg" style="width: 90%;"-->
+                <!--img src="{{logoPreview}}{{'invoice_footer_image' | configure }}" alt="" class="img-fluid" style="width: 100%;"-->
+                <div class="page-footer">
+                    {{'address' | configure }}<br>
+                    Cell:{{'phone' | configure }}&#44;Email:{{'email' | configure }}<br>
+                    {{'pos_invoice_footer_text' | configure }}
+                    <p>printerd by sit-online software www.gmtradeinternational.com</p>
+                  </div>
+
+
+              </div>
+            </div>
+
+        </div>
+ 
+      </div>
+
+    </div>
+        </div>
+
+      </div> <!--close of frontpage-->
+ 
+
+      </div>
+    </section>
+
+  </div>
+  <!-- Content Wrapper. Contains page content -->

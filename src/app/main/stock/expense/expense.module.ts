@@ -12,6 +12,7 @@ import { ProductListResolver } from '@app/core/resolvers/productlist.resolver';
 import { CustomerResolver } from '@app/core/resolvers/customer.resolver';
 import { ExpenseListResolver } from '@app/core/resolvers/expenselist.resolver';
 import { ExpenseDetailsComponent } from './expense-details/expense-details.component';
+import { ConfigModule } from '@app/shared/config/config.module';
 
 
 const routes: Routes = [
@@ -24,7 +25,10 @@ const routes: Routes = [
     },
 
   },
-
+  {
+    path: 'details/:id',
+    component: ExpenseDetailsComponent
+  },
   {
     path: 'add-expense',
     component: AddExpenseComponent,
@@ -50,6 +54,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     MaterialsModule,
+    ConfigModule
   ],
   providers: [UserResolver,ProductListResolver,CustomerResolver,UserResolver,ExpenseListResolver,]
 })
