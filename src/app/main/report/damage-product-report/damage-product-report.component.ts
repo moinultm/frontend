@@ -106,18 +106,17 @@ export class DamageProductReportComponent implements OnInit {
       to:   toDt
     }).subscribe((res: PartialList<StockGeneral>) => {
       this.data = res;
-     console.log( this.data);
+    // console.log( this.data);
       this.loading = false;
     });
   }
 
   iniForm(){
     this.loading=true;
-
     this.form = this._fb.group({
       fromDate: [  new Date(),  [Validators.required],],
       toDate: [  new Date(),  [Validators.required],],
-      userId:[ null,  [Validators.required]]
+      userId:[ null,  [Validators.nullValidator]]
     });
   }
 
@@ -134,6 +133,12 @@ export class DamageProductReportComponent implements OnInit {
   this.userName= this.users[ctrl.selectedIndex - 1].name,
   this.userAddress= this.users[ctrl.selectedIndex - 1].address
  }
+ else
+ {
+  this.userName="All"
+  this.userAddress=""
+ }
+
  }
 
 

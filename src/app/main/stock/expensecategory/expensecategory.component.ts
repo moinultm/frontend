@@ -25,6 +25,8 @@ export class ExpensecategoryComponent implements OnInit {
   size = 10;
   form: FormGroup;
   selectedCategory: ExpenseCategory;
+  deletingExpenseCategory:boolean;
+
   constructor(private categoryService: ExpenseCategoryService,
     private _toastr: ToastrService,
     private modalService: NgbModal,

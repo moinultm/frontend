@@ -4,14 +4,14 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Representative  Stock Report</h1>
+            <h1 class="m-0 text-dark">User Sales Report</h1>
             <span><small>Current user: {{ jwtHelper.name() }}</small> </span>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#" [routerLink]="['/dashboard']">Home</a></li>
               <li class="breadcrumb-item"><a>Report</a></li>
-              <li class="breadcrumb-item active">Representative Report</li>
+              <li class="breadcrumb-item active">User Report</li>
             </ol>
           </div>
         </div>
@@ -104,7 +104,7 @@
               </div>
               <div class="col-md-4">
                 <p></p>
-                <h5>Representative Stock  Report</h5>
+                <h5>Representative  Sales  Report</h5>
                 Name:<strong>{{userName}}</strong><br>Address:<strong>{{userAddress}}</strong><br>
                 <p>From Date:<strong>{{fromDate| date: 'dd/MM/yyyy'}}</strong>  To: <strong>{{toDate |date: 'dd/MM/yyyy'}}</strong> </p>
                 </div>

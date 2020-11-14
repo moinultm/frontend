@@ -117,7 +117,7 @@ export class GiftProductReportComponent implements OnInit {
     this.form = this._fb.group({
       fromDate: [  new Date(),  [Validators.required],],
       toDate: [  new Date(),  [Validators.required],],
-      userId:[ null,  [Validators.required]]
+      userId:[ null,  [Validators.nullValidator]]
     });
   }
 
@@ -134,6 +134,11 @@ export class GiftProductReportComponent implements OnInit {
   this.userName= this.users[ctrl.selectedIndex - 1].name,
   this.userAddress= this.users[ctrl.selectedIndex - 1].address
  }
+ else{
+  this.userName="All";
+  this.userAddress="";
+ }
+
  }
 
 

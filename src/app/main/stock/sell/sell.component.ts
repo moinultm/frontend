@@ -28,8 +28,8 @@ export class SellComponent implements OnInit {
 
   apiResponse:any;
   isSearching:boolean;
-@ViewChild('input', { static: false }) input: ElementRef;
-@ViewChild('input2',{ static: false }) input2: ElementRef;
+  @ViewChild('input', { static: false }) input: ElementRef;
+  @ViewChild('input2',{ static: false }) input2: ElementRef;
 
   data: any;
   loading: boolean;

@@ -3,9 +3,6 @@
   <div class="content-header">
     <div class="container-fluid">
 
-
-
-
       <!--div class="row mb-2">
         <div class="col-sm-6">
           <h1 class="m-0 text-dark">Sales Invoices</h1>
@@ -27,7 +24,6 @@
       <div class="row">
         <div class="col-md-12">
           <div class="card card-outline">
-
             <div class="card-header">
 
               <h3 class="card-title">
@@ -49,8 +45,6 @@
             <!-- /.card-header -->
 
             <div class="card-body">
-
-
               <form [formGroup]="form">
                 <div class="row mb-3">
                   <div class="col-md-3">
@@ -157,7 +151,7 @@
                             <button *ngIf="isRoleViewAll"    (click)="initDelete(deleteModal, result)">
                               Delete
                              </button>
-                             
+
                           </div>
 
                         </td>
@@ -186,21 +180,11 @@
                     [page]="data.page" (pageChange)="loadData($event)" class="pagination pagination-sm m-0 float-right">
                   </ngb-pagination>
                 </div>
-
-
-
               </div>
-
-
             </div>
-
-
           </div>
           <!-- /.card -->
-
         </div>
-
-
       </div>
 
       <!--div class="row">

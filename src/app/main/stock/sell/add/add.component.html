@@ -27,13 +27,11 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-
           <div class="card card-outline">
             <div class="card-header">
               <h3 class="card-title">
                   <i class="fas fa-edit"></i>
                   Sales SI Form</h3>
-
                   <div class="card-tools">
                       <a href="#" [routerLink]="['/sell']" class="nav-link d-inline"
                       [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
@@ -93,7 +91,6 @@
                                   </mat-form-field>
                                   <!--https://appdividend.com/2018/09/16/angular-datepicker-example-tutorial/-->
                                 </div>
-
                         </div>
 
                         <div class="row">
@@ -111,7 +108,6 @@
                                        </option>
                                      </select>
                                   </div>
-
                                </div>
                            </div>
 
@@ -150,7 +146,6 @@
                     </div>
 
                   </div>
-
 
                     <div class="table-responsive  mb-3">
 
@@ -220,7 +215,6 @@
                               </td>
                               <td colspan="6">
                                   <input class="form-control" type="text" id="discountAmount" formControlName="discountAmount" readonly>
-
                                </td>
                             </tr>
                             <tr>
@@ -364,27 +358,38 @@
             </div>
             </div>
 
-
-
             <div class="col-md-3">
               <div class="form-group">
                   <label for="pack_size">Pack Size</label>
-                  <input type="text" class="form-control" id="pack_size" formControlName="pack_size"/>
+                  <select class="form-control" id="pack_size" formControlName="pack_size">
+                    <option value="0">--Select--</option>
+                    <option value="5ML">5ML</option>
+                    <option value="10ML">10ML</option>
+                    <option value="15ML">15ML</option>
+                    <option value="20ML">20ML</option>
+                    <option value="25ML">25ML</option>
+                  </select>
+                 </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-group">
+                  <mat-form-field  class="full-width">
+                    <input matInput [matDatepicker]="picker2" placeholder="Mfg.Date" formControlName="mfg_date">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                  </mat-form-field>
                 </div>
             </div>
 
             <div class="col-md-3">
               <div class="form-group">
-                  <label for="mfg_date">Mfg.Date</label>
-                  <input type="text" class="form-control" id="mfg_date" formControlName="mfg_date"/>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-              <div class="form-group">
-                  <label for="exp_date">Exp.Date</label>
-                  <input type="text" class="form-control" id="exp_date" formControlName="exp_date"/>
-                </div>
+                  <mat-form-field class="full-width">
+                    <input matInput [matDatepicker]="picker3" placeholder="Exp.Date" formControlName="exp_date">
+                    <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                    <mat-datepicker #picker3></mat-datepicker>
+                  </mat-form-field>
+                 </div>
             </div>
 
       </div>

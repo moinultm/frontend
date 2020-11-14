@@ -35,13 +35,9 @@
                 <div class="col-md-12">
                   <form [formGroup]="form">
                     <div class="row">
-
                         <div class="col-md-4">
-
                           </div>
-
                       <div class="col-md-12">
-
                         <div class="row">
                             <div class="col-md-3"><mat-form-field class="full-width">
                                 <input matInput [matDatepicker]="pickerFrom" placeholder="Start Date"
@@ -71,7 +67,8 @@
                               <div class="col-md-3 my-auto">
                                 <div class="input-group" *ngIf="!loadingUser">
                                   <select class="form-control" formControlName="userId" (change)="updateUser($event.target)">
-                                    <option value="null">--Select User--</option>
+                                    <option value="null">--All User--</option>
+
                                     <option *ngFor="let list of users" [value]="list.id">
                                       {{list.id}} :: {{list.name}}
                                     </option>
@@ -85,8 +82,6 @@
                               </div>
                         </div>
 
-
-
                       </div>
 
                     </div>
@@ -99,17 +94,16 @@
    <div id="print-section">
 
      <!--HEADER-->
-    <div class="print-only">
+    <div class="print">
         <div class="row">
           <div class="col-md-12">
             <img src="/assets/images/trade-2.jpg" height="80">
           </div>
         </div>
         </div>
-
-                    <h4>Damage Report</h4>
-                    <p>Name:{{userName}}, Address:{{userAddress}}</p>
-                       <p>From Date: <strong>{{fromDate| date: 'dd/MM/yyyy'}}</strong>  To: <strong>{{toDate |date: 'dd/MM/yyyy'}}</strong> </p>
+          <h4>Damage Report</h4>
+           <p>Name:{{userName}}, Address:{{userAddress}}</p>
+           <p>From Date: <strong>{{fromDate| date: 'dd/MM/yyyy'}}</strong>  To: <strong>{{toDate |date: 'dd/MM/yyyy'}}</strong> </p>
 
             <div class="table-responsive ">
 
@@ -120,7 +114,7 @@
                           <tr>
                             <th>#</th>
                             <th>Name</th>
-                            <th>Ref.</th>
+
                             <th *ngFor="let product of data.products">
                               {{ product.name }}
                             </th>
@@ -131,7 +125,6 @@
                           <tr *ngFor="let user of data.users; let i = index">
                             <td>{{ i+1 }}</td>
                             <td>{{ user.name }}</td>
-                            <td>{{ user.ref_no }}</td>
 
                             <td *ngFor="let product of data.products">
                               <span *ngFor=" let cross of data.crossData">
@@ -148,10 +141,27 @@
             </ng-container>
 
               </div>
+
+
+              <div class="row">
+                <div class="col-md-12 text-center">
+                  <div class="page-footer">
+                    {{'address' | configure }}<br>
+                    Cell:{{'phone' | configure }}&#44;Email:{{'email' | configure }}<br>
+                    {{'pos_invoice_footer_text' | configure }}
+                  </div>
+
+                  <!--div class="page-footer">
+                    Head Office: 81/2(Ground floor), Nayapaltan,Dhaka-1000,Bangladesh<br>
+                    Cell:+8801793000277,Email:giasuddin8832@gmail.com, gmtradeint2004@gmail.com<br>
+                    Web:www.gmtradeinternational.com, F /gmtradeinternational&zarifcorporation
+                  </div-->
+
+                </div>
+              </div>
+
+
              </div>
-
-
-
 
         </div>
         <!-- /.card-body -->

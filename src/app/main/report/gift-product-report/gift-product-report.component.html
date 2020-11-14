@@ -71,7 +71,7 @@
                               <div class="col-md-3 my-auto">
                                 <div class="input-group" *ngIf="!loadingUser">
                                   <select class="form-control" formControlName="userId" (change)="updateUser($event.target)">
-                                    <option value="null">--Select User--</option>
+                                    <option value="null">--All User--</option>
                                     <option *ngFor="let list of users" [value]="list.id">
                                       {{list.id}} :: {{list.name}}
                                     </option>
@@ -99,7 +99,7 @@
    <div id="print-section">
 
      <!--HEADER-->
-    <div class="print-only">
+    <div class="print">
         <div class="row">
           <div class="col-md-12">
             <img src="/assets/images/trade-2.jpg" height="80">
@@ -147,6 +147,21 @@
                       </table>
             </ng-container>
 
+              </div>
+
+              <div class="row">
+                <div class="col-md-12 text-center">
+                  <div class="page-footer">
+                    {{'address' | configure }}<br>
+                    Cell:{{'phone' | configure }}&#44;Email:{{'email' | configure }}<br>
+                    {{'pos_invoice_footer_text' | configure }}
+                  </div>
+                  <!--div class="page-footer">
+                    Head Office: 81/2(Ground floor), Nayapaltan,Dhaka-1000,Bangladesh<br>
+                    Cell:+8801793000277,Email:giasuddin8832@gmail.com, gmtradeint2004@gmail.com<br>
+                    Web:www.gmtradeinternational.com, F /gmtradeinternational&zarifcorporation
+                  </div-->
+                </div>
               </div>
              </div>
 

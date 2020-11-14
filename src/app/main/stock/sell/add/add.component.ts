@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SellsInvoiceService } from '@app/core/services/stock/sells-invoice.service';
 import { Client } from '@app/shared/models/stock/client.model';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
 import {SellsInvoice } from '@app/shared/models/stock/invoice.model';
 import { PartialList } from '@app/shared/models/common/patial-list.model';
 import { CustomerService } from '@app/core/services/stock/customer.service';
@@ -31,8 +31,6 @@ export class AddComponent implements OnInit {
   modalOption: NgbModalOptions = {};
   customerList:any;
   orderItemList: Array<OrderItems>=[];
-
-
   _saving:boolean;
   mainForm: FormGroup;
   formProducts:FormGroup;
@@ -49,6 +47,8 @@ export class AddComponent implements OnInit {
 
   data$: Observable<any>;
 
+  myForm: FormGroup;
+
   constructor(private sellsOrdererSvice:SellsInvoiceService,
     private customeService:CustomerService,
     private productService:ProductService,
@@ -59,7 +59,8 @@ export class AddComponent implements OnInit {
     titleService: Title,
     private dialog: MatDialog,
     private actRoute: ActivatedRoute,
-    private datePipe : DatePipe
+    private datePipe : DatePipe,
+    private _formBuilder: FormBuilder
     ) {
       titleService.setTitle('Sales Invoice');
     }
@@ -114,9 +115,7 @@ export class AddComponent implements OnInit {
       this.orderItemList =[];
     }
 
-
     //this.FillCustomer();
-
     this.mainForm = this._fb.group({
     sellDate:[new Date(),[Validators.required]],
     customerName:[null,[Validators.required]  ],
@@ -127,13 +126,53 @@ export class AddComponent implements OnInit {
     discountAmount:['0', [Validators.required]  ],
     discountOnTotal:['0', [Validators.required]  ],
     shippingCost:['0', [Validators.required]  ],
-    grandTotal:['0',[Validators.required]  ],
-    direct:['1',[Validators.required]  ],
-    user_id:  [null,[Validators.required]  ]
+    grandTotal:['0',[Validators.required]],
+    direct:['1',[Validators.required]],
+    user_id:  [null,[Validators.required]],
   });
+
   }
 
 
+  addNewCompany() {
+    let control = <FormArray>this.mainForm.controls.companies;
+    control.push(
+      this._formBuilder.group({
+        product_id: [null,[Validators.required]],
+
+       quantity: [0,[Validators.required]  ] ,
+      productMRP: [0,  [Validators.required]  ] ,
+
+      discountOnMRP: [      15,        [Validators.required]
+      ] ,
+
+      itemDiscountAmt:[ 0, [Validators.required]],
+
+      sub_total: [0,
+        [Validators.required]],
+        itemTotal:[ 0, [Validators.required]],
+
+        batch_no:['', [Validators.nullValidator]],
+        lot_no:['', [Validators.nullValidator]],
+        pack_size:[0,[Validators.required]],
+        mfg_date:[new Date(), [Validators.required]],
+        exp_date:[new Date(), [Validators.required]],
+        stock_quantity: 0,
+
+        mrp: 0,
+        cost_price: 0
+      })
+    )
+  }
+
+  deleteCompany(index) {
+    let control = <FormArray>this.mainForm.controls.companies;
+    control.removeAt(index)
+  }
+
+  get employees(): FormArray {
+    return this.mainForm.get('companies') as FormArray;
+  }
 
 /*
   FillCustomer()
@@ -220,31 +259,35 @@ export class AddComponent implements OnInit {
 
         batch_no:['', [Validators.nullValidator]],
         lot_no:['', [Validators.nullValidator]],
-        pack_size:['', [Validators.nullValidator]],
-        mfg_date:['', [Validators.nullValidator]],
-        exp_date:['', [Validators.nullValidator]],
+        pack_size:[0,[Validators.required]],
+        mfg_date:[new Date(), [Validators.required]],
+        exp_date:[new Date(), [Validators.required]],
 
     });
   }
 
 
   //=================update price   selected item===================================
-  updatePrice(ctrl) {
+  updatePrice(ctrl,index) {
+
     if (ctrl.selectedIndex == 0) {
-      this.formProducts.patchValue({
-        name: '',
-        productMRP:0
-     });
+     this.formProducts.patchValue({
+        stock_quantity: 0,
+        mrp: 0,
+      });
     }
     else {
-      this.formProducts.patchValue({
-        //name:this._productList[ctrl.selectedIndex - 1].name ,
-        productMRP:this._productList[ctrl.selectedIndex - 1].mrp,
-           });
 
+      this.formProducts.patchValue({
+        stock_quantity: this._productList[ctrl.selectedIndex - 1].general_quantity,
+        mrp: this._productList[ctrl.selectedIndex - 1].mrp,
+      });
     }
+
+
     this.updateSubTotal();
   }
+
 
   updateSubTotal() {
     const itemTotal= parseFloat((this.formProducts.value.quantity * this.formProducts.value.productMRP).toFixed(2)) ;
@@ -303,11 +346,14 @@ export class AddComponent implements OnInit {
 
   updateDueAmount(){
     let due :number;
-
     due= (this.mainForm.value.grandTotal-this.mainForm.value.paidAmount);
     this.mainForm.patchValue({dueAmount:    parseFloat(due.toFixed(2)),});
   }
   //=================update price   selected item===================================
+
+
+
+
 
 
   addItemToInvoice(formProducts:any,modal ?:any) : void{
@@ -332,7 +378,6 @@ export class AddComponent implements OnInit {
 
    formItem.cost_price=formProducts.value.name.cost_price;
 
-
     if (this.formProducts.valid) {
       this.orderItemList.push(formItem);
       this.updateGrandTotal();
@@ -349,7 +394,6 @@ export class AddComponent implements OnInit {
 save(form: any){
 
   //console.log(JSON.stringify(this.orderItemList));
-
 
   this._saving=true;
   if(parseFloat(this.mainForm.get('paidAmount').value) > this.mainForm.get('grandTotal').value ){
@@ -381,11 +425,9 @@ save(form: any){
 
   formData.append('sells', JSON.stringify(this.orderItemList));
 
-
   this.sellsOrdererSvice.save(formData, false).subscribe((res:any) => {
 
     success('Success!', 'The Invoice is successfully saved.', this._toastr);
-
 
     this.initForm();
     this._saving = false;
@@ -414,7 +456,6 @@ save(form: any){
   }
 
 
-
   onDeleteOrderItem(orderItemID: number, i: number) {
     if (orderItemID != null)
  {
@@ -428,8 +469,6 @@ this.updateGrandTotal();
  }
 
   }
-
-
 
   //mat customer
   openDialog(client?:Client): void {
@@ -463,7 +502,6 @@ this.updateGrandTotal();
         else{
           warning('warning!', result.data  , this._toastr);
         }
-
 
     });
   }

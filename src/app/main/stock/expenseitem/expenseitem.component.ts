@@ -39,7 +39,8 @@ export class ExpenseitemComponent implements OnInit {
   loadingSubcategory: boolean;
 
   selectedCategory: ExpenseItem;
-
+  deletingExpenseCategory:boolean;
+  
   constructor( private categoryService: ExpenseCategoryService,
     private _toastr: ToastrService,
     private modalService: NgbModal,
