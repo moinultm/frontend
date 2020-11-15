@@ -91,7 +91,7 @@ export class AddComponent implements OnInit {
     this.actRoute.data.subscribe(data => {
       this._productList=data.ProductListResolver.data;
       this.loading = false;
-  // console.log(data.ProductListResolver.data)
+   console.log(data.ProductListResolver.data)
     });
   }
 
@@ -272,18 +272,17 @@ export class AddComponent implements OnInit {
 
     if (ctrl.selectedIndex == 0) {
      this.formProducts.patchValue({
-        stock_quantity: 0,
-        mrp: 0,
+        productMRP: 0,
+        pack_size:0
       });
     }
     else {
 
       this.formProducts.patchValue({
-        stock_quantity: this._productList[ctrl.selectedIndex - 1].general_quantity,
-        mrp: this._productList[ctrl.selectedIndex - 1].mrp,
+        productMRP: this._productList[ctrl.selectedIndex - 1].mrp,
+        pack_size: this._productList[ctrl.selectedIndex - 1].size
       });
     }
-
 
     this.updateSubTotal();
   }

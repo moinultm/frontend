@@ -23,7 +23,7 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">        <h3 class="card-title">
-                {{ selectedProduct.id ? ('Update Product: ' + selectedProduct.name) : 'Add Product' }}
+                {{ selectedProduct ? ('Update Product: ' + selectedProduct.name) : 'Add Product' }}
               </h3>
 
               <code>##Opening Value will be count as addition with previous Field (quantity) and (general_quantity) when editing item</code>
@@ -125,15 +125,18 @@
                     </div>
 
                     <div class="col-md-4">
-                      <label>Opening Stock</label>
-                      <input type="text" class="form-control" formControlName="opening_stock" placeholder="Opening">
+                      <label>Size</label>
+                      <input type="text" class="form-control" formControlName="size" placeholder="Pack Size">
+                    </div>
 
+                    <div class="col-md-4">
+                      <label>Opening Stock</label>
+                     <input type="text" class="form-control" formControlName="opening_stock" placeholder="Opening">
                     </div>
 
                     <div class="col-md-4">
                       <label>Opening Value</label>
                       <input type="text" class="form-control" formControlName="opening_stock_value" placeholder="Opening Value">
-
                     </div>
 
                   </div>
@@ -153,6 +156,7 @@
                         </div>
                       </div>
                        ./Picture field -->
+
 
                        <div class="col-md-6">
                         <label>Product Type</label>

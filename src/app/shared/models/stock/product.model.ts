@@ -9,6 +9,7 @@ export class Product {
     quantity:number;
     general_quantity:number;
     details:number;
+    
     cost_price:number;
     mrp:number;
     tax_id:number;
@@ -19,11 +20,9 @@ export class Product {
     opening_stock:number;
     opening_stock_value:number;
     product_type:number;
+    size:number;
     sells:Array<SellsInvoice>;
-
     data:[]
-
-
 
    // purchases:[];
 

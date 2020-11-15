@@ -119,6 +119,8 @@ export class ProductComponent implements OnInit {
       product_minimum_retail_price:[product ? product.minimum_retail_price : '',  [Validators.required]  ],
       product_status:[product ? product.status : '',  [Validators.required]  ],
       product_details:[product ? product.details : '',  [Validators.nullValidator]  ],
+      size:[product ? product.size : '',  [Validators.nullValidator]  ],
+
       opening_stock:[product ? product.opening_stock : '',  [Validators.required]   ],
       product_type:[product ? product.product_type : '',  [Validators.required]   ],
       opening_stock_value:[product ? product.opening_stock_value : '',  [Validators.required]   ],
@@ -152,6 +154,8 @@ export class ProductComponent implements OnInit {
     formData.append('minimum_retail_price', this.form.get('product_minimum_retail_price').value);
     formData.append('unit', this.form.get('product_unit').value);
     formData.append('details', this.form.get('product_details').value);
+    formData.append('size', this.form.get('size').value);
+
     formData.append('opening_stock', this.form.get('opening_stock').value);
     formData.append('opening_stock_value', this.form.get('opening_stock_value').value);
     formData.append('product_type', this.form.get('product_type').value);

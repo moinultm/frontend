@@ -309,7 +309,7 @@
               </div>
               <!-- /.card-body -->
               <div class="card-footer">
-                <code>Bill Date is effective on every day</code>
+                <code>Bill Date is effective on every day/ Nill Stock Will return 404 page</code>
                 <button type="button" class="btn btn-primary btn-lg float-right" [disabled]="mainForm.invalid || _saving" (click)="save(mainForm)"
                   [disabled]="mainForm.invalid || _saving">Save Invoice</button>
               </div>
@@ -361,14 +361,7 @@
             <div class="col-md-3">
               <div class="form-group">
                   <label for="pack_size">Pack Size</label>
-                  <select class="form-control" id="pack_size" formControlName="pack_size">
-                    <option value="0">--Select--</option>
-                    <option value="5ML">5ML</option>
-                    <option value="10ML">10ML</option>
-                    <option value="15ML">15ML</option>
-                    <option value="20ML">20ML</option>
-                    <option value="25ML">25ML</option>
-                  </select>
+                  <input type="text" class="form-control" id="pack_size" formControlName="pack_size" readonly/>
                  </div>
             </div>
 
