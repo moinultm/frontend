@@ -100,18 +100,20 @@
 
                     </div>
 
-<div class="table-responsive">
-
-
+      <div class="table-responsive">
 
                   <!-- order items table-->
                   <table class="table table-bordered">
                     <thead class="thead-light">
 
                       <th>ProductName</th>
+                      <th>Batch.No</th>
+                      <th>PackSize</th>
+                      <th>Mfg Date</th>
+                      <th>Exp Date</th>
                       <th>Quantity</th>
-                      <th>Discount(%)</th>
-                      <th>Price</th>
+                      <th>Discount %</th>
+                      <th>MRP</th>
                       <th>Subtotal</th>
                       <th style="text-align: right;">
                         <a class="btn btn-sm btn-success text-white" (click)="initItemModal(addItemModal)"><i
@@ -120,7 +122,7 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td class="font-italic text-center" colspan="5" *ngIf="orderItemList.length==0"
+                        <td class="font-italic text-center" colspan="10" *ngIf="orderItemList.length==0"
                           [class.text-danger]="orderItemList.length==0">
                           No product selected for this order.
                         </td>
@@ -129,56 +131,62 @@
                       <tr *ngFor="let item of orderItemList;let i=index;">
 
                         <td>{{item.product_name}}</td>
+                        <td>{{item.batch_no}}</td>
+                        <td>{{item.pack_size}}</td>
+                        <td>{{item.mfg_date}}</td>
+                        <td>{{item.exp_date}}</td>
                         <td>{{item.quantity}}</td>
-                        <td>{{item.product_discount_percentage}}</td>
+                        <td>{{item.product_discount_percentage}} %</td>
                         <td>{{item.mrp}}</td>
-                        <td>{{item.subtotal}}</td>
+                        <td>{{item.sub_total}}</td>
                         <td>
 
                           <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteOrderItem(item.product_id,i)"><i class="fa fa-trash"></i></a>
                         </td>
                       </tr>
                     </tbody>
+
+
                       <tfoot>
 
                           <tr>
-                              <td colspan="4" style="text-align: right; font-weight: bold;">
+                              <td colspan="6" style="text-align: right; font-weight: bold;">
                                 Total
-                               </td> <td colspan="2">
+                               </td> <td colspan="4">
                                   <input class="form-control" type="text" id="totalAmount" formControlName="totalAmount" readonly>
                                 </td>
                               </tr>
 
                             <tr>
-                                <td colspan="4" style="text-align: right; font-weight: bold;">
+                                <td colspan="6" style="text-align: right; font-weight: bold;">
                                   Discount
-                                 </td> <td colspan="2">
+                                 </td> <td colspan="4">
                                     <input class="form-control" type="text" id="discountAmount" formControlName="discountAmount" readonly>
                                   </td>
                                 </tr>
 
                                 <tr>
-                                    <td colspan="4" style="text-align: right; font-weight: bold;">
+                                    <td colspan="6" style="text-align: right; font-weight: bold;">
                                       Shipping
-                                     </td> <td colspan="2">
+                                     </td> <td colspan="4">
                                         <input class="form-control" type="text" id="shippingCost" formControlName="shippingCost">
                                       </td>
                                     </tr>
 
 
                                         <tr>
-                                            <td colspan="4" style="text-align: right; font-weight: bold;">
+                                            <td colspan="6" style="text-align: right; font-weight: bold;">
                                               Net Total
-                                             </td> <td colspan="2">
+                                             </td> <td colspan="4">
                                               <input class="form-control" type="text" id="grandTotal" formControlName="grandTotal" readonly>
                                             </td>
                                             </tr>
 
 
                                     <tr>
-                                        <td colspan="4" style="text-align: right; font-weight: bold;">
+                                        <td colspan="6" style="text-align: right; font-weight: bold;">
                                           Paid
-                                         </td> <td colspan="2">
+                                         </td> <td colspan="4">
                                             <input class="form-control" type="text" id="paidAmount" formControlName="paidAmount"
                                             placeholder="Paid Amount" (keyup)="updateDueAmount()"
                                             [class.has-error]="mainForm.get('paidAmount').dirty && mainForm.get('paidAmount').invalid">                                        </td>
@@ -187,9 +195,9 @@
 
 
                                         <tr>
-                                            <td colspan="4" style="text-align: right; font-weight: bold;">
+                                            <td colspan="6" style="text-align: right; font-weight: bold;">
                                               Due
-                                             </td> <td colspan="2">
+                                             </td> <td colspan="4">
                                                 <input class="form-control" type="text" id="dueAmount" formControlName="dueAmount" readonly>
                                               </td>
                                             </tr>
@@ -245,6 +253,44 @@
           </select>
         </div>
         <!-- ./name-->
+
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+                <label for="batch_no">Batch.No</label>
+                <input type="text" class="form-control" id="batch_no" formControlName="batch_no"/>
+              </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="form-group">
+                    <label for="pack_size">Pack Size</label>
+                    <input type="text" class="form-control" id="pack_size" formControlName="pack_size" readonly/>
+                   </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="form-group">
+                    <mat-form-field  class="full-width">
+                      <input matInput [matDatepicker]="picker2" placeholder="Mfg.Date" formControlName="mfg_date">
+                      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                      <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="form-group">
+                    <mat-form-field class="full-width">
+                      <input matInput [matDatepicker]="picker3" placeholder="Exp.Date" formControlName="exp_date">
+                      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                      <mat-datepicker #picker3></mat-datepicker>
+                    </mat-form-field>
+                   </div>
+              </div>
+
+        </div>
+
 
 
         <div class="row">

@@ -176,6 +176,12 @@ selectedOrderItem: PurchaseItems;
 
        itemTotal:[ orderitem ? orderitem.item_total : '', [Validators.required]],
 
+       batch_no:['', [Validators.nullValidator]],
+       lot_no:['', [Validators.nullValidator]],
+       pack_size:[0,[Validators.required]],
+       mfg_date:[new Date(), [Validators.required]],
+       exp_date:[new Date(), [Validators.required]],
+       
     });
   }
 
@@ -185,13 +191,15 @@ selectedOrderItem: PurchaseItems;
     if (ctrl.selectedIndex == 0) {
       this.formProducts.patchValue({
         name: '',
-        productMRP:0
+        productMRP:0,
+        pack_size:0
      });
     }
     else {
       this.formProducts.patchValue({
         //name:this._productList[ctrl.selectedIndex - 1].name ,
         productMRP:this._productList[ctrl.selectedIndex - 1].cost_price,
+        pack_size: this._productList[ctrl.selectedIndex - 1].size
            });
 
     }
@@ -266,6 +274,11 @@ selectedOrderItem: PurchaseItems;
     formItem.mrp=formProducts.value.productMRP;
     formItem.item_total=formProducts.value.itemTotal;
 
+    formItem.batch_no= formProducts.value.batch_no ;
+    formItem.pack_size= formProducts.value.pack_size ;
+    formItem.mfg_date= formProducts.value.mfg_date ;
+    formItem.exp_date= formProducts.value.exp_date ;
+
     formItem.product_discount_percentage=formProducts.value.discountOnMRP;
     formItem.product_discount_amount=formProducts.value.itemDiscountAmt;
 
@@ -280,13 +293,10 @@ selectedOrderItem: PurchaseItems;
       //this.close(modal, true);
       this.initItemsForm();
     }
-
-
   }
 
 
 //Main Save Function
-
 save(form: any){
   this._saving=true;
 

@@ -7,11 +7,19 @@ export class PurchaseItems {
 		    		 tax_type: number;
 		    			product_tax: number;
 		    			subtotal:number;
-						product_id: number;			
+						product_id: number;
 						product_discount_percentage:number;
 						product_discount_amount:number
 						item_total:number;
 						product_name:string;
 						cost_price:number;
-						mrp:number;
+            mrp:number;
+
+            batch_no:number;
+            lot_no:number;
+            pack_size:number;
+            mfg_date:number;
+            exp_date:number;
+
+
 }
