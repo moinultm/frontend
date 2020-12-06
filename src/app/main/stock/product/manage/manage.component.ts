@@ -71,10 +71,10 @@ export class ManageComponent implements OnInit {
   fillList(){
     this.actRoute.data.subscribe(data => {
       this.data=data.ProductListResolver;
+     // console.log( this.data );
       this.loading = false;
     });
     }
-
 
      //Loading Data
      loadData(page?: number): void {
@@ -85,7 +85,7 @@ export class ManageComponent implements OnInit {
         size: this.size
       }).subscribe((res: PartialList<Product>) => {
         this.data = res;
-      //  console.log( this.data )
+       // console.log( this.data )
         this.loading = false;
       });
     }

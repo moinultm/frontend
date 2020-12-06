@@ -48,8 +48,12 @@
                     <tr>
                       <th style="width: 10px">#</th>
                       <th>Product Name</th>
+                      <th>Size</th>
+                      <th>MRP(Tk.)</th>
+
                       <th>In Stock</th>
-                      <th style="width:20%">Action</th>
+                      <th style="width:15%">Action</th>
+                      <th style="width:15%">Updates</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -66,7 +70,9 @@
                       <tr *ngFor="let item of data.data; let i = index">
                         <td>{{ i+1 }}</td>
                         <td>{{ item.name }}</td>
-                        <td>{{item.general_quantity}} {{item.unit}}</td>
+                        <td>{{ item.size }}</td>
+                        <td>{{ item.mrp }}</td>
+                        <td>{{item.quantity}} {{item.unit}}</td>
                         <td class="actions">
 
                           <a href="#"   *ngIf="CanManage" [routerLink]="['../edit',item.id]" class="dropdown-item" [routerLinkActiveOptions]="{exact: true}"
@@ -83,15 +89,18 @@
                           <!--a href="#" class="dropdown-item"> <span> <i class="fa fa-trash"></i>
                             Delete</span></a-->
 
-                            <a href="#"  *ngIf="CanManage" class="dropdown-item" (click)="initUpdate(updateValueModal, item,item.id)">
-                              <span><i class="fa fa-dollar-sign"></i> Update Value</span>
-                            </a>
 
-                            <a class="dropdown-item" href="#" (click)="toBarcode(item.id)">
-                                <span> <i class="fas fa-barcode"></i> Barcode </span>
-                              </a>
 
                         </td>
+                        <td class="actions">
+                          <a href="#"  *ngIf="CanManage" class="dropdown-item" (click)="initUpdate(updateValueModal, item,item.id)">
+                            <span><i class="fa fa-dollar-sign"></i> Update Value</span>
+                          </a>
+
+                          <a class="dropdown-item" href="#" (click)="toBarcode(item.id)">
+                              <span> <i class="fas fa-barcode"></i> Barcode </span>
+                          </a>
+                          </td>
                       </tr>
                     </ng-container>
 

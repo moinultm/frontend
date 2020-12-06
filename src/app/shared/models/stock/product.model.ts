@@ -9,7 +9,6 @@ export class Product {
     quantity:number;
     general_quantity:number;
     details:number;
-    
     cost_price:number;
     mrp:number;
     tax_id:number;

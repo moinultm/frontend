@@ -130,20 +130,16 @@ export class AddComponent implements OnInit {
     direct:['1',[Validators.required]],
     user_id:  [null,[Validators.required]],
   });
-
   }
-
 
   addNewCompany() {
     let control = <FormArray>this.mainForm.controls.companies;
     control.push(
       this._formBuilder.group({
         product_id: [null,[Validators.required]],
-
-       quantity: [0,[Validators.required]  ] ,
-      productMRP: [0,  [Validators.required]  ] ,
-
-      discountOnMRP: [      15,        [Validators.required]
+        quantity: [0,[Validators.required]  ] ,
+        productMRP: [0,  [Validators.required]  ] ,
+        discountOnMRP: [      15,        [Validators.required]
       ] ,
 
       itemDiscountAmt:[ 0, [Validators.required]],
@@ -249,9 +245,7 @@ export class AddComponent implements OnInit {
         orderitem ? orderitem.product_discount_percentage : 15,
         [Validators.required]
       ] ,
-
       itemDiscountAmt:[ orderitem ? orderitem.product_discount_amount : 0, [Validators.required]],
-
       sub_total: [
         orderitem ? orderitem.sub_total : 0,
         [Validators.required]],
@@ -268,7 +262,7 @@ export class AddComponent implements OnInit {
 
 
   //=================update price   selected item===================================
-  updatePrice(ctrl,index) {
+  updatePrice(ctrl  ) {
 
     if (ctrl.selectedIndex == 0) {
      this.formProducts.patchValue({
