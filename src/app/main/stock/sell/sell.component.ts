@@ -79,6 +79,7 @@ export class SellComponent implements OnInit {
 
     this.iniForm();
    // this.loadData();
+   //console.log(this.isRoleViewAll);
    this.fillList();
   }
 

@@ -101,7 +101,7 @@
                       <th>Amount</th>
                       <th>Paid</th>
                       <th>Sale by</th>
-                      <th>Actions</th>
+                      <th style="width: 20%">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -147,12 +147,10 @@
                           <button  (click)="toReturnDetails(result.id)">
                             Return Details
                             </button>
-
-                            <button *ngIf="isRoleViewAll"    (click)="initDelete(deleteModal, result)">
-                              Delete
-                             </button>
-
                           </div>
+                          <button *ngIf="isRoleViewAll"    (click)="initDelete(deleteModal, result)">
+                            Delete
+                           </button>
 
                         </td>
                       </tr>
