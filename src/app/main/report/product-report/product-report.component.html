@@ -192,10 +192,10 @@
                                       <td>{{ item.INWARD_AMOUNT }}</td>
 
                                       <td>{{ _CIP(item.OUTWARD_QUANTITY) }}</td>
-                                      <td>{{ _CIP(item.OUTWARD_AMOUNT) }}</td>
+                                      <td>{{ _CIP(item.OUTWARD_AMOUNT*-1) }}</td>
 
                                       <td>{{ _CIN(item.TRAN_QUANTITY)+_CIN(item.OUTWARD_QUANTITY)+_CIN(item.INWARD_QUANTITY)  }}</td>
-                                      <td>{{ _CIN(item.TRAN_AMOUNT)+_CIN(item.OUTWARD_AMOUNT)+_CIN(item.INWARD_AMOUNT)  }}</td>
+                                      <td>{{ _CIN(item.TRAN_AMOUNT)+_CIP(item.OUTWARD_AMOUNT)+_CIN(item.INWARD_AMOUNT)  }}</td>
                                     </tr>
                                   </ng-container>
                     </tbody>
